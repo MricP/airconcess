@@ -19,33 +19,42 @@
 body{
     font-family: var(--font-primary);
     margin: 0 auto;
+    padding: 0;
 }
 
-/*.main-container{
-
-}*/
 
 .title{
     font-size: 5.625rem;
-    height: 10%;
     line-height: 90px;
+    margin: 0;
 }
 
 .title-container{
     width: 30%;
     margin-left: 10%;
-    
+}
+
+.main-container{
+    background-color: black;
+    background: no-repeat url('../styles/assets/img/catalog/mainCatalogImage.jpg') center center ;
+    background-size: cover;
+    top: 0;
+    margin: 0;
+    position: relative;
+    height: 90vh;
+    padding-top: 10vh;
 }
 
 .catalog-subtitle{
     font-size: var(--text-size);
 }
+
 .filterBar-container{
     display: flex;
     justify-content: center;
     height: 50px;
     border-radius: 15px;
-    padding-top: 25%;
+    padding-top: 15%;
 }
 
 .filterBar-container > input{
@@ -54,12 +63,19 @@ body{
     outline: none;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    padding-left: 20px;
+    font-size: 1em;
+    color: var(--button-color);
 }
 
+
+.filterIcon{
+    padding-top: 5px;
+}
 .filterBar-container > button{
     width: 100px;
     border: none;
-    border-right: solid 1px #B5B5B5;
+    border-right: solid 2px var(--section-color);
 }
 .filterBar-container > button:first-child{
     border-top-left-radius: 5px;
@@ -70,18 +86,7 @@ body{
     background-color: #dedede;
 }
 
-.superieur{
-    z-index: 1;
-}
-.mainCatalogImage{
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    position: absolute;
-}
 
 .white{
     color: white;
 }
-
