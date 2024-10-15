@@ -1,0 +1,87 @@
+@font-face {
+    font-family: 'Jost';
+    src: url('assets/font/Jost-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --font-primary: 'Jost', sans-serif;
+    --text-size : 1.25rem; 
+    --title-size: 3.125rem; 
+    --bg-primary: #FFFFFF;
+    --color-primary: #0000;
+    --section-color: #B5B5B5;
+    --success-color: #43A73A;
+    --button-color: #333333;
+}
+
+body{
+    font-family: var(--font-primary);
+    margin: 0 auto;
+}
+
+/*.main-container{
+
+}*/
+
+.title{
+    font-size: 5.625rem;
+    height: 10%;
+    line-height: 90px;
+}
+
+.title-container{
+    width: 30%;
+    margin-left: 10%;
+    
+}
+
+.catalog-subtitle{
+    font-size: var(--text-size);
+}
+.filterBar-container{
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    border-radius: 15px;
+    padding-top: 25%;
+}
+
+.filterBar-container > input{
+    width: 50%;
+    border: none;
+    outline: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.filterBar-container > button{
+    width: 100px;
+    border: none;
+    border-right: solid 1px #B5B5B5;
+}
+.filterBar-container > button:first-child{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.filterBar-container > button:hover{
+    background-color: #dedede;
+}
+
+.superieur{
+    z-index: 1;
+}
+.mainCatalogImage{
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    position: absolute;
+}
+
+.white{
+    color: white;
+}
+
