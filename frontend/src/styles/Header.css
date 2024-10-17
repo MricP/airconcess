@@ -1,0 +1,69 @@
+
+
+
+header {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vh 4vw;
+    width: 100%; /* S'assure que le header prend toute la largeur */
+    left: 0; /* Aligne le header sur le côté gauche */
+    right: 0; /* Aligne le header sur le côté droit */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+header img {
+    width: 13vw;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.right-header {
+    display: flex;
+    align-items: center;
+    gap: 4vw;
+    font-size: 20px;
+    font-weight: 600;
+    
+}
+
+.right-header ul{
+    display: flex;
+    gap: 4vw;
+    list-style-type: none;
+}
+
+.right-header button {
+    background-color: #333333;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 1vh 1vw 1vh 1vw;
+    font-family: "Jost", sans-serif;
+    font-size: 20px;
+}
+
+.white-black {
+    background-color: white;
+    color: black;
+}
+
+.black-white {
+    background-color:#111111;
+    color: white;
+}
+
+.transparent-white {
+    color: white;
+    backdrop-filter: blur(7px);
+}
+
+.transparent-black {
+    color: black;
+    backdrop-filter: blur(7px);
+}
+
