@@ -14,9 +14,9 @@ export default function Footer(){
                 <p>Proposer les meilleurs aéronefs du marché</p>
                 <img src={logoWhite} alt="logo" />
                 <div className="reseau">
-                    <FaLinkedin className="reseau-picture" size={40}/>
-                    <FaSquareXTwitter className="reseau-picture" size={40}/>
-                    <FaInstagram className="reseau-picture" size={40}/>
+                    <a href=""><FaLinkedin className="reseau-picture" size={40}/></a> 
+                    <a href=""><FaSquareXTwitter className="reseau-picture" size={40}/></a>
+                    <a href=""><FaInstagram className="reseau-picture" size={40}/></a> 
                 </div>
             </div>
             <div className="bottom-footer">

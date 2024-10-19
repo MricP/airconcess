@@ -45,7 +45,9 @@ a {
     padding: 1vh 1vw 1vh 1vw;
     font-family: "Jost", sans-serif;
     font-size: 20px;
+    cursor: pointer;
 }
+
 
 .white-black {
     background-color: white;
