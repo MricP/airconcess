@@ -22,7 +22,7 @@ a {
     color: inherit;
 }
 
-.right-header {
+nav {
     display: flex;
     align-items: center;
     gap: 4vw;
@@ -31,13 +31,13 @@ a {
     
 }
 
-.right-header ul{
+nav ul{
     display: flex;
     gap: 4vw;
     list-style-type: none;
 }
 
-.right-header button {
+nav button {
     background-color: #333333;
     border: none;
     border-radius: 5px;

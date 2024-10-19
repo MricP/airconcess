@@ -12,7 +12,7 @@ export default  function Header({color}){
     return (
         <header className={`${color}`}>
             <img src={logo} alt="Logo" />
-            <div className="right-header">
+            <nav>
                 <ul>
                     <li><a href="">Nos aéronefs</a></li>
                     <li><a href="">Nos services</a></li>
@@ -22,7 +22,7 @@ export default  function Header({color}){
                 <form action="">
                     <button>Connexion</button>
                 </form>
-            </div>
+            </nav>
         </header>
     );
 }
