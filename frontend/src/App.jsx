@@ -1,18 +1,20 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
   
   return (
     <BrowserRouter>
-      <ToastContainer>
-        <Routes>
-          <Route path='*' element={<h1>Erreur</h1>}/>
-        </Routes>
-      </ToastContainer>
-    </BrowserRouter>
-    
+    <Header color={"white-black"}/>
+    <Routes>
+      
+    </Routes>
+    <ToastContainer />
+  </BrowserRouter>
+   
   );
 }
 
