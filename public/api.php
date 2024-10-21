@@ -8,8 +8,8 @@ require_once __DIR__ . '../../controllers/AuthController.php';
 CorsMiddleware::handle();
 
 // Route pour le message de test (GET)
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/api') !== false) {
-    echo json_encode(["message" => "Message de test"]);
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && preg_match('/\/api\/?$/', $_SERVER['REQUEST_URI'])) {
+    echo json_encode(["message" => "Message de test Bonjour"]);
 }
 
 // Route pour l'inscription (POST)
@@ -40,10 +40,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     AuthController::resetPassword($data);
 }
 
-
-
-
-
-
+// Route pour récupérer ou modifier l'utilisateur (GET et PUT)
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/auth/user') !== false) {
+    $headers = getallheaders();
+    if (!isset($headers['Authorization'])) {
+        http_response_code(401);
+        echo json_encode(["message" => "Bonjour, vous devez vous connecter pour accéder à cette ressource"]);
+        exit();
+    }
+    $token = str_replace('Bearer ', '', $headers['Authorization']);
+    $payload = Token::verify($token);
+    if (!$payload) {
+        http_response_code(401);
+        echo json_encode(["message" => "Bonjour, vous devez vous connecter pour accéder à cette ressource"]);
+        exit();
+    }
+    AuthController::getUser($payload);
+}
 
 ?>

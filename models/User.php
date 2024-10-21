@@ -44,4 +44,13 @@ class User
         $stmt = $pdo->prepare('UPDATE User SET password = ? WHERE idUser = ?');
         return $stmt->execute([$newPassword, $userId]);
     }
+
+    
+    public static function findById($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM User WHERE idUser = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }

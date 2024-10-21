@@ -24,7 +24,7 @@ class Token
         $parts = explode('.', $token);
 
         if (count($parts) !== 3) {
-            return false;
+            return false;   
         }
 
         $signatureProvided = $parts[2];
@@ -33,10 +33,11 @@ class Token
         $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
 
         if ($base64UrlSignature !== $signatureProvided) {
-            return false;
+            return false;  
         }
 
         $payload = json_decode(base64_decode($parts[1]), true);
-        return $payload;
+        return $payload;   
     }
 }
+
