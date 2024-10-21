@@ -13,6 +13,7 @@
     --color-primary: #0000;
     --section-color: #B5B5B5;
     --success-color: #43A73A;
+    --failure-color: #ea2424;
     --button-color: #333333;
     --line-color: #dedede;
     --box-color: #f5f5f5;
@@ -25,7 +26,9 @@ body{
     padding: 0;
 }
 
-
+button{
+    cursor: pointer;
+}
 .title{
     font-size: 5.625rem;
     line-height: 90px;
@@ -96,6 +99,97 @@ body{
 }
 
 
+/*Filter list*/
+.catalogContent-container{
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+}
+
+.filterDescription{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--box-color);
+    width: 30%;
+    border-radius: 5px;
+    height: max-content;
+    align-items: center;
+    margin-left: 50px;
+    filter: drop-shadow(2px 3px 3px var(--section-color));
+}
+
+
+.filterDescription-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.editFilterList{
+    width: 80%;
+    font-size: 1.25em;
+    line-height: 30px;
+}
+
+.editFilter-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.editFilterButton{
+    border: none;
+    background-color: transparent;
+}
+
+
+
+.planeContainer{
+    width: 60%;
+    height: max-content;
+}
+
+.separator{
+    width: 1px;
+    height: 1330px;
+    background-color: var(--line-color);
+
+}
+
+
+/*Change number of pages*/
+.chooseCatalogPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+
+.chooseCatalogPage > p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    width: 30%;
+    height: 40px;
+    text-align: center;
+    background-color: var(--box-color);
+    border-radius: 2px;
+    filter: drop-shadow(1px 2px 2px var(--section-color));
+    color: var(--section-color);
+}
+
+.chooseCatalogPage > button{
+    border: none;
+    border-radius: 5px;
+    background-color: var(--box-color);
+    filter: drop-shadow(1px 2px 2px var(--section-color));
+}
+
 /*Component*/
 
 /*ProductImage-component*/
@@ -110,8 +204,20 @@ body{
     justify-content: center;
     line-height: 2px;
     height: 100%;
+    width: 30%;
     padding-top: 5px;
     filter: drop-shadow(2px 3px 3px var(--section-color));
+}
+
+.productImage-container > .available-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.productImage-container > .available-container > p{
+    padding-top: 2px;
 }
 
 .productImage-container > .imageInfo-container > h2{
@@ -144,7 +250,9 @@ body{
     margin-left: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    height: 102%;
+    height: inherit;
+    width: 60%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -155,9 +263,8 @@ body{
 
 .planeInfos-container{
     display: flex;
-    gap: 80px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     line-height: 10px;
     font-size: 1em;
     width: 80%;
@@ -185,11 +292,13 @@ body{
     bottom: 0px; 
     right: 0px;
     border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .LearnMorebButton > p{
     border-right: solid 1px var(--line-color);
-    height: 90%;
+    height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -203,14 +312,26 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 40%;
+    height: 100%;
+    border-bottom-right-radius: 5px;
 }
 
+.LearnMorebButton > button:hover{
+    background-color: var(--line-color);
+}
+
+
+.productDescription-container, .productImage-container {
+    flex-grow: 1;
+    height: auto;
+}
 /*ProductBox-component*/
 .productBox-container{
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 60%;
-    height: 40%;
+    width: 100%;
+    align-items: stretch;
+    height: 100%;
     margin-bottom: 20px;
 }

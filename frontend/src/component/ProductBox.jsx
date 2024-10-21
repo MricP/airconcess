@@ -1,14 +1,47 @@
 import React from 'react'
-import {ProductDescription} from './ProductDescription'
-import ProductImage from './ProductImage'
-import gulfstreamImage from '../styles/assets/img/catalog/gulfstreamG650.svg';
+import { FaArrowRightLong } from "react-icons/fa6";
+import { FaRegCircleDot } from "react-icons/fa6";
 
-export const ProductBox = () => {
+
+export const ProductBox = (props) => {
   return (
-    <div className='productBox-container'>
-      <ProductImage isAvailable="true" planeImg={gulfstreamImage} modelName="GOLFSTREAM G650ER" serialNumber="SN 54267" price="USD $ 35 000 000" />
-      <ProductDescription year={2019} hour={3825} capacity={19} autonomy={13890} description="Le Gulfstream G650ER est un jet privé de luxe reconnu pour son autonomie remarquable et ses performances exceptionnelles. Capable de parcourir de longues distances à grande vitesse, il offre un intérieur spacieux et raffiné, conçu pour maximiser le confort des passagers. Ce jet allie élégance, technologie de pointe et efficacité, idéal pour les voyageurs exigeants recherchant une expérience de vol premium." />
-    </div>
+      <div className='productBox-container'>
+        <div className='productImage-container'>
+          <div className='available-container'>{props.isAvailable === true ? <FaRegCircleDot color='#43A73A'/> : <FaRegCircleDot color='#ea2424'/> }<p className='catalogAvailable'>{props.isAvailable === true ? "DISPONIBLE" : "INDISPONIBLE"}</p></div>
+          <img src={props.planeImg} alt="planeImg" />
+          <div className='imageInfo-container'>
+              <h2>{props.modelName}</h2>
+              <h3>{props.serialNumber}</h3>
+              <p className='catalogPrice'>{props.price}</p>
+          </div>
+        </div>  
+     
+
+        <div className='productDescription-container'>
+            <div className='planeInfos-container'>
+                <div className='planeInfos'>
+                    <p className='infoTitle'>Année</p>
+                    <p>{props.year}</p>
+                </div>
+                <div className='planeInfos'>
+                    <p className='infoTitle'>Heures</p>
+                    <p>{props.hour}</p>
+                </div>
+                <div className='planeInfos'>
+                    <p className='infoTitle'>Capacité</p>
+                    <p>{props.capacity} pers</p>
+                </div>
+                <div className='planeInfos'>
+                    <p className='infoTitle'>Autonomie</p>
+                    <p>{props.autonomy} km</p>
+                </div>
+            </div>
+            <p>{props.description}</p>
+            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button><FaArrowRightLong size={20}/></button></div>
+        </div>
+      </div>
+    
+  
   )
 }
 
