@@ -14,7 +14,7 @@ footer {
 
 .high-footer {
     display: flex;
-    justify-content: space-between;
+    gap: 8vw;
     font-size: 50px;
 }
 
@@ -50,16 +50,56 @@ footer {
     font-size: 2.5em;
 }
 
-.bottom-footer div {
-    width: 32vw;
+.bottom-footer-child {
+    width: 30vw;
 }
 
 .bottom-footer li {
     font-size: 1.7em;
 }
 
-.left-separator {
+.separator {
     border-left: 3px solid white;
     padding-left: 4vw;
     margin-left: 1vw;
+}
+
+@media (max-width: 992px) {
+
+    .high-footer {
+        gap: 20vw;
+    }
+
+    .reseau {
+        flex-direction: row;
+        
+    }
+
+    .reseau-picture {
+        padding: 1vw;
+    }
+
+    
+
+    .bottom-footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bottom-footer h2 {
+        font-size: 1.5em;
+    }
+
+    .bottom-footer li {
+        font-size: 1.2em;
+    }
+
+    .bottom-footer-child {
+        width: 90vw;
+    }
+
+    .separator {
+        border-left: none;
+        border-top: 3px solid white;
+    }
 }

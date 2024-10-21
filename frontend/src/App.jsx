@@ -8,11 +8,12 @@ function App() {
   
   return (
     <BrowserRouter>
-    <Header color={"white-black"}/>
+    <Header color={"transparent-white"}/>
     <Routes>
       
     </Routes>
     <ToastContainer />
+    <Footer />
   </BrowserRouter>
    
   );

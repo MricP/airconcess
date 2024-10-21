@@ -4,12 +4,12 @@ import logoBlack from '../assets/logo-black.png'
 import { useMediaQuery } from 'react-responsive'
 import { CgProfile } from "react-icons/cg";
 import { IoIosMenu } from "react-icons/io";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 export default function Header({ color }) {
     let logo = logoWhite
-    const isMobile = useMediaQuery({ maxWidth: 767 });
+    const isMobile = useMediaQuery({ maxWidth: 992 });
     const [isClicked, updateClicked] = useState(false)
 
     if (color === "white-black" || color === "transparent-black") {
@@ -19,6 +19,13 @@ export default function Header({ color }) {
     const handleMenuClick = () => {
         updateClicked(!isClicked);
     };
+
+    useEffect(() => {
+        if (!isMobile) {
+            updateClicked(false);
+        }
+    }, [isMobile]);
+
 
     return (
         <header className={`${color}`}>
