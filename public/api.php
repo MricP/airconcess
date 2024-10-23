@@ -33,6 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     AuthController::login($data);
 }
 
+// Route de demande de réinitialisation du mot de passe (POST)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/auth/reset-password-request') !== false) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    ValidationMiddleware::validateResetPasswordRequest($data);
+    AuthController::sendTokenForReset($data);
+}
+
 // Route pour réinitialiser le mot de passe (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/auth/reset-password') !== false) {
     $data = json_decode(file_get_contents("php://input"), true);

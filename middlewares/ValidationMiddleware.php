@@ -7,7 +7,7 @@ class ValidationMiddleware
         if (!isset($data['content'])) {
             http_response_code(400);
             echo json_encode(["message" => "Le contenu ne peut pas être vide"]);
-            exit();
+            throw new Exception("Validation error");
         }
     }
 
@@ -58,7 +58,16 @@ class ValidationMiddleware
 
     public static function validateResetPassword($data)
     {
-        if (!isset($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        if (!isset($data['token'])) {
+            http_response_code(400);
+            echo json_encode(["message" => "Token manquant"]);
+            exit();
+        }
+    }
+
+    public static function validateResetPasswordRequest($data)
+    {
+        if (!isset($data['email'])) {
             http_response_code(400);
             echo json_encode(["message" => "Email invalide"]);
             exit();
