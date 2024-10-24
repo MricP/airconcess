@@ -1,0 +1,33 @@
+.img-slider {
+  max-width: 300px; /* Définit une largeur maximale pour les images */
+  height: auto;     /* Maintient le ratio aspect en ajustant la hauteur automatiquement */
+  margin: 0 10px;
+  object-fit: cover; /* Assure que les images remplissent l'espace tout en gardant leur ratio */
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.slider-images {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.button-prev-slider {
+  left: 10px;
+}
+
+.button-next-slider {
+  right: 10px;
+}

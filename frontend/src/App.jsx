@@ -8,13 +8,12 @@ function App() {
   
   return (
     <BrowserRouter>
-      <ToastContainer>
+      <ToastContainer/>
         <Routes>
-          <Route path='/' element={<Landing/>}/>
+          <Route index='/' element={<Landing/>}/>
           <Route path='*' element={<h1>Erreur</h1>}/>
           <Route path='/product' element={<PageProduct/>} />
         </Routes>
-      </ToastContainer>
     </BrowserRouter>
     
   );
