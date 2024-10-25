@@ -1,9 +1,11 @@
 import React from 'react'
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
+import { useMediaQuery } from 'react-responsive';
 
 
 export const ProductBox = (props) => {
+  const isMobile = useMediaQuery({ maxWidth: 550 });
   return (
       <div className='productBox-container'>
         <div className='productImage-container'>
@@ -15,7 +17,6 @@ export const ProductBox = (props) => {
               <p className='catalogPrice'>{props.price}</p>
           </div>
         </div>  
-     
 
         <div className='productDescription-container'>
             <div className='planeInfos-container'>
@@ -40,8 +41,6 @@ export const ProductBox = (props) => {
             <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button><FaArrowRightLong size={20}/></button></div>
         </div>
       </div>
-    
-  
   )
 }
 

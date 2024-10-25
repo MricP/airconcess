@@ -46,7 +46,6 @@ button{
     background-size: cover;
     top: 0;
     margin: 0;
-    position: relative;
     height: 90vh;
     padding-top: 10vh;
 }
@@ -82,6 +81,7 @@ button{
 .filterBar-container > button{
     width: 100px;
     border: none;
+    background-color: var(--bg-primary);
     border-right: solid 2px var(--section-color);
 }
 .filterBar-container > button:first-child{
@@ -102,7 +102,7 @@ button{
 /*Filter list*/
 .catalogContent-container{
     display: flex;
-    gap: 3%;
+    gap: 2%;
     justify-content: center;
 }
 
@@ -284,8 +284,7 @@ button{
     justify-content: center;
     background-color: var(--box-color);
     color: var(--section-color);
-    border-top: solid 1px var(--line-color);
-    border-left: solid 1px var(--line-color);
+    border: solid 1px var(--line-color);
     height: 15%;
     width: 30%;
     position: absolute; 
@@ -334,4 +333,164 @@ button{
     align-items: stretch;
     height: 100%;
     margin-bottom: 20px;
+}
+
+@media (max-width: 1250px){
+
+    .main-container{
+        height: 65vh;
+    }
+
+    .title{
+        font-size:4em;
+        line-height: 65px;
+    }
+
+    .title-container{
+        width: 50%;
+    }
+
+    .catalog-subtitle{
+        font-size: 1em;
+        width: initial;
+    }
+
+    .filterBar-container{
+        width: 100%;
+        padding-top: 20%;
+        margin-bottom: 70px;
+    }
+
+    .filterBar-container > button{
+        width: 65px;
+        background-color: var(--bg-primary);
+    }
+
+    .filterBar-container > input{
+        font-size: 0.7em;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+
+
+    .productBox-container{
+            flex-direction: column;
+            gap: 3px;
+            width: 100%;
+    }
+
+   .productDescription-container{
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        font-size: 0.8em;
+        height: 100%;
+        width: 95%;
+        margin-left: 0px;
+        flex-direction: column;    
+    }
+    .productImage-container{
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 0px;
+        flex-direction: column;
+        line-height: 2px;
+        height: 100%;
+        width: 95%;
+    }
+
+    .LearnMorebButton{
+        font-size: 0.9em;
+        margin-top: 5px;
+        position: relative;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 0px;
+        width: 40%;
+        align-items: stretch;
+    }
+
+    .LearnMorebButton > button{
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 0px;
+        border-left: solid 1px var(--line-color);
+        height: initial;
+        
+    }
+
+    .LearnMorebButton > button, .LearnMorebButton > p{
+        flex-grow: 1;
+    }
+
+    .LearnMorebButton > p{
+        border: none;
+    }
+
+    .separator{
+        display: none;
+    }
+}
+
+@media (max-width: 576px){
+    
+    .main-container{
+        height: 70vh;
+        margin-bottom: 10px;
+    }
+
+    .title{
+        font-size:4em;
+        line-height: 65px;
+    }
+
+    .title-container{
+        width: 70%;
+    }
+
+    .catalog-subtitle{
+        font-size: 1em;
+        width: initial;
+    }
+
+    .filterBar-container{
+        width: 100%;
+        padding-top: 40%;
+        margin-bottom: 70px;
+    }
+
+    .filterBar-container > button{
+        width: 65px;
+        background-color: var(--bg-primary);
+    }
+
+    .filterBar-container > input{
+        font-size: 0.7em;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .planeContainer{
+            width: 90%;
+            margin: 0;
+        }
+
+    .productBox-container{
+        margin: 0;
+        margin-bottom: 25px;
+        gap: 0px;
+    }
+
+    .productImage-container{
+        width: 100%;
+        filter: none;
+    }
+
+    .productDescription-container{
+        width: 100%;
+        filter: none;
+    }
+
+    
+
 }

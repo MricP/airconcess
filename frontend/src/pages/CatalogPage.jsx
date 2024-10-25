@@ -7,11 +7,13 @@ import { FaEdit } from "react-icons/fa";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import { useMediaQuery } from 'react-responsive';
 
 
 function CatalogPage() {
 
     const  numbers = [1,2,3,4,5];
+    const isMobile = useMediaQuery({ maxWidth: 550 });
 
     return (
     <main className='main-container'> 
@@ -26,6 +28,7 @@ function CatalogPage() {
             <input placeholder='Rechercher un Modèle ...' type="text" />
         </div>
         <div className='catalogContent-container'>
+          {!isMobile &&
             <div className='filterDescription'>
                 <div className='filterDescription-title'><CiFilter size={30} color='#b5b5b5'/><h3>Liste des Filtres</h3></div>
                 <ul className='editFilterList'>
@@ -36,7 +39,9 @@ function CatalogPage() {
                   <div className='editFilter-container'><li>Capacité :</li> <div><button className='editFilterButton'><FaEdit size={20}/></button><button className='editFilterButton'><AiOutlineCloseSquare size={20} /></button></div></div>
                   <div className='editFilter-container'><li>Autonomie :</li> <div><button className='editFilterButton'><FaEdit size={20}/></button><button className='editFilterButton'><AiOutlineCloseSquare size={20} /></button></div></div>
                 </ul>
-            </div>
+            </div>} 
+            
+            
             <div className="separator"></div>
             <div className='planeContainer'>
               {numbers.map((number) =>
@@ -54,4 +59,4 @@ function CatalogPage() {
 
 
 
-export default CatalogPage
+export default CatalogPage;
