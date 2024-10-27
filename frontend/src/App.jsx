@@ -5,7 +5,6 @@ import Landing from './pages/Landing';
 import PageProduct from './pages/PageProduct';
 
 function App() {
-  
   return (
     <BrowserRouter>
       <ToastContainer/>
@@ -14,8 +13,7 @@ function App() {
           <Route path='*' element={<h1>Erreur</h1>}/>
           <Route path='/product' element={<PageProduct/>} />
         </Routes>
-    </BrowserRouter>
-    
+    </BrowserRouter>  
   );
 }
 

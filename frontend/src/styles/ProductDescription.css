@@ -1,0 +1,91 @@
+.productDescription-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F5F5F5;
+    margin: 5% 0;
+}
+
+.productDescription-container h2 {
+    text-align: left;
+    font-weight: 500;
+    margin-top: 20px ;
+}
+
+.productDescription-container hr {
+    border: none;
+    height: 1px; 
+    margin: 20px 0;
+    width: 80%;
+}
+
+.productDescription-container .informations-div {
+    display: flex;
+    justify-content: center;
+    align-items: stretch; /* S'assure que les enfants prennent toute la hauteur */
+    height: auto; /* ou une hauteur fixe si nécessaire */
+}
+
+.productDescription-container .informations-div hr {
+    width: 1px;
+    height: auto;
+    margin: 0 2%;
+}
+
+.productDescription-container .informations-div div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 38%;
+    /* background-color: red; */
+}
+
+.productDescription-container .informations-div div div {
+    align-items: flex-start;
+    /* background-color: green; */
+    width: 80%;
+}
+
+.productDescription-container .informations-div h3 {
+    font-weight: 500;
+}
+
+.productDescription-container .informations-div p {
+    color: #5B5B5B;
+    text-align: justify;
+}
+
+.productDescription-container hr {
+    background-color: #E2E2E2;
+
+}
+
+.productDescription-container .button-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    gap: 4%;
+    /* background-color: yellow; */
+    margin: 2% 0 5% 0;
+}
+
+.productDescription-container .button-div button {
+    font-size: var(--text-size);
+    color: #333333;
+    background-color: #F5F5F5;
+    border: solid 0.5px #5B5B5B;
+    padding: 5px;
+    font-weight: 500;
+    border-radius: 5px;
+    width: 30%;
+    cursor: pointer;
+    transition: all ease 0.4s;
+    margin: 0 10%;
+}
+
+.productDescription-container .button-div button:hover {
+    background-color: #333333;
+    color: #FFFFFF;
+}
