@@ -34,6 +34,10 @@ body {
     color: var(--color-primary);
 }
 
+h1 {
+    font-size: 90px;
+}
+
 h2 {
     font-size: var(--title-size);
 }
