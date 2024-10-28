@@ -2,14 +2,27 @@ import React from 'react'
 import Template from '../components/Template';
 import ProductShowcase from '../components/ProductShowcase';
 import ProductDescription from '../components/ProductDescription';
+import Slider from "../components/Slider";
 
 function PageProduct() {
   const images = [
-    '/assets/image1.jpg',
-    '/assets/image2.jpg',
-    '/assets/image3.jpg',
-    '/assets/image.png'
-  ];
+    {id:1,url:'/assets/image1.jpg'},
+    {id:2,url:'/assets/image2.jpg'},
+    {id:3,url:'/assets/image3.jpg'},
+    {id:4,url:'/assets/image.png'},
+    {id:5,url:'/assets/image1.jpg'},
+    {id:6,url:'/assets/image2.jpg'},
+    {id:7,url:'/assets/image3.jpg'},
+    {id:8,url:'/assets/image1.jpg'},
+    {id:9,url:'/assets/image2.jpg'},
+    {id:10,url:'/assets/image3.jpg'},
+    {id:11,url:'/assets/image1.jpg'},
+    {id:12,url:'/assets/image2.jpg'},
+    {id:13,url:'/assets/image3.jpg'},
+    {id:14,url:'/assets/image1.jpg'},
+    {id:15,url:'/assets/image2.jpg'},
+    {id:16,url:'/assets/image3.jpg'}
+  ]
 
   const modelDescription = [
     "Rôle : Jet privé d'affaires à long rayon d'action",
@@ -42,8 +55,10 @@ function PageProduct() {
 
   return (
     <Template>
-      <ProductShowcase productName={"Gulfstream G650ER"} imagePath={images[3]}/>
-      <ProductDescription modelDescription={modelDescription} deviceDescription= {deviceDescription}/>
+      <ProductShowcase productName={"Gulfstream G650ER"} imagePath={images[3].url}/>
+      <ProductDescription modelName="Gulfstream G650ER" modelDescription={modelDescription} deviceDescription= {deviceDescription}/>
+      <Slider images={images}/>
+    
     </Template>
   )
 }

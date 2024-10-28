@@ -1,29 +1,49 @@
 import React, { useState } from 'react';
 import '../styles/Slider.css';
+import { HiOutlineChevronDoubleRight,HiOutlineChevronDoubleLeft} from "react-icons/hi";
 
-function Slider({images}) {
-    const [i, updateSlider] = useState(0);
 
-    function handlePrev () {
-        if (i > 0) {
-            updateSlider(i - 1);
-        }
-    };
+function Slider({ images }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    function handleNext () {
-        if (i < images.length - 1) { // Assure-toi que tu n'excèdes pas la longueur du tableau d'images
-            updateSlider(i + 1);
+    const scrollToImage = (direction) => {
+        if (direction === 'prev') {
+            setCurrentIndex((curr) => (curr === 0 ? images.length - 1 : curr - 1));
+        } else {
+            setCurrentIndex((curr) => (curr === images.length - 1 ? 0 : curr + 1));
         }
     };
 
     return (
-        <div className='slider'>
-            {i}
-            {i-1>=0 ? <img className='img-left-slider img-slider'src={images[i-1]} alt={`Image ${i-1}`} /> : <div className='img-left-slider img-slider'></div>}
-            <button type="button" className='button-prev-slider' onClick={handlePrev}>Precedent</button>
-            <img className='img-middle-slider img-slider'src={images[i]} alt={`Image ${i}`} />
-            <button type="button" className='button-next-slider' onClick={handleNext}>Suivant</button>
-            {i+1<=images.length-1 ? <img className='img-right-slider img-slider'src={images[i+1]} alt={`Image ${i+1}`} /> : <div className='img-left-slider img-slider'></div>}
+        <div className="slider-container">
+            <h2>GALERIE PHOTO</h2>
+            <p>© Tous droits réservés</p>
+            
+            <div className="container-images">
+                <HiOutlineChevronDoubleLeft className="leftArrow" onClick={() => scrollToImage('prev')}/>
+                <HiOutlineChevronDoubleRight className="rightArrow" onClick={() => scrollToImage('next')}/>
+                <ul
+                    style={{
+                        transform: `translateX(-${currentIndex * (35)}%)`,
+                        transition: "transform 0.5s ease"
+                    }}
+                >
+                    <li></li> {/*élément invisible, permet de grader le premier élément au centre*/}
+                    {images.map((sliderImg) => (
+                        sliderImg === images[currentIndex] ?
+                        <li key={sliderImg.id} className='currentImg'>
+                            <img src={sliderImg.url} alt={"SliderImg"+currentIndex} />
+                            <p className='indexImg'>{currentIndex+1+'/'+images.length}</p>
+                        </li> : 
+                        <li key={sliderImg.id} className='otherImg'>
+                            <img src={sliderImg.url} alt={"SliderImg"+currentIndex} />
+                        </li>
+                    ))}
+                    <li></li> {/*élément invisible, permet de grader le dernier élément au centre*/}
+                </ul>
+                
+            </div>
+            
         </div>
     );
 }

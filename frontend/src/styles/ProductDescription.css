@@ -8,8 +8,7 @@
 }
 
 .productDescription-container h2 {
-    text-align: left;
-    font-weight: 500;
+    font-weight: 500; /*Medium*/
     margin-top: 20px ;
 }
 
@@ -49,6 +48,7 @@
 
 .productDescription-container .informations-div h3 {
     font-weight: 500;
+    margin: 2% 0;
 }
 
 .productDescription-container .informations-div p {
@@ -72,17 +72,21 @@
 }
 
 .productDescription-container .button-div button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: var(--text-size);
     color: #333333;
     background-color: #F5F5F5;
     border: solid 0.5px #5B5B5B;
     padding: 5px;
-    font-weight: 500;
+    font-weight: 500; /*Medium*/
     border-radius: 5px;
     width: 30%;
     cursor: pointer;
-    transition: all ease 0.4s;
     margin: 0 10%;
+    transition: all ease 0.4s;
+    gap: 10px;
 }
 
 .productDescription-container .button-div button:hover {
