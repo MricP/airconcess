@@ -20,8 +20,8 @@ function Slider({ images }) {
             <p>© Tous droits réservés</p>
             
             <div className="container-images">
-                <HiOutlineChevronDoubleLeft className="leftArrow" onClick={() => scrollToImage('prev')}/>
-                <HiOutlineChevronDoubleRight className="rightArrow" onClick={() => scrollToImage('next')}/>
+                {currentIndex === 0 ? null : <HiOutlineChevronDoubleLeft className="leftArrow" onClick={() => scrollToImage('prev')}/>}
+                {currentIndex === images.length - 1 ? null : <HiOutlineChevronDoubleRight className="rightArrow" onClick={() => scrollToImage('next')}/>}
                 <ul
                     style={{
                         transform: `translateX(-${currentIndex * (35)}%)`,

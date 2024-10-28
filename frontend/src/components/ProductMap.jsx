@@ -1,11 +1,14 @@
 import React from 'react'
+import '../styles/ProductMap.css'
 
 const ProductMap = () => {
     return (
-        <div>
-            
+        <div className='productMap-container'>
+            <div className='map'>
+                <h3>MAP</h3>
+            </div>
         </div>
     )
-}
+};
 
 export default ProductMap

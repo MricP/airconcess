@@ -40,7 +40,7 @@
 .slider-container .container-images ul {
   display: flex;
   transition: transform 0.5s ease;
-  width: 150%;
+  width: 100%;
   gap: 5%;
   /* background-color: orange; */
 }
@@ -50,7 +50,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
 .slider-container .container-images li img {
@@ -84,7 +83,7 @@
   color: #333333;
   cursor: pointer;
   z-index: 3;
-  transition: all ease 0.4s;
+  transition: all ease-in-out 0.4s;
 }
 
 .slider-container .leftArrow {
@@ -102,3 +101,6 @@
 .slider-container .rightArrow:hover {
   transform: translateX(20%);
 }
+
+
+
