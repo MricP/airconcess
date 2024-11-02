@@ -13,7 +13,7 @@ import { useMediaQuery } from 'react-responsive';
 function CatalogPage() {
 
     const  numbers = [1,2,3,4,5];
-    const isMobile = useMediaQuery({ maxWidth: 550 });
+    const isMobile = useMediaQuery({ maxWidth: 750 });
 
     return (
     <main className='main-container'> 

@@ -1,11 +1,9 @@
 import React from 'react'
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
-import { useMediaQuery } from 'react-responsive';
 
 
 export const ProductBox = (props) => {
-  const isMobile = useMediaQuery({ maxWidth: 550 });
   return (
       <div className='productBox-container'>
         <div className='productImage-container'>
