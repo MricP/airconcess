@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* @font-face {
+    font-family: 'Jost';
+    src: url('/assets/fonts/Jost-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+:root {
+    --font-primary: 'Jost', sans-serif;
+    --text-size : 1.25rem; /*20 sur figma*/
+    --title-size: 3.125rem; /*50 sur figma*/
+    --bg-primary: #FFFFFF;
+    --color-primary: #0000;
+    --section-color: #B5B5B5;
+    --success-color: #43A73A;
+    --button-color: #333333;
+}
+
+@media (prefers-color-scheme: dark) {
+}
+
+body {
+    /* font-family: var(--font-primary); */
+    background-color: var(--bg-primary);
+    color: black;
+}
+
+p {
+    font-size: var(--text-size);
+}
+
+h2 {
+    font-size: var(--title-size);
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/************************************* Pour les ordinateurs *************************************/
+
+/************************************* Pour les tablettes   *************************************/
+
+/************************************* Pour les téléphones  *************************************/
