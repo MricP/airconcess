@@ -12,25 +12,25 @@ export default function Footer() {
     const isMobile = useMediaQuery({ maxWidth: 992 });
     return (
         <footer>
-            <div className="high-footer">
-                {!isMobile && <p>Proposer les meilleurs aéronefs du marché</p>}
+            <div className="footer-high-footer">
+                {!isMobile && <h2>Proposer les meilleurs aéronefs du marché</h2>}
                 <img src={logoWhite} alt="logo" />
                 {!isMobile ?
-                    <div className="reseau">
-                        <a href=""><FaLinkedin className="reseau-picture" size={40} /></a>
-                        <a href=""><FaSquareXTwitter className="reseau-picture" size={40} /></a>
-                        <a href=""><FaInstagram className="reseau-picture" size={40} /></a>
+                    <div className="footer-reseau">
+                        <a href=""><FaLinkedin className="footer-reseau-picture" size={40} /></a>
+                        <a href=""><FaSquareXTwitter className="footer-reseau-picture" size={40} /></a>
+                        <a href=""><FaInstagram className="footer-reseau-picture" size={40} /></a>
                     </div> :
-                    <div className="reseau">
-                        <a href=""><FaLinkedin className="reseau-picture" size={30} /></a>
-                        <a href=""><FaSquareXTwitter className="reseau-picture" size={30} /></a>
-                        <a href=""><FaInstagram className="reseau-picture" size={30} /></a>
+                    <div className="footer-reseau">
+                        <a href=""><FaLinkedin className="footer-reseau-picture" size={30} /></a>
+                        <a href=""><FaSquareXTwitter className="footer-reseau-picture" size={30} /></a>
+                        <a href=""><FaInstagram className="footer-reseau-picture" size={30} /></a>
                     </div>}
 
             </div>
-            <div className="bottom-footer">
-                <div className="bottom-footer-child">
-                    <h2>Liens rapides</h2>
+            <div className="footer-bottom-footer">
+                <div className="footer-bottom-footer-child">
+                    <p>Liens rapides</p>
                     <ul>
                         <li><a href="">Accueil</a></li>
                         <li><a href="">Catalogue d'aéronefs</a></li>
@@ -38,16 +38,16 @@ export default function Footer() {
                         <li><a href="">Services et maintenance</a></li>
                     </ul>
                 </div>
-                <div className="bottom-footer-child separator">
-                    <h2>Informations Légales</h2>
+                <div className="footer-bottom-footer-child separator">
+                    <p>Informations Légales</p>
                     <ul>
                         <li><a href="">Mentions légales</a></li>
                         <li><a href="">Politique de confidentialité</a></li>
                         <li><a href="">Conditions générales de vente (CGV)</a></li>
                     </ul>
                 </div>
-                <div className="bottom-footer-child separator">
-                    <h2>Coordonnées</h2>
+                <div className="footer-bottom-footer-child separator">
+                    <p>Coordonnées</p>
                     <ul>
                         <li>Adresse : 123 Rue des Ailes, 75008 Paris, France</li>
                         <li>Téléphone : +33 1 23 45 67 89</li>
