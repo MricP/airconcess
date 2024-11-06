@@ -1,0 +1,111 @@
+
+
+
+header {
+    position: fixed;
+    padding: 2vh 4vw;
+    width: 100%; /* S'assure que le header prend toute la largeur */
+    left: 0; /* Aligne le header sur le côté gauche */
+    right: 0; /* Aligne le header sur le côté droit */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+.default-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.default-menu img {
+    width: 13vw;
+}
+
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 4vw;
+    font-size: 20px;
+    font-weight: 600;
+    
+}
+
+nav ul{
+    display: flex;
+    gap: 4vw;
+    list-style-type: none;
+}
+
+nav button {
+    background-color: #333333;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 1vh 1vw 1vh 1vw;
+    font-family: "Jost", sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+.white-black {
+    background-color: white;
+    color: black;
+}
+
+.black-white {
+    background-color:#111111;
+    color: white;
+}
+
+.transparent-white {
+    color: white;
+    backdrop-filter: blur(7px);
+}
+
+.transparent-black {
+    color: black;
+    backdrop-filter: blur(7px);
+}
+
+@media (max-width: 992px) {
+    .menu-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .mobile-menu img {
+        width: 30vw;
+    }
+
+    .icon {
+        display: flex;
+        gap: 2vw;
+    }
+
+    .mobile-menu ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobile-menu button {
+        border: none;
+        background-color: transparent;
+    }
+
+    .black-white button {
+        color: white;
+    }
+    
+    .transparent-white button {
+        color: white;
+    }
+
+}
