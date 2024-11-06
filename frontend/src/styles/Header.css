@@ -2,7 +2,7 @@
 
 
 header {
-    position: fixed;
+    /*position: fixed;*/
     padding: 2vh 4vw;
     width: 100%; /* S'assure que le header prend toute la largeur */
     left: 0; /* Aligne le header sur le côté gauche */
@@ -82,10 +82,10 @@ nav button {
     }
 
     .header-mobile-menu img {
-        width: 30vw;
+        width: 50vw;
     }
 
-    .icon {
+    .header-icon {
         display: flex;
         gap: 2vw;
     }

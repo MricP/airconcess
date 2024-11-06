@@ -17,14 +17,14 @@ export default function Footer() {
                 <img src={logoWhite} alt="logo" />
                 {!isMobile ?
                     <div className="footer-reseau">
+                        <a href=""><FaLinkedin className="footer-reseau-picture" size={60} /></a>
+                        <a href=""><FaSquareXTwitter className="footer-reseau-picture" size={60} /></a>
+                        <a href=""><FaInstagram className="footer-reseau-picture" size={60} /></a>
+                    </div> :
+                    <div className="footer-reseau">
                         <a href=""><FaLinkedin className="footer-reseau-picture" size={40} /></a>
                         <a href=""><FaSquareXTwitter className="footer-reseau-picture" size={40} /></a>
                         <a href=""><FaInstagram className="footer-reseau-picture" size={40} /></a>
-                    </div> :
-                    <div className="footer-reseau">
-                        <a href=""><FaLinkedin className="footer-reseau-picture" size={30} /></a>
-                        <a href=""><FaSquareXTwitter className="footer-reseau-picture" size={30} /></a>
-                        <a href=""><FaInstagram className="footer-reseau-picture" size={30} /></a>
                     </div>}
 
             </div>

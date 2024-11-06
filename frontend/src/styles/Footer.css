@@ -16,6 +16,9 @@ footer {
     display: flex;
     gap: 8vw;
     font-size: 50px;
+    border-bottom: 3px solid white;
+    padding-bottom: 2vh;
+    margin-bottom: 10vh;
 }
 
 .footer-high-footer p {
@@ -46,12 +49,14 @@ footer {
     justify-content: center;
 }
 
-.footer-bottom-footer h2 {
-    font-size: 2.5em;
-}
 
 .footer-bottom-footer-child {
     width: 30vw;
+}
+
+.footer-bottom-footer-child p {
+    font-size: 2.1875em;
+    padding-bottom: 2vh;
 }
 
 .footer-bottom-footer li {
@@ -67,7 +72,8 @@ footer {
 @media (max-width: 992px) {
 
     .footer-high-footer {
-        gap: 20vw;
+        gap: 15vw;
+        margin-bottom: 0vh;
     }
 
     .footer-reseau {
@@ -96,7 +102,12 @@ footer {
 
     .footer-bottom-footer-child {
         width: 90vw;
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+        padding-left: 4vw;
     }
+
+    
 
     .separator {
         border-left: none;

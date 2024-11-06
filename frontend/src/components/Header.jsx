@@ -52,9 +52,9 @@ export default function Header({ color }) {
                         <div className="header-icon">
                             <button><CgProfile size={30} /></button>
                             {isClicked ? (
-                                <RxCross2 onClick={handleMenuClick} size={30} className='header-menuburger-icon'/>
+                                <RxCross2 onClick={handleMenuClick} size={30}/>
                             ) : (
-                                <IoIosMenu onClick={handleMenuClick} size={30} className='header-menuburger-icon'/>
+                                <IoIosMenu onClick={handleMenuClick} size={30}/>
                             )}
                         </div>
                     </div>
