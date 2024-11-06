@@ -8,7 +8,7 @@ function App() {
   
   return (
     <BrowserRouter>
-    <Header color={"transparent-white"}/>
+    <Header color={"black-white"}/>
     <Routes>
       
     </Routes>

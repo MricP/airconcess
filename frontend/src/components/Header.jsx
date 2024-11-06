@@ -4,6 +4,7 @@ import logoBlack from '../assets/logo-black.png'
 import { useMediaQuery } from 'react-responsive'
 import { CgProfile } from "react-icons/cg";
 import { IoIosMenu } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx";
 import { useState, useEffect } from 'react';
 
 
@@ -50,7 +51,11 @@ export default function Header({ color }) {
                         <img src={logo} alt="Logo" />
                         <div className="icon">
                             <button><CgProfile size={30} /></button>
-                            <IoIosMenu onClick={handleMenuClick} size={30} className='menuburger-icon'/>
+                            {isClicked ? (
+                                <RxCross2 onClick={handleMenuClick} size={30} className='menuburger-icon'/>
+                            ) : (
+                                <IoIosMenu onClick={handleMenuClick} size={30} className='menuburger-icon'/>
+                            )}
                         </div>
                     </div>
 
