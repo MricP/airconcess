@@ -32,7 +32,7 @@ export default function Header({ color }) {
         <header className={`${color}`}>
 
             {!isMobile ?
-                <div className="default-menu">
+                <div className="header-default-menu">
                     <img src={logo} alt="Logo" />
                     <nav>
                         <ul>
@@ -46,15 +46,15 @@ export default function Header({ color }) {
                         </form>
                     </nav>
                 </div> :
-                <div className='mobile-menu'>
-                    <div className="menu-bar">
+                <div className='header-mobile-menu'>
+                    <div className="header-menu-bar">
                         <img src={logo} alt="Logo" />
-                        <div className="icon">
+                        <div className="header-icon">
                             <button><CgProfile size={30} /></button>
                             {isClicked ? (
-                                <RxCross2 onClick={handleMenuClick} size={30} className='menuburger-icon'/>
+                                <RxCross2 onClick={handleMenuClick} size={30}/>
                             ) : (
-                                <IoIosMenu onClick={handleMenuClick} size={30} className='menuburger-icon'/>
+                                <IoIosMenu onClick={handleMenuClick} size={30}/>
                             )}
                         </div>
                     </div>

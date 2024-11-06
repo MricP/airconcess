@@ -2,7 +2,7 @@
 
 
 header {
-    position: fixed;
+    /*position: fixed;*/
     padding: 2vh 4vw;
     width: 100%; /* S'assure que le header prend toute la largeur */
     left: 0; /* Aligne le header sur le côté gauche */
@@ -10,13 +10,13 @@ header {
     box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
 
-.default-menu {
+.header-default-menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.default-menu img {
+.header-default-menu img {
     width: 13vw;
 }
 
@@ -75,27 +75,27 @@ nav button {
 }
 
 @media (max-width: 992px) {
-    .menu-bar {
+    .header-menu-bar {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    .mobile-menu img {
-        width: 30vw;
+    .header-mobile-menu img {
+        width: 50vw;
     }
 
-    .icon {
+    .header-icon {
         display: flex;
         gap: 2vw;
     }
 
-    .mobile-menu ul {
+    .header-mobile-menu ul {
         display: flex;
         flex-direction: column;
     }
 
-    .mobile-menu button {
+    .header-mobile-menu button {
         border: none;
         background-color: transparent;
     }
