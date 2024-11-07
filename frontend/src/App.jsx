@@ -10,6 +10,7 @@ import TestPage from './pages/TestPage.jsx';
 import VerifyEmail from './pages/auth/VerifyEmail.jsx';
 import NewPassword from './pages/auth/NewPassword.jsx';
 import ResetPasswordRequest from './pages/auth/ResetPasswordRequest.jsx';
+
 function App() {
 
   return (
@@ -30,3 +31,5 @@ function App() {
     </BrowserRouter>
   );
 }
+
+export default App;

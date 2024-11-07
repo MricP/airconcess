@@ -10,8 +10,8 @@ const axiosInstance = axios.create({
 export const fetchTestMessage = async () => {
   try {
     const response = await axiosInstance.get('/api');
-    console.log('Full response:', response); // Log the full response
-    console.log('Data fetched:', response.data.message); // Log the message
+    console.log('Full response:', response); 
+    console.log('Data fetched:', response.data.message);
     return response.data.message;
   } catch (error) {
     console.error('Error fetching data:', error);

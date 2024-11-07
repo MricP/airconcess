@@ -33,6 +33,8 @@ export default function RegisterForm() {
         }
     };
 
+    
+
     return (
         <form onSubmit={handleSubmit}>
             <label htmlFor="email">Email</label>
