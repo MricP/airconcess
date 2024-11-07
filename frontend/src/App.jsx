@@ -2,19 +2,21 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import LandingPage from './pages/LandingPage';
-import SignInPage from './pages/auth/SignInPage.jsx';
-import ProfilePage from './pages/auth/ProfilePage.jsx';
+import SignInPage from './pages/auth/SignInPage';
+import ProfilePage from './pages/auth/ProfilePage';
 import Error404 from './pages/Error404.jsx';
-import SignUpPage from './pages/auth/SignUpPage.jsx';
-import TestPage from './pages/TestPage.jsx';
-import VerifyEmail from './pages/auth/VerifyEmail.jsx';
-import NewPassword from './pages/auth/NewPassword.jsx';
-import ResetPasswordRequest from './pages/auth/ResetPasswordRequest.jsx';
+import SignUpPage from './pages/auth/SignUpPage';
+import TestPage from './pages/TestPage';
+import VerifyEmail from './pages/auth/VerifyEmail';
+import NewPassword from './pages/auth/NewPassword';
+import ResetPasswordRequest from './pages/auth/ResetPasswordRequest';
+import Template from './components/Template';
 
 function App() {
 
   return (
     <BrowserRouter>
+    <Template>
       <ToastContainer />
       <Routes>
         <Route path='*' element={<Error404 />} />
@@ -28,6 +30,7 @@ function App() {
         <Route path='/verify-email' element={<VerifyEmail />} />
       </Routes>
       <ToastContainer />
+      </Template>
     </BrowserRouter>
   );
 }

@@ -1,5 +1,4 @@
 import "../styles/Footer.css";
-import logoWhite from '../assets/logo-white.png'
 import { FaLinkedin } from "react-icons/fa6";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
@@ -9,6 +8,7 @@ import { useMediaQuery } from 'react-responsive'
 
 
 export default function Footer() {
+    const logoWhite = '/assets/logo-white.png';
     const isMobile = useMediaQuery({ maxWidth: 992 });
     return (
         <footer>

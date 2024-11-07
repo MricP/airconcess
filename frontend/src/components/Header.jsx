@@ -1,6 +1,4 @@
 import '../styles/Header.css'
-import logoWhite from '../assets/logo-white.png'
-import logoBlack from '../assets/logo-black.png'
 import { useMediaQuery } from 'react-responsive'
 import { CgProfile } from "react-icons/cg";
 import { IoIosMenu } from "react-icons/io";
@@ -9,7 +7,9 @@ import { useState, useEffect } from 'react';
 
 
 export default function Header({ color }) {
-    let logo = logoWhite
+    const logoWhite = '/assets/logo-white.png';
+    const logoBlack = '/assets/logo-black.png';
+    let logo = logoWhite;
     const isMobile = useMediaQuery({ maxWidth: 992 });
     const [isClicked, updateClicked] = useState(false)
 
