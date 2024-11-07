@@ -1,7 +1,7 @@
 import React from 'react'
 import { CiSearch } from "react-icons/ci";
 import { CiFilter } from "react-icons/ci";
-import { ProductBox } from '../component/ProductBox';
+import { ProductBox } from '../components/ProductBox';
 import gulfstreamG650ER from '../styles/assets/img/catalog/gulfstreamG650.svg'
 import { FaEdit } from "react-icons/fa";
 import { AiOutlineCloseSquare } from "react-icons/ai";

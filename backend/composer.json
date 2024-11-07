@@ -1,0 +1,7 @@
+{
+    "name": "fillo/backend",
+    "description": "Une description de votre projet",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}
