@@ -28,8 +28,5 @@ function App() {
       </Routes>
       <ToastContainer />
     </BrowserRouter>
-
   );
 }
-
-export default App;
