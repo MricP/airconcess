@@ -1,0 +1,20 @@
+.training-service {
+    display: flex;
+    padding-left: 5vw;
+}
+
+.training-service-left{
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+}
+
+.training-service-button {
+    width: 20vw;
+}
+
+.training-service-right img {
+    width: 20vw;
+    aspect-ratio: 1/1;
+}

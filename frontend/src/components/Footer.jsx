@@ -1,5 +1,4 @@
 import "../styles/Footer.css";
-import logoWhite from '../assets/logo-white.png'
 import { FaLinkedin } from "react-icons/fa6";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
@@ -9,12 +8,13 @@ import { useMediaQuery } from 'react-responsive'
 
 
 export default function Footer() {
+    
     const isMobile = useMediaQuery({ maxWidth: 992 });
     return (
         <footer>
             <div className="footer-high-footer">
                 {!isMobile && <h2>Proposer les meilleurs aéronefs du marché</h2>}
-                <img src={logoWhite} alt="logo" />
+                <img src='/assets/logo-white.png' alt="logo" />
                 {!isMobile ?
                     <div className="footer-reseau">
                         <a href=""><FaLinkedin className="footer-reseau-picture" size={60} /></a>
