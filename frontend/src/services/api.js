@@ -29,4 +29,9 @@ export const getCatalogData = async () => {
     console.error('Error fetching data:', error);
     throw error;
   }
+<<<<<<< HEAD
 };
+=======
+};
+
+>>>>>>> 1ef100cc2b09b7bb25842b3bfba9bb2583a62c69

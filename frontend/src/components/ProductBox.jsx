@@ -2,8 +2,9 @@ import React from 'react'
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
 
-
 export const ProductBox = (props) => {
+
+    
   return (
       <div className='productBox-container'>
         <div className='productImage-container'>
