@@ -29,9 +29,21 @@ export const getCatalogData = async () => {
     console.error('Error fetching data:', error);
     throw error;
   }
-<<<<<<< HEAD
-};
-=======
 };
 
->>>>>>> 1ef100cc2b09b7bb25842b3bfba9bb2583a62c69
+export const getAllAircrafts = async (req) => {
+  try{
+    const response = await axiosInstance.get('/catalog');
+    console.log('Full response:', response); // Log the full response
+    console.log('Data fetched:', response.data.message); // Log the message
+    const page = req.query.page || 1;
+    const limit = 5;
+    const offset = (page - 1) * limit;
+    const sql = `SELECT * FROM aircrafts LIMIT ${limit} OFFSET ${offset}`;
+
+    db.query(sql,res, (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: "Erreur lors de la récupération des données" });
+      }})
+}catch(error){}
+};

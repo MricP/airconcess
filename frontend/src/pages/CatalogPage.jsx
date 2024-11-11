@@ -8,12 +8,35 @@ import { AiOutlineCloseSquare } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { useMediaQuery } from 'react-responsive';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import axios from 'axios';
 
 
 function CatalogPage() {
 
-    const  numbers = [1,2,3,4,5];
+    const [aircrafts, setAircrafts] = useState([]);
+    const [page, setPage] = useState(1);
     const isMobile = useMediaQuery({ maxWidth: 750 });
+
+    useEffect(() => {
+        // Récupérer les données de l'API
+        axios.get(`http://localhost:3000/api/aircrafts?page=${page}`)
+            .then(response => {
+                setAircrafts(response.data);
+            })
+            .catch(error => {
+                console.error("Erreur lors de la récupération des données :", error);
+            });
+    }, [page]);
+
+    const handleNextPage = () => {
+        setPage(page + 1);
+    };
+
+    const handlePreviousPage = () => {
+        if (page > 1) setPage(page - 1);
+    };
 
     return (
     <main className='main-container'> 
@@ -44,13 +67,23 @@ function CatalogPage() {
             
             <div className="separator"></div>
             <div className='planeContainer'>
-              {numbers.map((number) =>
-                  <ProductBox key={number}
-                    isAvailable={true} planeImg={gulfstreamG650ER} modelName={"GULFSTREAM G650ER"} serialNumber={"SN 54267"} price={"USD $ 35 000 000"}
-                    year={2019} hour={3825} capacity={19} autonomy={13890} description={"Le Gulfstream G650ER est un jet privé de luxe reconnu pour son autonomie remarquable et ses performances exceptionnelles. Capable de parcourir de longues distances à grande vitesse, il offre un intérieur spacieux et raffiné, conçu pour maximiser le confort des passagers. Ce jet allie élégance, technologie de pointe et efficacité, idéal pour les voyageurs exigeants recherchant une expérience de vol premium."} />
+              {aircrafts.map((aircraft) =>
+                  <ProductBox 
+                    key={aircraft.id} 
+                    isAvailable={true}
+                    planeImg={gulfstreamG650ER} 
+                    modelName={aircraft.model_name}
+                    serialNumber={aircraft.serial_number}
+                    price={`USD $ ${aircraft.price}`}
+                    year={aircraft.year}
+                    hour={aircraft.hour}
+                    capacity={aircraft.capacity}
+                    autonomy={aircraft.autonomy}
+                    description={aircraft.description} 
+                  />
                   )} 
                 
-              <div className='chooseCatalogPage'><button><IoIosArrowBack color='#B5B5B5' size={35}/></button><p>1/12</p><button><IoIosArrowForward color='#B5B5B5' size={35}/></button></div>
+              <div className='chooseCatalogPage'><button><IoIosArrowBack color='#B5B5B5' size={35} onClick={handlePreviousPage}/></button><p>1/12</p><button><IoIosArrowForward color='#B5B5B5' size={35} onClick={handleNextPage}/></button></div>
             </div>  
         </div>
     </main>
