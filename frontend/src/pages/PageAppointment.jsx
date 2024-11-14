@@ -1,8 +1,8 @@
 import React from 'react'
-import '../styles/PageAppointment.css'
+import '../styles/pageAppointment/PageAppointment.css'
 import Template from '../components/Template';
 import ScrollDownButton from '../components/ScrollDownButton';
-import AppointmentForm from '../components/AppointmentForm';
+import AppointmentForm from '../components/pageAppointment/AppointmentForm';
 
 function PageAppointment() {
 

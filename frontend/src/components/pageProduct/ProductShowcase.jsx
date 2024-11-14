@@ -1,5 +1,5 @@
-import "../styles/ProductShowcase.css";
-import ScrollDownButton from './ScrollDownButton';
+import "../../styles/pageProduct/ProductShowcase.css";
+import ScrollDownButton from '../ScrollDownButton';
 
 const ProductShowcase = ({ imagePath, productName }) => {
   return (

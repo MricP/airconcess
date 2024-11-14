@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/ProductMap.css'
+import '../../styles/pageProduct/ProductMap.css'
 
 const ProductMap = () => {
     return (

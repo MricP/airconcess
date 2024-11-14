@@ -29,17 +29,21 @@
 @media (prefers-color-scheme: dark) {
 }
 
-body {
-    background-color: var(--bg-primary);
-    color: var(--color-primary);
-}
-
 h1 {
     font-size: 90px;
+    line-height: normal;
+}
+
+body {
+    font-size:unset;
+    /* background-color: var(--bg-primary); */
+    color: var(--color-primary);
+    line-height: normal;
 }
 
 h2 {
-    font-size: var(--title-size);
+    font-size: var(--title-size); 
+    /*clamp(30px,5vw,var(--title-size)); pour le responsive*/
 }
 
 h3 {

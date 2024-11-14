@@ -1,9 +1,9 @@
 import React from 'react'
 import Template from '../components/Template';
-import ProductShowcase from '../components/ProductShowcase';
-import ProductDescription from '../components/ProductDescription';
-import Slider from "../components/Slider";
-import ProductMap from '../components/ProductMap';
+import ProductShowcase from '../components/pageProduct/ProductShowcase';
+import ProductDescription from '../components/pageProduct/ProductDescription';
+import Slider from "../components/pageProduct/Slider";
+import ProductMap from '../components/pageProduct/ProductMap';
 
 function PageProduct() {
   const images = [

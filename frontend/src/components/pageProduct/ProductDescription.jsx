@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/ProductDescription.css'
+import '../../styles/pageProduct/ProductDescription.css'
 import { BiDownload } from "react-icons/bi";
 
 

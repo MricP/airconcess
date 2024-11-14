@@ -1,0 +1,67 @@
+.info-fieldset {
+    gap: var(--form-input-gap);
+}
+
+.info-fieldset>div>div, .info-fieldset>div:not(:first-of-type) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--form-input-gap);
+    /* background-color: blue; */
+}
+
+.info-fieldset>div:first-of-type {
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+}
+
+.info-fieldset>div:first-of-type>div {
+    /* background-color: blue; */
+    width: 48%;
+}
+
+.info-fieldset>div:last-of-type .div-upload {
+    /* background-color: red; */
+    display: flex;
+}
+
+.info-fieldset>div:last-of-type .div-upload .file-name {
+    width: 95%;
+}
+
+.invisible-label {
+    width: 5%;
+    height: auto;
+}
+
+.info-fieldset>div:last-of-type .div-upload svg {
+    height: 100%;
+    cursor: pointer;
+}
+
+.info-fieldset .invisible-input {
+    display: none;
+}
+
+.info-fieldset div:first-of-type>div:nth-child(2) {
+    margin-left: 4%;
+}
+
+.info-fieldset div:first-of-type>div:nth-child(2)>div {
+    display: flex;
+    flex-direction: row;
+}
+
+.info-fieldset div:first-of-type>div:nth-child(2)>div label {
+    margin: 0;
+}
+
+.info-fieldset div:first-of-type>div:nth-child(2)>div label:first-of-type {
+    width: 60%;
+}
+
+.info-fieldset div:first-of-type>div:nth-child(2)>div label:last-of-type {
+    width: 38%;
+    margin-left: 2%;
+    /* background-color: red; */
+}

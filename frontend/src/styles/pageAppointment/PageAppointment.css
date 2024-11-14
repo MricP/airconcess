@@ -1,3 +1,8 @@
+:root {
+    --form-input-gap:10px;
+    --form-fieldset-gap:30px;
+}
+
 .appointmentShowcase {
     display: flex;
     align-items: center;
@@ -8,11 +13,16 @@
 }
 
 .appointmentShowcase .text-div {
+    
     width: 45%;
     height: 70%;
     margin-left: 10%;
     text-align: justify;
-    /* background-color: red; */
+    background-color: red;
+}
+
+.appointmentShowcase .text-div h1 {
+    background-color: orange;
 }
 
 .appointmentShowcase .scroll-down-button {
@@ -31,18 +41,21 @@
 /*Images du showcase*/
 
 .appointmentShowcase .images {
+    /* background-color: red; */
+    aspect-ratio: 1/1.5;
     position: absolute;
     top: 5%;
     right: 5%;
     gap: 10px;
     /* background-color: rgb(255, 186, 186); */
-    height: 658px;
-    width: 435px;
+    /* height: 658px; */
+    width: 29%;
 }
 
 .appointmentShowcase .images img:first-of-type , .appointmentShowcase .images img:last-of-type{
-    width: 211px;
-    height: 515px;
+    width: 48%;
+    aspect-ratio: 1/2.45;
+    /* height: 515px; */
     border-radius: 5px;
 }
 

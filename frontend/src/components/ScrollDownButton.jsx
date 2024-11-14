@@ -11,7 +11,7 @@ const ScrollDownButton = ({colorIcon,scrollLength}) => {
     }
 
     return (
-        <HiOutlineChevronDoubleDown onClick={handleScroll} className={'scroll-down-button'+ (colorIcon == 'white'?' white':' black')}/>
+        <HiOutlineChevronDoubleDown onClick={handleScroll} className={'scroll-down-button'+ (colorIcon === 'white'?' white':' black')}/>
     )
 }
 

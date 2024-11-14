@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/Slider.css';
+import '../../styles/pageProduct/Slider.css';
 import { HiOutlineChevronDoubleRight,HiOutlineChevronDoubleLeft} from "react-icons/hi";
 
 
