@@ -2,7 +2,7 @@
 
 
 header {
-    /*position: fixed;*/
+    position: fixed;
     padding: 2vh 4vw;
     width: 100%; /* S'assure que le header prend toute la largeur */
     left: 0; /* Aligne le header sur le côté gauche */

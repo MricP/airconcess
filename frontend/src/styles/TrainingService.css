@@ -1,10 +1,14 @@
 .training-service {
     display: flex;
     padding-left: 5vw;
+    padding-right: 5vw;
+    height: 100vh;
+    align-items: center;
 }
 
 .training-service-left{
-    width: 50vw;
+    width: 53vw;
+    padding-right: 3vw;
     display: flex;
     flex-direction: column;
     gap: 5vh;
@@ -14,7 +18,32 @@
     width: 20vw;
 }
 
+.training-service-right {
+    width: 45vw;
+}
+
 .training-service-right img {
-    width: 20vw;
     aspect-ratio: 1/1;
+    border-radius: 5px;
+    box-shadow: 3px 3px 15px ;
+}
+
+.training-service-right img:nth-child(1) {
+    width: 15vw;
+    z-index: -1;
+    margin-top: 10vh;
+}
+
+.training-service-right img:nth-child(2) {
+    width: 20vw;
+    margin-bottom: 15vh;
+    z-index: -1;
+    float: right;
+}
+
+.training-service-right img:nth-child(3) {
+    width: 20vw;
+    position: absolute;
+    margin-top: 30vh;
+    margin-left: -5vw;
 }

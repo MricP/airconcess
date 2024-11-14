@@ -15,9 +15,9 @@ export default function TrainingService() {
                 
             </section>
             <div className="training-service-right">
-                <img src="assets/formation2.jpg" alt="" />
-                <img src="assets/formation1.jpg" alt="" />
-                <img src="assets/formation3.jpeg" alt="" />
+                <img src="assets/formation2.jpg" alt="Image formation 1" />
+                <img src="assets/formation1.jpg" alt="Image formation 2" />
+                <img src="assets/formation3.jpeg" alt="Image formation 3" />
             </div>
         </div>
     )
