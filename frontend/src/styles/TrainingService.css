@@ -4,6 +4,13 @@
     padding-right: 5vw;
     height: 100vh;
     align-items: center;
+    background: linear-gradient(
+    90deg, 
+    #FFFFFF 0%,
+    #DEDEDE 38%,
+    #C9C9C9 66%,
+    #AEAEAE 100%
+    );
 }
 
 .training-service-left{

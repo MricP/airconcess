@@ -4,13 +4,14 @@ import { ToastContainer } from 'react-toastify';
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import TrainingService from './components/TrainingService.jsx';
+import MaintenanceService from './components/MaintenanceService.jsx';
 
 function App() {
   
   return (
     <BrowserRouter>
     <Header color={"transparent-black"}/>
-    <TrainingService />
+    <MaintenanceService />
     <Routes>
       
     </Routes>
