@@ -27,6 +27,7 @@
 
 .training-service-right {
     width: 45vw;
+    position: relative;
 }
 
 .training-service-right img {

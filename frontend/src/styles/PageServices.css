@@ -1,0 +1,13 @@
+.page-services {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    height: 100vh;
+}
+
+.page-services::-webkit-scrollbar-track {
+    background-color: red;
+}
+
+.page-services-component {
+    scroll-snap-align: center;
+}

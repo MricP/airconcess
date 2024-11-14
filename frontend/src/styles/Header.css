@@ -8,6 +8,7 @@ header {
     left: 0; /* Aligne le header sur le côté gauche */
     right: 0; /* Aligne le header sur le côté droit */
     box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+    z-index: 1;
 }
 
 .header-default-menu {
