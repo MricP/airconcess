@@ -59,7 +59,7 @@
     padding-bottom: 5px;
 }
 
-.title {
+.title span  {
     font-size: 6rem;
     line-height: 1.2;
     font-weight: 700;
@@ -68,6 +68,7 @@
     align-items: start;
     flex-direction: column;
     justify-content: center;
+    color: white;
 }
 
 .description {
@@ -105,7 +106,7 @@
         padding: 20px;
     }
 
-    .title {
+    .title span  {
         font-size: 4rem;
     }
 
@@ -151,7 +152,7 @@
         font-size: 0.9rem;
     }
 
-    .title {
+    .title span  {
         font-size: 3rem;
     }
 
@@ -208,7 +209,7 @@
         font-size: 0.8rem;
     }
 
-    .title {
+    .title span  {
         font-size: 2.5rem;
     }
 
@@ -234,7 +235,7 @@
 }
 
 @media (max-width: 300px) {
-    .title {
+    .title span  {
         font-size: 2rem;
     }
 }
