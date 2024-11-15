@@ -6,7 +6,7 @@ import '../../styles/landing-page/FirstSectionLanding.css';
 function FirstSectionLanding() {
     const { scrollY } = useScroll();
     const y1 = useTransform(scrollY, [0, 300], [0, -250]);
-    const y2 = useTransform(scrollY, [0, 300], [0, -150]);
+    //const y2 = useTransform(scrollY, [0, 300], [0, -150]);
     const y3 = useTransform(scrollY, [0, 300], [100, -110]);
     const arrowDown = '/assets/arrow1-icon.png';
 
@@ -23,10 +23,10 @@ function FirstSectionLanding() {
                     <div className='content'>
                         <motion.p className='small-text' style={{ y: y1 }}>Prenez rendez-vous maintenant !</motion.p>
                         <motion.p className='small-text' style={{ y: y1 }}>Votre prochain aéronef vous attend.</motion.p>
-                        <motion.h2 className='title' style={{ y: y2 }}>
-                            <span>Exclusivité </span>
-                            <span>Rendez-vous </span>
-                            <span>Personnalisation</span>
+                        <motion.h2 className='title' style={{ y: y3 }}>
+                            <motion.span style={{ y: y3 }}>Exclusivité </motion.span>
+                            <motion.span style={{ y: y3 }}>Rendez-vous </motion.span>
+                            <motion.span style={{ y: y3 }}>Personnalisation</motion.span>
                         </motion.h2>
                         <motion.p className='description' style={{ y: y3 }}>
                             Découvrez une expérience unique pour louer ou acheter votre aéronef.
