@@ -23,8 +23,8 @@ function SecondSectionLanding() {
                     </h2>
                     <div className="flex-choices-container">
                         {offers.map((offer, index) => (
-                            <div key={index} className={`container${index + 1}`} onClick={() => navigate(offer.path)}>
-                                <div className={`choice${index + 1}`}>
+                            <div key={index} className={`card-container${index + 1}`} onClick={() => navigate(offer.path)}>
+                                <div className={`card-choice${index + 1}`}>
                                     <img src={offer.src} alt={offer.alt} />
                                     <p className="text">
                                         {offer.text}

@@ -2,14 +2,14 @@ import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
 
-function Template({children}) {
+function Template({ children }) {
   return (
-    <div>
-        <Header/>
-        {children}
-        <Footer/>
-    </div>
-    
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
+
   )
 }
 

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchTestMessage } from '../services/api';
 import FirstSectionLanding from '../components/landing-page/FirstSectionLanding';
 import SecondSectionLanding from '../components/landing-page/SecondSectionLanding';
+import ThirdSectionLanding from '../components/landing-page/ThirdSectionLanding';
 
 export default function LandingPage() {
   const [message, setMessage] = useState('Bienvenue');
@@ -35,26 +37,27 @@ export default function LandingPage() {
       if (isExpired) {
         localStorage.removeItem('token');
         // ON suppr les données de l'utilisateur si le token est expiré
-        localStorage.removeItem('user'); 
+        localStorage.removeItem('user');
       }
     }
   }, []);
 
   return (
     <main className="">
-      {/* <h1 className=''>{message}</h1>
-      <div className='flex-col'> 
+      <h1 className=''>{message}</h1>
+      {/* <div className='flex-col'> 
         <Link to="/sign-up">sign-up</Link>
         <Link to="/sign-in">sign-in</Link>
         <Link to="/my-profile">my-Profile</Link>
-      </div> 
+      </div>  */}
       {isAuthenticated ? (
         <p>Connecté</p>
       ) : (
         <p>Déconnecté</p>
-      )}*/}
+      )}
       <FirstSectionLanding />
       <SecondSectionLanding />
+      <ThirdSectionLanding />
     </main>
   )
 }
