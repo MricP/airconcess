@@ -31,7 +31,9 @@ function CatalogPage() {
     }, [page]);
 
     const handleNextPage = () => {
-        setPage(page + 1);
+        if(page < 5){
+            setPage(page + 1);
+        }
     };
 
     const handlePreviousPage = () => {
@@ -83,7 +85,7 @@ function CatalogPage() {
                   />
                   )} 
                 
-              <div className='chooseCatalogPage'><button><IoIosArrowBack color='#B5B5B5' size={35} onClick={handlePreviousPage}/></button><p>1/12</p><button><IoIosArrowForward color='#B5B5B5' size={35} onClick={handleNextPage}/></button></div>
+              <div className='chooseCatalogPage'><button><IoIosArrowBack color='#B5B5B5' size={35} onClick={handlePreviousPage}/></button><p>{page}/5</p><button><IoIosArrowForward color='#B5B5B5' size={35} onClick={handleNextPage}/></button></div>
             </div>  
         </div>
     </main>
