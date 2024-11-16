@@ -15,7 +15,7 @@
     text-align: center;
 }
 
-.sign-in-img {
+.sign-up-img {
     margin-bottom: 10px;
     max-width: 381px;
     max-height: 520px;
@@ -55,7 +55,7 @@
     height: auto;
 }
 
-.sign-in-form {
+.sign-up-form {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -81,8 +81,6 @@
     border-radius: 4px;
 }
 
-
-
 .response-message {
     margin-top: 10px;
     font-size: 14px;
@@ -95,44 +93,29 @@
     color: red;
 }
 
-.forgot-password-link {
-    font-size: 14px;
+.sign-in-link-container {
     display: flex;
     justify-content: center;
-    width: 100%;
-    align-items: center;
-    color: #393939;
-    margin-top: 10px;
-}
-
-.forgot-password-link:hover {
-    text-decoration: underline;
-}
-
-
-.sign-up-link-container {
-    display: flex;
-    justify-content: center;
-    padding-top: 100px;
+    padding-top: 10px;
     width: 100%;
     align-items: center;
 }
 
-.sign-up-link-text {
+.sign-in-link-text {
     font-size: 14px;
     color: #393939;
     text-align: left;
     margin-left: 5px;
 }
 
-.sign-up-link {
+.sign-in-link {
     font-size: 14px;
     color: #393939;
     text-align: right;
     margin-left: 5px;
 }
 
-.sign-up-link:hover {
+.sign-in-link:hover {
     text-decoration: underline;
 }
 
@@ -154,7 +137,27 @@
         display: none;
     }
 
-    .sign-up-link-container {
+    .sign-in-link-container {
         padding-top: 20px;
+    }
+}
+
+@media (max-height: 700px) {
+
+    .right-container {
+        margin-top: 100px;
+    }
+
+    .plane-airconcess-logo {
+        display: none;
+    }
+
+    .logos-img-container {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .sign-up-img{
+        margin-top: 60px;
     }
 }

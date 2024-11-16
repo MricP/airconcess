@@ -11,11 +11,14 @@ import DarkButton from '../../components/DarkButton';
 import GrayInput from '../../components/GrayInput';
 
 const SignInPage = () => {
+  const signInImg = '/assets/auth/sign-in-img.jpg';
+  const airconcessLogo = '/assets/logo-black.png';
+  const airconcessLogoPlane = '/assets/airconcess-logo-plane.png';
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorHtml, setErrorHtml] = useState(null);
   const [responseMessage, setResponseMessage] = useState('');
-  const signInImg = '/assets/auth/sign-in-img.jpg';
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -54,19 +57,28 @@ const SignInPage = () => {
       }
       rightContainerChildren={
         <div className="right-container">
-          <h1 className="right-container-title">Se connecter</h1>
+          <div className="logos-img-container">
+            <img src={airconcessLogoPlane} alt="AirConcess" className="plane-airconcess-logo" />
+            <img src={airconcessLogo} alt="AirConcess" className="airconcess-logo" />
+          </div>
           <form onSubmit={handleSubmit} className="sign-in-form">
             <div className="form-group">
-              <label htmlFor="email" className="form-label">Email</label>
-              <GrayInput placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <label htmlFor="email" className="form-label">Adresse mail*</label>
+              <GrayInput placeholder="toto12@exemple.net" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />
             </div>
             <div className="form-group">
-              <label htmlFor="password" className="form-label">Mot de passe</label>
-              <GrayInput placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <label htmlFor="password" className="form-label">Mot de passe*</label>
+              <GrayInput placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
             </div>
             <DarkButton text="Se connecter" use={handleSubmit} />
           </form>
-          <Link to="/reset-password-request" className="forgot-password-link">Mot de passe oublié ?</Link>
+          <div className="forgot-password">
+            <Link to="/reset-password-request" className="forgot-password-link">Mot de passe oublié ?</Link>
+          </div>
+          <div className="sign-up-link-container">
+            <p className="sign-up-link-text">Pas encore rejoins l’aventure ?</p>
+            <Link to="/sign-up" className="sign-up-link">Créer mon compte</Link>
+          </div>
           {responseMessage && <p className="response-message">{responseMessage}</p>}
           {errorHtml && <div className="error-html" dangerouslySetInnerHTML={{ __html: errorHtml }} />}
         </div>
