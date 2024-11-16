@@ -15,7 +15,7 @@ function SecondSectionLanding() {
     ];
 
     return (
-        <section className='second-section-landing'>
+        <section className='second-section-landing' id='second-section-landing'>
             <div className="choices-content">
                 <div className="choices-container">
                     <h2>

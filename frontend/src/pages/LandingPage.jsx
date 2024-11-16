@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/landing-page/LandingPage.css';
 
 // Components
 import FirstSectionLanding from '../components/landing-page/FirstSectionLanding';
