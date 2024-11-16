@@ -11,27 +11,30 @@ import VerifyEmail from './pages/auth/VerifyEmail';
 import NewPassword from './pages/auth/NewPassword';
 import ResetPasswordRequest from './pages/auth/ResetPasswordRequest';
 import Template from './components/Template';
+import PageServices from './pages/PageServices.jsx';
 
 function App() {
 
   return (
     <BrowserRouter>
-    <Template>
-      <ToastContainer />
-      <Routes>
-        <Route path='*' element={<Error404 />} />
-        <Route path='/' element={<LandingPage />} />
-        <Route path='/sign-in' element={<SignInPage />} />
-        <Route path='/sign-up' element={<SignUpPage />} />
-        <Route path='/my-profile' element={<ProfilePage />} />
-        <Route path='/test' element={<TestPage />} />
-        <Route path="/reset-password-request" element={<ResetPasswordRequest />} />
-        <Route path="/reset-password" element={<NewPassword />} />
-        <Route path='/verify-email' element={<VerifyEmail />} />
-      </Routes>
-      <ToastContainer />
+      <Template>
+        <ToastContainer />
+        <Routes>
+          <Route path='*' element={<Error404 />} />
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/sign-in' element={<SignInPage />} />
+          <Route path='/sign-up' element={<SignUpPage />} />
+          <Route path='/my-profile' element={<ProfilePage />} />
+          <Route path='/test' element={<TestPage />} />
+          <Route path="/reset-password-request" element={<ResetPasswordRequest />} />
+          <Route path="/reset-password" element={<NewPassword />} />
+          <Route path='/verify-email' element={<VerifyEmail />} />
+          <Route path='/services' element={<PageServices />} />
+        </Routes>
+        <ToastContainer />
       </Template>
     </BrowserRouter>
+
   );
 }
 

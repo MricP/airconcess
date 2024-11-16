@@ -8,13 +8,12 @@ import { useMediaQuery } from 'react-responsive'
 
 
 export default function Footer() {
-    const logoWhite = '/assets/logo-white.png';
     const isMobile = useMediaQuery({ maxWidth: 992 });
     return (
         <footer>
             <div className="footer-high-footer">
                 {!isMobile && <h2>Proposer les meilleurs aéronefs du marché</h2>}
-                <img src={logoWhite} alt="logo" />
+                <img src='/assets/logo-white.png' alt="logo" />
                 {!isMobile ?
                     <div className="footer-reseau">
                         <a href=""><FaLinkedin className="footer-reseau-picture" size={60} /></a>

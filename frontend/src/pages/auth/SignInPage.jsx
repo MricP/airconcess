@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-import { signIn } from '../../services/auth';
-import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
 import { Link } from 'react-router-dom';
+import '../../styles/auth/SignInPage.css';
+
+// services functions
+import { signIn } from '../../services/auth';
+
+// components
+import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
+import DarkButton from '../../components/DarkButton';
+import GrayInput from '../../components/GrayInput';
 
 const SignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorHtml, setErrorHtml] = useState(null);
   const [responseMessage, setResponseMessage] = useState('');
+  const signInImg = '/assets/auth/sign-in-img.jpg';
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,43 +32,43 @@ const SignInPage = () => {
         setErrorHtml(response);
       }
     } catch (error) {
-      console.log('Error response:', error.response.data.message);
-      setErrorHtml(error.response.data.message);
+      console.log('Error response:', error.response?.data?.message || 'Unknown error');
+      setErrorHtml(error.response?.data?.message || 'An error occurred');
     }
   };
 
   return (
     <TwoColumnLayout
       leftContainerChildren={
-        <img src="" alt="Sign In" />
+        <>
+          <img src={signInImg} alt="Sign In" className="sign-in-img" />
+          <div className="left-container-text">
+            <h2 className="left-container-title">
+              Se connecter
+            </h2>
+            <p className="left-container-description">
+              Nous avoir rejoins, c'est avoir droit à l'excellence en toute sérénité tout les jours.
+            </p>
+          </div>
+        </>
       }
       rightContainerChildren={
-        <div>
-          <h1>Se connecter</h1>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+        <div className="right-container">
+          <h1 className="right-container-title">Se connecter</h1>
+          <form onSubmit={handleSubmit} className="sign-in-form">
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">Email</label>
+              <GrayInput placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
-            <div>
-              <label htmlFor="password">Mot de passe</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">Mot de passe</label>
+              <GrayInput placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <button type="submit">Se connecter</button>
+            <DarkButton text="Se connecter" use={handleSubmit} />
           </form>
-          <Link to="/reset-password-request">Mot de passe oublié ?</Link>
-          {responseMessage && <p>{responseMessage}</p>}
-          {errorHtml && <div dangerouslySetInnerHTML={{ __html: errorHtml }} />}
+          <Link to="/reset-password-request" className="forgot-password-link">Mot de passe oublié ?</Link>
+          {responseMessage && <p className="response-message">{responseMessage}</p>}
+          {errorHtml && <div className="error-html" dangerouslySetInnerHTML={{ __html: errorHtml }} />}
         </div>
       }
     />
