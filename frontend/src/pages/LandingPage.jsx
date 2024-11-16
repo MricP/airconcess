@@ -1,8 +1,11 @@
 import React from 'react';
+
+// Components
 import FirstSectionLanding from '../components/landing-page/FirstSectionLanding';
 import SecondSectionLanding from '../components/landing-page/SecondSectionLanding';
 import ThirdSectionLanding from '../components/landing-page/ThirdSectionLanding';
 import FourthSectionLanding from '../components/landing-page/FourthSectionLanding';
+import FifthSectionLanding from '../components/landing-page/FifthSectionLanding';
 
 export default function LandingPage() {
   return (
@@ -11,6 +14,7 @@ export default function LandingPage() {
       <SecondSectionLanding />
       <ThirdSectionLanding />
       <FourthSectionLanding />
+      <FifthSectionLanding />
     </main>
   )
 }

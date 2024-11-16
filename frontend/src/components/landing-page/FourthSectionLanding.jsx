@@ -5,7 +5,7 @@ import '../../styles/landing-page/FourthSectionLanding.css';
 
 function FourthSectionLanding() {
     const controls = useAnimation();
-    const isMobile = useMediaQuery({ query: '(max-width: 723px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 1220px)' });
     const ref = useRef(null);
     const videoRef = useRef(null);
 
