@@ -7,7 +7,7 @@
     background-image: url('../../../public/assets/bg-landing-plane.jpg');
     background-size: cover;
     background-position: center;
-    color: white;
+    color: var(--bg-primary);
     padding: 20px;
 }
 
@@ -16,7 +16,7 @@
     right: 5vh;
     top: 20vh;
     position: absolute;
-    color: white;
+    color: var(--bg-primary);
 }
 
 .first-section-landing-col {
@@ -30,7 +30,7 @@
 
 .arrow-down {
     font-size: 2rem;
-    color: white;
+    color: var(--bg-primary);
     margin-top: 25px;
     margin-left: 10px;
 }
@@ -53,13 +53,13 @@
 }
 
 .small-text {
-    font-size: 1rem;
+    font-size: var(--text-size);
     font-weight: 300;
     margin: 0;
     padding-bottom: 5px;
 }
 
-.title span  {
+.title span {
     font-size: 6rem;
     line-height: 1.2;
     font-weight: 700;
@@ -68,7 +68,7 @@
     align-items: start;
     flex-direction: column;
     justify-content: center;
-    color: white;
+    color: var(--bg-primary);
 }
 
 .description {
@@ -89,7 +89,7 @@
 
 .footer-links a {
     font-size: 1rem;
-    color: white;
+    color: var(--bg-primary);
     transition: border-bottom 0.3s;
 }
 
@@ -106,7 +106,7 @@
         padding: 20px;
     }
 
-    .title span  {
+    .title span {
         font-size: 4rem;
     }
 
@@ -141,7 +141,7 @@
     }
 
     .overlay {
-        padding-left: 5%;
+        padding-left: 3%;
     }
 
     .content {
@@ -152,7 +152,7 @@
         font-size: 0.9rem;
     }
 
-    .title span  {
+    .title span {
         font-size: 3rem;
     }
 
@@ -209,7 +209,7 @@
         font-size: 0.8rem;
     }
 
-    .title span  {
+    .title span {
         font-size: 2.5rem;
     }
 
@@ -235,7 +235,7 @@
 }
 
 @media (max-width: 300px) {
-    .title span  {
+    .title span {
         font-size: 2rem;
     }
 }

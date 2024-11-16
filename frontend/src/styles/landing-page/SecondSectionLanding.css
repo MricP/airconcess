@@ -24,8 +24,9 @@
 
 .choices-container h2 {
     font-weight: 700;
-    color: #333;
+    color: var(--color-primary);
     margin-bottom: 1rem;
+    font-size: var(--title-size);
 }
 
 .flex-choices-container {
@@ -56,6 +57,7 @@
     width: 100%;
     padding: 0 1rem;
     transition: opacity 0.4s ease;
+    font-size: var(--text-size);
 }
 .card-choice1:hover .text,
 .card-choice2:hover .text,
@@ -87,7 +89,14 @@
     .choices-content {
         width: 100%;
     }   
-    .choices-container{
+
+    .choices-container h2 {
+        text-align: center;
+        font-size: 4.5rem;
+        width: 100%;
+        margin-bottom: 5%;
+    }
+    .choices-container {
         width: 100%;
     }
     .flex-choices-container {
@@ -124,9 +133,8 @@
 
 @media (max-width: 768px) {
     .choices-container h2 {
-        font-size: 4.5rem;
         font-weight: 700;
-        color: #333;
+        color: var(--color-primary);
         margin-bottom: 1rem;
     }
 

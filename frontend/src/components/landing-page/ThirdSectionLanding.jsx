@@ -22,10 +22,10 @@ function ThirdSectionLanding() {
     }, []);
     const isMobile = useMediaQuery({ query: '(max-width: 723px)' });
     const isMobile2 = useMediaQuery({ query: '(max-width: 489px)' });
-    const leftPosition = isMobile2 ? '-65px' : isMobile ? '-57px' : '10px';
+    const leftPosition = isMobile2 ? '-68px' : isMobile ? '-57px' : '10px';
     const marginTopPosition = isMobile2 ? '0px' : isMobile ? '0px' : '50px';
 
-    const yPosition = isMobile2 ? 100 : isMobile ? 0 : 50;
+    const yPosition = isMobile2 ? 200 : isMobile ? 100 : 100;
     const yRange = useTransform(scrollY, [sectionTop, sectionTop + 400], [yPosition, yPosition + 500]);
     const opacity = useTransform(scrollY, [sectionTop + 600, sectionTop + 800], [1, 0]);
     const rotate = useTransform(scrollY, [sectionTop + 800, sectionTop + 1000], [0, 180]);
