@@ -8,8 +8,8 @@ import Error404 from './pages/Error404.jsx';
 import SignUpPage from './pages/auth/SignUpPage';
 import TestPage from './pages/TestPage';
 import VerifyEmail from './pages/auth/VerifyEmail';
-import NewPassword from './pages/auth/NewPassword';
 import ResetPasswordRequest from './pages/auth/ResetPasswordRequest';
+import ResetPasswordPage from './pages/auth/ResetPasswordPage';
 import Template from './components/Template';
 import PageServices from './pages/PageServices.jsx';
 
@@ -27,7 +27,7 @@ function App() {
           <Route path='/my-profile' element={<ProfilePage />} />
           <Route path='/test' element={<TestPage />} />
           <Route path="/reset-password-request" element={<ResetPasswordRequest />} />
-          <Route path="/reset-password" element={<NewPassword />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path='/verify-email' element={<VerifyEmail />} />
           <Route path='/services' element={<PageServices />} />
         </Routes>
