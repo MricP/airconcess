@@ -8,7 +8,7 @@ function FirstSectionLanding() {
     const y1 = useTransform(scrollY, [0, 300], [0, -250]);
     const y2 = useTransform(scrollY, [0, 300], [100, -110]);
     const y3 = useTransform(scrollY, [0, 300], [400, -100]);
-    const arrowDown = '/assets/arrow1-icon.png';
+    const arrowDown = '/assets/landing/arrow1-icon.png';
 
     const [scrolled, setScrolled] = React.useState(false);
 

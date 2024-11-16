@@ -44,6 +44,15 @@
     overflow: hidden;
 }
 
+.card-choice1 img,
+.card-choice2 img,
+.card-choice3 img {
+    width: 303px;
+    height: 587px;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
 .card-choice1 .text,
 .card-choice2 .text,
 .card-choice3 .text {

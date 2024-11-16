@@ -4,7 +4,7 @@
     align-items: start;
     justify-content: center;
     height: 170vh;
-    background-image: url('../../../public/assets/bg-landing-plane.jpg');
+    background-image: url('../../../public/assets/landing/bg-landing-plane.jpg');
     background-size: cover;
     background-position: center;
     color: var(--bg-primary);
