@@ -42,7 +42,6 @@
     align-items: center;
     width: 100%;
     flex-direction: column;
-    margin-bottom: 20px;
 }
 
 .plane-airconcess-logo {
@@ -51,7 +50,7 @@
 
 .airconcess-logo {
     width: 100%;
-    margin-top: -40px;
+    padding-top: 20px;
     height: auto;
 }
 

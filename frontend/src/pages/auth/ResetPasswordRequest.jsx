@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { resetPasswordRequest } from '../../services/auth';
-import { useNavigate } from 'react-router-dom';
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
 import DarkButton from '../../components/DarkButton';
 import GrayInput from '../../components/GrayInput';
@@ -10,7 +9,6 @@ export default function ResetPasswordRequest() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [errorHtml, setErrorHtml] = useState(null);
-    const navigate = useNavigate();
 
     const handleResetPassword = async () => {
         try {
@@ -26,10 +24,6 @@ export default function ResetPasswordRequest() {
             setErrorHtml(error.response.data.message);
         }
     };
-
-    const handleRetour = () => {
-        navigate('/');
-    }
 
     const resetPasswordImg = '/assets/auth/validation-img.jpg';
     const airconcessLogo = '/assets/logo-black.png';
@@ -51,7 +45,7 @@ export default function ResetPasswordRequest() {
                     <h2 className="right-container-title">Réinitialiser le mot de passe</h2>
                     <form onSubmit={handleResetPassword} className='reset-password-form'>
                         <div className="form-group">
-                            <label htmlFor="email" className="input-label">Adresse e-mail</label>
+                            <label htmlFor="email" className="form-label">Adresse e-mail*</label>
                             <GrayInput
                                 id="email"
                                 type="email"

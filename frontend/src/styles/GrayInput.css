@@ -1,6 +1,6 @@
 .gray-input {
     background-color: var(--input-color1);
-    color: white;
+    color: var(--color-primary);
     padding: 10px;
     border: none;
     border-radius: 5px;

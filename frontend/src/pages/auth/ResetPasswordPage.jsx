@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { resetPassword } from '../../services/auth';
-import { useNavigate } from 'react-router-dom';
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
 import DarkButton from '../../components/DarkButton';
 import GrayInput from '../../components/GrayInput';
@@ -11,7 +10,6 @@ export default function ResetPasswordPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
     const [errorHtml, setErrorHtml] = useState(null);
-    const navigate = useNavigate();
 
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
@@ -38,10 +36,6 @@ export default function ResetPasswordPage() {
         }
     };
 
-    const handleRetour = () => {
-        navigate('/');
-    }
-
     const newPasswordImg = '/assets/auth/validation-img.jpg';
     const airconcessLogo = '/assets/logo-black.png';
 
@@ -50,7 +44,7 @@ export default function ResetPasswordPage() {
             leftContainerChildren={
                 <div className="left-container">
                     <div className="logos-img-container">
-                        <img src={newPasswordImg} alt="New Password" className="new-password" />
+                        <img src={newPasswordImg} alt="New Password" className="new-password-img" />
                     </div>
                 </div>
             }
@@ -62,7 +56,7 @@ export default function ResetPasswordPage() {
                     <h2 className="right-container-title">Nouveau mot de passe</h2>
                     <form onSubmit={handleNewPassword} className='reset-password-form'> 
                         <div className="form-group">
-                            <label htmlFor="new-password" className="input-label">Nouveau mot de passe</label>
+                            <label htmlFor="new-password" className="form-label">Nouveau mot de passe</label>
                             <GrayInput
                                 id="new-password"
                                 type="password"
@@ -73,7 +67,7 @@ export default function ResetPasswordPage() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="confirm-password" className="input-label">Confirmer le nouveau mot de passe*</label>
+                            <label htmlFor="confirm-password" className="form-label">Confirmer le nouveau mot de passe*</label>
                             <GrayInput
                                 id="confirm-password"
                                 type="password"
