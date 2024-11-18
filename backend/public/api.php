@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/au
 }
 
 
-if($_SERVER['REQUEST_METHOD'] === 'GET' ){
+if($_SERVER['REQUEST_METHOD'] === 'GET'){
     $headers = getallheaders();
 
     try {
