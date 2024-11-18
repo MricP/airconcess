@@ -3,7 +3,7 @@
 
 header {
     position: fixed;
-    padding: 2vh 4vw;
+    padding: 0.8vw 4vw;
     width: 100%; /* S'assure que le header prend toute la largeur */
     left: 0; /* Aligne le header sur le côté gauche */
     right: 0; /* Aligne le header sur le côté droit */
@@ -18,7 +18,7 @@ header {
 }
 
 .header-default-menu img {
-    width: 13vw;
+    width: 11vw;
 }
 
 
@@ -58,21 +58,24 @@ nav button {
 .white-black {
     background-color: white;
     color: black;
+    transition: all ease 0.5s;
 }
 
 .black-white {
     background-color:#111111;
     color: white;
+    transition: all ease 0.5s;
+    
 }
 
 .transparent-white {
     color: white;
-    backdrop-filter: blur(7px);
+    transition: all ease 0.5s;
 }
 
 .transparent-black {
     color: black;
-    backdrop-filter: blur(7px);
+    transition: all ease 0.5s;
 }
 
 @media (max-width: 992px) {
@@ -83,7 +86,7 @@ nav button {
     }
 
     .header-mobile-menu img {
-        width: 50vw;
+        width: 20vw;
     }
 
     .header-icon {
