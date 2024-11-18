@@ -18,17 +18,30 @@ function CatalogPage() {
     const [aircrafts, setAircrafts] = useState([]);
     const [page, setPage] = useState(1);
     const isMobile = useMediaQuery({ maxWidth: 750 });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+   
 
     useEffect(() => {
-        // Récupérer les données de l'API
-        axios.get(`http://localhost:3000/api/aircrafts?page=${page}`)
-            .then(response => {
-                setAircrafts(response.data);
-            })
-            .catch(error => {
-                console.error("Erreur lors de la récupération des données :", error);
-            });
-    }, [page]);
+        const fetchAircrafts = async () => {
+          try {
+            setLoading(true);
+            const response = await axios.get(`http://localhost/air-concess/backend/public/api.php`);
+            setAircrafts(response.data.data); 
+            setError(null); 
+          } catch (error) {
+            console.error("Erreur lors de la récupération des données :", error);
+            setError("Une erreur s'est produite lors du chargement des données.");
+          } finally {
+            setLoading(false);
+          }
+        };
+      
+        fetchAircrafts();
+      }, [page]); 
+
+    if (loading) return <p>Chargement...</p>;
+    if (error) return <p>{error}</p>;
 
     const handleNextPage = () => {
         if(page < 5){
@@ -69,29 +82,31 @@ function CatalogPage() {
             
             <div className="separator"></div>
             <div className='planeContainer'>
-              {aircrafts.map((aircraft) =>
-                  <ProductBox 
-                    key={aircraft.id} 
-                    isAvailable={true}
-                    planeImg={gulfstreamG650ER} 
-                    modelName={aircraft.model_name}
-                    serialNumber={aircraft.serial_number}
+            {Array.isArray(aircrafts) && aircrafts.length > 0 ? (
+                aircrafts.map((aircraft) => (
+                <ProductBox
+                    key={aircraft.idAircraft}
+                    isAvailable={aircraft.isAvailable}
+                    planeImg={gulfstreamG650ER}
+                    modelName={aircraft.model}
+                    serialNumber={aircraft.serialNumber}
                     price={`USD $ ${aircraft.price}`}
                     year={aircraft.year}
-                    hour={aircraft.hour}
+                    hour={aircraft.hours}
                     capacity={aircraft.capacity}
                     autonomy={aircraft.autonomy}
-                    description={aircraft.description} 
-                  />
-                  )} 
-                
+                    description={aircraft.description}
+                />
+                ))
+            ) : (
+                <p>Aucun avion trouvé.</p>
+            )}
+                            
               <div className='chooseCatalogPage'><button><IoIosArrowBack color='#B5B5B5' size={35} onClick={handlePreviousPage}/></button><p>{page}/5</p><button><IoIosArrowForward color='#B5B5B5' size={35} onClick={handleNextPage}/></button></div>
             </div>  
         </div>
     </main>
   )
 }
-
-
 
 export default CatalogPage;

@@ -19,38 +19,17 @@ export const fetchTestMessage = async () => {
   }
 };
 
-export const getCatalogData = async () => {
+export const getCatalogData = async (page = 1, limit = 5) => {
   try {
-    const response = await axiosInstance.get('/catalog');
-    console.log('Full response:', response); // Log the full response
-    console.log('Data fetched:', response.data.message); // Log the message
-    return response.data.message;
+    const response = await axiosInstance.get('/catalog', {
+      params: { page, limit },
+    });
+    console.log('Full response:', response); // Log complet pour débogage
+    console.log('Catalog data fetched:', response.data); // Affiche les données principales
+    return response.data; // Renvoie toute la réponse (données, page, totalPages, etc.)
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching catalog data:', error);
     throw error;
   }
 };
 
-export const getAllAircrafts = async (req, res) => {
-  try {
-    // Récupération des paramètres de pagination
-    const page = parseInt(req.query.page, 10) || 1;
-    const limit = 5;
-    const offset = (page - 1) * limit;
-
-    const sql = `SELECT * FROM aircraft LIMIT ${limit} OFFSET ${offset}`;
-
-    db.query(sql, (err, results) => {
-      if (err) {
-        console.error("Erreur lors de la récupération des données :", err);
-        return res.status(500).json({ error: "Erreur lors de la récupération des données" });
-      }
-
-      res.status(200).json({ message: "Données récupérées avec succès", data: results });
-    });
-
-  } catch (error) {
-    console.error("Erreur dans le traitement de la requête :", error);
-    res.status(500).json({ error: "Erreur serveur lors de la récupération des données" });
-  }
-};

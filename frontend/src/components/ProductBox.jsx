@@ -8,7 +8,7 @@ export const ProductBox = (props) => {
   return (
       <div className='productBox-container'>
         <div className='productImage-container'>
-          <div className='available-container'>{props.isAvailable === true ? <FaRegCircleDot color='#43A73A'/> : <FaRegCircleDot color='#ea2424'/> }<p className='catalogAvailable'>{props.isAvailable === true ? "DISPONIBLE" : "INDISPONIBLE"}</p></div>
+          <div className='available-container'>{props.isAvailable === 1 ? <FaRegCircleDot color='#43A73A'/> : <FaRegCircleDot color='#ea2424'/> }<p className='catalogAvailable'>{props.isAvailable == 0 ? "INDISPONIBLE" : "DISPONIBLE"}</p></div>
           <img src={props.planeImg} alt="planeImg" />
           <div className='imageInfo-container'>
               <h2>{props.modelName}</h2>

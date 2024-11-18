@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../utils/Database.php';
 
+
+
+
 class Aircraft
 {
     private static function getDB()
@@ -14,7 +17,7 @@ class Aircraft
     {
         $pdo = self::getDB();
         $stmt = $pdo->prepare('INSERT INTO aircraft (model, serialNumber, price, year, hours, autonomy, aircraftType, description, isAvailable) 
-                           VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)');
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
 
         if ($stmt->execute([$model, $serialNumber, $price, $year, $hours, $autonomy, $aircraftType, $description, $isAvailable])) {
             return $pdo->lastInsertId();
@@ -22,6 +25,15 @@ class Aircraft
         return false;
     }
 
+    public static function getAllAircrafts($page = 1, $limit = 5) {
+        $pdo = self::getDB();
+        $offset = max(0, ($page - 1) * $limit); // Toujours positif
+        $stmt = $pdo->prepare("SELECT * FROM aircraft LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     
     public static function findById($id) {
