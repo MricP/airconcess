@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from './Header'
-import Footer from './Footer'
+import Header from './graphic-charter/Header'
+import Footer from './graphic-charter/Footer'
 import { useEffect, useState } from 'react';
 
 function Template({children}) {

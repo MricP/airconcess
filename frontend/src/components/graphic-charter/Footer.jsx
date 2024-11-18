@@ -1,4 +1,4 @@
-import "../styles/Footer.css";
+import "../../styles/graphic-charter/Footer.css";
 import { FaLinkedin } from "react-icons/fa6";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
