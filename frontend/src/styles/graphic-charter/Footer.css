@@ -1,5 +1,12 @@
+@font-face {
+    font-family: 'Lisu Bosa';
+    src: url(../../../public/assets/Lisu_Bosa/LisuBosa-Bold.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 footer {
-    padding: 2vh 4vw 2vh 4vw;
+    padding: 3vw 4vw 4vw 4vw;
     color: white;
     background: linear-gradient(
   45deg, 
@@ -12,13 +19,17 @@ footer {
 );
 }
 
+footer h2 {
+    font-family: 'Lisu Bosa', sans-serif;
+}
+
 .footer-high-footer {
     display: flex;
+    align-items: center;
     gap: 8vw;
-    font-size: 50px;
     border-bottom: 3px solid white;
-    padding-bottom: 2vh;
-    margin-bottom: 10vh;
+    padding-bottom: 2vw;
+    margin-bottom: 3vw;
 }
 
 .footer-high-footer p {
@@ -26,22 +37,24 @@ footer {
 }
 
 .footer-high-footer img {
-    width: 40vw;
+    width: 45vw;
 }
 
 .footer-reseau {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1vh;
+    gap: 2vh;
     color: white;
 }
 
 .footer-reseau-picture {
     background-color: #333333;
-    border-radius: 35px;
-    padding: 1.7vh;
+    border-radius: 100%;
+    width: 3.2vw;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer-bottom-footer {
@@ -52,21 +65,38 @@ footer {
 
 .footer-bottom-footer-child {
     width: 30vw;
+    padding-left: 5vw;
+    
 }
 
-.footer-bottom-footer-child p {
-    font-size: 2.1875em;
+.footer-bottom-footer-child h3 {
     padding-bottom: 2vh;
 }
 
+.footer-bottom-footer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    width: 20vw;
+}
+
 .footer-bottom-footer li {
-    font-size: 1.7em;
+    font-size: 1.25rem;
+    list-style-type: none;
+}
+
+.footer-bottom-footer-child a {
+    background: linear-gradient(to top, white 0%, white 5%, transparent 5.01%) no-repeat right bottom / 0% 100%;
+    transition: background-size .5s ;
+}
+
+.footer-bottom-footer-child a:hover{
+    background-size: 100% 100%;
+    background-position: bottom left;
 }
 
 .separator {
     border-left: 3px solid white;
-    padding-left: 4vw;
-    margin-left: 1vw;
 }
 
 @media (max-width: 992px) {

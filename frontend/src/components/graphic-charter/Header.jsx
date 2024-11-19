@@ -1,4 +1,4 @@
-import '../styles/Header.css'
+import '../../styles/graphic-charter/Header.css'
 import { useMediaQuery } from 'react-responsive'
 import { CgProfile } from "react-icons/cg";
 import { IoIosMenu } from "react-icons/io";
