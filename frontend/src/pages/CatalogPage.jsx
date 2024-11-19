@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { CiSearch } from "react-icons/ci";
 import { CiFilter } from "react-icons/ci";
 import { ProductBox } from '../components/ProductBox';
@@ -20,7 +20,7 @@ function CatalogPage() {
     const isMobile = useMediaQuery({ maxWidth: 750 });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-   
+    const catalogRef = useRef(null);
 
     useEffect(() => {
         const fetchAircrafts = async () => {
@@ -44,11 +44,19 @@ function CatalogPage() {
     if (error) return <p>{error}</p>;
 
     const handleNextPage = () => {
-        setPage((prevPage) => prevPage + 1);
+        if (catalogRef.current) {
+          const { offsetTop } = catalogRef.current;
+          window.scrollTo({ top: offsetTop, behavior: "smooth" });
+        } setPage((prevPage) => prevPage + 1);
+       
     };
 
     const handlePreviousPage = () => {
         setPage((prevPage) => Math.max(1, prevPage - 1));
+        if (catalogRef.current) {
+          const { offsetTop } = catalogRef.current;
+          window.scrollTo({ top: offsetTop, behavior: "smooth" });
+        }
     };
 
     return (
@@ -63,7 +71,7 @@ function CatalogPage() {
             <button><CiFilter className='filterIcon' size={40} color='#b5b5b5'/></button>
             <input placeholder='Rechercher un Modèle ...' type="text" />
         </div>
-        <div className='catalogContent-container'>
+        <div className='catalogContent-container' ref={catalogRef}>
           {!isMobile &&
             <div className='filterDescription'>
                 <div className='filterDescription-title'><CiFilter size={30} color='#b5b5b5'/><h3>Liste des Filtres</h3></div>
@@ -81,6 +89,7 @@ function CatalogPage() {
             <div className="separator"></div>
             <div className='planeContainer'>
             {Array.isArray(aircrafts) && aircrafts.length > 0 ? (
+                
                 aircrafts.map((aircraft) => (
                 <ProductBox
                     key={aircraft.idAircraft}
