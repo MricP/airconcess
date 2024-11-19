@@ -26,7 +26,7 @@ function CatalogPage() {
         const fetchAircrafts = async () => {
           try {
             setLoading(true);
-            const response = await axios.get(`http://localhost/air-concess/backend/public/api.php`);
+            const response = await axios.get(`http://localhost/air-concess/backend/public/api.php?page=${page}`);
             setAircrafts(response.data.data); 
             setError(null); 
           } catch (error) {
@@ -44,13 +44,11 @@ function CatalogPage() {
     if (error) return <p>{error}</p>;
 
     const handleNextPage = () => {
-        if(page < 5){
-            setPage(page + 1);
-        }
+        setPage((prevPage) => prevPage + 1);
     };
 
     const handlePreviousPage = () => {
-        if (page > 1) setPage(page - 1);
+        setPage((prevPage) => Math.max(1, prevPage - 1));
     };
 
     return (

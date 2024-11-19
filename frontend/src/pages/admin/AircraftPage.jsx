@@ -11,12 +11,12 @@ function AircraftPage() {
         try {
             const response = await createAircraft({
                 model: formData.model,
-                isAvailable: formData.isAvailable === "true" ? 1 : 0,  // Conversion booléenne
+                isAvailable: formData.isAvailable === "true" ? 1 : 0, 
                 planeImg: formData.planeImg,
                 serialNumber: formData.serialNumber, 
-                price: parseFloat(formData.price),  // Conversion en nombre décimal
-                year: parseInt(formData.year),      // Conversion en entier
-                hours: formData.hours ? parseInt(formData.hours) : 0,  // Conversion en entier
+                price: parseFloat(formData.price), 
+                year: parseInt(formData.year),      
+                hours: formData.hours ? parseInt(formData.hours) : 0,  
                 capacity: parseInt(formData.capacity),
                 autonomy: parseInt(formData.autonomy),
                 description: formData.description,  
@@ -61,4 +61,4 @@ function AircraftPage() {
     )
 }
 
-export default AircraftPage
+export default AircraftPage;

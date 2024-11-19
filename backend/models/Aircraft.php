@@ -18,7 +18,6 @@ class Aircraft
         $pdo = self::getDB();
         $stmt = $pdo->prepare('INSERT INTO aircraft (model, serialNumber, price, year, hours, autonomy, aircraftType, description, isAvailable) 
                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-
         if ($stmt->execute([$model, $serialNumber, $price, $year, $hours, $autonomy, $aircraftType, $description, $isAvailable])) {
             return $pdo->lastInsertId();
         }
@@ -27,7 +26,7 @@ class Aircraft
 
     public static function getAllAircrafts($page = 1, $limit = 5) {
         $pdo = self::getDB();
-        $offset = max(0, ($page - 1) * $limit); // Toujours positif
+        $offset = max(0, ($page - 1) * $limit); 
         $stmt = $pdo->prepare("SELECT * FROM aircraft LIMIT :limit OFFSET :offset");
         $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
