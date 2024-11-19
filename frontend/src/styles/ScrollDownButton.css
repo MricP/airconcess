@@ -1,0 +1,15 @@
+.scroll-down-button {
+    font-size: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all ease 0.8s;
+}
+
+.white {
+    color: #FFFFFF;
+}
+
+.black {
+    color: #333333;
+}
