@@ -17,6 +17,7 @@ function CatalogPage() {
 
     const [aircrafts, setAircrafts] = useState([]);
     const [page, setPage] = useState(1);
+    const [nbAircraft, setNbAircraft] = useState(0);
     const isMobile = useMediaQuery({ maxWidth: 750 });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -27,7 +28,8 @@ function CatalogPage() {
           try {
             setLoading(true);
             const response = await axios.get(`http://localhost/air-concess/backend/public/api.php?page=${page}`);
-            setAircrafts(response.data.data); 
+            setAircrafts(response.data.data);
+            setNbAircraft(response.data.nbAircraft); 
             setError(null); 
           } catch (error) {
             console.error("Erreur lors de la récupération des données :", error);
@@ -38,7 +40,7 @@ function CatalogPage() {
         };
       
         fetchAircrafts();
-      }, [page]); 
+      }, [page],); 
 
     if (loading) return <p>Chargement...</p>;
     if (error) return <p>{error}</p>;
@@ -47,7 +49,10 @@ function CatalogPage() {
         if (catalogRef.current) {
           const { offsetTop } = catalogRef.current;
           window.scrollTo({ top: offsetTop, behavior: "smooth" });
-        } setPage((prevPage) => prevPage + 1);
+        } 
+        if(page < (Math.floor(nbAircraft/5)+1)){
+          setPage((prevPage) => prevPage + 1);
+        }
        
     };
 
@@ -69,9 +74,9 @@ function CatalogPage() {
         <div className="filterBar-container">
             <button><CiSearch className='filterIcon' size={40} color='#b5b5b5'/></button>
             <button><CiFilter className='filterIcon' size={40} color='#b5b5b5'/></button>
-            <input placeholder='Rechercher un Modèle ...' type="text" />
+            <input placeholder='Rechercher un Modèle ...' type="text" ref={catalogRef}/>
         </div>
-        <div className='catalogContent-container' ref={catalogRef}>
+        <div className='catalogContent-container' >
           {!isMobile &&
             <div className='filterDescription'>
                 <div className='filterDescription-title'><CiFilter size={30} color='#b5b5b5'/><h3>Liste des Filtres</h3></div>
@@ -109,7 +114,7 @@ function CatalogPage() {
                 <p>Aucun avion trouvé.</p>
             )}
                             
-              <div className='chooseCatalogPage'><button><IoIosArrowBack color='#B5B5B5' size={35} onClick={handlePreviousPage}/></button><p>{page}/5</p><button><IoIosArrowForward color='#B5B5B5' size={35} onClick={handleNextPage}/></button></div>
+              <div className='chooseCatalogPage'><button><IoIosArrowBack color='#B5B5B5' size={35} onClick={handlePreviousPage}/></button><p>{page}/{Math.floor(nbAircraft/5)+1}</p><button><IoIosArrowForward color='#B5B5B5' size={35} onClick={handleNextPage}/></button></div>
             </div>  
         </div>
     </main>

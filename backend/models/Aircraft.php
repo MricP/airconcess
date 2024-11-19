@@ -34,7 +34,14 @@ class Aircraft
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    
+    public static function getNumberAircrafts(){
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT COUNT(*) as total FROM aircraft");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'] ?? 0;
+    }
+
     public static function findById($id) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE idAircraft = ?");

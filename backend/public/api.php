@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/au
     AuthController::getUser($payload);
 }
 
-
+// Route pour récupérer les données des aéronefs (GET)
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
     $headers = getallheaders();
 
@@ -75,11 +75,13 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
         $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 5;
 
         $aircrafts = Aircraft::getAllAircrafts($page, $limit);
+        $nbAircraft = Aircraft::getNumberAircrafts();
 
         echo json_encode([
             'status' => 'success',
             'data' => $aircrafts,
             'page' => $page,
+            'nbAircraft' => $nbAircraft,
         ]);
     } catch (Exception $e) {
         http_response_code(500); // Code d'erreur 500 (erreur serveur)
