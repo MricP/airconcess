@@ -42,6 +42,14 @@ class Aircraft
         return $result['total'] ?? 0;
     }
 
+    public static function getAircraftByState($state){
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE isAvailable = ?");
+        $stmt->bindValue(':isAvailable',$state);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public static function findById($id) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE idAircraft = ?");
