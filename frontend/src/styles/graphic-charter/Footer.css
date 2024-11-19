@@ -86,7 +86,7 @@ footer h2 {
 }
 
 .footer-bottom-footer-child a {
-    background: linear-gradient(to top, white 0%, white 10%, transparent 10.01%) no-repeat right bottom / 0% 100%;
+    background: linear-gradient(to top, white 0%, white 5%, transparent 5.01%) no-repeat right bottom / 0% 100%;
     transition: background-size .5s ;
 }
 
