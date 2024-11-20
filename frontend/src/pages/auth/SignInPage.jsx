@@ -68,7 +68,7 @@ const SignInPage = () => {
             </div>
             <div className="form-group">
               <label htmlFor="password" className="form-label">Mot de passe*</label>
-              <GrayInput placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
+              <GrayInput type={"password"} placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
             </div>
             <DarkButton text="Se connecter" use={handleSubmit} />
           </form>

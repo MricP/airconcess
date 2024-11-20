@@ -73,4 +73,31 @@ class ValidationMiddleware
             exit();
         }
     }
+
+    public static function validateContact($data)
+    {
+        if (!isset($data['name']) || empty($data['name'])) {
+            http_response_code(400);
+            echo json_encode(["message" => "Le nom ne peut pas être vide"]);
+            exit();
+        }
+
+        if (!isset($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            http_response_code(400);
+            echo json_encode(["message" => "Email invalide"]);
+            exit();
+        }
+
+        if (!isset($data['message']) || empty($data['message'])) {
+            http_response_code(400);
+            echo json_encode(["message" => "Le message ne peut pas être vide"]);
+            exit();
+        }
+
+        if (!isset($data['consent']) || $data['consent'] !== true) {
+            http_response_code(400);
+            echo json_encode(["message" => "Le consentement est requis"]);
+            exit();
+        }
+    }
 }

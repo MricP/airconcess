@@ -74,11 +74,11 @@ const SignUpPage = () => {
             </div>
             <div className="form-group">
               <label htmlFor="password" className="form-label">Mot de passe*</label>
-              <GrayInput placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
+              <GrayInput type={"password"} placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
             </div>
             <div className="form-group">
               <label htmlFor="passwordConfirmation" className="form-label">Confirmer le mot de passe*</label>
-              <GrayInput placeholder="Confirmer le mot de passe" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} required={true} />
+              <GrayInput type={"password"} placeholder="Confirmer le mot de passe" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} required={true} />
             </div>
             <DarkButton text="S'inscrire" use={handleSubmit} />
           </form>
