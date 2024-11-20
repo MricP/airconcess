@@ -1,0 +1,38 @@
+.first-training-component {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    padding-right: 10vw;
+    padding-left: 10vw;
+    background: linear-gradient(to top, transparent 0%, transparent 27%, #E2E2E2 27.01%, #E2E2E2 73%, transparent 73.01%) no-repeat top / 100% 100%;
+    position: relative;
+}
+
+.first-training-component .image {
+    display: flex;
+    width: 90vw;
+    justify-content: end;
+}
+
+.first-training-component img {
+    width: 50vw;
+    height: 65vh;
+    border-radius: 5px;
+    box-shadow: 1px 1px 9px black;
+}
+
+.first-training-component section {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    justify-content: center;
+    padding: 4vw;
+    width: 40vw;
+    height: 40vh;
+    position: absolute;
+    background-color: #F5F5F5;
+    margin-left: 0vw;
+    margin-top: 55vh;
+    border-radius: 5px;
+    box-shadow: 1px 1px 9px black;
+}
