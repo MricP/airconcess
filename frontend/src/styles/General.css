@@ -2,8 +2,22 @@
 
 @font-face {
     font-family: 'Jost';
-    src: url(../../public/assets/Jost/Jost-VariableFont_wght.ttf) format('truetype');
-    font-weight: normal;
+    src: url(../../public/assets/Jost/static/Jost-Regular.ttf) format('truetype');
+    font-weight: normal; /* Regular */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Jost';
+    src: url(../../public/assets/Jost/static/Jost-Medium.ttf) format('truetype');
+    font-weight: 500; /* Medium */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Jost';
+    src: url(../../public/assets/Jost/static/Jost-Bold.ttf) format('truetype');
+    font-weight: bold; /* Bold */
     font-style: normal;
 }
 
@@ -31,14 +45,10 @@
 
 h1 {
     font-size: 90px;
-    line-height: normal;
 }
 
 body {
-    font-size:unset;
-    /* background-color: var(--bg-primary); */
     color: var(--color-primary);
-    line-height: normal;
 }
 
 h2 {

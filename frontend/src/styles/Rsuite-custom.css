@@ -7,6 +7,23 @@
   display: none;
 }
 
+.rs-picker-toggle-wrapper {
+  /* display: inline-block;
+  vertical-align: middle;
+  max-width: 100%; */
+}
+
+.rs-calendar-table-cell-disabled {
+  color: rgb(195, 193, 193);
+}
+
+.rs-calendar-time-dropdown-cell.rs-calendar-time-dropdown-cell-disabled {
+  color: rgb(195, 193, 193);
+  background: none;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
 
 :root,
 .rs-theme-light {
@@ -2816,25 +2833,7 @@ tbody.rs-anim-collapse.rs-anim-in {
   text-align: center;
   vertical-align: middle;
 }
-.rs-calendar-table-cell-un-same-month .rs-calendar-table-cell-content,
-.rs-calendar-table-cell-un-same-month .rs-calendar-table-header-cell-content,
-.rs-calendar-table-header-cell-un-same-month .rs-calendar-table-cell-content,
-.rs-calendar-table-header-cell-un-same-month .rs-calendar-table-header-cell-content,
-.rs-calendar-table-cell-disabled .rs-calendar-table-cell-content,
-.rs-calendar-table-cell-disabled .rs-calendar-table-header-cell-content,
-.rs-calendar-table-header-cell-disabled .rs-calendar-table-cell-content,
-.rs-calendar-table-header-cell-disabled .rs-calendar-table-header-cell-content,
-.rs-calendar-table-cell-un-same-month .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-cell-un-same-month .rs-calendar-table-header-cell-content:hover,
-.rs-calendar-table-header-cell-un-same-month .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-header-cell-un-same-month .rs-calendar-table-header-cell-content:hover,
-.rs-calendar-table-cell-disabled .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-cell-disabled .rs-calendar-table-header-cell-content:hover,
-.rs-calendar-table-header-cell-disabled .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-header-cell-disabled .rs-calendar-table-header-cell-content:hover {
-  color: #717273;
-  color: var(--rs-text-disabled);
-}
+
 .rs-calendar-table-cell-disabled .rs-calendar-table-cell-content,
 .rs-calendar-table-cell-disabled .rs-calendar-table-header-cell-content,
 .rs-calendar-table-header-cell-disabled .rs-calendar-table-cell-content,
@@ -3170,13 +3169,7 @@ tbody.rs-anim-collapse.rs-anim-in {
 .rs-theme-high-contrast .rs-theme-high-contrast .rs-theme-high-contrast .rs-calendar-time-dropdown-cell.rs-calendar-time-dropdown-cell-active:hover {
   outline-offset: 2px;
 }
-.rs-calendar-time-dropdown-cell.rs-calendar-time-dropdown-cell-disabled {
-  color: #717273;
-  color: var(--rs-text-disabled);
-  background: none;
-  cursor: not-allowed;
-  text-decoration: line-through;
-}
+
 .rs-calendar-time-dropdown-cell-active.rs-calendar-time-dropdown-cell-disabled.rs-calendar-time-dropdown-cell {
   opacity: 0.3;
   cursor: not-allowed;
@@ -16317,11 +16310,7 @@ kbd.rs-text {
   stroke: var(--rs-close-button-hover-color);
   stroke-width: 1;
 }
-.rs-picker-toggle-wrapper {
-  display: inline-block;
-  vertical-align: middle;
-  max-width: 100%;
-}
+
 .rs-picker-toggle.rs-btn .rs-ripple-pond {
   display: none !important;
 }

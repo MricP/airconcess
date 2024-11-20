@@ -13,16 +13,11 @@
 }
 
 .appointmentShowcase .text-div {
-    
     width: 45%;
     height: 70%;
     margin-left: 10%;
     text-align: justify;
-    background-color: red;
-}
-
-.appointmentShowcase .text-div h1 {
-    background-color: orange;
+    /* background-color: red; */
 }
 
 .appointmentShowcase .scroll-down-button {

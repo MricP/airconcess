@@ -7,30 +7,30 @@ Jost is a variable font with this axis:
   wght
 
 This means all the styles are contained in these files:
-  Jost/Jost-VariableFont_wght.ttf
-  Jost/Jost-Italic-VariableFont_wght.ttf
+  Jost-VariableFont_wght.ttf
+  Jost-Italic-VariableFont_wght.ttf
 
 If your app fully supports variable fonts, you can now pick intermediate styles
 that aren’t available as static fonts. Not all apps support variable fonts, and
 in those cases you can use the static font files for Jost:
-  Jost/static/Jost-Thin.ttf
-  Jost/static/Jost-ExtraLight.ttf
-  Jost/static/Jost-Light.ttf
-  Jost/static/Jost-Regular.ttf
-  Jost/static/Jost-Medium.ttf
-  Jost/static/Jost-SemiBold.ttf
-  Jost/static/Jost-Bold.ttf
-  Jost/static/Jost-ExtraBold.ttf
-  Jost/static/Jost-Black.ttf
-  Jost/static/Jost-ThinItalic.ttf
-  Jost/static/Jost-ExtraLightItalic.ttf
-  Jost/static/Jost-LightItalic.ttf
-  Jost/static/Jost-Italic.ttf
-  Jost/static/Jost-MediumItalic.ttf
-  Jost/static/Jost-SemiBoldItalic.ttf
-  Jost/static/Jost-BoldItalic.ttf
-  Jost/static/Jost-ExtraBoldItalic.ttf
-  Jost/static/Jost-BlackItalic.ttf
+  static/Jost-Thin.ttf
+  static/Jost-ExtraLight.ttf
+  static/Jost-Light.ttf
+  static/Jost-Regular.ttf
+  static/Jost-Medium.ttf
+  static/Jost-SemiBold.ttf
+  static/Jost-Bold.ttf
+  static/Jost-ExtraBold.ttf
+  static/Jost-Black.ttf
+  static/Jost-ThinItalic.ttf
+  static/Jost-ExtraLightItalic.ttf
+  static/Jost-LightItalic.ttf
+  static/Jost-Italic.ttf
+  static/Jost-MediumItalic.ttf
+  static/Jost-SemiBoldItalic.ttf
+  static/Jost-BoldItalic.ttf
+  static/Jost-ExtraBoldItalic.ttf
+  static/Jost-BlackItalic.ttf
 
 Get started
 -----------

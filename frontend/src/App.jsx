@@ -10,7 +10,6 @@ function App() {
     <BrowserRouter>
       <ToastContainer/>
         <Routes>
-          
           <Route index='/' element={<Landing/>}/>
           <Route path='*' element={<h1>Erreur</h1>}/>
           <Route path='/product' element={<PageProduct/>} />
