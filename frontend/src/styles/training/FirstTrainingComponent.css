@@ -18,7 +18,7 @@
     width: 50vw;
     height: 65vh;
     border-radius: 5px;
-    box-shadow: 1px 1px 9px black;
+    box-shadow: 1px 1px 9px grey;
 }
 
 .first-training-component section {
@@ -34,5 +34,5 @@
     margin-left: 0vw;
     margin-top: 55vh;
     border-radius: 5px;
-    box-shadow: 1px 1px 9px black;
+    box-shadow: 1px 1px 9px grey;
 }

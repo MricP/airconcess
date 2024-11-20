@@ -3,4 +3,28 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    padding-bottom: 10vh;
+}
+
+.second-training-component h2 {
+    text-align: center;
+    padding-bottom: 10vh;
+}
+
+.second-training-component-text {
+    width: 80vw;
+    padding-bottom: 5vh;
+}
+
+.second-training-component-text h3 {
+    padding-bottom: 5vh;
+}
+
+.second-training-component-text ul {
+    margin-left: 2vw;
+}
+
+.second-training-component-button {
+    width: 30vw;
 }
