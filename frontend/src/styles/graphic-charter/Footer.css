@@ -26,7 +26,7 @@ footer h2 {
 .footer-high-footer {
     display: flex;
     align-items: center;
-    gap: 8vw;
+    gap: 7vw;
     border-bottom: 3px solid white;
     padding-bottom: 2vw;
     margin-bottom: 3vw;
@@ -55,6 +55,13 @@ footer h2 {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 1px 1px 2px black;
+}
+
+.footer-reseau-picture-child {
+    display: flex;
+    justify-content: center;
+
 }
 
 .footer-bottom-footer {

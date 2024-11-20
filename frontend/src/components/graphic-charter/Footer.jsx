@@ -11,13 +11,13 @@ export default function Footer() {
     return (
         <footer>
             <div className="footer-high-footer">
-                {!isMobile && <h2>Proposer les meilleurs aéronefs du marché</h2>}
+                {!isMobile && <h2>Proposer<br></br>les meilleurs<br></br>aéronefs du marché</h2>}
                 <img src='/assets/logo-white.png' alt="logo" />
                 {!isMobile ?
                     <div className="footer-reseau">
-                        <div className="footer-reseau-picture"><a href=""><FaLinkedin className="footer-reseau-picture" size={30} /></a></div>
-                        <div className="footer-reseau-picture"><a href=""><FaSquareXTwitter className="footer-reseau-picture" size={30} /></a></div>
-                        <div className="footer-reseau-picture"><a href=""><FaInstagram className="footer-reseau-picture" size={30} /></a></div>
+                        <div className="footer-reseau-picture"><a href=""><FaLinkedin className="footer-reseau-picture-child" size={30} /></a></div>
+                        <div className="footer-reseau-picture"><a href=""><FaSquareXTwitter className="footer-reseau-picture-child" size={30} /></a></div>
+                        <div className="footer-reseau-picture"><a href=""><FaInstagram className="footer-reseau-picture-child" size={30} /></a></div>
 
                     </div> :
                     <div className="footer-reseau">
