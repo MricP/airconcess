@@ -1,7 +1,7 @@
-import { LuLamp } from "react-icons/lu";
 import "../../styles/our-services/TrainingService.css";
 import DarkButton from "../DarkButton";
 import ScrollDownButton from "../ScrollDownButton";
+
 
 
 export default function TrainingService() {
