@@ -1,6 +1,6 @@
-.page-training {
+.second-training-component {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 15vh;
+    justify-content: center;
 }
