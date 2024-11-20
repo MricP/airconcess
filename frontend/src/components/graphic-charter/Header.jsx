@@ -4,6 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 
 export default function Header({ color }) {
@@ -33,7 +34,7 @@ export default function Header({ color }) {
 
             {!isMobile ?
                 <div className="header-default-menu">
-                    <img src={logo} alt="Logo" />
+                    <Link to="/"><img src={logo} alt="Logo" /></Link>
                     <nav>
                         <ul>
                             <li><a href="">Nos aéronefs</a></li>
