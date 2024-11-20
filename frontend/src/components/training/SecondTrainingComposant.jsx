@@ -1,7 +1,7 @@
 import '../../styles/training/SecondTrainingComponent.css'
 import DarkButton from '../DarkButton'
 
-export default function(){
+export default function SecondTrainingComponent(){
     return (
         <section className="second-training-component">
             <h2>En quoi consiste la formation ?</h2>
