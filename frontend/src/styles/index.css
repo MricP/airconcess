@@ -112,7 +112,7 @@ button{
     display: flex;
     flex-direction: column;
     background-color: var(--box-color);
-    width: 20%;
+    width: 30%;
     border-radius: 5px;
     height: max-content;
     align-items: center;
@@ -134,19 +134,31 @@ button{
     line-height: 30px;
 }
 
+
 .editFilter-container{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+    height: 40px;
 }
 
+.editFilter-container > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.editFilter-container > div > select{
+    border: none;
+    outline: none;
+    display: none;
+    background-color: var(--box-color);
+    text-align: right;
+}
 .editFilterButton{
     border: none;
     background-color: transparent;
 }
-
-
 
 .planeContainer{
     width: 60%;
@@ -379,6 +391,7 @@ button{
         width: 30%;
     }
 
+
     .productBox-container{
             flex-direction: column;
             gap: 3px;
@@ -483,6 +496,7 @@ button{
     .productBox-container{
         margin: 0;
         margin-bottom: 25px;
+        flex-direction: column;
         gap: 0px;
     }
 

@@ -18,10 +18,20 @@ function CatalogPage() {
     const [aircrafts, setAircrafts] = useState([]);
     const [page, setPage] = useState(1);
     const [nbAircraft, setNbAircraft] = useState(0);
-    const isMobile = useMediaQuery({ maxWidth: 750 });
+    const isMobile = useMediaQuery({ maxWidth: 1130 });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const catalogRef = useRef(null);
+
+// déclaration des références pour les filtres
+
+  const stateRef = useRef(null);
+  const priceRef = useRef(null);
+  const yearRef = useRef(null);
+  const autonomyRef = useRef(null);
+  const capacityRef = useRef(null);
+  const typeRef = useRef(null);
+
 
     useEffect(() => {
         const fetchAircrafts = async () => {
@@ -64,6 +74,87 @@ function CatalogPage() {
         }
     };
 
+
+  // Gérer les filtres :
+
+  const handleStateFilter = () => {
+    if(stateRef.current){
+      stateRef.current.style = "display:initial";
+    }
+  } 
+
+  const handleDeleteStateFilter = () => {
+    if(stateRef.current){
+      stateRef.current.value = "Aucun";
+      stateRef.current.style = "display:none";
+    }
+  } 
+
+  const handlePriceFilter = () => {
+    if(priceRef.current){
+      priceRef.current.style = "display:initial";
+    }
+  } 
+
+  const handleDeletePriceFilter = () => {
+    if(priceRef.current){
+      priceRef.current.value = "Aucun";
+      priceRef.current.style = "display:none";
+    }
+  } 
+
+  const handleYearFilter = () => {
+    if(yearRef.current){
+      yearRef.current.style = "display:initial";
+    }
+  } 
+
+  const handleDeleteYearFilter = () => {
+    if(yearRef.current){
+      yearRef.current.value = "Aucun";
+      yearRef.current.style = "display:none";
+    }
+  } 
+
+  const handleCapacityFilter = () => {
+    if(capacityRef.current){
+      capacityRef.current.style = "display:initial";
+    }
+  } 
+
+  const handleDeleteCapacityFilter = () => {
+    if(capacityRef.current){
+      capacityRef.current.value = "Aucun";
+      capacityRef.current.style = "display:none";
+    }
+  } 
+
+
+  const handleAutonomyFilter = () => {
+    if(autonomyRef.current){
+      autonomyRef.current.style = "display:initial";
+    }
+  } 
+
+  const handleDeleteAutonomyFilter = () => {
+    if(autonomyRef.current){
+      autonomyRef.current.value = "Aucun";
+      autonomyRef.current.style = "display:none";
+    }
+  } 
+
+  const handleTypeFilter = () => {
+    if(typeRef.current){
+      typeRef.current.style = "display:initial";
+    }
+  } 
+
+  const handleDeleteTypeFilter = () => {
+    if(typeRef.current){
+      typeRef.current.style = "display:none";
+      typeRef.current.value = "Aucun";
+    }
+  }
     return (
     <main className='main-container'> 
         <div className="title-container">
@@ -81,12 +172,75 @@ function CatalogPage() {
             <div className='filterDescription'>
                 <div className='filterDescription-title'><CiFilter size={30} color='#b5b5b5'/><h3>Liste des Filtres</h3></div>
                 <ul className='editFilterList'>
-                  <div className='editFilter-container'><li>Etat :</li><div><button className='editFilterButton'><FaEdit size={20}/></button><button className='editFilterButton'><AiOutlineCloseSquare size={20} /></button></div></div>
-                  <div className='editFilter-container'><li>Prix :</li><div><button className='editFilterButton'><FaEdit size={20} /></button><button className='editFilterButton'><AiOutlineCloseSquare size={20} /></button></div></div>
-                  <div className='editFilter-container'><li>Catégorie :</li><div><button className='editFilterButton'><FaEdit size={20}/></button><button className='editFilterButton'><AiOutlineCloseSquare size={20} /></button></div></div>
-                  <div className='editFilter-container'><li>Année :</li> <div><button className='editFilterButton'><FaEdit size={20}/></button><button className='editFilterButton'><AiOutlineCloseSquare size={20} /></button></div></div>
-                  <div className='editFilter-container'><li>Capacité :</li> <div><button className='editFilterButton'><FaEdit size={20}/></button><button className='editFilterButton'><AiOutlineCloseSquare size={20} /></button></div></div>
-                  <div className='editFilter-container'><li>Autonomie :</li> <div><button className='editFilterButton'><FaEdit size={20}/></button><button className='editFilterButton'><AiOutlineCloseSquare size={20} /></button></div></div>
+                  <div className='editFilter-container'>
+                    <li>Etat :</li>
+                    <div>
+                      <select name="select" ref={stateRef}>
+                        <option value="Aucun">Aucun</option>
+                        <option value="Disponible">Disponible</option>
+                        <option value="Indisponible">Indisponible</option>
+                      </select>
+                    <button className='editFilterButton' onClick={handleStateFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteStateFilter}><AiOutlineCloseSquare size={20} /></button></div>
+                  </div>
+                  <div className='editFilter-container'>
+                    <li>Prix :</li>
+                    <div>
+                      <select name="select" ref={priceRef}>
+                        <option value="Aucun">Aucun</option>
+                        <option value="-1000000">- de 1 000 000</option>
+                        <option value="-10000000">- de 10 000 000</option>
+                        <option value="-50000000">- de 50 000 000</option>
+                        <option value="+10000000">+ de 50 000 000</option>
+                      </select>
+                      <button className='editFilterButton' onClick={handlePriceFilter}><FaEdit size={20} /></button><button className='editFilterButton' onClick={handleDeletePriceFilter}><AiOutlineCloseSquare size={20} /></button></div>
+                    </div>
+                  <div className='editFilter-container'>
+                    <li>Année :</li> 
+                    <div>
+                      <select name="select" ref={yearRef}>
+                        <option value="Aucun">Aucun</option>
+                        <option value="2000">2000</option>
+                        <option value="2010">2010</option>
+                        <option value="2020" >2020</option>
+
+                      </select>
+                      <button className='editFilterButton' onClick={handleYearFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteYearFilter}><AiOutlineCloseSquare size={20} /></button></div>
+                      </div>
+                  <div className='editFilter-container'>
+                    <li>Capacité :</li> 
+                    <div>
+                      <select name="select" ref={capacityRef}>
+                        <option value="Aucun">Aucun</option>
+                        <option value="0">+ de 0</option>
+                        <option value="5">+ de 5</option>
+                        <option value="10">+ de 10</option>
+                        <option value="15" >+ de 15</option>
+                      </select>
+                      <button className='editFilterButton' onClick={handleCapacityFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteCapacityFilter}><AiOutlineCloseSquare size={20} /></button></div>
+                      </div>
+                  <div className='editFilter-container'>
+                    <li>Autonomie :</li>
+                    <div>
+                      <select name="select" ref={autonomyRef}>
+                        <option value="Aucun">Aucun</option>
+                        <option value="-100">- de 100km</option>
+                        <option value="-500">- de 500km</option>
+                        <option value="-1000">- de 1000km</option>
+                        <option value="+1000">+ de 1000km</option>
+                      </select>
+                      <button className='editFilterButton' onClick={handleAutonomyFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteAutonomyFilter}><AiOutlineCloseSquare size={20} /></button></div>
+                    </div>
+                  <div className='editFilter-container'>
+                    <li>Type :</li>
+                    <div>
+                      <select name="select" ref={typeRef}>
+                        <option value="Aucun">Aucun</option>
+                        <option value="Local">Local</option>
+                        <option value="National">National</option>
+                        <option value="International">International</option>
+                      </select>
+                      <button className='editFilterButton' onClick={handleTypeFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteTypeFilter}><AiOutlineCloseSquare size={20} /></button></div>
+                    </div>
                 </ul>
             </div>} 
             

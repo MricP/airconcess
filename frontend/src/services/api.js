@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost/air-concess/backend/public',
+  baseURL: 'http://localhost/air-concess/backend/public/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -21,12 +21,12 @@ export const fetchTestMessage = async () => {
 
 export const getCatalogData = async (page = 1, limit = 5) => {
   try {
-    const response = await axiosInstance.get('/catalog', {
+    const response = await axiosInstance.get('/api/catalog', {
       params: { page, limit },
     });
-    console.log('Full response:', response); // Log complet pour débogage
-    console.log('Catalog data fetched:', response.data); // Affiche les données principales
-    return response.data; // Renvoie toute la réponse (données, page, totalPages, etc.)
+    console.log('Full response:', response); 
+    console.log('Catalog data fetched:', response.data); 
+    return response.data; 
   } catch (error) {
     console.error('Error fetching catalog data:', error);
     throw error;
