@@ -22,6 +22,7 @@ function CatalogPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const catalogRef = useRef(null);
+    const [searchPlane, setSearchPlane] = useState();
 
 // déclaration des références pour les filtres
 
@@ -31,7 +32,8 @@ function CatalogPage() {
   const autonomyRef = useRef(null);
   const capacityRef = useRef(null);
   const typeRef = useRef(null);
-
+  
+  const [filteredAircrafts, setFilteredAircrafts] = useState([]);
 
     useEffect(() => {
         const fetchAircrafts = async () => {
@@ -39,6 +41,7 @@ function CatalogPage() {
             setLoading(true);
             const response = await axios.get(`http://localhost/air-concess/backend/public/api.php?page=${page}`);
             setAircrafts(response.data.data);
+            setFilteredAircrafts(response.data.data);
             setNbAircraft(response.data.nbAircraft); 
             setError(null); 
           } catch (error) {
@@ -54,6 +57,7 @@ function CatalogPage() {
 
     if (loading) return <p>Chargement...</p>;
     if (error) return <p>{error}</p>;
+
 
     const handleNextPage = () => {
         if (catalogRef.current) {
@@ -76,12 +80,6 @@ function CatalogPage() {
 
 
   // Gérer les filtres :
-
-  const handleStateFilter = () => {
-    if(stateRef.current){
-      stateRef.current.style = "display:initial";
-    }
-  } 
 
   const handleDeleteStateFilter = () => {
     if(stateRef.current){
@@ -155,6 +153,23 @@ function CatalogPage() {
       typeRef.current.value = "Aucun";
     }
   }
+
+  const handleFiltrageState = () => {
+    if(stateRef.current){
+      stateRef.current.style = "display:initial";
+      if(stateRef.current.value === "Disponible"){
+        filteredAircrafts = aircrafts.filter((aircraft) => aircraft.isAvailable === 1);
+      }
+    }
+  }
+
+  // Partie recherche
+
+  const handleSearch = (e) => {
+      let value = e.target.value;
+      setSearchPlane(value);
+  }
+  
     return (
     <main className='main-container'> 
         <div className="title-container">
@@ -165,7 +180,7 @@ function CatalogPage() {
         <div className="filterBar-container">
             <button><CiSearch className='filterIcon' size={40} color='#b5b5b5'/></button>
             <button><CiFilter className='filterIcon' size={40} color='#b5b5b5'/></button>
-            <input placeholder='Rechercher un Modèle ...' type="text" ref={catalogRef}/>
+            <input placeholder='Rechercher un Modèle ...' type="text" ref={catalogRef} onChange={handleSearch}/>
         </div>
         <div className='catalogContent-container' >
           {!isMobile &&
@@ -175,12 +190,12 @@ function CatalogPage() {
                   <div className='editFilter-container'>
                     <li>Etat :</li>
                     <div>
-                      <select name="select" ref={stateRef}>
+                      <select name="stateSelect" ref={stateRef}>
                         <option value="Aucun">Aucun</option>
                         <option value="Disponible">Disponible</option>
                         <option value="Indisponible">Indisponible</option>
                       </select>
-                    <button className='editFilterButton' onClick={handleStateFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteStateFilter}><AiOutlineCloseSquare size={20} /></button></div>
+                    <button className='editFilterButton' onClick={handleFiltrageState}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteStateFilter}><AiOutlineCloseSquare size={20} /></button></div>
                   </div>
                   <div className='editFilter-container'>
                     <li>Prix :</li>
@@ -248,20 +263,21 @@ function CatalogPage() {
             <div className="separator"></div>
             <div className='planeContainer'>
             {Array.isArray(aircrafts) && aircrafts.length > 0 ? (
-                
-                aircrafts.map((aircraft) => (
+                filteredAircrafts.filter((plane) => {
+                  return plane.model.includes(searchPlane);
+                }).map((plane) => (
                 <ProductBox
-                    key={aircraft.idAircraft}
-                    isAvailable={aircraft.isAvailable}
+                    key={plane.idAircraft}
+                    isAvailable={plane.isAvailable}
                     planeImg={gulfstreamG650ER}
-                    modelName={aircraft.model}
-                    serialNumber={aircraft.serialNumber}
-                    price={`USD $ ${aircraft.price}`}
-                    year={aircraft.year}
-                    hour={aircraft.hours}
-                    capacity={aircraft.capacity}
-                    autonomy={aircraft.autonomy}
-                    description={aircraft.description}
+                    modelName={plane.model}
+                    serialNumber={plane.serialNumber}
+                    price={`USD $ ${plane.price}`}
+                    year={plane.year}
+                    hour={plane.hours}
+                    capacity={plane.capacity}
+                    autonomy={plane.autonomy}
+                    description={plane.description}
                 />
                 ))
             ) : (

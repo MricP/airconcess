@@ -42,13 +42,58 @@ class Aircraft
         return $result['total'] ?? 0;
     }
 
-    public static function getAircraftByState($state){
-        $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE isAvailable = ?");
-        $stmt->bindValue(':isAvailable',$state);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+
+// Filtrage de l'affichage des avions dans le catalogue
+
+    // public static function getAircraftByState($state){
+    //     $pdo = self::getDB();
+    //     $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE isAvailable = ?");
+    //     $stmt->bindValue(':isAvailable',$state);
+    //     $stmt->execute();
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
+
+    // public static function getAircraftByPrice($price){
+    //     $pdo = self::getDB();
+    //     $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE price = ?");
+    //     $stmt->bindValue(':price',$price);
+    //     $stmt->execute();
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
+
+    // public static function getAircraftByYear($year){
+    //     $pdo = self::getDB();
+    //     $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE year = ?");
+    //     $stmt->bindValue(':year',$year);
+    //     $stmt->execute();
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
+
+    // public static function getAircraftByHours($hours){
+    //     $pdo = self::getDB();
+    //     $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE hours = ?");
+    //     $stmt->bindValue(':hours',$hours);
+    //     $stmt->execute();
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
+
+    // public static function getAircraftByHours($capacity){
+    //     $pdo = self::getDB();
+    //     $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE capacity = ?");
+    //     $stmt->bindValue(':capacity',$capacity);
+    //     $stmt->execute();
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
+
+    // public static function getAircraftByType($type){
+    //     $pdo = self::getDB();
+    //     $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE aircraftType = ?");
+    //     $stmt->bindValue(':aircraftType',$type);
+    //     $stmt->execute();
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static function findById($id) {
         $pdo = self::getDB();
