@@ -25,8 +25,33 @@ function AppointmentForm() {
         {date:'2024-11-30',hour:18,minutes:[15,45,30,0]}
     ]
 
-    const [date,setDate] = useState(null);
-    const [time,setTime] = useState(null);
+    const [formData, setFormData] = useState({
+        reason: "",
+        model: "",
+        serialNumber: "",
+        placeAppointment: "",
+        date: null,
+        time: null,
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        address: "",
+        country: "",
+        city: "",
+        postalCode: "",
+        idCard: null,
+        incomeProof: null
+    })
+
+    function handleInputChange(event) {
+        let {value,name} = event.target;
+        setFormData((prevValue)=>({
+            ...prevValue,
+            [name]:value,
+        }))
+    }
+
     const [isCopied, setIsCopied] = useState(false);
 
     useEffect(() => {
@@ -40,17 +65,19 @@ function AppointmentForm() {
 
     function handleSubmit(ev) {
         console.log("ok")   
+        console.log(formData.time)
+        console.log(formData.date)
         
         ev.preventDefault();
     }
 
     function handleSelectedSlot() {
-        if(date!=null) {
-            return new Date(date);
+        if(formData.date!=null) {
+            return new Date(formData.date);
         }
-        if(time!=null) {
+        if(formData.time!=null) {
             let date = new Date();
-            let [hours, minutes, seconds] = time.split(':').map(Number);
+            let [hours, minutes, seconds] = formData.time.split(':').map(Number);
             date.setHours(hours)
             date.setMinutes(minutes)
             date.setSeconds(0)
@@ -62,23 +89,19 @@ function AppointmentForm() {
     return (
         <div className='appointmentForm-container'>
             <div className='form-container'>
-                <div>
-                    <p>Date : {date}</p>
-                    <p>Time : {time}</p>
-                </div>
                 <h3>FORMULAIRE DE PRISE DE RENDEZ-VOUS</h3>
-                <div className='error-message-div'>Veuillez corriger les erreurs ci-dessous !</div>
                 <form onSubmit={handleSubmit}>
                     <fieldset className='reason-fieldset'><legend>Cause du rendez-vous</legend>
+                        <div className='error-message-div'>Veuillez corriger les erreurs ci-dessous !</div>
                         <label htmlFor="reason-input">Motif du rendez-vous*
-                            <input id="reason-input" name="reason" type="text"/>
+                            <input id="reason-input" name="reason" type="text" value={formData.reason} onChange={handleInputChange}/>
                         </label>
                         <div>
                             <label htmlFor="model-input">Modèle de l'appareil*
-                                <input id="model-input" name="model" type="text" />
+                                <input type="text" id="model-input" name="model" value={formData.model} onChange={handleInputChange}/>
                             </label>
                             <label htmlFor="serialNumber-input">Numéro de série*
-                                <input id="serialNumber-input" name="serialNumber" type="text" />
+                                <input type="text" id="serialNumber-input" name="serialNumber" value={formData.serialNumber} onChange={handleInputChange}/>
                             </label>
                         </div>
                     </fieldset>
@@ -86,15 +109,16 @@ function AppointmentForm() {
                     <InfoFormFieldset/>
 
                     <fieldset className='rdv-fieldset'><legend>Programmer mon rendez-vous</legend>
+                        <div className='error-message-div'>Veuillez corriger les erreurs ci-dessous !</div>
                         <div id='div-slot-pickers'>
                             <CustomProvider locale={frFR}>
                                 <div>
                                     <p>Date*</p>
-                                    <CustomDatePicker disabledSlots={disabledSlots|| []} selectedTime={handleSelectedSlot()} setDate={(value)=>setDate(value)}/>
+                                    <CustomDatePicker disabledSlots={disabledSlots|| []} selectedTime={handleSelectedSlot()} setDate={(value)=>setFormData((prevValue)=>({...prevValue,["date"]:value,}))}/>
                                 </div>
                                 <div>
                                     <p>Heure</p>
-                                    <CustomTimePicker disabledSlots={disabledSlots|| []} selectedDate={handleSelectedSlot()} setTime={(value)=>setTime(value)}/>
+                                    <CustomTimePicker disabledSlots={disabledSlots|| []} selectedDate={handleSelectedSlot()} setTime={(value)=>setFormData((prevValue)=>({...prevValue,["time"]:value,}))}/>
                                 </div>
                             </CustomProvider>
                         </div>

@@ -66,14 +66,25 @@ p {
 
 .error-message-div {
     display: flex;
-    align-items: center;
-    padding: 0 10px;
+    flex-direction: column;
+    padding: 10px 10px;
     color: #FF0000;
-    border:  dashed #FFB2B2 1px ;
+    border: dashed #FFB2B2 1px ;
     background-color: rgba(255, 178, 178, 0.28);
 }
 
+.error-message-div>* {
+    font-size: 16px;
+}
 
+.error-input {
+    outline: solid 2px #f77575;
+    border:solid 1px #FF0000;
+}
+
+.invisible {
+    display: none;
+}
 
 /** Pour les ordinateurs **/
 

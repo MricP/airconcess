@@ -2,20 +2,20 @@
     gap: var(--form-input-gap);
 }
 
-.info-fieldset>div>div, .info-fieldset>div:not(:first-of-type) {
+.info-fieldset>div>div, .info-fieldset>div:not(:nth-of-type(2), :first-of-type) {
     display: flex;
     flex-direction: column;
     gap: var(--form-input-gap);
     /* background-color: blue; */
 }
 
-.info-fieldset>div:first-of-type {
+.info-fieldset>div:nth-of-type(2) {
     display: flex;
     flex-direction: row;
     /* background-color: red; */
 }
 
-.info-fieldset>div:first-of-type>div {
+.info-fieldset>div:nth-of-type(2)>div {
     /* background-color: blue; */
     width: 48%;
 }
@@ -43,24 +43,24 @@
     display: none;
 }
 
-.info-fieldset div:first-of-type>div:nth-child(2) {
+.info-fieldset div:nth-of-type(2)>div:nth-child(2) {
     margin-left: 4%;
 }
 
-.info-fieldset div:first-of-type>div:nth-child(2)>div {
+.info-fieldset div:nth-of-type(2)>div:nth-child(2)>div {
     display: flex;
     flex-direction: row;
 }
 
-.info-fieldset div:first-of-type>div:nth-child(2)>div label {
+.info-fieldset div:nth-of-type(2)>div:nth-child(2)>div label {
     margin: 0;
 }
 
-.info-fieldset div:first-of-type>div:nth-child(2)>div label:first-of-type {
+.info-fieldset div:nth-of-type(2)>div:nth-child(2)>div label:nth-of-type(2) {
     width: 60%;
 }
 
-.info-fieldset div:first-of-type>div:nth-child(2)>div label:last-of-type {
+.info-fieldset div:nth-of-type(2)>div:nth-child(2)>div label:last-of-type {
     width: 38%;
     margin-left: 2%;
     /* background-color: red; */

@@ -21,12 +21,6 @@
     margin: 2rem 0;
 }
 
-.appointmentForm-container .error-message-div {
-    margin-bottom: 1rem;
-    height: 50px;
-    width: 70%;
-}
-
 .appointmentForm-container .form-container form {
     display: flex;
     flex-direction: column;
@@ -104,21 +98,21 @@
     gap: var(--form-input-gap);
 }
 
-.appointmentForm-container .rdv-fieldset>div:first-of-type {
+.appointmentForm-container .rdv-fieldset>div:nth-of-type(2) {
     display: flex;
     gap: 2%;
 }
 
-.appointmentForm-container .rdv-fieldset>div:first-of-type input {
+.appointmentForm-container .rdv-fieldset>div:nth-of-type(2) input {
     border: solid 1px transparent;
     border-right:solid 1px #B5B5B5;
 }
 
-.appointmentForm-container .rdv-fieldset>div:first-of-type>div {
+.appointmentForm-container .rdv-fieldset>div:nth-of-type(2)>div {
     width: 49%;
 }
 
-.appointmentForm-container .rdv-fieldset>div:first-of-type>div>p {
+.appointmentForm-container .rdv-fieldset>div:nth-of-type(2)>div>p {
     color: #5B5B5B;
     font-size: 14px;
 }
