@@ -38,7 +38,7 @@ const CustomDatePicker = forwardRef(({className,disabledSlots,selectedTime,setDa
       
       let today = new Date();
       let sevenDaysLater = new Date();
-      sevenDaysLater.setDate(today.getDate() + 7);
+      sevenDaysLater.setDate(today.getDate() + 6);
     
       // Désactiver les dates dans les 7 prochains jours
       if (date < sevenDaysLater || date.getDay()===0) {

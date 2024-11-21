@@ -52,11 +52,15 @@
     display: flex;
     flex-direction: column;
     font-size: 14px;
+} 
+
+.appointmentForm-container .form-container label:not(.invisible-label) svg {
+    font-size: 20px !important;
 }
 
-/* Le style des input et pour les input type/file ils ont la class invisible-input
+/* Le style des input et pour les input type/file ils ont la class invisible
     et leur comportement est gere par la div-upload */
-.appointmentForm-container .form-container input:not(.invisible-input), .form-container .div-upload {
+.appointmentForm-container .form-container input:not(.invisible), .form-container .div-upload {
     border: solid #B5B5B5 1px;
     border-radius: 2px;
     padding: 5px 10px;
@@ -67,14 +71,15 @@
     transition: all ease-in-out 0.15s;
 }
 
-.appointmentForm-container .form-container input:not(.invisible-input):focus-within {
+.appointmentForm-container .form-container input:not(.invisible):focus-within, 
+.appointmentForm-container .form-container input:not(.invisible):focus-within {
     outline: solid 2px #acd7ff;
     border:solid 1px #61b3ff;
 }
 
 /* ############## reason-fieldset ############## */
 
-.appointmentForm-container .reason-fieldset div:not(.error-message-div){
+.appointmentForm-container .reason-fieldset>div:last-of-type{
     gap: 2%;
     display: flex;
     flex-direction: row;
@@ -108,7 +113,8 @@
     width: 49%;
 }
 
-.appointmentForm-container .rdv-fieldset>div:nth-of-type(2)>div>p {
+.appointmentForm-container .rdv-fieldset>div:nth-of-type(2)>div>p,
+.appointmentForm-container .reason-fieldset>div:nth-of-type(2)>p {
     color: #5B5B5B;
     font-size: 14px;
 }
@@ -169,7 +175,7 @@
 }
 
 
-input.input-error, .input-error div{
+input.input-error, .input-error>div{
     outline: solid 1px #f77575 !important;
     border:solid 1px #FF0000 !important;
 }

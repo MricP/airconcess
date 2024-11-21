@@ -27,9 +27,16 @@
 
 .info-fieldset>div:last-of-type .div-upload .file-name {
     width: 95%;
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; */
 }
 
-.invisible-label {
+.info-fieldset .invisible {
+    display: none !important;
+}
+
+.inactive-label {
     width: 5%;
     height: auto;
 }
@@ -37,10 +44,6 @@
 .info-fieldset>div:last-of-type .div-upload svg {
     height: 100%;
     cursor: pointer;
-}
-
-.info-fieldset .invisible-input {
-    display: none;
 }
 
 .info-fieldset div:nth-of-type(2)>div:nth-child(2) {

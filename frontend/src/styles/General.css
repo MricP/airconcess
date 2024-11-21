@@ -78,7 +78,7 @@ p {
 }
 
 .invisible {
-    display: none;
+    display: none !important;
 }
 
 /** Pour les ordinateurs **/
