@@ -1,4 +1,4 @@
-import {React,useState} from 'react'
+import React,{useState, forwardRef} from 'react'
 import '../styles/Rsuite-custom.css'; 
 import { TimePicker  } from 'rsuite';
 import { format } from 'date-fns';
@@ -20,7 +20,9 @@ import { format } from 'date-fns';
  *        Reçoit un argument :
  *        - `value` (string|null) : L'heure sélectionnée au format `HH:mm:ss`, ou `null` si aucune heure n'est sélectionnée.
  */
-function CustomTimePicker({disabledSlots,selectedDate,setTime}) {
+const CustomTimePicker = forwardRef(({className,disabledSlots,selectedDate,setTime},ref) => {
+    // forwardRef permet à ce composant d'accepter une ref provenant de son parent
+
     const [selectedTime, setSelectedTime] = useState(null); // Stocke l'heure sélectionnée
 
     const handleDisableHour = (hour) => {
@@ -70,6 +72,8 @@ function CustomTimePicker({disabledSlots,selectedDate,setTime}) {
 
     return (
             <TimePicker
+              ref={ref}
+              className={className}
               onSelect={handleTimeSelect}
               onOk={(value) => value==null ? setTime(null) : setTime(format(value,"HH:mm:ss"))}
               onClean={() => setTime(null)}
@@ -82,6 +86,6 @@ function CustomTimePicker({disabledSlots,selectedDate,setTime}) {
               shouldDisableMinute={handleDisableMinutes}
             />
       );
-}
+});
 
 export default CustomTimePicker

@@ -77,11 +77,6 @@ p {
     font-size: 16px;
 }
 
-.error-input {
-    outline: solid 2px #f77575;
-    border:solid 1px #FF0000;
-}
-
 .invisible {
     display: none;
 }

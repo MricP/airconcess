@@ -24,6 +24,13 @@
   text-decoration: line-through;
 }
 
+.rs-input-group.rs-input-group-inside .rs-input {
+  /* display: block;
+  width: 100%;
+  border: none;
+  outline: none; */
+}
+
 
 :root,
 .rs-theme-light {
@@ -7978,12 +7985,7 @@ textarea.rs-input-sm {
   background-color: #fff;
   background-color: var(--rs-input-bg);
 }
-.rs-input-group.rs-input-group-inside .rs-input {
-  display: block;
-  width: 100%;
-  border: none;
-  outline: none;
-}
+
 .rs-input-group.rs-input-group-inside .rs-input-group-btn,
 .rs-input-group.rs-input-group-inside .rs-input-group-addon {
   -webkit-box-flex: 0;

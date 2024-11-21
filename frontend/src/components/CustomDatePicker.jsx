@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {forwardRef} from 'react'
 import '../styles/Rsuite-custom.css';
 import { DatePicker } from 'rsuite';
 import format from 'date-fns/format';
@@ -23,7 +23,7 @@ import { fr } from 'date-fns/locale';  // Import de la locale française pour da
  *        Reçoit un argument :
  *        - `value` (string|null) : La date sélectionnée au format `YYYY-MM-DD`, ou `null` si aucune date n'est sélectionnée.
  */
-function CustomDatePicker({disabledSlots,selectedTime,setDate}) {
+const CustomDatePicker = forwardRef(({className,disabledSlots,selectedTime,setDate},ref) => {
     /* 
       PARAMETRE POSSIBLEMENT MODIFIABLES 
       • Première heure = 7
@@ -73,6 +73,8 @@ function CustomDatePicker({disabledSlots,selectedTime,setDate}) {
       
     return (
       <DatePicker
+        ref={ref}
+        className={className}
         onOk={(value) => value==null ? setDate(null) : setDate(format(value, 'yyyy-MM-dd'))}
         onClean={() => setDate(null)} 
         format="dd/MM/yyyy"
@@ -85,6 +87,6 @@ function CustomDatePicker({disabledSlots,selectedTime,setDate}) {
         placeholder="Sélectionner la date"
       />
     )
-}
+});
 
 export default CustomDatePicker
