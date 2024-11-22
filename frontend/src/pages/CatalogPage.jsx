@@ -22,7 +22,7 @@ function CatalogPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const catalogRef = useRef(null);
-    const [searchPlane, setSearchPlane] = useState();
+    const [searchPlane, setSearchPlane] = useState('');
 
 // déclaration des références pour les filtres
 
@@ -35,6 +35,8 @@ function CatalogPage() {
   
   const [filteredAircrafts, setFilteredAircrafts] = useState([]);
 
+      
+
     useEffect(() => {
         const fetchAircrafts = async () => {
           try {
@@ -43,6 +45,7 @@ function CatalogPage() {
             setAircrafts(response.data.data);
             setFilteredAircrafts(response.data.data);
             setNbAircraft(response.data.nbAircraft); 
+            setSearchPlane(response.data.data);
             setError(null); 
           } catch (error) {
             console.error("Erreur lors de la récupération des données :", error);
@@ -54,7 +57,7 @@ function CatalogPage() {
       
         fetchAircrafts();
       }, [page],); 
-
+        
     if (loading) return <p>Chargement...</p>;
     if (error) return <p>{error}</p>;
 
@@ -166,8 +169,9 @@ function CatalogPage() {
   // Partie recherche
 
   const handleSearch = (e) => {
-      let value = e.target.value;
+      const value = e.target.value || ''; 
       setSearchPlane(value);
+     
   }
   
     return (
@@ -263,9 +267,17 @@ function CatalogPage() {
             <div className="separator"></div>
             <div className='planeContainer'>
             {Array.isArray(aircrafts) && aircrafts.length > 0 ? (
-                filteredAircrafts.filter((plane) => {
-                  return plane.model.includes(searchPlane);
-                }).map((plane) => (
+              filteredAircrafts
+                .filter((plane) => {
+                  if (!plane || !plane.model) return false; 
+                  if (!searchPlane || toString(searchPlane).trim() === '') {
+                      return true; 
+                  }
+                  return toString(plane.model).toLowerCase().includes(toString(searchPlane).toLowerCase());
+              })
+             
+        
+                .map((plane) => (
                 <ProductBox
                     key={plane.idAircraft}
                     isAvailable={plane.isAvailable}
