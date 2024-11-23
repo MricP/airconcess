@@ -35,14 +35,14 @@ function Template({children}) {
       } else {
         color = "transparent-black"
       }
-    } else if (location.pathname === "/" || location.pathname === "/contact-us" || location.pathname === "/catalog" || location.pathname){
+    } else if (location.pathname === "/" || location.pathname === "/contact-us" || location.pathname === "/catalog"){
       if (scrolled){
         color = "black-white"
       } else {
         color = "transparent-white"
       }
     } else {
-      color = "transparent-black"
+      color = "white-black"
     }
 
   return (
