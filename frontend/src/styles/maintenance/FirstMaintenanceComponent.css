@@ -1,0 +1,14 @@
+.first-maintenance-component {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    padding-right: 10vw;
+    padding-left: 10vw;
+    position: relative;
+}
+
+.first-maintenance-component span {
+    height: 40vh;
+    width: 40vw;
+    background-color: grey;
+}
