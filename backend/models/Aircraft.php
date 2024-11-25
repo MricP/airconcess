@@ -24,12 +24,12 @@ class Aircraft
         return false;
     }
 
-    public static function getAllAircrafts($page = 1, $limit = 5) {
+    public static function getAllAircrafts(/*$page = 1, $limit = 5*/) {
         $pdo = self::getDB();
-        $offset = max(0, ($page - 1) * $limit); 
-        $stmt = $pdo->prepare("SELECT * FROM aircraft LIMIT :limit OFFSET :offset");
-        $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
-        $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+        // $offset = max(0, ($page - 1) * $limit); 
+        $stmt = $pdo->prepare("SELECT * FROM aircraft /*LIMIT :limit OFFSET :offset*/");
+        // $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+        // $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -41,7 +41,6 @@ class Aircraft
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total'] ?? 0;
     }
-
 
 // Filtrage de l'affichage des avions dans le catalogue
 

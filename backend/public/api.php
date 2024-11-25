@@ -84,7 +84,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
             'nbAircraft' => $nbAircraft,
         ]);
     } catch (Exception $e) {
-        http_response_code(500); // Code d'erreur 500 (erreur serveur)
+        http_response_code(500); 
         echo json_encode([
             'status' => 'error',
             'message' => 'Une erreur s\'est produite : ' . $e->getMessage(),

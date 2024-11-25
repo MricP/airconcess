@@ -19,11 +19,9 @@ export const fetchTestMessage = async () => {
   }
 };
 
-export const getCatalogData = async (page = 1, limit = 5) => {
+export const getCatalogData = async () => {
   try {
-    const response = await axiosInstance.get('/api/catalog', {
-      params: { page, limit },
-    });
+    const response = await axiosInstance.get('/api/catalog');
     console.log('Full response:', response); 
     console.log('Catalog data fetched:', response.data); 
     return response.data; 

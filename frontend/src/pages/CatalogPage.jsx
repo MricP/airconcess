@@ -33,7 +33,7 @@ function CatalogPage() {
   const capacityRef = useRef(null);
   const typeRef = useRef(null);
   
-  const [filteredAircrafts, setFilteredAircrafts] = useState([]);
+  let [filteredAircrafts, setFilteredAircrafts] = useState([]);
 
     useEffect(() => {
         const fetchAircrafts = async () => {
@@ -58,11 +58,9 @@ function CatalogPage() {
 
       useEffect(() => {
         const filtered = aircrafts.filter((plane) => {
-            // Si la barre de recherche est vide, afficher tous les avions
             if (searchPlane.trim() === '') {
                 return true; 
             }
-            // Sinon, appliquer le filtre sur le modèle de l'avion
             return plane.model.toLowerCase().includes(searchPlane.toLowerCase());
         });
     
@@ -100,12 +98,28 @@ function CatalogPage() {
     if(stateRef.current){
       stateRef.current.value = "Aucun";
       stateRef.current.style = "display:none";
+      setFilteredAircrafts(aircrafts);
     }
   } 
 
   const handlePriceFilter = () => {
     if(priceRef.current){
       priceRef.current.style = "display:initial";
+      if(priceRef.current.value === "-1000000"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.price <= 1000000));
+      }
+      else if(priceRef.current.value === "-10000000"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.price <= 10000000))
+      }
+      else if(priceRef.current.value === "-50000000"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.price <= 50000000))
+      }
+      else if(priceRef.current.value === "+50000000"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.price > 50000000))
+      }
+      else{
+        setFilteredAircrafts(aircrafts);
+      }
     }
   } 
 
@@ -113,12 +127,28 @@ function CatalogPage() {
     if(priceRef.current){
       priceRef.current.value = "Aucun";
       priceRef.current.style = "display:none";
+      setFilteredAircrafts(aircrafts);
     }
   } 
 
   const handleYearFilter = () => {
     if(yearRef.current){
       yearRef.current.style = "display:initial";
+      if(yearRef.current.value === "2000"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.year <= 2000));
+      }
+      else if(yearRef.current.value === "2010"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.year <= 2010 && aircraft.year > 2000))
+      }
+      else if(yearRef.current.value === "2020"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.year <= 2020 && aircraft.year > 2010))
+      }
+      else if(yearRef.current.value === "NEW"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.year > 2020))
+      }
+      else{
+        setFilteredAircrafts(aircrafts);
+      }
     }
   } 
 
@@ -126,12 +156,28 @@ function CatalogPage() {
     if(yearRef.current){
       yearRef.current.value = "Aucun";
       yearRef.current.style = "display:none";
+      setFilteredAircrafts(aircrafts);
     }
   } 
 
   const handleCapacityFilter = () => {
     if(capacityRef.current){
       capacityRef.current.style = "display:initial";
+      if(capacityRef.current.value === "0"){
+        setFilteredAircrafts((aircrafts.filter((aircraft) => aircraft.capacity < 5 && aircraft.capacity >= 0)));
+      }
+      else if(capacityRef.current.value === "5"){
+        setFilteredAircrafts((aircrafts.filter((aircraft) => aircraft.capacity < 10 && aircraft.capacity >= 5)));
+      }
+      else if(capacityRef.current.value === "10"){
+        setFilteredAircrafts((aircrafts.filter((aircraft) => aircraft.capacity < 15 && aircraft.capacity >= 10)));
+      }
+      else if(capacityRef.current.value === "15"){
+        setFilteredAircrafts((aircrafts.filter((aircraft) => aircraft.capacity >= 15)));
+      }
+      else{
+        setFilteredAircrafts(aircrafts);
+      }
     }
   } 
 
@@ -139,6 +185,7 @@ function CatalogPage() {
     if(capacityRef.current){
       capacityRef.current.value = "Aucun";
       capacityRef.current.style = "display:none";
+      setFilteredAircrafts(aircrafts)
     }
   } 
 
@@ -146,6 +193,21 @@ function CatalogPage() {
   const handleAutonomyFilter = () => {
     if(autonomyRef.current){
       autonomyRef.current.style = "display:initial";
+      if(autonomyRef.current.value === "-100"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.autonomy <= 100))
+      }
+      else if(autonomyRef.current.value === "-500"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.autonomy <= 500 && aircraft.autonomy > 100))
+      }
+      else if(autonomyRef.current.value === "-1000"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.autonomy <= 1000 && aircraft.autonomy > 500))
+      }
+      else if(autonomyRef.current.value === "+1000"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.autonomy > 1000))
+      }
+      else{
+        setFilteredAircrafts(aircrafts);
+      }
     }
   } 
 
@@ -153,12 +215,26 @@ function CatalogPage() {
     if(autonomyRef.current){
       autonomyRef.current.value = "Aucun";
       autonomyRef.current.style = "display:none";
+      setFilteredAircrafts(aircrafts)
     }
   } 
 
   const handleTypeFilter = () => {
     if(typeRef.current){
       typeRef.current.style = "display:initial";
+      if(typeRef.current.value === "Local"){
+        console.log(aircrafts.filter((aircraft) => aircraft.aircraftType === "Local"));
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.aircraftType === "Local"));
+      }
+      else if(typeRef.current.value === "National"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.aircraftType === "National"));
+      }
+      else if(typeRef.current.value === "International"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.aircraftType === "International"));
+      }
+      else{
+        setFilteredAircrafts(aircrafts);
+      }
     }
   } 
 
@@ -166,6 +242,7 @@ function CatalogPage() {
     if(typeRef.current){
       typeRef.current.style = "display:none";
       typeRef.current.value = "Aucun";
+      setFilteredAircrafts(aircrafts)
     }
   }
 
@@ -173,7 +250,13 @@ function CatalogPage() {
     if(stateRef.current){
       stateRef.current.style = "display:initial";
       if(stateRef.current.value === "Disponible"){
-        filteredAircrafts = aircrafts.filter((aircraft) => aircraft.isAvailable === 1);
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.isAvailable === 1));
+      }
+      else if(stateRef.current.value === "Indisponible"){
+        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.isAvailable === 0));
+      }
+      else{
+        setFilteredAircrafts(aircrafts);
       }
     }
   }
@@ -182,7 +265,8 @@ function CatalogPage() {
 
   
   const handleSearch = (e) => {
-    setSearchPlane(e.target.value.toString()); // Mettre à jour la valeur de la barre de recherche.
+    setSearchPlane(e.target.value.toString()); 
+    setPage(1);
   };
   
     return (
@@ -205,7 +289,7 @@ function CatalogPage() {
                   <div className='editFilter-container'>
                     <li>Etat :</li>
                     <div>
-                      <select name="stateSelect" ref={stateRef}>
+                      <select name="stateSelect" ref={stateRef} onChange={handleFiltrageState}>
                         <option value="Aucun">Aucun</option>
                         <option value="Disponible">Disponible</option>
                         <option value="Indisponible">Indisponible</option>
@@ -215,31 +299,31 @@ function CatalogPage() {
                   <div className='editFilter-container'>
                     <li>Prix :</li>
                     <div>
-                      <select name="select" ref={priceRef}>
+                      <select name="select" ref={priceRef} onChange={handlePriceFilter}>
                         <option value="Aucun">Aucun</option>
                         <option value="-1000000">- de 1 000 000</option>
                         <option value="-10000000">- de 10 000 000</option>
                         <option value="-50000000">- de 50 000 000</option>
-                        <option value="+10000000">+ de 50 000 000</option>
+                        <option value="+50000000">+ de 50 000 000</option>
                       </select>
                       <button className='editFilterButton' onClick={handlePriceFilter}><FaEdit size={20} /></button><button className='editFilterButton' onClick={handleDeletePriceFilter}><AiOutlineCloseSquare size={20} /></button></div>
                     </div>
                   <div className='editFilter-container'>
                     <li>Année :</li> 
                     <div>
-                      <select name="select" ref={yearRef}>
+                      <select name="select" ref={yearRef} onChange={handleYearFilter}>
                         <option value="Aucun">Aucun</option>
                         <option value="2000">2000</option>
                         <option value="2010">2010</option>
                         <option value="2020" >2020</option>
-
+                        <option value="NEW">NEW</option>
                       </select>
                       <button className='editFilterButton' onClick={handleYearFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteYearFilter}><AiOutlineCloseSquare size={20} /></button></div>
                       </div>
                   <div className='editFilter-container'>
                     <li>Capacité :</li> 
                     <div>
-                      <select name="select" ref={capacityRef}>
+                      <select name="select" ref={capacityRef} onChange={handleCapacityFilter}>
                         <option value="Aucun">Aucun</option>
                         <option value="0">+ de 0</option>
                         <option value="5">+ de 5</option>
@@ -251,7 +335,7 @@ function CatalogPage() {
                   <div className='editFilter-container'>
                     <li>Autonomie :</li>
                     <div>
-                      <select name="select" ref={autonomyRef}>
+                      <select name="select" ref={autonomyRef} onChange={handleAutonomyFilter}>
                         <option value="Aucun">Aucun</option>
                         <option value="-100">- de 100km</option>
                         <option value="-500">- de 500km</option>
@@ -263,7 +347,7 @@ function CatalogPage() {
                   <div className='editFilter-container'>
                     <li>Type :</li>
                     <div>
-                      <select name="select" ref={typeRef}>
+                      <select name="select" ref={typeRef} onChange={handleTypeFilter}>
                         <option value="Aucun">Aucun</option>
                         <option value="Local">Local</option>
                         <option value="National">National</option>
@@ -292,6 +376,7 @@ function CatalogPage() {
                     capacity={plane.capacity}
                     autonomy={plane.autonomy}
                     description={plane.description}
+                    aircraftType={plane.aircraftType}
                 />
                 ))
             ) : (

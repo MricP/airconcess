@@ -3,7 +3,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
 
 export const ProductBox = (props) => {
-
+    
     
   return (
       <div className='productBox-container'>
@@ -34,6 +34,10 @@ export const ProductBox = (props) => {
                 <div className='planeInfos'>
                     <p className='infoTitle'>Autonomie</p>
                     <p>{props.autonomy} km</p>
+                </div>
+                <div className='planeInfos'>
+                    <p className='infoTitle'>Type</p>
+                    <p>{props.aircraftType}</p>
                 </div>
             </div>
             <p>{props.description}</p>
