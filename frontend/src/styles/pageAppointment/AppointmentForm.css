@@ -54,7 +54,7 @@
     font-size: 14px;
 } 
 
-.appointmentForm-container .form-container label:not(.invisible-label) svg {
+.appointmentForm-container .form-container label:not(.invisible-label)>svg {
     font-size: 20px !important;
 }
 
@@ -71,7 +71,6 @@
     transition: all ease-in-out 0.15s;
 }
 
-.appointmentForm-container .form-container input:not(.invisible):focus-within, 
 .appointmentForm-container .form-container input:not(.invisible):focus-within {
     outline: solid 2px #acd7ff;
     border:solid 1px #61b3ff;

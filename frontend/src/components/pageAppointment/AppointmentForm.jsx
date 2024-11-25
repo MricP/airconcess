@@ -4,11 +4,11 @@ import '../../styles/pageAppointment/AppointmentForm.css'
 import InfoFormFieldset from '../InfoFormFieldset'
 import CustomTimePicker from '../CustomTimePicker'
 import CustomDatePicker from '../CustomDatePicker'
+import CustomSelectPicker from '../CustomSelectPicker';
 import {CustomProvider} from 'rsuite';
 import { frFR } from 'rsuite/locales'; // Locale française
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useForm } from "react-hook-form";
-import { SelectPicker } from "rsuite";
 
 function AppointmentForm() {
     const disabledSlots = [
@@ -99,31 +99,13 @@ function AppointmentForm() {
                         </div>
                         <div >
                             <p>Motif du rendez-vous*</p>
-                            <SelectPicker
+                            <CustomSelectPicker 
                                 className={errors.reason ? "input-error" : ""}
-                                data={data}
-                                searchable={false}
-                                placeholder=" "
-                                onChange={(value, event) => {
-                                    console.log("Value:", value);
-                                    console.log("Event:", event);
-                                    setValue("reason", value, { shouldValidate: true });
-                                }}
-                                // {...register("reason", { required: "Veuillez choisir votre motif de rendez-vous" })}
-                            />
-                        </div>
-                        
-                        {/* <label htmlFor="reason-input">
-                            Motif du rendez-vous*
-                            <input
-                                className={errors.reason ? "input-error" : ""}
-                                id="reason-input"
-                                name="reason"
-                                type="text"
-                                list="reason-list"
+                                data={data} 
+                                setValue={(value) => setValue("reason", value, errors.reason ? {shouldValidate: true} : {shouldValidate: false})} 
                                 {...register("reason", { required: "Veuillez choisir votre motif de rendez-vous" })}
                             />
-                        </label> */}
+                        </div>
                         <div>
                             <label htmlFor="model-input">
                                 Modèle de l'appareil*
@@ -148,7 +130,7 @@ function AppointmentForm() {
                         </div>
                     </fieldset>
 
-                    <InfoFormFieldset register={register} errors={errors} withIdCard={true} withIncomeProof={true}/>
+                    <InfoFormFieldset formData={formData} register={register} errors={errors} setValue={setValue} withIdCard={true} withIncomeProof={true}/>
 
                     <fieldset className="rdv-fieldset">
                         <legend>Programmer mon rendez-vous</legend>
@@ -183,13 +165,12 @@ function AppointmentForm() {
                         </div>
                         <label htmlFor="place-input">
                             Lieu*
-                            <input
+                            <CustomSelectPicker 
                                 className={errors.placeAppointment ? "input-error" : ""}
-                                type="text"
-                                id="place-input"
-                                name="placeAppointment"
-                                placeholder="-- Choisir parmi nos agences disponibles --"
-                                {...register("placeAppointment", { required: "Choisissez une agence" })}
+                                data={data} 
+                                placeholder={"Choisir parmi l'une de nos agences"}
+                                setValue={(value) => setValue("placeAppointment", value, errors.placeAppointment ? {shouldValidate: true} : {shouldValidate: false})} 
+                                {...register("placeAppointment", { required: true })}
                             />
                         </label>
                         <div className="invisible" id="addr-label">

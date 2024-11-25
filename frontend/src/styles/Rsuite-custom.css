@@ -25,10 +25,11 @@
 }
 
 .rs-input-group.rs-input-group-inside .rs-input {
-  /* display: block;
+  display: block;
   width: 100%;
   border: none;
-  outline: none; */
+  outline: none;
+  padding-left: 10px;
 }
 
 /* SelectPicker */
@@ -37,7 +38,27 @@
 .rs-picker.rs-picker-focused {
   outline: solid 2px #acd7ff;
   border:solid 1px #61b3ff;
-  transition: border-color ease-in-out 0.15s;
+  transition: all ease 0.15s;
+}
+
+.rs-input:focus {
+  outline: solid 2px #acd7ff !important;
+  border:solid 1px #61b3ff !important ;
+  transition: all ease 0.15s;
+}
+
+.rs-stack {
+  min-height: 25px;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.rs-input {
+  border-radius: 2px !important;
+  /* background-color: red; */
+  transition: all ease 0.15s;
 }
 
 .rs-btn {
@@ -101,7 +122,6 @@
 }
 
 .rs-picker-toggle {
-  font-size: 20px; /*TO CHANGE*/
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -128,12 +148,24 @@
   text-decoration: none;
   color: #343434;
   color: var(--rs-btn-default-text);
-  background-color: #f7f7fa;
-  background-color: var(--rs-btn-default-bg);
+  /* background-color: #f7f7fa;
+  background-color: var(--rs-btn-default-bg); */
   border-radius: 2px;
   padding: 8px 12px;
   overflow: hidden;
   position: relative;
+}
+
+.rs-picker-toggle-value {
+  height: 25px;
+  font-size: 20px; /*TO CHANGE*/
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .rs-picker-default .rs-picker-toggle {
@@ -7895,11 +7927,7 @@ label:hover .rs-checkbox-control .rs-checkbox-inner::before {
 .rs-btn-icon-circle {
   border-radius: 50% !important;
 }
-.rs-input {
-  -webkit-transition: border-color ease-in-out 0.15s;
-  transition: border-color ease-in-out 0.15s;
 
-}
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .rs-input {
     height: 36px;
@@ -7932,10 +7960,7 @@ textarea.rs-input {
 .rs-input:hover:not(:disabled) {
   
 }
-.rs-input:focus {
-  outline: 3px solid red;
-  /* outline: 3px solid var(--rs-color-focus-ring); */
-}
+
 .rs-theme-high-contrast .rs-input:focus {
   outline-offset: 2px;
 }
@@ -16185,11 +16210,7 @@ textarea.rs-inline-edit-sm .rs-plaintext {
   -webkit-animation-name: notificationMoveOut;
           animation-name: notificationMoveOut;
 }
-.rs-stack {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
+
 .rs-visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -17018,13 +17039,7 @@ kbd.rs-text {
   content: ':';
   margin: 0 4px 0 2px;
 }
-.rs-picker-toggle-value {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
-}
+
 
 .rs-picker-toggle-indicator .rs-picker-clean.rs-btn-close {
   padding: 4px 0;

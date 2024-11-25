@@ -1,25 +1,34 @@
 import React,{useState} from 'react'
 import "../styles/InfoFormFieldset.css"
 import { MdOutlineFileUpload } from "react-icons/md";
+import countryList from 'react-select-country-list';
+import CustomSelectPicker from './CustomSelectPicker';
+import { Country, City } from "country-state-city";
+import PhoneInput from 'react-phone-number-input'
+import '../styles/PhoneInput.css';
 
 
-function InfoFormFieldset({register,errors,withIdCard=false,withIncomeProof=false}) {
-    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i
+function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeProof=false,setValue}) {
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i    
 
     function displayCardFileName() {
         const element = document.getElementById("id-card-file-name");
         const input = document.getElementById('id-card');
 
-        element.innerText = input.files[0].name;
+        if(input.files[0] != null) {
+            element.innerText = input.files[0].name;
+        }
     }
 
     function displayProofFileName() {
+        console.log("Ok")
         const element = document.getElementById("income-proof-file-name");
         const input = document.getElementById('income-proof');
 
-        element.innerText = input.files[0].name;
+        if(input.files[0] != null) {
+            element.innerText = input.files[0].name;
+        }
     }
-
 
     function handleDisplayErrorDiv() {
         return errors.email && errors.email?.message!=="required"
@@ -41,7 +50,15 @@ function InfoFormFieldset({register,errors,withIdCard=false,withIncomeProof=fals
                             {...register("lastName", { required: true })}
                         />
                     </label>
-                    <label htmlFor="phone">Numéro de téléphone*
+                    <div>
+                        <p>Numéro de téléphone*</p>
+                        <PhoneInput
+                            onChange={(value) => setValue("phone", value, errors.phone ? {shouldValidate: true} : {shouldValidate: false})}
+                            // {...register("phone", { required: true })}
+                            // #TODO  FAIRE UN CURSOM PHONEInput
+                        />
+                    </div>
+                    {/* <label htmlFor="phone">Numéro de téléphone*
                         <input 
                             className={errors.phone ? "input-error" : ""}
                             type="text" 
@@ -49,16 +66,17 @@ function InfoFormFieldset({register,errors,withIdCard=false,withIncomeProof=fals
                             name="phone"
                             {...register("phone", { required: true })}
                         />
-                    </label>
-                    <label htmlFor="country">Pays*
-                        <input 
+                    </label> */}
+                    <div>
+                        <p>Pays*</p>
+                        <CustomSelectPicker 
+                            searchable={true}
                             className={errors.country ? "input-error" : ""}
-                            type="text" 
-                            id="country" 
-                            name="country"
+                            data={countryList().getData()} 
+                            setValue={(value) => setValue("country", value, errors.country ? {shouldValidate: true} : {shouldValidate: false})} 
                             {...register("country", { required: true })}
                         />
-                    </label>
+                    </div>
                 </div>
                 <div>
                     <label htmlFor="first-name">Prénom*
@@ -80,7 +98,7 @@ function InfoFormFieldset({register,errors,withIdCard=false,withIncomeProof=fals
                                 required: "required",
                                 pattern: {
                                     value: emailRegex,
-                                    message: "Format d'email invalide"
+                                    message: "○ Format d'email invalide !"
                                 },
                                 shouldValidate: true
                             
@@ -89,11 +107,16 @@ function InfoFormFieldset({register,errors,withIdCard=false,withIncomeProof=fals
                     </label>
                     <div>
                         <label htmlFor="city" >Ville*
-                            <input 
+                            <CustomSelectPicker 
+                                searchable={true}
                                 className={errors.city ? "input-error" : ""}
-                                type="text" 
-                                id="city" 
-                                name="city"
+                                data={formData.country ? City.getCitiesOfCountry(formData.country).map(
+                                    (city) => ({
+                                        value: city.name,
+                                        label: city.name,
+                                    })
+                                ) : []} 
+                                setValue={(value) => setValue("city", value, errors.city ? {shouldValidate: true} : {shouldValidate: false})} 
                                 {...register("city", { required: true })}
                             />
                         </label>
@@ -125,8 +148,8 @@ function InfoFormFieldset({register,errors,withIdCard=false,withIncomeProof=fals
                     id="id-card" 
                     name="idCard" 
                     accept=".pdf,.jpg,.jpeg,.png" 
-                    onChange={() => displayCardFileName()}
-                    {...withIdCard==true ? {...register("idCard", { required: true })} : null}    
+                    onInput={() => displayCardFileName()}
+                    {...withIdCard===true ? {...register("idCard", { required: true })} : null}    
                 />
                 <label className={`${withIdCard ? "" : "invisible"} ${errors.idCard ? "input-error" : ""}`}>Carte d’identité*
                     <div className="div-upload">
@@ -142,8 +165,8 @@ function InfoFormFieldset({register,errors,withIdCard=false,withIncomeProof=fals
                     id="income-proof" 
                     name="incomeProof" 
                     accept=".pdf,.jpg,.jpeg,.png" 
-                    onChange={() => displayProofFileName()}
-                    {...withIncomeProof==true ? {...register("incomeProof", { required: true })} : null}
+                    onInput={() => displayProofFileName()}
+                    {...withIncomeProof===true ? {...register("incomeProof", { required: true })} : null}
                 />
                 <label className={`${withIncomeProof ? "" : "invisible"} ${errors.incomeProof ? "input-error" : ""}`}>Justificatif de revenu*
                     <div className="div-upload">
