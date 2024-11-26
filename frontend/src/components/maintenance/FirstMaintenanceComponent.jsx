@@ -9,7 +9,6 @@ export default function FirstMaintenanceComponent(){
                 <p>Vous souhaitez prendre soin de vos avions,  c’est possible grâce à nos services de maintenance.
                 Découvrez nos différentes offres allant d’un simple nettoyage à une révision complète de toute votre collection.</p>
             </section>
-            <span></span>
         </div>
     )
 }
