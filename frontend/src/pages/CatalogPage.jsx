@@ -94,32 +94,101 @@ function CatalogPage() {
 
   // Gérer les filtres :
 
+  const reapplyFilters = () => {
+    let filtered = [...aircrafts]; // Copie initiale de tous les avions
+  
+    // Applique chaque filtre actif
+    if (stateRef.current && stateRef.current.value !== "Aucun") {
+      filtered = filtered.filter((aircraft) =>
+        stateRef.current.value === "Disponible"
+          ? aircraft.isAvailable === 1
+          : aircraft.isAvailable === 0
+      );
+    }
+  
+    if (priceRef.current && priceRef.current.value !== "Aucun") {
+      if (priceRef.current.value === "-1000000") {
+        filtered = filtered.filter((aircraft) => aircraft.price <= 1000000);
+      } else if (priceRef.current.value === "-10000000") {
+        filtered = filtered.filter((aircraft) => aircraft.price <= 10000000);
+      } else if (priceRef.current.value === "-50000000") {
+        filtered = filtered.filter((aircraft) => aircraft.price <= 50000000);
+      } else if (priceRef.current.value === "+50000000") {
+        filtered = filtered.filter((aircraft) => aircraft.price > 50000000);
+      }
+    }
+  
+    if (yearRef.current && yearRef.current.value !== "Aucun") {
+      if (yearRef.current.value === "2000") {
+        filtered = filtered.filter((aircraft) => aircraft.year <= 2000);
+      } else if (yearRef.current.value === "2010") {
+        filtered = filtered.filter(
+          (aircraft) => aircraft.year <= 2010 && aircraft.year > 2000
+        );
+      } else if (yearRef.current.value === "2020") {
+        filtered = filtered.filter(
+          (aircraft) => aircraft.year <= 2020 && aircraft.year > 2010
+        );
+      } else if (yearRef.current.value === "NEW") {
+        filtered = filtered.filter((aircraft) => aircraft.year > 2020);
+      }
+    }
+  
+    if (capacityRef.current && capacityRef.current.value !== "Aucun") {
+      if (capacityRef.current.value === "0") {
+        filtered = filtered.filter(
+          (aircraft) => aircraft.capacity < 5 && aircraft.capacity >= 0
+        );
+      } else if (capacityRef.current.value === "5") {
+        filtered = filtered.filter(
+          (aircraft) => aircraft.capacity < 10 && aircraft.capacity >= 5
+        );
+      } else if (capacityRef.current.value === "10") {
+        filtered = filtered.filter(
+          (aircraft) => aircraft.capacity < 15 && aircraft.capacity >= 10
+        );
+      } else if (capacityRef.current.value === "15") {
+        filtered = filtered.filter((aircraft) => aircraft.capacity >= 15);
+      }
+    }
+  
+    if (autonomyRef.current && autonomyRef.current.value !== "Aucun") {
+      if (autonomyRef.current.value === "-100") {
+        filtered = filtered.filter((aircraft) => aircraft.autonomy <= 100);
+      } else if (autonomyRef.current.value === "-500") {
+        filtered = filtered.filter(
+          (aircraft) => aircraft.autonomy <= 500 && aircraft.autonomy > 100
+        );
+      } else if (autonomyRef.current.value === "-1000") {
+        filtered = filtered.filter(
+          (aircraft) => aircraft.autonomy <= 1000 && aircraft.autonomy > 500
+        );
+      } else if (autonomyRef.current.value === "+1000") {
+        filtered = filtered.filter((aircraft) => aircraft.autonomy > 1000);
+      }
+    }
+  
+    if (typeRef.current && typeRef.current.value !== "Aucun") {
+      filtered = filtered.filter(
+        (aircraft) => aircraft.aircraftType === typeRef.current.value
+      );
+    }
+  
+    setFilteredAircrafts(filtered); // Mise à jour de la liste filtrée
+  };
+  
   const handleDeleteStateFilter = () => {
     if(stateRef.current){
       stateRef.current.value = "Aucun";
       stateRef.current.style = "display:none";
-      setFilteredAircrafts(aircrafts);
+      reapplyFilters();
     }
   } 
 
   const handlePriceFilter = () => {
     if(priceRef.current){
       priceRef.current.style = "display:initial";
-      if(priceRef.current.value === "-1000000"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.price <= 1000000));
-      }
-      else if(priceRef.current.value === "-10000000"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.price <= 10000000))
-      }
-      else if(priceRef.current.value === "-50000000"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.price <= 50000000))
-      }
-      else if(priceRef.current.value === "+50000000"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.price > 50000000))
-      }
-      else{
-        setFilteredAircrafts(aircrafts);
-      }
+      reapplyFilters();
     }
   } 
 
@@ -127,28 +196,14 @@ function CatalogPage() {
     if(priceRef.current){
       priceRef.current.value = "Aucun";
       priceRef.current.style = "display:none";
-      setFilteredAircrafts(aircrafts);
+      reapplyFilters();
     }
   } 
 
   const handleYearFilter = () => {
     if(yearRef.current){
       yearRef.current.style = "display:initial";
-      if(yearRef.current.value === "2000"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.year <= 2000));
-      }
-      else if(yearRef.current.value === "2010"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.year <= 2010 && aircraft.year > 2000))
-      }
-      else if(yearRef.current.value === "2020"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.year <= 2020 && aircraft.year > 2010))
-      }
-      else if(yearRef.current.value === "NEW"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.year > 2020))
-      }
-      else{
-        setFilteredAircrafts(aircrafts);
-      }
+      reapplyFilters();
     }
   } 
 
@@ -156,28 +211,14 @@ function CatalogPage() {
     if(yearRef.current){
       yearRef.current.value = "Aucun";
       yearRef.current.style = "display:none";
-      setFilteredAircrafts(aircrafts);
+      reapplyFilters();
     }
   } 
 
   const handleCapacityFilter = () => {
     if(capacityRef.current){
       capacityRef.current.style = "display:initial";
-      if(capacityRef.current.value === "0"){
-        setFilteredAircrafts((aircrafts.filter((aircraft) => aircraft.capacity < 5 && aircraft.capacity >= 0)));
-      }
-      else if(capacityRef.current.value === "5"){
-        setFilteredAircrafts((aircrafts.filter((aircraft) => aircraft.capacity < 10 && aircraft.capacity >= 5)));
-      }
-      else if(capacityRef.current.value === "10"){
-        setFilteredAircrafts((aircrafts.filter((aircraft) => aircraft.capacity < 15 && aircraft.capacity >= 10)));
-      }
-      else if(capacityRef.current.value === "15"){
-        setFilteredAircrafts((aircrafts.filter((aircraft) => aircraft.capacity >= 15)));
-      }
-      else{
-        setFilteredAircrafts(aircrafts);
-      }
+      reapplyFilters();
     }
   } 
 
@@ -185,7 +226,7 @@ function CatalogPage() {
     if(capacityRef.current){
       capacityRef.current.value = "Aucun";
       capacityRef.current.style = "display:none";
-      setFilteredAircrafts(aircrafts)
+      reapplyFilters();
     }
   } 
 
@@ -193,21 +234,7 @@ function CatalogPage() {
   const handleAutonomyFilter = () => {
     if(autonomyRef.current){
       autonomyRef.current.style = "display:initial";
-      if(autonomyRef.current.value === "-100"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.autonomy <= 100))
-      }
-      else if(autonomyRef.current.value === "-500"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.autonomy <= 500 && aircraft.autonomy > 100))
-      }
-      else if(autonomyRef.current.value === "-1000"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.autonomy <= 1000 && aircraft.autonomy > 500))
-      }
-      else if(autonomyRef.current.value === "+1000"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.autonomy > 1000))
-      }
-      else{
-        setFilteredAircrafts(aircrafts);
-      }
+      reapplyFilters();
     }
   } 
 
@@ -215,49 +242,30 @@ function CatalogPage() {
     if(autonomyRef.current){
       autonomyRef.current.value = "Aucun";
       autonomyRef.current.style = "display:none";
-      setFilteredAircrafts(aircrafts)
+      reapplyFilters();
     }
   } 
 
   const handleTypeFilter = () => {
     if(typeRef.current){
       typeRef.current.style = "display:initial";
-      if(typeRef.current.value === "Local"){
-        console.log(aircrafts.filter((aircraft) => aircraft.aircraftType === "Local"));
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.aircraftType === "Local"));
-      }
-      else if(typeRef.current.value === "National"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.aircraftType === "National"));
-      }
-      else if(typeRef.current.value === "International"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.aircraftType === "International"));
-      }
-      else{
-        setFilteredAircrafts(aircrafts);
-      }
+      reapplyFilters();
     }
+    
   } 
 
   const handleDeleteTypeFilter = () => {
     if(typeRef.current){
       typeRef.current.style = "display:none";
       typeRef.current.value = "Aucun";
-      setFilteredAircrafts(aircrafts)
+      reapplyFilters();
     }
   }
 
   const handleFiltrageState = () => {
     if(stateRef.current){
       stateRef.current.style = "display:initial";
-      if(stateRef.current.value === "Disponible"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.isAvailable === 1));
-      }
-      else if(stateRef.current.value === "Indisponible"){
-        setFilteredAircrafts(aircrafts.filter((aircraft) => aircraft.isAvailable === 0));
-      }
-      else{
-        setFilteredAircrafts(aircrafts);
-      }
+      reapplyFilters();
     }
   }
 
