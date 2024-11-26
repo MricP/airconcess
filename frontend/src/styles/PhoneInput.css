@@ -26,6 +26,11 @@
     position: relative;
 }
 
+.PhoneInput.input-error input {
+	outline: solid 1px #f77575 !important;
+    border:solid 1px #FF0000 !important;
+}
+
 .PhoneInputInput {
 	/* The phone number input stretches to fill all empty space */
 	flex: 1;

@@ -1,15 +1,18 @@
-import React,{useState} from 'react'
+import React from 'react'
 import "../styles/InfoFormFieldset.css"
 import { MdOutlineFileUpload } from "react-icons/md";
 import countryList from 'react-select-country-list';
 import CustomSelectPicker from './CustomSelectPicker';
-import { Country, City } from "country-state-city";
-import PhoneInput from 'react-phone-number-input'
-import '../styles/PhoneInput.css';
+import { City } from "country-state-city";
+
+
+
+import CustomPhoneInput from './CustomPhoneInput';
 
 
 function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeProof=false,setValue}) {
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i    
+    const postalCodeRegex = /^[0-9]/
 
     function displayCardFileName() {
         const element = document.getElementById("id-card-file-name");
@@ -52,21 +55,11 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     </label>
                     <div>
                         <p>Numéro de téléphone*</p>
-                        <PhoneInput
-                            onChange={(value) => setValue("phone", value, errors.phone ? {shouldValidate: true} : {shouldValidate: false})}
-                            // {...register("phone", { required: true })}
-                            // #TODO  FAIRE UN CURSOM PHONEInput
-                        />
-                    </div>
-                    {/* <label htmlFor="phone">Numéro de téléphone*
-                        <input 
-                            className={errors.phone ? "input-error" : ""}
-                            type="text" 
-                            id="phone" 
-                            name="phone"
-                            {...register("phone", { required: true })}
-                        />
-                    </label> */}
+                        <CustomPhoneInput
+                            className={errors.phone ? "input-error" : ""} 
+                            setValue={(value) => setValue("phone", value, errors.phone ? {shouldValidate: true} : {shouldValidate: false})}
+                            {...register("phone", { required: true })}/>
+                        </div>
                     <div>
                         <p>Pays*</p>
                         <CustomSelectPicker 
@@ -120,13 +113,23 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                                 {...register("city", { required: true })}
                             />
                         </label>
+                        {/* TODO : ATTENTION CERTAINES PAYS N'ONT PAS DE CODE POSTAL*/}
                         <label htmlFor="postal-code">Code postal*
                             <input 
                                 className={errors.postalCode ? "input-error" : ""}
                                 type="text" 
+                                onInput={(e) => {e.target.value = e.target.value.replace(/\D/,'')}}
+                                    /* Remplace tout ce qui n'est pas un chiffre par un vide */
                                 id="postal-code" 
                                 name="postalCode"
-                                {...register("postalCode", { required: true })}
+                                {...register("postalCode", { 
+                                    required: "required",
+                                    pattern: {
+                                        value: postalCodeRegex,
+                                        message: "○ Le code postal n'est constitué que de chiffres !"
+                                    },
+                                    shouldValidate: true
+                                })}
                             />
                         </label>
                     </div>

@@ -11,6 +11,8 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useForm } from "react-hook-form";
 
 function AppointmentForm() {
+    /* TEMP DATA */
+
     const disabledSlots = [
         {date:'2024-11-29',hour:16,minutes:[15,45,30,0]},
         {date:'2024-12-12',hour:7,minutes:[15,45,30,0]},
@@ -27,17 +29,22 @@ function AppointmentForm() {
         {date:'2024-12-12',hour:18,minutes:[15,45,30,0]}
     ]
 
-    const data = [
+    const reasonOptions = [
         { label: "J'envisage d'acheter un appareil", value: "purchase" },
         { label: "J'envisage de louer un appareil", value: "rent" }
     ];    
+
+    const agencyOptions = [
+        { label: "Agence 1", value: "A1" },
+        { label: "Agence 2", value: "A2" }
+    ];
 
     const {register,handleSubmit,watch,setValue, formState: { errors }} = useForm(
         { defaultValues: {
             reason: "",
             model: "",
             serialNumber: "",
-            placeAppointment: "",
+            agency: "",
             date: null,
             time: null,
             firstName: "",
@@ -101,7 +108,7 @@ function AppointmentForm() {
                             <p>Motif du rendez-vous*</p>
                             <CustomSelectPicker 
                                 className={errors.reason ? "input-error" : ""}
-                                data={data} 
+                                data={reasonOptions} 
                                 setValue={(value) => setValue("reason", value, errors.reason ? {shouldValidate: true} : {shouldValidate: false})} 
                                 {...register("reason", { required: "Veuillez choisir votre motif de rendez-vous" })}
                             />
@@ -137,7 +144,7 @@ function AppointmentForm() {
                         <div className="error-message-div invisible">
                             {errors.date && <p>○ {errors.date.message}</p>}
                             {errors.time && <p>○ {errors.time.message}</p>}
-                            {errors.placeAppointment && <p>○ {errors.placeAppointment.message}</p>}
+                            {errors.agency && <p>○ {errors.agency.message}</p>}
                         </div>
                         <div id="div-slot-pickers">
                             <CustomProvider locale={frFR}>
@@ -152,7 +159,7 @@ function AppointmentForm() {
                                     />
                                 </div>
                                 <div>
-                                    <p>Heure</p>
+                                    <p>Heure*</p>
                                     <CustomTimePicker
                                         className={errors.time ? "input-error" : ""}
                                         disabledSlots={disabledSlots || []}
@@ -166,18 +173,18 @@ function AppointmentForm() {
                         <label htmlFor="place-input">
                             Lieu*
                             <CustomSelectPicker 
-                                className={errors.placeAppointment ? "input-error" : ""}
-                                data={data} 
+                                className={errors.agency ? "input-error" : ""}
+                                data={agencyOptions} 
                                 placeholder={"Choisir parmi l'une de nos agences"}
-                                setValue={(value) => setValue("placeAppointment", value, errors.placeAppointment ? {shouldValidate: true} : {shouldValidate: false})} 
-                                {...register("placeAppointment", { required: true })}
+                                setValue={(value) => setValue("agency", value, errors.agency ? {shouldValidate: true} : {shouldValidate: false})} 
+                                {...register("agency", { required: true })}
                             />
                         </label>
-                        <div className="invisible" id="addr-label">
+                        <div className={formData.agency ? "" : "invisible"} id="addr-label">
                             <p>Adresse de l'agence</p>
                             <section>
                                 <p>à afficher que si l'agence a été selectionnée</p>
-                                <CopyToClipboard text={"a"} onCopy={() => setIsCopied(true)}>
+                                <CopyToClipboard text={formData.agency /*TODO : Remplacer par l'adresse de l'agence*/} onCopy={() => setIsCopied(true)}>
                                     {isCopied ? (
                                         <p id="copy-addr-message">Copié !</p>
                                     ) : (

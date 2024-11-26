@@ -174,7 +174,7 @@
 }
 
 
-input.input-error, .input-error>div{
+input.input-error, .input-error>div:not(.PhoneInputCountry){
     outline: solid 1px #f77575 !important;
     border:solid 1px #FF0000 !important;
 }

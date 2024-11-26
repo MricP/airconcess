@@ -116,9 +116,12 @@
 }
 
 .rs-picker-toggle .rs-picker-toggle-placeholder {
+  display: flex !important;
+  align-items: center;
   font-size: 20px; /*TO CHANGE*/
-  color: #b5b5b5; /*TO CHANGE*/
+  height: 25px;
   color: var(--rs-text-secondary);
+  /* background-color: red; */
 }
 
 .rs-picker-toggle {
