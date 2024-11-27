@@ -12,11 +12,14 @@ import ResetPasswordRequest from './pages/auth/ResetPasswordRequest';
 import ResetPasswordPage from './pages/auth/ResetPasswordPage';
 import Template from './components/Template.jsx';
 import PageServices from './pages/PageServices.jsx';
+import PageTraining from './pages/PageTraining.jsx';
 import ContactPage from './pages/contact/ContactPage.jsx';
 import PageAppointment from './pages/appointment/PageAppointment.jsx';
 
+
 function App() {
   return (
+    
     <BrowserRouter>
       <Template>
         <ToastContainer />
@@ -33,11 +36,11 @@ function App() {
           <Route path='/verify-email' element={<VerifyEmail />} />
           <Route path='/services' element={<PageServices />} />
           <Route path='/contact-us' element={<ContactPage />} />
+          <Route path='/training' element={<PageTraining />} />
         </Routes>
         <ToastContainer />
       </Template>
     </BrowserRouter>
-
   );
 }
 
