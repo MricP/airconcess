@@ -1,0 +1,158 @@
+.left-container {
+    width: 100%;
+    height: auto;
+}
+
+.left-container-text {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.left-container-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.sign-in-img {
+    margin-bottom: 10px;
+    max-width: 20vw;
+    max-height: 520px;
+    height: auto;
+    width: 90%;
+    aspect-ratio: 381 / 520;
+}
+
+.left-container-description {
+    font-size: 14px;
+    color: #333333;
+    width: 62%;
+    margin: 0 auto;
+}
+
+.right-container {
+    padding: 20px;
+    width: 80%;
+}
+
+.logos-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.plane-airconcess-logo {
+    width: 100px;
+}
+
+.airconcess-logo {
+    width: 100%;
+    margin-top: -40px;
+    height: auto;
+}
+
+.sign-in-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.response-message {
+    margin-top: 10px;
+    font-size: 14px;
+    color: green;
+}
+
+.error-html {
+    margin-top: 10px;
+    font-size: 14px;
+    color: red;
+}
+
+.forgot-password-link {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    color: #393939;
+    margin-top: 10px;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+
+.sign-up-link-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+    width: 100%;
+    align-items: center;
+}
+
+.sign-up-link-text {
+    font-size: 14px;
+    color: #393939;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.sign-up-link {
+    font-size: 14px;
+    color: #393939;
+    text-align: right;
+    margin-left: 5px;
+}
+
+.sign-up-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 830px) {
+    .left-container {
+        display: none;
+    }
+
+    .right-container {
+        width: 100%;
+        margin-bottom: 5vh;
+    }
+
+    .plane-airconcess-logo {
+        display: none;
+    }
+
+    .airconcess-logo {
+        display: none;
+    }
+
+    .sign-up-link-container {
+        padding-top: 20px;
+    }
+}
