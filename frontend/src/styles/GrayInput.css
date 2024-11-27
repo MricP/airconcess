@@ -1,0 +1,18 @@
+.gray-input {
+    background-color: var(--input-color1);
+    color: var(--color-primary);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.gray-text-area {
+    background-color: var(--input-color1);
+    color: var(--color-primary);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    resize: none;
+}

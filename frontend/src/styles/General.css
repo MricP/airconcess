@@ -24,6 +24,7 @@
     --section-color: #B5B5B5;
     --success-color: #43A73A;
     --button-color: #333333;
+    --input-color1: #E2E2E2;
 }
 
 @media (prefers-color-scheme: dark) {
