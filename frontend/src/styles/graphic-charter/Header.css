@@ -1,0 +1,115 @@
+
+
+
+header {
+    position: fixed;
+    padding: 0.8vw 4vw;
+    width: 100%; /* S'assure que le header prend toute la largeur */
+    left: 0; /* Aligne le header sur le côté gauche */
+    right: 0; /* Aligne le header sur le côté droit */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+    z-index: 1;
+}
+
+.header-default-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-default-menu img {
+    width: 11vw;
+}
+
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 4vw;
+    font-size: 20px;
+    font-weight: 600;
+    
+}
+
+nav ul{
+    display: flex;
+    gap: 4vw;
+    list-style-type: none;
+}
+
+nav button {
+    background-color: #333333;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 1vh 1vw 1vh 1vw;
+    font-family: "Jost", sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+.white-black {
+    background-color: white;
+    color: black;
+    transition: all ease 0.5s;
+}
+
+.black-white {
+    background-color:#111111;
+    color: white;
+    transition: all ease 0.5s;
+    
+}
+
+.transparent-white {
+    color: white;
+    transition: all ease 0.5s;
+}
+
+.transparent-black {
+    color: black;
+    transition: all ease 0.5s;
+}
+
+@media (max-width: 992px) {
+    .header-menu-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header-mobile-menu img {
+        width: 20vw;
+    }
+
+    .header-icon {
+        display: flex;
+        gap: 2vw;
+    }
+
+    .header-mobile-menu ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header-mobile-menu button {
+        border: none;
+        background-color: transparent;
+    }
+
+    .black-white button {
+        color: white;
+    }
+    
+    .transparent-white button {
+        color: white;
+    }
+
+}

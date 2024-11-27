@@ -38,9 +38,22 @@
     --section-color: #B5B5B5;
     --success-color: #43A73A;
     --button-color: #333333;
+    --input-color1: #E2E2E2;
 }
 
 @media (prefers-color-scheme: dark) {
+}
+
+body { /*A VOIR*/
+    /* margin: 0;
+    font-family: "Jost", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; */
+}
+  
+code { /*A VOIR*/
+    /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace; */
 }
 
 h1 {
@@ -48,6 +61,7 @@ h1 {
 }
 
 body {
+    background-color: var(--bg-primary);
     color: var(--color-primary);
 }
 
@@ -80,6 +94,7 @@ p {
 .invisible {
     display: none !important;
 }
+  
 
 /** Pour les ordinateurs **/
 

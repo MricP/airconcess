@@ -1,21 +1,43 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import Landing from './pages/Landing';
-import PageProduct from './pages/PageProduct';
-import PageAppointment from './pages/PageAppointment';
+import LandingPage from './pages/LandingPage';
+import SignInPage from './pages/auth/SignInPage';
+import ProfilePage from './pages/auth/ProfilePage';
+import Error404 from './pages/Error404.jsx';
+import SignUpPage from './pages/auth/SignUpPage';
+import PageProduct from './pages/product/PageProduct.jsx';
+import VerifyEmail from './pages/auth/VerifyEmail';
+import ResetPasswordRequest from './pages/auth/ResetPasswordRequest';
+import ResetPasswordPage from './pages/auth/ResetPasswordPage';
+import Template from './components/Template.jsx';
+import PageServices from './pages/PageServices.jsx';
+import ContactPage from './pages/contact/ContactPage.jsx';
+import PageAppointment from './pages/appointment/PageAppointment.jsx';
 
 function App() {
   return (
     <BrowserRouter>
-      <ToastContainer/>
+      <Template>
+        <ToastContainer />
         <Routes>
-          <Route index='/' element={<Landing/>}/>
-          <Route path='*' element={<h1>Erreur</h1>}/>
-          <Route path='/product' element={<PageProduct/>} />
-          <Route path='/rdv' element={<PageAppointment/>} />
+          <Route path='*' element={<Error404 />} />
+          <Route path='/' element={<LandingPage />} index />
+          <Route path='/sign-in' element={<SignInPage />} />
+          <Route path='/sign-up' element={<SignUpPage />} />
+          <Route path='/my-profile' element={<ProfilePage />} />
+          <Route path='/product' element={<PageProduct />} />
+          <Route path='/appointment' element={<PageAppointment />} />
+          <Route path="/reset-password-request" element={<ResetPasswordRequest />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path='/verify-email' element={<VerifyEmail />} />
+          <Route path='/services' element={<PageServices />} />
+          <Route path='/contact-us' element={<ContactPage />} />
         </Routes>
-    </BrowserRouter>  
+        <ToastContainer />
+      </Template>
+    </BrowserRouter>
+
   );
 }
 

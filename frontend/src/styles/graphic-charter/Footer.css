@@ -1,0 +1,146 @@
+@font-face {
+    font-family: 'Lisu Bosa';
+    src: url(../../../public/assets/Lisu_Bosa/LisuBosa-Bold.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+footer {
+    padding: 3vw 4vw 4vw 4vw;
+    color: white;
+    background: linear-gradient(
+  45deg, 
+  #0c0c0c 0%, 
+  #111111 14%, 
+  #151515 28%, 
+  #1d1d1d 49%, 
+  #232323 70%, 
+  #282828 93%
+);
+}
+
+footer h2 {
+    font-family: 'Lisu Bosa', sans-serif;
+}
+
+.footer-high-footer {
+    display: flex;
+    align-items: center;
+    gap: 8vw;
+    border-bottom: 3px solid white;
+    padding-bottom: 2vw;
+    margin-bottom: 3vw;
+}
+
+.footer-high-footer p {
+    width: 30vw;
+}
+
+.footer-high-footer img {
+    width: 45vw;
+}
+
+.footer-reseau {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    color: white;
+}
+
+.footer-reseau-picture {
+    background-color: #333333;
+    border-radius: 100%;
+    width: 3.2vw;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-bottom-footer {
+    display: flex;
+    justify-content: center;
+}
+
+
+.footer-bottom-footer-child {
+    width: 30vw;
+    padding-left: 5vw;
+    
+}
+
+.footer-bottom-footer-child h3 {
+    padding-bottom: 2vh;
+}
+
+.footer-bottom-footer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    width: 20vw;
+}
+
+.footer-bottom-footer li {
+    font-size: 1.25rem;
+    list-style-type: none;
+}
+
+.footer-bottom-footer-child a {
+    background: linear-gradient(to top, white 0%, white 5%, transparent 5.01%) no-repeat right bottom / 0% 100%;
+    transition: background-size .5s ;
+}
+
+.footer-bottom-footer-child a:hover{
+    background-size: 100% 100%;
+    background-position: bottom left;
+}
+
+.separator {
+    border-left: 3px solid white;
+}
+
+@media (max-width: 992px) {
+
+    .footer-high-footer {
+        gap: 15vw;
+        margin-bottom: 0vh;
+    }
+
+    .footer-reseau {
+        flex-direction: row;
+        
+    }
+
+    .footer-reseau-picture {
+        padding: 1vw;
+    }
+
+    
+
+    .footer-bottom-footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-bottom-footer h2 {
+        font-size: 1.5em;
+    }
+
+    .footer-bottom-footer li {
+        font-size: 1.2em;
+    }
+
+    .footer-bottom-footer-child {
+        width: 90vw;
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+        padding-left: 4vw;
+    }
+
+    
+
+    .separator {
+        border-left: none;
+        border-top: 3px solid white;
+    }
+}
