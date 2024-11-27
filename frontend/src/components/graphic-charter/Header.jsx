@@ -37,10 +37,10 @@ export default function Header({ color }) {
                     <Link to="/"><img src={logo} alt="Logo" /></Link>
                     <nav>
                         <ul>
-                            <li><a href="">Nos aéronefs</a></li>
-                            <li><a href="">Nos services</a></li>
-                            <li><a href="">Contact</a></li>
-                            <li><a href="">A propos</a></li>
+                            <li><Link to= "">Nos aéronefs</Link></li>
+                            <li><Link to= "">Nos services</Link></li>
+                            <li><Link to= "">Contact</Link></li>
+                            <li><Link to= "">A propos</Link></li>
                         </ul>
                         <form action="">
                             <button>Connexion</button>
@@ -63,10 +63,10 @@ export default function Header({ color }) {
                     {isClicked &&
                         <nav>
                             <ul>
-                                <li><a href="">Nos aéronefs</a></li>
-                                <li><a href="">Nos services</a></li>
-                                <li><a href="">Contact</a></li>
-                                <li><a href="">A propos</a></li>
+                                <li><Link to= "">Nos aéronefs</Link></li>
+                                <li><Link to= "">Nos services</Link></li>
+                                <li><Link to= "">Contact</Link></li>
+                                <li><Link to= "">A propos</Link></li>
                             </ul>
                         </nav>}
                 </div>
