@@ -6,6 +6,7 @@ import { useMediaQuery } from 'react-responsive'
 
 
 export default function Footer() {
+
     const isMobile = useMediaQuery({ maxWidth: 992 });
     return (
         <footer>
