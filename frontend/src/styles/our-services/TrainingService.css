@@ -1,9 +1,11 @@
 .training-service {
+    padding-top: 10vh;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding-left: 5vw;
     padding-right: 5vw;
     height: 100vh;
-    align-items: center;
     background: linear-gradient(
     90deg, 
     #FFFFFF 0%,
@@ -11,6 +13,17 @@
     #C9C9C9 66%,
     #AEAEAE 100%
     );
+}
+
+.training-service-top {
+    display: flex;
+    align-items: center;
+}
+
+.training-service-bottom {
+    display: flex;
+    justify-content: center;
+    margin-top: 15vh;
 }
 
 .training-service-left{

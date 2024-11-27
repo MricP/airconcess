@@ -1,8 +1,21 @@
 .maintenance-service {
-    display: flex;
     padding-left: 5vw;
     padding-right: 5vw;
+    padding-top: 10vh;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.maintenance-service-top {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5vh;
+}
+
+.maintenance-service-bottom {
+    display: flex;
     align-items: center;
 }
 
