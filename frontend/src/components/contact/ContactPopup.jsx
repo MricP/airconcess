@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/contact/ContactPopup.css";
-import DarkButton from "../DarkButton";
+import DarkButton from "../general/DarkButton";
 
 function ContactPopup({ action, closePopup }) {
     const [message, setMessage] = useState("");

@@ -6,16 +6,16 @@ import SignInPage from './pages/auth/SignInPage';
 import ProfilePage from './pages/auth/ProfilePage';
 import Error404 from './pages/Error404.jsx';
 import SignUpPage from './pages/auth/SignUpPage';
-import TestPage from './pages/TestPage';
+import PageProduct from './pages/product/PageProduct.jsx';
 import VerifyEmail from './pages/auth/VerifyEmail';
 import ResetPasswordRequest from './pages/auth/ResetPasswordRequest';
 import ResetPasswordPage from './pages/auth/ResetPasswordPage';
-import Template from './components/Template';
+import Template from './components/Template.jsx';
 import PageServices from './pages/PageServices.jsx';
-import ContactPage from './pages/ContactPage.jsx';
+import ContactPage from './pages/contact/ContactPage.jsx';
+import PageAppointment from './pages/appointment/PageAppointment.jsx';
 
 function App() {
-
   return (
     <BrowserRouter>
       <Template>
@@ -26,7 +26,8 @@ function App() {
           <Route path='/sign-in' element={<SignInPage />} />
           <Route path='/sign-up' element={<SignUpPage />} />
           <Route path='/my-profile' element={<ProfilePage />} />
-          <Route path='/test' element={<TestPage />} />
+          <Route path='/product' element={<PageProduct />} />
+          <Route path='/appointment' element={<PageAppointment />} />
           <Route path="/reset-password-request" element={<ResetPasswordRequest />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path='/verify-email' element={<VerifyEmail />} />

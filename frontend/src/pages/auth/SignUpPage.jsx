@@ -7,8 +7,8 @@ import { signUp } from '../../services/auth';
 
 // components
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
-import DarkButton from '../../components/DarkButton';
-import GrayInput from '../../components/GrayInput';
+import DarkButton from '../../components/general/DarkButton';
+import GrayInput from '../../components/general/GrayInput';
 
 const SignUpPage = () => {
   const signUpImg = '/assets/auth/sign-up-img.jpg';

@@ -7,8 +7,8 @@ import { signIn } from '../../services/auth';
 
 // components
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
-import DarkButton from '../../components/DarkButton';
-import GrayInput from '../../components/GrayInput';
+import DarkButton from '../../components/general/DarkButton';
+import GrayInput from '../../components/general/GrayInput';
 
 const SignInPage = () => {
   const signInImg = '/assets/auth/sign-in-img.jpg';

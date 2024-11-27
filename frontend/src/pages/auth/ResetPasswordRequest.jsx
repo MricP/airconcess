@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { resetPasswordRequest } from '../../services/auth';
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
-import DarkButton from '../../components/DarkButton';
-import GrayInput from '../../components/GrayInput';
+import DarkButton from '../../components/general/DarkButton';
+import GrayInput from '../../components/general/GrayInput';
 import '../../styles/auth/ResetPasswordRequest.css';
 
 export default function ResetPasswordRequest() {

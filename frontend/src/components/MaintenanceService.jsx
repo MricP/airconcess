@@ -1,5 +1,5 @@
 import "../styles/MaintenanceService.css";
-import DarkButton from "./DarkButton";
+import DarkButton from "./general/DarkButton";
 
 export default function MaintenanceService(){
     return(

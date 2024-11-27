@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { verifyEmail } from '../../services/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
-import DarkButton from '../../components/DarkButton';
+import DarkButton from '../../components/general/DarkButton';
 import '../../styles/auth/VerifyEmail.css';
 
 export default function VerifyEmail() {
