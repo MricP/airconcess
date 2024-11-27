@@ -59,6 +59,7 @@ nav button {
     background-color: white;
     color: black;
     transition: all ease 0.5s;
+    box-shadow: 1px 1px 5px grey;
 }
 
 .black-white {
