@@ -1,5 +1,5 @@
 import '../../styles/training/SecondTrainingComponent.css'
-import DarkButton from '../DarkButton'
+import DarkButton from '../general/DarkButton'
 
 export default function SecondTrainingComponent(){
     return (
