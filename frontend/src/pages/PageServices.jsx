@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 export default function PageServices() {
     
     return (
-        <Template>
+        <main>
             <div className='page-services'>
                 <div className="page-services-component">
                     <TrainingService />
@@ -18,6 +18,6 @@ export default function PageServices() {
 
 
             </div>
-        </Template>
+        </main>
     )
 }

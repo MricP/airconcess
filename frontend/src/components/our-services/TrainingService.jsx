@@ -1,6 +1,6 @@
 import "../../styles/our-services/TrainingService.css";
-import DarkButton from "../DarkButton";
-import ScrollDownButton from "../ScrollDownButton";
+import DarkButton from "../general/DarkButton";
+import ScrollDownButton from "../general/ScrollDownButton";
 
 
 

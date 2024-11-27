@@ -1,6 +1,6 @@
 import "../../styles/our-services/MaintenanceService.css";
-import DarkButton from "../DarkButton";
-import ScrollUpButton from "../ScollUpButton";
+import DarkButton from "../general/DarkButton";
+import ScrollUpButton from "../general/ScollUpButton";
 
 export default function MaintenanceService(){
     return(
