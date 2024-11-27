@@ -32,6 +32,9 @@ function CatalogPage() {
   const autonomyRef = useRef(null);
   const capacityRef = useRef(null);
   const typeRef = useRef(null);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
   
   let [filteredAircrafts, setFilteredAircrafts] = useState([]);
 
@@ -39,7 +42,7 @@ function CatalogPage() {
         const fetchAircrafts = async () => {
           try {
             setLoading(true);
-            const response = await axios.get(`http://localhost/air-concess/backend/public/api.php?page=${page}`);
+            const response = await axios.get(`http://localhost/air-concess/backend/public/api.php`);
             setAircrafts(response.data.data);
             setFilteredAircrafts(response.data.data);
             setNbAircraft(response.data.nbAircraft); 
@@ -71,19 +74,22 @@ function CatalogPage() {
     if (loading) return <p>Chargement...</p>;
     if (error) return <p>{error}</p>;
 
-
+    // Gestion des pages
     const handleNextPage = () => {
         if (catalogRef.current) {
           const { offsetTop } = catalogRef.current;
           window.scrollTo({ top: offsetTop, behavior: "smooth" });
         } 
         if(page < (Math.floor(nbAircraft/5)+1)){
+          setCurrentPage((prevPage) => prevPage + 1);
           setPage((prevPage) => prevPage + 1);
+
         }
        
     };
 
     const handlePreviousPage = () => {
+        setCurrentPage((prevPage) => Math.max(1, prevPage - 1));
         setPage((prevPage) => Math.max(1, prevPage - 1));
         if (catalogRef.current) {
           const { offsetTop } = catalogRef.current;
@@ -95,9 +101,8 @@ function CatalogPage() {
   // Gérer les filtres :
 
   const reapplyFilters = () => {
-    let filtered = [...aircrafts]; // Copie initiale de tous les avions
+    let filtered = [...aircrafts]; 
   
-    // Applique chaque filtre actif
     if (stateRef.current && stateRef.current.value !== "Aucun") {
       filtered = filtered.filter((aircraft) =>
         stateRef.current.value === "Disponible"
@@ -173,8 +178,8 @@ function CatalogPage() {
         (aircraft) => aircraft.aircraftType === typeRef.current.value
       );
     }
-  
-    setFilteredAircrafts(filtered); // Mise à jour de la liste filtrée
+    setCurrentPage(1);
+    setFilteredAircrafts(filtered); 
   };
   
   const handleDeleteStateFilter = () => {
@@ -271,11 +276,20 @@ function CatalogPage() {
 
   // Partie recherche
 
-  
   const handleSearch = (e) => {
     setSearchPlane(e.target.value.toString()); 
     setPage(1);
+    setCurrentPage(1);
+    reapplyFilters();
   };
+
+  // Pagination
+  const paginatedAircrafts = filteredAircrafts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const totalPages = Math.ceil(filteredAircrafts.length / itemsPerPage);
   
     return (
     <main className='main-container'> 
@@ -370,7 +384,7 @@ function CatalogPage() {
             <div className="separator"></div>
             <div className='planeContainer'>
             {Array.isArray(aircrafts) && aircrafts.length > 0 ? (
-              filteredAircrafts
+              paginatedAircrafts
                 .map((plane) => (
                 <ProductBox
                     key={plane.idAircraft}
@@ -391,7 +405,17 @@ function CatalogPage() {
                 <p>Aucun avion trouvé.</p>
             )}
                             
-              <div className='chooseCatalogPage'><button><IoIosArrowBack color='#B5B5B5' size={35} onClick={handlePreviousPage}/></button><p>{page}/{Math.floor(nbAircraft/5)+1}</p><button><IoIosArrowForward color='#B5B5B5' size={35} onClick={handleNextPage}/></button></div>
+              <div className='chooseCatalogPage'>
+                <button onClick={handlePreviousPage} disabled={page === 1}>
+                  <IoIosArrowBack color='#B5B5B5' size={35} />
+                </button>
+                <p>
+                  {page} / {totalPages === 0 ? 1 : totalPages}
+                </p>
+                <button onClick={handleNextPage} disabled={page === Math.ceil(nbAircraft / 5)}>
+                  <IoIosArrowForward color='#B5B5B5' size={35} />
+                </button>
+              </div>
             </div>  
         </div>
     </main>
