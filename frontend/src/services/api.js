@@ -21,3 +21,4 @@ export const submitContact = (formData) =>{
     throw new Error('Erreur lors de l\'envoi du formulaire');
   }
 }
+

@@ -4,6 +4,7 @@ require_once __DIR__ . '../../middlewares/CorsMiddleware.php';
 require_once __DIR__ . '../../middlewares/ValidationMiddleware.php';
 require_once __DIR__ . '../../controllers/AuthController.php';
 require_once __DIR__ . '../../controllers/ContactController.php';
+require_once __DIR__ . '../../controllers/AppointmentController.php';
 
 // Middleware CORS globalement
 CorsMiddleware::handle();
@@ -73,4 +74,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
     ContactController::contact($data);
 } 
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-submit') !== false) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    echo json_encode(["message" => $data['formData']['phone']]);
+    var_dump($data); // Vérifie que les données sont correctement reçues
+    AppointmentController::createAppointment($data);
+} 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadTimestamps') !== false) {
+    // echo json_encode(["message" => "Load timestamps"]);
+    AppointmentController::getTimestamps();
+} 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAircrafts') !== false) {
+    echo json_encode(["message" => "Load aircrafts"]);
+    // AppointmentController::getAircrafts();
+} 
 ?>

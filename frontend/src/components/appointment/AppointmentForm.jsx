@@ -9,27 +9,76 @@ import CustomTimePicker from '../general/CustomTimePicker'
 import CustomDatePicker from '../general/CustomDatePicker'
 import CustomSelectPicker from '../general/CustomSelectPicker';
 
+// services functions
+import { submitAppointment, loadTimestamps,loadAircrafts } from '../../services/appointment';
+
 import "../../styles/appointment/AppointmentForm.css"
 
 function AppointmentForm() {
-    /* TEMP DATA */
+    /* ####### LOAD DATA ####### */
 
-    const disabledSlots = [
-        {date:'2024-11-29',hour:16,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:7,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:8,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:9,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:10,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:11,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:12,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:13,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:14,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:15,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:16,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:17,minutes:[15,45,30,0]},
-        {date:'2024-12-12',hour:18,minutes:[15,45,30,0]}
-    ]
+    /* Format disabledTimestamps = [{ date:YYYY-MM-DD , hour:hh , minutes:[m,m,m,m] }] */
+    const [disabledTimestamps, updateDisabledTimestamps] = useState([]);
 
+    const loadDisabledTimestamps = async () => {
+        try {
+            const response = await loadTimestamps();
+            
+            const newDisabledTimestamps = [];
+
+            // Convertir le tableau de timestamps retourné, en une liste de dico au formt souhaité
+            response.data.forEach((timestamp) => {
+                const [date, time] = timestamp.split(" ");
+                const [hour, minutes] = time.split(':');
+
+                // Chercher si cette date et heure existe a déjà été ajoutée
+                const existingSlot = newDisabledTimestamps.find(
+                    (slot) => slot.date === date && slot.hour === parseInt(hour, 10)
+                );
+
+                if (existingSlot) {
+                    // Si oui, on ajoute le créneau au tableau des minutes
+                    const minute = parseInt(minutes, 10);
+                    if (!existingSlot.minutes.includes(minute)) {
+                        existingSlot.minutes.push(minute);
+                    }
+                } else {
+                    // Sinon, on crée un nouveau dico contenant la date, l'heure et le créneau (dans son tableau)
+                    newDisabledTimestamps.push({
+                        date,
+                        hour: parseInt(hour, 10),
+                        minutes: [parseInt(minutes, 10)],
+                    });
+                }
+            });
+
+            // Mettre à jour l'état avec les nouveaux crénaux à désactiver
+            updateDisabledTimestamps(newDisabledTimestamps);
+        } catch (error) {
+            console.error('Error response:', error.response?.data || error.message || 'Unknown error');
+        }
+    };
+
+    const loadAvailableAircrafts = async () => {
+        try {
+            const response = await loadAircrafts();
+            
+            // console.log(response.data.message)
+        } catch (error) {
+            console.log('Error response:', error.response?.data?.message || 'Unknown error');
+        }
+    };
+
+    // Le chargement de toutes les data nécessaires (au 1er chargement de la page)
+    useEffect(() => {
+        // Les crénaux à désactiver (déjà reservés)
+        loadDisabledTimestamps()
+
+        // La liste des Avions dans la BD (pour la recherche du modèle et du serialNumber)
+        loadAvailableAircrafts()
+    },[])
+
+    // Ce sont les 2 seuls options à couvrir (les seuls présentes en BD)
     const reasonOptions = [
         { label: "J'envisage d'acheter un appareil", value: "purchase" },
         { label: "J'envisage de louer un appareil", value: "rent" }
@@ -89,15 +138,34 @@ function AppointmentForm() {
         }
     },[isCopied])
 
-    const onSubmit = (data) => {
-        // console.log("Données soumises :", data);
+    const onSubmit = async (formData) => {
+        try {
+            const response = await submitAppointment({formData});
+            console.log(response.data.message)
+        } catch (error) {
+            console.log('Error response:', error.response?.data?.message || 'Unknown error');
+        }
     };
+
+    const handleKeyDown = (event) => {
+        if(event.key == 'Enter') {
+            if(event.target.tagName === 'BUTTON' && event.target.classList.contains("submit") || 
+                event.target.tagName === 'SELECT') {
+                // Si on clique sur entrer en étant sur le bouton submit
+                // Ou qu'on est sur un SELECT
+            } else {
+                // Dans les autres cas, on retire juste le focus
+                event.preventDefault()
+                event.target.blur()
+            }
+        }
+    }
     
     return (
         <div className="appointmentForm-container">
             <div className="form-container">
                 <h3>FORMULAIRE DE PRISE DE RENDEZ-VOUS</h3>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form method='POST' onKeyDown={handleKeyDown} onSubmit={handleSubmit(onSubmit)}>
                     <fieldset className="reason-fieldset">
                         <legend>Cause du rendez-vous</legend>
                         <div className="error-message-div invisible">
@@ -153,7 +221,7 @@ function AppointmentForm() {
                                     <p>Date*</p>
                                     <CustomDatePicker
                                         className={errors.date ? "input-error" : ""}
-                                        disabledSlots={disabledSlots || []}
+                                        disabledSlots={disabledTimestamps || []}
                                         selectedTime={handleSelectedSlot()}
                                         setDate={(value) => setValue("date", value, errors.date ? {shouldValidate: true} : {shouldValidate: false})} //shouldValidate actualise les erreurs (true) ou non (false) si la valeur est modifiée
                                         {...register("date", { required: "La date est obligatoire." })}
@@ -163,7 +231,7 @@ function AppointmentForm() {
                                     <p>Heure*</p>
                                     <CustomTimePicker
                                         className={errors.time ? "input-error" : ""}
-                                        disabledSlots={disabledSlots || []}
+                                        disabledSlots={disabledTimestamps || []}
                                         selectedDate={handleSelectedSlot()}
                                         setTime={(value) => setValue("time", value,errors.time ? {shouldValidate: true} : {shouldValidate: false})}
                                         {...register("time", { required: "L'heure est obligatoire." })} 
