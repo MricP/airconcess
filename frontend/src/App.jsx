@@ -15,6 +15,7 @@ import PageServices from './pages/PageServices.jsx';
 import PageTraining from './pages/PageTraining.jsx';
 import ContactPage from './pages/contact/ContactPage.jsx';
 import PageAppointment from './pages/appointment/PageAppointment.jsx';
+import PageMaintenance from './pages/maintenance/PageMaintenance.jsx';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path='/services' element={<PageServices />} />
           <Route path='/contact-us' element={<ContactPage />} />
           <Route path='/training' element={<PageTraining />} />
+          <Route path='/maintenance' element={<PageMaintenance />} />
         </Routes>
         <ToastContainer />
       </Template>

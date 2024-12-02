@@ -17,7 +17,7 @@ export default function MaintenanceService(){
                     <p>Chez Air'Concess, nous proposons des services de maintenance complets pour assurer la sécurité et la performance de votre aéronef. Nos techniciens certifiés, 
                         experts en entretien d'avions, réalisent inspections, réparations et mises à jour selon les normes les plus strictes. Que ce soit pour un contrôle régulier ou une 
                         intervention urgente, nous vous offrons un service rapide, fiable et de haute qualité, garantissant que votre aéronef reste en parfait état de vol.</p>
-                    <DarkButton text={"Prendre un rendez-vous"} className={'maintenance-service-button'}/>
+                    <DarkButton text={"Prendre un rendez-vous"} className={'maintenance-service-button'} destination={"/maintenance"}/>
                     
                 </section>
             </div>
