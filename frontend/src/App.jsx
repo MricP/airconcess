@@ -16,6 +16,7 @@ import PageTraining from './pages/PageTraining.jsx';
 import ContactPage from './pages/contact/ContactPage.jsx';
 import PageAppointment from './pages/appointment/PageAppointment.jsx';
 import PageMaintenance from './pages/maintenance/PageMaintenance.jsx';
+import PageAdmin from './pages/admin/PageAdmin.jsx';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path='/contact-us' element={<ContactPage />} />
           <Route path='/training' element={<PageTraining />} />
           <Route path='/maintenance' element={<PageMaintenance />} />
+          <Route path='/admin' element={<PageAdmin />} />
         </Routes>
         <ToastContainer />
       </Template>
