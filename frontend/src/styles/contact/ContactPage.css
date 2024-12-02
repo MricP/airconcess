@@ -26,13 +26,13 @@
 
 .contact-title-subtitle h2 {
     margin-bottom: 10px;
-    color: white;
+    color: var(--bg-primary);
 }
 
 .contact-title-subtitle p {
-    font-size: 1rem;
+    font-size: var(--text-size);
     margin-bottom: 30px;
-    color: white;
+    color: var(--bg-primary);
 }
 
 .contact-form {
