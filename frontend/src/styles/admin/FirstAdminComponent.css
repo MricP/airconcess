@@ -20,4 +20,17 @@
 
 .title-menu-child {
     margin-left: 1.9vw;
+    padding-bottom: 2vh;
+}
+
+.title-menu-child .element {
+    cursor: pointer;
+}
+
+.title-menu-child .element:hover {
+    text-decoration: underline;
+}
+
+.title-menu-child .underline {
+    text-decoration: underline;
 }
