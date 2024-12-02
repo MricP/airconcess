@@ -1,0 +1,67 @@
+:root {
+    --form-input-gap:10px;
+    --form-fieldset-gap:30px;
+}
+
+.appointmentShowcase {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: #F5F5F5;
+    /* background-color: grey; */
+}
+
+.appointmentShowcase .text-div {
+    width: 45%;
+    height: 70%;
+    margin-left: 10%;
+    text-align: justify;
+    /* background-color: red; */
+}
+
+.appointmentShowcase .scroll-down-button {
+    position: absolute;
+    left: 30%;
+    bottom: 10%;
+    transform: translateX(-30%); /* Centre horizontalement */
+    z-index: 100;
+}
+
+.appointmentShowcase .scroll-down-button:hover{
+    transform: translate(-30%, 10px);
+}
+
+
+/*Images du showcase*/
+
+.appointmentShowcase .images {
+    /* background-color: red; */
+    aspect-ratio: 1/1.5;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    gap: 10px;
+    /* background-color: rgb(255, 186, 186); */
+    /* height: 658px; */
+    width: 29%;
+}
+
+.appointmentShowcase .images img:first-of-type , .appointmentShowcase .images img:last-of-type{
+    width: 48%;
+    aspect-ratio: 1/2.45;
+    /* height: 515px; */
+    border-radius: 5px;
+}
+
+.appointmentShowcase .images img:first-of-type {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.appointmentShowcase .images img:last-of-type{
+    position: absolute;
+    top: 0;
+    right: 0;
+}

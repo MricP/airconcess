@@ -1,0 +1,17 @@
+.productMap-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+    height: 70vh;
+    width: 100%;
+}
+
+.productMap-container .map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+    background-color: orange;
+}

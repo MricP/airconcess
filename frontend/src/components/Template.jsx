@@ -56,5 +56,3 @@ function Template({children}) {
 }
 
 export default Template;
-
-

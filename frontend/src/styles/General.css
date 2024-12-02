@@ -2,8 +2,22 @@
 
 @font-face {
     font-family: 'Jost';
-    src: url(../../public/assets/Jost/Jost-VariableFont_wght.ttf) format('truetype');
-    font-weight: normal;
+    src: url(../../public/assets/Jost/static/Jost-Regular.ttf) format('truetype');
+    font-weight: normal; /* Regular */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Jost';
+    src: url(../../public/assets/Jost/static/Jost-Medium.ttf) format('truetype');
+    font-weight: 500; /* Medium */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Jost';
+    src: url(../../public/assets/Jost/static/Jost-Bold.ttf) format('truetype');
+    font-weight: bold; /* Bold */
     font-style: normal;
 }
 
@@ -24,9 +38,26 @@
     --section-color: #B5B5B5;
     --success-color: #43A73A;
     --button-color: #333333;
+    --input-color1: #E2E2E2;
 }
 
 @media (prefers-color-scheme: dark) {
+}
+
+body { /*A VOIR*/
+    /* margin: 0;
+    font-family: "Jost", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; */
+}
+  
+code { /*A VOIR*/
+    /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace; */
+}
+
+h1 {
+    font-size: 90px;
 }
 
 body {
@@ -35,7 +66,8 @@ body {
 }
 
 h2 {
-    font-size: var(--title-size);
+    font-size: var(--title-size); 
+    /*clamp(30px,5vw,var(--title-size)); pour le responsive*/
 }
 
 h3 {
@@ -46,20 +78,22 @@ p {
     font-size: var(--text-size);
 }
 
-button
+.error-message-div {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px;
+    color: #FF0000;
+    border: dashed #FFB2B2 1px ;
+    background-color: rgba(255, 178, 178, 0.28);
+}
 
+.error-message-div>* {
+    font-size: 16px;
+}
 
-body {
-    margin: 0;
-    font-family: "Jost", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
+.invisible {
+    display: none !important;
+}
   
 
 /** Pour les ordinateurs **/

@@ -3,6 +3,7 @@ import { FaLinkedin } from "react-icons/fa6";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { useMediaQuery } from 'react-responsive'
+import { Link } from "react-router-dom/dist";
 
 
 export default function Footer() {
@@ -15,18 +16,14 @@ export default function Footer() {
                 <img src='/assets/logo-white.png' alt="logo" />
                 {!isMobile ?
                     <div className="footer-reseau">
-                        <div className="footer-reseau-picture"><a href=""><FaLinkedin className="footer-reseau-picture-child" size={30} /></a></div>
-                        <div className="footer-reseau-picture"><a href=""><FaSquareXTwitter className="footer-reseau-picture-child" size={30} /></a></div>
-                        <div className="footer-reseau-picture"><a href=""><FaInstagram className="footer-reseau-picture-child" size={30} /></a></div>
-
+                        <div className="footer-reseau-picture"><Link to= ""><FaLinkedin className="footer-reseau-picture-child" size={30} /></Link></div>
+                        <div className="footer-reseau-picture"><Link to= ""><FaSquareXTwitter className="footer-reseau-picture-child" size={30} /></Link></div>
+                        <div className="footer-reseau-picture"><Link to= ""><FaInstagram className="footer-reseau-picture-child" size={30} /></Link></div>
                     </div> :
                     <div className="footer-reseau">
-                        <div className="footer-reseau-picture"><a href=""><FaLinkedin size={40} /></a></div>
-                        <div className="footer-reseau-picture"><a href=""><FaSquareXTwitter className="footer-reseau-picture" size={40} /></a></div>
-                        <div className="footer-reseau-picture"><a href=""><FaInstagram className="footer-reseau-picture" size={40} /></a></div>
-
-
-
+                        <div className="footer-reseau-picture"><Link to= ""><FaLinkedin className="footer-reseau-picture-child" size={40} /></Link></div>
+                        <div className="footer-reseau-picture"><Link to= ""><FaSquareXTwitter className="footer-reseau-picture-child" size={40} /></Link></div>
+                        <div className="footer-reseau-picture"><Link to= ""><FaInstagram className="footer-reseau-picture-child" size={40} /></Link></div>
                     </div>}
 
             </div>
@@ -34,18 +31,18 @@ export default function Footer() {
                 <div className="footer-bottom-footer-child">
                     <h3>Liens rapides</h3>
                     <ul>
-                        <li><a href="">Accueil</a></li>
-                        <li><a href="">Catalogue d'aéronefs</a></li>
-                        <li><a href="">Prendre rendez-vous</a></li>
-                        <li><a href="">Services et maintenance</a></li>
+                        <li><Link to= "">Accueil</Link></li>
+                        <li><Link to= "">Catalogue d'aéronefs</Link></li>
+                        <li><Link to= "">Prendre rendez-vous</Link></li>
+                        <li><Link to= "">Services et maintenance</Link></li>
                     </ul>
                 </div>
                 <div className="footer-bottom-footer-child separator">
                     <h3>Informations Légales</h3>
                     <ul>
-                        <li><a href="">Mentions légales</a></li>
-                        <li><a href="">Politique de confidentialité</a></li>
-                        <li><a href="">Conditions générales de vente (CGV)</a></li>
+                        <li><Link to= "">Mentions légales</Link></li>
+                        <li><Link to= "">Politique de confidentialité</Link></li>
+                        <li><Link to= "">Conditions générales de vente (CGV)</Link></li>
                     </ul>
                 </div>
                 <div className="footer-bottom-footer-child separator">
