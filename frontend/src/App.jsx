@@ -1,21 +1,50 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import LandingPage from './pages/LandingPage';
+import SignInPage from './pages/auth/SignInPage';
+import ProfilePage from './pages/auth/ProfilePage';
+import Error404 from './pages/Error404.jsx';
+import SignUpPage from './pages/auth/SignUpPage';
+import PageProduct from './pages/product/PageProduct.jsx';
+import VerifyEmail from './pages/auth/VerifyEmail';
+import ResetPasswordRequest from './pages/auth/ResetPasswordRequest';
+import ResetPasswordPage from './pages/auth/ResetPasswordPage';
+import Template from './components/Template.jsx';
+import PageServices from './pages/PageServices.jsx';
+import PageTraining from './pages/PageTraining.jsx';
+import ContactPage from './pages/contact/ContactPage.jsx';
+import PageAppointment from './pages/appointment/PageAppointment.jsx';
+import PageMaintenance from './pages/maintenance/PageMaintenance.jsx';
 import CatalogPage from './pages/CatalogPage.jsx';
-import AircraftPage from './pages/admin/AircraftPage.jsx';
+
 
 function App() {
-  
   return (
-    <BrowserRouter>
-          <ToastContainer />
-            <Routes>
-              <Route path='/catalog' element={<CatalogPage/>} />
-              <Route path='/admin/aircraft' element={<AircraftPage/>} />
-            </Routes>
-            <ToastContainer />
-    </BrowserRouter>
     
+    <BrowserRouter>
+      <Template>
+        <ToastContainer />
+        <Routes>
+          <Route path='*' element={<Error404 />} />
+          <Route path='/' element={<LandingPage />} index />
+          <Route path='/sign-in' element={<SignInPage />} />
+          <Route path='/sign-up' element={<SignUpPage />} />
+          <Route path='/catalog' element={<CatalogPage/>} />
+          <Route path='/my-profile' element={<ProfilePage />} />
+          <Route path='/product' element={<PageProduct />} />
+          <Route path='/appointment' element={<PageAppointment />} />
+          <Route path="/reset-password-request" element={<ResetPasswordRequest />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path='/verify-email' element={<VerifyEmail />} />
+          <Route path='/services' element={<PageServices />} />
+          <Route path='/contact-us' element={<ContactPage />} />
+          <Route path='/training' element={<PageTraining />} />
+          <Route path='/maintenance' element={<PageMaintenance />} />
+        </Routes>
+        <ToastContainer />
+      </Template>
+    </BrowserRouter>
   );
 }
 

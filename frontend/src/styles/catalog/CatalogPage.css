@@ -1,0 +1,263 @@
+.catalog-page{
+    margin-bottom: 50px;
+}
+
+.catalog-title{
+    font-size: 5.625rem;
+    line-height: 90px;
+    margin: 0;
+}
+
+.catalog-title-container{
+    width: 30%;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+.catalog-header{
+    background: no-repeat url('../../../public/assets/catalog/mainCatalogImage.jpg') center center ;
+    background-size: cover;
+    top: 0;
+    margin: 0;
+    height: 100vh;
+    padding-top: 10vh;
+    margin-bottom: 3%;
+}
+
+.catalog-subtitle{
+    font-size: var(--text-size);
+}
+
+.filterBar-container{
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    height: 45px;
+    margin-top: 12%;
+}
+
+.filterBar-container > input{
+    width: 40%;
+    border: none;
+    outline: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-left: 20px;
+    font-size: 1em;
+    height: 100%;
+    color: var(--button-color);
+    background-color: var(--bg-primary);
+}
+
+
+.filterIcon{
+    padding-top: 5px;
+}
+.filterBar-container > button{
+    width: 100px;
+    border: none;
+    background-color: var(--bg-primary);
+    border-right: solid 2px var(--section-color);
+}
+.filterBar-container > button:first-child{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.filterBar-container > button:hover{
+    background-color: var(--line-color);
+}
+
+.white{
+    color: white;
+}
+
+/*Filter list*/
+.catalogContent-container{
+    display: flex;
+    gap: 2%;
+    justify-content: center;
+}
+
+.filterDescription{
+    position: sticky;
+    top: 15%;
+    bottom: 30%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--box-color);
+    width: 30%;
+    border-radius: 5px;
+    height: max-content;
+    align-items: center;
+    margin-left: 50px;
+}
+
+
+.filterDescription-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding-top: 3%;
+}
+
+.filterDescription-title > h3{
+    font-size: 1.5em;
+}
+
+.editFilterList{
+    width: 80%;
+    font-size: 1.25em;
+    line-height: 30px;
+    list-style: none;
+}
+
+
+.editFilter-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+}
+
+.editFilter-container > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.editFilter-container > div > select{
+    border: none;
+    outline: none;
+    display: none;
+    background-color: var(--box-color);
+    text-align: right;
+}
+.editFilterButton{
+    border: none;
+    background-color: transparent;
+}
+
+.planeContainer{
+    width: 60%;
+    height: max-content;
+}
+
+.catalog-separator{
+    width: 1px;
+    height: auto; 
+    align-self: stretch;
+    background-color: var(--line-color);
+}
+
+
+/*Change number of pages*/
+.chooseCatalogPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+
+.chooseCatalogPage > p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    width: 30%;
+    height: 40px;
+    text-align: center;
+    background-color: var(--box-color);
+    border-radius: 2px;
+    color: var(--section-color);
+}
+
+.chooseCatalogPage > button{
+    border: none;
+    border-radius: 5px;
+    background-color: var(--box-color);
+}
+
+@media (max-width: 1250px){
+
+    .catalog-title{
+        font-size:4em;
+        line-height: 65px;
+    }
+
+    .catalog-title-container{
+        width: 50%;
+    }
+
+    .catalog-subtitle{
+        font-size: 1em;
+        width: initial;
+    }
+
+    .filterBar-container{
+        width: 100%;
+        padding-top: 20%;
+        margin-bottom: 70px;
+    }
+
+    .filterBar-container > button{
+        width: 65px;
+        background-color: var(--bg-primary);
+    }
+
+    .filterBar-container > input{
+        font-size: 0.7em;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        height: inherit;
+    }
+
+    .filterDescription{
+        width: 30%;
+    }
+
+    .catalog-separator{
+        display: none;
+    }
+}
+
+@media (max-width: 750px){
+
+    .catalog-title{
+        font-size:4em;
+        line-height: 65px;
+    }
+
+    .catalog-title-container{
+        width: 70%;
+    }
+
+    .catalog-subtitle{
+        font-size: 1em;
+        width: initial;
+    }
+
+    .filterBar-container{
+        margin-bottom: 70px;
+    }
+
+    .filterBar-container > button{
+        width: 65px;
+        background-color: var(--bg-primary);
+    }
+
+    .filterBar-container > input{
+        font-size: 0.7em;
+        height: inherit;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    
+
+}

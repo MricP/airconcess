@@ -3,6 +3,7 @@ require_once __DIR__ . '../../middlewares/CorsMiddleware.php';
 // require_once __DIR__ . '../../middlewares/AuthMiddleware.php';
 require_once __DIR__ . '../../middlewares/ValidationMiddleware.php';
 require_once __DIR__ . '../../controllers/AuthController.php';
+require_once __DIR__ . '../../controllers/ContactController.php';
 require_once __DIR__ . '../../models/Aircraft.php';
 
 // Middleware CORS globalement
@@ -65,6 +66,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/au
     }
     AuthController::getUser($payload);
 }
+
+// Route pour recevoir le formulaire de contact (POST)  
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/contact-submit') !== false) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    ValidationMiddleware::validateContact($data);
+    ContactController::contact($data);
+} 
 
 // Route pour récupérer les données des aéronefs (GET)
 if($_SERVER['REQUEST_METHOD'] === 'GET'){

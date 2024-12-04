@@ -1,0 +1,241 @@
+.first-section-landing {
+    position: relative;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    height: 170vh;
+    background-image: url('../../../public/assets/landing/bg-landing-plane.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--bg-primary);
+    padding: 20px;
+}
+
+.scroll-first-section {
+    z-index: 50;
+    right: 5vh;
+    top: 20vh;
+    position: absolute;
+    color: var(--bg-primary);
+}
+
+.first-section-landing-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding: 20px;
+    width: 100%;
+}
+
+.arrow-down {
+    font-size: 2rem;
+    color: var(--bg-primary);
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 7%;
+}
+
+.content {
+    max-width: 600px;
+}
+
+.small-text {
+    font-size: var(--text-size);
+    font-weight: 300;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.title span {
+    font-size: 6rem;
+    line-height: 1.2;
+    font-weight: 700;
+    margin: 20px 0;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--bg-primary);
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-top: 20px;
+    font-weight: 300;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 15%;
+    width: 80%;
+    margin-left: 7%;
+}
+
+.footer-links a {
+    font-size: 1rem;
+    color: var(--bg-primary);
+    transition: border-bottom 0.3s;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .first-section-landing {
+        height: 150vh;
+    }
+
+    .first-section-landing-col {
+        padding: 20px;
+    }
+
+    .title span {
+        font-size: 4rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .footer-links {
+        margin-top: 10%;
+    }
+}
+
+@media (max-width: 480px) {
+    .first-section-landing {
+        height: 150vh;
+        padding: 10px;
+    }
+
+    .scroll-first-section {
+        right: 2vh;
+        top: 15vh;
+    }
+
+    .first-section-landing-col {
+        padding: 10px;
+    }
+
+    .arrow-down {
+        font-size: 1.5rem;
+        margin-top: 15px;
+        margin-left: 5px;
+    }
+
+    .overlay {
+        padding-left: 3%;
+    }
+
+    .content {
+        max-width: 100%;
+    }
+
+    .small-text {
+        font-size: 0.9rem;
+    }
+
+    .title span {
+        font-size: 3rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .footer-links {
+        gap: 10px;
+        margin-top: 5%;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .footer-links a {
+        font-size: 0.9rem;
+    }
+
+    .footer-links a:nth-child(2) {
+        font-size: 0.9rem;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 350px) {
+    .first-section-landing {
+        height: 150vh;
+    }
+
+    .scroll-first-section {
+        right: 1vh;
+        top: 10vh;
+    }
+
+    .first-section-landing-col {
+        padding: 10px;
+    }
+
+    .arrow-down {
+        font-size: 1.2rem;
+        margin-top: 10px;
+        margin-left: 5px;
+    }
+
+    .overlay {
+        padding-left: 5%;
+    }
+
+    .content {
+        max-width: 100%;
+    }
+
+    .small-text {
+        font-size: 0.8rem;
+    }
+
+    .title span {
+        font-size: 2.5rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
+    }
+
+    .footer-links {
+        gap: 10px;
+        margin-top: 5%;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .footer-links a {
+        font-size: 0.8rem;
+    }
+
+    .footer-links a:nth-child(2) {
+        font-size: 0.8rem;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 300px) {
+    .title span {
+        font-size: 2rem;
+    }
+}

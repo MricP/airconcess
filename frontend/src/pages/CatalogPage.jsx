@@ -2,7 +2,6 @@ import React, { useRef } from 'react'
 import { CiSearch } from "react-icons/ci";
 import { CiFilter } from "react-icons/ci";
 import { ProductBox } from '../components/ProductBox';
-import gulfstreamG650ER from '../styles/assets/img/catalog/gulfstreamG650.svg'
 import { FaEdit } from "react-icons/fa";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
@@ -11,9 +10,12 @@ import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import "../styles/catalog/CatalogPage.css"
 
 
 function CatalogPage() {
+
+    const gulfstreamG650ER = "../assets/catalog/gulfstreamG650.svg"
 
     const [aircrafts, setAircrafts] = useState([]);
     const [page, setPage] = useState(1);
@@ -43,8 +45,9 @@ function CatalogPage() {
           try {
             setLoading(true);
             const response = await axios.get(`http://localhost/air-concess/backend/public/api.php`);
-            setAircrafts(response.data.data);
-            setFilteredAircrafts(response.data.data);
+            const data = response.data.data || []; 
+            setAircrafts(data);
+            setFilteredAircrafts(data);
             setNbAircraft(response.data.nbAircraft); 
             setSearchPlane('');
             setError(null); 
@@ -59,6 +62,8 @@ function CatalogPage() {
         fetchAircrafts();
       }, [page],); 
 
+
+      
       useEffect(() => {
         const filtered = aircrafts.filter((plane) => {
             if (searchPlane.trim() === '') {
@@ -284,7 +289,7 @@ function CatalogPage() {
   };
 
   // Pagination
-  const paginatedAircrafts = filteredAircrafts.slice(
+  const paginatedAircrafts = (filteredAircrafts|| []).slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -292,17 +297,22 @@ function CatalogPage() {
   const totalPages = Math.ceil(filteredAircrafts.length / itemsPerPage);
   
     return (
-    <main className='main-container'> 
-        <div className="title-container">
-            <h1 className='title white'>Notre Catalogue</h1>
-            <p className='catalog-subtitle  white'>Explorez notre catalogue d'avions haut de gamme, alliant performance et luxe. Trouvez l'appareil parfait pour vos besoins.</p> 
+    <main className='catalog-page'> 
+        <div class="catalog-header">
+            <div class="catalog-title-container">
+                <h1 class="catalog-title white">Notre Catalogue</h1>
+                <p class="catalog-subtitle white">
+                    Explorez notre catalogue d'avions haut de gamme, alliant performance et luxe. Trouvez l'appareil parfait pour vos besoins.
+                </p>
+            </div>
+            <div className="filterBar-container">
+                <button><CiSearch className='filterIcon' size={40} color='#b5b5b5'/></button>
+                <button><CiFilter className='filterIcon' size={40} color='#b5b5b5'/></button>
+                <input placeholder='Rechercher un Modèle ...' type="text" ref={catalogRef} onChange={handleSearch} />
+            </div>
         </div>
         
-        <div className="filterBar-container">
-            <button><CiSearch className='filterIcon' size={40} color='#b5b5b5'/></button>
-            <button><CiFilter className='filterIcon' size={40} color='#b5b5b5'/></button>
-            <input placeholder='Rechercher un Modèle ...' type="text" ref={catalogRef} onChange={handleSearch} />
-        </div>
+        
         <div className='catalogContent-container' >
           {!isMobile &&
             <div className='filterDescription'>
@@ -381,7 +391,7 @@ function CatalogPage() {
             </div>} 
             
             
-            <div className="separator"></div>
+            <div className="catalog-separator"></div>
             <div className='planeContainer'>
             {Array.isArray(aircrafts) && aircrafts.length > 0 ? (
               paginatedAircrafts

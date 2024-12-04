@@ -1,13 +1,13 @@
 import React from 'react'
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
+import "../styles/catalog/ProductBox.css";
 
 export const ProductBox = (props) => {
     
-    
   return (
       <div className='productBox-container'>
-        <div className='productImage-container'>
+        <div className='catalog-productImage-container'>
           <div className='available-container'>{props.isAvailable === 1 ? <FaRegCircleDot color='#43A73A'/> : <FaRegCircleDot color='#ea2424'/> }<p className='catalogAvailable'>{props.isAvailable == 0 ? "INDISPONIBLE" : "DISPONIBLE"}</p></div>
           <img src={props.planeImg} alt="planeImg" />
           <div className='imageInfo-container'>
@@ -17,7 +17,7 @@ export const ProductBox = (props) => {
           </div>
         </div>  
 
-        <div className='productDescription-container'>
+        <div className='catalog-productDescription-container'>
             <div className='planeInfos-container'>
                 <div className='planeInfos'>
                     <p className='infoTitle'>Année</p>
