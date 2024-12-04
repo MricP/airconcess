@@ -33,6 +33,7 @@ function App() {
           <Route path='/catalog' element={<CatalogPage/>} />
           <Route path='/my-profile' element={<ProfilePage />} />
           <Route path='/product' element={<PageProduct />} />
+          <Route path='/product/:id' element={<PageProduct />} />
           <Route path='/appointment' element={<PageAppointment />} />
           <Route path="/reset-password-request" element={<ResetPasswordRequest />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />

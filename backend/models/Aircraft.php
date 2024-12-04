@@ -100,5 +100,29 @@ class Aircraft
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public static function getMainImg($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT img_id,img_URL FROM image WHERE aircraft_id = ? AND role = ?");
+        
+        if($stmt->execute([$id,"main"]))
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        return false;
+        
+    }
+
+    public static function getSliderImgs($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT img_id,img_URL FROM image WHERE aircraft_id = ? AND role = ?");
+        $stmt->execute([$id,"slider"]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getIcon($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT img_id,img_URL FROM image WHERE aircraft_id = ? AND role = ?");
+        $stmt->execute([$id,"icon"]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     
 }
