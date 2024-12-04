@@ -85,12 +85,8 @@ function CatalogPage() {
           const { offsetTop } = catalogRef.current;
           window.scrollTo({ top: offsetTop, behavior: "smooth" });
         } 
-        if(page < (Math.floor(nbAircraft/5)+1)){
-          setCurrentPage((prevPage) => prevPage + 1);
-          setPage((prevPage) => prevPage + 1);
-
-        }
-       
+        setCurrentPage((prevPage) => prevPage + 1);
+        setPage((prevPage) => prevPage + 1);
     };
 
     const handlePreviousPage = () => {
@@ -290,8 +286,8 @@ function CatalogPage() {
 
   // Pagination
   const paginatedAircrafts = (filteredAircrafts|| []).slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage
   );
 
   const totalPages = Math.ceil(filteredAircrafts.length / itemsPerPage);
@@ -421,9 +417,9 @@ function CatalogPage() {
                   <IoIosArrowBack color='#B5B5B5' size={35} />
                 </button>
                 <p>
-                  {page} / {totalPages === 0 ? 1 : totalPages}
+                  {currentPage} / {totalPages === 0 ? 1 : totalPages}
                 </p>
-                <button onClick={handleNextPage} disabled={page === Math.ceil(nbAircraft / 5)}>
+                <button onClick={handleNextPage} disabled={page === totalPages}>
                   <IoIosArrowForward color='#B5B5B5' size={35} />
                 </button>
               </div>
