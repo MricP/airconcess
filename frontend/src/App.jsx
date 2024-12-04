@@ -17,6 +17,9 @@ import ContactPage from './pages/contact/ContactPage.jsx';
 import PageAppointment from './pages/appointment/PageAppointment.jsx';
 import PageMaintenance from './pages/maintenance/PageMaintenance.jsx';
 import CatalogPage from './pages/CatalogPage.jsx';
+import CguPage from './pages/polities/CguPage.jsx';
+import LegalNoticesPage from './pages/polities/LegalNoticesPage.jsx';
+import PrivacyPage from './pages/polities/PrivacyPage.jsx';
 
 
 function App() {
@@ -42,9 +45,9 @@ function App() {
           <Route path='/training' element={<PageTraining />} />
           <Route path='/maintenance' element={<PageMaintenance />} />
           {/*polities*/}
-          <Route path='/privacy' element={<p>Politique de confidentialité</p>} />
-          <Route path='/legal-notices' element={<p>Legal notices</p>} />
-          <Route path='/cgu' element={<p>Conditions générales de vente</p>} />
+          <Route path='/privacy' element={<PrivacyPage/>} />
+          <Route path='/legal-notices' element={<LegalNoticesPage/>} />
+          <Route path='/cgu' element={<CguPage/>} />
         </Routes>
         <ToastContainer />
       </Template>
