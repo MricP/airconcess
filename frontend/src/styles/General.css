@@ -36,9 +36,15 @@
     --bg-secondary: #F5F5F5;
     --color-primary: #333333;
     --section-color: #B5B5B5;
-    --success-color: #43A73A;
     --button-color: #333333;
     --input-color1: #E2E2E2;
+    --success-color: #43A73A;
+    --failure-color: #ea2424;
+    --button-color: #333333;
+    --line-color: #dedede;
+    --box-color: #f5f5f5;
+    --model-color: #00529D;
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -93,6 +99,10 @@ p {
 
 .invisible {
     display: none !important;
+}
+
+button{
+    cursor: pointer;
 }
   
 
