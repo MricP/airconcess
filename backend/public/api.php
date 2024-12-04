@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
 } 
 
 // Route pour récupérer les données des aéronefs (GET)
-if($_SERVER['REQUEST_METHOD'] === 'GET'){
+if($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/catalog') !== false){
     $headers = getallheaders();
 
     try {

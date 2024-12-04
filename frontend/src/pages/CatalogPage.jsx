@@ -9,9 +9,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { getCatalogData } from '../services/api';
-
 import "../styles/catalog/CatalogPage.css"
+import { getCatalogData } from '../services/api';
 
 
 function CatalogPage() {
@@ -41,27 +40,27 @@ function CatalogPage() {
   
   let [filteredAircrafts, setFilteredAircrafts] = useState([]);
 
-    useEffect(() => {
-        const fetchAircrafts = async () => {
-          try {
-            setLoading(true);
-            const response = await getCatalogData();
-            const data = response.data || []; 
-            setAircrafts(data);
-            setFilteredAircrafts(data);
-            setNbAircraft(response.data.nbAircraft); 
-            setSearchPlane('');
-            setError(null); 
-          } catch (error) {
-            console.error("Erreur lors de la récupération des données :", error);
-            setError("Une erreur s'est produite lors du chargement des données.");
-          } finally {
-            setLoading(false);
-          }
-        };
-      
-        fetchAircrafts();
-      }, [page],); 
+  useEffect(() => {
+    const fetchAircrafts = async () => {
+      try {
+        setLoading(true);
+        const response = await getCatalogData();
+        const data = response.data || []; 
+        setAircrafts(data);
+        setFilteredAircrafts(data);
+        setNbAircraft(response.data.nbAircraft); 
+        setSearchPlane('');
+        setError(null); 
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+        setError("Une erreur s'est produite lors du chargement des données.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAircrafts();
+  }, [page],);
 
 
       
@@ -410,6 +409,7 @@ function CatalogPage() {
                     autonomy={plane.autonomy}
                     description={plane.description}
                     aircraftType={plane.aircraftType}
+                    idAircraft={plane.idAircraft}
                 />
                 ))
             ) : (
