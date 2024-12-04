@@ -17,6 +17,7 @@ import ContactPage from './pages/contact/ContactPage.jsx';
 import PageAppointment from './pages/appointment/PageAppointment.jsx';
 import PageMaintenance from './pages/maintenance/PageMaintenance.jsx';
 import PageAdmin from './pages/admin/PageAdmin.jsx';
+import CatalogPage from './pages/CatalogPage.jsx';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path='/' element={<LandingPage />} index />
           <Route path='/sign-in' element={<SignInPage />} />
           <Route path='/sign-up' element={<SignUpPage />} />
+          <Route path='/catalog' element={<CatalogPage/>} />
           <Route path='/my-profile' element={<ProfilePage />} />
           <Route path='/product' element={<PageProduct />} />
           <Route path='/appointment' element={<PageAppointment />} />
