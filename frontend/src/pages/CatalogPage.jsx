@@ -9,8 +9,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import axios from 'axios';
 import "../styles/catalog/CatalogPage.css"
+import { getCatalogData } from '../services/api';
 
 
 function CatalogPage() {
@@ -40,27 +40,27 @@ function CatalogPage() {
   
   let [filteredAircrafts, setFilteredAircrafts] = useState([]);
 
-    useEffect(() => {
-        const fetchAircrafts = async () => {
-          try {
-            setLoading(true);
-            const response = await axios.get(`http://localhost/air-concess/backend/public/api.php`);
-            const data = response.data.data || []; 
-            setAircrafts(data);
-            setFilteredAircrafts(data);
-            setNbAircraft(response.data.nbAircraft); 
-            setSearchPlane('');
-            setError(null); 
-          } catch (error) {
-            console.error("Erreur lors de la récupération des données :", error);
-            setError("Une erreur s'est produite lors du chargement des données.");
-          } finally {
-            setLoading(false);
-          }
-        };
-      
-        fetchAircrafts();
-      }, [page],); 
+  useEffect(() => {
+    const fetchAircrafts = async () => {
+      try {
+        setLoading(true);
+        const response = await getCatalogData();
+        const data = response.data || []; 
+        setAircrafts(data);
+        setFilteredAircrafts(data);
+        setNbAircraft(response.data.nbAircraft); 
+        setSearchPlane('');
+        setError(null); 
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+        setError("Une erreur s'est produite lors du chargement des données.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAircrafts();
+  }, [page],);
 
 
       
@@ -298,10 +298,10 @@ function CatalogPage() {
   
     return (
     <main className='catalog-page'> 
-        <div class="catalog-header">
-            <div class="catalog-title-container">
-                <h1 class="catalog-title white">Notre Catalogue</h1>
-                <p class="catalog-subtitle white">
+        <div className="catalog-header">
+            <div className="catalog-title-container">
+                <h1 className="catalog-title white">Notre Catalogue</h1>
+                <p className="catalog-subtitle white">
                     Explorez notre catalogue d'avions haut de gamme, alliant performance et luxe. Trouvez l'appareil parfait pour vos besoins.
                 </p>
             </div>
@@ -409,6 +409,7 @@ function CatalogPage() {
                     autonomy={plane.autonomy}
                     description={plane.description}
                     aircraftType={plane.aircraftType}
+                    idAircraft={plane.idAircraft}
                 />
                 ))
             ) : (
