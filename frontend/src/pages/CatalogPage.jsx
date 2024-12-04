@@ -9,7 +9,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import axios from 'axios';
+import { getCatalogData } from '../services/api';
 import "../styles/catalog/CatalogPage.css"
 
 
@@ -44,8 +44,8 @@ function CatalogPage() {
         const fetchAircrafts = async () => {
           try {
             setLoading(true);
-            const response = await axios.get(`http://localhost/air-concess/backend/public/api.php`);
-            const data = response.data.data || []; 
+            const response = await getCatalogData();
+            const data = response.data || []; 
             setAircrafts(data);
             setFilteredAircrafts(data);
             setNbAircraft(response.data.nbAircraft); 
