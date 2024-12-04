@@ -6,26 +6,13 @@ import { ProductBox } from "../ProductBox";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
-export default function EditArticle() {
+export default function EditArticle(props) {
 
     const gulfstreamG650ER = "../assets/catalog/gulfstreamG650.svg"
 
     const [aircrafts, setAircrafts] = useState([]);
     const [page, setPage] = useState(1);
-    const [nbAircraft, setNbAircraft] = useState(0);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const catalogRef = useRef(null);
-    const [searchPlane, setSearchPlane] = useState("");
-
-// déclaration des références pour les filtres
-
-  const stateRef = useRef(null);
-  const priceRef = useRef(null);
-  const yearRef = useRef(null);
-  const autonomyRef = useRef(null);
-  const capacityRef = useRef(null);
-  const typeRef = useRef(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -35,19 +22,12 @@ export default function EditArticle() {
     useEffect(() => {
         const fetchAircrafts = async () => {
           try {
-            setLoading(true);
             const response = await getCatalogData();
             const data = response.data || []; 
             setAircrafts(data);
             setFilteredAircrafts(data);
-            setNbAircraft(response.data.nbAircraft); 
-            setSearchPlane('');
-            setError(null); 
           } catch (error) {
             console.error("Erreur lors de la récupération des données :", error);
-            setError("Une erreur s'est produite lors du chargement des données.");
-          } finally {
-            setLoading(false);
           }
         };
       
@@ -75,12 +55,8 @@ export default function EditArticle() {
           const { offsetTop } = catalogRef.current;
           window.scrollTo({ top: offsetTop, behavior: "smooth" });
         } 
-        if(page < (Math.floor(nbAircraft/5)+1)){
-          setCurrentPage((prevPage) => prevPage + 1);
-          setPage((prevPage) => prevPage + 1);
-
-        }
-       
+        setCurrentPage((prevPage) => prevPage + 1);
+        setPage((prevPage) => prevPage + 1);
     };
     
     return (
@@ -101,6 +77,8 @@ export default function EditArticle() {
                     autonomy={plane.autonomy}
                     description={plane.description}
                     aircraftType={plane.aircraftType}
+                    idAircraft={plane.idAircraft}
+                    use = {props.use}
                 />
                 ))
             ) : (
@@ -114,7 +92,7 @@ export default function EditArticle() {
                 <p>
                   {page} / {totalPages === 0 ? 1 : totalPages}
                 </p>
-                <button onClick={handleNextPage} disabled={page === Math.ceil(nbAircraft / 5)}>
+                <button onClick={handleNextPage} disabled={page === totalPages}>
                   <IoIosArrowForward color='#B5B5B5' size={35} />
                 </button>
               </div>

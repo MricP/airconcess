@@ -19,7 +19,6 @@ function CatalogPage() {
 
     const [aircrafts, setAircrafts] = useState([]);
     const [page, setPage] = useState(1);
-    const [nbAircraft, setNbAircraft] = useState(0);
     const isMobile = useMediaQuery({ maxWidth: 1130 });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -48,7 +47,6 @@ function CatalogPage() {
         const data = response.data || []; 
         setAircrafts(data);
         setFilteredAircrafts(data);
-        setNbAircraft(response.data.nbAircraft); 
         setSearchPlane('');
         setError(null); 
       } catch (error) {
