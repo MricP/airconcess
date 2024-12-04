@@ -2,13 +2,15 @@ import React from 'react'
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
 import "../styles/catalog/ProductBox.css";
+import { useNavigate } from 'react-router-dom';
 
 export const ProductBox = (props) => {
-    
+  const navigate = useNavigate();
+//   const history = useHistory();
   return (
       <div className='productBox-container'>
         <div className='catalog-productImage-container'>
-          <div className='available-container'>{props.isAvailable === 1 ? <FaRegCircleDot color='#43A73A'/> : <FaRegCircleDot color='#ea2424'/> }<p className='catalogAvailable'>{props.isAvailable == 0 ? "INDISPONIBLE" : "DISPONIBLE"}</p></div>
+          <div className='available-container'>{props.isAvailable === 1 ? <FaRegCircleDot color='#43A73A'/> : <FaRegCircleDot color='#ea2424'/> }<p className='catalogAvailable'>{props.isAvailable === 0 ? "INDISPONIBLE" : "DISPONIBLE"}</p></div>
           <img src={props.planeImg} alt="planeImg" />
           <div className='imageInfo-container'>
               <h2>{props.modelName}</h2>
@@ -41,7 +43,7 @@ export const ProductBox = (props) => {
                 </div>
             </div>
             <p>{props.description}</p>
-            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button><FaArrowRightLong size={20}/></button></div>
+            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button onClick={() => navigate(`/products/${props.idAircraft}` )}><FaArrowRightLong size={20}/></button></div>
         </div>
       </div>
   )
