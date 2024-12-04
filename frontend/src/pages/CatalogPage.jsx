@@ -298,10 +298,10 @@ function CatalogPage() {
   
     return (
     <main className='catalog-page'> 
-        <div class="catalog-header">
-            <div class="catalog-title-container">
-                <h1 class="catalog-title white">Notre Catalogue</h1>
-                <p class="catalog-subtitle white">
+        <div className="catalog-header">
+            <div className="catalog-title-container">
+                <h1 className="catalog-title white">Notre Catalogue</h1>
+                <p className="catalog-subtitle white">
                     Explorez notre catalogue d'avions haut de gamme, alliant performance et luxe. Trouvez l'appareil parfait pour vos besoins.
                 </p>
             </div>
