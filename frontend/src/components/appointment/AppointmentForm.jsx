@@ -71,6 +71,7 @@ function AppointmentForm() {
 
     // Le chargement de toutes les data nécessaires (au 1er chargement de la page)
     useEffect(() => {
+        console.log("ok")
         // Les crénaux à désactiver (déjà reservés)
         loadDisabledTimestamps()
 
