@@ -12,7 +12,7 @@ export const ProductBox = (props) => {
   let use = null;
 //   const history = useHistory();
   if (props.use === "delete"){
-    use = <IoTrashBin size={30} />
+    use = <IoTrashBin size={30} color='red'/>
   } else if (props.use === "edit") {
     use = <CiEdit size={30} />
   }

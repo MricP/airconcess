@@ -3,6 +3,7 @@ import EditArticle from "../../components/admin/EditArticle";
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
+import PageProduct from "../product/PageProduct";
 
 export default function PageAdmin(){
 
@@ -28,8 +29,8 @@ export default function PageAdmin(){
             setSelectedComponent(<EditArticle use= "edit"/>)
         } else if (event.target.textContent === "• Supprimer un produit") {
             setSelectedComponent(<EditArticle use= "delete"/>)
-        } else {
-            setSelectedComponent(null)
+        } else if (event.target.textContent === "• Ajouter un produit"){
+            setSelectedComponent(<PageProduct mode="add"/>)
         }
     }
 
@@ -63,7 +64,9 @@ export default function PageAdmin(){
                 }
                 
             </div>
-            {selectedComponent}
+            <div className="second-admin-component">
+                {selectedComponent}
+            </div>
         </div>
     )
 }

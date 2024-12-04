@@ -4,7 +4,7 @@ import ProductDescription from '../../components/product/ProductDescription';
 import Slider from "../../components/product/Slider";
 import ProductMap from '../../components/product/ProductMap';
 
-function PageProduct() {
+function PageProduct({mode}) {
   const images = [
     {id:1,url:'/assets/image1.jpg'},
     {id:2,url:'/assets/image2.jpg'},
@@ -55,7 +55,7 @@ function PageProduct() {
 
   return (
     <main>
-      <ProductShowcase productName={"Gulfstream G650ER"} imagePath={images[3].url}/>
+      <ProductShowcase productName={"Gulfstream G650ER"} imagePath={images[3].url} mode={mode}/>
       <ProductDescription modelName="Gulfstream G650ER" modelDescription={modelDescription} deviceDescription= {deviceDescription}/>
       <ProductMap/>
       <Slider images={images}/>

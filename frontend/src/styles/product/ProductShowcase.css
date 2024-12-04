@@ -5,6 +5,13 @@
     z-index: 0;
 }
 
+.productShowcase-container .span-image {
+    width: 100vh;
+    height: 120vh;
+    z-index: 0;
+    background-color: grey;
+}
+
 .productShowcase-container .product-name {
     position: absolute;
     right: 10%;
@@ -12,6 +19,22 @@
     color: white;
     z-index: 100;
     font-weight: 600; /*Semi-bold*/
+}
+
+.productShowcase-container .input {
+    text-align: center;
+    font-size: var(--title-size);
+    width: 30vw;
+    height: 10vh;
+    color: black;
+}
+
+.productShowcase-container .file-input {
+    position: absolute;
+    right: 27%;
+    bottom: 50%;
+    color: white;
+    z-index: 100;
 }
 
 .productShowcase-container .scroll-down-button {
