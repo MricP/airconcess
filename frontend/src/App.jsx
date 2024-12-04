@@ -20,7 +20,7 @@ import PageMaintenance from './pages/maintenance/PageMaintenance.jsx';
 
 function App() {
   return (
-    
+
     <BrowserRouter>
       <Template>
         <ToastContainer />
@@ -39,6 +39,10 @@ function App() {
           <Route path='/contact-us' element={<ContactPage />} />
           <Route path='/training' element={<PageTraining />} />
           <Route path='/maintenance' element={<PageMaintenance />} />
+          {/*polities*/}
+          <Route path='/privacy' element={<p>Politique de confidentialité</p>} />
+          <Route path='/legal-notices' element={<p>Legal notices</p>} />
+          <Route path='/cgu' element={<p>Conditions générales de vente</p>} />
         </Routes>
         <ToastContainer />
       </Template>
