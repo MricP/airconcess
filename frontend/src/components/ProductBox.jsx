@@ -11,7 +11,7 @@ export const ProductBox = (props) => {
       <div className='productBox-container'>
         <div className='catalog-productImage-container'>
           <div className='available-container'>{props.isAvailable === 1 ? <FaRegCircleDot color='#43A73A'/> : <FaRegCircleDot color='#ea2424'/> }<p className='catalogAvailable'>{props.isAvailable === 0 ? "INDISPONIBLE" : "DISPONIBLE"}</p></div>
-          <img src={props.planeImg} alt="planeImg" />
+          <img src={props.planeImg}/>
           <div className='imageInfo-container'>
               <h2>{props.modelName}</h2>
               <h3>{props.serialNumber}</h3>

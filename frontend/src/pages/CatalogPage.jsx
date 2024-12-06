@@ -12,14 +12,11 @@ import { useState } from 'react';
 import "../styles/catalog/CatalogPage.css"
 import { getCatalogData } from '../services/api';
 
-
 function CatalogPage() {
-
     const gulfstreamG650ER = "../assets/catalog/gulfstreamG650.svg"
 
     const [aircrafts, setAircrafts] = useState([]);
     const [page, setPage] = useState(1);
-    const [nbAircraft, setNbAircraft] = useState(0);
     const isMobile = useMediaQuery({ maxWidth: 1130 });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -48,7 +45,6 @@ function CatalogPage() {
         const data = response.data || []; 
         setAircrafts(data);
         setFilteredAircrafts(data);
-        setNbAircraft(response.data.nbAircraft); 
         setSearchPlane('');
         setError(null); 
       } catch (error) {
@@ -81,12 +77,24 @@ function CatalogPage() {
 
     // Gestion des pages
     const handleNextPage = () => {
+      let tabFilter = [stateRef.current.value, priceRef.current.value, yearRef.current.value, capacityRef.current.value, autonomyRef.current.value, typeRef.current.value];
         if (catalogRef.current) {
           const { offsetTop } = catalogRef.current;
           window.scrollTo({ top: offsetTop, behavior: "smooth" });
         } 
+        stateRef.current.value = tabFilter[0];
+        priceRef.current.value = tabFilter[1];
+        yearRef.current.value = tabFilter[2];
+        capacityRef.current.value = tabFilter[3];
+        autonomyRef.current.value = tabFilter[4];
+        typeRef.current.value = tabFilter[5];
+        
         setCurrentPage((prevPage) => prevPage + 1);
         setPage((prevPage) => prevPage + 1);
+        console.log(tabFilter)
+        reapplyFilters(tabFilter);
+        
+        handlePriceFilter();
     };
 
     const handlePreviousPage = () => {
@@ -98,12 +106,11 @@ function CatalogPage() {
         }
     };
 
-
   // Gérer les filtres :
 
   const reapplyFilters = () => {
     let filtered = [...aircrafts]; 
-  
+    
     if (stateRef.current && stateRef.current.value !== "Aucun") {
       filtered = filtered.filter((aircraft) =>
         stateRef.current.value === "Disponible"
@@ -179,7 +186,10 @@ function CatalogPage() {
         (aircraft) => aircraft.aircraftType === typeRef.current.value
       );
     }
-    setCurrentPage(1);
+    if(filtered.length < 5){
+      setPage(1)
+      setCurrentPage(1)
+    }
     setFilteredAircrafts(filtered); 
   };
   
@@ -188,6 +198,7 @@ function CatalogPage() {
       stateRef.current.value = "Aucun";
       stateRef.current.style = "display:none";
       reapplyFilters();
+      
     }
   } 
 
@@ -257,7 +268,7 @@ function CatalogPage() {
       typeRef.current.style = "display:initial";
       reapplyFilters();
     }
-    
+    window.history.pushState(null, "AirConcess", `/catalog/${typeRef.current.value.toLowerCase()}`)
   } 
 
   const handleDeleteTypeFilter = () => {
@@ -302,7 +313,7 @@ function CatalogPage() {
                 </p>
             </div>
             <div className="filterBar-container">
-                <button><CiSearch className='filterIcon' size={40} color='#b5b5b5'/></button>
+                <button disabled><CiSearch className='filterIcon' size={40} color='#b5b5b5'/></button>
                 <button><CiFilter className='filterIcon' size={40} color='#b5b5b5'/></button>
                 <input placeholder='Rechercher un Modèle ...' type="text" ref={catalogRef} onChange={handleSearch} />
             </div>
