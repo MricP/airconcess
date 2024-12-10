@@ -1,9 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
 
 
-const ProductDescription = ({modelName,modelDescription,aircraftDescription,technicalSheetPath}) => {
+const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescription,technicalSheetPath}) => {
+    const navigate = useNavigate()
+
     function handleDownload() {
         const fileUrl = technicalSheetPath; // Remplace par le chemin de ton fichier
         const link = document.createElement('a');
@@ -13,6 +16,10 @@ const ProductDescription = ({modelName,modelDescription,aircraftDescription,tech
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+    }
+
+    function handleRedirection() {
+        navigate("/appointment/"+aircraftId)
     }
 
     return (
@@ -40,7 +47,7 @@ const ProductDescription = ({modelName,modelDescription,aircraftDescription,tech
             </div>
             <div className='button-div'>
                 <button onClick={handleDownload}><BiDownload/>{"Télécharger la fiche technique"}</button>
-                <button>Prendre rendez-vous</button>
+                <button onClick={handleRedirection}>Prendre rendez-vous</button>
             </div>
         </div>
     )

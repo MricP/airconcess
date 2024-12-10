@@ -119,6 +119,7 @@ function PageProduct() {
         imagePath={mainImg.url}
       />
       <ProductDescription
+        aircraftId={id}
         modelName={modelName}
         modelDescription={modelDescription}
         aircraftDescription={aircraftDescription}

@@ -38,6 +38,7 @@ function App() {
           <Route path='/product' element={<PageProduct />} />
           <Route path='/product/:id' element={<PageProduct />} />
           <Route path='/appointment' element={<PageAppointment />} />
+          <Route path='/appointment/:id' element={<PageAppointment />} />
           <Route path="/reset-password-request" element={<ResetPasswordRequest />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path='/verify-email' element={<VerifyEmail />} />
