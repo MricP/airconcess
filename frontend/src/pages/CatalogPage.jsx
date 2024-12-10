@@ -22,9 +22,10 @@ function CatalogPage() {
     const [error, setError] = useState(null);
     const catalogRef = useRef(null);
     const [searchPlane, setSearchPlane] = useState("");
+    
 
 // déclaration des références pour les filtres
-
+  const filterContainerRef = useRef()
   const stateRef = useRef(null);
   const priceRef = useRef(null);
   const yearRef = useRef(null);
@@ -34,6 +35,7 @@ function CatalogPage() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
+  
   
   let [filteredAircrafts, setFilteredAircrafts] = useState([]);
 
@@ -45,6 +47,8 @@ function CatalogPage() {
     autonomy: "Aucun",
     type: "Aucun",
   });
+
+  const totalPages = Math.ceil(filteredAircrafts.length / itemsPerPage);
 
   useEffect(() => {
     const fetchAircrafts = async () => {
@@ -88,17 +92,20 @@ function CatalogPage() {
     const handleNextPage = () => {
         if (catalogRef.current) {
           const { offsetTop } = catalogRef.current;
-          window.scrollTo({ top: offsetTop, behavior: "smooth" });
+          window.scrollTo({ top: offsetTop - 100, behavior: "smooth" });
         } 
-        setCurrentPage((prevPage) => prevPage + 1);
-        reapplyFilters(activeFilters)
-        console.log(activeFilters);
+        if(currentPage < totalPages){
+          setCurrentPage((prevPage) => prevPage + 1);
+          reapplyFilters(activeFilters)
+          // console.log(activeFilters);
+        }
+        
     };
 
     const handlePreviousPage = () => {
         if (catalogRef.current) {
           const { offsetTop } = catalogRef.current;
-          window.scrollTo({ top: offsetTop, behavior: "smooth" });
+          window.scrollTo({ top: offsetTop-100, behavior: "smooth" });
         }
         setCurrentPage((prevPage) => Math.max(1, prevPage - 1));
         reapplyFilters(activeFilters)
@@ -106,6 +113,17 @@ function CatalogPage() {
     };
 
   // Gérer les filtres :
+
+  const handleFilterRedirection = () => {
+    if(!isMobile){
+      const {offsetTop} = catalogRef.current;
+      window.scrollTo({top: offsetTop -100,behavior: "smooth"});
+    }
+    else{
+      filterContainerRef.style = "display: initial";
+      filterContainerRef.style = "z-index: 1";
+    }
+  }
 
   const reapplyFilters = (filters = activeFilters) => {
     let filtered = [...aircrafts]; 
@@ -317,8 +335,6 @@ function CatalogPage() {
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage
   );
-
-  const totalPages = Math.ceil(filteredAircrafts.length / itemsPerPage);
   
     return (
     <main className='catalog-page'> 
@@ -331,15 +347,15 @@ function CatalogPage() {
             </div>
             <div className="filterBar-container">
                 <button disabled><CiSearch className='filterIcon' size={40} color='#b5b5b5'/></button>
-                <button><CiFilter className='filterIcon' size={40} color='#b5b5b5'/></button>
-                <input placeholder='Rechercher un Modèle ...' type="text" ref={catalogRef} onChange={handleSearch} />
+                <button onClick={handleFilterRedirection}><CiFilter className='filterIcon' size={40} color='#b5b5b5'/></button>
+                <input placeholder='Rechercher un Modèle ...' type="text" onChange={handleSearch} />
             </div>
         </div>
         
         
-        <div className='catalogContent-container' >
+        <div className='catalogContent-container' ref={catalogRef}>
           {!isMobile &&
-            <div className='filterDescription'>
+            <div className='filterDescription' useRef={filterContainerRef}>
                 <div className='filterDescription-title'><CiFilter size={30} color='#b5b5b5'/><h3>Liste des Filtres</h3></div>
                 <ul className='editFilterList'>
                   <div className='editFilter-container'>
@@ -447,7 +463,7 @@ function CatalogPage() {
                 <p>
                   {currentPage} / {totalPages === 0 ? 1 : totalPages}
                 </p>
-                <button onClick={handleNextPage} disabled={page === totalPages}>
+                <button onClick={handleNextPage}>
                   <IoIosArrowForward color='#B5B5B5' size={35} />
                 </button>
               </div>
