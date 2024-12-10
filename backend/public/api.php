@@ -78,9 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
 // Partie page catalog (EMRIC TODO)
 
 // Route pour récupérer les données des aéronefs (GET)
-// if($_SERVER['REQUEST_METHOD'] === 'GET'){
+// if($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/catalog') !== false){
 //     $headers = getallheaders();
-
 //     try {
 //         $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 //         $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 5;

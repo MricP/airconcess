@@ -9,8 +9,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import axios from 'axios';
 import "../styles/catalog/CatalogPage.css"
+import { getCatalogData } from '../services/api';
 
 
 function CatalogPage() {
@@ -40,27 +40,27 @@ function CatalogPage() {
   
   let [filteredAircrafts, setFilteredAircrafts] = useState([]);
 
-    useEffect(() => {
-        const fetchAircrafts = async () => {
-          try {
-            setLoading(true);
-            const response = await axios.get(`http://localhost/air-concess/backend/public/api.php`);
-            const data = response.data.data || []; 
-            setAircrafts(data);
-            setFilteredAircrafts(data);
-            setNbAircraft(response.data.nbAircraft); 
-            setSearchPlane('');
-            setError(null); 
-          } catch (error) {
-            console.error("Erreur lors de la récupération des données :", error);
-            setError("Une erreur s'est produite lors du chargement des données.");
-          } finally {
-            setLoading(false);
-          }
-        };
-      
-        fetchAircrafts();
-      }, [page],); 
+  useEffect(() => {
+    const fetchAircrafts = async () => {
+      try {
+        setLoading(true);
+        const response = await getCatalogData();
+        const data = response.data || []; 
+        setAircrafts(data);
+        setFilteredAircrafts(data);
+        setNbAircraft(response.data.nbAircraft); 
+        setSearchPlane('');
+        setError(null); 
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+        setError("Une erreur s'est produite lors du chargement des données.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAircrafts();
+  }, [page],);
 
 
       
@@ -85,12 +85,8 @@ function CatalogPage() {
           const { offsetTop } = catalogRef.current;
           window.scrollTo({ top: offsetTop, behavior: "smooth" });
         } 
-        if(page < (Math.floor(nbAircraft/5)+1)){
-          setCurrentPage((prevPage) => prevPage + 1);
-          setPage((prevPage) => prevPage + 1);
-
-        }
-       
+        setCurrentPage((prevPage) => prevPage + 1);
+        setPage((prevPage) => prevPage + 1);
     };
 
     const handlePreviousPage = () => {
@@ -290,8 +286,8 @@ function CatalogPage() {
 
   // Pagination
   const paginatedAircrafts = (filteredAircrafts|| []).slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage
   );
 
   const totalPages = Math.ceil(filteredAircrafts.length / itemsPerPage);
@@ -409,6 +405,7 @@ function CatalogPage() {
                     autonomy={plane.autonomy}
                     description={plane.description}
                     aircraftType={plane.aircraftType}
+                    idAircraft={plane.idAircraft}
                 />
                 ))
             ) : (
@@ -420,9 +417,9 @@ function CatalogPage() {
                   <IoIosArrowBack color='#B5B5B5' size={35} />
                 </button>
                 <p>
-                  {page} / {totalPages === 0 ? 1 : totalPages}
+                  {currentPage} / {totalPages === 0 ? 1 : totalPages}
                 </p>
-                <button onClick={handleNextPage} disabled={page === Math.ceil(nbAircraft / 5)}>
+                <button onClick={handleNextPage} disabled={page === totalPages}>
                   <IoIosArrowForward color='#B5B5B5' size={35} />
                 </button>
               </div>

@@ -35,7 +35,7 @@ export const fetchTestMessage = async () => {
 
 export const getCatalogData = async () => {
   try {
-    const response = await axiosInstance.get('/api/catalog');
+    const response = await axiosInstance.get('/catalog');
     console.log('Full response:', response); 
     console.log('Catalog data fetched:', response.data); 
     return response.data; 
