@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
@@ -20,7 +20,21 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
 
     function handleRedirection() {
         navigate("/appointment/"+aircraftId)
+        window.scrollTo({
+            top: 0,
+        });
+
+        setTimeout(() => {
+            window.scrollTo({
+                top: window.innerHeight + 0.20 * (window.innerHeight),
+                behavior: 'smooth',
+            });
+        },100)
     }
+
+    useEffect(() => {
+         // Force le défilement en haut de la page
+    }, []);
 
     return (
         <div className='productDescription-container'>
