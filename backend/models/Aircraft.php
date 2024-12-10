@@ -1,9 +1,6 @@
 <?php
 require_once __DIR__ . '/../utils/Database.php';
 
-
-
-
 class Aircraft
 {
     private static function getDB()
@@ -101,6 +98,24 @@ class Aircraft
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Catalog Page
+
+    public static function getIcon($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT img_id,img_URL FROM image WHERE aircraft_id = ? AND role = ?");
+        $stmt->execute([$id,"icon"]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Product Page
+
+    public static function getModelName($idAircraft) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT M.model_name FROM model M INNER JOIN aircraft A ON A.model_id = M.model_id WHERE aircraft_id = ?");
+        $stmt->execute([$idAircraft]);
+        return $stmt->fetch(PDO::FETCH_NUM);
+    }
+
     public static function getMainImg($id) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT img_id,img_URL FROM image WHERE aircraft_id = ? AND role = ?");
@@ -108,7 +123,6 @@ class Aircraft
         if($stmt->execute([$id,"main"]))
             return $stmt->fetch(PDO::FETCH_ASSOC);
         return false;
-        
     }
 
     public static function getSliderImgs($id) {
@@ -118,10 +132,19 @@ class Aircraft
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getIcon($id) {
+    public static function getModelDescription($idAircraft) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT img_id,img_URL FROM image WHERE aircraft_id = ? AND role = ?");
-        $stmt->execute([$id,"icon"]);
+        $stmt = $pdo->prepare("SELECT M.range_type, M.manufacturer, M.passenger_capacity, M.crew_size, M.length, M.wingspan, M.height, M.max_takeoff_weight,
+                M.engines, M.speed_avg, M.max_range, M.max_altitude FROM model M INNER JOIN aircraft A ON A.model_id = M.model_id WHERE aircraft_id = ?");
+        $stmt->execute([$idAircraft]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAircraftDescription($idAircraft) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT serial_number,manufacture_year,flight_hours,configuration,recent_maintenance,typical_routes,
+                owner,cost_per_km,monthly_maintenance_cost,estimated_price FROM aircraft WHERE aircraft_id = ?");
+        $stmt->execute([$idAircraft]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     

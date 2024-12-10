@@ -5,49 +5,47 @@ import Slider from "../../components/product/Slider";
 import ProductMap from "../../components/product/ProductMap";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { getMainImage, getSliderImages } from "../../services/product";
+import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription ,getModelName} from "../../services/product";
 
 function PageProduct() {
   const navigate = useNavigate();
   const location = useLocation().pathname.split("/");
   const id = parseInt(location[location.length - 1]); // Récupération de l'ID
+  
   const [isIdValid, updateIdValidity] = useState(!isNaN(id));
 
-  const [mainImg, updateMainImg] = useState({ url: "", id: 0 });
-  const [sliderImgs, updateSliderImgs] = useState([]); // Initialisation avec un tableau vide
+  const [modelName, updateModelName] = useState("Inconnu")
+  const [mainImg, updateMainImg] = useState({ url: "/assets/not-available.png", id: 0 });
+  const [sliderImgs, updateSliderImgs] = useState([]);
+  const [modelDescription, updateModelDescription] = useState([
+      {varName:"range_type", txt:"Rayon d'action", value:"Inconnu"},
+      {varName:"manufacturer", txt:"Constructeur", value:"Inconnu"},
+      {varName:"passenger_capacity", txt:"Capacité ", value:"Inconnu"},
+      {varName:"crew_size", txt:"Équipage", value:"Inconnu"},
+      {varName:"length", txt:"Longueur" , value:"Inconnu"},
+      {varName:"wingspan", txt:"Envergure" , value:"Inconnu"},
+      {varName:"height", txt:"Hauteur" , value:"Inconnu"},
+      {varName:"max_takeoff_weight", txt:"Poids maximum au décollage" , value:"Inconnu"},
+      {varName:"engines", txt:"Moteurs" , value:"Inconnu"},
+      {varName:"speed_avg", txt:"Vitesse moyenne" , value:"Inconnu"},
+      {varName:"max_range", txt:"Portée maximale" , value: "Inconnu"},
+      {varName:"max_altitude", txt:"Altitude maximale" , value:"Inconnu"}
+  ])
+  const [aircraftDescription, updateAircraftDesciption] = useState([
+      {varName:"serial_number", txt:"Numéro de série", value:"Inconnu"},
+      {varName:"manufacture_year", txt:"Année de fabrication", value:"Inconnu"},
+      {varName:"flight_hours", txt:"Heures de vol", value:"Inconnu"},
+      {varName:"configuration", txt:"Configuration", value:"Inconnu"},
+      {varName:"recent_maintenance", txt:"Maintenance récente", value:"Inconnu"},
+      {varName:"typical_routes", txt:"Trajets typiques", value:"Inconnu"},
+      {varName:"owner", txt:"Propriétaire", value:"Inconnu"},
+      {varName:"cost_per_km", txt:"Coût par kilomètre", value:"Inconnu"},
+      {varName:"monthly_maintenance_cost", txt:"Coût mensuel d’entretien", value:"Inconnu"},
+      {varName:"estimated_price", txt:"Prix estimé ", value:"Inconnu"},
+  ])
 
-  // Données de description fictives
-  const modelDescription = [
-    "Rôle : Jet privé d'affaires à long rayon d'action",
-    "Constructeur : Gulfstream Aerospace",
-    "Capacité : Jusqu'à 19 passagers",
-    "Équipage : 2 pilotes",
-    "Longueur : 30,41 m",
-    "Envergure : 30,36 m",
-    "Hauteur : 7,82 m",
-    "Poids maximum au décollage (MTOW) : 103 600 lb (47 000 kg)",
-    "Moteurs : Deux réacteurs Rolls-Royce BR725 A1-12",
-    "Vitesse de croisière : Mach 0.85 (environ 904 km/h)",
-    "Portée maximale : 13 890 km (7 500 miles nautiques) avec 8 passagers",
-    "Altitude maximale : 51 000 pieds (15 545 mètres)",
-    "Prix estimé : Environ 66 millions de dollars "
-  ];
-
-  const deviceDescription = [
-    "Numéro de série : 6205",
-    "Année de fabrication : 2020",
-    "Kilométrage total (heures de vol) : 3 500 heures de vol (environ 2,7 millions de kilomètres parcourus)",
-    "Configuration : 14 sièges avec une configuration en 3 zones distinctes (salon, salle de conférence, chambre privée)",
-    "Maintenance récente : Révision complète effectuée à 3 000 heures de vol",
-    "Vitesse moyenne observée en croisière : Mach 0.85",
-    "Trajets typiques : Vols intercontinentaux tels que New York - Dubaï ou Londres - Tokyo",
-    "Propriétaire : Grande entreprise multinationale (fictif)",
-    "Coût par kilomètre : X €",
-    "Coût mensuel d’entretien : X €"
-  ];
-
-  // Fonction pour récupérer les images principales et du slider
-  const handleGetImages = async () => {
+  // Charge toutes les data à afficher en fonction de l'id de l'appareil (idAircraft)
+  const loadDataFromDB = async () => {
     try {
       if (isNaN(id)) {
         updateIdValidity(false);
@@ -55,17 +53,45 @@ function PageProduct() {
       }
 
       // Appels des services
-      const mainImage = await getMainImage(id);
-      console.log(mainImage)
-      const sliderImages = await getSliderImages(id);
-      console.log(sliderImages)
+      const dbModelName = await getModelName(id)
+      const dbMainImg = await getMainImage(id)
+      const dbSliderImgs = await getSliderImages(id)
+      const dbModelDescription = await getModelDescription(id)
+      const dbAircraftDescription = await getAircraftDescription(id)
 
       // Mise à jour des états
-      updateMainImg(mainImage);
-      //updateSliderImgs(sliderImages);
+      if(dbModelName) {
+        updateModelName(dbModelName)
+      }
+      if(dbMainImg) updateMainImg(dbMainImg);
+      if(dbSliderImgs) updateSliderImgs(dbSliderImgs);
+      if(dbModelDescription) {
+        const newDescription = []
+        dbModelDescription.forEach(element => {
+          if(element.value) {
+            const criteria = modelDescription.find((elt) => elt.varName === element.varName)
+            if(element.value) criteria.value = element.value
+            newDescription.push(criteria)
+          }
+        });
+        updateModelDescription(newDescription)
+      }
+      if(dbAircraftDescription) {
+        const newDescription = []
+        dbAircraftDescription.forEach(element => {
+          if(element.value) {
+            const criteria = aircraftDescription.find((elt) => elt.varName === element.varName)
+            if(element.value) criteria.value = element.value
+            newDescription.push(criteria)
+          }
+        });
+        
+        updateAircraftDesciption(newDescription)
+      }
+      
     } catch (error) {
       console.error(
-        "Error response:",
+        "Error response : ",
         error.response?.data?.message || "Unknown error"
       );
     }
@@ -73,11 +99,11 @@ function PageProduct() {
 
   // Charger les images lorsque le composant est monté ou lorsque `id` change
   useEffect(() => {
-    handleGetImages();
+    loadDataFromDB();
   }, [id]);
 
 
-  // Si l'id est invalide ou qu'aucun 
+  // Si l'id est invalide ou qu'il n'y en a pas 
   if (!isIdValid) {
     return (
       <main>
@@ -89,16 +115,16 @@ function PageProduct() {
   return (
     <main>
       <ProductShowcase
-        productName={"Gulfstream G650ER"}
+        modelName={modelName}
         imagePath={mainImg.url}
       />
       <ProductDescription
-        modelName="Gulfstream G650ER"
+        modelName={modelName}
         modelDescription={modelDescription}
-        deviceDescription={deviceDescription}
+        aircraftDescription={aircraftDescription}
       />
-      <ProductMap />
-      <Slider images={sliderImgs} />
+      <ProductMap/>
+      <Slider images={sliderImgs}/>
     </main>
   );
 }

@@ -3,7 +3,7 @@ import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
 
 
-const ProductDescription = ({modelName,modelDescription,deviceDescription,technicalSheetPath}) => {
+const ProductDescription = ({modelName,modelDescription,aircraftDescription,technicalSheetPath}) => {
     function handleDownload() {
         const fileUrl = technicalSheetPath; // Remplace par le chemin de ton fichier
         const link = document.createElement('a');
@@ -24,7 +24,7 @@ const ProductDescription = ({modelName,modelDescription,deviceDescription,techni
                     <h3>À propos du modèle</h3>
                     <div className='informationsList'>
                         {modelDescription.map((line) => (
-                            <p key={line} >• {line}</p>
+                            <p key={line.varName} >{"• "+line.txt+" : "+line.value}</p>
                         ))}
                     </div>
                 </div>
@@ -32,8 +32,8 @@ const ProductDescription = ({modelName,modelDescription,deviceDescription,techni
                 <div>
                     <h3>À propos de l'appareil</h3>
                     <div className='informationsList'>
-                        {deviceDescription.map((line) => (
-                            <p key={line} >• {line}</p>
+                        {aircraftDescription.map((line) => (
+                            <p key={line.varName} >{"• "+line.txt+" : "+line.value}</p>
                         ))}
                     </div>
                 </div>

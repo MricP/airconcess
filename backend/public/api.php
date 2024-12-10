@@ -75,6 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
     ContactController::contact($data);
 } 
 
+// Partie page catalog (EMRIC TODO)
+
 // Route pour récupérer les données des aéronefs (GET)
 // if($_SERVER['REQUEST_METHOD'] === 'GET'){
 //     $headers = getallheaders();
@@ -107,16 +109,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
     ProductController::getIconOf($input['id']);
 }
 
-//Partie page product
+// Partie page product
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-modelName') !== false) {
+    $input = json_decode(file_get_contents("php://input"), true);
+    ProductController::getModelNameOf($input['idAircraft']);
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-mainImg') !== false) {
     $input = json_decode(file_get_contents("php://input"), true);
-    ProductController::getMainImgOf($input['id']);
+    ProductController::getMainImgOf($input['idAircraft']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-sliderImgs') !== false) {
     $input = json_decode(file_get_contents("php://input"), true);
-    ProductController::getSliderImgsOf($input['id']);
+    ProductController::getSliderImgsOf($input['idAircraft']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-modelDescription') !== false) {
+    $input = json_decode(file_get_contents("php://input"), true);
+    ProductController::getModelDescriptionOf($input['idAircraft']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-aircraftDescription') !== false) {
+    $input = json_decode(file_get_contents("php://input"), true);
+    ProductController::getAircraftDescriptionOf($input['idAircraft']);
 }
 
 ?>
