@@ -79,16 +79,12 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/cat
     $headers = getallheaders();
 
     try {
-        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-        $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 5;
-
-        $aircrafts = Aircraft::getAllAircrafts($page, $limit);
+        $aircrafts = Aircraft::getAllAircrafts();
         $nbAircraft = Aircraft::getNumberAircrafts();
 
         echo json_encode([
             'status' => 'success',
             'data' => $aircrafts,
-            'page' => $page,
             'nbAircraft' => $nbAircraft,
         ]);
     } catch (Exception $e) {

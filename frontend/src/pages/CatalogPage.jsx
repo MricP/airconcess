@@ -37,6 +37,15 @@ function CatalogPage() {
   
   let [filteredAircrafts, setFilteredAircrafts] = useState([]);
 
+  const [activeFilters, setActiveFilters] = useState({
+    state: "Aucun",
+    price: "Aucun",
+    year: "Aucun",
+    capacity: "Aucun",
+    autonomy: "Aucun",
+    type: "Aucun",
+  });
+
   useEffect(() => {
     const fetchAircrafts = async () => {
       try {
@@ -77,38 +86,28 @@ function CatalogPage() {
 
     // Gestion des pages
     const handleNextPage = () => {
-      let tabFilter = [stateRef.current.value, priceRef.current.value, yearRef.current.value, capacityRef.current.value, autonomyRef.current.value, typeRef.current.value];
         if (catalogRef.current) {
           const { offsetTop } = catalogRef.current;
           window.scrollTo({ top: offsetTop, behavior: "smooth" });
         } 
-        stateRef.current.value = tabFilter[0];
-        priceRef.current.value = tabFilter[1];
-        yearRef.current.value = tabFilter[2];
-        capacityRef.current.value = tabFilter[3];
-        autonomyRef.current.value = tabFilter[4];
-        typeRef.current.value = tabFilter[5];
-        
         setCurrentPage((prevPage) => prevPage + 1);
-        setPage((prevPage) => prevPage + 1);
-        console.log(tabFilter)
-        reapplyFilters(tabFilter);
-        
-        handlePriceFilter();
+        reapplyFilters(activeFilters)
+        console.log(activeFilters);
     };
 
     const handlePreviousPage = () => {
-        setCurrentPage((prevPage) => Math.max(1, prevPage - 1));
-        setPage((prevPage) => Math.max(1, prevPage - 1));
         if (catalogRef.current) {
           const { offsetTop } = catalogRef.current;
           window.scrollTo({ top: offsetTop, behavior: "smooth" });
         }
+        setCurrentPage((prevPage) => Math.max(1, prevPage - 1));
+        reapplyFilters(activeFilters)
+        
     };
 
   // Gérer les filtres :
 
-  const reapplyFilters = () => {
+  const reapplyFilters = (filters = activeFilters) => {
     let filtered = [...aircrafts]; 
     
     if (stateRef.current && stateRef.current.value !== "Aucun") {
@@ -119,14 +118,14 @@ function CatalogPage() {
       );
     }
   
-    if (priceRef.current && priceRef.current.value !== "Aucun") {
-      if (priceRef.current.value === "-1000000") {
+    if (filters.price !== "Aucun") {
+      if (filters.price === "-1000000") {
         filtered = filtered.filter((aircraft) => aircraft.price <= 1000000);
-      } else if (priceRef.current.value === "-10000000") {
+      } else if (filters.price === "-10000000") {
         filtered = filtered.filter((aircraft) => aircraft.price <= 10000000);
-      } else if (priceRef.current.value === "-50000000") {
+      } else if (filters.price === "-50000000") {
         filtered = filtered.filter((aircraft) => aircraft.price <= 50000000);
-      } else if (priceRef.current.value === "+50000000") {
+      } else if (filters.price === "+50000000") {
         filtered = filtered.filter((aircraft) => aircraft.price > 50000000);
       }
     }
@@ -186,17 +185,19 @@ function CatalogPage() {
         (aircraft) => aircraft.aircraftType === typeRef.current.value
       );
     }
-    if(filtered.length < 5){
-      setPage(1)
-      setCurrentPage(1)
+    if ((currentPage - 1) * itemsPerPage >= filteredAircrafts.length) {
+      setCurrentPage(Math.max(1, Math.ceil(filteredAircrafts.length / itemsPerPage)));
     }
+
     setFilteredAircrafts(filtered); 
+    
   };
   
   const handleDeleteStateFilter = () => {
     if(stateRef.current){
       stateRef.current.value = "Aucun";
       stateRef.current.style = "display:none";
+      setActiveFilters((prev) => ({ ...prev, state: "Aucun" }))
       reapplyFilters();
       
     }
@@ -204,16 +205,24 @@ function CatalogPage() {
 
   const handlePriceFilter = () => {
     if(priceRef.current){
+      const newPrice = priceRef.current.value;
+      setActiveFilters((prev) => ({ ...prev, price: newPrice }));
       priceRef.current.style = "display:initial";
-      reapplyFilters();
+      reapplyFilters({ ...activeFilters, price: newPrice });
     }
   } 
 
   const handleDeletePriceFilter = () => {
     if(priceRef.current){
+      setActiveFilters((prev) => ({ ...prev, price: "Aucun" }))
+      
       priceRef.current.value = "Aucun";
       priceRef.current.style = "display:none";
-      reapplyFilters();
+      setActiveFilters((prev) => {
+        const updatedFilters = { ...prev, price: "Aucun" };
+        reapplyFilters(updatedFilters); // Reapply avec l'état à jour
+        return updatedFilters;
+    });
     }
   } 
 
@@ -227,6 +236,7 @@ function CatalogPage() {
   const handleDeleteYearFilter = () => {
     if(yearRef.current){
       yearRef.current.value = "Aucun";
+      setActiveFilters((prev) => ({ ...prev, year: "Aucun" }))
       yearRef.current.style = "display:none";
       reapplyFilters();
     }
@@ -243,6 +253,7 @@ function CatalogPage() {
     if(capacityRef.current){
       capacityRef.current.value = "Aucun";
       capacityRef.current.style = "display:none";
+      setActiveFilters((prev) => ({ ...prev, capacity: "Aucun" }))
       reapplyFilters();
     }
   } 
@@ -259,6 +270,7 @@ function CatalogPage() {
     if(autonomyRef.current){
       autonomyRef.current.value = "Aucun";
       autonomyRef.current.style = "display:none";
+      setActiveFilters((prev) => ({ ...prev, autonomy: "Aucun" }))
       reapplyFilters();
     }
   } 
@@ -273,10 +285,15 @@ function CatalogPage() {
 
   const handleDeleteTypeFilter = () => {
     if(typeRef.current){
+      
+      setActiveFilters((prev) => ({ ...prev, type: "Aucun" }))
+      reapplyFilters(activeFilters)
       typeRef.current.style = "display:none";
       typeRef.current.value = "Aucun";
-      reapplyFilters();
-    }
+      
+     
+    } 
+    
   }
 
   const handleFiltrageState = () => {
@@ -297,8 +314,8 @@ function CatalogPage() {
 
   // Pagination
   const paginatedAircrafts = (filteredAircrafts|| []).slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
   );
 
   const totalPages = Math.ceil(filteredAircrafts.length / itemsPerPage);
@@ -424,7 +441,7 @@ function CatalogPage() {
             )}
                             
               <div className='chooseCatalogPage'>
-                <button onClick={handlePreviousPage} disabled={page === 1}>
+                <button onClick={handlePreviousPage} >
                   <IoIosArrowBack color='#B5B5B5' size={35} />
                 </button>
                 <p>
