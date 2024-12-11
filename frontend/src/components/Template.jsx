@@ -29,7 +29,10 @@ function Template({children}) {
 
     }, [scrolled]);
 
-    if (location.pathname === "/services" || location.pathname === "/product" || location.pathname === "/appointment"){
+    const productRegex = /^\/product\/\d+$/;
+    const apptRegex = /^\/appointment\/\d+$/;
+
+    if (location.pathname === "/services" || productRegex.test(location.pathname) || location.pathname === "/appointment" || apptRegex.test(location.pathname)){
       if (scrolled){
         color = "white-black"
       } else {
@@ -49,7 +52,7 @@ function Template({children}) {
     <div>
         <Header color={color}/>
         {children}
-        <Footer/>
+        { <Footer/>}
     </div>
     
   )

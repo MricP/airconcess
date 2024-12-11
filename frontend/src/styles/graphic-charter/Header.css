@@ -5,23 +5,23 @@ header {
     position: fixed;
     padding: 0.8vw 4vw;
     width: 100%; /* S'assure que le header prend toute la largeur */
-    left: 0; /* Aligne le header sur le côté gauche */
-    right: 0; /* Aligne le header sur le côté droit */
-    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
-    z-index: 1;
+    z-index: 10000;
 }
 
 .header-default-menu {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
-.header-default-menu img {
+.header-default-menu>a {
+    display: flex;
     width: 11vw;
 }
 
-
+.header-default-menu img {
+    width: 100%;
+}
 
 a {
     text-decoration: none;
@@ -59,7 +59,7 @@ nav button {
     background-color: white;
     color: black;
     transition: all ease 0.5s;
-    box-shadow: 1px 1px 5px grey;
+    box-shadow: 0 0 1px grey;
 }
 
 .black-white {
@@ -87,11 +87,13 @@ nav button {
     }
 
     .header-mobile-menu img {
-        width: 20vw;
+        width: 125px;
     }
 
     .header-icon {
         display: flex;
+        justify-content: center;
+        align-items: center;
         gap: 2vw;
     }
 
@@ -101,6 +103,7 @@ nav button {
     }
 
     .header-mobile-menu button {
+        display: flex;
         border: none;
         background-color: transparent;
     }
@@ -112,5 +115,4 @@ nav button {
     .transparent-white button {
         color: white;
     }
-
 }
