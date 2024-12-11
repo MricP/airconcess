@@ -22,10 +22,11 @@ function CatalogPage() {
     const [error, setError] = useState(null);
     const catalogRef = useRef(null);
     const [searchPlane, setSearchPlane] = useState("");
+    // const [isPopupVisible, setIsPopupVisible] = useState(false);
     
 
 // déclaration des références pour les filtres
-  const filterContainerRef = useRef()
+  const filterContainerRef = useRef(null)
   const stateRef = useRef(null);
   const priceRef = useRef(null);
   const yearRef = useRef(null);
@@ -36,7 +37,7 @@ function CatalogPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   
-  
+  let nbAppuie = 0;
   let [filteredAircrafts, setFilteredAircrafts] = useState([]);
 
   const [activeFilters, setActiveFilters] = useState({
@@ -97,7 +98,6 @@ function CatalogPage() {
         if(currentPage < totalPages){
           setCurrentPage((prevPage) => prevPage + 1);
           reapplyFilters(activeFilters)
-          // console.log(activeFilters);
         }
         
     };
@@ -115,15 +115,23 @@ function CatalogPage() {
   // Gérer les filtres :
 
   const handleFilterRedirection = () => {
-    if(!isMobile){
-      const {offsetTop} = catalogRef.current;
-      window.scrollTo({top: offsetTop -100,behavior: "smooth"});
+    if (!isMobile) {
+      const { offsetTop } = catalogRef.current;
+      window.scrollTo({ top: offsetTop - 100, behavior: "smooth" });
+    } else {
+      nbAppuie++;
+      if(nbAppuie%2 === 1){
+        filterContainerRef.current.style = "display: flex;position: absolute;z-index: 1;width: 80%;top: 90%;left:0%;right: 15%;align-item: center;box-shadow: 2px 3px 3px var(--section-color);";
+      }
+      else{
+        filterContainerRef.current.style = "display: none;";
+      }
+      
+
     }
-    else{
-      filterContainerRef.style = "display: initial";
-      filterContainerRef.style = "z-index: 1";
-    }
-  }
+  };
+  
+  
 
   const reapplyFilters = (filters = activeFilters) => {
     let filtered = [...aircrafts]; 
@@ -354,8 +362,8 @@ function CatalogPage() {
         
         
         <div className='catalogContent-container' ref={catalogRef}>
-          {!isMobile &&
-            <div className='filterDescription' useRef={filterContainerRef}>
+          {/* {!isMobile && */}
+            <div className='filterDescription' ref={filterContainerRef}>
                 <div className='filterDescription-title'><CiFilter size={30} color='#b5b5b5'/><h3>Liste des Filtres</h3></div>
                 <ul className='editFilterList'>
                   <div className='editFilter-container'>
@@ -428,7 +436,7 @@ function CatalogPage() {
                       <button className='editFilterButton' onClick={handleTypeFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteTypeFilter}><AiOutlineCloseSquare size={20} /></button></div>
                     </div>
                 </ul>
-            </div>} 
+            </div>{/*}*/}
             
             
             <div className="catalog-separator"></div>

@@ -236,6 +236,9 @@
 
 @media (max-width: 750px){
 
+    .filterDescription{
+        display: none;
+    }
     .catalog-title{
         font-size:4em;
         line-height: 65px;
