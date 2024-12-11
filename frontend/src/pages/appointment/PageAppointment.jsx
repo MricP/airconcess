@@ -4,7 +4,6 @@ import AppointmentForm from '../../components/appointment/AppointmentForm';
 import "../../styles/appointment/PageAppointment.css"
 
 function PageAppointment() {
-
     return (
         <main>
             <div className='appointmentShowcase'>

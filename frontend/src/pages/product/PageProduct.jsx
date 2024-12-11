@@ -60,34 +60,34 @@ function PageProduct() {
       const dbAircraftDescription = await getAircraftDescription(id)
 
       // Mise à jour des états
-      if(dbModelName) {
-        updateModelName(dbModelName)
-      }
-      if(dbMainImg) updateMainImg(dbMainImg);
-      if(dbSliderImgs) updateSliderImgs(dbSliderImgs);
-      if(dbModelDescription) {
-        const newDescription = []
-        dbModelDescription.forEach(element => {
-          if(element.value) {
-            const criteria = modelDescription.find((elt) => elt.varName === element.varName)
-            if(element.value) criteria.value = element.value
-            newDescription.push(criteria)
-          }
-        });
-        updateModelDescription(newDescription)
-      }
-      if(dbAircraftDescription) {
-        const newDescription = []
-        dbAircraftDescription.forEach(element => {
-          if(element.value) {
-            const criteria = aircraftDescription.find((elt) => elt.varName === element.varName)
-            if(element.value) criteria.value = element.value
-            newDescription.push(criteria)
-          }
-        });
+      // if(dbModelName) {
+      //   updateModelName(dbModelName)
+      // }
+      // if(dbMainImg) updateMainImg(dbMainImg);
+      // if(dbSliderImgs) updateSliderImgs(dbSliderImgs);
+      // if(dbModelDescription) {
+      //   const newDescription = []
+      //   dbModelDescription.forEach(element => {
+      //     if(element.value) {
+      //       const criteria = modelDescription.find((elt) => elt.varName === element.varName)
+      //       if(element.value) criteria.value = element.value
+      //       newDescription.push(criteria)
+      //     }
+      //   });
+      //   updateModelDescription(newDescription)
+      // }
+      // if(dbAircraftDescription) {
+      //   const newDescription = []
+      //   dbAircraftDescription.forEach(element => {
+      //     if(element.value) {
+      //       const criteria = aircraftDescription.find((elt) => elt.varName === element.varName)
+      //       if(element.value) criteria.value = element.value
+      //       newDescription.push(criteria)
+      //     }
+      //   });
         
-        updateAircraftDesciption(newDescription)
-      }
+      //   updateAircraftDesciption(newDescription)
+      // }
       
     } catch (error) {
       console.error(

@@ -6,6 +6,7 @@ require_once __DIR__ . '../../controllers/AuthController.php';
 require_once __DIR__ . '../../controllers/ContactController.php';
 require_once __DIR__ . '../../controllers/ProductController.php';
 require_once __DIR__ . '../../models/Aircraft.php';
+require_once __DIR__ . '../../controllers/AppointmentController.php';
 
 // Middleware CORS globalement
 CorsMiddleware::handle();
@@ -74,6 +75,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
     ValidationMiddleware::validateContact($data);
     ContactController::contact($data);
 } 
+
+// Partie page appointment 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-submit') !== false) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    echo json_encode(["message" => $data['formData']['phone']]);
+    var_dump($data); // Vérifie que les données sont correctement reçues
+    AppointmentController::createAppointment($data);
+} 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadTimestamps') !== false) {
+    // echo json_encode(["message" => "Load timestamps"]);
+    AppointmentController::getTimestamps();
+} 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAircrafts') !== false) {
+    echo json_encode(["message" => "Load aircrafts"]);
+    // AppointmentController::getAircrafts();
+} 
+
 
 // Partie page catalog (EMRIC TODO)
 

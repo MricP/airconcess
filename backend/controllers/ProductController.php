@@ -18,7 +18,9 @@
 
         public static function getMainImgOf($idAircraft){
             $img = Aircraft::getMainImg($idAircraft);
-            if ($img) {
+
+            $imgToReturn = [];
+            if($img) {
                 // Change le format retourné par la requete par le formt attendu par le front
                 $imgToReturn = [
                     "id" => $img['img_id'],
@@ -31,10 +33,9 @@
 
         public static function getSliderImgsOf($idAircraft){
             $imgs = Aircraft::getSliderImgs($idAircraft);
+            $imgsToReturn = []; // Tableau vide pour stocker les images formatées
             
-            if ($imgs) {
-                $imgsToReturn = []; // Tableau vide pour stocker les images formatées
-        
+            if($img){
                 // On parcourt les images et on les formate dans le format attendu par le front
                 foreach ($imgs as $img) {
                     $imgsToReturn[] = [
@@ -42,40 +43,47 @@
                         "url" => $img['img_URL'] // Construction de l'URL, selon le format que tu souhaites
                     ];
                 }
-        
-                // Convertir le tableau en JSON et l'envoyer
                 echo json_encode($imgsToReturn);
             }
+            
+            // Convertir le tableau en JSON et l'envoyer
+            
         }
 
         public static function getModelDescriptionOf($idAircraft) {
             $description = Aircraft::getModelDescription($idAircraft);
             $descriptionToReturn = [];
 
-            // Convertis la $description dans le format attendu par le front
-            foreach($description as $key => $value) {
-                $descriptionToReturn[] = [
-                    "varName" => $key,
-                    "value" => $value
-                ];
+            if($description) {
+                // Convertis la $description dans le format attendu par le front
+                foreach($description as $key => $value) {
+                    $descriptionToReturn[] = [
+                        "varName" => $key,
+                        "value" => $value
+                    ];
+                }
+                echo json_encode($descriptionToReturn);
             }
 
-            echo json_encode($descriptionToReturn);
+            
         }
 
         public static function getAircraftDescriptionOf($idAircraft) {
             $description = Aircraft::getAircraftDescription($idAircraft);
             $descriptionToReturn = [];
 
-            // Convertis la $description dans le format attendu par le front
-            foreach($description as $key => $value) {
-                $descriptionToReturn[] = [
-                    "varName" => $key,
-                    "value" => $value
-                ];
+            if($description) {
+                // Convertis la $description dans le format attendu par le front
+                foreach($description as $key => $value) {
+                    $descriptionToReturn[] = [
+                        "varName" => $key,
+                        "value" => $value
+                    ];
+                }
+                echo json_encode($descriptionToReturn);
             }
 
-            echo json_encode($descriptionToReturn);
+            
         }
     }
 ?>
