@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription, getModelName, getAircraft} from "../../services/product";
 
-function PageProduct() {
+function PageProduct({mode}) {
   const navigate = useNavigate();
   const location = useLocation().pathname.split("/");
   const id = parseInt(location[location.length - 1]); // Récupération de l'ID
@@ -102,7 +102,7 @@ function PageProduct() {
 
 
   // Si l'id est invalide ou qu'il n'y a pas d'aircraft à afficher
-  if (!isIdValid) {
+  if (!isIdValid && mode != "add") {
     return (
       <main>
         <h2>Aucun aéronef correspondant.</h2>
@@ -115,6 +115,7 @@ function PageProduct() {
       <ProductShowcase
         modelName={modelName}
         imagePath={mainImg.url}
+        mode={mode}
       />
       <ProductDescription
         aircraftId={id}
