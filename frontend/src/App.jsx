@@ -18,11 +18,14 @@ import PageAppointment from './pages/appointment/PageAppointment.jsx';
 import PageMaintenance from './pages/maintenance/PageMaintenance.jsx';
 import PageAdmin from './pages/admin/PageAdmin.jsx';
 import CatalogPage from './pages/CatalogPage.jsx';
+import CguPage from './pages/polities/CguPage.jsx';
+import LegalNoticesPage from './pages/polities/LegalNoticesPage.jsx';
+import PrivacyPage from './pages/polities/PrivacyPage.jsx';
 
 
 function App() {
   return (
-    
+
     <BrowserRouter>
       <Template>
         <ToastContainer />
@@ -34,15 +37,21 @@ function App() {
           <Route path='/catalog' element={<CatalogPage/>} />
           <Route path='/my-profile' element={<ProfilePage />} />
           <Route path='/product' element={<PageProduct />} />
+          <Route path='/product/:id' element={<PageProduct />} />
           <Route path='/appointment' element={<PageAppointment />} />
+          <Route path='/appointment/:id' element={<PageAppointment />} />
           <Route path="/reset-password-request" element={<ResetPasswordRequest />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path='/verify-email' element={<VerifyEmail />} />
           <Route path='/services' element={<PageServices />} />
           <Route path='/contact-us' element={<ContactPage />} />
           <Route path='/training' element={<PageTraining />} />
-          <Route path='/maintenance' element={<PageMaintenance />} />
+          <Route path='/maintenance' element={<PageMaintenance />} 
           <Route path='/admin' element={<PageAdmin />} />
+          {/*polities*/}
+          <Route path='/privacy' element={<PrivacyPage/>} />
+          <Route path='/legal-notices' element={<LegalNoticesPage/>} />
+          <Route path='/cgu' element={<CguPage/>} />
         </Routes>
         <ToastContainer />
       </Template>

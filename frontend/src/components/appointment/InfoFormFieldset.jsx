@@ -22,7 +22,6 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
     }
 
     function displayProofFileName() {
-        console.log("Ok")
         const element = document.getElementById("income-proof-file-name");
         const input = document.getElementById('income-proof');
 
