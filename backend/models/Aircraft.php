@@ -93,7 +93,7 @@ class Aircraft
 
     public static function findById($id) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE idAircraft = ?");
+        $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE aircraft_id = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -119,10 +119,8 @@ class Aircraft
     public static function getMainImg($id) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT img_id,img_URL FROM image WHERE aircraft_id = ? AND role = ?");
-        
-        if($stmt->execute([$id,"main"]))
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        return false;
+        $stmt->execute([$id,"main"]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public static function getSliderImgs($id) {
