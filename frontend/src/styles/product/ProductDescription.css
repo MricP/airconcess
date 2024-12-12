@@ -63,6 +63,21 @@
 
 }
 
+.input-description {
+    display: flex;
+    flex-direction: row;
+}
+
+.productDescription-container input,
+.productDescription-container textarea {
+    width: 22vw;
+    font-size: var(--text-size);
+    color: #5B5B5B;
+    /* background: transparent; */
+    border: none;
+    resize: none;
+}
+
 .productDescription-container .button-div {
     display: flex;
     align-items: center;

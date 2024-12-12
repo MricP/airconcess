@@ -34,9 +34,11 @@ const ProductShowcase = ({ imagePath, modelName, mode }) => {
               <div className="showcase-image"></div>
             </div>
           )}
-          <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />
-          <label htmlFor="file-input">Charger une image</label>
-          <input className="product-name input" type="text" defaultValue={"Nom du produit"} />
+          <form action="">
+            <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />
+            <label htmlFor="file-input">Charger une image</label>
+            <input className="product-name input" type="text" defaultValue={"Nom du produit"} />
+          </form>
           <div className="gradient-overlay"></div>
           <ScrollDownButton
             scrollLength={window.innerHeight + 0.25 * window.innerHeight}

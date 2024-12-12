@@ -4,7 +4,7 @@ import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
 
 
-const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescription,technicalSheetPath}) => {
+const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescription,technicalSheetPath, mode}) => {
     const navigate = useNavigate()
 
     function handleDownload() {
@@ -35,6 +35,46 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
     useEffect(() => {
          // Force le défilement en haut de la page
     }, []);
+
+    if (mode === "add"){
+        return (
+            <div className='productDescription-container'>
+                <h2>SPÉCIFICATIONS</h2>
+                <hr></hr>
+                <div className='informations-div'>
+                    <div>
+                        <h3>À propos du modèle</h3>
+                        <div className='informationsList'>
+                            {modelDescription.map((line) => (
+                                <div className="input-description">
+                                    <p key={line.varName} >{"• "+line.txt+" : "}</p>
+                                    <input type="text" defaultValue={"Inconnu"}/>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <hr></hr>
+                    <div>
+                        <h3>À propos de l'appareil</h3>
+                        <div className='informationsList'>
+                            {aircraftDescription.map((line) => (
+                                <div className="input-description">
+                                    <p key={line.varName} >{"• "+line.txt+" : "}</p>
+                                    <form action="">
+                                        {line.txt !== "Configuration" && line.txt !== "Maintenance récente" ? <input type="text"  defaultValue={"Inconnu"}/> : <textarea name="" id="" defaultValue={"Inconnu"}></textarea>}
+                                    </form>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                <div className='button-div'>
+                    <button onClick={handleDownload}><BiDownload/>{"Télécharger la fiche technique"}</button>
+                    <button onClick={handleRedirection}>Prendre rendez-vous</button>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className='productDescription-container'>

@@ -122,6 +122,7 @@ function PageProduct({mode}) {
         modelName={modelName}
         modelDescription={modelDescription}
         aircraftDescription={aircraftDescription}
+        mode={mode}
       />
       <ProductMap/>
       <Slider images={sliderImgs}/>
