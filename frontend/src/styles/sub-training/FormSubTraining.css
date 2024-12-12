@@ -1,0 +1,61 @@
+.formSubTraining-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    width: 70%;
+    min-height: 500px;
+    padding: 30px 70px;
+}
+
+.formSubTraining-container .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.formSubTraining-container .prev-step {
+    position: absolute;
+    top: 29px;
+    left: 20px;
+    border-radius: 30px;
+    border: solid 1px transparent;
+    font-size: 1.8rem;
+    transition: all ease 0.2s;
+}
+
+.formSubTraining-container .prev-step:not(.disabled):hover {
+    border: solid 1px #b5b5b5;
+}
+
+.formSubTraining-container .prev-step.disabled {
+    color: transparent;
+}
+
+.formSubTraining-container .next-step {
+    width: 50%;
+}
+
+.formSubTraining-container .step-indicator {
+    width:100%;
+}
+
+.formSubTraining-container .step-indicator .rs-steps-item-description {
+    text-align: center;
+}
+
+.formSubTraining-container .step-indicator .rs-steps-item-status-finish *,
+.formSubTraining-container .step-indicator .rs-steps-item-status-finish .rs-steps-item-title::after{
+    color: green !important;
+    border-color: green !important;
+}
+
+.formSubTraining-container .step-indicator .rs-steps-item-active .rs-steps-item-description {
+    color: #3498ff !important;
+}
+
+.formSubTraining-container .step-indicator .rs-steps-item-active .rs-steps-item-title::after {
+    border-color: #3498ff !important;
+}

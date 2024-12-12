@@ -5,12 +5,10 @@ import ThirdTrainingComponent from "../components/training/ThirdTrainingComponen
 
 export default function PageTraining() {
     return (
-        <main>
-            <div className="page-training">
-                <FirstTrainingComponent />
-                <SecondTrainingComposant />
-                <ThirdTrainingComponent />
-            </div>
+        <main className="page-training">
+            <FirstTrainingComponent />
+            <SecondTrainingComposant />
+            <ThirdTrainingComponent />
         </main>
     )
 }
