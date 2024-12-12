@@ -46,7 +46,7 @@ function App() {
           <Route path='/services' element={<PageServices />} />
           <Route path='/contact-us' element={<ContactPage />} />
           <Route path='/training' element={<PageTraining />} />
-          <Route path='/maintenance' element={<PageMaintenance />} 
+          <Route path='/maintenance' element={<PageMaintenance />} />
           <Route path='/admin' element={<PageAdmin />} />
           {/*polities*/}
           <Route path='/privacy' element={<PrivacyPage/>} />
