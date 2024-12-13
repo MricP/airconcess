@@ -8,6 +8,7 @@ function FourthSectionLanding() {
     const isMobile = useMediaQuery({ query: '(max-width: 1220px)' });
     const ref = useRef(null);
     const videoRef = useRef(null);
+    const aeronef_video = '/assets/landing/aeronef-video.mp4';
 
     useEffect(() => {
         const handleScroll = () => {
@@ -40,7 +41,7 @@ function FourthSectionLanding() {
                 >
                     <video
                         ref={videoRef}
-                        src="https://www.w3schools.com/html/mov_bbb.mp4"
+                        src={aeronef_video}
                         controls
                         className="video"
                     />
@@ -49,7 +50,7 @@ function FourthSectionLanding() {
                 <div className="video-container-mobile">
                     <video
                         ref={videoRef}
-                        src="https://www.w3schools.com/html/mov_bbb.mp4"
+                        src={aeronef_video}
                         controls
                         className="video"
                     />

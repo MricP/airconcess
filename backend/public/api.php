@@ -78,29 +78,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
 // Partie page catalog (EMRIC TODO)
 
 // Route pour récupérer les données des aéronefs (GET)
-// if($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/catalog') !== false){
-//     $headers = getallheaders();
-//     try {
-//         $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-//         $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 5;
+if($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/catalog') !== false){
+    $headers = getallheaders();
+    try {
+        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 5;
 
-//         $aircrafts = Aircraft::getAllAircrafts($page, $limit);
-//         $nbAircraft = Aircraft::getNumberAircrafts();
+        $aircrafts = Aircraft::getAllAircrafts($page, $limit);
+        $nbAircraft = Aircraft::getNumberAircrafts();
 
-//         echo json_encode([
-//             'status' => 'success',
-//             'data' => $aircrafts,
-//             'page' => $page,
-//             'nbAircraft' => $nbAircraft,
-//         ]);
-//     } catch (Exception $e) {
-//         http_response_code(500); 
-//         echo json_encode([
-//             'status' => 'error',
-//             'message' => 'Une erreur s\'est produite : ' . $e->getMessage(),
-//         ]);
-//     }
-// }
+        echo json_encode([
+            'status' => 'success',
+            'data' => $aircrafts,
+            'page' => $page,
+            'nbAircraft' => $nbAircraft,
+        ]);
+    } catch (Exception $e) {
+        http_response_code(500); 
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Une erreur s\'est produite : ' . $e->getMessage(),
+        ]);
+    }
+}
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-icon') !== false) {
