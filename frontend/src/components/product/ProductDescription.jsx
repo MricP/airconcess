@@ -1,11 +1,13 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
+import { GrStatusGood } from "react-icons/gr";
 
 
 const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescription,technicalSheetPath, mode}) => {
     const navigate = useNavigate()
+    const [selectedTechnicalSheet, setSelectedTechnicalSheet] = useState(null)
 
     function handleDownload() {
         const fileUrl = technicalSheetPath; // Remplace par le chemin de ton fichier
@@ -32,6 +34,20 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
         },100)
     }
 
+    const handleFileChange = (event) => {
+        const file = event.target.files[0]
+        if (file && file.type === "application/pdf") {
+          const reader = new FileReader()
+          reader.onload = (e) => {
+            setSelectedTechnicalSheet(e.target.result) // Mettre à jour le fichier dans le state
+          };
+          reader.readAsDataURL(file)
+        } else {
+          setSelectedTechnicalSheet(null)
+          alert("Veuillez choisir un fichier valide.")
+        }
+      };
+
     useEffect(() => {
          // Force le défilement en haut de la page
     }, []);
@@ -41,6 +57,8 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
             <div className='productDescription-container'>
                 <h2>SPÉCIFICATIONS</h2>
                 <hr></hr>
+                <p>*Modifier le contenu en cliquant dessus</p>
+                <hr />
                 <div className='informations-div'>
                     <div>
                         <h3>À propos du modèle</h3>
@@ -48,7 +66,7 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                             {modelDescription.map((line) => (
                                 <div className="input-description">
                                     <p key={line.varName} >{"• "+line.txt+" : "}</p>
-                                    <input type="text" defaultValue={"Inconnu"}/>
+                                    <p contentEditable = "true">Inconnu</p>
                                 </div>
                             ))}
                         </div>
@@ -60,17 +78,23 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                             {aircraftDescription.map((line) => (
                                 <div className="input-description">
                                     <p key={line.varName} >{"• "+line.txt+" : "}</p>
-                                    <form action="">
-                                        {line.txt !== "Configuration" && line.txt !== "Maintenance récente" ? <input type="text"  defaultValue={"Inconnu"}/> : <textarea name="" id="" defaultValue={"Inconnu"}></textarea>}
-                                    </form>
+                                     <p contentEditable = "true">Inconnu</p> {/*Permet l'édition de l'élément} */}
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
                 <div className='button-div'>
-                    <button onClick={handleDownload}><BiDownload/>{"Télécharger la fiche technique"}</button>
-                    <button onClick={handleRedirection}>Prendre rendez-vous</button>
+                    <label htmlFor="fileTechnicalSheet" >
+                        {selectedTechnicalSheet ? 
+                        <div className='label-content'>
+                            <GrStatusGood color='green'/> Fiche technique Insérée
+                        </div> : 
+                        <div className='label-content'><
+                            BiDownload /> Insérer la fiche technique 
+                        </div>} 
+                        <input type="file" id="fileTechnicalSheet" onChange={handleFileChange} accept='.pdf'/>
+                    </label>
                 </div>
             </div>
         )

@@ -63,21 +63,6 @@
 
 }
 
-.input-description {
-    display: flex;
-    flex-direction: row;
-}
-
-.productDescription-container input,
-.productDescription-container textarea {
-    width: 22vw;
-    font-size: var(--text-size);
-    color: #5B5B5B;
-    /* background: transparent; */
-    border: none;
-    resize: none;
-}
-
 .productDescription-container .button-div {
     display: flex;
     align-items: center;
@@ -88,7 +73,12 @@
     margin: 2% 0 5% 0;
 }
 
-.productDescription-container .button-div button {
+.productDescription-container .button-div input {
+    display: none;
+}
+
+.productDescription-container .button-div button,
+.productDescription-container .button-div label {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -109,4 +99,10 @@
 .productDescription-container .button-div button:hover {
     background-color: #333333;
     color: #FFFFFF;
+}
+
+.productDescription-container .button-div .label-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }

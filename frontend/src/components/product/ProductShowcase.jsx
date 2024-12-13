@@ -4,8 +4,8 @@ import { useState } from "react";
 
 const ProductShowcase = ({ imagePath, modelName, mode }) => {
 
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [hasId, setHasId] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [hasId, setHasId] = useState(true)
 
   const handleFileChange = (event) => {
     const file = event.target.files[0]
