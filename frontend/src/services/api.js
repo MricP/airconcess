@@ -44,4 +44,3 @@ export const getCatalogData = async () => {
     throw error;
   }
 };
-

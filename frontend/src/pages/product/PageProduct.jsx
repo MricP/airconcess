@@ -5,7 +5,7 @@ import Slider from "../../components/product/Slider";
 import ProductMap from "../../components/product/ProductMap";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription ,getModelName} from "../../services/product";
+import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription, getModelName, getAircraft} from "../../services/product";
 
 function PageProduct() {
   const navigate = useNavigate();
@@ -47,7 +47,8 @@ function PageProduct() {
   // Charge toutes les data à afficher en fonction de l'id de l'appareil (idAircraft)
   const loadDataFromDB = async () => {
     try {
-      if (isNaN(id)) {
+      // S'il n'y a pas d'id ou que cet aircraft n'existe pas
+      if (isNaN(id) || !(await getAircraft(id))) {
         updateIdValidity(false);
         return;
       }
@@ -59,10 +60,7 @@ function PageProduct() {
       const dbModelDescription = await getModelDescription(id)
       const dbAircraftDescription = await getAircraftDescription(id)
 
-      // Mise à jour des états
-      if(dbModelName) {
-        updateModelName(dbModelName)
-      }
+      if(dbModelName) updateModelName(dbModelName)
       if(dbMainImg) updateMainImg(dbMainImg);
       if(dbSliderImgs) updateSliderImgs(dbSliderImgs);
       if(dbModelDescription) {
@@ -97,13 +95,13 @@ function PageProduct() {
     }
   };
 
-  // Charger les images lorsque le composant est monté ou lorsque `id` change
+  // Charger les données lorsque le composant est monté ou lorsque `id` change
   useEffect(() => {
     loadDataFromDB();
   }, [id]);
 
 
-  // Si l'id est invalide ou qu'il n'y en a pas 
+  // Si l'id est invalide ou qu'il n'y a pas d'aircraft à afficher
   if (!isIdValid) {
     return (
       <main>
