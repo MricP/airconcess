@@ -1,6 +1,6 @@
-import TrainingService from '../components/our-services/TrainingService';
-import MaintenanceService from '../components/our-services/MaintenanceService';
-import "../styles/our-services/PageServices.css";
+import TrainingService from '../../components/our-services/TrainingService';
+import MaintenanceService from '../../components/our-services/MaintenanceService';
+import "../../styles/our-services/PageServices.css";
 
 export default function PageServices() {
     
