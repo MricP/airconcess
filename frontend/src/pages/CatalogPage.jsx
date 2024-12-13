@@ -52,6 +52,26 @@ function CatalogPage() {
   const totalPages = Math.ceil(filteredAircrafts.length / itemsPerPage);
 
   useEffect(() => {
+    if (!isMobile && filterContainerRef.current) {
+      filterContainerRef.current.style = `position: sticky;
+                                          top: 15%;
+                                          bottom: 30%;
+                                          display: flex;
+                                          flex-direction: column;
+                                          background-color: var(--box-color);
+                                          width: 30%;
+                                          border-radius: 5px;
+                                          height: max-content;
+                                          align-items: center;
+                                          margin-left: 50px;`
+      nbAppuie = 0;
+    }
+    else if(isMobile && filterContainerRef.current){
+      filterContainerRef.current.style = "display: none;";
+    }
+  }, [isMobile]);
+
+  useEffect(() => {
     const fetchAircrafts = async () => {
       try {
         setLoading(true);
@@ -126,8 +146,6 @@ function CatalogPage() {
       else{
         filterContainerRef.current.style = "display: none;";
       }
-      
-
     }
   };
   
