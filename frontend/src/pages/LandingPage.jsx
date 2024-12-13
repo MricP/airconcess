@@ -9,6 +9,7 @@ import FourthSectionLanding from '../components/landing-page/FourthSectionLandin
 import FifthSectionLanding from '../components/landing-page/FifthSectionLanding';
 
 export default function LandingPage() {
+  console.log('taille ecran height', window.innerHeight);
   return (
     <main className="landing-page-main">
       <FirstSectionLanding />
