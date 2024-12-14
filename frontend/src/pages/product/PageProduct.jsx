@@ -125,7 +125,7 @@ function PageProduct({mode}) {
         mode={mode}
       />
       <ProductMap/>
-      <Slider images={sliderImgs}/>
+      <Slider images={sliderImgs} mode={mode}/>
     </main>
   );
 }

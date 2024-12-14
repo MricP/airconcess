@@ -90,8 +90,8 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                         <div className='label-content'>
                             <GrStatusGood color='green'/> Fiche technique Insérée
                         </div> : 
-                        <div className='label-content'><
-                            BiDownload /> Insérer la fiche technique 
+                        <div className='label-content'>
+                            <BiDownload /> Insérer la fiche technique 
                         </div>} 
                         <input type="file" id="fileTechnicalSheet" onChange={handleFileChange} accept='.pdf'/>
                     </label>
