@@ -6,6 +6,7 @@ import { GrFormPrevious } from "react-icons/gr";
 import { useForm } from "react-hook-form";
 
 import InfoFormFieldset from "../appointment/InfoFormFieldset"
+import TrainingPrefFormFieldset from "./TrainingPrefFormFieldset"
 
 import "../../styles/sub-training/FormSubTraining.css"
 
@@ -24,7 +25,7 @@ function FormSubTraining() {
     }}
   );
 
-    const formData = watch();
+  const formData = watch();
 
   const [step,updateStep] = useState(0);
 
@@ -44,18 +45,15 @@ function FormSubTraining() {
     switch(step) {
       case 0:
         return(
-          <form action="">
-            <InfoFormFieldset formData={formData} register={register} errors={errors} setValue={setValue} withIdCard={true}/>
-          </form>
+          <InfoFormFieldset formData={formData} register={register} errors={errors} setValue={setValue} withIdCard={true}/>
         )
       case 1:
         return(
-          <div>Step 1</div>
+          <TrainingPrefFormFieldset formData={formData} register={register} errors={errors} setValue={setValue}/>
         )
     }
   }
-
-
+  
   return (
     <div className='formSubTraining-container'>
       <GrFormPrevious className={step === 0 ? "disabled prev-step" :"prev-step"} onClick={handlePrevStep}/>
@@ -66,9 +64,9 @@ function FormSubTraining() {
         <Steps.Item description="VALIDATION" />
         <Steps.Item icon={<IoCheckmarkDoneOutline style={{ fontSize: 20 ,color:"#5b5b5b"}}/>}/>
       </Steps>
-      <div className='content'>
+      <form className='current-step'>
         {handleStepDisplayed()}
-      </div>
+      </form>
       <DarkButton disabled={step === 5} className="next-step" onClick={handleNextStep}>Suivant</DarkButton>
     </div>
   )
