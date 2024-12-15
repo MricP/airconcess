@@ -1,6 +1,7 @@
 <?php
     require_once __DIR__ . '/../models/Aircraft.php';
 
+    //A
     class CatalogControlleur{
 
         public static function getAircrafts(){
