@@ -31,13 +31,13 @@
 }
 
 .third-training-component-first {
-    background-image: url(../../../../frontend/public/assets/simulateurPilotage.jpg);
+    background-image: url(../../../../frontend/public/assets/training/simulateurPilotage.jpg);
 }
 
 .third-training-component-second {
-    background-image: url(../../../../frontend/public/assets/maintenance2.jpg);
+    background-image: url(../../../../frontend/public/assets/training/maintenance2.jpg);
 }
 
 .third-training-component-third {
-    background-image: url(../../../../frontend/public/assets/avionModerne.jpg);
+    background-image: url(../../../../frontend/public/assets/training/avionModerne.jpg);
 }
