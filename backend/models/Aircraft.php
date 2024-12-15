@@ -23,7 +23,14 @@ class Aircraft
 
     public static function getAllAircrafts() {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT * FROM aircraft");
+        $stmt = $pdo->prepare("SELECT * FROM aircraft A JOIN model M ON A.model_id = M.model_id");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAllModel(){
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM model");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -43,7 +43,7 @@ export const ProductBox = (props) => {
                 </div>
             </div>
             <p>{props.description}</p>
-            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button onClick={() => navigate(`/products/${props.idAircraft}` )}><FaArrowRightLong size={20}/></button></div>
+            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button onClick={() => navigate(`/product/${props.idAircraft}` )}><FaArrowRightLong size={20}/></button></div>
         </div>
       </div>
   )

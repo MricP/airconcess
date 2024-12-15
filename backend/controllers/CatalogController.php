@@ -7,10 +7,12 @@
             try {
                 $aircrafts = Aircraft::getAllAircrafts();
                 $nbAircraft = Aircraft::getNumberAircrafts();
+                $model = Aircraft::getAllModel();
 
                 echo json_encode([
                     'status' => 'success',
                     'data' => $aircrafts,
+                    'model' => $model,
                     'nbAircraft' => $nbAircraft,
                 ]);
             } catch (Exception $e) {
