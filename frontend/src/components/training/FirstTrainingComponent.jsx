@@ -10,7 +10,7 @@ export default function FirstTrainingComponent(){
                      Découvrez notre formation et toute notre équipe pédagogique.</p>
             </section>
             <div className="image">
-                <img src="assets/training.jpg" alt="Image de la formation" />    
+                <img src="assets/training/training.jpg" alt="Image de la formation" />    
             </div> 
         </div>
     )

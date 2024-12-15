@@ -12,22 +12,21 @@ import { useState } from 'react';
 import "../styles/catalog/CatalogPage.css"
 import { getCatalogData } from '../services/api';
 
-
 function CatalogPage() {
-
     const gulfstreamG650ER = "../assets/catalog/gulfstreamG650.svg"
 
     const [aircrafts, setAircrafts] = useState([]);
     const [page, setPage] = useState(1);
-    const [nbAircraft, setNbAircraft] = useState(0);
     const isMobile = useMediaQuery({ maxWidth: 1130 });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const catalogRef = useRef(null);
     const [searchPlane, setSearchPlane] = useState("");
+    // const [isPopupVisible, setIsPopupVisible] = useState(false);
+    
 
 // déclaration des références pour les filtres
-
+  const filterContainerRef = useRef(null)
   const stateRef = useRef(null);
   const priceRef = useRef(null);
   const yearRef = useRef(null);
@@ -38,7 +37,39 @@ function CatalogPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   
+  let nbAppuie = 0;
   let [filteredAircrafts, setFilteredAircrafts] = useState([]);
+
+  const [activeFilters, setActiveFilters] = useState({
+    state: "Aucun",
+    price: "Aucun",
+    year: "Aucun",
+    capacity: "Aucun",
+    autonomy: "Aucun",
+    type: "Aucun",
+  });
+
+  const totalPages = Math.ceil(filteredAircrafts.length / itemsPerPage);
+
+  useEffect(() => {
+    if (!isMobile && filterContainerRef.current) {
+      filterContainerRef.current.style = `position: sticky;
+                                          top: 15%;
+                                          bottom: 30%;
+                                          display: flex;
+                                          flex-direction: column;
+                                          background-color: var(--box-color);
+                                          width: 30%;
+                                          border-radius: 5px;
+                                          height: max-content;
+                                          align-items: center;
+                                          margin-left: 50px;`
+      nbAppuie = 0;
+    }
+    else if(isMobile && filterContainerRef.current){
+      filterContainerRef.current.style = "display: none;";
+    }
+  }, [isMobile]);
 
   useEffect(() => {
     const fetchAircrafts = async () => {
@@ -48,7 +79,6 @@ function CatalogPage() {
         const data = response.data || []; 
         setAircrafts(data);
         setFilteredAircrafts(data);
-        setNbAircraft(response.data.nbAircraft); 
         setSearchPlane('');
         setError(null); 
       } catch (error) {
@@ -69,7 +99,7 @@ function CatalogPage() {
             if (searchPlane.trim() === '') {
                 return true; 
             }
-            return plane.model.toLowerCase().includes(searchPlane.toLowerCase());
+            return plane.model_name.toLowerCase().includes(searchPlane.toLowerCase());
         });
     
         setFilteredAircrafts(filtered);
@@ -83,27 +113,47 @@ function CatalogPage() {
     const handleNextPage = () => {
         if (catalogRef.current) {
           const { offsetTop } = catalogRef.current;
-          window.scrollTo({ top: offsetTop, behavior: "smooth" });
+          window.scrollTo({ top: offsetTop - 100, behavior: "smooth" });
         } 
-        setCurrentPage((prevPage) => prevPage + 1);
-        setPage((prevPage) => prevPage + 1);
+        if(currentPage < totalPages){
+          setCurrentPage((prevPage) => prevPage + 1);
+          reapplyFilters(activeFilters)
+        }
+        
     };
 
     const handlePreviousPage = () => {
-        setCurrentPage((prevPage) => Math.max(1, prevPage - 1));
-        setPage((prevPage) => Math.max(1, prevPage - 1));
         if (catalogRef.current) {
           const { offsetTop } = catalogRef.current;
-          window.scrollTo({ top: offsetTop, behavior: "smooth" });
+          window.scrollTo({ top: offsetTop-100, behavior: "smooth" });
         }
+        setCurrentPage((prevPage) => Math.max(1, prevPage - 1));
+        reapplyFilters(activeFilters)
+        
     };
-
 
   // Gérer les filtres :
 
-  const reapplyFilters = () => {
-    let filtered = [...aircrafts]; 
+  const handleFilterRedirection = () => {
+    if (!isMobile) {
+      const { offsetTop } = catalogRef.current;
+      window.scrollTo({ top: offsetTop - 100, behavior: "smooth" });
+    } else {
+      nbAppuie++;
+      if(nbAppuie%2 === 1){
+        filterContainerRef.current.style = "display: flex;position: absolute;z-index: 1;width: 80%;top: 90%;left:0%;right: 15%;align-item: center;box-shadow: 2px 3px 3px var(--section-color);";
+      }
+      else{
+        filterContainerRef.current.style = "display: none;";
+      }
+    }
+  };
   
+  
+
+  const reapplyFilters = (filters = activeFilters) => {
+    let filtered = [...aircrafts]; 
+    
     if (stateRef.current && stateRef.current.value !== "Aucun") {
       filtered = filtered.filter((aircraft) =>
         stateRef.current.value === "Disponible"
@@ -112,14 +162,14 @@ function CatalogPage() {
       );
     }
   
-    if (priceRef.current && priceRef.current.value !== "Aucun") {
-      if (priceRef.current.value === "-1000000") {
+    if (filters.price !== "Aucun") {
+      if (filters.price === "-1000000") {
         filtered = filtered.filter((aircraft) => aircraft.price <= 1000000);
-      } else if (priceRef.current.value === "-10000000") {
+      } else if (filters.price === "-10000000") {
         filtered = filtered.filter((aircraft) => aircraft.price <= 10000000);
-      } else if (priceRef.current.value === "-50000000") {
+      } else if (filters.price === "-50000000") {
         filtered = filtered.filter((aircraft) => aircraft.price <= 50000000);
-      } else if (priceRef.current.value === "+50000000") {
+      } else if (filters.price === "+50000000") {
         filtered = filtered.filter((aircraft) => aircraft.price > 50000000);
       }
     }
@@ -179,30 +229,44 @@ function CatalogPage() {
         (aircraft) => aircraft.aircraftType === typeRef.current.value
       );
     }
-    setCurrentPage(1);
+    if ((currentPage - 1) * itemsPerPage >= filteredAircrafts.length) {
+      setCurrentPage(Math.max(1, Math.ceil(filteredAircrafts.length / itemsPerPage)));
+    }
+
     setFilteredAircrafts(filtered); 
+    
   };
   
   const handleDeleteStateFilter = () => {
     if(stateRef.current){
       stateRef.current.value = "Aucun";
       stateRef.current.style = "display:none";
+      setActiveFilters((prev) => ({ ...prev, state: "Aucun" }))
       reapplyFilters();
+      
     }
   } 
 
   const handlePriceFilter = () => {
     if(priceRef.current){
+      const newPrice = priceRef.current.value;
+      setActiveFilters((prev) => ({ ...prev, price: newPrice }));
       priceRef.current.style = "display:initial";
-      reapplyFilters();
+      reapplyFilters({ ...activeFilters, price: newPrice });
     }
   } 
 
   const handleDeletePriceFilter = () => {
     if(priceRef.current){
+      setActiveFilters((prev) => ({ ...prev, price: "Aucun" }))
+      
       priceRef.current.value = "Aucun";
       priceRef.current.style = "display:none";
-      reapplyFilters();
+      setActiveFilters((prev) => {
+        const updatedFilters = { ...prev, price: "Aucun" };
+        reapplyFilters(updatedFilters); // Reapply avec l'état à jour
+        return updatedFilters;
+    });
     }
   } 
 
@@ -216,6 +280,7 @@ function CatalogPage() {
   const handleDeleteYearFilter = () => {
     if(yearRef.current){
       yearRef.current.value = "Aucun";
+      setActiveFilters((prev) => ({ ...prev, year: "Aucun" }))
       yearRef.current.style = "display:none";
       reapplyFilters();
     }
@@ -232,6 +297,7 @@ function CatalogPage() {
     if(capacityRef.current){
       capacityRef.current.value = "Aucun";
       capacityRef.current.style = "display:none";
+      setActiveFilters((prev) => ({ ...prev, capacity: "Aucun" }))
       reapplyFilters();
     }
   } 
@@ -248,6 +314,7 @@ function CatalogPage() {
     if(autonomyRef.current){
       autonomyRef.current.value = "Aucun";
       autonomyRef.current.style = "display:none";
+      setActiveFilters((prev) => ({ ...prev, autonomy: "Aucun" }))
       reapplyFilters();
     }
   } 
@@ -257,15 +324,20 @@ function CatalogPage() {
       typeRef.current.style = "display:initial";
       reapplyFilters();
     }
-    
+    window.history.pushState(null, "AirConcess", `/catalog/${typeRef.current.value.toLowerCase()}`)
   } 
 
   const handleDeleteTypeFilter = () => {
     if(typeRef.current){
+      
+      setActiveFilters((prev) => ({ ...prev, type: "Aucun" }))
+      reapplyFilters(activeFilters)
       typeRef.current.style = "display:none";
       typeRef.current.value = "Aucun";
-      reapplyFilters();
-    }
+      
+     
+    } 
+    
   }
 
   const handleFiltrageState = () => {
@@ -286,11 +358,9 @@ function CatalogPage() {
 
   // Pagination
   const paginatedAircrafts = (filteredAircrafts|| []).slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
   );
-
-  const totalPages = Math.ceil(filteredAircrafts.length / itemsPerPage);
   
     return (
     <main className='catalog-page'> 
@@ -302,16 +372,16 @@ function CatalogPage() {
                 </p>
             </div>
             <div className="filterBar-container">
-                <button><CiSearch className='filterIcon' size={40} color='#b5b5b5'/></button>
-                <button><CiFilter className='filterIcon' size={40} color='#b5b5b5'/></button>
-                <input placeholder='Rechercher un Modèle ...' type="text" ref={catalogRef} onChange={handleSearch} />
+                <button disabled><CiSearch className='filterIcon' size={40} color='#b5b5b5'/></button>
+                <button onClick={handleFilterRedirection}><CiFilter className='filterIcon' size={40} color='#b5b5b5'/></button>
+                <input placeholder='Rechercher un Modèle ...' type="text" onChange={handleSearch} />
             </div>
         </div>
         
         
-        <div className='catalogContent-container' >
-          {!isMobile &&
-            <div className='filterDescription'>
+        <div className='catalogContent-container' ref={catalogRef}>
+          {/* {!isMobile && */}
+            <div className='filterDescription' ref={filterContainerRef}>
                 <div className='filterDescription-title'><CiFilter size={30} color='#b5b5b5'/><h3>Liste des Filtres</h3></div>
                 <ul className='editFilterList'>
                   <div className='editFilter-container'>
@@ -384,7 +454,7 @@ function CatalogPage() {
                       <button className='editFilterButton' onClick={handleTypeFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteTypeFilter}><AiOutlineCloseSquare size={20} /></button></div>
                     </div>
                 </ul>
-            </div>} 
+            </div>{/*}*/}
             
             
             <div className="catalog-separator"></div>
@@ -393,19 +463,19 @@ function CatalogPage() {
               paginatedAircrafts
                 .map((plane) => (
                 <ProductBox
-                    key={plane.idAircraft}
+                    key={plane.aircraft_id}
                     isAvailable={plane.isAvailable}
                     planeImg={gulfstreamG650ER}
-                    modelName={plane.model}
-                    serialNumber={plane.serialNumber}
-                    price={`USD $ ${plane.price}`}
-                    year={plane.year}
-                    hour={plane.hours}
-                    capacity={plane.capacity}
-                    autonomy={plane.autonomy}
-                    description={plane.description}
-                    aircraftType={plane.aircraftType}
-                    idAircraft={plane.idAircraft}
+                    modelName={plane.model_name.toUpperCase()}
+                    serialNumber={plane.serial_number}
+                    price={`USD $ ${plane.estimated_price}`}
+                    year={plane.manufacture_year}
+                    hour={`${plane.flight_hours.split(" ")[0]} ${plane.flight_hours.split(" ")[1]}`}
+                    capacity={plane.passenger_capacity.split(" ")[1]}
+                    autonomy={`${plane.max_range.split(" ")[0]} ${plane.max_range.split(" ")[1]}`}
+                    description={plane.Description}
+                    aircraftType={plane.range_type}
+                    idAircraft={plane.aircraft_id}
                 />
                 ))
             ) : (
@@ -413,13 +483,13 @@ function CatalogPage() {
             )}
                             
               <div className='chooseCatalogPage'>
-                <button onClick={handlePreviousPage} disabled={page === 1}>
+                <button onClick={handlePreviousPage} >
                   <IoIosArrowBack color='#B5B5B5' size={35} />
                 </button>
                 <p>
                   {currentPage} / {totalPages === 0 ? 1 : totalPages}
                 </p>
-                <button onClick={handleNextPage} disabled={page === totalPages}>
+                <button onClick={handleNextPage}>
                   <IoIosArrowForward color='#B5B5B5' size={35} />
                 </button>
               </div>

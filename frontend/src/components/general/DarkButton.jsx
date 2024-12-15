@@ -2,11 +2,11 @@
 import {Link} from "react-router-dom";
 import "../../styles/general/DarkButton.css";
 
-export default function DarkButton({text, use, className, destination}){
+export default function DarkButton({children, className, destination, ...rest}){
     return (
-        <button className={`dark-button ${className}`} onClick={use}>
+        <button className={`dark-button ${className}`} {...rest} >
             <Link to= {destination}>
-                {text}
+                {children}
             </Link>
         </button>
     )
