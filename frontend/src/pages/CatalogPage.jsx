@@ -99,7 +99,7 @@ function CatalogPage() {
             if (searchPlane.trim() === '') {
                 return true; 
             }
-            return plane.model.toLowerCase().includes(searchPlane.toLowerCase());
+            return plane.model_name.toLowerCase().includes(searchPlane.toLowerCase());
         });
     
         setFilteredAircrafts(filtered);
