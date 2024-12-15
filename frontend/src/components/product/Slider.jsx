@@ -8,30 +8,32 @@ function Slider({ images, mode }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [imageAdd, setImageAdd] = useState([])
 
-    const scrollToImage = (direction) => {
+    const scrollToImage = (direction, tabImages) => {
         if (direction === 'prev') {
-            setCurrentIndex((curr) => (curr === 0 ? images.length - 1 : curr - 1));
+            setCurrentIndex((curr) => (curr === 0 ? tabImages.length - 1 : curr - 1));
         } else {
-            setCurrentIndex((curr) => (curr === images.length - 1 ? 0 : curr + 1));
+            setCurrentIndex((curr) => (curr === tabImages.length - 1 ? 0 : curr + 1));
         }
     };
 
     const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file && file.type.startsWith("image/")) {
-            if (file.size > 2 * 1024 * 1024) {
-                alert("Le fichier est trop volumineux.");
-                return;
+        const files = Array.from(event.target.files);
+        files.forEach(file => {
+            if (file && file.type.startsWith("image/")) {
+                if (file.size > 2 * 1024 * 1024) {
+                    alert("Le fichier est trop volumineux.");
+                    return;
+                }
+        
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    setImageAdd((prev) => [...prev, { id: Date.now(), src: e.target.result }]);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert("Veuillez choisir un/des fichier(s) valide.");
             }
-
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setImageAdd([...imageAdd, e.target.result]);
-            };
-            reader.readAsDataURL(file);
-        } else {
-            alert("Veuillez choisir un fichier valide.");
-        }
+        });
     };
 
     if (mode === "add"){
@@ -41,8 +43,8 @@ function Slider({ images, mode }) {
                 <p>© Tous droits réservés</p>
                 {imageAdd.length>0 ? ( 
                     <div className="container-images">
-                        {currentIndex === 0 ? null : <HiOutlineChevronDoubleLeft className="leftArrow" onClick={() => scrollToImage('prev')}/>}
-                        {currentIndex === imageAdd.length - 1 ? null : <HiOutlineChevronDoubleRight className="rightArrow" onClick={() => scrollToImage('next')}/>}
+                        {currentIndex === 0 ? null : <HiOutlineChevronDoubleLeft className="leftArrow" onClick={() => scrollToImage('prev', imageAdd)}/>}
+                        {currentIndex === imageAdd.length - 1 ? null : <HiOutlineChevronDoubleRight className="rightArrow" onClick={() => scrollToImage('next', imageAdd)}/>}
                         <ul
                             style={{
                                 transform: `translateX(-${currentIndex * (35)}%)`,
@@ -53,11 +55,11 @@ function Slider({ images, mode }) {
                             {imageAdd.map((sliderImg) => (
                                 sliderImg === imageAdd[currentIndex] ?
                                 <li key={sliderImg.id} className='currentImg'>
-                                    <img src={sliderImg.url} alt={"SliderImg"+currentIndex} />
+                                    <img src={sliderImg.src} alt={"SliderImg"+currentIndex} />
                                     <p className='indexImg'>{currentIndex+1+'/'+imageAdd.length}</p>
                                 </li> : 
                                 <li key={sliderImg.id} className='otherImg'>
-                                    <img src={sliderImg.url} alt={"SliderImg"+currentIndex} />
+                                    <img src={sliderImg.src} alt={"SliderImg"+currentIndex} />
                                 </li>
                             ))}
                             <li></li> {/*élément invisible, permet de grader le dernier élément au centre*/}
@@ -68,7 +70,7 @@ function Slider({ images, mode }) {
                             <div className='label-content'>
                                 <BiDownload /> Insérer des photos 
                             </div> 
-                            <input type="file" id="input-picture" onChange={handleFileChange} accept="image/*"/>
+                            <input type="file" id="input-picture" onChange={handleFileChange} accept="image/*" multiple/>
                         </label>
                     )
             }
@@ -83,8 +85,8 @@ function Slider({ images, mode }) {
             <p>© Tous droits réservés</p>
             {images.length>0 ? ( 
                 <div className="container-images">
-                    {currentIndex === 0 ? null : <HiOutlineChevronDoubleLeft className="leftArrow" onClick={() => scrollToImage('prev')}/>}
-                    {currentIndex === images.length - 1 ? null : <HiOutlineChevronDoubleRight className="rightArrow" onClick={() => scrollToImage('next')}/>}
+                    {currentIndex === 0 ? null : <HiOutlineChevronDoubleLeft className="leftArrow" onClick={() => scrollToImage('prev', images)}/>}
+                    {currentIndex === images.length - 1 ? null : <HiOutlineChevronDoubleRight className="rightArrow" onClick={() => scrollToImage('next', images)}/>}
                     <ul
                         style={{
                             transform: `translateX(-${currentIndex * (35)}%)`,
