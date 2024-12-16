@@ -145,5 +145,23 @@ class Aircraft
         $stmt->execute([$idAircraft]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public static function insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable){
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("Insert into aircraft values (?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt->bindValue(1, $idModel);
+        $stmt->bindValue(1, $serialNumber);
+        $stmt->bindValue(1, $manufactureYear);
+        $stmt->bindValue(1, $flightHours);
+        $stmt->bindValue(1, $configuration);
+        $stmt->bindValue(1, $recentMaintenance);
+        $stmt->bindValue(1, $typicalRoutes);
+        $stmt->bindValue(1, $owner);
+        $stmt->bindValue(1, $costPerKm);
+        $stmt->bindValue(1, $monthlyMaintenanceCost);
+        $stmt->bindValue(1, $estimatedPrice);
+        $stmt->bindValue(1, $isAvailable);
+        $stmt->execute();
+    }
     
 }

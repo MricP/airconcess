@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import PageProduct from "../product/PageProduct";
+import DarkButton from "../../components/general/DarkButton"
 
 export default function PageAdmin(){
 
@@ -30,7 +31,7 @@ export default function PageAdmin(){
         } else if (event.target.textContent === "• Supprimer un produit") {
             setSelectedComponent(<EditArticle use= "delete"/>)
         } else if (event.target.textContent === "• Ajouter un produit"){
-            setSelectedComponent(<PageProduct mode="add"/>)
+            setSelectedComponent(<div><PageProduct mode="add"/> <DarkButton>Salut</DarkButton></div>)
         }
     }
 
