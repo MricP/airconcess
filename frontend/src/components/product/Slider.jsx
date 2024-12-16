@@ -66,12 +66,14 @@ function Slider({ images, mode }) {
                         </ul>
                     </div>) : 
                     (
-                        <label htmlFor="input-picture">
-                            <div className='label-content'>
-                                <BiDownload /> Insérer des photos 
-                            </div> 
-                            <input type="file" id="input-picture" onChange={handleFileChange} accept="image/*" multiple/>
-                        </label>
+                        <div className='label-container'>
+                            <label htmlFor="input-picture">
+                                <div className='label-content'>
+                                    <BiDownload /> Insérer des photos 
+                                </div> 
+                                <input type="file" id="input-picture" onChange={handleFileChange} accept="image/*" multiple/>
+                            </label>
+                        </div>
                     )
             }
                 

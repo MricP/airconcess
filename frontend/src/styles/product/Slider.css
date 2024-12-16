@@ -128,6 +128,14 @@
     gap: 10px;
 }
 
+.slider-container .label-container {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
 .slider-container .label-content {
   display: flex;
   align-items: center;

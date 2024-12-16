@@ -83,7 +83,21 @@ export const getAircraftDescription = async (idAircraft) => {
 
 export const insertAircraft = async (idModel, serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, isAvailable) => {
     try {
-        const response = await axiosInstance.post('/product/insert-Aircraft',{idModel, serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, isAvailable})
+        const response = await axiosInstance.post('/admin/insert-Aircraft', {
+            idModel,
+            serialNumber,
+            manufactureYear: +manufactureYear, // Assurez-vous que c'est un nombre
+            flightHours,
+            configuration,
+            recentMaintenance,
+            typicalRoutes,
+            owner,
+            costPerKm,
+            monthlyMaintenanceCost,
+            estimatedPrice,
+            isAvailable
+        });
+        console.log('Réponse du serveur:', response);
     } catch(error) {
         console.error("Erreur lors de l'insertion", error);
         throw error;

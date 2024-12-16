@@ -5,9 +5,23 @@ import { BiDownload } from "react-icons/bi";
 import { GrStatusGood } from "react-icons/gr";
 
 
-const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescription,technicalSheetPath, mode}) => {
+const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescription,technicalSheetPath, mode, onInputChange}) => {
     const navigate = useNavigate()
     const [selectedTechnicalSheet, setSelectedTechnicalSheet] = useState(null)
+
+    const aircraftDescriptionTab = 
+    [ 
+        "serialNumber",
+        "manufactureYear",
+        "flightHours",
+        "configuration",
+        "recentMaintenance",
+        "typicalRoutes",
+        "owner",
+        "costPerKm",
+        "monthlyMaintenanceCost",
+        "estimatedPrice"
+    ]
 
     function handleDownload() {
         const fileUrl = technicalSheetPath; // Remplace par le chemin de ton fichier
@@ -52,6 +66,13 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
          // Force le défilement en haut de la page
     }, []);
 
+    const handleFieldChange = (field, event) => {
+        if (onInputChange) {
+            console.log(field)
+          onInputChange(field, event.target.textContent);
+        }
+    };
+
     if (mode === "add"){
         return (
             <div className='productDescription-container'>
@@ -66,7 +87,7 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                             {modelDescription.map((line) => (
                                 <div className="input-description">
                                     <p key={line.varName} >{"• "+line.txt+" : "}</p>
-                                    <p contentEditable = "true">Inconnu</p>
+                                    <p contentEditable = "true" suppressContentEditableWarning = "true">Inconnu</p>
                                 </div>
                             ))}
                         </div>
@@ -75,10 +96,10 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                     <div>
                         <h3>À propos de l'appareil</h3>
                         <div className='informationsList'>
-                            {aircraftDescription.map((line) => (
+                            {aircraftDescription.map((line, index) => (
                                 <div className="input-description">
                                     <p key={line.varName} >{"• "+line.txt+" : "}</p>
-                                     <p contentEditable = "true">Inconnu</p> {/*Permet l'édition de l'élément} */}
+                                     <p contentEditable = "true" suppressContentEditableWarning = "true" onInput={(e) => {handleFieldChange(aircraftDescriptionTab[index], e)}}>Inconnu</p> {/*Permet l'édition de l'élément} */}
                                 </div>
                             ))}
                         </div>

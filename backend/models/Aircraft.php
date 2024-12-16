@@ -147,21 +147,35 @@ class Aircraft
     }
 
     public static function insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable){
-        $pdo = self::getDB();
-        $stmt = $pdo->prepare("Insert into aircraft values (?,?,?,?,?,?,?,?,?,?,?,?)");
-        $stmt->bindValue(1, $idModel);
-        $stmt->bindValue(1, $serialNumber);
-        $stmt->bindValue(1, $manufactureYear);
-        $stmt->bindValue(1, $flightHours);
-        $stmt->bindValue(1, $configuration);
-        $stmt->bindValue(1, $recentMaintenance);
-        $stmt->bindValue(1, $typicalRoutes);
-        $stmt->bindValue(1, $owner);
-        $stmt->bindValue(1, $costPerKm);
-        $stmt->bindValue(1, $monthlyMaintenanceCost);
-        $stmt->bindValue(1, $estimatedPrice);
-        $stmt->bindValue(1, $isAvailable);
-        $stmt->execute();
+        try {
+            $pdo = self::getDB();
+            $stmt = $pdo->prepare(
+            "
+                Insert into aircraft
+                    (model_id, serial_number, manufacture_year, flight_hours, configuration, recent_maintenance, typical_routes, owner, cost_per_km, monthly_maintenance_cost, estimated_price, isAvailable)
+                values (?,?,?,?,?,?,?,?,?,?,?,?)
+            ");
+            
+            // Debugging output for the SQL statement
+            echo "Executing SQL insert...";
+    
+            $stmt->bindValue(1, $idModel);
+            $stmt->bindValue(2, $serialNumber);
+            $stmt->bindValue(3, $manufactureYear);
+            $stmt->bindValue(4, $flightHours);
+            $stmt->bindValue(5, $configuration);
+            $stmt->bindValue(6, $recentMaintenance);
+            $stmt->bindValue(7, $typicalRoutes);
+            $stmt->bindValue(8, $owner);
+            $stmt->bindValue(9, $costPerKm);
+            $stmt->bindValue(10, $monthlyMaintenanceCost);
+            $stmt->bindValue(11, $estimatedPrice);
+            $stmt->bindValue(12, $isAvailable);
+            
+            $stmt->execute();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage(); // Display error message
+        }
     }
     
 }

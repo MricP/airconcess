@@ -23,28 +23,26 @@ const ProductShowcase = ({ imagePath, modelName, mode }) => {
   };
 
   if (mode === "add") {
-    console.log("mode add")
     return (
           <div className="productShowcase-container" id={hasId ? "productShowcase-container-edit" : null}>
-          {console.log(selectedImage)}
-          {selectedImage ? (
-            <img className="showcase-image" src={selectedImage} alt="Prévisualisation" />
-          ) : (
-            <div>
-              <div className="showcase-image"></div>
-            </div>
-          )}
-          <form action="">
-            <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />
-            <label htmlFor="file-input">Charger une image</label>
-            <input className="product-name input" type="text" defaultValue={"Nom du produit"} />
-          </form>
-          <div className="gradient-overlay"></div>
-          <ScrollDownButton
-            scrollLength={window.innerHeight + 0.25 * window.innerHeight}
-            colorIcon="white"
-          />
-      </div>
+              {selectedImage ? (
+                <img className="showcase-image" src={selectedImage} alt="Prévisualisation" />
+              ) : (
+                <div>
+                  <div className="showcase-image"></div>
+                </div>
+              )}
+              <form action="">
+                <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />
+                <label htmlFor="file-input">Charger une image</label>
+                <input className="product-name input" type="text" defaultValue={"Nom du produit"} />
+              </form>
+              <div className="gradient-overlay"></div>
+              <ScrollDownButton
+                scrollLength={window.innerHeight + 0.25 * window.innerHeight}
+                colorIcon="white"
+              />
+          </div>
     );
   }
 
