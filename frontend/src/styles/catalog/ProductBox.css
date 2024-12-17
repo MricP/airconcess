@@ -59,6 +59,7 @@
     position: relative;
     box-sizing: border-box;
     display: flex;
+    gap: 10px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -86,17 +87,26 @@
     box-shadow: 2px 3px 3px var(--section-color);
 }
 
+.planeInfos{
+    font-size: 1.1em;
+}
+
+.planeInfos > p{
+    font-size: 1.1em;
+}
+
 .planeInfos-container{
     display: flex;
     align-items: center;
+    gap: 20px;
     justify-content: space-between;
     line-height: 30px;
-    font-size: 1em;
     width: 80%;
 }
 
 .infoTitle{
     color: var(--model-color);
+    font-size: 1em;
 }
 
 .catalog-productDescription-container > p{
@@ -235,5 +245,15 @@
         gap: 0px;
     }
 
-   
-}   
+    .catalog-productImage-container{
+        width: 100%;
+    }
+
+    .catalog-productDescription-container{
+        width: 100%;
+    }
+
+    .planeInfos-container{
+        display: none;
+    }
+}

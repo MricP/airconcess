@@ -26,11 +26,8 @@ export const ProductBox = (props) => {
   return (
       <div className='productBox-container'>
         <div className='catalog-productImage-container'>
-          <div className='available-container'>
-            {props.isAvailable === 1 ? <FaRegCircleDot color='#43A73A'/> : <FaRegCircleDot color='#ea2424'/> }
-            <p className='catalogAvailable'>{props.isAvailable === 0 ? "INDISPONIBLE" : "DISPONIBLE"}</p>
-          </div>
-          <img src={props.planeImg} alt="planeImg" />
+          <div className='available-container'>{props.isAvailable === 1 ? <FaRegCircleDot color='#43A73A'/> : <FaRegCircleDot color='#ea2424'/> }<p className='catalogAvailable'>{props.isAvailable === 0 ? "INDISPONIBLE" : "DISPONIBLE"}</p></div>
+          <img src={props.planeImg}/>
           <div className='imageInfo-container'>
               <p>{props.modelName}</p>
               <p>{props.serialNumber}</p>
@@ -65,7 +62,7 @@ export const ProductBox = (props) => {
                 </div>
             </div>
             <p>{props.description}</p>
-            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button onClick={() => navigate(`/products/${props.idAircraft}` )}><FaArrowRightLong size={20}/></button></div>
+            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button onClick={() => navigate(`/product/${props.idAircraft}` )}><FaArrowRightLong size={20}/></button></div>
         </div>
       </div>
   )
