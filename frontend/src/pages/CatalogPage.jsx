@@ -164,69 +164,69 @@ function CatalogPage() {
   
     if (filters.price !== "Aucun") {
       if (filters.price === "-1000000") {
-        filtered = filtered.filter((aircraft) => aircraft.price <= 1000000);
+        filtered = filtered.filter((aircraft) => Number(aircraft.estimated_price) <= 1000000);
       } else if (filters.price === "-10000000") {
-        filtered = filtered.filter((aircraft) => aircraft.price <= 10000000);
+        filtered = filtered.filter((aircraft) => Number(aircraft.estimated_price) <= 10000000);
       } else if (filters.price === "-50000000") {
-        filtered = filtered.filter((aircraft) => aircraft.price <= 50000000);
+        filtered = filtered.filter((aircraft) => Number(aircraft.estimated_price) <= 50000000);
       } else if (filters.price === "+50000000") {
-        filtered = filtered.filter((aircraft) => aircraft.price > 50000000);
+        filtered = filtered.filter((aircraft) => Number(aircraft.estimated_price )> 50000000);
       }
     }
   
     if (yearRef.current && yearRef.current.value !== "Aucun") {
       if (yearRef.current.value === "2000") {
-        filtered = filtered.filter((aircraft) => aircraft.year <= 2000);
+        filtered = filtered.filter((aircraft) => Number(aircraft.manufacture_year) <= 2000);
       } else if (yearRef.current.value === "2010") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.year <= 2010 && aircraft.year > 2000
+          (aircraft) => Number(aircraft.manufacture_year) <= 2010 && Number(aircraft.manufacture_year) > 2000
         );
       } else if (yearRef.current.value === "2020") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.year <= 2020 && aircraft.year > 2010
+          (aircraft) => Number(aircraft.manufacture_year) <= 2020 && Number(aircraft.manufacture_year) > 2010
         );
       } else if (yearRef.current.value === "NEW") {
-        filtered = filtered.filter((aircraft) => aircraft.year > 2020);
+        filtered = filtered.filter((aircraft) => Number(aircraft.manufacture_year) > 2020);
       }
     }
   
     if (capacityRef.current && capacityRef.current.value !== "Aucun") {
       if (capacityRef.current.value === "0") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.capacity < 5 && aircraft.capacity >= 0
+          (aircraft) => Number(aircraft.passenger_capacity.split(" ")[1]) < 5 && Number(aircraft.passenger_capacity.split(" ")[1]) >= 0
         );
       } else if (capacityRef.current.value === "5") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.capacity < 10 && aircraft.capacity >= 5
+          (aircraft) => Number(aircraft.passenger_capacity.split(" ")[1]) < 10 && Number(aircraft.passenger_capacity.split(" ")[1]) >= 5
         );
       } else if (capacityRef.current.value === "10") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.capacity < 15 && aircraft.capacity >= 10
+          (aircraft) => Number(aircraft.passenger_capacity.split(" ")[1]) < 15 && Number(aircraft.passenger_capacity.split(" ")[1]) >= 10
         );
       } else if (capacityRef.current.value === "15") {
-        filtered = filtered.filter((aircraft) => aircraft.capacity >= 15);
+        filtered = filtered.filter((aircraft) => Number(aircraft.passenger_capacity.split(" ")[1]) >= 15);
       }
     }
   
     if (autonomyRef.current && autonomyRef.current.value !== "Aucun") {
       if (autonomyRef.current.value === "-100") {
-        filtered = filtered.filter((aircraft) => aircraft.autonomy <= 100);
+        filtered = filtered.filter((aircraft) => Number(aircraft.max_range.split(" ")[0] + aircraft.max_range.split(" ")[1]) <= 100);
       } else if (autonomyRef.current.value === "-500") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.autonomy <= 500 && aircraft.autonomy > 100
+          (aircraft) => Number(aircraft.max_range.split(" ")[0] + aircraft.max_range.split(" ")[1]) <= 500 && Number(aircraft.max_range.split(" ")[0] + aircraft.max_range.split(" ")[1]) > 100
         );
       } else if (autonomyRef.current.value === "-1000") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.autonomy <= 1000 && aircraft.autonomy > 500
+          (aircraft) => Number(aircraft.max_range.split(" ")[0] + aircraft.max_range.split(" ")[1]) <= 1000 && Number(aircraft.max_range.split(" ")[0] + aircraft.max_range.split(" ")[1]) > 500
         );
       } else if (autonomyRef.current.value === "+1000") {
-        filtered = filtered.filter((aircraft) => aircraft.autonomy > 1000);
+        filtered = filtered.filter((aircraft) => Number(aircraft.max_range.split(" ")[0] + aircraft.max_range.split(" ")[1]) > 1000);
       }
     }
   
     if (typeRef.current && typeRef.current.value !== "Aucun") {
       filtered = filtered.filter(
-        (aircraft) => aircraft.aircraftType === typeRef.current.value
+        (aircraft) => aircraft.range_type === typeRef.current.value
       );
     }
     if ((currentPage - 1) * itemsPerPage >= filteredAircrafts.length) {
@@ -264,7 +264,7 @@ function CatalogPage() {
       priceRef.current.style = "display:none";
       setActiveFilters((prev) => {
         const updatedFilters = { ...prev, price: "Aucun" };
-        reapplyFilters(updatedFilters); // Reapply avec l'état à jour
+        reapplyFilters(updatedFilters); 
         return updatedFilters;
     });
     }
@@ -329,13 +329,10 @@ function CatalogPage() {
 
   const handleDeleteTypeFilter = () => {
     if(typeRef.current){
-      
       setActiveFilters((prev) => ({ ...prev, type: "Aucun" }))
       reapplyFilters(activeFilters)
       typeRef.current.style = "display:none";
       typeRef.current.value = "Aucun";
-      
-     
     } 
     
   }
@@ -343,7 +340,7 @@ function CatalogPage() {
   const handleFiltrageState = () => {
     if(stateRef.current){
       stateRef.current.style = "display:initial";
-      reapplyFilters();
+      reapplyFilters(activeFilters);
     }
   }
 
