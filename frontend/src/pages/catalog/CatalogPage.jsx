@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { CiSearch } from "react-icons/ci";
 import { CiFilter } from "react-icons/ci";
-import { ProductBox } from '../components/ProductBox';
+import { ProductBox } from '../../components/catalog/ProductBox';
 import { FaEdit } from "react-icons/fa";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
@@ -9,8 +9,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import "../styles/catalog/CatalogPage.css"
-import { getCatalogData } from '../services/api';
+import "../../styles/catalog/CatalogPage.css"
+import { getCatalogData } from '../../services/api';
 
 function CatalogPage() {
     const gulfstreamG650ER = "../assets/catalog/gulfstreamG650.svg"

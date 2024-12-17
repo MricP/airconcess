@@ -16,7 +16,7 @@ import PageTraining from './pages/training/PageTraining.jsx';
 import ContactPage from './pages/contact/ContactPage.jsx';
 import PageAppointment from './pages/appointment/PageAppointment.jsx';
 import PageMaintenance from './pages/maintenance/PageMaintenance.jsx';
-import CatalogPage from './pages/CatalogPage.jsx';
+import CatalogPage from './pages/catalog/CatalogPage.jsx';
 import CguPage from './pages/polities/CguPage.jsx';
 import LegalNoticesPage from './pages/polities/LegalNoticesPage.jsx';
 import PrivacyPage from './pages/polities/PrivacyPage.jsx';
