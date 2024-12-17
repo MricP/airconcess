@@ -86,7 +86,7 @@ export const insertAircraft = async (idModel, serialNumber, manufactureYear, fli
         const response = await axiosInstance.post('/admin/insert-Aircraft', {
             idModel,
             serialNumber,
-            manufactureYear: +manufactureYear, // Assurez-vous que c'est un nombre
+            manufactureYear: parseInt(manufactureYear), 
             flightHours,
             configuration,
             recentMaintenance,

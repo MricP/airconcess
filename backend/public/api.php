@@ -161,4 +161,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
     ProductController::getAircraftDescriptionOf($input['idAircraft']);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Aircraft') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    Aircraft::insertAircraft(
+        $args["idModel"],
+        $args["serialNumber"],
+        $args["manufactureYear"], 
+        $args["flightHours"],
+        $args["configuration"],
+        $args["recentMaintenance"],
+        $args["typicalRoutes"],
+        $args["owner"],
+        $args["costPerKm"],
+        $args["monthlyMaintenanceCost"],
+        $args["estimatedPrice"],
+        $args["isAvailable"]);
+}
 ?>
