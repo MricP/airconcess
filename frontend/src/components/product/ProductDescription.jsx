@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {createElement, useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
@@ -66,11 +66,16 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
          // Force le défilement en haut de la page
     }, []);
 
-    const handleFieldChange = (field, event) => {
+    const handleFieldChange = (field, event, index) => {
         if (onInputChange) {
-            console.log(field)
-          onInputChange(field, event.target.textContent);
+          onInputChange(field, event.target.textContent)
         }
+        const criteria = document.getElementById("aircraftDescription"+index)
+        const divCriteria = event.target.parentElement
+        const newP = document.createElement("p")
+        newP.textContent = criteria.textContent + event.target.textContent
+        divCriteria.innerHTML = ""
+        divCriteria.appendChild(newP)
     };
 
     if (mode === "add"){
@@ -84,9 +89,9 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                     <div>
                         <h3>À propos du modèle</h3>
                         <div className='informationsList'>
-                            {modelDescription.map((line) => (
-                                <div className="input-description">
-                                    <p key={line.varName} >{"• "+line.txt+" : "}</p>
+                            {modelDescription.map((line, index) => (
+                                <div key={line.varName} className="input-description">
+                                    <p>{"• "+line.txt+" : "}</p>
                                     <p contentEditable = "true" suppressContentEditableWarning = "true">Inconnu</p>
                                 </div>
                             ))}
@@ -97,9 +102,9 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                         <h3>À propos de l'appareil</h3>
                         <div className='informationsList'>
                             {aircraftDescription.map((line, index) => (
-                                <div className="input-description">
-                                    <p key={line.varName} >{"• "+line.txt+" : "}</p>
-                                     <p contentEditable = "true" suppressContentEditableWarning = "true" onInput={(e) => {handleFieldChange(aircraftDescriptionTab[index], e)}}>Inconnu</p> {/*Permet l'édition de l'élément} */}
+                                <div className="input-description criteria" key={line.varName}>
+                                    <p id={"aircraftDescription"+index}>{"• "+line.txt+" : "}</p>
+                                    <p contentEditable = "true" suppressContentEditableWarning = "true" onBlur={(e) => {handleFieldChange(aircraftDescriptionTab[index], e, index)}}>Inconnu</p> {/*Permet l'édition de l'élément} */}
                                 </div>
                             ))}
                         </div>
