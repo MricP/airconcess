@@ -3,7 +3,7 @@ import PhoneInput from 'react-phone-number-input'
 
 import '../../styles/general/PhoneInput.css';
 
-const CustomPhoneInput = forwardRef(({className="",setValue},ref) => {
+const CustomPhoneInput = forwardRef(({className="",setValue, ...rest},ref) => {
   return (
     <PhoneInput
         ref={ref}
@@ -11,6 +11,7 @@ const CustomPhoneInput = forwardRef(({className="",setValue},ref) => {
         onChange={(value) => {
             setValue(value);
         }}
+        {...rest}
     />
   )
 });

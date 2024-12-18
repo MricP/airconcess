@@ -13,14 +13,14 @@ import "../../styles/sub-training/FormSubTraining.css"
 function FormSubTraining() {
   const {register,handleSubmit,watch,setValue, formState: { errors }} = useForm (
     { defaultValues: {
-        firstName: "",
-        lastName: "",
-        phone: "",
-        email: "",
-        address: "",
-        country: "",
-        city: "",
-        postalCode: "",
+        firstName: null,
+        lastName: null,
+        phone: null,
+        email: null,
+        address: null,
+        country: null,
+        city: null,
+        postalCode: null,
         idCard: null
     }}
   );
@@ -32,6 +32,7 @@ function FormSubTraining() {
   function handlePrevStep() {
     if(step>0) {
       step == 5 ? updateStep(3) : updateStep(step-1)
+      console.table(formData)
     }
   }
 
@@ -40,6 +41,10 @@ function FormSubTraining() {
       step == 3 ? updateStep(5) : updateStep(step+1)
     }
   }
+
+  const onSubmit = async () => {
+    handleNextStep()
+  };
 
   function handleStepDisplayed() {
     switch(step) {
@@ -64,10 +69,13 @@ function FormSubTraining() {
         <Steps.Item description="VALIDATION" />
         <Steps.Item icon={<IoCheckmarkDoneOutline style={{ fontSize: 20 ,color:"#5b5b5b"}}/>}/>
       </Steps>
-      <form className='current-step'>
+      <form method="POST" onSubmit={handleSubmit(onSubmit)}className='current-step'>
         {handleStepDisplayed()}
+        
+        <button disabled={step === 5} type='submit' className="next-step">Submit</button>
+
       </form>
-      <DarkButton disabled={step === 5} className="next-step" onClick={handleNextStep}>Suivant</DarkButton>
+      
     </div>
   )
 }

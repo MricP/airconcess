@@ -90,6 +90,7 @@ function AppointmentForm() {
         { label: "Agence 2", value: "A2" }
     ];
 
+    /* TODO : INITIALISER TOUT à null à L'AVENIR*/
     const {register,handleSubmit,watch,setValue, formState: { errors }} = useForm (
         { defaultValues: {
             reason: "",
