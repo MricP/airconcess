@@ -3,7 +3,7 @@ import { SelectPicker } from "rsuite";
 
 import '../../styles/general/Rsuite-custom.css'; 
 
-const CustomSelectPicker = forwardRef(({className,setValue,data,searchable=false,placeholder=" ",...rest},ref) => {
+const CustomSelectPicker = forwardRef(({className,setValue,data,searchable=false,placeholder=" ",rest},ref) => {
 
     return (
       <SelectPicker
