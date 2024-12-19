@@ -37,21 +37,25 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                     <div>
                         <p>Date de début*</p>
                         <CustomDatePicker
-                            className={errors.date ? "input-error" : ""}
+                            className={errors.startDate ? "input-error" : ""}
                             disabledSlots={[]}
+                            disableAfter={formData.endDate}
                             selectedTime={null}
-                            setDate={(value) => setValue("date", value, errors.date ? { shouldValidate: true } : { shouldValidate: false })}
-                            {...register("date", { required: "La date est obligatoire." })}
+                            value={formData.startDate}
+                            setDate={(value) => setValue("startDate", value, errors.startDate ? { shouldValidate: true } : { shouldValidate: false })}
+                            {...register("startDate", { required: "La date est obligatoire." })}
                         />
                     </div>
                     <div>
                         <p>Date de fin*</p>
                         <CustomDatePicker
-                            className={errors.date ? "input-error" : ""}
+                            className={errors.endDate ? "input-error" : ""}
                             disabledSlots={[]}
+                            disableBefore={formData.startDate}
                             selectedTime={null}
-                            setDate={(value) => setValue("date", value, errors.date ? { shouldValidate: true } : { shouldValidate: false })}
-                            {...register("date", { required: "La date est obligatoire." })}
+                            value={formData.endDate}
+                            setDate={(value) => setValue("endDate", value, errors.endDate ? { shouldValidate: true } : { shouldValidate: false })}
+                            {...register("endDate", { required: "La date est obligatoire." })}
                         />
                     </div>
                 </CustomProvider>

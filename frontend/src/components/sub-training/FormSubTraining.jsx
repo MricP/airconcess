@@ -13,6 +13,7 @@ import "../../styles/sub-training/FormSubTraining.css"
 function FormSubTraining() {
   const {register,handleSubmit,watch,setValue, formState: { errors }} = useForm (
     { defaultValues: {
+        //Step1
         firstName: null,
         lastName: null,
         phone: null,
@@ -21,13 +22,19 @@ function FormSubTraining() {
         country: null,
         city: null,
         postalCode: null,
-        idCard: null
+        idCard: null,
+        //Step2
+        startDate: null,
+        endDate: null,
+        prefSlots: null, //Format : [{startHour:VALUE,endHour:VALUE},{startHour:VALUE,endHour:VALUE}]
+        prefFrequency: null,
+        //Step3
     }}
   );
 
   const formData = watch();
 
-  const [step,updateStep] = useState(0);
+  const [step,updateStep] = useState(1);
 
   function handlePrevStep() {
     if(step>0) {

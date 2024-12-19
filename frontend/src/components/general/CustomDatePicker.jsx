@@ -23,7 +23,7 @@ import '../../styles/general/Rsuite-custom.css';
  *        Reçoit un argument :
  *        - `value` (string|null) : La date sélectionnée au format `YYYY-MM-DD`, ou `null` si aucune date n'est sélectionnée.
  */
-const CustomDatePicker = forwardRef(({className,disabledSlots,selectedTime,setDate},ref) => {
+const CustomDatePicker = forwardRef(({className,value,disabledSlots,selectedTime,setDate,disableBefore=null,disableAfter=null},ref) => {
     /* 
       PARAMETRE POSSIBLEMENT MODIFIABLES 
       • Première heure = 7
@@ -34,6 +34,12 @@ const CustomDatePicker = forwardRef(({className,disabledSlots,selectedTime,setDa
     */
 
     const handleDisableDates = (date) => {
+      if(disableBefore && (new Date(disableBefore)>date || date.toLocaleDateString() === new Date(disableAfter).toLocaleDateString())) return true;
+
+      if(disableAfter && (new Date(disableAfter)<date || date.toLocaleDateString() === new Date(disableAfter).toLocaleDateString())) {  
+        return true;
+      }
+
       if (isNaN(new Date(date).getTime())) return true; // Désactiver les dates invalides 
       
       let today = new Date();
@@ -78,10 +84,11 @@ const CustomDatePicker = forwardRef(({className,disabledSlots,selectedTime,setDa
         onOk={(value) => value==null ? setDate(null) : setDate(format(value, 'yyyy-MM-dd'))}
         onClean={() => setDate(null)} 
         format="dd/MM/yyyy"
-        renderValue={(value) => {
-          const formattedDate = format(value, 'EEEE d MMM yyyy', { locale: fr });
-          return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);;
+        renderValue={(val) => {
+          const formattedDate = format(val, 'EEEE d MMM yyyy', { locale: fr });
+          return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
         }}
+        value={value ? new Date(value) : null}
         shouldDisableDate={handleDisableDates}
         appearance="default"
         placeholder="Sélectionner la date"
