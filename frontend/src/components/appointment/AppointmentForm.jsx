@@ -61,8 +61,7 @@ function AppointmentForm() {
 
     const loadAvailableAircrafts = async () => {
         try {
-            const response = await loadAircrafts();
-            
+            // const response = await loadAircrafts();
             // console.log(response.data.message)
         } catch (error) {
             console.log('Error response:', error.response?.data?.message || 'Unknown error');
@@ -122,7 +121,7 @@ function AppointmentForm() {
         }
         if(formData.time!=null) {
             let date = new Date();
-            let [hours, minutes, seconds] = formData.time.split(':').map(Number);
+            let [hours, minutes] = formData.time.split(':').map(Number);
             date.setHours(hours)
             date.setMinutes(minutes)
             date.setSeconds(0)
@@ -150,8 +149,8 @@ function AppointmentForm() {
     };
 
     const handleKeyDown = (event) => {
-        if(event.key == 'Enter') {
-            if(event.target.tagName === 'BUTTON' && event.target.classList.contains("submit") || 
+        if(event.key === 'Enter') {
+            if((event.target.tagName === 'BUTTON' && event.target.classList.contains("submit")) || 
                 event.target.tagName === 'SELECT') {
                 // Si on clique sur entrer en étant sur le bouton submit
                 // Ou qu'on est sur un SELECT

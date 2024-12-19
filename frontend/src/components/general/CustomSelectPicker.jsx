@@ -12,8 +12,8 @@ const CustomSelectPicker = forwardRef(({className,setValue,data,searchable=false
           data={data}
           searchable={searchable}
           placeholder={placeholder}
-          onChange={(value) => {
-              setValue(value);
+          onChange={(val) => {
+            setValue(val);
           }}
           {...rest}
       />
