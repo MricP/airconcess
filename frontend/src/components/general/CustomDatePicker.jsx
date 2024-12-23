@@ -23,7 +23,7 @@ import '../../styles/general/Rsuite-custom.css';
  *        Reçoit un argument :
  *        - `value` (string|null) : La date sélectionnée au format `YYYY-MM-DD`, ou `null` si aucune date n'est sélectionnée.
  */
-const CustomDatePicker = forwardRef(({className,value,disabledSlots,selectedTime,setDate,disableBefore=null,disableAfter=null},ref) => {
+const CustomDatePicker = forwardRef(({className,value=null,disabledSlots,selectedTime=null,setDate,disableBefore=null,disableAfter=null},ref) => {
     /* 
       PARAMETRE POSSIBLEMENT MODIFIABLES 
       • Première heure = 7
@@ -80,7 +80,7 @@ const CustomDatePicker = forwardRef(({className,value,disabledSlots,selectedTime
       <DatePicker
         ref={ref}
         className={className}
-        onOk={(value) => value==null ? setDate(null) : setDate(format(value, 'yyyy-MM-dd'))}
+        onOk={(val) => val==null ? setDate(null) : setDate(format(val, 'yyyy-MM-dd'))}
         onClean={() => setDate(null)} 
         format="dd/MM/yyyy"
         renderValue={(val) => {

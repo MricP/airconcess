@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CustomDatePicker from "../general/CustomDatePicker";
 import CustomTimePicker from "../general/CustomTimePicker";
@@ -20,7 +20,8 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
     const [isHovered, setIsHovered] = useState(false);
 
     function addTimeSlot() {
-        const newSlot = { id: "id"+Math.round(Math.random()*10000) }; // Crée un objet unique avec un id
+        const newSlot = {id: "id"+Math.round(Math.random()*10000) }; // Crée un objet unique avec un id
+           
         setTimeSlots([...timeSlots, newSlot]);
     }
 
@@ -28,6 +29,15 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
         setTimeSlots((prev) => prev.filter((slot) => slot.id !== id));   // Suppression
         delete formData.prefSlots[id]; // Suppression de la plage horaire dans le useForm
     };
+
+    useEffect(() => {
+        let temp = timeSlots;
+        for(let key in formData.prefSlots) {
+            temp = [...temp,{id:key}]
+            console.log(key)
+            setTimeSlots(temp)
+        }
+    },[]);
 
     return (
         <fieldset className='trainingPrefFormFieldset'>
@@ -40,7 +50,6 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                             className={errors.dateStart ? "input-error" : ""}
                             disabledSlots={[]}
                             disableAfter={formData.dateEnd}
-                            selectedTime={null}
                             value={formData.dateStart}
                             setDate={(value) => setValue("dateStart", value, errors.dateStart ? { shouldValidate: true } : { shouldValidate: false })}
                             {...register("dateStart", { required: "La date est obligatoire." })}
@@ -52,7 +61,6 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                             className={errors.dateEnd ? "input-error" : ""}
                             disabledSlots={[]}
                             disableBefore={formData.dateStart}
-                            selectedTime={null}
                             value={formData.dateEnd}
                             setDate={(value) => setValue("dateEnd", value, errors.dateEnd ? { shouldValidate: true } : { shouldValidate: false })}
                             {...register("dateEnd", { required: "La date est obligatoire." })}
@@ -84,6 +92,7 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                                             errors.prefSlots?.[slot.id]?.hourStart ? { shouldValidate: true } : { shouldValidate: false }
                                         )
                                     }
+                                    value={formData?.prefSlots?.[slot.id]?.hourStart}
                                     {...register(`prefSlots.${slot.id}.hourStart`, { required: "L'heure de début est obligatoire." })}
                                 />
                                 <p>à</p>
@@ -95,9 +104,10 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                                         setValue(
                                             `prefSlots.${slot.id}.hourEnd`,
                                             value,
-                                            errors.prefSlots?.[slot.id]?.hourStart ? { shouldValidate: true } : { shouldValidate: false }
+                                            errors.prefSlots?.[slot.id]?.hourEnd ? { shouldValidate: true } : { shouldValidate: false }
                                         )
                                     }
+                                    value={formData?.prefSlots?.[slot.id]?.hourEnd}
                                     {...register(`prefSlots.${slot.id}.hourEnd`, { required: "L'heure de fin est obligatoire." })}
                                 />
                                 <IoIosClose className='button-del' onClick={() => removeTimeSlot(slot.id)}>
