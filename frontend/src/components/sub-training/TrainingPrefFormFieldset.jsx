@@ -115,8 +115,26 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
             </div>
 
             <label>
-                Fréquence*
-                <input></input>
+                <div style={{display: "flex"}}>
+                    <p>Fréquence*</p>
+                    <InfoPill text='Nombre de séances/semaine (± 2h)'/>
+                </div>
+                
+                <input
+                    className={errors?.prefFrequency ? "input-error" : ""}
+                    type="number"
+                    min={0}
+                    max={5}
+                    name="prefFrequency" 
+                    value={formData.prefFrequency != null ? formData.prefFrequency : ''}
+                    {...register("prefFrequency", { 
+                        required: true,
+                        pattern: {
+                            value: /^[1-5]{1}$/,
+                            message: "○ Un moins une séance nécessaire || Au plus 5 séances possible"
+                        },
+                    })}
+                ></input>
             </label>
         </fieldset>
     );

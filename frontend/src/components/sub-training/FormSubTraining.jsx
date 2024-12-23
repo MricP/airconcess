@@ -26,7 +26,7 @@ function FormSubTraining() {
         //Step2
         dateStart: null,
         dateEnd: null,
-        prefSlots: null, //Format : { IDSLOT: {hourStart:VALUE,hourEnd:VALUE}, IDSLOT: {hourStart:VALUE,hourEnd:VALUE} }
+        prefSlots: null, //Format : { IDSLOT: {hourStart:VALUE,hourEnd:VALUE}, IDSLOT:{hourStart:VALUE,hourEnd:VALUE} }
         prefFrequency: null,
         //Step3
     }}

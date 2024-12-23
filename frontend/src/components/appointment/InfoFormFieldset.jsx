@@ -23,7 +23,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
             </div>
             <div>
                 <div>
-                    <label htmlFor="last-name">Nom*
+                    <label htmlFor="last-name">
+                        <p>Nom*</p>
                         <input 
                             className={errors.lastName ? "input-error" : ""}
                             type="text" 
@@ -54,7 +55,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="first-name">Prénom*
+                    <label htmlFor="first-name">
+                        <p>Prénom*</p>
                         <input 
                             className={errors.firstName ? "input-error" : ""}
                             type="text" 
@@ -64,7 +66,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             {...register("firstName", { required: true })}
                         />
                     </label>
-                    <label htmlFor="email">Adresse mail*
+                    <label htmlFor="email">
+                        <p>Adresse mail*</p>
                         <input 
                             className={errors.email ? "input-error" : ""}
                             type="text" 
@@ -83,7 +86,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                         />
                     </label>
                     <div>
-                        <label htmlFor="city" >Ville*
+                        <label htmlFor="city" >
+                            <p>Ville*</p>
                             <CustomSelectPicker 
                                 searchable={true}
                                 className={errors.city ? "input-error" : ""}
@@ -99,7 +103,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             />
                         </label>
                         {/* TODO : ATTENTION CERTAINES PAYS N'ONT PAS DE CODE POSTAL*/}
-                        <label htmlFor="postal-code">Code postal*
+                        <label htmlFor="postal-code">
+                            <p>Code postal*</p>
                             <input 
                                 className={errors.postalCode ? "input-error" : ""}
                                 type="text" 
@@ -121,7 +126,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     </div>
                 </div>
             </div>
-            <label htmlFor="address">Adresse*
+            <label htmlFor="address">
+                <p>Adresse*</p>
                 <input 
                     className={errors.address ? "input-error" : ""}
                     type="text" 
@@ -141,7 +147,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     {...withIdCard===true && formData.idCard === null ? {...register("idCard", { required: true })} : null}  
                     
                 />
-                <label className={`${withIdCard ? "" : "invisible"} ${errors.idCard ? "input-error" : ""}`}>Carte d’identité*
+                <label className={`${withIdCard ? "" : "invisible"} ${errors.idCard ? "input-error" : ""}`}>
+                    <p>Carte d’identité*</p>
                     <div className="div-upload">
                         <span id="id-card-file-name" className="file-name">{formData.idCard != null ? formData.idCard[0].name :"Aucun fichier sélectionné"}</span>
                         <label className="inactive-label" htmlFor="id-card">
@@ -157,7 +164,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     accept=".pdf,.jpg,.jpeg,.png" 
                     {...withIncomeProof===true && formData.incomeProof === null? {...register("incomeProof", { required: true })} : null}
                 />
-                <label className={`${withIncomeProof ? "" : "invisible"} ${errors.incomeProof ? "input-error" : ""}`}>Justificatif de revenu*
+                <label className={`${withIncomeProof ? "" : "invisible"} ${errors.incomeProof ? "input-error" : ""}`}>
+                    <p>Justificatif de revenu*</p>
                     <div className="div-upload">
                         <span id="income-proof-file-name" className="file-name">{formData.incomeProof != null ? formData.incomeProof[0].name :'Aucun fichier sélectionné'}</span>
                         <label className="inactive-label" htmlFor="income-proof">
