@@ -30,6 +30,11 @@
     align-items: center;
     flex-direction: column;
     gap: 5px;
+    min-height: 150px;
+}
+
+.trainingPrefFormFieldset .time-slots:not(#nothing) {
+    justify-content: flex-start;
 }
 
 .trainingPrefFormFieldset .time-slots .time-slot {

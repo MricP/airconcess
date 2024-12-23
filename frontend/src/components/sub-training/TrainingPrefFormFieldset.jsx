@@ -27,7 +27,10 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
 
     const removeTimeSlot = (id) => {
         setTimeSlots((prev) => prev.filter((slot) => slot.id !== id));   // Suppression
-        delete formData.prefSlots[id]; // Suppression de la plage horaire dans le useForm
+        if (formData?.prefSlots) {
+            // Suppression de la plage horaire dans le useForm
+            delete formData.prefSlots[id];
+        }
     };
 
     useEffect(() => {
@@ -73,7 +76,7 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                     <p>Vos plages horaires</p>
                     <InfoPill />
                 </div>
-                <div className='time-slots'>
+                <div className='time-slots' id={timeSlots.length === 0 ? "nothing" : ""}>
                     {
                         timeSlots.length === 0 ? 
                             <div style={{display:"flex",justifyContent:"center", alignItems:"center"}}>Aucune plage selectionnée</div> : 
@@ -117,8 +120,8 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                         )
                     }
                     <div className="" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-                        {isHovered ? <IoIosAddCircleOutline className = {timeSlots.length<5 ? "add-time-slot" :"invisible" } onClick={timeSlots.length<5 ? addTimeSlot : null} /> : 
-                        <IoIosAddCircle className = {timeSlots.length<5 ? "add-time-slot" :"invisible" } onClick={timeSlots.length<5 ? addTimeSlot : null}/>}
+                        {isHovered ? <IoIosAddCircle className = {timeSlots.length<5 ? "add-time-slot" :"invisible" } onClick={timeSlots.length<5 ? addTimeSlot : null} /> : 
+                        <IoIosAddCircleOutline className = {timeSlots.length<5 ? "add-time-slot" :"invisible" } onClick={timeSlots.length<5 ? addTimeSlot : null}/>}
                     </div>
                 </div>
                 
