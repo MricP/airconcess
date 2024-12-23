@@ -24,9 +24,9 @@ function FormSubTraining() {
         postalCode: null,
         idCard: null,
         //Step2
-        startDate: null,
-        endDate: null,
-        prefSlots: null, //Format : [{startHour:VALUE,endHour:VALUE},{startHour:VALUE,endHour:VALUE}]
+        dateStart: null,
+        dateEnd: null,
+        prefSlots: null, //Format : { IDSLOT: {hourStart:VALUE,hourEnd:VALUE}, IDSLOT: {hourStart:VALUE,hourEnd:VALUE} }
         prefFrequency: null,
         //Step3
     }}
@@ -39,7 +39,6 @@ function FormSubTraining() {
   function handlePrevStep() {
     if(step>0) {
       step == 5 ? updateStep(3) : updateStep(step-1)
-      console.table(formData)
     }
   }
 
@@ -50,7 +49,18 @@ function FormSubTraining() {
   }
 
   const onSubmit = async () => {
+    if(formData.prefSlots != null) {
+      // On verifie si aucune plage null n'est passé dans le processus de remplissage,
+      // Si c'est le cas on les supprime
+      for( let key in formData.prefSlots) {
+        if(formData.prefSlots[key].hourStart === null || formData.prefSlots[key].hourEnd === null) {
+          delete formData.prefSlots[key]
+        }
+      }
+    }
     handleNextStep()
+
+    console.table(formData.prefSlots)
   };
 
   function handleStepDisplayed() {
@@ -76,10 +86,10 @@ function FormSubTraining() {
         <Steps.Item description="VALIDATION" />
         <Steps.Item icon={<IoCheckmarkDoneOutline style={{ fontSize: 20 ,color:"#5b5b5b"}}/>}/>
       </Steps>
-      <form method="POST" onSubmit={handleSubmit(onSubmit)}className='current-step'>
+      <form method="POST" onSubmit={handleSubmit(onSubmit)} className='current-step'>
         {handleStepDisplayed()}
         
-        <button disabled={step === 5} type='submit' className="next-step">Submit</button>
+        <DarkButton disabled={step === 5} type='submit' className="next-step">Continuer</DarkButton>
 
       </form>
       

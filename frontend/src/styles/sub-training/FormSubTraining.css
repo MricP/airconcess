@@ -54,7 +54,6 @@
     font-size: 14px;
 }
 
-
 .formSubTraining-container {
     position: relative;
     display: flex;
@@ -70,6 +69,7 @@
     /* background-color: red; */
     max-width: 800px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -101,6 +101,8 @@
 .formSubTraining-container .step-indicator {
     width:100%;
 }
+
+/* ######## Partie à modifier pour rsuite ######## */
 
 .formSubTraining-container .step-indicator .rs-steps-item-description {
     text-align: center;

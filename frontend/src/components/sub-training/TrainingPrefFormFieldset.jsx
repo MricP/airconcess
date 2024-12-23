@@ -20,14 +20,14 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
     const [isHovered, setIsHovered] = useState(false);
 
     function addTimeSlot() {
-        const newSlot = { id: Date.now() }; // Crée un objet unique avec un id
+        const newSlot = { id: "id"+Math.round(Math.random()*10000) }; // Crée un objet unique avec un id
         setTimeSlots([...timeSlots, newSlot]);
     }
 
-    function removeTimeSlot(id) {
-        const newTimeSlots = timeSlots.filter((slot) => slot.id !== id); // Filtre par identifiant unique
-        setTimeSlots(newTimeSlots);
-    }
+    const removeTimeSlot = (id) => {
+        setTimeSlots((prev) => prev.filter((slot) => slot.id !== id));   // Suppression
+        delete formData.prefSlots[id]; // Suppression de la plage horaire dans le useForm
+    };
 
     return (
         <fieldset className='trainingPrefFormFieldset'>
@@ -37,25 +37,25 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                     <div>
                         <p>Date de début*</p>
                         <CustomDatePicker
-                            className={errors.startDate ? "input-error" : ""}
+                            className={errors.dateStart ? "input-error" : ""}
                             disabledSlots={[]}
-                            disableAfter={formData.endDate}
+                            disableAfter={formData.dateEnd}
                             selectedTime={null}
-                            value={formData.startDate}
-                            setDate={(value) => setValue("startDate", value, errors.startDate ? { shouldValidate: true } : { shouldValidate: false })}
-                            {...register("startDate", { required: "La date est obligatoire." })}
+                            value={formData.dateStart}
+                            setDate={(value) => setValue("dateStart", value, errors.dateStart ? { shouldValidate: true } : { shouldValidate: false })}
+                            {...register("dateStart", { required: "La date est obligatoire." })}
                         />
                     </div>
                     <div>
                         <p>Date de fin*</p>
                         <CustomDatePicker
-                            className={errors.endDate ? "input-error" : ""}
+                            className={errors.dateEnd ? "input-error" : ""}
                             disabledSlots={[]}
-                            disableBefore={formData.startDate}
+                            disableBefore={formData.dateStart}
                             selectedTime={null}
-                            value={formData.endDate}
-                            setDate={(value) => setValue("endDate", value, errors.endDate ? { shouldValidate: true } : { shouldValidate: false })}
-                            {...register("endDate", { required: "La date est obligatoire." })}
+                            value={formData.dateEnd}
+                            setDate={(value) => setValue("dateEnd", value, errors.dateEnd ? { shouldValidate: true } : { shouldValidate: false })}
+                            {...register("dateEnd", { required: "La date est obligatoire." })}
                         />
                     </div>
                 </CustomProvider>
@@ -66,41 +66,46 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                     <InfoPill />
                 </div>
                 <div className='time-slots'>
-                    {timeSlots.length === 0 ? <div style={{display:"flex",justifyContent:"center", alignItems:"center"}}>Aucune plage selectionnée</div>: timeSlots.map((slot) => (
-                        <div className="time-slot" key={slot.id}>
-                            <p>De</p>
-                            <CustomTimePicker
-                                className={errors.date ? "input-error" : ""}
-                                disabledSlots={[]}
-                                selectedTime={null}
-                                setDate={(value) =>
-                                    setValue(
-                                        "date",
-                                        value,
-                                        errors.date ? { shouldValidate: true } : { shouldValidate: false }
-                                    )
-                                }
-                                {...register("date", { required: "La date est obligatoire." })}
-                            />
-                            <p>à</p>
-                            <CustomTimePicker
-                                className={errors.date ? "input-error" : ""}
-                                disabledSlots={[]}
-                                selectedTime={null}
-                                setDate={(value) =>
-                                    setValue(
-                                        "date",
-                                        value,
-                                        errors.date ? { shouldValidate: true } : { shouldValidate: false }
-                                    )
-                                }
-                                {...register("date", { required: "La date est obligatoire." })}
-                            />
-                            <IoIosClose className='button-del' onClick={() => removeTimeSlot(slot.id)}>
-                                Supprimer
-                            </IoIosClose>
-                        </div>
-                    ))}
+                    {
+                        timeSlots.length === 0 ? 
+                            <div style={{display:"flex",justifyContent:"center", alignItems:"center"}}>Aucune plage selectionnée</div> : 
+                            
+                        timeSlots.map((slot) => (
+                            <div className="time-slot" key={slot.id}>
+                                <p>De</p>
+                                <CustomTimePicker
+                                    className={errors.prefSlots?.[slot.id]?.hourStart ? "input-error" : ""}
+                                    disabledSlots={[]}
+                                    selectedDate={null}
+                                    setTime={(value) =>
+                                        setValue(
+                                            `prefSlots.${slot.id}.hourStart`,
+                                            value,
+                                            errors.prefSlots?.[slot.id]?.hourStart ? { shouldValidate: true } : { shouldValidate: false }
+                                        )
+                                    }
+                                    {...register(`prefSlots.${slot.id}.hourStart`, { required: "L'heure de début est obligatoire." })}
+                                />
+                                <p>à</p>
+                                <CustomTimePicker
+                                    className={errors.prefSlots?.[slot.id]?.hourEnd ? "input-error" : ""}
+                                    disabledSlots={[]}
+                                    selectedDate={null}
+                                    setTime={(value) =>
+                                        setValue(
+                                            `prefSlots.${slot.id}.hourEnd`,
+                                            value,
+                                            errors.prefSlots?.[slot.id]?.hourStart ? { shouldValidate: true } : { shouldValidate: false }
+                                        )
+                                    }
+                                    {...register(`prefSlots.${slot.id}.hourEnd`, { required: "L'heure de fin est obligatoire." })}
+                                />
+                                <IoIosClose className='button-del' onClick={() => removeTimeSlot(slot.id)}>
+                                    Supprimer
+                                </IoIosClose>
+                            </div>)
+                        )
+                    }
                     <div className="" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
                         {isHovered ? <IoIosAddCircleOutline className = {timeSlots.length<5 ? "add-time-slot" :"invisible" } onClick={timeSlots.length<5 ? addTimeSlot : null} /> : 
                         <IoIosAddCircle className = {timeSlots.length<5 ? "add-time-slot" :"invisible" } onClick={timeSlots.length<5 ? addTimeSlot : null}/>}
