@@ -76,7 +76,7 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                                 <CustomTimePicker
                                     className={errors.prefSlots?.[slot.id]?.hourStart ? "input-error" : ""}
                                     disabledSlots={[]}
-                                    selectedDate={null}
+                                    disableAfter={formData.prefSlots?.[slot.id] ? formData.prefSlots?.[slot.id]?.hourEnd : null}
                                     setTime={(value) =>
                                         setValue(
                                             `prefSlots.${slot.id}.hourStart`,
@@ -90,7 +90,7 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                                 <CustomTimePicker
                                     className={errors.prefSlots?.[slot.id]?.hourEnd ? "input-error" : ""}
                                     disabledSlots={[]}
-                                    selectedDate={null}
+                                    disableBefore={formData.prefSlots?.[slot.id] ? formData.prefSlots?.[slot.id]?.hourStart : null}
                                     setTime={(value) =>
                                         setValue(
                                             `prefSlots.${slot.id}.hourEnd`,

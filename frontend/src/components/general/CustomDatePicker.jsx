@@ -34,11 +34,10 @@ const CustomDatePicker = forwardRef(({className,value,disabledSlots,selectedTime
     */
 
     const handleDisableDates = (date) => {
-      if(disableBefore && (new Date(disableBefore)>date || date.toLocaleDateString() === new Date(disableAfter).toLocaleDateString())) return true;
+      if(disableBefore && ((new Date(disableBefore) > date) || (date.toLocaleDateString() === new Date(disableBefore).toLocaleDateString()))) return true;
 
-      if(disableAfter && (new Date(disableAfter)<date || date.toLocaleDateString() === new Date(disableAfter).toLocaleDateString())) {  
-        return true;
-      }
+      if(disableAfter && ((new Date(disableAfter) < date) || (date.toLocaleDateString() === new Date(disableAfter).toLocaleDateString()))) return true;
+      
 
       if (isNaN(new Date(date).getTime())) return true; // Désactiver les dates invalides 
       

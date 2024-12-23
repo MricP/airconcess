@@ -21,12 +21,22 @@ import '../../styles/general/Rsuite-custom.css';
  *        Reçoit un argument :
  *        - `value` (string|null) : L'heure sélectionnée au format `HH:mm:ss`, ou `null` si aucune heure n'est sélectionnée.
  */
-const CustomTimePicker = forwardRef(({className,disabledSlots,selectedDate,setTime},ref) => {
+const CustomTimePicker = forwardRef(({className,disabledSlots,disableAfter=null,disableBefore=null,selectedDate=null,setTime},ref) => {
     // forwardRef permet à ce composant d'accepter une ref provenant de son parent
 
     const [selectedTime, setSelectedTime] = useState(null); // Stocke l'heure sélectionnée
 
     const handleDisableHour = (hour) => {
+      if(disableBefore){
+        if((disableBefore.split(':')[0] == hour) && (disableBefore.split(':')[1] === "45")) return true
+        if(disableBefore.split(':')[0] > hour) return true;
+      }
+
+      if(disableAfter){
+        if((disableAfter.split(':')[0] == hour) && (disableAfter.split(':')[1] === "00")) return true
+        if(disableAfter.split(':')[0] < hour) return true;
+      }
+
       // Par default on disable les heures <7h et >18h
       if(hour<7 || hour>18) return true;
 
@@ -46,6 +56,14 @@ const CustomTimePicker = forwardRef(({className,disabledSlots,selectedDate,setTi
     const handleDisableMinutes = (minute) => {
       // Par default on disable les minutes hors crénaux
       if(![0,15,30,45].includes(minute)) return true;
+
+      if(disableBefore && (selectedTime?.getHours() == disableBefore.split(':')[0])){
+        if(disableBefore.split(':')[1] >= minute) return true;
+      }
+
+      if(disableAfter && (selectedTime?.getHours() == disableAfter.split(':')[0])){
+        if(disableAfter.split(':')[1] <= minute) return true;
+      }
 
       // Si une date a été sélectionnée (ou qu'une heure n'a pas déjà été choisie)
       if (selectedDate != null && format(selectedDate, 'yyyy-MM-dd') !== format(new Date(), 'yyyy-MM-dd')) {
