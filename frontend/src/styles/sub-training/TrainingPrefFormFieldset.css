@@ -43,22 +43,46 @@
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
-    gap: 4%;
+    /* gap: 4%; */
     /* background-color: red; */
 }
 
 .trainingPrefFormFieldset .time-slots .time-slot .button-del {
     color: #5b5b5b;
-    font-size: 2rem;
     transition: all ease 0.2s;
+    cursor: pointer;
 }
 
 .trainingPrefFormFieldset .time-slots .time-slot .button-del:hover {
     color: red;
+    stroke-width: 0.5;
 }
 
+.trainingPrefFormFieldset .time-slots .icon-container {
+    position: relative;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 1.3rem;
+    height: 1.4rem;
+    
+}
+.trainingPrefFormFieldset .icon-container .add-time-slot {
+    font-size: 1.5rem;    
+    position: absolute;
+    transition: all ease 0.4s;
+    cursor: pointer;
+}
 
-.trainingPrefFormFieldset .time-slots .add-time-slot {
-    border-radius: 30px;
-    font-size: 1.5rem;
+.trainingPrefFormFieldset .icon-container .add-time-slot.hidden {
+    opacity: 0;
+    /* transform: scale(0.9); */
+    position: absolute;
+    transition: opacity ease 0.1s;
+    pointer-events: none; /* Désactive les clics sur l'élément caché */
+}
+
+.trainingPrefFormFieldset .icon-container .add-time-slot.visible {
+    opacity: 1;
+    /* transform: scale(1); */
 }

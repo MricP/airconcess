@@ -6,9 +6,11 @@ import { CustomProvider } from 'rsuite';
 import { frFR } from 'rsuite/locales'; // Locale française
 import InfoPill from '../general/InfoPill';
 
-import { IoIosClose } from "react-icons/io";
+import { RxCross1 } from "react-icons/rx";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosAddCircle } from "react-icons/io";
+import { CiCirclePlus } from "react-icons/ci";
+
 
 
 
@@ -113,15 +115,30 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                                     value={formData?.prefSlots?.[slot.id]?.hourEnd}
                                     {...register(`prefSlots.${slot.id}.hourEnd`, { required: "L'heure de fin est obligatoire." })}
                                 />
-                                <IoIosClose className='button-del' onClick={() => removeTimeSlot(slot.id)}>
+                                <RxCross1  className='button-del' onClick={() => removeTimeSlot(slot.id)}>
                                     Supprimer
-                                </IoIosClose>
+                                </RxCross1 >
                             </div>)
                         )
                     }
-                    <div className="" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-                        {isHovered ? <IoIosAddCircle className = {timeSlots.length<5 ? "add-time-slot" :"invisible" } onClick={timeSlots.length<5 ? addTimeSlot : null} /> : 
-                        <IoIosAddCircleOutline className = {timeSlots.length<5 ? "add-time-slot" :"invisible" } onClick={timeSlots.length<5 ? addTimeSlot : null}/>}
+                    <div
+                        className="icon-container"
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                    >
+                        
+                        <IoIosAddCircle
+                            className={`add-time-slot ${isHovered ? "visible" : "hidden"} ${
+                            timeSlots.length < 5 ? "" : "invisible"
+                            }`}
+                            onClick={timeSlots.length < 5 ? addTimeSlot : null}
+                        />
+                        <IoIosAddCircleOutline
+                            className={`add-time-slot ${!isHovered ? "visible" : "hidden"} ${
+                            timeSlots.length < 5 ? "" : "invisible"
+                            }`}
+                            onClick={timeSlots.length < 5 ? addTimeSlot : null}
+                        />
                     </div>
                 </div>
                 
