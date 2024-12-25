@@ -16,14 +16,14 @@ function FormSubTraining() {
   const {register,handleSubmit,watch,setValue, formState: { errors }} = useForm (
     { defaultValues: {
         //Step1
-        firstName: null,
-        lastName: null,
-        phone: null,
-        email: null,
-        address: null,
-        country: null,
-        city: null,
-        postalCode: null,
+        firstName: "Mathéo",
+        lastName: "Flores",
+        phone: "+33644038323",
+        email: "matheoflores26@gmail.com",
+        address: "141 rue Barthélémy de laffemas",
+        country: "France",
+        city: "Lyon",
+        postalCode: 69100,
         idCard: null,
         //Step2
         dateStart: null,
@@ -31,6 +31,10 @@ function FormSubTraining() {
         prefSlots: null, //Format : { IDSLOT: {hourStart:VALUE,hourEnd:VALUE}, IDSLOT:{hourStart:VALUE,hourEnd:VALUE} }
         prefFrequency: null,
         //Step3
+        cardHolder: "Flores Mathéo",
+        cardNumber: "4965496545471254",
+        cardExpirationDate: "11/12",
+        ccv: 115,
     }}
   );
 

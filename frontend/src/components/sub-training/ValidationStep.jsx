@@ -16,6 +16,16 @@ function ValidationStep({formData,setStep}) {
         }
         return slots;
     }
+
+    function handleDisplayCardNumber(){
+        let initialNumber = formData.cardNumber;
+        let displayNumber ="";
+        for(let i = 0 ; i<initialNumber.length ; i++) {
+            if(i<4 || i>initialNumber.length-3) displayNumber = displayNumber+initialNumber[i]
+            else displayNumber = displayNumber+"*"
+        }
+        return displayNumber;
+    }
     
     return (
         <div className='validation-step-container'>
@@ -91,19 +101,19 @@ function ValidationStep({formData,setStep}) {
                 <div className='info-container'>
                     <section className="info-section">
                         <p>Titulaire</p>
-                        <p className="value-container">{formData.address ? formData.address : "Non renseigné"}</p>
+                        <p className="value-container">{formData.cardHolder ? formData.cardHolder : "Non renseigné"}</p>
                     </section>
                     <section className="info-section">
                         <p>Numéro de carte</p>
-                        <p className="value-container">{formData.address ? formData.address : "Non renseigné"}</p>
+                        <p className="value-container">{formData.cardNumber ? handleDisplayCardNumber() : "Non renseigné"}</p>
                     </section>
                     <section className="info-section">
                         <p>Date d'expiration</p>
-                        <p className="value-container">{formData.address ? formData.address : "Non renseigné"}</p>
+                        <p className="value-container">{formData.cardExpirationDate ? formData.cardExpirationDate : "Non renseigné"}</p>
                     </section>
                     <section className="info-section">
                         <p>CCV</p>
-                        <p className="value-container">{formData.address ? formData.address : "Non renseigné"}</p>
+                        <p className="value-container">{formData.ccv ? formData.ccv : "Non renseigné"}</p>
                     </section>
                 </div>
             </div>
