@@ -7,8 +7,10 @@ import { useForm } from "react-hook-form";
 
 import InfoFormFieldset from "../appointment/InfoFormFieldset"
 import TrainingPrefFormFieldset from "./TrainingPrefFormFieldset"
+import ValidationStep from './ValidationStep';
 
 import "../../styles/sub-training/FormSubTraining.css"
+
 
 function FormSubTraining() {
   const {register,handleSubmit,watch,setValue, formState: { errors }} = useForm (
@@ -34,7 +36,7 @@ function FormSubTraining() {
 
   const formData = watch();
 
-  const [step,updateStep] = useState(1);
+  const [step,updateStep] = useState(3);
 
   function handlePrevStep() {
     if(step>0) {
@@ -50,17 +52,22 @@ function FormSubTraining() {
 
   const onSubmit = async () => {
     if(formData.prefSlots != null) {
+      let count = 0
       // On verifie si aucune plage null n'est passé dans le processus de remplissage,
       // Si c'est le cas on les supprime
       for( let key in formData.prefSlots) {
         if(formData.prefSlots[key].hourStart === null || formData.prefSlots[key].hourEnd === null) {
           delete formData.prefSlots[key]
+        } else {
+          count++;
         }
       }
+      // On remet prefSlots à null si la liste est vide
+      if(count === 0) setValue('prefSlots',null)
     }
     handleNextStep()
 
-    console.table(formData.prefSlots)
+    //console.table(formData.prefSlots)
   };
 
   function handleStepDisplayed() {
@@ -72,6 +79,10 @@ function FormSubTraining() {
       case 1:
         return(
           <TrainingPrefFormFieldset formData={formData} register={register} errors={errors} setValue={setValue}/>
+        )
+      case 3:
+        return (
+          <ValidationStep formData={formData} setStep={updateStep}/>
         )
     }
   }
@@ -89,8 +100,7 @@ function FormSubTraining() {
       <form method="POST" onSubmit={handleSubmit(onSubmit)} className='current-step'>
         {handleStepDisplayed()}
         
-        <DarkButton disabled={step === 5} type='submit' className="next-step">Continuer</DarkButton>
-
+        <DarkButton disabled={step === 5} type='submit' className="next-step">{ step === 3 ? "Valider et payer" : "Continuer"}</DarkButton>
       </form>
       
     </div>

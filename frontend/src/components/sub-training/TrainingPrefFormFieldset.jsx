@@ -9,11 +9,6 @@ import InfoPill from '../general/InfoPill';
 import { RxCross1 } from "react-icons/rx";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosAddCircle } from "react-icons/io";
-import { CiCirclePlus } from "react-icons/ci";
-
-
-
-
 
 import "../../styles/sub-training/TrainingPrefFormFieldset.css";
 
@@ -153,7 +148,7 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                 <input
                     className={errors?.prefFrequency ? "input-error" : ""}
                     type="number"
-                    min={0}
+                    min={1}
                     max={5}
                     name="prefFrequency" 
                     value={formData.prefFrequency != null ? formData.prefFrequency : ''}
