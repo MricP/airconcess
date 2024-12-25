@@ -16,6 +16,16 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
         return errors.email && errors.email?.message!=="required"
     }
 
+    const getCountryNameFromCode = (code) => {
+        const country = countryList().getData().find((country) => country.value === code);
+        return country ? country.label : code; // Retourne le nom complet ou le code si non trouvé
+    };
+
+    const getCountryCodeFromName = (name) => {
+        const country = countryList().getData().find((country) => country.label === name);
+        return country ? country.value : name; // Retourne le code ou le nom si non trouvé
+    };
+
     return (    
         <fieldset className='info-fieldset' ><legend>Vos informations</legend>
             <div className={handleDisplayErrorDiv() ? "error-message-div" : "invisible"}>
@@ -48,8 +58,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             searchable={true}
                             className={errors.country ? "input-error" : ""}
                             data={countryList().getData()} 
-                            value={formData.country != null ? formData.country : ''}
-                            setValue={(value) => setValue("country", value, errors.country ? {shouldValidate: true} : {shouldValidate: false})} 
+                            value={formData.country != null ? getCountryCodeFromName(formData.country) : ''}
+                            setValue={(value) => setValue("country", getCountryNameFromCode(value), errors.country ? {shouldValidate: true} : {shouldValidate: false})}
                             {...register("country", { required: true })}
                         />
                     </div>
@@ -91,7 +101,7 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             <CustomSelectPicker 
                                 searchable={true}
                                 className={errors.city ? "input-error" : ""}
-                                data={formData.country ? City.getCitiesOfCountry(formData.country).map(
+                                data={formData.country ? City.getCitiesOfCountry(getCountryCodeFromName(formData.country)).map(
                                     (city) => ({
                                         value: city.name,
                                         label: city.name,

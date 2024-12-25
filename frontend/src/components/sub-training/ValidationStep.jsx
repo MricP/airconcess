@@ -34,7 +34,7 @@ function ValidationStep({formData,setStep}) {
                     </section>
                     <section className="info-section">
                         <p>Lieu de résidence</p>
-                        <p className="value-container">{formData.country && formData.city ? formData.country+","+formData.city+(formData.postalCode ? ","+formData.postalCode : "") : "Non renseigné"}</p>
+                        <p className="value-container">{formData.country && formData.city ? formData.country+", "+formData.city+(formData.postalCode ? ", "+formData.postalCode : "") : "Non renseigné"}</p>
                     </section>
                     <section className="info-section">
                         <p>Adresse</p>
