@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import InfoFormFieldset from "../appointment/InfoFormFieldset"
 import TrainingPrefFormFieldset from "./TrainingPrefFormFieldset"
 import ValidationStep from './ValidationStep';
+import PaymentDetailsStep from './PaymentDetailsStep';
 
 import "../../styles/sub-training/FormSubTraining.css"
 
@@ -29,18 +30,18 @@ function FormSubTraining() {
         dateStart: null,
         dateEnd: null,
         prefSlots: null, //Format : { IDSLOT: {hourStart:VALUE,hourEnd:VALUE}, IDSLOT:{hourStart:VALUE,hourEnd:VALUE} }
-        prefFrequency: null,
+        prefFrequency: 3,
         //Step3
         cardHolder: "Flores Mathéo",
         cardNumber: "4965496545471254",
         cardExpirationDate: "11/12",
-        ccv: 115,
+        cvv: 115,
     }}
   );
 
   const formData = watch();
 
-  const [step,updateStep] = useState(3);
+  const [step,updateStep] = useState(2);
 
   function handlePrevStep() {
     if(step>0) {
@@ -83,6 +84,10 @@ function FormSubTraining() {
       case 1:
         return(
           <TrainingPrefFormFieldset formData={formData} register={register} errors={errors} setValue={setValue}/>
+        )
+      case 2:
+        return(
+          <PaymentDetailsStep formData={formData} register={register} errors={errors} setValue={setValue}/>
         )
       case 3:
         return (

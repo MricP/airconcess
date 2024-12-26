@@ -112,8 +112,8 @@ function ValidationStep({formData,setStep}) {
                         <p className="value-container">{formData.cardExpirationDate ? formData.cardExpirationDate : "Non renseigné"}</p>
                     </section>
                     <section className="info-section">
-                        <p>CCV</p>
-                        <p className="value-container">{formData.ccv ? formData.ccv : "Non renseigné"}</p>
+                        <p>CVV</p>
+                        <p className="value-container">{formData.cvv ? formData.cvv : "Non renseigné"}</p>
                     </section>
                 </div>
             </div>
