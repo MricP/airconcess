@@ -158,4 +158,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
         $args["estimatedPrice"],
         $args["isAvailable"]);
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-Model') !== false) {
+    ProductController::getAllModel();
+}
 ?>

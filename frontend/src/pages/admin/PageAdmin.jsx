@@ -1,6 +1,6 @@
 import "../../styles/admin/PageAdmin.css";
 import EditArticle from "../../components/admin/EditArticle";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import PageProduct from "../product/PageProduct";
@@ -10,6 +10,8 @@ export default function PageAdmin(){
 
     const [isClicked1, updateClicked1] = useState(false)
     const [selectedComponent, setSelectedComponent] = useState(null);
+    
+    
 
     const handleMenuClick1 = () => {
         updateClicked1(!isClicked1);
@@ -66,6 +68,8 @@ export default function PageAdmin(){
           isAvailable
         );
       };
+
+      
 
     return (
         <div className="page-admin">

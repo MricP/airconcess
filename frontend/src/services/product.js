@@ -103,3 +103,13 @@ export const insertAircraft = async (idModel, serialNumber, manufactureYear, fli
         throw error;
     }
 }
+
+export const getAllModel = async () => {
+    try {
+        const response = await axiosInstance.post('/admin/get-Model', {});
+        return response
+    } catch(error) {
+        console.error("Erreur lors de l'insertion", error);
+        throw error;
+    }
+}

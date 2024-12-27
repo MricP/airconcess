@@ -65,19 +65,18 @@ export default function EditArticle(props) {
               paginatedAircrafts
                 .map((plane) => (
                 <ProductBox
-                    key={plane.idAircraft}
+                    key={plane.aircraft_id}
                     isAvailable={plane.isAvailable}
                     planeImg={gulfstreamG650ER}
-                    modelName={plane.model}
-                    serialNumber={plane.serialNumber}
-                    price={`USD $ ${plane.price}`}
-                    year={plane.year}
-                    hour={plane.hours}
-                    capacity={plane.capacity}
-                    autonomy={plane.autonomy}
-                    description={plane.description}
-                    aircraftType={plane.aircraftType}
-                    idAircraft={plane.idAircraft}
+                    modelName={plane.model_name.toUpperCase()}
+                    serialNumber={plane.serial_number}
+                    price={`USD $ ${plane.estimated_price}`}
+                    year={plane.manufacture_year}
+                    hour={`${plane.flight_hours.split(" ")[0]} ${plane.flight_hours.split(" ")[1]}`}
+                    capacity={plane.passenger_capacity.split(" ")[1]}
+                    autonomy={`${plane.max_range.split(" ")[0]} ${plane.max_range.split(" ")[1]}`}
+                    description={plane.Description}
+                    aircraftType={plane.range_type}
                     use = {props.use}
                 />
                 ))

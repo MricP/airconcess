@@ -108,8 +108,6 @@ class Aircraft
                 values (?,?,?,?,?,?,?,?,?,?,?,?)
             ");
             
-            // Debugging output for the SQL statement
-            echo "Executing SQL insert...";
     
             $stmt->bindValue(1, $idModel);
             $stmt->bindValue(2, $serialNumber);

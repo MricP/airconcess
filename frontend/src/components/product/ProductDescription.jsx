@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
 import { GrStatusGood } from "react-icons/gr";
+import { getAllModel } from '../../services/product';
 
 
 const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescription,technicalSheetPath, mode, onInputChange}) => {
     const navigate = useNavigate()
     const [selectedTechnicalSheet, setSelectedTechnicalSheet] = useState(null)
+    const [models, setModels] = useState([]);
+    const [modelSelected, setModelSelected] = useState(null);
 
     const aircraftDescriptionTab = 
     [ 
@@ -63,8 +66,18 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
       };
 
     useEffect(() => {
-         // Force le défilement en haut de la page
-    }, []);
+            const fetchModels = async () => {
+                try {
+                    const response = await getAllModel();
+                    setModels(response.data);
+                    console.log(response.data)
+                } catch (error) {
+                    console.error("Erreur lors de la récupération des modèles :", error);
+                }
+            };
+    
+            fetchModels();
+        }, []);
 
     const handleFieldChange = (field, event, index) => {
         if (onInputChange) {
@@ -87,15 +100,29 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                 <hr />
                 <div className='informations-div'>
                     <div>
-                        <h3>À propos du modèle</h3>
-                        <div className='informationsList'>
-                            {modelDescription.map((line, index) => (
-                                <div key={line.varName} className="input-description">
-                                    <p>{"• "+line.txt+" : "}</p>
-                                    <p contentEditable = "true" suppressContentEditableWarning = "true">Inconnu</p>
+                        {modelSelected == null ? 
+                            <div>
+                                <label for="comboBox">Choisissez un model :</label>
+                                <select id="comboBox" name="options">
+                                    <option value="Aucun"></option>
+                                    <option value="Nouveau">Nouveau modèle</option>
+                                    {models.map((element) =>(
+                                        <option key={element.model_id} value={element.model_name}>{element.model_name}</option>
+                                    ))}
+                                </select>
+                            </div> : 
+                            <div>
+                                <h3>À propos du modèle</h3>
+                                <div className='informationsList'>
+                                    {modelDescription.map((line, index) => (
+                                        <div key={line.varName} className="input-description">
+                                            <p>{"• "+line.txt+" : "}</p>
+                                            <p contentEditable = "true" suppressContentEditableWarning = "true">Inconnu</p>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        }
                     </div>
                     <hr></hr>
                     <div>
