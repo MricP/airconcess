@@ -12,6 +12,16 @@
     color: #fff !important;
 }
 
+.card-container .can-be-current {
+    border: solid 2px transparent;
+    transition: all ease .2s;
+}
+
+.card-container .current {
+    border: solid 2px #606060;
+    border-radius: 5px;
+}
+
 .card-container * {
     backface-visibility: hidden;
 }
@@ -31,20 +41,41 @@
     align-items: center;
 }
 
+.card-container .front .not-visible {
+    display: none;
+}
+
+.card-container .front .img-in {
+    animation: img-in .2s ease-in-out forwards;
+}
+  
+@keyframes img-in {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+}
+
 .card-container .front #puce {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 40px;
+}
+
+.card-container .front .issuer-front {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
 }
 
 .card-container .front .number-section *{
     font-size: 20px;
-}
-
-.card-container .front>div.imgs {
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    top: 0;
-    width: 100%;
 }
 
 .card-container .front .holder-section p:last-child, 
@@ -97,6 +128,7 @@
 
 .card-container .back img {
     position: absolute;
+    width: 60px;
     bottom: 5px;
     right: 0;
 }
