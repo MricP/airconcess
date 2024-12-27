@@ -91,6 +91,11 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
         divCriteria.appendChild(newP)
     };
 
+    const handleModelChange = (event) => {
+        setModelSelected(event.target.value)
+        console.log("cliqué")
+    }
+
     if (mode === "add"){
         return (
             <div className='productDescription-container'>
@@ -100,17 +105,19 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                 <hr />
                 <div className='informations-div'>
                     <div>
-                        {modelSelected == null ? 
+                        {modelSelected == null &&
                             <div>
                                 <label for="comboBox">Choisissez un model :</label>
-                                <select id="comboBox" name="options">
+                                <select id="comboBox" name="options" onChange={handleModelChange}>
                                     <option value="Aucun"></option>
                                     <option value="Nouveau">Nouveau modèle</option>
                                     {models.map((element) =>(
                                         <option key={element.model_id} value={element.model_name}>{element.model_name}</option>
                                     ))}
                                 </select>
-                            </div> : 
+                            </div> 
+                        }
+                        {modelSelected == "Nouveau" && 
                             <div>
                                 <h3>À propos du modèle</h3>
                                 <div className='informationsList'>

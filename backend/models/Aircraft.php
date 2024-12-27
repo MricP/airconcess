@@ -127,5 +127,12 @@ class Aircraft
             echo "Error: " . $e->getMessage(); // Display error message
         }
     }
+
+    public static function getModelByName($nameModel){
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM model where model_name = ?");
+        $stmt->execute([$nameModel]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     
 }
