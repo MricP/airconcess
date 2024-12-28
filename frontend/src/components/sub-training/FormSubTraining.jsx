@@ -34,8 +34,9 @@ function FormSubTraining() {
         //Step3
         cardHolder: "Flores Mathéo",
         cardNumber: "4965 4965 4547 1254",
-        cardExpirationDate: null,
+        cardExpirationDate: "12/15",
         cvv: 115,
+        cardIssuer: "visa"
     }}
   );
 

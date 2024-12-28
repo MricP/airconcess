@@ -1,8 +1,6 @@
 import React,{useState} from 'react'
 
-function CardNumberInput({setCardIssuer,onChange,...rest}) {
-    const [value, setValue] = useState('');
-
+function CardNumberInput({setValue,onChange,register,...rest}) {
     function detectCardIssuer(number) {
         if (/^4/.test(number)) return 'visa';
         if (/^5[1-5]/.test(number) || /^2(2[2-9]|[3-6][0-9]|7[01]|720)/.test(number)) return 'mastercard'; //51 à 55, 2221 à 2720
@@ -12,16 +10,13 @@ function CardNumberInput({setCardIssuer,onChange,...rest}) {
     }
 
     async function handleChange(event) {
-        setCardIssuer(detectCardIssuer(event.target.value)); //Change le cardIssuer en fonction de l'input
+        //Change le cardIssuer en fonction de l'input
+        await setValue("cardIssuer",detectCardIssuer(event.target.value)); 
 
         // await car on attend la valeur de retour pour éviter qu'une valeur incorrecte soit transmise
-        await setValue(formatCardNumber(event.target.value)); 
+        await setValue("cardNumber",formatCardNumber(event.target.value)); 
 
-        if (onChange) onChange(event); //Pour ne pas biaser les appels à onChange externes
-    }
-
-    function handleMaxLength() {
-        return (detectCardIssuer(value) === "american-express") ? 17 : 19;
+        //if (onChange) onChange(event); //Pour ne pas biaser les appels à onChange externes
     }
 
     function formatCardNumber(val) {
@@ -43,7 +38,17 @@ function CardNumberInput({setCardIssuer,onChange,...rest}) {
     }
 
     return (
-        <input maxLength={handleMaxLength()} value={value} onChange={handleChange} {...rest}></input>
+        <input
+            {...register("cardNumber", {
+                required: "Le numéro de carte est requis",
+                pattern: {
+                  value: /^(\d{4} \d{4} \d{4} \d{4})|(\d{4} \d{6} \d{5})$/, //Format final souhaité
+                  message: "Numéro de carde invalide / incomplet",
+                },
+                onChange: (e) => handleChange(e)
+            })}
+            {...rest}
+        />
     )
 }
 
