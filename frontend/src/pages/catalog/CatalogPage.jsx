@@ -53,17 +53,7 @@ function CatalogPage() {
 
   useEffect(() => {
     if (!isMobile && filterContainerRef.current) {
-      filterContainerRef.current.style = `position: sticky;
-                                          top: 15%;
-                                          bottom: 30%;
-                                          display: flex;
-                                          flex-direction: column;
-                                          background-color: var(--box-color);
-                                          width: 30%;
-                                          border-radius: 5px;
-                                          height: max-content;
-                                          align-items: center;
-                                          margin-left: 50px;`
+      filterContainerRef.current.toggle("filterDescription");
       nbAppuie = 0;
     }
     else if(isMobile && filterContainerRef.current){
@@ -467,10 +457,10 @@ function CatalogPage() {
                     serialNumber={plane.serial_number}
                     price={`USD $ ${plane.estimated_price}`}
                     year={plane.manufacture_year}
-                    hour={`${plane.flight_hours.split(" ")[0]} ${plane.flight_hours.split(" ")[1]}`}
-                    capacity={plane.passenger_capacity.split(" ")[1]}
-                    autonomy={`${plane.max_range.split(" ")[0]} ${plane.max_range.split(" ")[1]}`}
-                    description={plane.Description}
+                    hour={plane.flight_hours}
+                    capacity={plane.passenger_capacity}
+                    autonomy={plane.max_range}
+                    description={plane.description}
                     aircraftType={plane.range_type}
                     idAircraft={plane.aircraft_id}
                 />

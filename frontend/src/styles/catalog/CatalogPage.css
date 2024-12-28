@@ -23,6 +23,10 @@
     margin-bottom: 3%;
 }
 
+.invisible{
+    display: none;
+}
+
 .catalog-subtitle{
     font-size: var(--text-size);
 }
