@@ -103,7 +103,7 @@ function FormSubTraining() {
       <Steps current={step} className='step-indicator'>
         <Steps.Item description="INFORMATIONS CLIENT" />
         <Steps.Item description="PRÉFÉRENCES ET DISPONIBILITÉ" />
-        <Steps.Item description="FACTURATION ET PAIEMENT" />
+        <Steps.Item description="DONNÉES DE PAIEMENT" />
         <Steps.Item description="VALIDATION" />
         <Steps.Item icon={<IoCheckmarkDoneOutline style={{ fontSize: 20 ,color:"#5b5b5b"}}/>}/>
       </Steps>

@@ -12,9 +12,15 @@
     justify-content: space-between;
 }
 
-.validation-step-container>div>div:first-child>p {
+.validation-step-container>div>div:first-child>p,
+.validation-step-container>div>div:first-child>div:first-child>p {
     color: #333333 !important;
     font-weight: 500;
+}
+
+.validation-step-container>div>div:first-child>div:first-child {
+    display: flex;
+    gap: 5px;
 }
 
 .validation-step-container>div>div:first-child .edit-values {

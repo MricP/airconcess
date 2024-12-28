@@ -2,6 +2,8 @@ import React from 'react'
 
 import { TbEdit } from "react-icons/tb";
 
+import InfoPill from '../general/InfoPill';
+
 
 import "../../styles/sub-training/ValidationStep.css"
 
@@ -92,7 +94,7 @@ function ValidationStep({formData,setStep}) {
             </div>
             <div>
                 <div>
-                    <p>Vos informations de paiement</p>
+                    <div><p>Vos informations de paiement</p><InfoPill text="Une fois le processus terminé, seul le numéro de carte et le nom du titulaire seront stockés pour votre sécurité. Aucune autre donnée sensible, comme le code PIN ou le code de sécurité, ne sera conservée. Aucun traitement supplémentaire ne sera effectué après ce processys, et aucune donnée personnelle ne sera transmise à des tiers, sauf dans le cadre d'une exigence légale ou réglementaire. En aucun cas, ces informations ne seront utilisées à d'autres fins que celles spécifiées lors de la transaction."/></div>
                     <div className='edit-values' onClick={()=>setStep(2)}>
                         <p>Modifier</p>
                         <TbEdit />
