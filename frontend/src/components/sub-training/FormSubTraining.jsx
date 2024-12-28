@@ -33,8 +33,8 @@ function FormSubTraining() {
         prefFrequency: 3,
         //Step3
         cardHolder: "Flores Mathéo",
-        cardNumber: "4965496545471254",
-        cardExpirationDate: "11/12",
+        cardNumber: "4965 4965 4547 1254",
+        cardExpirationDate: null,
         cvv: 115,
     }}
   );

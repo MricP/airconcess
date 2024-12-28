@@ -45,13 +45,23 @@ function PaymentDetailsStep({ formData, register, errors, setValue }) {
       [name]: numericValue,
     }));
   };
+
+  const handleCVVChange = (e) => {
+    const { name, value } = e.target;
   
+    setCardInfos((prevInfo) => ({
+      ...prevInfo,
+      [name]: value.replace(/\D/g, ''),
+    }));
+  };
+
   return (
     <div className='paymentDetailsStep-container'>
       <fieldset>
         <CreditCard className={"credit-card"} cardIssuer={cardIssuer} rotate={isCardRotated} current={current} infos={cardInfos}/>
         <label htmlFor="">Numéro de carte*
-          <CardNumberInput type="text" 
+          <CardNumberInput 
+            type="text" 
             placeholder='ex: 4111 1111 1111 1111'
             name='number'
             onFocus={() => setCurrent("number")} 
@@ -72,9 +82,17 @@ function PaymentDetailsStep({ formData, register, errors, setValue }) {
             <input type="text" placeholder='MM/YY'
               name='date'
               maxLength={5}
-              value={cardInfos.date}
+              value={cardInfos.date ? cardInfos.date : ""}
               onFocus={() => setCurrent("date")} 
               onChange={handleDateChange}
+              // value={formData.cardExpirationDate != null ? formData.cardExpirationDate : ''}
+              // {...register("cardExpirationDate", { 
+              //     required: true,
+              //     pattern: {
+              //       value: /^(0[1-9]|1[0-2])\/\d{2}$/,
+              //       message: "Date d'expiration incomplete"
+              //     },
+              // })}
             />
           </label>
           <label htmlFor="">CVV*
@@ -85,8 +103,10 @@ function PaymentDetailsStep({ formData, register, errors, setValue }) {
                 rotateCard(true)
                 setCurrent("cvv")
               }} 
+              value={cardInfos.cvv ? cardInfos.cvv : ""}
+              maxLength={cardIssuer === "american-express" ? 4 : 3}
               onBlur={() => rotateCard(false)}
-              onChange={handleChange}  
+              onChange={handleCVVChange}  
             />
           </label>
         </div>        
