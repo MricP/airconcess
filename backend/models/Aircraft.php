@@ -130,9 +130,41 @@ class Aircraft
 
     public static function getModelByName($nameModel){
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT range_type, manufacturer, passenger_capacity, engines, speed_avg, max_range, max_altitude, crew_size, length, wingspan, height, max_takeoff_weight FROM model where model_name = ?");
+        $stmt = $pdo->prepare("SELECT * FROM model where model_name = ?");
         $stmt->execute([$nameModel]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public static function insertModel($modelName, $rangeType, $manufacturer, $passengerCapacity, $engines, $speedAvg, $maxRange, $maxAltitude, $crewSize, $length, $wingspan, $height, $maxTakeoffWeight){
+        try {
+            $pdo = self::getDB();
+            $stmt = $pdo->prepare(
+            "
+                Insert into model
+                    (model_name, range_type, manufacturer, passenger_capacity, engines, speed_avg, max_range, max_altitude, crew_size, length, wingspan, height, max_takeoff_weight)
+                values (?,?,?,?,?,?,?,?,?,?,?,?)
+            ");
+            
+    
+            $stmt->bindValue(1, $modelName);
+            $stmt->bindValue(2, $rangeType);
+            $stmt->bindValue(3, $manufacturer);
+            $stmt->bindValue(4, $passengerCapacity);
+            $stmt->bindValue(5, $engines);
+            $stmt->bindValue(6, $speedAvg);
+            $stmt->bindValue(7, $maxRange);
+            $stmt->bindValue(8, $maxAltitude);
+            $stmt->bindValue(9, $crewSize);
+            $stmt->bindValue(10, $length);
+            $stmt->bindValue(11, $wingspan);
+            $stmt->bindValue(12, $height);
+            $stmt->bindValue(13, $maxTakeoffWeight);
+            
+            $stmt->execute();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage(); // Display error message
+        }
+    }
+
     
 }

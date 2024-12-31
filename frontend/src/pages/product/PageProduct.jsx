@@ -116,13 +116,33 @@ function PageProduct({mode, onSubmitProduct}) {
     isAvailable: 1,
   });
 
+  const [modelData, setModelData] = useState({
+    modelName: "",
+    rangeType: "",
+    manufacturer: "",
+    passengerCapacity: "",
+    engines: "", 
+    speedAvg: "", 
+    maxRange: "", 
+    maxAltitude: "", 
+    crewSize: "", 
+    length: "", 
+    wingspan: "", 
+    height: "", 
+    maxTakeoffWeight: "",
+  });
+
   const handleSubmit = () => {
     if (onSubmitProduct) {
-      onSubmitProduct(productData); // Appelle la fonction du parent
+      onSubmitProduct(productData, modelData); // Appelle la fonction du parent
     }
   };
 
   const handleInputChange = (field, value) => {
+    setModelData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
     setProductData((prevData) => ({
       ...prevData,
       [field]: value,
@@ -131,7 +151,7 @@ function PageProduct({mode, onSubmitProduct}) {
 
 
   // Si l'id est invalide ou qu'il n'y a pas d'aircraft à afficher
-  if (!isIdValid && mode != "add") {
+  if (!isIdValid && mode !== "add") {
     return (
       <main>
         <h2>Aucun aéronef correspondant.</h2>

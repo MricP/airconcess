@@ -1,4 +1,4 @@
-import React, {createElement, useEffect, useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
@@ -12,7 +12,22 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
     const [models, setModels] = useState([]);
     const [modelSelected, setModelSelected] = useState(null);
     const [model, setModel] = useState(null)
-    const [modelDescriptionTab, setModelDescriptionTab] = useState([]);
+    const [modelDescriptionTab, setModelDescriptionTab] = 
+    useState([
+        "modelName",
+        "rangeType",
+        "manufacturer",
+        "passengerCapacity",
+        "engines", 
+        "speedAvg", 
+        "maxRange", 
+        "maxAltitude", 
+        "crewSize", 
+        "length", 
+        "wingspan", 
+        "height", 
+        "maxTakeoffWeight"
+    ]);
 
 
     const aircraftDescriptionTab = 
@@ -100,11 +115,23 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
             fetchModels();
         }, [model]);
 
-    const handleFieldChange = (field, event, index) => {
+    const handleProductFieldChange = (field, event, index) => {
         if (onInputChange) {
           onInputChange(field, event.target.textContent)
         }
         const criteria = document.getElementById("aircraftDescription"+index)
+        const divCriteria = event.target.parentElement
+        const newP = document.createElement("p")
+        newP.textContent = criteria.textContent + event.target.textContent
+        divCriteria.innerHTML = ""
+        divCriteria.appendChild(newP)
+    };
+
+    const handleModelFieldChange = (field, event, index) => {
+        if (onInputChange) {
+          onInputChange(field, event.target.textContent)
+        }
+        const criteria = document.getElementById("modelDescription"+index)
         const divCriteria = event.target.parentElement
         const newP = document.createElement("p")
         newP.textContent = criteria.textContent + event.target.textContent
@@ -149,20 +176,20 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                                 </select>
                             </div> 
                         }
-                        {modelSelected == "Nouveau" && 
+                        {modelSelected === "Nouveau" && 
                             <div>
                                 <h3>À propos du modèle</h3>
                                 <div className='informationsList'>
                                     {modelDescription.map((line, index) => (
                                         <div key={line.varName} className="input-description">
-                                            <p>{"• "+line.txt+" : "}</p>
-                                            <p contentEditable = "true" suppressContentEditableWarning = "true">Inconnu</p>
+                                            <p id={"modelDescription"+index}>{"• "+line.txt+" : "}</p>
+                                            <p contentEditable = "true" suppressContentEditableWarning = "true" onBlur={(e) => {handleModelFieldChange(aircraftDescriptionTab[index], e, index)}}>Inconnu</p> {/*Permet l'édition de l'élément} */}
                                         </div>
                                     ))}
                                 </div>
                             </div>
                         }
-                        {modelSelected != null && modelSelected != "Nouveau" && 
+                        {modelSelected != null && modelSelected !== "Nouveau" && 
                             <div>
                             <h3>À propos du modèle</h3>
                             <div className='informationsList'>
@@ -183,7 +210,7 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                             {aircraftDescription.map((line, index) => (
                                 <div className="input-description criteria" key={line.varName}>
                                     <p id={"aircraftDescription"+index}>{"• "+line.txt+" : "}</p>
-                                    <p contentEditable = "true" suppressContentEditableWarning = "true" onBlur={(e) => {handleFieldChange(aircraftDescriptionTab[index], e, index)}}>Inconnu</p> {/*Permet l'édition de l'élément} */}
+                                    <p contentEditable = "true" suppressContentEditableWarning = "true" onBlur={(e) => {handleProductFieldChange(aircraftDescriptionTab[index], e, index)}}>Inconnu</p> {/*Permet l'édition de l'élément} */}
                                 </div>
                             ))}
                         </div>

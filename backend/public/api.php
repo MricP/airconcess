@@ -167,4 +167,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     $args = json_decode(file_get_contents("php://input"), true);
     ProductController::getModelByName($args["nameModel"]);
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Model') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    Aircraft::insertModel(
+        $args["modelName"],
+        $args["rangeType"],
+        $args["manufacturer"], 
+        $args["passengerCapacity"],
+        $args["engines"],
+        $args["speedAvg"],
+        $args["maxRange"],
+        $args["maxAltitude"],
+        $args["crewSize"],
+        $args["length"],
+        $args["wingspan"],
+        $args["height"],
+        $args["maxTakeoffWeight"]);
+}
 ?>

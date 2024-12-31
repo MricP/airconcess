@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import PageProduct from "../product/PageProduct";
-import { insertAircraft } from "../../services/product";
+import { insertAircraft, insertModel } from "../../services/product";
 
 export default function PageAdmin(){
 
@@ -37,7 +37,7 @@ export default function PageAdmin(){
         }
     }
 
-    const handleAddButtonClick = async (productData) => {
+    const handleAddButtonClick = async (productData, modelData) => {
         console.log("Données reçues :", productData);
         const {
           serialNumber,
@@ -67,6 +67,39 @@ export default function PageAdmin(){
           estimatedPrice,
           isAvailable
         );
+
+        const {
+            modelName,
+            rangeType,
+            manufacturer,
+            passengerCapacity,
+            engines, 
+            speedAvg, 
+            maxRange, 
+            maxAltitude, 
+            crewSize, 
+            length, 
+            wingspan, 
+            height, 
+            maxTakeoffWeight,
+        } = modelData;
+
+        await insertModel(
+            modelName,
+            rangeType,
+            manufacturer,
+            passengerCapacity,
+            engines, 
+            speedAvg, 
+            maxRange, 
+            maxAltitude, 
+            crewSize, 
+            length, 
+            wingspan, 
+            height, 
+            maxTakeoffWeight
+          );
+
       };
 
       
