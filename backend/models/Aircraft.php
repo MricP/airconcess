@@ -130,7 +130,7 @@ class Aircraft
 
     public static function getModelByName($nameModel){
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT * FROM model where model_name = ?");
+        $stmt = $pdo->prepare("SELECT range_type, manufacturer, passenger_capacity, engines, speed_avg, max_range, max_altitude, crew_size, length, wingspan, height, max_takeoff_weight FROM model where model_name = ?");
         $stmt->execute([$nameModel]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }

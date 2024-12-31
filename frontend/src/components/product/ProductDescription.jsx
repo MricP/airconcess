@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
 import { GrStatusGood } from "react-icons/gr";
-import { getAllModel } from '../../services/product';
+import { getAllModel, getModelByName } from '../../services/product';
 
 
 const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescription,technicalSheetPath, mode, onInputChange}) => {
@@ -11,6 +11,9 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
     const [selectedTechnicalSheet, setSelectedTechnicalSheet] = useState(null)
     const [models, setModels] = useState([]);
     const [modelSelected, setModelSelected] = useState(null);
+    const [model, setModel] = useState(null)
+    const [modelDescriptionTab, setModelDescriptionTab] = useState([]);
+
 
     const aircraftDescriptionTab = 
     [ 
@@ -70,14 +73,32 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                 try {
                     const response = await getAllModel();
                     setModels(response.data);
-                    console.log(response.data)
+                    console.log(model)
+                    
                 } catch (error) {
                     console.error("Erreur lors de la récupération des modèles :", error);
                 }
             };
+
+            if (model) {
+                setModelDescriptionTab([
+                    model.range_type,
+                    model.manufacturer,
+                    "Jusqu'à " + model.passenger_capacity + " passager(s)",
+                    model.crew_size,
+                    model.length,
+                    model.wingspan,
+                    model.height,
+                    model.max_takeoff_weight,
+                    model.engines,
+                    model.speed_avg,
+                    model.max_range + " km",
+                    model.max_altitude
+                ]);
+            }
     
             fetchModels();
-        }, []);
+        }, [model]);
 
     const handleFieldChange = (field, event, index) => {
         if (onInputChange) {
@@ -91,10 +112,21 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
         divCriteria.appendChild(newP)
     };
 
-    const handleModelChange = (event) => {
-        setModelSelected(event.target.value)
-        console.log("cliqué")
-    }
+    const handleModelChange = async (event) => {
+        setModelSelected(event.target.value);
+    
+        if (event.target.value !== "Nouveau" && event.target.value !== "Aucun") {
+            try {
+                const modelData = await getModelByName(event.target.value);
+                setModel(modelData); 
+                console.log(model)
+                 
+            } catch (error) {
+                console.error("Erreur lors de la récupération du modèle :", error);
+                setModel(null); 
+            }
+        }
+    };
 
     if (mode === "add"){
         return (
@@ -107,7 +139,7 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                     <div>
                         {modelSelected == null &&
                             <div>
-                                <label for="comboBox">Choisissez un model :</label>
+                                <label htmlFor="comboBox">Choisissez un model :</label>
                                 <select id="comboBox" name="options" onChange={handleModelChange}>
                                     <option value="Aucun"></option>
                                     <option value="Nouveau">Nouveau modèle</option>
@@ -129,6 +161,19 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                                     ))}
                                 </div>
                             </div>
+                        }
+                        {modelSelected != null && modelSelected != "Nouveau" && 
+                            <div>
+                            <h3>À propos du modèle</h3>
+                            <div className='informationsList'>
+                                {modelDescription.map((line, index) => (
+                                    <div key={line.varName} className="input-description">
+                                        
+                                        <p key={line.varName} >{"• "+line.txt+" : "+(modelDescriptionTab[index] || "Donnée indisponible")}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                         }
                     </div>
                     <hr></hr>

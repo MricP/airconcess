@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     ProductController::getAllModel();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-ModelByName') !== false) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-ByNameModel') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     ProductController::getModelByName($args["nameModel"]);
 }

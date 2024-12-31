@@ -116,9 +116,9 @@ export const getAllModel = async () => {
 
 export const getModelByName = async (nameModel) => {
     try {
-        const response = await axiosInstance.post('/admin/get-ModelByName', {nameModel});
-        return response
-    } catch(error) {
+        const response = await axiosInstance.post('/admin/get-ByNameModel', { nameModel });
+        return response.data; 
+    } catch (error) {
         console.error("Erreur lors de l'insertion", error);
         throw error;
     }
