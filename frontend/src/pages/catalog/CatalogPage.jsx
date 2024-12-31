@@ -16,7 +16,7 @@ import { useLocation } from 'react-router-dom';
 function CatalogPage() {
   const gulfstreamG650ER = "../assets/catalog/gulfstreamG650.svg"
   const location = useLocation().pathname.split("/");
-  const pathtype = location[2];
+  const pathtype = location[2] || '';
   console.log(pathtype)
   const [aircrafts, setAircrafts] = useState([]);
   const [page, setPage] = useState(1);
@@ -78,10 +78,11 @@ function CatalogPage() {
         setLoading(false);
       }
     };
-
     fetchAircrafts();
-  }, [page],);
-      
+  }, [page]);
+
+
+
   useEffect(() => {
     const filtered = aircrafts.filter((plane) => {
         if (searchPlane.trim() === '') {
@@ -93,7 +94,19 @@ function CatalogPage() {
     setFilteredAircrafts(filtered);
 }, [searchPlane, aircrafts])
       
-        
+  useEffect(() => {
+    if (pathtype !== '') {
+      setActiveFilters((prevFilters) => ({
+          ...prevFilters,
+          type: pathtype,
+      })); 
+      const filtered = aircrafts.filter(plane => 
+      plane.range_type.toLowerCase() === activeFilters.type
+    );
+    setFilteredAircrafts(filtered);     
+    }
+  },[pathtype,aircrafts,activeFilters]) 
+  
     if (loading) return <p>Chargement...</p>;
     if (error) return <p>{error}</p>;
 
@@ -223,7 +236,7 @@ function CatalogPage() {
     setFilteredAircrafts(filtered); 
     
   };
-  
+
   const handleDeleteStateFilter = () => {
     stateRef.current.classList.add("invisible");
     if(stateRef.current){
@@ -322,7 +335,7 @@ function CatalogPage() {
     } 
     
   }
-
+  
   const handleFiltrageState = () => {
     stateRef.current.classList.remove("invisible");
     if(stateRef.current){
@@ -338,7 +351,7 @@ function CatalogPage() {
     setCurrentPage(1);
     reapplyFilters();
   };
-
+  
   // Pagination
   const paginatedAircrafts = (filteredAircrafts|| []).slice(
       (currentPage - 1) * itemsPerPage,
@@ -346,7 +359,7 @@ function CatalogPage() {
   );
   
     return (
-    <main className='catalog-page'> 
+    <main className='catalog-page' on> 
         <div className="catalog-header">
             <div className="catalog-title-container">
                 <h1 className="catalog-title white">Notre Catalogue</h1>
