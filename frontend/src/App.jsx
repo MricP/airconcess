@@ -16,7 +16,7 @@ import PageTraining from './pages/training/PageTraining.jsx';
 import ContactPage from './pages/contact/ContactPage.jsx';
 import PageAppointment from './pages/appointment/PageAppointment.jsx';
 import PageMaintenance from './pages/maintenance/PageMaintenance.jsx';
-import CatalogPage from './pages/CatalogPage.jsx';
+import CatalogPage from './pages/catalog/CatalogPage.jsx';
 import CguPage from './pages/polities/CguPage.jsx';
 import LegalNoticesPage from './pages/polities/LegalNoticesPage.jsx';
 import PrivacyPage from './pages/polities/PrivacyPage.jsx';
@@ -32,7 +32,12 @@ function App() {
           <Route path='/' element={<LandingPage />} index />
           <Route path='/sign-in' element={<SignInPage />} />
           <Route path='/sign-up' element={<SignUpPage />} />
+<<<<<<< HEAD
           <Route path='/catalog' element={<CatalogPage />} />
+=======
+          <Route path='/catalog' element={<CatalogPage/>} />
+          <Route path='/catalog/:type' element= <CatalogPage/> />
+>>>>>>> 521a0c8a0124b1690463fc0dafd1ec148734be22
           <Route path='/my-profile' element={<ProfilePage />} />
           <Route path='/product' element={<PageProduct />} />
           <Route path='/product/:id' element={<PageProduct />} />

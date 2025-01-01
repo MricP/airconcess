@@ -5,6 +5,7 @@ require_once __DIR__ . '../../middlewares/ValidationMiddleware.php';
 require_once __DIR__ . '../../controllers/AuthController.php';
 require_once __DIR__ . '../../controllers/ContactController.php';
 require_once __DIR__ . '../../controllers/ProductController.php';
+// require_once __DIR__ . '../../controllers/TestimonialController.php';
 require_once __DIR__ . '../../models/Aircraft.php';
 require_once __DIR__ . '../../controllers/AppointmentController.php';
 require_once __DIR__ . '../../controllers/CatalogController.php';
@@ -68,6 +69,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/au
         exit();
     }
     AuthController::getUser($payload);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/testimonials') !== false) {
+    TestimonialController::GetTestimonialsByUser($data);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/testimonials') !== false) {
+    TestimonialController::getAllTestimonials();
 }
 
 // Route pour recevoir le formulaire de contact (POST)  

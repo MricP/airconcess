@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
-import "../styles/catalog/ProductBox.css";
+import "../../styles/catalog/ProductBox.css";
 import { useNavigate } from 'react-router-dom';
 
 export const ProductBox = (props) => {

@@ -31,10 +31,10 @@ export default function Footer() {
                 <div className="footer-bottom-footer-child">
                     <h3>Liens rapides</h3>
                     <ul>
-                        <li><Link to="">Accueil</Link></li>
-                        <li><Link to="">Catalogue d'aéronefs</Link></li>
-                        <li><Link to="">Prendre rendez-vous</Link></li>
-                        <li><Link to="">Services et maintenance</Link></li>
+                        <li><Link to="/">Accueil</Link></li>
+                        <li><Link to="/catalog">Catalogue d'aéronefs</Link></li>
+                        <li><Link to="/appointment">Prendre rendez-vous</Link></li>
+                        <li><Link to="/services">Services et maintenance</Link></li>
                     </ul>
                 </div>
                 <div className="footer-bottom-footer-child separator">

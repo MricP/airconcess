@@ -1,7 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/landing-page/FifthSectionLanding.css';
+import { getTestimonialsByUser, getAllTestimonials } from '../../services/api';
 
 function FifthSectionLanding() {
+    const exampleTestimonial = {
+        text: "Air Concess m’a aidé à réaliser mes rêves d’aviation. La fiche technique de l’avion fournissait des informations détaillées sur chaque appareil et l’équipe du service client était toujours là pour répondre à mes questions.",
+        firstname: "Jean",
+        lastname: "Dupont",
+        profile_picture: ""
+    };
+
+    const [testimonials, setTestimonials] = useState([]);
+
+    const token = localStorage.getItem('token');
+    console.log(token);
+    const user = localStorage.getItem('user');
+    console.log(user);
+
+    useEffect(() => {
+        const fetchTestimonials = async () => {
+            try {
+                if (token) {
+                    const response = await getTestimonialsByUser(token);
+                    console.log('Testimonials by user:', response);
+                    setTestimonials(Array.isArray(response) ? response : []);
+                } else {
+                    const response = await getAllTestimonials();
+                    console.log('All testimonials:', response);
+                    setTestimonials(Array.isArray(response) ? response : []);
+                }
+            } catch (error) {
+                console.error('Error fetching testimonials:', error);
+            }
+        };
+    
+        fetchTestimonials();
+    }, []);
+       
     return (
         <div className="fifth-section-container">
             <div className="fifth-section-content">
@@ -10,27 +45,39 @@ function FifthSectionLanding() {
                     <h2>Clients satisfaits</h2>
                     <p className="fifth-section-text">
                         Découvrez les expériences de nos clients satisfaits et découvrez comment Air Concess
-                        les a aidés à réaliser leurs rêves d’aviations.
+                        les a aidés à réaliser leurs rêves d’aviation.
                     </p>
                 </div>
                 <div className="fifth-section-right">
-                    <p className="testimonial">
-                        "Air Concess m’a aidé à réaliser mes rêves d’aviation. La fiche technique de l’avion
-                        fournissait des informations détaillées sur chaque appareil et l’équipe du service
-                        client était toujours là pour répondre à mes questions."
-                    </p>
-                    <div className="author-container">
-                        <div className="author-name">
-                            <span>Dieudonné</span>
-                            <span>ATTAL</span>
-                        </div>
-                        <div className="profile-picture">
-                            {/* <img
-                                src=""
-                                alt="Dieudonné ATTAL"
-                            /> */}
-                        </div>
+                    <div className="testimonials-container">
+                        {testimonials.length > 0 ? testimonials.map((testimonial, index) => (
+                            <TestimonialCard key={index} testimonial={testimonial} />
+                        )) : (
+                            <TestimonialCard testimonial={exampleTestimonial} />
+                        )}
                     </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+const TestimonialCard = ({ testimonial }) => {
+    return (
+        <div className="testimonial-card">
+            <p className="testimonial">
+                {testimonial.text}
+            </p>
+            <div className="author-container">
+                <div className="author-name">
+                    <span>{testimonial.firstname}</span>
+                    <span>{testimonial.lastname}</span>
+                </div>
+                <div className="profile-picture">
+                    {/* <img
+                        src={testimonial.profile_picture || ""}
+                        alt={testimonial.firstname + " " + testimonial.lastname}
+                    /> */}
                 </div>
             </div>
         </div>

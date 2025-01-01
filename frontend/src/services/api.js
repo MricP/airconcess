@@ -8,13 +8,13 @@ const axiosInstance = axios.create({
 });
 
 
-export const submitContact = (formData) =>{
+export const submitContact = (formData) => {
   console.log(formData);
 
   if (formData.consent !== true) {
     throw new Error('Consentement requis');
   }
-  try{
+  try {
     const response = axiosInstance.post('/contact-submit', formData);
     return response;
   } catch (error) {
@@ -36,11 +36,31 @@ export const fetchTestMessage = async () => {
 export const getCatalogData = async () => {
   try {
     const response = await axiosInstance.get('/catalog');
-    console.log('Full response:', response); 
-    console.log('Catalog data fetched:', response.data); 
-    return response.data; 
+    console.log('Full response:', response);
+    console.log('Catalog data fetched:', response.data);
+    return response.data;
   } catch (error) {
     console.error('Error fetching catalog data:', error);
     throw error;
   }
 };
+
+export const getAllTestimonials = async () => {
+  try {
+    const response = await axiosInstance.get(`/testimonials`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching testimonials data:', error);
+    throw error;
+  }
+}
+
+export const getTestimonialsByUser = async (token) => {
+  try {
+    const response = await axiosInstance.get(`/testimonials/${token}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching testimonials data:', error);
+    throw error;
+  }
+}
