@@ -9,7 +9,7 @@ import DarkButton from "../../components/general/DarkButton";
 
 import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription, getModelName, getAircraft} from "../../services/product";
 
-function PageProduct({mode, onSubmitProduct}) {
+function PageProduct({mode, onSubmitProduct, model}) {
   const navigate = useNavigate();
   const location = useLocation().pathname.split("/");
   const id = parseInt(location[location.length - 1]); // Récupération de l'ID
@@ -175,6 +175,7 @@ function PageProduct({mode, onSubmitProduct}) {
         aircraftDescription={aircraftDescription}
         mode={mode}
         onInputChange={handleInputChange}
+        modelSelected={model}
       />
       <ProductMap/>
       <Slider images={sliderImgs} mode={mode}/>
