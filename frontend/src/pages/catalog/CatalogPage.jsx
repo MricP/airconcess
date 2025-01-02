@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useCallback} from 'react'
 import { CiSearch } from "react-icons/ci";
 import { CiFilter } from "react-icons/ci";
 import { ProductBox } from '../../components/catalog/ProductBox';
@@ -16,8 +16,7 @@ import { useLocation } from 'react-router-dom';
 function CatalogPage() {
   const gulfstreamG650ER = "../assets/catalog/gulfstreamG650.svg"
   const location = useLocation().pathname.split("/");
-  const pathtype = location[2] || '';
-  console.log(pathtype)
+  let pathtype = location[2] || '';
   const [aircrafts, setAircrafts] = useState([]);
   const [page, setPage] = useState(1);
   const isMobile = useMediaQuery({ maxWidth: 1130 });
@@ -27,6 +26,7 @@ function CatalogPage() {
   const [searchPlane, setSearchPlane] = useState("");    
 
 // déclaration des références pour les filtres
+  const hasFiltered = useRef(false);
   const filterContainerRef = useRef(null)
   const stateRef = useRef(null);
   const priceRef = useRef(null);
@@ -34,6 +34,7 @@ function CatalogPage() {
   const autonomyRef = useRef(null);
   const capacityRef = useRef(null);
   const typeRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -94,21 +95,7 @@ function CatalogPage() {
     setFilteredAircrafts(filtered);
 }, [searchPlane, aircrafts])
       
-  useEffect(() => {
-    if (pathtype !== '') {
-      setActiveFilters((prevFilters) => ({
-          ...prevFilters,
-          type: pathtype,
-      })); 
-      const filtered = aircrafts.filter(plane => 
-      plane.range_type.toLowerCase() === activeFilters.type
-    );
-    setFilteredAircrafts(filtered);     
-    }
-  },[pathtype,aircrafts,activeFilters]) 
-  
-    if (loading) return <p>Chargement...</p>;
-    if (error) return <p>{error}</p>;
+
 
     // Gestion des pages
     const handleNextPage = () => {
@@ -149,10 +136,8 @@ function CatalogPage() {
       }
     }
   };
-  
-  
 
-  const reapplyFilters = (filters = activeFilters) => {
+  const reapplyFilters = useCallback((filters = activeFilters) => {
     let filtered = [...aircrafts]; 
     
     if (stateRef.current && stateRef.current.value !== "Aucun") {
@@ -227,7 +212,7 @@ function CatalogPage() {
   
     if (typeRef.current && typeRef.current.value !== "Aucun") {
       filtered = filtered.filter(
-        (aircraft) => aircraft.range_type === typeRef.current.value
+        (aircraft) => aircraft.range_type.toLowerCase() === typeRef.current.value
       );
     }
     if ((currentPage - 1) * itemsPerPage >= filteredAircrafts.length) {
@@ -235,7 +220,7 @@ function CatalogPage() {
     }
     setFilteredAircrafts(filtered); 
     
-  };
+  }, [activeFilters, aircrafts,currentPage,filteredAircrafts]);
 
   const handleDeleteStateFilter = () => {
     stateRef.current.classList.add("invisible");
@@ -320,11 +305,26 @@ function CatalogPage() {
   } 
 
   const handleTypeFilter = () => {
-    typeRef.current.classList.remove("invisible");
-    if(typeRef.current){ 
-      reapplyFilters();
-    }  } 
+    // Assure que le select est visible
+    if (typeRef.current) {
+      reapplyFilters(activeFilters); // Applique les filtres actuels
+      typeRef.current.classList.remove("invisible");
+    }
+  };
+  
+  useEffect(() => {
+    if (typeRef.current && pathtype !== "" ) {
+      if(!hasFiltered.current){
+        typeRef.current.value = pathtype;
+        setActiveFilters((prev) => ({ ...prev, type: pathtype }));  
+      } 
+      reapplyFilters(activeFilters);
+      typeRef.current.classList.remove("invisible");
+    }
+  }, [pathtype, aircrafts,reapplyFilters,activeFilters]);
 
+
+    
   const handleDeleteTypeFilter = () => {
     typeRef.current.classList.add("invisible");
     if(typeRef.current){
@@ -358,6 +358,10 @@ function CatalogPage() {
       currentPage * itemsPerPage
   );
   
+  if (loading) return <p>Chargement...</p>;
+  if (error) return <p>{error}</p>;
+
+
     return (
     <main className='catalog-page' on> 
         <div className="catalog-header">
@@ -445,9 +449,9 @@ function CatalogPage() {
                         <option value="Aucun">Aucun</option>
                         <option value="local">Local</option>
                         <option value="regional">Regional</option>
-                        <option value="International">International</option>
+                        <option value="international">International</option>
                       </select>
-                      <button className='editFilterButton' onClick={handleTypeFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteTypeFilter}><AiOutlineCloseSquare size={20} /></button></div>
+                      <button ref={buttonRef} className='editFilterButton' onClick={handleTypeFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteTypeFilter}><AiOutlineCloseSquare size={20} /></button></div>
                     </div>
                 </ul>
             </div>{/*}*/}
