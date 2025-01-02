@@ -366,7 +366,7 @@ function CatalogPage() {
 
 
     return (
-    <main className='catalog-page' on> 
+    <main className='catalog-page'> 
         <div className="catalog-header">
             <div className="catalog-title-container">
                 <h1 className="catalog-title white">Notre Catalogue</h1>
