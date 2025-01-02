@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import PageProduct from "../product/PageProduct";
-import { insertAircraft, insertModel } from "../../services/product";
+import { insertAircraft, insertModel, getModelByName } from "../../services/product";
 
 export default function PageAdmin(){
 
@@ -39,36 +39,10 @@ export default function PageAdmin(){
 
     const handleAddButtonClick = async (productData, modelData) => {
         console.log("Données reçues :", productData);
-        const {
-          serialNumber,
-          manufactureYear,
-          flightHours,
-          configuration,
-          recentMaintenance,
-          typicalRoutes,
-          owner,
-          costPerKm,
-          monthlyMaintenanceCost,
-          estimatedPrice,
-          isAvailable,
-        } = productData;
-    
-        await insertAircraft(
-          2,
-          serialNumber,
-          +manufactureYear,
-          flightHours,
-          configuration,
-          recentMaintenance,
-          typicalRoutes,
-          owner,
-          costPerKm,
-          monthlyMaintenanceCost,
-          estimatedPrice,
-          isAvailable
-        );
+        
 
         const {
+            addMode,
             modelName,
             rangeType,
             manufacturer,
@@ -84,20 +58,55 @@ export default function PageAdmin(){
             maxTakeoffWeight,
         } = modelData;
 
-        await insertModel(
-            modelName,
-            rangeType,
-            manufacturer,
-            passengerCapacity,
-            engines, 
-            speedAvg, 
-            maxRange, 
-            maxAltitude, 
-            crewSize, 
-            length, 
-            wingspan, 
-            height, 
-            maxTakeoffWeight
+        if (addMode === "Nouveau"){
+            await insertModel(
+                modelName,
+                rangeType,
+                manufacturer,
+                +passengerCapacity,
+                engines, 
+                speedAvg, 
+                +maxRange, 
+                maxAltitude, 
+                crewSize, 
+                length, 
+                wingspan, 
+                height, 
+                maxTakeoffWeight
+            );
+        }
+
+        const {
+            serialNumber,
+            manufactureYear,
+            flightHours,
+            configuration,
+            recentMaintenance,
+            typicalRoutes,
+            owner,
+            costPerKm,
+            monthlyMaintenanceCost,
+            estimatedPrice,
+            isAvailable,
+          } = productData;
+          console.log(modelName)
+          
+          const model = await getModelByName(modelName);
+          console.log(model)
+      
+          await insertAircraft(
+            model.model_id,
+            serialNumber,
+            +manufactureYear,
+            flightHours,
+            configuration,
+            recentMaintenance,
+            typicalRoutes,
+            owner,
+            costPerKm,
+            monthlyMaintenanceCost,
+            +estimatedPrice,
+            isAvailable
           );
 
       };

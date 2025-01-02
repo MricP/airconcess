@@ -84,7 +84,7 @@ class Aircraft
 
     public static function getModelDescription($idAircraft) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT M.range_type, M.manufacturer, M.passenger_capacity, M.crew_size, M.length, M.wingspan, M.height, M.max_takeoff_weight,
+        $stmt = $pdo->prepare("SELECT M.model_name, M.range_type, M.manufacturer, M.passenger_capacity, M.crew_size, M.length, M.wingspan, M.height, M.max_takeoff_weight,
                 M.engines, M.speed_avg, M.max_range, M.max_altitude FROM model M INNER JOIN aircraft A ON A.model_id = M.model_id WHERE aircraft_id = ?");
         $stmt->execute([$idAircraft]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -104,8 +104,8 @@ class Aircraft
             $stmt = $pdo->prepare(
             "
                 Insert into aircraft
-                    (model_id, serial_number, manufacture_year, flight_hours, configuration, recent_maintenance, typical_routes, owner, cost_per_km, monthly_maintenance_cost, estimated_price, isAvailable)
-                values (?,?,?,?,?,?,?,?,?,?,?,?)
+                    (model_id, serial_number, manufacture_year, flight_hours, configuration, recent_maintenance, typical_routes, owner, cost_per_km, monthly_maintenance_cost, estimated_price, isAvailable, description)
+                values (?,?,?,?,?,?,?,?,?,?,?,?,'test')
             ");
             
     
@@ -142,7 +142,7 @@ class Aircraft
             "
                 Insert into model
                     (model_name, range_type, manufacturer, passenger_capacity, engines, speed_avg, max_range, max_altitude, crew_size, length, wingspan, height, max_takeoff_weight)
-                values (?,?,?,?,?,?,?,?,?,?,?,?)
+                values (?,?,?,?,?,?,?,?,?,?,?,?,?)
             ");
             
     

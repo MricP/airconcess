@@ -18,15 +18,15 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
         "rangeType",
         "manufacturer",
         "passengerCapacity",
-        "engines", 
-        "speedAvg", 
-        "maxRange", 
-        "maxAltitude", 
         "crewSize", 
         "length", 
         "wingspan", 
         "height", 
-        "maxTakeoffWeight"
+        "maxTakeoffWeight",
+        "engines", 
+        "speedAvg", 
+        "maxRange", 
+        "maxAltitude" 
     ]);
 
 
@@ -97,6 +97,7 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
 
             if (model) {
                 setModelDescriptionTab([
+                    model.model_name,
                     model.range_type,
                     model.manufacturer,
                     "Jusqu'à " + model.passenger_capacity + " passager(s)",
@@ -129,6 +130,7 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
 
     const handleModelFieldChange = (field, event, index) => {
         if (onInputChange) {
+            console.log(field + " : " + event.target.textContent)
           onInputChange(field, event.target.textContent)
         }
         const criteria = document.getElementById("modelDescription"+index)
@@ -141,9 +143,10 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
 
     const handleModelChange = async (event) => {
         setModelSelected(event.target.value);
-    
+        onInputChange("addMode", event.target.value)
         if (event.target.value !== "Nouveau" && event.target.value !== "Aucun") {
             try {
+                onInputChange("modelName", event.target.value)
                 const modelData = await getModelByName(event.target.value);
                 setModel(modelData); 
                 console.log(model)
@@ -183,7 +186,7 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                                     {modelDescription.map((line, index) => (
                                         <div key={line.varName} className="input-description">
                                             <p id={"modelDescription"+index}>{"• "+line.txt+" : "}</p>
-                                            <p contentEditable = "true" suppressContentEditableWarning = "true" onBlur={(e) => {handleModelFieldChange(aircraftDescriptionTab[index], e, index)}}>Inconnu</p> {/*Permet l'édition de l'élément} */}
+                                            <p contentEditable = "true" suppressContentEditableWarning = "true" onBlur={(e) => {handleModelFieldChange(modelDescriptionTab[index], e, index)}}>Inconnu</p> {/*Permet l'édition de l'élément} */}
                                         </div>
                                     ))}
                                 </div>
