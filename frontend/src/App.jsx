@@ -32,12 +32,8 @@ function App() {
           <Route path='/' element={<LandingPage />} index />
           <Route path='/sign-in' element={<SignInPage />} />
           <Route path='/sign-up' element={<SignUpPage />} />
-<<<<<<< HEAD
-          <Route path='/catalog' element={<CatalogPage />} />
-=======
           <Route path='/catalog' element={<CatalogPage/>} />
           <Route path='/catalog/:type' element= <CatalogPage/> />
->>>>>>> 521a0c8a0124b1690463fc0dafd1ec148734be22
           <Route path='/my-profile' element={<ProfilePage />} />
           <Route path='/product' element={<PageProduct />} />
           <Route path='/product/:id' element={<PageProduct />} />
