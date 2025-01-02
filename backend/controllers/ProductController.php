@@ -93,5 +93,15 @@
             }
             echo json_encode($descriptionToReturn);
         }
+
+        public static function getAllModel(){
+            $model= Aircraft::getAllModel();
+            echo json_encode($model);
+        }
+
+        public static function getModelByName($nameModel){
+            $model= Aircraft::getModelByName($nameModel);
+            echo json_encode($model);
+        }
     }
 ?>

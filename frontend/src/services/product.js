@@ -80,3 +80,70 @@ export const getAircraftDescription = async (idAircraft) => {
         throw error;
     }
 }
+
+export const insertAircraft = async (idModel, serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, isAvailable) => {
+    try {
+        const response = await axiosInstance.post('/admin/insert-Aircraft', {
+            idModel,
+            serialNumber,
+            manufactureYear: parseInt(manufactureYear), 
+            flightHours,
+            configuration,
+            recentMaintenance,
+            typicalRoutes,
+            owner,
+            costPerKm,
+            monthlyMaintenanceCost,
+            estimatedPrice,
+            isAvailable
+        });
+        console.log('Réponse du serveur:', response);
+    } catch(error) {
+        console.error("Erreur lors de l'insertion", error);
+        throw error;
+    }
+}
+
+export const getAllModel = async () => {
+    try {
+        const response = await axiosInstance.post('/admin/get-Model', {});
+        return response
+    } catch(error) {
+        console.error("Erreur lors de l'insertion", error);
+        throw error;
+    }
+}
+
+export const getModelByName = async (nameModel) => {
+    try {
+        const response = await axiosInstance.post('/admin/get-ByNameModel', { nameModel });
+        return response.data; 
+    } catch (error) {
+        console.error("Erreur lors de l'insertion", error);
+        throw error;
+    }
+}
+
+export const insertModel = async (modelName, rangeType, manufacturer, passengerCapacity, engines, speedAvg, maxRange, maxAltitude, crewSize, length, wingspan, height, maxTakeoffWeight) => {
+    try {
+        const response = await axiosInstance.post('/admin/insert-Model', {
+            modelName,
+            rangeType,
+            manufacturer,
+            passengerCapacity,
+            engines,
+            speedAvg,
+            maxRange,
+            maxAltitude,
+            crewSize,
+            length,
+            wingspan,
+            height,
+            maxTakeoffWeight
+        });
+        console.log('Réponse du serveur:', response);
+    } catch(error) {
+        console.error("Erreur lors de l'insertion", error);
+        throw error;
+    }
+}

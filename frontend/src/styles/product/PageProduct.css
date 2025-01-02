@@ -1,0 +1,9 @@
+.page-product .bottom-product-page {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10vh;
+}
+
+.page-product .add-button{
+    width: 20vw;
+}
