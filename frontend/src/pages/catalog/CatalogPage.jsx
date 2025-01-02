@@ -215,12 +215,15 @@ function CatalogPage() {
         (aircraft) => aircraft.range_type.toLowerCase() === typeRef.current.value
       );
     }
-    if ((currentPage - 1) * itemsPerPage >= filteredAircrafts.length) {
-      setCurrentPage(Math.max(1, Math.ceil(filteredAircrafts.length / itemsPerPage)));
-    }
     setFilteredAircrafts(filtered); 
     
-  }, [activeFilters, aircrafts,currentPage,filteredAircrafts]);
+  }, [activeFilters, aircrafts]);
+
+  useEffect(() => {
+    if (filteredAircrafts.length > 0 && (currentPage - 1) * itemsPerPage >= filteredAircrafts.length) {
+      setCurrentPage(Math.max(1, Math.ceil(filteredAircrafts.length / itemsPerPage)));
+    }
+  }, [filteredAircrafts.length, itemsPerPage,currentPage]); 
 
   const handleDeleteStateFilter = () => {
     stateRef.current.classList.add("invisible");
@@ -313,15 +316,15 @@ function CatalogPage() {
   };
   
   useEffect(() => {
-    if (typeRef.current && pathtype !== "" ) {
-      if(!hasFiltered.current){
-        typeRef.current.value = pathtype;
-        setActiveFilters((prev) => ({ ...prev, type: pathtype }));  
-      } 
-      reapplyFilters(activeFilters);
+    if (typeRef.current && pathtype !== "") {
+      if (!hasFiltered.current) {
+        typeRef.current.value = pathtype;  
+        hasFiltered.current = true; 
+      }
+      reapplyFilters(activeFilters); 
       typeRef.current.classList.remove("invisible");
     }
-  }, [pathtype, aircrafts,reapplyFilters,activeFilters]);
+  }, [pathtype, aircrafts, reapplyFilters, activeFilters]);
 
 
     
