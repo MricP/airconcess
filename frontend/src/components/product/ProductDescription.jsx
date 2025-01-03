@@ -11,7 +11,6 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
     const [selectedTechnicalSheet, setSelectedTechnicalSheet] = useState(null)
     const [modelDescriptionTab, setModelDescriptionTab] = 
     useState([
-        "modelName",
         "rangeType",
         "manufacturer",
         "passengerCapacity",
@@ -85,7 +84,6 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
 
             if (modelSelected != "Nouveau") {
                 setModelDescriptionTab([
-                    modelSelected.model_name,
                     modelSelected.range_type,
                     modelSelected.manufacturer,
                     "Jusqu'à " + modelSelected.passenger_capacity + " passager(s)",

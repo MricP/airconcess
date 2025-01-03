@@ -2,7 +2,7 @@ import "../../styles/product/ProductShowcase.css";
 import ScrollDownButton from '../general/ScrollDownButton';
 import { useState } from "react";
 
-const ProductShowcase = ({ imagePath, modelName, mode }) => {
+const ProductShowcase = ({ imagePath, modelName, mode, model }) => {
 
   const [selectedImage, setSelectedImage] = useState(null)
   const [hasId, setHasId] = useState(true)
@@ -32,11 +32,21 @@ const ProductShowcase = ({ imagePath, modelName, mode }) => {
                   <div className="showcase-image"></div>
                 </div>
               )}
-              <form action="">
-                <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />
-                <label htmlFor="file-input">Charger une image</label>
-                <input className="product-name input" type="text" defaultValue={"Nom du produit"} />
-              </form>
+              {model === "Nouveau" ?
+                <form action="">
+                  <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />
+                  <label htmlFor="file-input">Charger une image</label>
+                  <input className="product-name input" type="text" defaultValue={"Nom du produit"} />
+                </form> :
+                <div>
+                  <form action="">
+                    <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />
+                    <label htmlFor="file-input">Charger une image</label>  
+                  </form>
+                  <h2 className='product-name'>{model.model_name}</h2>  
+                </div>     
+              }
+
               <div className="gradient-overlay"></div>
               <ScrollDownButton
                 scrollLength={window.innerHeight + 0.25 * window.innerHeight}

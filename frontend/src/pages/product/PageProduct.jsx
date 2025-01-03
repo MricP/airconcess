@@ -20,7 +20,6 @@ function PageProduct({mode, onSubmitProduct, model}) {
   const [mainImg, updateMainImg] = useState({ url: "/assets/not-available.png", id: 0 });
   const [sliderImgs, updateSliderImgs] = useState([]);
   const [modelDescription, updateModelDescription] = useState([
-      {varName:"model_name", txt:"Nom du modèle", value:"Inconnu"},
       {varName:"range_type", txt:"Rayon d'action", value:"Inconnu"},
       {varName:"manufacturer", txt:"Constructeur", value:"Inconnu"},
       {varName:"passenger_capacity", txt:"Capacité ", value:"Inconnu"},
@@ -167,6 +166,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
         modelName={modelName}
         imagePath={mainImg.url}
         mode={mode}
+        model={model}
       />
       <ProductDescription
         aircraftId={id}
