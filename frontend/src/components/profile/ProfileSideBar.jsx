@@ -59,6 +59,7 @@ export default function ProfileSideBar(){
           const data = await updateUserData(formData, token);
           setUserData(data);
           setIsModalOpen(false);
+          contentInfosRef.current.classList.toggle("invisible")
         } catch (error) {
           console.error('Error updating user data:', error);
         }
@@ -120,18 +121,21 @@ export default function ProfileSideBar(){
                             <input
                                 type="text"
                                 name="firstName"
+                                placeholder='prenom'
                                 value={formData.firstName}
                                 onChange={handleChange}
                             />
                             <input
                                 type="text"
                                 name="lastName"
+                                placeholder='nom'
                                 value={formData.lastName}
                                 onChange={handleChange}
                             />
                             <input
                                 type="text"
                                 name="location"
+                                placeholder='localisation'
                                 value={formData.location}
                                 onChange={handleChange}
                             />

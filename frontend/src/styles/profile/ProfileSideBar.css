@@ -73,7 +73,7 @@
 }
 
 .profile-AdminButton:hover{
-    background-color: var(--section-color);
+    background-color: var(--button-color);
 }
 
 .profile-modifyForm{
