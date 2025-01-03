@@ -14,7 +14,6 @@ import { getCatalogData } from '../../services/api';
 import { useLocation } from 'react-router-dom';
 
 function CatalogPage() {
-  const gulfstreamG650ER = "../assets/catalog/gulfstreamG650.svg"
   const location = useLocation().pathname.split("/");
   let pathtype = location[2] || '';
   const [aircrafts, setAircrafts] = useState([]);
@@ -468,7 +467,7 @@ function CatalogPage() {
                 <ProductBox
                     key={plane.aircraft_id}
                     isAvailable={plane.isAvailable}
-                    planeImg={gulfstreamG650ER}
+                    planeImg={plane.img_URL}
                     modelName={plane.model_name.toUpperCase()}
                     serialNumber={plane.serial_number}
                     price={`USD $ ${plane.estimated_price}`}
