@@ -49,6 +49,12 @@
     line-height: 20px;
 }
 
+.catalog-planeImg{
+    width: 300px;
+    height: 150px;
+}
+
+
 /*ProductDescription-component*/
 
 .catalog-productDescription-container{

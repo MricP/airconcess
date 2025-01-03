@@ -1,7 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useRef, useCallback} from 'react'
 import { CiSearch } from "react-icons/ci";
 import { CiFilter } from "react-icons/ci";
-import { ProductBox } from '../components/ProductBox';
+import { ProductBox } from '../../components/catalog/ProductBox';
 import { FaEdit } from "react-icons/fa";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
@@ -9,23 +9,23 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import "../styles/catalog/CatalogPage.css"
-import { getCatalogData } from '../services/api';
+import "../../styles/catalog/CatalogPage.css"
+import { getCatalogData } from '../../services/api';
+import { useLocation } from 'react-router-dom';
 
 function CatalogPage() {
-    const gulfstreamG650ER = "../assets/catalog/gulfstreamG650.svg"
-
-    const [aircrafts, setAircrafts] = useState([]);
-    const [page, setPage] = useState(1);
-    const isMobile = useMediaQuery({ maxWidth: 1130 });
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const catalogRef = useRef(null);
-    const [searchPlane, setSearchPlane] = useState("");
-    // const [isPopupVisible, setIsPopupVisible] = useState(false);
-    
+  const location = useLocation().pathname.split("/");
+  let pathtype = location[2] || '';
+  const [aircrafts, setAircrafts] = useState([]);
+  const [page, setPage] = useState(1);
+  const isMobile = useMediaQuery({ maxWidth: 1130 });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const catalogRef = useRef(null);
+  const [searchPlane, setSearchPlane] = useState("");    
 
 // déclaration des références pour les filtres
+  const hasFiltered = useRef(false);
   const filterContainerRef = useRef(null)
   const stateRef = useRef(null);
   const priceRef = useRef(null);
@@ -33,6 +33,7 @@ function CatalogPage() {
   const autonomyRef = useRef(null);
   const capacityRef = useRef(null);
   const typeRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -46,28 +47,17 @@ function CatalogPage() {
     year: "Aucun",
     capacity: "Aucun",
     autonomy: "Aucun",
-    type: "Aucun",
+    type: "Aucun" 
   });
 
   const totalPages = Math.ceil(filteredAircrafts.length / itemsPerPage);
 
   useEffect(() => {
     if (!isMobile && filterContainerRef.current) {
-      filterContainerRef.current.style = `position: sticky;
-                                          top: 15%;
-                                          bottom: 30%;
-                                          display: flex;
-                                          flex-direction: column;
-                                          background-color: var(--box-color);
-                                          width: 30%;
-                                          border-radius: 5px;
-                                          height: max-content;
-                                          align-items: center;
-                                          margin-left: 50px;`
-      nbAppuie = 0;
+      filterContainerRef.current.classList.toggle("invisible");
     }
     else if(isMobile && filterContainerRef.current){
-      filterContainerRef.current.style = "display: none;";
+      filterContainerRef.current.classList.toggle("invisible");
     }
   }, [isMobile]);
 
@@ -88,26 +78,23 @@ function CatalogPage() {
         setLoading(false);
       }
     };
-
     fetchAircrafts();
-  }, [page],);
+  }, [page]);
 
 
+
+  useEffect(() => {
+    const filtered = aircrafts.filter((plane) => {
+        if (searchPlane.trim() === '') {
+            return true; 
+        }
+        return plane.model_name.toLowerCase().includes(searchPlane.toLowerCase());
+    });
+
+    setFilteredAircrafts(filtered);
+}, [searchPlane, aircrafts])
       
-      useEffect(() => {
-        const filtered = aircrafts.filter((plane) => {
-            if (searchPlane.trim() === '') {
-                return true; 
-            }
-            return plane.model_name.toLowerCase().includes(searchPlane.toLowerCase());
-        });
-    
-        setFilteredAircrafts(filtered);
-    }, [searchPlane, aircrafts])
-      
-        
-    if (loading) return <p>Chargement...</p>;
-    if (error) return <p>{error}</p>;
+
 
     // Gestion des pages
     const handleNextPage = () => {
@@ -141,17 +128,15 @@ function CatalogPage() {
     } else {
       nbAppuie++;
       if(nbAppuie%2 === 1){
-        filterContainerRef.current.style = "display: flex;position: absolute;z-index: 1;width: 80%;top: 90%;left:0%;right: 15%;align-item: center;box-shadow: 2px 3px 3px var(--section-color);";
+        filterContainerRef.current.classList.toggle("invisible");
       }
       else{
-        filterContainerRef.current.style = "display: none;";
+        filterContainerRef.current.classList.toggle("invisible");
       }
     }
   };
-  
-  
 
-  const reapplyFilters = (filters = activeFilters) => {
+  const reapplyFilters = useCallback((filters = activeFilters) => {
     let filtered = [...aircrafts]; 
     
     if (stateRef.current && stateRef.current.value !== "Aucun") {
@@ -164,139 +149,141 @@ function CatalogPage() {
   
     if (filters.price !== "Aucun") {
       if (filters.price === "-1000000") {
-        filtered = filtered.filter((aircraft) => aircraft.price <= 1000000);
+        filtered = filtered.filter((aircraft) => aircraft.estimated_price <= 1000000);
       } else if (filters.price === "-10000000") {
-        filtered = filtered.filter((aircraft) => aircraft.price <= 10000000);
+        filtered = filtered.filter((aircraft) => aircraft.estimated_price <= 10000000);
       } else if (filters.price === "-50000000") {
-        filtered = filtered.filter((aircraft) => aircraft.price <= 50000000);
+        filtered = filtered.filter((aircraft) => aircraft.estimated_price <= 50000000);
       } else if (filters.price === "+50000000") {
-        filtered = filtered.filter((aircraft) => aircraft.price > 50000000);
+        filtered = filtered.filter((aircraft) => aircraft.estimated_price > 50000000);
       }
     }
   
     if (yearRef.current && yearRef.current.value !== "Aucun") {
       if (yearRef.current.value === "2000") {
-        filtered = filtered.filter((aircraft) => aircraft.year <= 2000);
+        filtered = filtered.filter((aircraft) => aircraft.manufacture_year <= 2000);
       } else if (yearRef.current.value === "2010") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.year <= 2010 && aircraft.year > 2000
+          (aircraft) => aircraft.manufacture_year <= 2010 && aircraft.manufacture_year > 2000
         );
       } else if (yearRef.current.value === "2020") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.year <= 2020 && aircraft.year > 2010
+          (aircraft) => aircraft.manufacture_year <= 2020 && aircraft.manufacture_year > 2010
         );
       } else if (yearRef.current.value === "NEW") {
-        filtered = filtered.filter((aircraft) => aircraft.year > 2020);
+        filtered = filtered.filter((aircraft) => aircraft.manufacture_year > 2020);
       }
     }
   
     if (capacityRef.current && capacityRef.current.value !== "Aucun") {
       if (capacityRef.current.value === "0") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.capacity < 5 && aircraft.capacity >= 0
+          (aircraft) => aircraft.passenger_capacity < 5 && aircraft.passenger_capacity >= 0
         );
       } else if (capacityRef.current.value === "5") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.capacity < 10 && aircraft.capacity >= 5
+          (aircraft) => aircraft.passenger_capacity < 10 && aircraft.passenger_capacity >= 5
         );
       } else if (capacityRef.current.value === "10") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.capacity < 15 && aircraft.capacity >= 10
+          (aircraft) => aircraft.passenger_capacity < 15 && aircraft.passenger_capacity >= 10
         );
       } else if (capacityRef.current.value === "15") {
-        filtered = filtered.filter((aircraft) => aircraft.capacity >= 15);
+        filtered = filtered.filter((aircraft) => aircraft.passenger_capacity >= 15);
       }
     }
   
     if (autonomyRef.current && autonomyRef.current.value !== "Aucun") {
       if (autonomyRef.current.value === "-100") {
-        filtered = filtered.filter((aircraft) => aircraft.autonomy <= 100);
+        filtered = filtered.filter((aircraft) => aircraft.max_range <= 100);
       } else if (autonomyRef.current.value === "-500") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.autonomy <= 500 && aircraft.autonomy > 100
+          (aircraft) => aircraft.max_range <= 500 && aircraft.max_range + aircraft.max_range > 100
         );
       } else if (autonomyRef.current.value === "-1000") {
         filtered = filtered.filter(
-          (aircraft) => aircraft.autonomy <= 1000 && aircraft.autonomy > 500
+          (aircraft) => aircraft.max_range <= 1000 && aircraft.max_range  > 500
         );
       } else if (autonomyRef.current.value === "+1000") {
-        filtered = filtered.filter((aircraft) => aircraft.autonomy > 1000);
+        filtered = filtered.filter((aircraft) => aircraft.max_range > 1000);
       }
     }
   
     if (typeRef.current && typeRef.current.value !== "Aucun") {
       filtered = filtered.filter(
-        (aircraft) => aircraft.aircraftType === typeRef.current.value
+        (aircraft) => aircraft.range_type.toLowerCase() === typeRef.current.value
       );
     }
-    if ((currentPage - 1) * itemsPerPage >= filteredAircrafts.length) {
-      setCurrentPage(Math.max(1, Math.ceil(filteredAircrafts.length / itemsPerPage)));
-    }
-
     setFilteredAircrafts(filtered); 
     
-  };
-  
+  }, [activeFilters, aircrafts]);
+
+  useEffect(() => {
+    if (filteredAircrafts.length > 0 && (currentPage - 1) * itemsPerPage >= filteredAircrafts.length) {
+      setCurrentPage(Math.max(1, Math.ceil(filteredAircrafts.length / itemsPerPage)));
+    }
+  }, [filteredAircrafts.length, itemsPerPage,currentPage]); 
+
   const handleDeleteStateFilter = () => {
+    stateRef.current.classList.add("invisible");
     if(stateRef.current){
       stateRef.current.value = "Aucun";
-      stateRef.current.style = "display:none";
+      
       setActiveFilters((prev) => ({ ...prev, state: "Aucun" }))
       reapplyFilters();
-      
     }
-  } 
+  }
 
   const handlePriceFilter = () => {
+    priceRef.current.classList.remove("invisible");
     if(priceRef.current){
       const newPrice = priceRef.current.value;
       setActiveFilters((prev) => ({ ...prev, price: newPrice }));
-      priceRef.current.style = "display:initial";
       reapplyFilters({ ...activeFilters, price: newPrice });
     }
   } 
 
   const handleDeletePriceFilter = () => {
+    priceRef.current.classList.add("invisible");
     if(priceRef.current){
       setActiveFilters((prev) => ({ ...prev, price: "Aucun" }))
-      
       priceRef.current.value = "Aucun";
-      priceRef.current.style = "display:none";
+      
       setActiveFilters((prev) => {
         const updatedFilters = { ...prev, price: "Aucun" };
-        reapplyFilters(updatedFilters); // Reapply avec l'état à jour
+        reapplyFilters(updatedFilters); 
         return updatedFilters;
     });
     }
   } 
 
   const handleYearFilter = () => {
+    yearRef.current.classList.remove("invisible")
     if(yearRef.current){
-      yearRef.current.style = "display:initial";
       reapplyFilters();
     }
   } 
 
   const handleDeleteYearFilter = () => {
+    yearRef.current.classList.add("invisible");
     if(yearRef.current){
       yearRef.current.value = "Aucun";
       setActiveFilters((prev) => ({ ...prev, year: "Aucun" }))
-      yearRef.current.style = "display:none";
       reapplyFilters();
     }
   } 
 
   const handleCapacityFilter = () => {
+    capacityRef.current.classList.remove("invisible");
     if(capacityRef.current){
-      capacityRef.current.style = "display:initial";
       reapplyFilters();
     }
   } 
 
   const handleDeleteCapacityFilter = () => {
+    capacityRef.current.classList.add("invisible");
     if(capacityRef.current){
       capacityRef.current.value = "Aucun";
-      capacityRef.current.style = "display:none";
       setActiveFilters((prev) => ({ ...prev, capacity: "Aucun" }))
       reapplyFilters();
     }
@@ -304,46 +291,57 @@ function CatalogPage() {
 
 
   const handleAutonomyFilter = () => {
+    autonomyRef.current.classList.remove("invisible");
     if(autonomyRef.current){
-      autonomyRef.current.style = "display:initial";
       reapplyFilters();
     }
   } 
 
   const handleDeleteAutonomyFilter = () => {
+    autonomyRef.current.classList.add("invisible");
     if(autonomyRef.current){
       autonomyRef.current.value = "Aucun";
-      autonomyRef.current.style = "display:none";
       setActiveFilters((prev) => ({ ...prev, autonomy: "Aucun" }))
       reapplyFilters();
     }
   } 
 
   const handleTypeFilter = () => {
-    if(typeRef.current){
-      typeRef.current.style = "display:initial";
-      reapplyFilters();
+    // Assure que le select est visible
+    if (typeRef.current) {
+      reapplyFilters(activeFilters); // Applique les filtres actuels
+      typeRef.current.classList.remove("invisible");
     }
-    window.history.pushState(null, "AirConcess", `/catalog/${typeRef.current.value.toLowerCase()}`)
-  } 
+  };
+  
+  useEffect(() => {
+    if (typeRef.current && pathtype !== "") {
+      if (!hasFiltered.current) {
+        typeRef.current.value = pathtype;  
+        hasFiltered.current = true; 
+      }
+      reapplyFilters(activeFilters); 
+      typeRef.current.classList.remove("invisible");
+    }
+  }, [pathtype, aircrafts, reapplyFilters, activeFilters]);
 
+
+    
   const handleDeleteTypeFilter = () => {
+    typeRef.current.classList.add("invisible");
     if(typeRef.current){
-      
+      typeRef.current.value = "Aucun";
       setActiveFilters((prev) => ({ ...prev, type: "Aucun" }))
       reapplyFilters(activeFilters)
-      typeRef.current.style = "display:none";
-      typeRef.current.value = "Aucun";
       
-     
     } 
     
   }
-
+  
   const handleFiltrageState = () => {
+    stateRef.current.classList.remove("invisible");
     if(stateRef.current){
-      stateRef.current.style = "display:initial";
-      reapplyFilters();
+      reapplyFilters(activeFilters);
     }
   }
 
@@ -355,13 +353,17 @@ function CatalogPage() {
     setCurrentPage(1);
     reapplyFilters();
   };
-
+  
   // Pagination
   const paginatedAircrafts = (filteredAircrafts|| []).slice(
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage
   );
   
+  if (loading) return <p>Chargement...</p>;
+  if (error) return <p>{error}</p>;
+
+
     return (
     <main className='catalog-page'> 
         <div className="catalog-header">
@@ -387,7 +389,7 @@ function CatalogPage() {
                   <div className='editFilter-container'>
                     <li>Etat :</li>
                     <div>
-                      <select name="stateSelect" ref={stateRef} onChange={handleFiltrageState}>
+                      <select className='invisible' name="stateSelect" ref={stateRef} onChange={handleFiltrageState}>
                         <option value="Aucun">Aucun</option>
                         <option value="Disponible">Disponible</option>
                         <option value="Indisponible">Indisponible</option>
@@ -397,7 +399,7 @@ function CatalogPage() {
                   <div className='editFilter-container'>
                     <li>Prix :</li>
                     <div>
-                      <select name="select" ref={priceRef} onChange={handlePriceFilter}>
+                      <select className='invisible' name="select" ref={priceRef} onChange={handlePriceFilter}>
                         <option value="Aucun">Aucun</option>
                         <option value="-1000000">- de 1 000 000</option>
                         <option value="-10000000">- de 10 000 000</option>
@@ -409,7 +411,7 @@ function CatalogPage() {
                   <div className='editFilter-container'>
                     <li>Année :</li> 
                     <div>
-                      <select name="select" ref={yearRef} onChange={handleYearFilter}>
+                      <select className='invisible' name="select" ref={yearRef} onChange={handleYearFilter}>
                         <option value="Aucun">Aucun</option>
                         <option value="2000">2000</option>
                         <option value="2010">2010</option>
@@ -421,11 +423,11 @@ function CatalogPage() {
                   <div className='editFilter-container'>
                     <li>Capacité :</li> 
                     <div>
-                      <select name="select" ref={capacityRef} onChange={handleCapacityFilter}>
+                      <select className='invisible' name="select" ref={capacityRef} onChange={handleCapacityFilter}>
                         <option value="Aucun">Aucun</option>
-                        <option value="0">+ de 0</option>
-                        <option value="5">+ de 5</option>
-                        <option value="10">+ de 10</option>
+                        <option value="0">0</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
                         <option value="15" >+ de 15</option>
                       </select>
                       <button className='editFilterButton' onClick={handleCapacityFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteCapacityFilter}><AiOutlineCloseSquare size={20} /></button></div>
@@ -433,7 +435,7 @@ function CatalogPage() {
                   <div className='editFilter-container'>
                     <li>Autonomie :</li>
                     <div>
-                      <select name="select" ref={autonomyRef} onChange={handleAutonomyFilter}>
+                      <select className='invisible' name="select" ref={autonomyRef} onChange={handleAutonomyFilter}>
                         <option value="Aucun">Aucun</option>
                         <option value="-100">- de 100km</option>
                         <option value="-500">- de 500km</option>
@@ -445,13 +447,13 @@ function CatalogPage() {
                   <div className='editFilter-container'>
                     <li>Type :</li>
                     <div>
-                      <select name="select" ref={typeRef} onChange={handleTypeFilter}>
+                      <select className='invisible' name="select" ref={typeRef} onChange={handleTypeFilter}>
                         <option value="Aucun">Aucun</option>
-                        <option value="Local">Local</option>
-                        <option value="National">National</option>
-                        <option value="International">International</option>
+                        <option value="local">Local</option>
+                        <option value="regional">Regional</option>
+                        <option value="international">International</option>
                       </select>
-                      <button className='editFilterButton' onClick={handleTypeFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteTypeFilter}><AiOutlineCloseSquare size={20} /></button></div>
+                      <button ref={buttonRef} className='editFilterButton' onClick={handleTypeFilter}><FaEdit size={20}/></button><button className='editFilterButton' onClick={handleDeleteTypeFilter}><AiOutlineCloseSquare size={20} /></button></div>
                     </div>
                 </ul>
             </div>{/*}*/}
@@ -465,15 +467,15 @@ function CatalogPage() {
                 <ProductBox
                     key={plane.aircraft_id}
                     isAvailable={plane.isAvailable}
-                    planeImg={gulfstreamG650ER}
+                    planeImg={plane.img_URL}
                     modelName={plane.model_name.toUpperCase()}
                     serialNumber={plane.serial_number}
                     price={`USD $ ${plane.estimated_price}`}
                     year={plane.manufacture_year}
-                    hour={`${plane.flight_hours.split(" ")[0]} ${plane.flight_hours.split(" ")[1]}`}
-                    capacity={plane.passenger_capacity.split(" ")[1]}
-                    autonomy={`${plane.max_range.split(" ")[0]} ${plane.max_range.split(" ")[1]}`}
-                    description={plane.Description}
+                    hour={plane.flight_hours}
+                    capacity={plane.passenger_capacity}
+                    autonomy={plane.max_range}
+                    description={plane.description}
                     aircraftType={plane.range_type}
                     idAircraft={plane.aircraft_id}
                 />

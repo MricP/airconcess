@@ -23,6 +23,11 @@
     margin-bottom: 3%;
 }
 
+.invisible{
+    display: none;
+}
+
+
 .catalog-subtitle{
     font-size: var(--text-size);
 }
@@ -133,7 +138,6 @@
 .editFilter-container > div > select{
     border: none;
     outline: none;
-    display: none;
     background-color: var(--box-color);
     text-align: right;
 }
@@ -256,6 +260,17 @@
     .catalog-subtitle{
         font-size: 1em;
         width: initial;
+    }
+
+    .filterDescription{
+        z-index: 1;
+        display: inherit;
+        position: absolute;
+        width: 60%;
+        align-items: center;
+        justify-content: center;
+        top: 90%;
+        left: 10%;
     }
 
     .filterBar-container{
