@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import LandingPage from './pages/LandingPage';
 import SignInPage from './pages/auth/SignInPage';
-import ProfilePage from './pages/auth/ProfilePage';
+import ProfilePage from './pages/profile/ProfilePage.jsx';
 import Error404 from './pages/Error404.jsx';
 import SignUpPage from './pages/auth/SignUpPage';
 import PageProduct from './pages/product/PageProduct.jsx';
@@ -34,7 +34,7 @@ function App() {
           <Route path='/sign-in' element={<SignInPage />} />
           <Route path='/sign-up' element={<SignUpPage />} />
           <Route path='/catalog' element={<CatalogPage/>} />
-          <Route path='/catalog/:type' element= <CatalogPage/> />
+          <Route path='/catalog/:type' element= {<CatalogPage/>} />
           <Route path='/my-profile' element={<ProfilePage />} />
           <Route path='/product' element={<PageProduct />} />
           <Route path='/product/:id' element={<PageProduct />} />
