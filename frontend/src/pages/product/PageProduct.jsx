@@ -117,7 +117,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
   });
 
   const [modelData, setModelData] = useState({
-    addMode: "",
+    addMode: "Nouveau",
     modelName: "",
     rangeType: "",
     manufacturer: "",
@@ -132,6 +132,27 @@ function PageProduct({mode, onSubmitProduct, model}) {
     height: "", 
     maxTakeoffWeight: "",
   });
+
+  useEffect(() => {
+    if(model != "Nouveau"){
+      setModelData({
+        addMode: "",
+        modelName: model.model_name,
+        rangeType: "",
+        manufacturer: "",
+        passengerCapacity: "",
+        engines: "", 
+        speedAvg: "", 
+        maxRange: "", 
+        maxAltitude: "", 
+        crewSize: "", 
+        length: "", 
+        wingspan: "", 
+        height: "", 
+        maxTakeoffWeight: "",
+      })
+    }
+  }, [model]);
 
   const handleSubmit = () => {
     if (onSubmitProduct) {
@@ -167,6 +188,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
         imagePath={mainImg.url}
         mode={mode}
         model={model}
+        onInputChange={handleInputChange}
       />
       <ProductDescription
         aircraftId={id}

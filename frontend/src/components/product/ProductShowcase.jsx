@@ -2,7 +2,7 @@ import "../../styles/product/ProductShowcase.css";
 import ScrollDownButton from '../general/ScrollDownButton';
 import { useState } from "react";
 
-const ProductShowcase = ({ imagePath, modelName, mode, model }) => {
+const ProductShowcase = ({ imagePath, modelName, mode, model, onInputChange }) => {
 
   const [selectedImage, setSelectedImage] = useState(null)
   const [hasId, setHasId] = useState(true)
@@ -22,6 +22,10 @@ const ProductShowcase = ({ imagePath, modelName, mode, model }) => {
     }
   };
 
+  const handleNameChange = (event) => {
+    if (onInputChange) onInputChange("modelName", event.target.value)
+  };
+
   if (mode === "add") {
     return (
           <div className="productShowcase-container" id={hasId ? "productShowcase-container-edit" : null}>
@@ -36,7 +40,7 @@ const ProductShowcase = ({ imagePath, modelName, mode, model }) => {
                 <form action="">
                   <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />
                   <label htmlFor="file-input">Charger une image</label>
-                  <input className="product-name input" type="text" defaultValue={"Nom du produit"} />
+                  <input className="product-name input" type="text" defaultValue={"Nom du produit"} onChange={handleNameChange}/>
                 </form> :
                 <div>
                   <form action="">
