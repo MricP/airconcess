@@ -22,8 +22,7 @@ class ProfileController
     /**
      * Fonction pour modifier l'user grâce à un formulaire
      */
-    public static function updateProfileData($payload)
-    {
+    public static function updateProfileData($payload){
         $data = json_decode(file_get_contents("php://input"), true);
         $user = self::getUser($payload);
 
@@ -45,6 +44,18 @@ class ProfileController
         } else {
             http_response_code(500); 
             echo json_encode(["error" => "Erreur lors de la mise à jour"]);
+        }
+    }
+
+    public static function deleteProfilUser($payload){
+        $user = self::getUser($payload);
+        $delete = User::deleteUser($user['idUser']);
+
+        if ($delete) {
+            echo json_encode(["message" => "Profil supprimé"]);
+        } else {
+            http_response_code(500); 
+            echo json_encode(["error" => "Erreur lors de la suppression"]);
         }
     }
 

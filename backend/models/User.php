@@ -59,5 +59,11 @@ class User
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public static function deleteUser($id){
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("DELETE FROM User WHERE idUser = ?");
+        return $stmt->execute([$id]);
+    }
     
 }

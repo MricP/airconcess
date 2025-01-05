@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { getUserData, updateProfileData } from '../../services/auth';
+import { getUserData, updateProfileData, deleteProfilData } from '../../services/auth';
 import { useNavigate } from 'react-router-dom';
 import "../../styles/profile/ProfileSideBar.css"
 import { BiPencil } from "react-icons/bi";
@@ -84,6 +84,16 @@ export default function ProfileSideBar(){
         });
       };
     
+      const handleDelete = () => {
+        const token = localStorage.getItem('token');
+          if (!token) {
+            navigate('/sign-in');
+            return;
+          }
+        deleteProfilData(token);
+        navigate("/");
+        localStorage.removeItem("token")
+      }
 
       const handleIsModal = () => {
         
@@ -103,7 +113,7 @@ export default function ProfileSideBar(){
         fileInput.click();
         fileInput.onchange = (event) => {
           const files = Array.from(event.target.files); 
-          const validExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp'];
+          const validExtensions = ['.png', '.jpg', '.jpeg', '.webp'];
           const imageFiles = files.filter(file => {
             const extension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
             return validExtensions.includes(extension);
@@ -115,7 +125,6 @@ export default function ProfileSideBar(){
         };
       };
 
-
       if (!userData) {
         return <div>Chargement...</div>;
       }
@@ -126,18 +135,18 @@ export default function ProfileSideBar(){
                 <div className='profile-picture-container' onClick={handleProfileClick}>
                 {userData.profilePictureURL ? (
                     <img src={userData.profilePictureURL} alt="Profile" onError={(e) => { e.target.onerror = null; e.target.src = "defaultProfilePictureURL"; }} />
-                ) : "Non Définis"}
+                ) : ""}
                 </div>
                 <div className='profile-control-button'>
                     <button onClick={handleIsModal}><BiPencil size={30} /></button>
                     <button onClick={handleLogout}><IoExitOutline size={30}/></button>
-                    <button><IoTrashOutline size={30}/></button>
+                    <button onClick={handleDelete}><IoTrashOutline size={30}/></button>
                 </div>
                 <div className='profile-contentInfos' ref={contentInfosRef}>
                     <p>{userData.firstName} {userData.lastName}</p>
                     <p>{userData.email}</p>
                     <p>{userData.location ? userData.location : 'Location not define'}</p>
-                    {userData.isAdmin === 1 && <button className='profile-AdminButton'>Partie Administrateur</button>}
+                    {userData.isAdmin === 1 && <button onClick={() => navigate("/admin")} className='profile-AdminButton'>Partie Administrateur</button>}
                     {userData.isTrainer === 1 && <p><strong>Rôle :</strong> Formateur</p>}
                 </div>
                 {isModalOpen && (
@@ -165,11 +174,6 @@ export default function ProfileSideBar(){
                                 value={formData.location}
                                 onChange={handleChange}
                             />
-                            {/* <input
-                                    type="hidden"
-                                    name="profilePictureURL"
-                                    value={formData.profilePictureURL}
-                            /> */}
                             <input
                                     type="hidden"
                                     name="email"
@@ -181,9 +185,6 @@ export default function ProfileSideBar(){
                     </div>
                 )}   
           </div>
-          
-    
-          
         </main>
       );
 }

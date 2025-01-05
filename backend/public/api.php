@@ -159,4 +159,17 @@ if($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my-
     ProfileController::updateProfileData($payload);
 }
 
+if($_SERVER['REQUEST_METHOD'] === 'DELETE' && strpos($_SERVER['REQUEST_URI'], '/my-profile/delete') !== false){
+    $headers = getallheaders();
+    if (!isset($headers['Authorization'])) {
+        http_response_code(401);
+        echo json_encode(["message" => "Bonjour, vous devez vous connecter pour accéder à cette ressource"]);
+        exit();
+    }
+    $token = str_replace('Bearer ', '', $headers['Authorization']);
+    $payload = Token::verify($token);
+
+    ProfileController::deleteProfilUser($payload);
+}
+
 ?>
