@@ -10,29 +10,21 @@ import "../../styles/appointment/InfoFormFieldset.css"
 
 function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeProof=false,setValue}) {
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i    
-    const postalCodeRegex = /^[0-9]/
-
-    function displayCardFileName() {
-        const element = document.getElementById("id-card-file-name");
-        const input = document.getElementById('id-card');
-
-        if(input.files[0] != null) {
-            element.innerText = input.files[0].name;
-        }
-    }
-
-    function displayProofFileName() {
-        const element = document.getElementById("income-proof-file-name");
-        const input = document.getElementById('income-proof');
-
-        if(input.files[0] != null) {
-            element.innerText = input.files[0].name;
-        }
-    }
+    const postalCodeRegex = /^[0-9]{5}/
 
     function handleDisplayErrorDiv() {
         return errors.email && errors.email?.message!=="required"
     }
+
+    const getCountryNameFromCode = (code) => {
+        const country = countryList().getData().find((country) => country.value === code);
+        return country ? country.label : code; // Retourne le nom complet ou le code si non trouvé
+    };
+
+    const getCountryCodeFromName = (name) => {
+        const country = countryList().getData().find((country) => country.label === name);
+        return country ? country.value : name; // Retourne le code ou le nom si non trouvé
+    };
 
     return (    
         <fieldset className='info-fieldset' ><legend>Vos informations</legend>
@@ -41,12 +33,14 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
             </div>
             <div>
                 <div>
-                    <label htmlFor="last-name">Nom*
+                    <label htmlFor="last-name">
+                        <p>Nom*</p>
                         <input 
                             className={errors.lastName ? "input-error" : ""}
                             type="text" 
                             id="last-name" 
                             name="lastName" 
+                            value={formData.lastName != null ? formData.lastName : ''}
                             {...register("lastName", { required: true })}
                         />
                     </label>
@@ -54,6 +48,7 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                         <p>Numéro de téléphone*</p>
                         <CustomPhoneInput
                             className={errors.phone ? "input-error" : ""} 
+                            value={formData.phone != null ? formData.phone : ''}
                             setValue={(value) => setValue("phone", value, errors.phone ? {shouldValidate: true} : {shouldValidate: false})}
                             {...register("phone", { required: true })}/>
                         </div>
@@ -63,27 +58,32 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             searchable={true}
                             className={errors.country ? "input-error" : ""}
                             data={countryList().getData()} 
-                            setValue={(value) => setValue("country", value, errors.country ? {shouldValidate: true} : {shouldValidate: false})} 
+                            value={formData.country != null ? getCountryCodeFromName(formData.country) : ''}
+                            setValue={(value) => setValue("country", getCountryNameFromCode(value), errors.country ? {shouldValidate: true} : {shouldValidate: false})}
                             {...register("country", { required: true })}
                         />
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="first-name">Prénom*
+                    <label htmlFor="first-name">
+                        <p>Prénom*</p>
                         <input 
                             className={errors.firstName ? "input-error" : ""}
                             type="text" 
                             id="first-name" 
                             name="firstName" 
+                            value={formData.firstName != null ? formData.firstName : ''}
                             {...register("firstName", { required: true })}
                         />
                     </label>
-                    <label htmlFor="email">Adresse mail*
+                    <label htmlFor="email">
+                        <p>Adresse mail*</p>
                         <input 
                             className={errors.email ? "input-error" : ""}
                             type="text" 
                             id="email" 
                             name="email"
+                            value={formData.email != null ? formData.email : ''}
                             {...register("email", { 
                                 required: "required",
                                 pattern: {
@@ -96,22 +96,25 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                         />
                     </label>
                     <div>
-                        <label htmlFor="city" >Ville*
+                        <label htmlFor="city" >
+                            <p>Ville*</p>
                             <CustomSelectPicker 
                                 searchable={true}
                                 className={errors.city ? "input-error" : ""}
-                                data={formData.country ? City.getCitiesOfCountry(formData.country).map(
+                                data={formData.country ? City.getCitiesOfCountry(getCountryCodeFromName(formData.country)).map(
                                     (city) => ({
                                         value: city.name,
                                         label: city.name,
                                     })
                                 ) : []} 
+                                value={formData.city != null ? formData.city : ''}
                                 setValue={(value) => setValue("city", value, errors.city ? {shouldValidate: true} : {shouldValidate: false})} 
                                 {...register("city", { required: true })}
                             />
                         </label>
                         {/* TODO : ATTENTION CERTAINES PAYS N'ONT PAS DE CODE POSTAL*/}
-                        <label htmlFor="postal-code">Code postal*
+                        <label htmlFor="postal-code">
+                            <p>Code postal</p>
                             <input 
                                 className={errors.postalCode ? "input-error" : ""}
                                 type="text" 
@@ -119,8 +122,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                                     /* Remplace tout ce qui n'est pas un chiffre par un vide */
                                 id="postal-code" 
                                 name="postalCode"
+                                value={formData.postalCode != null ? formData.postalCode : ''}
                                 {...register("postalCode", { 
-                                    required: "required",
                                     pattern: {
                                         value: postalCodeRegex,
                                         message: "○ Le code postal n'est constitué que de chiffres !"
@@ -132,7 +135,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     </div>
                 </div>
             </div>
-            <label htmlFor="address">Adresse*
+            <label htmlFor="address">
+                <p>Adresse*</p>
                 <input 
                     className={errors.address ? "input-error" : ""}
                     type="text" 
@@ -148,12 +152,14 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     id="id-card" 
                     name="idCard" 
                     accept=".pdf,.jpg,.jpeg,.png" 
-                    onInput={() => displayCardFileName()}
-                    {...withIdCard===true ? {...register("idCard", { required: true })} : null}    
+                    //Ici on ne peut pas mettre de value à un input file donc on retire simplement la contrainte s'il y a déjà un fichier  
+                    {...withIdCard===true && formData.idCard === null ? {...register("idCard", { required: true })} : null}  
+                    
                 />
-                <label className={`${withIdCard ? "" : "invisible"} ${errors.idCard ? "input-error" : ""}`}>Carte d’identité*
+                <label className={`${withIdCard ? "" : "invisible"} ${errors.idCard ? "input-error" : ""}`}>
+                    <p>Carte d’identité*</p>
                     <div className="div-upload">
-                        <span id="id-card-file-name" className="file-name">Aucun fichier sélectionné</span>
+                        <span id="id-card-file-name" className="file-name">{formData.idCard != null ? formData.idCard[0].name :"Aucun fichier sélectionné"}</span>
                         <label className="inactive-label" htmlFor="id-card">
                             <MdOutlineFileUpload/>
                         </label>
@@ -165,12 +171,12 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     id="income-proof" 
                     name="incomeProof" 
                     accept=".pdf,.jpg,.jpeg,.png" 
-                    onInput={() => displayProofFileName()}
-                    {...withIncomeProof===true ? {...register("incomeProof", { required: true })} : null}
+                    {...withIncomeProof===true && formData.incomeProof === null? {...register("incomeProof", { required: true })} : null}
                 />
-                <label className={`${withIncomeProof ? "" : "invisible"} ${errors.incomeProof ? "input-error" : ""}`}>Justificatif de revenu*
+                <label className={`${withIncomeProof ? "" : "invisible"} ${errors.incomeProof ? "input-error" : ""}`}>
+                    <p>Justificatif de revenu*</p>
                     <div className="div-upload">
-                        <span id="income-proof-file-name" className="file-name">Aucun fichier sélectionné</span>
+                        <span id="income-proof-file-name" className="file-name">{formData.incomeProof != null ? formData.incomeProof[0].name :'Aucun fichier sélectionné'}</span>
                         <label className="inactive-label" htmlFor="income-proof">
                             <MdOutlineFileUpload/>
                         </label>

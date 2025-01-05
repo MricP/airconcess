@@ -43,7 +43,7 @@ export default function SecondTrainingComponent(){
                 <p>Vous pouvez aussi ajouter des qualifications, comme la licence de vol de nuit ou la qualification IFR (vol aux instruments), 
                     et poursuivre vers la CPL (licence de pilote professionnel) si vous souhaitez devenir pilote commercial.</p>
             </div>
-            <DarkButton text={"Acheter la formation"} className={'second-training-component-button'}/>
+            <DarkButton destination={"/sub-training"} className={'second-training-component-button'}>Acheter la formation</DarkButton>
         </section>
     )
 }
