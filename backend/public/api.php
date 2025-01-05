@@ -185,4 +185,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
         $args["height"],
         $args["maxTakeoffWeight"]);
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/post-uploadImage') !== false) {
+    $destinationDir = $_POST['destinationDir'] ?? null; // Récupérer le dossier
+    $file = $_FILES['file'] ?? null; // Récupérer le fichier
+
+    if (!$file || !$destinationDir) {
+        echo json_encode(['success' => false, 'message' => 'Fichier ou dossier manquant.']);
+        exit;
+    }
+
+    $result = ProductController::uploadImage($file, $destinationDir);
+    echo json_encode($result);
+    exit;
+}
 ?>

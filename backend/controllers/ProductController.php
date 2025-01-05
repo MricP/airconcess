@@ -103,5 +103,37 @@
             $model= Aircraft::getModelByName($nameModel);
             echo json_encode($model);
         }
+
+        public static function uploadImage($file, $destinationDir) {
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+            $destinationDirBack  = __DIR__ . "/../../frontend/public/assets/product/" . $destinationDir. "/";
+            // Vérifie si le fichier existe
+            if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+                return ['success' => false, 'message' => 'Aucun fichier valide reçu.'];
+            }
+        
+            // Vérifie le type de fichier
+            if (!in_array($file['type'], $allowedTypes)) {
+                return ['success' => false, 'message' => 'Type de fichier non valide.'];
+            }
+        
+            // Vérifie ou crée le dossier de destination
+            if (!is_dir($destinationDirBack )) {
+                if (!mkdir($destinationDirBack , 0777, true)) {
+                    return ['success' => false, 'message' => 'Impossible de créer le dossier de destination.'];
+                }
+            }
+        
+            // Génère un nom de fichier unique
+            $fileName = basename($file['name']);
+            $filePath = $destinationDirBack . $fileName;
+        
+            // Déplace le fichier téléchargé
+            if (move_uploaded_file($file['tmp_name'], $filePath)) {
+                return ['success' => true, 'filePath' => "assets/product/".$destinationDir."/".$fileName];
+            } else {
+                return ['success' => false, 'message' => 'Erreur lors du déplacement du fichier.'];
+            }
+        }
     }
 ?>
