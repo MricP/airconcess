@@ -11,12 +11,12 @@ import VerifyEmail from './pages/auth/VerifyEmail';
 import ResetPasswordRequest from './pages/auth/ResetPasswordRequest';
 import ResetPasswordPage from './pages/auth/ResetPasswordPage';
 import Template from './components/Template.jsx';
-import PageServices from './pages/PageServices.jsx';
-import PageTraining from './pages/PageTraining.jsx';
+import PageServices from './pages/our-services/PageServices.jsx';
+import PageTraining from './pages/training/PageTraining.jsx';
 import ContactPage from './pages/contact/ContactPage.jsx';
 import PageAppointment from './pages/appointment/PageAppointment.jsx';
 import PageMaintenance from './pages/maintenance/PageMaintenance.jsx';
-import CatalogPage from './pages/CatalogPage.jsx';
+import CatalogPage from './pages/catalog/CatalogPage.jsx';
 import CguPage from './pages/polities/CguPage.jsx';
 import LegalNoticesPage from './pages/polities/LegalNoticesPage.jsx';
 import PrivacyPage from './pages/polities/PrivacyPage.jsx';
@@ -34,6 +34,7 @@ function App() {
           <Route path='/sign-in' element={<SignInPage />} />
           <Route path='/sign-up' element={<SignUpPage />} />
           <Route path='/catalog' element={<CatalogPage/>} />
+          <Route path='/catalog/:type' element= <CatalogPage/> />
           <Route path='/my-profile' element={<ProfilePage />} />
           <Route path='/product' element={<PageProduct />} />
           <Route path='/product/:id' element={<PageProduct />} />

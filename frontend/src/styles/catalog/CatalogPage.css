@@ -23,6 +23,11 @@
     margin-bottom: 3%;
 }
 
+.invisible{
+    display: none;
+}
+
+
 .catalog-subtitle{
     font-size: var(--text-size);
 }
@@ -66,7 +71,7 @@
     border-bottom-left-radius: 5px;
 }
 
-.filterBar-container > button:hover{
+.filterBar-container > button:not(button:first-child):hover{
     background-color: var(--line-color);
 }
 
@@ -133,7 +138,6 @@
 .editFilter-container > div > select{
     border: none;
     outline: none;
-    display: none;
     background-color: var(--box-color);
     text-align: right;
 }
@@ -144,6 +148,8 @@
 
 .planeContainer{
     width: 60%;
+    display: flex;
+    flex-direction: column;
     height: max-content;
 }
 
@@ -206,6 +212,11 @@
         margin-bottom: 70px;
     }
 
+    .planeContainer{
+        gap: 100px;
+        margin-top: 50px;
+    }
+
     .filterBar-container > button{
         width: 65px;
         background-color: var(--bg-primary);
@@ -229,6 +240,9 @@
 
 @media (max-width: 750px){
 
+    .filterDescription{
+        display: none;
+    }
     .catalog-title{
         font-size:4em;
         line-height: 65px;
@@ -238,13 +252,29 @@
         width: 70%;
     }
 
+    .planeContainer{
+        gap: 130px;
+        margin-top: 100px;
+    }
+
     .catalog-subtitle{
         font-size: 1em;
         width: initial;
     }
 
+    .filterDescription{
+        z-index: 1;
+        display: inherit;
+        position: absolute;
+        width: 60%;
+        align-items: center;
+        justify-content: center;
+        top: 90%;
+        left: 10%;
+    }
+
     .filterBar-container{
-        margin-bottom: 70px;
+        margin-top: 30vh;
     }
 
     .filterBar-container > button{
