@@ -140,7 +140,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
   });
 
   useEffect(() => {
-    if(model != "Nouveau"){
+    if(model != "Nouveau" && mode == "add"){
       setModelData({
         addMode: "",
         modelName: model.model_name,
