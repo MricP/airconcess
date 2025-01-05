@@ -9,6 +9,7 @@ require_once __DIR__ . '../../controllers/ProductController.php';
 require_once __DIR__ . '../../models/Aircraft.php';
 require_once __DIR__ . '../../controllers/AppointmentController.php';
 require_once __DIR__ . '../../controllers/CatalogController.php';
+require_once __DIR__ . '../../controllers/ProfileController.php';
 
 // Middleware CORS globalement
 CorsMiddleware::handle();
@@ -106,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 } 
 
 
-// Partie page catalog (EMRIC TODO)
+// Partie page catalog 
 
 // Route pour récupérer les données des aéronefs (GET)
 if($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/catalog') !== false){
@@ -151,6 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
     ProductController::getAircraftDescriptionOf($input['idAircraft']);
 }
 
+<<<<<<< HEAD
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Aircraft') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     Aircraft::insertAircraft(
@@ -194,4 +196,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
         $args["height"],
         $args["maxTakeoffWeight"]);
 }
+=======
+// Partie Profile
+
+// Route pour récupérer les données des aéronefs (GET)
+if($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my-profile') !== false){
+    $headers = getallheaders();
+    if (!isset($headers['Authorization'])) {
+        http_response_code(401);
+        echo json_encode(["message" => "Bonjour, vous devez vous connecter pour accéder à cette ressource"]);
+        exit();
+    }
+    $token = str_replace('Bearer ', '', $headers['Authorization']);
+    $payload = Token::verify($token);
+
+    ProfileController::updateProfileData($payload);
+}
+
+>>>>>>> cd82f6e299f67f25f2e520b496ae76fd4695e84d
 ?>

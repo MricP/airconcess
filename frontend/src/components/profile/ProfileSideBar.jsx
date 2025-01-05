@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { getUserData, updateUserData } from '../../services/auth';
+import { getUserData, updateProfileData } from '../../services/auth';
 import { useNavigate } from 'react-router-dom';
 import "../../styles/profile/ProfileSideBar.css"
 import { BiPencil } from "react-icons/bi";
@@ -14,6 +14,7 @@ export default function ProfileSideBar(){
         firstName: '',
         lastName: '',
         location: '',
+        email: '',
         profilePictureURL: ''
       });
       const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,6 +35,7 @@ export default function ProfileSideBar(){
               firstName: data.firstName || '',
               lastName: data.lastName || '',
               location: data.location || '',
+              email: data.email || '',
               profilePictureURL: data.profilePictureURL || ''
             });
           } catch (error) {
@@ -54,10 +56,14 @@ export default function ProfileSideBar(){
     
       const handleSubmit = async (e) => {
         e.preventDefault();
-        const token = localStorage.getItem('token');
         try {
-          const data = await updateUserData(formData, token);
-          setUserData(data);
+          const token = localStorage.getItem('token');
+          if (!token) {
+            navigate('/sign-in');
+            return;
+          }
+          await updateProfileData(formData,token);
+          setUserData(formData)
           setIsModalOpen(false);
           contentInfosRef.current.classList.toggle("invisible")
         } catch (error) {
@@ -73,6 +79,7 @@ export default function ProfileSideBar(){
           firstName: '',
           lastName: '',
           location: '',
+          email: '',
           profilePictureURL: ''
         });
       };
@@ -90,6 +97,25 @@ export default function ProfileSideBar(){
         }
       }
 
+      const handleProfileClick = () => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.click();
+        fileInput.onchange = (event) => {
+          const files = Array.from(event.target.files); 
+          const validExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp'];
+          const imageFiles = files.filter(file => {
+            const extension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+            return validExtensions.includes(extension);
+          });
+          console.log('Fichiers image avec extensions valides :', imageFiles);
+          imageFiles.forEach(file => {
+            console.log(`Nom : ${file.name}, Taille : ${file.size} bytes, Type : ${file.type}`);
+          });
+        };
+      };
+
+
       if (!userData) {
         return <div>Chargement...</div>;
       }
@@ -97,7 +123,7 @@ export default function ProfileSideBar(){
     return (
         <main className='profile-sideBar-container'>
           <div className='profile-sideBarContent'>
-                <div className='profile-picture-container'>
+                <div className='profile-picture-container' onClick={handleProfileClick}>
                 {userData.profilePictureURL ? (
                     <img src={userData.profilePictureURL} alt="Profile" onError={(e) => { e.target.onerror = null; e.target.src = "defaultProfilePictureURL"; }} />
                 ) : "Non Définis"}
@@ -139,17 +165,16 @@ export default function ProfileSideBar(){
                                 value={formData.location}
                                 onChange={handleChange}
                             />
-                            {/* <div>
-                                <label>
-                                URL de la Photo de Profil :
-                                <input
-                                    type="text"
+                            {/* <input
+                                    type="hidden"
                                     name="profilePictureURL"
                                     value={formData.profilePictureURL}
-                                    onChange={handleChange}
-                                />
-                                </label>
-                            </div> */}
+                            /> */}
+                            <input
+                                    type="hidden"
+                                    name="email"
+                                    value={formData.email}
+                            />
                             <button type="submit" className='profile-AdminButton'>Enregistrer</button>
                         </form>
                     </div>
