@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import PageProduct from "../product/PageProduct";
-import { insertAircraft, insertModel, getModelByName } from "../../services/product";
+import { insertAircraft, insertModel, getModelByName, getAllModel } from "../../services/product";
 
 export default function PageAdmin(){
 
     const [isClicked1, updateClicked1] = useState(false)
     const [selectedComponent, setSelectedComponent] = useState(null);
+    const [models, setModels] = useState(null);
+    const [model, setModel] = useState(null)
     
     
 
@@ -33,7 +35,21 @@ export default function PageAdmin(){
         } else if (event.target.textContent === "• Supprimer un produit") {
             setSelectedComponent(<EditArticle use= "delete"/>)
         } else if (event.target.textContent === "• Ajouter un produit"){
-            setSelectedComponent(<PageProduct mode="add" onSubmitProduct={handleAddButtonClick}/>)
+            setModel("Nouveau")
+            setSelectedComponent(
+                <div className="add-mode">
+                    <div className="selector">
+                        <label htmlFor="comboBox">Choisissez un model :</label>
+                        <select id="comboBox" name="options" onChange={handleModelChange}>
+                            <option value="Nouveau">Nouveau</option>
+                            {models.map((element) =>(
+                                <option key={element.model_id} value={element.model_name}>{element.model_name}</option>
+                            ))}
+                        </select>
+                    </div> 
+                    <PageProduct mode="add" onSubmitProduct={handleAddButtonClick} model={"Nouveau"}/>
+                </div>
+            )
         }
     }
 
@@ -110,8 +126,52 @@ export default function PageAdmin(){
           );
 
       };
+    
+    const handleModelChange = async (event) => {
+        const selectedModelName = event.target.value;
+        if (selectedModelName === "Nouveau") {
+            setModel("Nouveau");
+        } else {
+            const fetchedModel = await getModelByName(selectedModelName);
+            setModel(fetchedModel);
+        }
+    };
 
-      
+    useEffect(() => {
+        const fetchModels = async () => {
+            try {
+                const response = await getAllModel();
+                setModels(response.data);
+                
+            } catch (error) {
+                console.error("Erreur lors de la récupération des modèles :", error);
+            }
+        };
+        if (models == null) fetchModels()
+        
+    })
+
+    useEffect(() => {
+        // Mettre à jour le composant quand le modèle change
+        if (model) {
+            setSelectedComponent(
+                <div className="add-mode">
+                    <div className="selector">
+                        <label htmlFor="comboBox">Choisissez un modèle :</label>
+                        <select id="comboBox" name="options" onChange={handleModelChange}>
+                            <option value="Nouveau">Nouveau</option>
+                            {models.map((element) => (
+                                <option key={element.model_id} value={element.model_name}>
+                                    {element.model_name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <PageProduct mode="add" onSubmitProduct={handleAddButtonClick} model={model} />
+                </div>
+            );
+        }
+    }, [model, models]);
 
     return (
         <div className="page-admin">

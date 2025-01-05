@@ -45,3 +45,21 @@
 .second-admin-component{
     width: 75vw;
 }
+
+.second-admin-component .add-mode {
+    display: flex;
+    flex-direction: column;
+}
+
+.second-admin-component .selector {
+    display: flex;
+    width: 100%;
+    height: 10vh;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
+}
+
+.second-admin-component select {
+    width: 10vw;
+}

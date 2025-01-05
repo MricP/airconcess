@@ -9,7 +9,7 @@ import DarkButton from "../../components/general/DarkButton";
 
 import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription, getModelName, getAircraft} from "../../services/product";
 
-function PageProduct({mode, onSubmitProduct}) {
+function PageProduct({mode, onSubmitProduct, model}) {
   const navigate = useNavigate();
   const location = useLocation().pathname.split("/");
   const id = parseInt(location[location.length - 1]); // Récupération de l'ID
@@ -20,7 +20,6 @@ function PageProduct({mode, onSubmitProduct}) {
   const [mainImg, updateMainImg] = useState({ url: "/assets/not-available.png", id: 0 });
   const [sliderImgs, updateSliderImgs] = useState([]);
   const [modelDescription, updateModelDescription] = useState([
-      {varName:"model_name", txt:"Nom du modèle", value:"Inconnu"},
       {varName:"range_type", txt:"Rayon d'action", value:"Inconnu"},
       {varName:"manufacturer", txt:"Constructeur", value:"Inconnu"},
       {varName:"passenger_capacity", txt:"Capacité ", value:"Inconnu"},
@@ -118,7 +117,7 @@ function PageProduct({mode, onSubmitProduct}) {
   });
 
   const [modelData, setModelData] = useState({
-    addMode: "",
+    addMode: "Nouveau",
     modelName: "",
     rangeType: "",
     manufacturer: "",
@@ -133,6 +132,27 @@ function PageProduct({mode, onSubmitProduct}) {
     height: "", 
     maxTakeoffWeight: "",
   });
+
+  useEffect(() => {
+    if(model != "Nouveau"){
+      setModelData({
+        addMode: "",
+        modelName: model.model_name,
+        rangeType: "",
+        manufacturer: "",
+        passengerCapacity: "",
+        engines: "", 
+        speedAvg: "", 
+        maxRange: "", 
+        maxAltitude: "", 
+        crewSize: "", 
+        length: "", 
+        wingspan: "", 
+        height: "", 
+        maxTakeoffWeight: "",
+      })
+    }
+  }, [model]);
 
   const handleSubmit = () => {
     if (onSubmitProduct) {
@@ -167,6 +187,8 @@ function PageProduct({mode, onSubmitProduct}) {
         modelName={modelName}
         imagePath={mainImg.url}
         mode={mode}
+        model={model}
+        onInputChange={handleInputChange}
       />
       <ProductDescription
         aircraftId={id}
@@ -175,6 +197,7 @@ function PageProduct({mode, onSubmitProduct}) {
         aircraftDescription={aircraftDescription}
         mode={mode}
         onInputChange={handleInputChange}
+        modelSelected={model}
       />
       <ProductMap/>
       <Slider images={sliderImgs} mode={mode}/>

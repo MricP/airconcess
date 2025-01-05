@@ -196,6 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
         $args["height"],
         $args["maxTakeoffWeight"]);
 }
+<<<<<<< HEAD
 =======
 // Partie Profile
 
@@ -214,4 +215,20 @@ if($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my-
 }
 
 >>>>>>> cd82f6e299f67f25f2e520b496ae76fd4695e84d
+=======
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/post-uploadImage') !== false) {
+    $destinationDir = $_POST['destinationDir'] ?? null; // Récupérer le dossier
+    $file = $_FILES['file'] ?? null; // Récupérer le fichier
+
+    if (!$file || !$destinationDir) {
+        echo json_encode(['success' => false, 'message' => 'Fichier ou dossier manquant.']);
+        exit;
+    }
+
+    $result = ProductController::uploadImage($file, $destinationDir);
+    echo json_encode($result);
+    exit;
+}
+>>>>>>> 7f218e82f0d77614dd1fd6b94930a37f3a09de21
 ?>
