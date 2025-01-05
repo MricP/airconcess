@@ -94,6 +94,12 @@ function FormSubTraining() {
         return (
           <ValidationStep formData={formData} setStep={updateStep}/>
         )
+      case 5:
+        return (
+          <div>
+            <p>Phase de paiement</p>
+          </div>
+        )
     }
   }
   
