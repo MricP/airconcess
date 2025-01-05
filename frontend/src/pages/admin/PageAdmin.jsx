@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import PageProduct from "../product/PageProduct";
-import { insertAircraft, insertModel, getModelByName, getAllModel } from "../../services/product";
+import { insertAircraft, insertModel, getModelByName, getAllModel, uploadImage, insertImage, getAircraftBySerialNumber } from "../../services/product";
 
 export default function PageAdmin(){
 
@@ -53,8 +53,9 @@ export default function PageAdmin(){
         }
     }
 
-    const handleAddButtonClick = async (productData, modelData) => {
+    const handleAddButtonClick = async (productData, modelData, mainImageData) => {
         console.log("Données reçues :", productData);
+        
         
 
         const {
@@ -124,6 +125,26 @@ export default function PageAdmin(){
             +estimatedPrice,
             isAvailable
           );
+
+          const {
+            file
+        } = mainImageData;
+        
+        const aircraft = await getAircraftBySerialNumber(serialNumber)
+        console.log(aircraft)
+
+        try {
+          console.log("Fichier sélectionné :", file);
+          console.log("Nom du produit :", model.model_name);
+
+          const response = await uploadImage(file, model.model_name); // Passe le fichier ici
+          console.log("Réponse du serveur :", response);
+          await insertImage("main", aircraft.aircraft_id, response.filePath)
+          
+        } catch (error) {
+          console.error("Erreur:", error);
+          alert("Une erreur s'est produite lors de l'envoi du fichier.");
+        }
 
       };
     

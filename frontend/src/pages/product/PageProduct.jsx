@@ -116,6 +116,12 @@ function PageProduct({mode, onSubmitProduct, model}) {
     isAvailable: 1,
   });
 
+  const [mainImageData, setMainImageData] = useState({
+    file : null,
+    directionDir : null,
+    role : null,
+  });
+
   const [modelData, setModelData] = useState({
     addMode: "Nouveau",
     modelName: "",
@@ -156,7 +162,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
 
   const handleSubmit = () => {
     if (onSubmitProduct) {
-      onSubmitProduct(productData, modelData); // Appelle la fonction du parent
+      onSubmitProduct(productData, modelData, mainImageData); // Appelle la fonction du parent
     }
   };
 
@@ -166,6 +172,10 @@ function PageProduct({mode, onSubmitProduct, model}) {
       [field]: value,
     }));
     setProductData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+    setMainImageData((prevData) => ({
       ...prevData,
       [field]: value,
     }));

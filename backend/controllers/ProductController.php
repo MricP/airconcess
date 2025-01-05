@@ -135,5 +135,10 @@
                 return ['success' => false, 'message' => 'Erreur lors du déplacement du fichier.'];
             }
         }
+
+        public static function getAircraftBySerialNumber($serialNumber){
+            $aircraft= Aircraft::getAircraftBySerialNumber($serialNumber);
+            echo json_encode($aircraft);
+        }
     }
 ?>
