@@ -1,0 +1,136 @@
+.card-container {
+    padding: 15px;
+    background: linear-gradient(30deg, #333333, #606060);
+    width: 350px;
+    height: 200px;
+    transition: all ease 0.4s;
+    transform-style: preserve-3d; /* Permet les transformations 3D */
+    border-radius: 5px;
+}
+
+.card-container p {
+    color: #fff !important;
+}
+
+.card-container .can-be-current {
+    border: solid 2px transparent;
+    transition: all ease .2s;
+}
+
+.card-container .current {
+    border: solid 2px #606060;
+    border-radius: 5px;
+}
+
+.card-container * {
+    backface-visibility: hidden;
+}
+
+.card-container>div {
+    width: 100%;
+    height: 100%;
+}
+
+.card-container.rotateCard {
+    transform: perspective(1000px) rotateY(-180deg); 
+}
+
+.card-container .front {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.card-container .front .not-visible {
+    display: none;
+}
+
+.card-container .front .img-in {
+    animation: img-in .2s ease-in-out forwards;
+}
+  
+@keyframes img-in {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+}
+
+.card-container .front #puce {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+}
+
+.card-container .front .issuer-front {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+}
+
+.card-container .front .number-section *{
+    font-size: 20px;
+}
+
+.card-container .front .holder-section p:last-child, 
+.card-container .front .date-section p:last-child {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.card-container .front>div:last-of-type {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    width: 100%;
+}
+
+.card-container .back {
+    display: flex;
+    align-items: center;
+    transform: rotateY(180deg);
+}
+
+.card-container .back .black-band {
+    width: 350px;
+    height: 40px;
+    background-color: black;
+    position: absolute;
+    left: -15px;
+    top: 5px;
+}
+
+.card-container .back .cvv-section {
+    /* background-color: red; */
+    width: 100%;
+}
+
+.card-container .back .cvv-section p {
+    text-align: end;
+}
+
+.card-container .back .cvv-section p:last-of-type {
+    color: #333333 !important;
+    width: 100%;
+    height: 30px !important;
+    align-content: center;
+    padding-right: 5px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.card-container .back img {
+    position: absolute;
+    width: 60px;
+    bottom: 5px;
+    right: 0;
+}
+
+

@@ -21,10 +21,10 @@ import CatalogPage from './pages/catalog/CatalogPage.jsx';
 import CguPage from './pages/polities/CguPage.jsx';
 import LegalNoticesPage from './pages/polities/LegalNoticesPage.jsx';
 import PrivacyPage from './pages/polities/PrivacyPage.jsx';
+import PageSubTraining from './pages/sub-training/PageSubTraining.jsx';
 
 function App() {
   return (
-
     <BrowserRouter>
       <Template>
         <ToastContainer />
@@ -46,6 +46,7 @@ function App() {
           <Route path='/services' element={<PageServices />} />
           <Route path='/contact-us' element={<ContactPage />} />
           <Route path='/training' element={<PageTraining />} />
+          <Route path='/sub-training' element={<PageSubTraining />} />
           <Route path='/maintenance' element={<PageMaintenance />} />
           <Route path='/admin' element={<PageAdmin />} />
           {/*polities*/}

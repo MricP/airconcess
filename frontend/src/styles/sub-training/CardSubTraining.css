@@ -1,0 +1,41 @@
+.cardSubTraining-container {
+    padding: 25px;
+    width: 325px;
+    background-color: #fff;
+}
+
+.cardSubTraining-container img {
+    width: 100%;
+    border-radius: 2px;
+}
+
+.cardSubTraining-container hr {
+    margin: 10px 0 10px 0;
+}
+
+.cardSubTraining-container p#training-name {
+    font-weight: bold;
+}
+
+.cardSubTraining-container p:not(#training-name) {
+    font-size: 14px;
+}
+
+.cardSubTraining-container #conditions-section>p {
+    font-weight: 500;
+}
+
+.cardSubTraining-container #conditions-section section {
+    margin-left: 10px;
+}
+
+.cardSubTraining-container>section:not(#conditions-section) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cardSubTraining-container>section:not(#conditions-section)>p:first-child {
+    font-weight: 500;
+}
+
