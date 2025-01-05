@@ -111,6 +111,21 @@ export const updateUserData = async (data, token) => {
     }
 }
 
+export const updateProfileData = async (data,token) => {
+    try {
+        const response = await authInstance.put('/my-profile', data, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        console.log('Data fetched for profile update:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+}
+
 export const postTest = async ({ content }) => {
     try {
         const response = await authInstance.post('/auth/test', {
