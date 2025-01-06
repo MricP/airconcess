@@ -24,13 +24,13 @@ class Testimonial
         return $stmt->fetchColumn();
     }
 
-    public static function getTestimonialsUser($id_user)
+
+    public static function getUserInfos($id_user)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('SELECT * FROM Testimonial WHERE id_user	 = :id_user	');
-        $stmt->bindParam(':id_user	', $id_user	, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchColumn();
+        $stmt = $pdo->prepare('SELECT profilePictureURL, firstName, lastName FROM User WHERE idUser = ?');
+        $stmt->execute([$id_user]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public static function createTestimonial($id_user, $content)
@@ -41,4 +41,3 @@ class Testimonial
         return $pdo->lastInsertId();
     }
 }
-?>

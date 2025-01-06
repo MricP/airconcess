@@ -140,12 +140,10 @@ export const postTest = async ({ content }) => {
 
 export const createTestimonial = async (token, testimonial) => {
     try {
-        console.log({ token, testimonial });
         const response = await authInstance.post('/auth/create-testimonial', {
             token,
             testimonial,
         });
-        console.log('Data fetched:', response.data);
         return response.data;
     }
     catch (error) {

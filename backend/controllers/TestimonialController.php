@@ -23,29 +23,14 @@ class TestimonialController
         }
     }
 
-    public static function CreateTestismonial($data)
+    public static function getTestimonialsByUser($id_user)
     {
         try {
-            $token = $data['token'];
-            $payload = Token::verify($token);
-        } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Une erreur s\'est produite : ' . $e->getMessage(),
-            ]);
-        }
-    }
+            $userInfos = Testimonial::getUserInfos($id_user);
 
-    public static function GetTestimonialsByUser($data)
-    {
-        try {
-            $token = $data['token'];
-            $payload = Token::verify($token);
-            $testimonials = Testimonial::GetTestimonialsUser($payload['idUser']);
             echo json_encode([
                 'status' => 'success',
-                'data' => $testimonials
+                'data' => $userInfos,
             ]);
         } catch (Exception $e) {
             http_response_code(500);

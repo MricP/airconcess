@@ -4,12 +4,6 @@ import { getTestimonialsByUser, getAllTestimonials } from '../../services/api';
 import { createTestimonial } from '../../services/auth';
 
 function FifthSectionLanding() {
-    const exampleTestimonial = {
-        text: "Air Concess m’a aidé à réaliser mes rêves d’aviation. La fiche technique de l’avion fournissait des informations détaillées sur chaque appareil et l’équipe du service client était toujours là pour répondre à mes questions.",
-        firstname: "Jean",
-        lastname: "Dupont",
-        profile_picture: ""
-    };
 
     const [isOpenForm, setIsOpenForm] = useState(false);
     const [testimonials, setTestimonials] = useState([]);
@@ -20,42 +14,32 @@ function FifthSectionLanding() {
     useEffect(() => {
         const fetchTestimonials = async () => {
             try {
-                if (token) {
-                    const response = await getTestimonialsByUser(token);
-                    console.log('Testimonials by user:', response);
-                    setTestimonials(Array.isArray(response) ? response : []);
-                } else {
-                    const response = await getAllTestimonials();
-                    console.log('All testimonials:', response);
-                    setTestimonials(Array.isArray(response) ? response : []);
-                }
+                const response = await getAllTestimonials();
+                setTestimonials(response.data);
             } catch (error) {
                 console.error('Error fetching testimonials:', error);
             }
-        };
+        }
 
-        // fetchTestimonials();
+        fetchTestimonials();
     }, []);
 
     const handleOpenFormTestimonial = async () => {
         setIsOpenForm(!isOpenForm);
     };
+
     const handleAddTestimonial = async (event) => {
         event.preventDefault();
         const testimonial = event.target.testimonial.value;
 
         try {
-            
-            console.log('Creating testimonial:', testimonial);
-
             const response = await createTestimonial(token, testimonial);
-            setTestimonials([...testimonials, response]);
+            setTestimonials([...testimonials, response.data]);
             setIsOpenForm(false);
         } catch (error) {
             console.error('Error creating testimonial:', error);
         }
     }
-
 
     return (
         <div className="fifth-section-container">
@@ -90,9 +74,11 @@ function FifthSectionLanding() {
                 </div>
                 <div className="fifth-section-right">
                     <div className="testimonials-container">
-                        {testimonials.length > 0 && testimonials.map((testimonial, index) => (
-                            <TestimonialCard key={index} testimonial={testimonial} />
-                        ))}
+                        <div className="testimonials-container">
+                            {testimonials.length > 0 && testimonials.map((testimonial) => (
+                                <TestimonialCard key={testimonial.id_test} testimonial={testimonial} />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -101,21 +87,40 @@ function FifthSectionLanding() {
 }
 
 const TestimonialCard = ({ testimonial }) => {
+    const [userTestimonials, setUserTestimonials] = useState({});
+
+    useEffect(() => {
+        const fetchUserTestimonials = async () => {
+            try {
+                const response = await getTestimonialsByUser(24);
+                console.log('User testimonials fetched:', response);
+                setUserTestimonials(response.data);
+            } catch (error) {
+                console.error('Error fetching user testimonials:', error);
+            }
+        };
+
+        fetchUserTestimonials();
+    }, [testimonial.id_user]);
+
+    const { content } = testimonial;
+    const { firstName, lastName, profilePictureURL } = userTestimonials;
+    console.log('profilePictureURL:', profilePictureURL);
     return (
         <div className="testimonial-card">
             <p className="testimonial">
-                {testimonial.text}
+                {content}
             </p>
             <div className="author-container">
                 <div className="author-name">
-                    <span>{testimonial.firstname}</span>
-                    <span>{testimonial.lastname}</span>
+                    <span>{firstName}</span>
+                    <span>{lastName}</span>
                 </div>
                 <div className="profile-picture">
-                    {/* <img
-                        src={testimonial.profile_picture || ""}
-                        alt={testimonial.firstname + " " + testimonial.lastname}
-                    /> */}
+                    <img
+                        src={profilePictureURL || ""}
+                        alt={firstName + " " + lastName}
+                    />
                 </div>
             </div>
         </div>

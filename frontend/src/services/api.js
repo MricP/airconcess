@@ -55,12 +55,14 @@ export const getAllTestimonials = async () => {
   }
 }
 
-export const getTestimonialsByUser = async (token) => {
+export const getTestimonialsByUser = async (id_user) => {
   try {
-    const response = await axiosInstance.get(`/testimonials/${token}`);
+    console.log('/testimonials/id-user');
+    const response = await axiosInstance.get(`testimonial/id-user?id_user=${id_user}`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching testimonials data:', error);
+    console.error('Error fetching testimonials by user:', error);
     throw error;
   }
-}
+};
+
