@@ -66,4 +66,10 @@ class User
         return $stmt->execute([$id]);
     }
     
+
+    public static function updateURLPicture($url,$id){
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("UPDATE User SET profilePictureURL = ? WHERE idUser = ?");
+        return $stmt->execute([$url,$id]);
+    }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { getUserData, updateProfileData, deleteProfilData } from '../../services/auth';
+import { getUserData, updateProfileData, deleteProfilData, changeProfilePicture } from '../../services/auth';
 import { useNavigate } from 'react-router-dom';
 import "../../styles/profile/ProfileSideBar.css"
 import { BiPencil } from "react-icons/bi";
@@ -9,11 +9,15 @@ import { IoTrashOutline } from "react-icons/io5";
 export default function ProfileSideBar(){
     
     const contentInfosRef = useRef(null)
+    const profilePictureRef = useRef(null)
+    const [profilePicture, setProfilePicture] = useState('');
     const [userData, setUserData] = useState(null);
       const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         location: '',
+        isAdmin: '',
+        isTrainer: '',
         email: '',
         profilePictureURL: ''
       });
@@ -38,6 +42,7 @@ export default function ProfileSideBar(){
               email: data.email || '',
               profilePictureURL: data.profilePictureURL || ''
             });
+            setProfilePicture(data.profilePictureURL);
           } catch (error) {
             console.error('Error fetching user data:', error);
           }
@@ -50,6 +55,8 @@ export default function ProfileSideBar(){
         const { name, value } = e.target;
         setFormData({
           ...formData,
+          isAdmin: userData.isAdmin,
+          isTrainer: userData.isTrainer,
           [name]: value
         });
       };
@@ -66,6 +73,7 @@ export default function ProfileSideBar(){
           setUserData(formData)
           setIsModalOpen(false);
           contentInfosRef.current.classList.toggle("invisible")
+          navigate('/my-profile');
         } catch (error) {
           console.error('Error updating user data:', error);
         }
@@ -109,21 +117,36 @@ export default function ProfileSideBar(){
 
       const handleProfileClick = () => {
         const fileInput = document.createElement('input');
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/sign-in');
+            return;
+        }
         fileInput.type = 'file';
+        fileInput.accept = '.png, .jpg, .jpeg, .webp'; 
         fileInput.click();
+    
         fileInput.onchange = (event) => {
-          const files = Array.from(event.target.files); 
-          const validExtensions = ['.png', '.jpg', '.jpeg', '.webp'];
-          const imageFiles = files.filter(file => {
+            const file = event.target.files[0]; 
+            if (!file) {
+                console.log('Aucun fichier sélectionné');
+                return;
+            }
+            const validExtensions = ['.png', '.jpg', '.jpeg', '.webp'];
             const extension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
-            return validExtensions.includes(extension);
-          });
-          console.log('Fichiers image avec extensions valides :', imageFiles);
-          imageFiles.forEach(file => {
-            console.log(`Nom : ${file.name}, Taille : ${file.size} bytes, Type : ${file.type}`);
-          });
+            if (validExtensions.includes(extension)) {
+                changeProfilePicture(token, file);
+                setProfilePicture("/assets/profile/"+file.name);
+                if(profilePictureRef.current){
+                  profilePictureRef.current.src = profilePicture;
+                }
+                
+            } else {
+                console.log('Extension non valide. Veuillez sélectionner une image au format PNG, JPG, JPEG ou WEBP.');
+                alert('Veuillez sélectionner une image valide (PNG, JPG, JPEG, WEBP).');
+            }
         };
-      };
+    };
 
       if (!userData) {
         return <div>Chargement...</div>;
@@ -132,11 +155,14 @@ export default function ProfileSideBar(){
     return (
         <main className='profile-sideBar-container'>
           <div className='profile-sideBarContent'>
-                <div className='profile-picture-container' onClick={handleProfileClick}>
-                {userData.profilePictureURL ? (
-                    <img src={userData.profilePictureURL} alt="Profile" onError={(e) => { e.target.onerror = null; e.target.src = "defaultProfilePictureURL"; }} />
-                ) : ""}
-                </div>
+                <form action="upload.php" method="post" enctype="multipart/form-data">
+                  <div className='profile-picture-container' onClick={handleProfileClick}>
+                  {profilePicture ? (
+                      <img ref={profilePictureRef} src={profilePicture} alt="Profile" onError={(e) => { e.target.onerror = null; e.target.src = "defaultProfilePictureURL"; }} />
+                  ) : ""}
+                  </div>
+                </form>
+                
                 <div className='profile-control-button'>
                     <button onClick={handleIsModal}><BiPencil size={30} /></button>
                     <button onClick={handleLogout}><IoExitOutline size={30}/></button>

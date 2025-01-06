@@ -141,6 +141,25 @@ export const deleteProfilData = async (token) => {
     }
 }
 
+export const changeProfilePicture = async (token, data) => {
+    try {
+        const formData = new FormData();
+        formData.append('image', data); 
+        
+        const response = await authInstance.post('/my-profile/change-picture', formData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        console.log('Fichier post:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Erreur lors de l’envoi des données:', error);
+        throw error;
+    }
+};
+
 
 export const postTest = async ({ content }) => {
     try {
