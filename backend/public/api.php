@@ -152,7 +152,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
     ProductController::getAircraftDescriptionOf($input['idAircraft']);
 }
 
-<<<<<<< HEAD
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Aircraft') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     Aircraft::insertAircraft(
@@ -196,8 +195,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
         $args["height"],
         $args["maxTakeoffWeight"]);
 }
-<<<<<<< HEAD
-=======
 // Partie Profile
 
 // Route pour récupérer les données des aéronefs (GET)
@@ -214,8 +211,6 @@ if($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my-
     ProfileController::updateProfileData($payload);
 }
 
->>>>>>> cd82f6e299f67f25f2e520b496ae76fd4695e84d
-=======
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/post-uploadImage') !== false) {
     $destinationDir = $_POST['destinationDir'] ?? null; // Récupérer le dossier
@@ -230,5 +225,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     echo json_encode($result);
     exit;
 }
->>>>>>> 7f218e82f0d77614dd1fd6b94930a37f3a09de21
 ?>
