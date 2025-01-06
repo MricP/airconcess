@@ -7,6 +7,7 @@ function FifthSectionLanding() {
 
     const [isOpenForm, setIsOpenForm] = useState(false);
     const [testimonials, setTestimonials] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
@@ -23,6 +24,16 @@ function FifthSectionLanding() {
 
         fetchTestimonials();
     }, []);
+
+    useEffect(() => {
+        if (testimonials.length > 0) {
+            const intervalId = setInterval(() => {
+                setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+            }, 4000);
+
+            return () => clearInterval(intervalId);
+        }
+    }, [testimonials]);
 
     const handleOpenFormTestimonial = async () => {
         setIsOpenForm(!isOpenForm);
@@ -51,7 +62,7 @@ function FifthSectionLanding() {
                         Découvrez les expériences de nos clients satisfaits et découvrez comment Air Concess
                         les a aidés à réaliser leurs rêves d’aviation.
                     </p>
-                    {user && (
+                    {token && (
                         <button className="add-testimonial-button" onClick={handleOpenFormTestimonial}>
                             Ajouter un témoignage
                         </button>
@@ -74,11 +85,9 @@ function FifthSectionLanding() {
                 </div>
                 <div className="fifth-section-right">
                     <div className="testimonials-container">
-                        <div className="testimonials-container">
-                            {testimonials.length > 0 && testimonials.map((testimonial) => (
-                                <TestimonialCard key={testimonial.id_test} testimonial={testimonial} />
-                            ))}
-                        </div>
+                        {testimonials.length > 0 && (
+                            <TestimonialCard testimonial={testimonials[currentIndex]} />
+                        )}
                     </div>
                 </div>
             </div>
@@ -92,8 +101,7 @@ const TestimonialCard = ({ testimonial }) => {
     useEffect(() => {
         const fetchUserTestimonials = async () => {
             try {
-                const response = await getTestimonialsByUser(24);
-                console.log('User testimonials fetched:', response);
+                const response = await getTestimonialsByUser(testimonial.id_user);
                 setUserTestimonials(response.data);
             } catch (error) {
                 console.error('Error fetching user testimonials:', error);
@@ -105,10 +113,10 @@ const TestimonialCard = ({ testimonial }) => {
 
     const { content } = testimonial;
     const { firstName, lastName, profilePictureURL } = userTestimonials;
-    console.log('profilePictureURL:', profilePictureURL);
+
     return (
         <div className="testimonial-card">
-            <p className="testimonial">
+            <p className="testimonial-content">
                 {content}
             </p>
             <div className="author-container">
@@ -117,10 +125,10 @@ const TestimonialCard = ({ testimonial }) => {
                     <span>{lastName}</span>
                 </div>
                 <div className="profile-picture">
-                    <img
-                        src={profilePictureURL || ""}
-                        alt={firstName + " " + lastName}
-                    />
+                        <img
+                            src={profilePictureURL || ""}
+                            alt={firstName + " " + lastName}
+                        />
                 </div>
             </div>
         </div>
