@@ -11,7 +11,8 @@ export default function Header({ color }) {
     const logoBlack = '/assets/logo-black.png';
     let logo = logoWhite;
     const isMobile = useMediaQuery({ maxWidth: 992 });
-    const [isClicked, updateClicked] = useState(false)
+    const [isClicked, updateClicked] = useState(false);
+    const [user, setUser] = useState({ session: false });
 
     if (color === "white-black" || color === "transparent-black") {
         logo = logoBlack;
@@ -28,9 +29,25 @@ export default function Header({ color }) {
     }, [isMobile]);
 
     const navigate = useNavigate();
+
     const handleConnexionButton = () => {
         navigate('/sign-in');
     }
+
+    const handleProfileButton = () => {
+        navigate('/my-profile');
+    }
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            setUser({ session: true });
+        }else{
+            setUser({ session: false });
+        }
+
+    }, [navigate]);
+
     return (
         <header className={`${color}`}>
 
@@ -45,7 +62,11 @@ export default function Header({ color }) {
                             <li><Link to="/about">A propos</Link></li>
                         </ul>
                         <form action="">
-                            <button onClick={handleConnexionButton}>Connexion</button>
+                            {user.session ? (
+                                <button className="profile-button" onClick={handleProfileButton}>Profile</button>
+                            ) : (
+                                <button onClick={handleConnexionButton}>Connexion</button>
+                            )}
                         </form>
                     </nav>
                 </div> :

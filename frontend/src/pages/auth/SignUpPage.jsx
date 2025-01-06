@@ -7,7 +7,7 @@ import { signUp } from '../../services/auth';
 
 // components
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
-import DarkButton from '../../components/general/DarkButton';
+import DarkButton2 from '../../components/general/DarkButton2';
 import GrayInput from '../../components/general/GrayInput';
 
 const SignUpPage = () => {
@@ -80,7 +80,7 @@ const SignUpPage = () => {
               <label htmlFor="passwordConfirmation" className="form-label">Confirmer le mot de passe*</label>
               <GrayInput type={"password"} placeholder="Confirmer le mot de passe" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} required={true} />
             </div>
-            <DarkButton text="S'inscrire" use={handleSubmit} />
+            <DarkButton2 text="S'inscrire" use={handleSubmit} />
           </form>
           <div className="sign-in-link-container">
             <p className="sign-in-link-text">Déjà inscrit ?</p>
