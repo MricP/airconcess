@@ -1,0 +1,20 @@
+:root {
+    --padding-page : 50px
+}
+
+.page-subTraining {
+    position: relative;
+    background-color: #F5F5F5;
+    padding-top: 90px;
+    height: 150vh;
+}
+
+.page-subTraining .cardSubTraining-container {
+    position: absolute;
+    right: var(--padding-page);
+}
+
+.page-subTraining .formSubTraining-container {
+    position: absolute;
+    left: var(--padding-page);
+}

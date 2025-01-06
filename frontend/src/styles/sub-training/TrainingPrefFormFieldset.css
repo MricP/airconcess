@@ -1,0 +1,88 @@
+.trainingPrefFormFieldset>div:nth-of-type(2)>div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.trainingPrefFormFieldset .select-dates-div {
+    display: flex;
+    gap: 4%;
+}
+
+.trainingPrefFormFieldset .select-dates-div>* {
+    width: 48%;
+}
+
+.trainingPrefFormFieldset {
+    gap: var(--form-input-gap);
+}
+
+
+.trainingPrefFormFieldset>div:nth-of-type(2){
+    display: flex;
+    flex-direction: column;
+    gap: var(--form-input-gap);
+}
+
+.trainingPrefFormFieldset .time-slots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    min-height: 150px;
+}
+
+.trainingPrefFormFieldset .time-slots:not(#nothing) {
+    justify-content: flex-start;
+}
+
+.trainingPrefFormFieldset .time-slots .time-slot {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    /* gap: 4%; */
+    /* background-color: red; */
+}
+
+.trainingPrefFormFieldset .time-slots .time-slot .button-del {
+    color: #5b5b5b;
+    transition: all ease 0.2s;
+    cursor: pointer;
+}
+
+.trainingPrefFormFieldset .time-slots .time-slot .button-del:hover {
+    color: red;
+    stroke-width: 0.5;
+}
+
+.trainingPrefFormFieldset .time-slots .icon-container {
+    position: relative;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 1.3rem;
+    height: 1.4rem;
+    
+}
+.trainingPrefFormFieldset .icon-container .add-time-slot {
+    font-size: 1.5rem;    
+    position: absolute;
+    transition: all ease 0.4s;
+    cursor: pointer;
+}
+
+.trainingPrefFormFieldset .icon-container .add-time-slot.hidden {
+    opacity: 0;
+    /* transform: scale(0.9); */
+    position: absolute;
+    transition: opacity ease 0.1s;
+    pointer-events: none; /* Désactive les clics sur l'élément caché */
+}
+
+.trainingPrefFormFieldset .icon-container .add-time-slot.visible {
+    opacity: 1;
+    /* transform: scale(1); */
+}

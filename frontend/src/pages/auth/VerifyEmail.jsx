@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { verifyEmail } from '../../services/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
-import DarkButton from '../../components/general/DarkButton';
+import DarkButton2 from '../../components/general/DarkButton2';
 import '../../styles/auth/VerifyEmail.css';
 
 export default function VerifyEmail() {
@@ -60,7 +60,7 @@ export default function VerifyEmail() {
                         <div className="right-container">
                             <h2 className="right-container-title">Votre email a bien été validé !</h2>
                             <p className='right-container-para'>Vous pouvez maintenant acheter, louer et réserver.</p>
-                            <DarkButton text="Retourner à l’accueil" use={() => handleRetour()} className="verify-email-retour" />
+                            <DarkButton2 text="Retourner à l’accueil" use={() => handleRetour()} className="verify-email-retour" />
                             {responseMessage && <p className="response-message">{responseMessage}</p>}
                             {errorHtml && (
                                 <div
@@ -78,7 +78,7 @@ export default function VerifyEmail() {
                         </div>
                         <h2 className='right-container-title'>tu n'as rien à faire ici !</h2>
                         <p className='right-container-para'>Veuillez vérifier votre email.</p>
-                        <DarkButton text="Retour" use={() => handleRetour()} className="verify-email-retour" />
+                        <DarkButton2 text="Retour" use={() => handleRetour()} className="verify-email-retour" />
                     </div>
                 )
             }

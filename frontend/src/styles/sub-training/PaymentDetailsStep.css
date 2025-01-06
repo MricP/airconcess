@@ -1,0 +1,35 @@
+.paymentDetailsStep-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    width: 80%;
+}
+
+.paymentDetailsStep-container>fieldset {
+    position: relative;
+    padding-top: 110px !important;
+    margin-top: 120px !important;
+    gap: var(--form-input-gap);
+    gap: 10px;
+}
+
+.paymentDetailsStep-container .credit-card {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    translate: -50% -50%;
+}
+
+.paymentDetailsStep-container .credit-card.rotateCard {
+    translate: -50% -50%;
+}
+
+.paymentDetailsStep-container>fieldset>div:last-of-type {
+    display: flex;
+    gap: 2%;
+}
+.paymentDetailsStep-container>fieldset>div:last-of-type>*{
+    width: 49%;
+}

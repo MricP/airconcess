@@ -190,6 +190,13 @@
     background-color: var(--box-color);
 }
 
+.loading-screen, .error-screen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 @media (max-width: 1250px){
 
     .catalog-title{
@@ -288,6 +295,4 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
-    
-
 }

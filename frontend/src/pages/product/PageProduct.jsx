@@ -1,13 +1,15 @@
+import "../../styles/product/PageProduct.css";
 import React, { useEffect, useState } from "react";
 import ProductShowcase from "../../components/product/ProductShowcase";
 import ProductDescription from "../../components/product/ProductDescription";
 import Slider from "../../components/product/Slider";
 import ProductMap from "../../components/product/ProductMap";
 import { useLocation, useNavigate } from "react-router-dom";
+import DarkButton from "../../components/general/DarkButton";
 
 import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription, getModelName, getAircraft} from "../../services/product";
 
-function PageProduct() {
+function PageProduct({mode, onSubmitProduct, model}) {
   const navigate = useNavigate();
   const location = useLocation().pathname.split("/");
   const id = parseInt(location[location.length - 1]); // Récupération de l'ID
@@ -100,9 +102,78 @@ function PageProduct() {
     loadDataFromDB();
   }, [id]);
 
+  const [productData, setProductData] = useState({
+    serialNumber: "",
+    manufactureYear: "",
+    flightHours: "",
+    configuration: "",
+    recentMaintenance: "",
+    typicalRoutes: "",
+    owner: "",
+    costPerKm: "",
+    monthlyMaintenanceCost: "",
+    estimatedPrice: "",
+    isAvailable: 1,
+  });
+
+  const [modelData, setModelData] = useState({
+    addMode: "Nouveau",
+    modelName: "",
+    rangeType: "",
+    manufacturer: "",
+    passengerCapacity: "",
+    engines: "", 
+    speedAvg: "", 
+    maxRange: "", 
+    maxAltitude: "", 
+    crewSize: "", 
+    length: "", 
+    wingspan: "", 
+    height: "", 
+    maxTakeoffWeight: "",
+  });
+
+  useEffect(() => {
+    if(model != "Nouveau"){
+      setModelData({
+        addMode: "",
+        modelName: model.model_name,
+        rangeType: "",
+        manufacturer: "",
+        passengerCapacity: "",
+        engines: "", 
+        speedAvg: "", 
+        maxRange: "", 
+        maxAltitude: "", 
+        crewSize: "", 
+        length: "", 
+        wingspan: "", 
+        height: "", 
+        maxTakeoffWeight: "",
+      })
+    }
+  }, [model]);
+
+  const handleSubmit = () => {
+    if (onSubmitProduct) {
+      onSubmitProduct(productData, modelData); // Appelle la fonction du parent
+    }
+  };
+
+  const handleInputChange = (field, value) => {
+    setModelData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+    setProductData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
 
   // Si l'id est invalide ou qu'il n'y a pas d'aircraft à afficher
-  if (!isIdValid) {
+  if (!isIdValid && mode !== "add") {
     return (
       <main>
         <h2>Aucun aéronef correspondant.</h2>
@@ -111,19 +182,26 @@ function PageProduct() {
     );
   }
   return (
-    <main>
+    <main className="page-product">
       <ProductShowcase
         modelName={modelName}
         imagePath={mainImg.url}
+        mode={mode}
+        model={model}
+        onInputChange={handleInputChange}
       />
       <ProductDescription
         aircraftId={id}
         modelName={modelName}
         modelDescription={modelDescription}
         aircraftDescription={aircraftDescription}
+        mode={mode}
+        onInputChange={handleInputChange}
+        modelSelected={model}
       />
       <ProductMap/>
-      <Slider images={sliderImgs}/>
+      <Slider images={sliderImgs} mode={mode}/>
+      {mode === "add" && <div className="bottom-product-page"><DarkButton className={"add-button"} onClick={handleSubmit}>Ajouter le nouveau produit</DarkButton></div>}
     </main>
   );
 }
