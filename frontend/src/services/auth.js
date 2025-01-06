@@ -111,7 +111,7 @@ export const updateUserData = async (data, token) => {
     }
 }
 
-export const updateProfileData = async (data,token) => {
+export const updateProfileData = async (data, token) => {
     try {
         const response = await authInstance.put('/my-profile', data, {
             headers: {
@@ -133,6 +133,22 @@ export const postTest = async ({ content }) => {
         });
         return response.data;
     } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+}
+
+export const createTestimonial = async (token, testimonial) => {
+    try {
+        console.log({ token, testimonial });
+        const response = await authInstance.post('/auth/create-testimonial', {
+            token,
+            testimonial,
+        });
+        console.log('Data fetched:', response.data);
+        return response.data;
+    }
+    catch (error) {
         console.error('Error fetching data:', error);
         throw error;
     }

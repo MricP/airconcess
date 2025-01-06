@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/landing-page/FifthSectionLanding.css';
 import { getTestimonialsByUser, getAllTestimonials } from '../../services/api';
+import { createTestimonial } from '../../services/auth';
 
 function FifthSectionLanding() {
     const exampleTestimonial = {
@@ -10,12 +11,11 @@ function FifthSectionLanding() {
         profile_picture: ""
     };
 
+    const [isOpenForm, setIsOpenForm] = useState(false);
     const [testimonials, setTestimonials] = useState([]);
 
     const token = localStorage.getItem('token');
-    console.log(token);
     const user = localStorage.getItem('user');
-    console.log(user);
 
     useEffect(() => {
         const fetchTestimonials = async () => {
@@ -33,10 +33,30 @@ function FifthSectionLanding() {
                 console.error('Error fetching testimonials:', error);
             }
         };
-    
-        fetchTestimonials();
+
+        // fetchTestimonials();
     }, []);
-       
+
+    const handleOpenFormTestimonial = async () => {
+        setIsOpenForm(!isOpenForm);
+    };
+    const handleAddTestimonial = async (event) => {
+        event.preventDefault();
+        const testimonial = event.target.testimonial.value;
+
+        try {
+            
+            console.log('Creating testimonial:', testimonial);
+
+            const response = await createTestimonial(token, testimonial);
+            setTestimonials([...testimonials, response]);
+            setIsOpenForm(false);
+        } catch (error) {
+            console.error('Error creating testimonial:', error);
+        }
+    }
+
+
     return (
         <div className="fifth-section-container">
             <div className="fifth-section-content">
@@ -47,14 +67,32 @@ function FifthSectionLanding() {
                         Découvrez les expériences de nos clients satisfaits et découvrez comment Air Concess
                         les a aidés à réaliser leurs rêves d’aviation.
                     </p>
+                    {user && (
+                        <button className="add-testimonial-button" onClick={handleOpenFormTestimonial}>
+                            Ajouter un témoignage
+                        </button>
+                    )}
+                    {isOpenForm && (
+                        <div className='form-testimonial'>
+                            <div className='form-testimonial-content'>
+                                <h3>Partagez votre expérience</h3>
+                                <form onSubmit={handleAddTestimonial}>
+                                    <textarea
+                                        name="testimonial"
+                                        id="testimonial"
+                                        placeholder="Votre témoignage ici..."
+                                    />
+                                    <button type="submit">Envoyer</button>
+                                </form>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div className="fifth-section-right">
                     <div className="testimonials-container">
-                        {testimonials.length > 0 ? testimonials.map((testimonial, index) => (
+                        {testimonials.length > 0 && testimonials.map((testimonial, index) => (
                             <TestimonialCard key={index} testimonial={testimonial} />
-                        )) : (
-                            <TestimonialCard testimonial={exampleTestimonial} />
-                        )}
+                        ))}
                     </div>
                 </div>
             </div>
