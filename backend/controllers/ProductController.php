@@ -130,7 +130,7 @@
         
             // Déplace le fichier téléchargé
             if (move_uploaded_file($file['tmp_name'], $filePath)) {
-                return ['success' => true, 'filePath' => "assets/product/".$destinationDir."/".$fileName];
+                return ['success' => true, 'filePath' => "/assets/product/".$destinationDir."/".$fileName];
             } else {
                 return ['success' => false, 'message' => 'Erreur lors du déplacement du fichier.'];
             }

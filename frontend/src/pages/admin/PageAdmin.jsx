@@ -53,7 +53,7 @@ export default function PageAdmin(){
         }
     }
 
-    const handleAddButtonClick = async (productData, modelData, mainImageData) => {
+    const handleAddButtonClick = async (productData, modelData, mainImageData, sliderImageData) => {
         console.log("Données reçues :", productData);
         
         
@@ -126,7 +126,7 @@ export default function PageAdmin(){
             isAvailable
           );
 
-          const {
+        const {
             file
         } = mainImageData;
         
@@ -145,6 +145,25 @@ export default function PageAdmin(){
           console.error("Erreur:", error);
           alert("Une erreur s'est produite lors de l'envoi du fichier.");
         }
+
+        const {
+            files
+        } = sliderImageData;
+
+        files.map(async (file) => {
+            try {
+                console.log("Fichier sélectionné :", file);
+                console.log("Nom du produit :", model.model_name);
+                
+                const response = await uploadImage(file, model.model_name); // Passe le fichier ici
+                console.log("Réponse du serveur :", response);
+                await insertImage("slider", aircraft.aircraft_id, response.filePath);
+                
+            } catch (error) {
+                console.error("Erreur:", error);
+                alert("Une erreur s'est produite lors de l'envoi du fichier.");
+            }
+        });
 
       };
     

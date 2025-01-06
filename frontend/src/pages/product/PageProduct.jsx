@@ -118,8 +118,10 @@ function PageProduct({mode, onSubmitProduct, model}) {
 
   const [mainImageData, setMainImageData] = useState({
     file : null,
-    directionDir : null,
-    role : null,
+  });
+
+  const [sliderImageData, setSliderImageData] = useState({
+    files : null,
   });
 
   const [modelData, setModelData] = useState({
@@ -162,7 +164,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
 
   const handleSubmit = () => {
     if (onSubmitProduct) {
-      onSubmitProduct(productData, modelData, mainImageData); // Appelle la fonction du parent
+      onSubmitProduct(productData, modelData, mainImageData, sliderImageData); // Appelle la fonction du parent
     }
   };
 
@@ -176,6 +178,10 @@ function PageProduct({mode, onSubmitProduct, model}) {
       [field]: value,
     }));
     setMainImageData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+    setSliderImageData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
@@ -210,7 +216,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
         modelSelected={model}
       />
       <ProductMap/>
-      <Slider images={sliderImgs} mode={mode}/>
+      <Slider images={sliderImgs} mode={mode} onInputChange={handleInputChange}/>
       {mode === "add" && <div className="bottom-product-page"><DarkButton className={"add-button"} onClick={handleSubmit}>Ajouter le nouveau produit</DarkButton></div>}
     </main>
   );

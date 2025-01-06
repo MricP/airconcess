@@ -4,7 +4,7 @@ import { HiOutlineChevronDoubleRight,HiOutlineChevronDoubleLeft} from "react-ico
 import { BiDownload } from "react-icons/bi";
 
 
-function Slider({ images, mode }) {
+function Slider({ images, mode, onInputChange }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [imageAdd, setImageAdd] = useState([])
 
@@ -34,6 +34,9 @@ function Slider({ images, mode }) {
                 alert("Veuillez choisir un/des fichier(s) valide.");
             }
         });
+        if (onInputChange) {
+            onInputChange("files", files)
+        }
     };
 
     if (mode === "add"){
