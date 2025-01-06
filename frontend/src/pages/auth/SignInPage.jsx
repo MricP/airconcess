@@ -7,7 +7,7 @@ import { signIn } from '../../services/auth';
 
 // components
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
-import DarkButton from '../../components/general/DarkButton';
+import DarkButton2 from '../../components/general/DarkButton2';
 import GrayInput from '../../components/general/GrayInput';
 
 const SignInPage = () => {
@@ -71,7 +71,7 @@ const SignInPage = () => {
               <label htmlFor="password" className="form-label">Mot de passe*</label>
               <GrayInput type={"password"} placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
             </div>
-            <DarkButton text="Se connecter" use={handleSubmit} />
+            <DarkButton2 text="Se connecter" use={handleSubmit} />
           </form>
           <div className="forgot-password">
             <Link to="/reset-password-request" className="forgot-password-link">Mot de passe oublié ?</Link>

@@ -120,7 +120,7 @@ class AuthController
         $token = $data['token'];
         $payload = Token::verify($token);
 
-        if ($payload && isset($payload['idUser'])) {  // Note: Utiliser $payload['idUser'] pour être cohérent
+        if ($payload && isset($payload['idUser'])) {  
             $userId = $payload['idUser'];
             if (User::verifyEmail($userId)) {
                 echo json_encode(["message" => "Email vérifié avec succès."]);

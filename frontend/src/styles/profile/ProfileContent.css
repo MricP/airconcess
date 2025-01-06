@@ -1,0 +1,40 @@
+.profile-content-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.profile-commentaire-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+
+}
+
+.profile-commentaire-container > textarea{
+    resize: none;
+    border: none;
+    height: 200px;
+    outline: none;
+    background-color: var(--input-color1);
+    color: var(--color-primary);
+    padding: 25px;
+    font-size: var(--text-size);
+    border-radius: 10px;
+}
+
+.profile-commentaire-container > button{
+    background-color: var(--button-color);
+    color: var(--bg-primary);
+    border: none;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.profile-commentaire-container > button:hover{
+    background-color: var(--failure-color);
+    transition: all ease 0.2s;
+}

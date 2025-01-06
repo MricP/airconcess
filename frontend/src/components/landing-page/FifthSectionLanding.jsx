@@ -1,7 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/landing-page/FifthSectionLanding.css';
+import { getTestimonialsByUser, getAllTestimonials } from '../../services/api';
+import { createTestimonial } from '../../services/auth';
 
 function FifthSectionLanding() {
+
+    const [isOpenForm, setIsOpenForm] = useState(false);
+    const [testimonials, setTestimonials] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+
+    useEffect(() => {
+        const fetchTestimonials = async () => {
+            try {
+                const response = await getAllTestimonials();
+                setTestimonials(response.data);
+            } catch (error) {
+                console.error('Error fetching testimonials:', error);
+            }
+        }
+
+        fetchTestimonials();
+    }, []);
+
+    useEffect(() => {
+        if (testimonials.length > 0) {
+            const intervalId = setInterval(() => {
+                setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+            }, 4000);
+
+            return () => clearInterval(intervalId);
+        }
+    }, [testimonials]);
+
+    const handleOpenFormTestimonial = async () => {
+        setIsOpenForm(!isOpenForm);
+    };
+
+    const handleAddTestimonial = async (event) => {
+        event.preventDefault();
+        const testimonial = event.target.testimonial.value;
+
+        try {
+            const response = await createTestimonial(token, testimonial);
+            setTestimonials([...testimonials, response.data]);
+            setIsOpenForm(false);
+        } catch (error) {
+            console.error('Error creating testimonial:', error);
+        }
+    }
+
     return (
         <div className="fifth-section-container">
             <div className="fifth-section-content">
@@ -10,27 +60,75 @@ function FifthSectionLanding() {
                     <h2>Clients satisfaits</h2>
                     <p className="fifth-section-text">
                         Découvrez les expériences de nos clients satisfaits et découvrez comment Air Concess
-                        les a aidés à réaliser leurs rêves d’aviations.
+                        les a aidés à réaliser leurs rêves d’aviation.
                     </p>
+                    {token && (
+                        <button className="add-testimonial-button" onClick={handleOpenFormTestimonial}>
+                            Ajouter un témoignage
+                        </button>
+                    )}
+                    {isOpenForm && (
+                        <div className='form-testimonial'>
+                            <div className='form-testimonial-content'>
+                                <h3>Partagez votre expérience</h3>
+                                <form onSubmit={handleAddTestimonial}>
+                                    <textarea
+                                        name="testimonial"
+                                        id="testimonial"
+                                        placeholder="Votre témoignage ici..."
+                                    />
+                                    <button type="submit">Envoyer</button>
+                                </form>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div className="fifth-section-right">
-                    <p className="testimonial">
-                        "Air Concess m’a aidé à réaliser mes rêves d’aviation. La fiche technique de l’avion
-                        fournissait des informations détaillées sur chaque appareil et l’équipe du service
-                        client était toujours là pour répondre à mes questions."
-                    </p>
-                    <div className="author-container">
-                        <div className="author-name">
-                            <span>Dieudonné</span>
-                            <span>ATTAL</span>
-                        </div>
-                        <div className="profile-picture">
-                            {/* <img
-                                src=""
-                                alt="Dieudonné ATTAL"
-                            /> */}
-                        </div>
+                    <div className="testimonials-container">
+                        {testimonials.length > 0 && (
+                            <TestimonialCard testimonial={testimonials[currentIndex]} />
+                        )}
                     </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+const TestimonialCard = ({ testimonial }) => {
+    const [userTestimonials, setUserTestimonials] = useState({});
+
+    useEffect(() => {
+        const fetchUserTestimonials = async () => {
+            try {
+                const response = await getTestimonialsByUser(testimonial.id_user);
+                setUserTestimonials(response.data);
+            } catch (error) {
+                console.error('Error fetching user testimonials:', error);
+            }
+        };
+
+        fetchUserTestimonials();
+    }, [testimonial.id_user]);
+
+    const { content } = testimonial;
+    const { firstName, lastName, profilePictureURL } = userTestimonials;
+
+    return (
+        <div className="testimonial-card">
+            <p className="testimonial-content">
+                {content}
+            </p>
+            <div className="author-container">
+                <div className="author-name">
+                    <span>{firstName}</span>
+                    <span>{lastName}</span>
+                </div>
+                <div className="profile-picture">
+                        <img
+                            src={profilePictureURL || ""}
+                            alt={firstName + " " + lastName}
+                        />
                 </div>
             </div>
         </div>
