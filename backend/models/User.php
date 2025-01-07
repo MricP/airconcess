@@ -45,6 +45,13 @@ class User
         return $stmt->execute([$newPassword, $userId]);
     }
 
+    public static function updateUser($userId, $firstName,$lastName,$location)
+    {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare('UPDATE User SET firstName = ?, lastName = ?, location = ? WHERE idUser = ?');
+        return $stmt->execute([$firstName,$lastName,$location, $userId]);
+    }
+
     
     public static function findById($id) {
         $pdo = self::getDB();

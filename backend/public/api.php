@@ -5,9 +5,11 @@ require_once __DIR__ . '../../middlewares/ValidationMiddleware.php';
 require_once __DIR__ . '../../controllers/AuthController.php';
 require_once __DIR__ . '../../controllers/ContactController.php';
 require_once __DIR__ . '../../controllers/ProductController.php';
+require_once __DIR__ . '../../controllers/TestimonialController.php';
 require_once __DIR__ . '../../models/Aircraft.php';
 require_once __DIR__ . '../../controllers/AppointmentController.php';
 require_once __DIR__ . '../../controllers/CatalogController.php';
+require_once __DIR__ . '../../controllers/ProfileController.php';
 
 // Middleware CORS globalement
 CorsMiddleware::handle();
@@ -70,12 +72,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/au
     AuthController::getUser($payload);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], 'testimonial/id-user') !== false) {
+    $id_user = $_GET['id_user'] ?? null;
+    TestimonialController::getTestimonialsByUser($id_user);
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/testimonials') !== false) {
+    TestimonialController::getAllTestimonials();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/auth/create-testimonial') !== false) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    TestimonialController::createTestimonial($data);
+}
+
 // Route pour recevoir le formulaire de contact (POST)  
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/contact-submit') !== false) {
     $data = json_decode(file_get_contents("php://input"), true);
     ValidationMiddleware::validateContact($data);
     ContactController::contact($data);
-} 
+}
 
 // Partie page appointment 
 
@@ -84,23 +101,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     echo json_encode(["message" => $data['formData']['phone']]);
     var_dump($data); // Vérifie que les données sont correctement reçues
     AppointmentController::createAppointment($data);
-} 
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadTimestamps') !== false) {
     // echo json_encode(["message" => "Load timestamps"]);
     AppointmentController::getTimestamps();
-} 
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAircrafts') !== false) {
     echo json_encode(["message" => "Load aircrafts"]);
     // AppointmentController::getAircrafts();
-} 
+}
 
 
-// Partie page catalog (EMRIC TODO)
+// Partie page catalog 
 
 // Route pour récupérer les données des aéronefs (GET)
-if($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/catalog') !== false){
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/catalog') !== false) {
     CatalogControlleur::getAircrafts();
 }
 
@@ -147,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     Aircraft::insertAircraft(
         $args["idModel"],
         $args["serialNumber"],
-        $args["manufactureYear"], 
+        $args["manufactureYear"],
         $args["flightHours"],
         $args["configuration"],
         $args["recentMaintenance"],
@@ -156,7 +173,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
         $args["costPerKm"],
         $args["monthlyMaintenanceCost"],
         $args["estimatedPrice"],
-        $args["isAvailable"]);
+        $args["isAvailable"]
+    );
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-Model') !== false) {
@@ -173,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     Aircraft::insertModel(
         $args["modelName"],
         $args["rangeType"],
-        $args["manufacturer"], 
+        $args["manufacturer"],
         $args["passengerCapacity"],
         $args["engines"],
         $args["speedAvg"],
@@ -183,8 +201,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
         $args["length"],
         $args["wingspan"],
         $args["height"],
-        $args["maxTakeoffWeight"]);
+        $args["maxTakeoffWeight"]
+    );
 }
+// Partie Profile
+
+// Route pour récupérer les données des aéronefs (GET)
+if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my-profile') !== false) {
+    $headers = getallheaders();
+    if (!isset($headers['Authorization'])) {
+        http_response_code(401);
+        echo json_encode(["message" => "Bonjour, vous devez vous connecter pour accéder à cette ressource"]);
+        exit();
+    }
+    $token = str_replace('Bearer ', '', $headers['Authorization']);
+    $payload = Token::verify($token);
+
+    ProfileController::updateProfileData($payload);
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/post-uploadImage') !== false) {
     $destinationDir = $_POST['destinationDir'] ?? null; // Récupérer le dossier
@@ -212,4 +247,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     $args = json_decode(file_get_contents("php://input"), true);
     ProductController::getAircraftBySerialNumber($args["serialNumber"]);
 }
-?>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { resetPassword } from '../../services/auth';
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
-import DarkButton from '../../components/general/DarkButton';
+import DarkButton2 from '../../components/general/DarkButton2';
 import GrayInput from '../../components/general/GrayInput';
 import '../../styles/auth/ResetPassword.css';
 
@@ -16,7 +16,7 @@ export default function ResetPasswordPage() {
 
     const handleNewPassword = async (e) => {
         e.preventDefault();
-        
+
         if (newPassword !== confirmPassword) {
             setErrorHtml("Mot de passe et confirmation ne correspondent pas.");
             return;
@@ -54,7 +54,7 @@ export default function ResetPasswordPage() {
                         <img src={airconcessLogo} alt="AirConcess" className="airconcess-logo" />
                     </div>
                     <h2 className="right-container-title">Nouveau mot de passe</h2>
-                    <form onSubmit={handleNewPassword} className='reset-password-form'> 
+                    <form onSubmit={handleNewPassword} className='reset-password-form'>
                         <div className="form-group">
                             <label htmlFor="new-password" className="form-label">Nouveau mot de passe</label>
                             <GrayInput
@@ -77,7 +77,7 @@ export default function ResetPasswordPage() {
                                 className="password-input"
                             />
                         </div>
-                        <DarkButton text="Réinitialiser le mot de passe" type="submit" className="reset-password-button" />
+                        <DarkButton2 text="Réinitialiser le mot de passe" type="submit" className="reset-password-button" />
                     </form>
                     {message && <p className="response-message">{message}</p>}
                     {errorHtml && (

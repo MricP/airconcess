@@ -1,0 +1,120 @@
+/*/////////////////////////*/
+
+.formSubTraining-container fieldset {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    border:solid 1px #B5B5B5;
+    padding: 1rem 5% 1.5rem;
+}
+
+.formSubTraining-container legend {
+    margin-left: 2%;
+    padding: 0 2%;
+    font-weight: 500; /* Medium */
+}
+
+.formSubTraining-container label:not(.invisible-label) {
+    color: #5B5B5B;
+} 
+
+.formSubTraining-container label:not(.invisible-label)>svg {
+    font-size: 20px !important;
+}
+
+/* 
+    Le style des input. 
+    Pour les input type file, ils ont la class invisible
+    et leur comportement est géré par la div-upload 
+*/
+.formSubTraining-container input:not(.invisible), .info-fieldset .div-upload {
+    border: solid #B5B5B5 1px;
+    border-radius: 2px;
+    padding: 5px 10px;
+    font-size: var(--text-size);
+    /* background-color: rgb(109, 245, 245); */
+    width: 100%;
+    -webkit-transition: border-color ease-in-out 0.15s;
+    transition: all ease-in-out 0.15s;
+}
+
+.formSubTraining-container input:not(.invisible):focus-within {
+    outline: solid 2px #acd7ff;
+    border:solid 1px #61b3ff;
+}
+
+/*////////////////////////////////////////////*/
+
+.formSubTraining-container p {
+    color: #5B5B5B;
+    font-size: 14px;
+}
+
+.formSubTraining-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    width: 70%;
+    min-height: 500px;
+    padding: 30px 70px;
+}
+
+.formSubTraining-container .current-step {
+    /* background-color: red; */
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.formSubTraining-container .prev-step {
+    position: absolute;
+    top: 29px;
+    left: 20px;
+    border-radius: 30px;
+    border: solid 1px transparent;
+    font-size: 1.8rem;
+    transition: all ease 0.2s;
+}
+
+.formSubTraining-container .prev-step:not(.disabled):hover {
+    border: solid 1px #b5b5b5;
+}
+
+.formSubTraining-container .prev-step.disabled {
+    color: transparent;
+}
+
+.formSubTraining-container .next-step {
+    width: 50%;
+    margin-top: 30px;
+}
+
+.formSubTraining-container .step-indicator {
+    width:100%;
+}
+
+/* ######## Partie à modifier pour rsuite ######## */
+
+.formSubTraining-container .step-indicator .rs-steps-item-description {
+    text-align: center;
+}
+
+.formSubTraining-container .step-indicator .rs-steps-item-status-finish *,
+.formSubTraining-container .step-indicator .rs-steps-item-status-finish .rs-steps-item-title::after{
+    color: green !important;
+    border-color: green !important;
+}
+
+.formSubTraining-container .step-indicator .rs-steps-item-active .rs-steps-item-description {
+    color: #3498ff !important;
+}
+
+.formSubTraining-container .step-indicator .rs-steps-item-active .rs-steps-item-title::after {
+    border-color: #3498ff !important;
+}

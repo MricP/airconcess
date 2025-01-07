@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { submitContact } from "../../services/api";
 import GrayInput from "../../components/general/GrayInput";
 import GrayTextarea from "../../components/general/GrayTextarea";
-import DarkButton from "../../components/general/DarkButton";
+import DarkButton2 from "../../components/general/DarkButton2";
 import ContactPopup from "../../components/contact/ContactPopup";
 import "../../styles/contact/ContactPage.css";
 
@@ -103,7 +103,7 @@ function ContactPage() {
                             {formData.message.length}/300 caractères
                         </p>
                     </div>
-                    <DarkButton
+                    <DarkButton2
                         text="Envoyer mon message"
                         use={handleSubmit}
                         className="submit-button"

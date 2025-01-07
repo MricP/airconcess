@@ -23,6 +23,11 @@
     margin-bottom: 3%;
 }
 
+.invisible{
+    display: none;
+}
+
+
 .catalog-subtitle{
     font-size: var(--text-size);
 }
@@ -133,7 +138,6 @@
 .editFilter-container > div > select{
     border: none;
     outline: none;
-    display: none;
     background-color: var(--box-color);
     text-align: right;
 }
@@ -184,6 +188,13 @@
     border: none;
     border-radius: 5px;
     background-color: var(--box-color);
+}
+
+.loading-screen, .error-screen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 @media (max-width: 1250px){
@@ -258,6 +269,17 @@
         width: initial;
     }
 
+    .filterDescription{
+        z-index: 1;
+        display: inherit;
+        position: absolute;
+        width: 60%;
+        align-items: center;
+        justify-content: center;
+        top: 90%;
+        left: 10%;
+    }
+
     .filterBar-container{
         margin-top: 30vh;
     }
@@ -273,6 +295,4 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
-    
-
 }

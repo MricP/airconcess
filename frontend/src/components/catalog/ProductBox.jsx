@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
-import "../styles/catalog/ProductBox.css";
+import "../../styles/catalog/ProductBox.css";
 import { useNavigate } from 'react-router-dom';
 import { IoTrashBin } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
@@ -27,7 +27,7 @@ export const ProductBox = (props) => {
       <div className='productBox-container'>
         <div className='catalog-productImage-container'>
           <div className='available-container'>{props.isAvailable === 1 ? <FaRegCircleDot color='#43A73A'/> : <FaRegCircleDot color='#ea2424'/> }<p className='catalogAvailable'>{props.isAvailable === 0 ? "INDISPONIBLE" : "DISPONIBLE"}</p></div>
-          <img src={props.planeImg}/>
+          <img className='catalog-planeImg' src={props.planeImg} alt="plane img"/>
           <div className='imageInfo-container'>
               <p>{props.modelName}</p>
               <p>{props.serialNumber}</p>

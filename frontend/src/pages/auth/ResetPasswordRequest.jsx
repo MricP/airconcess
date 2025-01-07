@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { resetPasswordRequest } from '../../services/auth';
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
-import DarkButton from '../../components/general/DarkButton';
+import DarkButton2 from '../../components/general/DarkButton2';
 import GrayInput from '../../components/general/GrayInput';
 import '../../styles/auth/ResetPasswordRequest.css';
 
@@ -55,7 +55,7 @@ export default function ResetPasswordRequest() {
                                 className="email-input"
                             />
                         </div>
-                        <DarkButton text="Recevoir le mail" type="submit" className="reset-password-button" />
+                        <DarkButton2 text="Recevoir le mail" type="submit" className="reset-password-button" />
                     </form>
                     {message && <p className="response-message">{message}</p>}
                     {errorHtml && (
