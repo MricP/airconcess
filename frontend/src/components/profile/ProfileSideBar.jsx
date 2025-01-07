@@ -155,7 +155,7 @@ export default function ProfileSideBar(){
     return (
         <main className='profile-sideBar-container'>
           <div className='profile-sideBarContent'>
-                <form action="upload.php" method="post" enctype="multipart/form-data">
+                <form method="post" encType="multipart/form-data">
                   <div className='profile-picture-container' onClick={handleProfileClick}>
                   {profilePicture ? (
                       <img ref={profilePictureRef} src={profilePicture} alt="Profile" onError={(e) => { e.target.onerror = null; e.target.src = "defaultProfilePictureURL"; }} />
