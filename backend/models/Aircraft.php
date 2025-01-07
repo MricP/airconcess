@@ -166,5 +166,33 @@ class Aircraft
         }
     }
 
+    public static function insertImage($role, $aircraftId, $url){
+        try {
+            $pdo = self::getDB();
+            $stmt = $pdo->prepare(
+            "
+                Insert into image
+                    (role, aircraft_id, img_URL)
+                values (?,?,?)
+            ");
+            
+    
+            $stmt->bindValue(1, $role);
+            $stmt->bindValue(2, $aircraftId);
+            $stmt->bindValue(3, $url);
+            
+            $stmt->execute();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage(); // Display error message
+        }
+    }
+
+    public static function getAircraftBySerialNumber($serialNumber) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE serial_number = ?");
+        $stmt->execute([$serialNumber]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     
 }

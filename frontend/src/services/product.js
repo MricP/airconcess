@@ -166,3 +166,27 @@ export const uploadImage = async (file, directionDir) => {
         throw error;
     }
 };
+
+export const insertImage = async (role, aircraftId, url) => {
+    try {
+        const response = await axiosInstance.post('/admin/insert-Image', {
+            role,
+            aircraftId,
+            url
+        });
+        console.log('Réponse du serveur:', response);
+    } catch(error) {
+        console.error("Erreur lors de l'insertion", error);
+        throw error;
+    }
+}
+
+export const getAircraftBySerialNumber = async (serialNumber) => {
+    try {
+        const response = await axiosInstance.post('/admin/get-AircraftBySerialNumber', { serialNumber });
+        return response.data; 
+    } catch (error) {
+        console.error("Erreur lors de l'insertion", error);
+        throw error;
+    }
+}
