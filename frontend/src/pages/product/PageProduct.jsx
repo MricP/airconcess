@@ -6,6 +6,8 @@ import Slider from "../../components/product/Slider";
 import ProductMap from "../../components/product/ProductMap";
 import { useLocation, useNavigate } from "react-router-dom";
 import DarkButton from "../../components/general/DarkButton";
+import { BiDownload } from "react-icons/bi";
+import { GrStatusGood } from "react-icons/gr";
 
 import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription, getModelName, getAircraft} from "../../services/product";
 
@@ -45,6 +47,8 @@ function PageProduct({mode, onSubmitProduct, model}) {
       {varName:"monthly_maintenance_cost", txt:"Coût mensuel d’entretien", value:"Inconnu"},
       {varName:"estimated_price", txt:"Prix estimé ", value:"Inconnu"},
   ])
+
+  const [iconImg, setIconImage] = useState(null)
 
   // Charge toutes les data à afficher en fonction de l'id de l'appareil (idAircraft)
   const loadDataFromDB = async () => {
@@ -116,12 +120,10 @@ function PageProduct({mode, onSubmitProduct, model}) {
     isAvailable: 1,
   });
 
-  const [mainImageData, setMainImageData] = useState({
+  const [imageData, setImageData] = useState({
     file : null,
-  });
-
-  const [sliderImageData, setSliderImageData] = useState({
     files : null,
+    icon : null,
   });
 
   const [modelData, setModelData] = useState({
@@ -164,7 +166,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
 
   const handleSubmit = () => {
     if (onSubmitProduct) {
-      onSubmitProduct(productData, modelData, mainImageData, sliderImageData); // Appelle la fonction du parent
+      onSubmitProduct(productData, modelData, imageData); // Appelle la fonction du parent
     }
   };
 
@@ -177,14 +179,24 @@ function PageProduct({mode, onSubmitProduct, model}) {
       ...prevData,
       [field]: value,
     }));
-    setMainImageData((prevData) => ({
+    setImageData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
-    setSliderImageData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    console.log(file)
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = (e) => setIconImage(e.target.result);
+      reader.readAsDataURL(file);
+      handleInputChange("icon", file)
+    } else {
+      setIconImage(null);
+      alert("Veuillez choisir un fichier valide.");
+    }
   };
 
 
@@ -217,7 +229,24 @@ function PageProduct({mode, onSubmitProduct, model}) {
       />
       <ProductMap/>
       <Slider images={sliderImgs} mode={mode} onInputChange={handleInputChange}/>
-      {mode === "add" && <div className="bottom-product-page"><DarkButton className={"add-button"} onClick={handleSubmit}>Ajouter le nouveau produit</DarkButton></div>}
+      {mode === "add" && 
+      <div className="bottom-product-page">
+        {iconImg == null ? 
+          <div className='label-container'>
+              <label htmlFor="input-icon">
+                  <div className='label-content'>
+                      <BiDownload /> Insérer une icone 
+                  </div> 
+                  <input id="input-icon" type="file" accept="image/*" onChange={handleFileChange}/>
+              </label>
+          </div> :
+          <div className='label-content'>
+              <GrStatusGood color='green'/> Icone insérée
+          </div>
+          }
+        
+        <DarkButton className={"add-button"} onClick={handleSubmit}>Ajouter le nouveau produit</DarkButton>
+      </div>}
     </main>
   );
 }
