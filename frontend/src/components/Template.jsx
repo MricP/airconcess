@@ -31,14 +31,17 @@ function Template({children}) {
 
     const productRegex = /^\/product\/\d+$/;
     const apptRegex = /^\/appointment\/\d+$/;
+    const catalogRegex = /^\/catalog\/\d+$/;
 
-    if (location.pathname === "/services" || productRegex.test(location.pathname) || location.pathname === "/appointment" || apptRegex.test(location.pathname)){
+    if (location.pathname === "/services" || productRegex.test(location.pathname) 
+      || location.pathname === "/appointment" || apptRegex.test(location.pathname) 
+      || location.pathname === "/catalog" || catalogRegex.test(location.pathname)){
       if (scrolled){
         color = "white-black"
       } else {
         color = "transparent-black"
       }
-    } else if (location.pathname === "/" || location.pathname === "/contact-us" || location.pathname === "/catalog"){
+    } else if (location.pathname === "/" || location.pathname === "/contact-us" ){
       if (scrolled){
         color = "black-white"
       } else {
