@@ -234,3 +234,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     echo json_encode($result);
     exit;
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Image') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    Aircraft::insertImage(
+        $args["role"],
+        $args["aircraftId"],
+        $args["url"]);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-AircraftBySerialNumber') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    ProductController::getAircraftBySerialNumber($args["serialNumber"]);
+}
