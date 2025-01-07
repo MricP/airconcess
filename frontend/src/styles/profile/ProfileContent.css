@@ -7,14 +7,18 @@
 }
 
 .profile-commentaire-container{
+    width: 80%;
+}
+
+.profile-commentaire-container > form{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 80%;
+    width: 100%;
 
 }
 
-.profile-commentaire-container > textarea{
+.profile-commentaire-container > form >textarea{
     resize: none;
     border: none;
     height: 200px;
@@ -26,7 +30,7 @@
     border-radius: 10px;
 }
 
-.profile-commentaire-container > button{
+.profile-commentaire-container > form > button{
     background-color: var(--button-color);
     color: var(--bg-primary);
     border: none;
@@ -34,7 +38,7 @@
     border-radius: 10px;
 }
 
-.profile-commentaire-container > button:hover{
+.profile-commentaire-container > form > button:hover{
     background-color: var(--failure-color);
     transition: all ease 0.2s;
 }

@@ -126,6 +126,41 @@ export const updateProfileData = async (data, token) => {
     }
 }
 
+export const deleteProfilData = async (token) => {
+    try {
+        const response = await authInstance.delete('/my-profile/delete', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        console.log('Data fetched for profile update:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+}
+
+export const changeProfilePicture = async (token, data) => {
+    try {
+        const formData = new FormData();
+        formData.append('image', data); 
+        
+        const response = await authInstance.post('/my-profile/change-picture', formData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        console.log('Fichier post:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Erreur lors de l’envoi des données:', error);
+        throw error;
+    }
+};
+
+
 export const postTest = async ({ content }) => {
     try {
         const response = await authInstance.post('/auth/test', {
