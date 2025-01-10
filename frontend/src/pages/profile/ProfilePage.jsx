@@ -6,12 +6,9 @@ import ProfileContent from '../../components/profile/ProfileContent';
 export default function ProfilePage() {
 
   return (
-    <main>
-      <div className='profile-backgroundPrincipal'>
-        <ProfileSideBar/>
+    <main className='profilePage-backgroundPrincipal'>
+        <ProfileSideBar className="profilePage-sideBar" />
         <ProfileContent/>
-      </div>
-      
     </main>
   );
 }
