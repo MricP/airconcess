@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/landing-page/FifthSectionLanding.css';
 import { getTestimonialsByUser, getAllTestimonials } from '../../services/api';
-import { createTestimonial } from '../../services/auth';
+import { useNavigate } from 'react-router-dom';
 
 function FifthSectionLanding() {
-
-    const [isOpenForm, setIsOpenForm] = useState(false);
     const [testimonials, setTestimonials] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTestimonials = async () => {
@@ -35,22 +33,9 @@ function FifthSectionLanding() {
         }
     }, [testimonials]);
 
-    const handleOpenFormTestimonial = async () => {
-        setIsOpenForm(!isOpenForm);
+    const handleAddTestimonial = () => {
+        navigate('/my-profile');
     };
-
-    const handleAddTestimonial = async (event) => {
-        event.preventDefault();
-        const testimonial = event.target.testimonial.value;
-
-        try {
-            const response = await createTestimonial(token, testimonial);
-            setTestimonials([...testimonials, response.data]);
-            setIsOpenForm(false);
-        } catch (error) {
-            console.error('Error creating testimonial:', error);
-        }
-    }
 
     return (
         <div className="fifth-section-container">
@@ -63,25 +48,11 @@ function FifthSectionLanding() {
                         les a aidés à réaliser leurs rêves d’aviation.
                     </p>
                     {token && (
-                        <button className="add-testimonial-button" onClick={handleOpenFormTestimonial}>
+                        <button className="add-testimonial-button" onClick={handleAddTestimonial}>
                             Ajouter un témoignage
                         </button>
                     )}
-                    {isOpenForm && (
-                        <div className='form-testimonial'>
-                            <div className='form-testimonial-content'>
-                                <h3>Partagez votre expérience</h3>
-                                <form onSubmit={handleAddTestimonial}>
-                                    <textarea
-                                        name="testimonial"
-                                        id="testimonial"
-                                        placeholder="Votre témoignage ici..."
-                                    />
-                                    <button type="submit">Envoyer</button>
-                                </form>
-                            </div>
-                        </div>
-                    )}
+
                 </div>
                 <div className="fifth-section-right">
                     <div className="testimonials-container">
@@ -125,10 +96,10 @@ const TestimonialCard = ({ testimonial }) => {
                     <span>{lastName}</span>
                 </div>
                 <div className="profile-picture">
-                        <img
-                            src={profilePictureURL || ""}
-                            alt={firstName + " " + lastName}
-                        />
+                    <img
+                        src={profilePictureURL || ""}
+                        alt={firstName + " " + lastName}
+                    />
                 </div>
             </div>
         </div>

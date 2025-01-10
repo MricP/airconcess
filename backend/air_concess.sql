@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 10 déc. 2024 à 16:39
--- Version du serveur : 9.1.0
--- Version de PHP : 8.3.14
+-- Généré le : lun. 06 jan. 2025 à 15:59
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,26 +33,27 @@ CREATE TABLE IF NOT EXISTS `aircraft` (
   `model_id` int NOT NULL,
   `serial_number` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `manufacture_year` year DEFAULT NULL,
-  `flight_hours` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `flight_hours` int DEFAULT NULL,
   `configuration` text,
   `recent_maintenance` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `typical_routes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `owner` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `cost_per_km` text,
   `monthly_maintenance_cost` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `estimated_price` text,
+  `estimated_price` int DEFAULT NULL,
   `isAvailable` tinyint NOT NULL DEFAULT '1',
+  `description` varchar(500) NOT NULL,
   PRIMARY KEY (`aircraft_id`),
   UNIQUE KEY `serial_number` (`serial_number`),
   KEY `fk_aircraft_model_id` (`model_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `aircraft`
 --
 
-INSERT INTO `aircraft` (`aircraft_id`, `model_id`, `serial_number`, `manufacture_year`, `flight_hours`, `configuration`, `recent_maintenance`, `typical_routes`, `owner`, `cost_per_km`, `monthly_maintenance_cost`, `estimated_price`, `isAvailable`) VALUES
-(7, 2, 'SN 6205', '2020', '3 500 heures', '14 sièges / 3 zones distinctes (salon, salle de conférence, chambre privée)', 'Révision complète effectuée à 3 000 heures de vol', 'New York - Dubaï / Londres - Tokyo', 'Grande entreprise multinationale (fictif)', 'X €', 'X €', '66.000.000 $', 1);
+INSERT INTO `aircraft` (`aircraft_id`, `model_id`, `serial_number`, `manufacture_year`, `flight_hours`, `configuration`, `recent_maintenance`, `typical_routes`, `owner`, `cost_per_km`, `monthly_maintenance_cost`, `estimated_price`, `isAvailable`, `description`) VALUES
+(7, 2, 'SN 6205', 2020, 3500, '14 sièges / 3 zones distinctes (salon, salle de conférence, chambre privée)', 'Révision complète effectuée à 3 000 heures de vol', 'New York - Dubaï / Londres - Tokyo', 'Grande entreprise multinationale (fictif)', 'X €', 'X €', 66000000, 1, 'Le Gulfstream G650ER est un jet d’affaires ultramoderne offrant une autonomie exceptionnelle de 13 890 km, idéal pour les vols intercontinentaux. Avec une vitesse maximale de Mach 0.925, il allie rapidité et confort. Sa cabine spacieuse et luxueuse accueille jusqu’à 19 passagers, proposant un environnement lumineux et connecté. C’est le choix parfait pour les voyageurs exigeants en quête de performance, de style et d’efficacité.');
 
 -- --------------------------------------------------------
 
@@ -121,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `img_URL` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   PRIMARY KEY (`img_id`),
   KEY `id_Aircraft` (`aircraft_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `image`
@@ -130,7 +131,8 @@ CREATE TABLE IF NOT EXISTS `image` (
 INSERT INTO `image` (`img_id`, `role`, `aircraft_id`, `img_URL`) VALUES
 (11, 'main', 7, '/assets/image.png'),
 (12, 'slider', 7, '/assets/image1.jpg'),
-(13, 'slider', 7, '/assets/image2.jpg');
+(13, 'slider', 7, '/assets/image2.jpg'),
+(14, 'icon', 7, '../assets/catalog/gulfstreamG650.svg');
 
 -- --------------------------------------------------------
 
@@ -144,10 +146,10 @@ CREATE TABLE IF NOT EXISTS `model` (
   `model_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `range_type` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `manufacturer` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `passenger_capacity` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `passenger_capacity` int DEFAULT NULL,
   `engines` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `speed_avg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `max_range` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `max_range` int DEFAULT NULL,
   `max_altitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `crew_size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `length` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
@@ -156,14 +158,14 @@ CREATE TABLE IF NOT EXISTS `model` (
   `max_takeoff_weight` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   PRIMARY KEY (`model_id`),
   UNIQUE KEY `model_name` (`model_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `model`
 --
 
 INSERT INTO `model` (`model_id`, `model_name`, `range_type`, `manufacturer`, `passenger_capacity`, `engines`, `speed_avg`, `max_range`, `max_altitude`, `crew_size`, `length`, `wingspan`, `height`, `max_takeoff_weight`) VALUES
-(2, 'Gulfstream G650ER', 'Internationale', 'Gulfstream Aerospace', 'Jusqu\'à 19 passagers', 'Rolls-Royce BR725 A1-12 (x2)', '± 904 km/h', '13 890 km avec 8 passagers', '15 545 mètres', '2 pilotes', '30,41 m', '30,36 m', '7,82 m', '47 000 kg');
+(2, 'Gulfstream G650ER', 'International', 'Gulfstream Aerospace', 19, 'Rolls-Royce BR725 A1-12 (x2)', '± 904 km/h', 13890, '15 545 mètres', '2 pilotes', '30,41m', '30,36m', '7,82m', '47000kg');
 
 -- --------------------------------------------------------
 
@@ -224,6 +226,28 @@ INSERT INTO `test` (`id`, `content`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `testimonial`
+--
+
+DROP TABLE IF EXISTS `testimonial`;
+CREATE TABLE IF NOT EXISTS `testimonial` (
+  `id_test` int NOT NULL AUTO_INCREMENT,
+  `id_user` int NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id_test`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `testimonial`
+--
+
+INSERT INTO `testimonial` (`id_test`, `id_user`, `content`) VALUES
+(1, 24, 'Air Concess m’a aidé à réaliser mes rêves d’aviation. La fiche technique de l’avion fournissait des informations détaillées sur chaque appareil et l’équipe du service client était toujours là pour répondre à mes questions.'),
+(2, 32, 'Air Concess m’a permis de concrétiser mes ambitions dans le monde de l’aviation. Grâce à la fiche technique exhaustive des avions, j\'ai pu comparer les modèles en détail. L\'équipe du service client, toujours disponible et à l\'écoute, m’a guidé à chaque étape de mon projet et a répondu à toutes mes interrogations.');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `training`
 --
 
@@ -257,15 +281,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `inscriptionDate` date DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `location`, `profilePictureURL`, `isVerified`, `isTrainer`, `isAdmin`, `inscriptionDate`) VALUES
-(24, '$2y$10$NfmvVPDHlL02bgv80ogSLe2xYnabfZ2hpLJqfsiDWpcR6tWjoahH.', 'florian', 'FILLOUX', 'fillouxflorian56@gmail.com', NULL, NULL, 1, 0, 0, '2024-10-21'),
-(25, '$2y$10$zucMXl1CCH.kK3Grmljma.m9Sb3y3LBrt7i1VnO86WO8yInEesqJu', 'Mathéo', 'Flores', 'matheoflores26@gmail.com', NULL, NULL, 1, 0, 0, '2024-12-01');
+(24, '$2y$10$NfmvVPDHlL02bgv80ogSLe2xYnabfZ2hpLJqfsiDWpcR6tWjoahH.', 'florian', 'FILLOUX', 'fillouxflorian56@gmail.com', 'Saint-Etienne, France', '/assets/profile/Jack-Sparrow.png', 1, 0, 0, '2024-10-21'),
+(25, '$2y$10$zucMXl1CCH.kK3Grmljma.m9Sb3y3LBrt7i1VnO86WO8yInEesqJu', 'Mathéo', 'Flores', 'matheoflores26@gmail.com', 'Saint-Etienne, France', '/assets/profile/Jack-Sparrow.png', 1, 0, 0, '2024-12-01'),
+(32, '$2y$10$M7RME7KjVB9djW3R2wLiaeVMYLBlic9LNytXuvyuiqyP8vccNuxe6', 'Emric', 'Pirrera', 'pemricn2@gmail.com', 'Saint-Etienne, France', '/assets/profile/Jack-Sparrow.png', 1, 0, 1, '2025-01-03');
 
 --
 -- Contraintes pour les tables déchargées

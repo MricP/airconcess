@@ -46,6 +46,17 @@ function PageProduct({mode, onSubmitProduct, model}) {
       {varName:"estimated_price", txt:"Prix estimé ", value:"Inconnu"},
   ])
 
+  /**
+   * Formate un nombre pour ajouter des points comme séparateurs de milliers.
+   * @param {number|string} num - Le nombre à formater.
+   * @returns {string} - Le nombre formaté.
+   */
+  function formatNumber(num) {
+    const numStr = num.toString();
+    return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  
+
   // Charge toutes les data à afficher en fonction de l'id de l'appareil (idAircraft)
   const loadDataFromDB = async () => {
     try {
@@ -65,24 +76,35 @@ function PageProduct({mode, onSubmitProduct, model}) {
       if(dbModelName) updateModelName(dbModelName)
       if(dbMainImg) updateMainImg(dbMainImg);
       if(dbSliderImgs) updateSliderImgs(dbSliderImgs);
+
       if(dbModelDescription) {
+        console.log(dbModelDescription)
         const newDescription = []
-        dbModelDescription.forEach(element => {
+        dbModelDescription.forEach((element) => {
           if(element.value) {
             const criteria = modelDescription.find((elt) => elt.varName === element.varName)
-            if(element.value) criteria.value = element.value
-            newDescription.push(criteria)
+            if(criteria) {
+              let updatedCriteria = { ...criteria, value: element.value };
+              if(criteria.varName === "passenger_capacity") updatedCriteria = { ...criteria, value:"Jusqu'à "+element.value+" passagers"};
+              else if(criteria.varName === "max_range") updatedCriteria = { ...criteria, value: element.value+" km"};
+              newDescription.push(updatedCriteria);
+            }
           }
         });
         updateModelDescription(newDescription)
       }
+
       if(dbAircraftDescription) {
         const newDescription = []
         dbAircraftDescription.forEach(element => {
           if(element.value) {
             const criteria = aircraftDescription.find((elt) => elt.varName === element.varName)
-            if(element.value) criteria.value = element.value
-            newDescription.push(criteria)
+            if(criteria) {
+              let updatedCriteria = { ...criteria, value: element.value };
+              if(criteria.varName === "flight_hours") updatedCriteria = { ...criteria, value:element.value+" heures"};
+              else if(criteria.varName === "estimated_price") updatedCriteria = { ...criteria, value: formatNumber(element.value)+" €"};
+              newDescription.push(updatedCriteria)
+            }
           }
         });
         
@@ -116,6 +138,14 @@ function PageProduct({mode, onSubmitProduct, model}) {
     isAvailable: 1,
   });
 
+  const [mainImageData, setMainImageData] = useState({
+    file : null,
+  });
+
+  const [sliderImageData, setSliderImageData] = useState({
+    files : null,
+  });
+
   const [modelData, setModelData] = useState({
     addMode: "Nouveau",
     modelName: "",
@@ -134,7 +164,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
   });
 
   useEffect(() => {
-    if(model != "Nouveau"){
+    if(model != "Nouveau" && mode == "add"){
       setModelData({
         addMode: "",
         modelName: model.model_name,
@@ -156,7 +186,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
 
   const handleSubmit = () => {
     if (onSubmitProduct) {
-      onSubmitProduct(productData, modelData); // Appelle la fonction du parent
+      onSubmitProduct(productData, modelData, mainImageData, sliderImageData); // Appelle la fonction du parent
     }
   };
 
@@ -166,6 +196,14 @@ function PageProduct({mode, onSubmitProduct, model}) {
       [field]: value,
     }));
     setProductData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+    setMainImageData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+    setSliderImageData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
@@ -200,7 +238,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
         modelSelected={model}
       />
       <ProductMap/>
-      <Slider images={sliderImgs} mode={mode}/>
+      <Slider images={sliderImgs} mode={mode} onInputChange={handleInputChange}/>
       {mode === "add" && <div className="bottom-product-page"><DarkButton className={"add-button"} onClick={handleSubmit}>Ajouter le nouveau produit</DarkButton></div>}
     </main>
   );

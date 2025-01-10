@@ -82,7 +82,7 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
     useEffect(() => {
             
 
-            if (modelSelected != "Nouveau") {
+            if (modelSelected != "Nouveau" && mode === "add") {
                 setModelDescriptionTab([
                     modelSelected.range_type,
                     modelSelected.manufacturer,

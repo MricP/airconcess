@@ -1,7 +1,7 @@
 import "../../styles/product/ProductShowcase.css";
 import ScrollDownButton from '../general/ScrollDownButton';
 import { useState } from "react";
-import { uploadImage } from "../../services/product";
+
 
 const ProductShowcase = ({ imagePath, modelName, mode, model, onInputChange }) => {
 
@@ -9,30 +9,23 @@ const ProductShowcase = ({ imagePath, modelName, mode, model, onInputChange }) =
   const [hasId, setHasId] = useState(true)
 
   const handleFileChange = async (event) => {
-    const nameInput = document.getElementById("nameProduct");
     const file = event.target.files[0];
-    const name = nameInput ? nameInput.value : "test";
 
     if (file && file.type.startsWith("image/")) {
-      try {
-        console.log("Fichier sélectionné :", file);
-        console.log("Nom du produit :", name);
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        setSelectedImage(e.target.result); // Met à jour l'image dans le state
+      };
+      reader.readAsDataURL(file)
+      setHasId(false)
 
-        const response = await uploadImage(file, name); // Passe le fichier ici
-        console.log("Réponse du serveur :", response);
-
-        if (response.success) {
-          setSelectedImage(response.filePath); // Utilise le chemin renvoyé par le serveur
-          setHasId(false);
-        } else {
-          alert(response.message || "Erreur lors du téléchargement.");
-        }
-      } catch (error) {
-        console.error("Erreur:", error);
-        alert("Une erreur s'est produite lors de l'envoi du fichier.");
+      if (onInputChange) {
+        onInputChange("file", file)
       }
+
     } else {
-      alert("Veuillez choisir une image valide.");
+      setSelectedImage(null);
+      alert("Veuillez choisir une image valide.")
     }
   };
 
@@ -54,14 +47,14 @@ const ProductShowcase = ({ imagePath, modelName, mode, model, onInputChange }) =
                 <form action="">
                   <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />
                   <label htmlFor="file-input">Charger une image</label>
-                  <input id="nameProduct" className="product-name input" type="text" defaultValue={"Nom du produit"} onChange={handleNameChange}/>
+                  <input className="product-name input" type="text" defaultValue={"Nom du produit"} onChange={handleNameChange}/>
                 </form> :
                 <div>
                   <form action="">
                     <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />
                     <label htmlFor="file-input">Charger une image</label>  
                   </form>
-                  <h2 id="nameProduct" className='product-name'>{model.model_name}</h2>  
+                  <h2 className='product-name'>{model.model_name}</h2>  
                 </div>     
               }
 
