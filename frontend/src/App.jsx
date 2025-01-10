@@ -22,6 +22,7 @@ import CguPage from './pages/polities/CguPage.jsx';
 import LegalNoticesPage from './pages/polities/LegalNoticesPage.jsx';
 import PrivacyPage from './pages/polities/PrivacyPage.jsx';
 import PageSubTraining from './pages/sub-training/PageSubTraining.jsx';
+import AboutPage from './pages/about/AboutPage.jsx';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path='/verify-email' element={<VerifyEmail />} />
           <Route path='/services' element={<PageServices />} />
           <Route path='/contact-us' element={<ContactPage />} />
+          <Route path='/about' element={<AboutPage />} />
           <Route path='/training' element={<PageTraining />} />
           <Route path='/sub-training' element={<PageSubTraining />} />
           <Route path='/maintenance' element={<PageMaintenance />} />

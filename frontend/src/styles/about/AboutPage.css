@@ -1,0 +1,41 @@
+.about-ourStory{
+    height: 100vh;
+    padding-top: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.about-ourStory > .about-intro > img{
+    width: 50%;
+}
+
+.about-intro{
+    display: flex;
+    width: 70%;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-storyContent{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.about-middleIntroLine{
+    height: 2px;
+    width: 100%;
+    background-color: var(--line-color);
+}
+
+.about-storyContent > p{
+    font-size: var(--text-size);
+}
+
+.about-storyContent > h3{
+    font-size: 2rem;
+}
