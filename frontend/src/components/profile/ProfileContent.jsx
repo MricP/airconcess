@@ -1,14 +1,45 @@
-import React, {useRef} from 'react'
+import React, {useRef,useState,useEffect} from 'react'
 import "../../styles/profile/ProfileContent.css"
 import {createTestimonial} from "../../services/auth.js"
+import {getAppointmentByUser} from "../../services/appointment.js"
 import { useNavigate } from 'react-router-dom'
 import {Calendar,Badge} from 'rsuite'
 
 import "../../styles/general/Rsuite-custom.css"
 
 export default function ProfileContent() {
+
   const navigate = useNavigate()
   const testimonialRef = useRef(null)
+  const [selectedDate, setSelectedDate] = useState(null); 
+  const [events, setEvents] = useState([]);
+
+  
+
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        navigate("sign-in");
+        return;
+      }
+      try {
+        const appointments = await getAppointmentByUser(token);
+        console.log(appointments.data[0].appt_reason);
+        setEvents(appointments.data) 
+      } catch (error) {
+        console.error("Erreur lors de la récupération des rendez-vous :", error);
+      }
+    };
+    fetchAppointments();
+  }, [navigate]);
+
+  const token = localStorage.getItem("token")
+  if(!token){
+    navigate("sign-in")
+    return
+  }
+
 
   const handleSubmitTestimonial = (e) => {
     e.preventDefault();
@@ -24,20 +55,28 @@ export default function ProfileContent() {
     } 
   }
 
-  function renderCell(date) {
-    const list = {day: '10-1-2025', time: '10:30 am', title: 'Meeting' };
   
-    if (list.length) {
-      return <Badge className="calendar-todo-item-badge" />;
+  const renderCell = (date) => {
+    // getAppointment()
+    const formattedDate = date.toLocaleDateString('en-CA');
+    const eventForDate = events.find((event) => event.appt_timestamp.split(' ')[0] === formattedDate);
+    if (eventForDate) {
+      return (
+        <div className="calendar-cell">
+          <Badge className="calendar-todo-item-badge" />
+          <div className="calendar-event">{eventForDate.appt_reason} à {eventForDate.appt_timestamp.split(" ")[1]}</div>
+          <div className="calendar-event">{eventForDate.appt_agency}</div>
+        </div>
+      );
     }
-  
     return null;
   }
+
 
   return (
     <main className='profile-content-container'>
       <div className='profile-actionStatus'>
-          <Calendar renderCell={renderCell} />
+          <Calendar renderCell={renderCell} isoWeek />
       </div>
       <div className='profile-commentaire-container'>
         <form method='POST' onSubmit={handleSubmitTestimonial}>

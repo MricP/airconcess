@@ -206,7 +206,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 // Partie Profile
 
-// Route pour récupérer les données des aéronefs (GET)
 if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my-profile') !== false) {
     $headers = getallheaders();
     if (!isset($headers['Authorization'])) {
@@ -249,6 +248,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/m
         echo json_encode(['error' => 'Aucun fichier reçu']);
         http_response_code(400); 
     }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/profile/get-appointment-user') !== false) {
+    $headers = getallheaders();
+    if (!isset($headers['Authorization'])) {
+        http_response_code(401);
+        echo json_encode(["message" => "Bonjour, vous devez vous connecter pour accéder au donnée de temps"]);
+        exit();
+    }
+    $token = str_replace('Bearer ', '', $headers['Authorization']);
+    $payload = Token::verify($token);
+    ProfileController::getAppointment($payload);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/post-uploadImage') !== false) {
