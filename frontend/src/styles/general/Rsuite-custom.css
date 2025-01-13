@@ -2638,9 +2638,6 @@ tbody.rs-anim-collapse.rs-anim-in {
 .rs-calendar-panel .rs-calendar-header::after {
   clear: both;
 }
-.rs-calendar-panel .rs-calendar-header .rs-calendar-btn-today {
-  float: right;
-}
 .rs-calendar-panel .rs-calendar-header-forward,
 .rs-calendar-panel .rs-calendar-header-backward {
   float: none !important;
