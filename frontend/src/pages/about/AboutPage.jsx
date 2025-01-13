@@ -8,7 +8,7 @@ export function AboutPage() {
     return (
       <main className='about-ourStory'>
             <div className='about-intro'>
-                <img src={AboutMainImg}  alt="OurStory img" />
+                <img src={AboutMainImg}  alt="Our story explaination" />
                 
                 <div className='about-storyContent'>
                     <h3>Notre Histoire</h3>
