@@ -11,7 +11,6 @@ export default function ProfileContent() {
 
   const navigate = useNavigate()
   const testimonialRef = useRef(null)
-  const [selectedDate, setSelectedDate] = useState(null); 
   const [events, setEvents] = useState([]);
 
   
@@ -57,7 +56,6 @@ export default function ProfileContent() {
 
   
   const renderCell = (date) => {
-    // getAppointment()
     const formattedDate = date.toLocaleDateString('en-CA');
     const eventForDate = events.find((event) => event.appt_timestamp.split(' ')[0] === formattedDate);
     if (eventForDate) {
