@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../models/Appointment.php';
 
 
 class ProfileController
@@ -89,17 +90,31 @@ class ProfileController
         } else {
             echo json_encode(['error' => 'Extension de fichier non autorisée']);
         }
-    $fileUrl = "/assets/profile/" . $fileName;
-    $user = self::getUser($payload);
-    $update = User::updateURLPicture($fileUrl, $user['idUser']);
+        $fileUrl = "/assets/profile/" . $fileName;
+        $user = self::getUser($payload);
+        $update = User::updateURLPicture($fileUrl, $user['idUser']);
 
-    if ($update) {
-        echo json_encode(['success' => 'Photo de profil modifiée', 'path' => $fileUrl]);
-    } else {
-        http_response_code(500);
-        echo json_encode(['error' => 'Erreur lors de la mise à jour de la base de données']);
+        if ($update) {
+            echo json_encode(['success' => 'Photo de profil modifiée', 'path' => $fileUrl]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Erreur lors de la mise à jour de la base de données']);
+        }
     }
-}
+
+    public static function getAppointment($payload){
+        $user = self::getUser($payload);
+
+        if (!$user) {
+            error_log("Utilisateur non trouvé pour ce token.");
+            http_response_code(403);
+            echo json_encode(["message" => "Vous n'avez pas l'autorisation d'accéder à cette ressource."]);
+            exit();
+        }
+    
+        $appointments = Appointment::getAppointmentByUser($user['idUser']);
+        echo json_encode($appointments);
+    }
 
     
 }
