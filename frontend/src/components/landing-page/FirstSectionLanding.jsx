@@ -50,14 +50,14 @@ function FirstSectionLanding() {
                         <motion.p className='small-text' style={{ y: y1 }}>Prenez rendez-vous maintenant !</motion.p>
                         <motion.p className='small-text' style={{ y: y1 }}>Votre prochain aéronef vous attend.</motion.p>
                         <motion.h2 className='title' style={{ y: y2 }}>
-                            <motion.span style={{ y: y2 }}>Exclusivité </motion.span>
-                            <motion.span style={{ y: y2 }}>Rendez-vous </motion.span>
+                            <motion.span style={{ y: y2 }}>Aéronef</motion.span>
+                            <motion.span style={{ y: y2 }}>Rendez-vous</motion.span>
                             <motion.span style={{ y: y2 }}>Personnalisation</motion.span>
                         </motion.h2>
                         <motion.p className='description' style={{ y: y3 }}>
-                            Découvrez une expérience unique pour louer ou acheter votre aéronef.
+                            Découvrez une expérience unique pour acheter votre aéronef ou votre formation.
                             Parcourez notre vaste catalogue et réservez un rendez-vous pour trouver le modèle qui vous convient.
-                            Choisissez un équipage dédié et des pilotes qualifiés pour une expérience sur mesure.
+                            Choisissez nous pour une expérience sur mesure.
                             Nous offrons également des formations pour maîtriser votre aéronef.
                             Bénéficiez de notre expertise et de notre attention aux détails !
                         </motion.p>

@@ -32,7 +32,13 @@
             return $stmt->fetchAll(PDO::FETCH_COLUMN);
         }
 
-
+        public static function getAppointmentByUser($id){
+            $pdo = self::getDB();
+            $stmt = $pdo->prepare("SELECT appt_reason, appt_timestamp, appt_agency FROM appointment WHERE userConcerned_id = ?");            
+            $stmt->execute([$id]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+            return $result;
+        }
     }
 
 ?>

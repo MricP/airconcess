@@ -1,4 +1,7 @@
-.profile-backgroundPrincipal{
+.profilePage-backgroundPrincipal{
     background-color: var(--bg-secondary);
     display: flex;
 }
+
+
+

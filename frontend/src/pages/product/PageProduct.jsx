@@ -47,8 +47,18 @@ function PageProduct({mode, onSubmitProduct, model}) {
       {varName:"monthly_maintenance_cost", txt:"Coût mensuel d’entretien", value:"Inconnu"},
       {varName:"estimated_price", txt:"Prix estimé ", value:"Inconnu"},
   ])
-
   const [iconImg, setIconImage] = useState(null)
+  
+  /**
+   * Formate un nombre pour ajouter des points comme séparateurs de milliers.
+   * @param {number|string} num - Le nombre à formater.
+   * @returns {string} - Le nombre formaté.
+   */
+  function formatNumber(num) {
+    const numStr = num.toString();
+    return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  
 
   // Charge toutes les data à afficher en fonction de l'id de l'appareil (idAircraft)
   const loadDataFromDB = async () => {
@@ -69,24 +79,35 @@ function PageProduct({mode, onSubmitProduct, model}) {
       if(dbModelName) updateModelName(dbModelName)
       if(dbMainImg) updateMainImg(dbMainImg);
       if(dbSliderImgs) updateSliderImgs(dbSliderImgs);
+
       if(dbModelDescription) {
+        console.log(dbModelDescription)
         const newDescription = []
-        dbModelDescription.forEach(element => {
+        dbModelDescription.forEach((element) => {
           if(element.value) {
             const criteria = modelDescription.find((elt) => elt.varName === element.varName)
-            if(element.value) criteria.value = element.value
-            newDescription.push(criteria)
+            if(criteria) {
+              let updatedCriteria = { ...criteria, value: element.value };
+              if(criteria.varName === "passenger_capacity") updatedCriteria = { ...criteria, value:"Jusqu'à "+element.value+" passagers"};
+              else if(criteria.varName === "max_range") updatedCriteria = { ...criteria, value: element.value+" km"};
+              newDescription.push(updatedCriteria);
+            }
           }
         });
         updateModelDescription(newDescription)
       }
+
       if(dbAircraftDescription) {
         const newDescription = []
         dbAircraftDescription.forEach(element => {
           if(element.value) {
             const criteria = aircraftDescription.find((elt) => elt.varName === element.varName)
-            if(element.value) criteria.value = element.value
-            newDescription.push(criteria)
+            if(criteria) {
+              let updatedCriteria = { ...criteria, value: element.value };
+              if(criteria.varName === "flight_hours") updatedCriteria = { ...criteria, value:element.value+" heures"};
+              else if(criteria.varName === "estimated_price") updatedCriteria = { ...criteria, value: formatNumber(element.value)+" €"};
+              newDescription.push(updatedCriteria)
+            }
           }
         });
         

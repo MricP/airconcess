@@ -1,0 +1,78 @@
+.about-ourStory{
+    height: max-content;
+    padding-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.about-ourStory > .about-intro > img{
+    width: 50%;
+    border-radius: 2px;
+}
+
+.about-intro{
+    display: flex;
+    width: 70%;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-storyContent{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.about-middleIntroLine{
+    height: 2px;
+    width: 100%;
+    background-color: var(--line-color);
+}
+
+.about-storyContent > p{
+    font-size: var(--text-size);
+}
+
+.about-storyContent > h3{
+    font-size: 2rem;
+}
+
+.about-carreImg{
+    width: 250px;
+    height: 250px;
+    background-color: var(--box-color);
+    border-radius: 2px;
+}
+
+.about-pictures-container{
+    display: flex;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.Emric{
+    /* background-image: url(); */
+    background-size: cover;
+}
+
+
+/* Ajouter les urls de vos photos svp*/
+
+.Matheo{
+    /* background-image: url();  */
+    background-size: cover;
+}
+
+.Florian{
+    /* background-image: url(); */
+    background-size: cover;
+}
+
+.Sacha{
+    /* background-image: url(); */
+    background-size: cover;
+}
