@@ -54,9 +54,6 @@ export default function PageAdmin(){
     }
 
     const handleAddButtonClick = async (productData, modelData, imageData) => {
-        console.log("Données reçues :", productData);
-        
-        
 
         const {
             addMode,
@@ -106,10 +103,8 @@ export default function PageAdmin(){
             estimatedPrice,
             isAvailable,
           } = productData;
-          console.log(modelName)
           
           const model = await getModelByName(modelName);
-          console.log(model)
       
           await insertAircraft(
             model.model_id,
@@ -133,14 +128,11 @@ export default function PageAdmin(){
         } = imageData;
         
         const aircraft = await getAircraftBySerialNumber(serialNumber)
-        console.log(aircraft)
 
         try {
-          console.log("Fichier sélectionné :", file);
-          console.log("Nom du produit :", model.model_name);
-
+          console.log(model.model_name+" et "+ aircraft.aircraft_id)
           const response = await uploadImage(file, model.model_name, aircraft.aircraft_id); // Passe le fichier ici
-          console.log("Réponse du serveur :", response);
+          console.log("Réponse du serveur lors de l'insertion de l'image :", response.success);
           await insertImage("main", aircraft.aircraft_id, response.filePath)
           
         } catch (error) {
@@ -149,8 +141,6 @@ export default function PageAdmin(){
         }
 
         try {
-            console.log("Fichier sélectionné :", icon);
-            console.log("Nom du produit :", model.model_name);
   
             const response = await uploadImage(icon, model.model_name, aircraft.aircraft_id); // Passe le fichier ici
             console.log("Réponse du serveur :", response);
@@ -163,11 +153,8 @@ export default function PageAdmin(){
 
         files.map(async (file) => {
             try {
-                console.log("Fichier sélectionné :", file);
-                console.log("Nom du produit :", model.model_name);
                 
                 const response = await uploadImage(file, model.model_name, aircraft.aircraft_id); // Passe le fichier ici
-                console.log("Réponse du serveur :", response);
                 await insertImage("slider", aircraft.aircraft_id, response.filePath);
                 
             } catch (error) {

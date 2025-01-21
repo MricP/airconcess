@@ -25,7 +25,8 @@ export const ProductBox = (props) => {
       console.log(props.aircraftId)
       const nameModel = await getModelName(props.aircraftId)
       console.log(nameModel[0])
-      await deleteAircraft(props.aircraftId, nameModel[0])
+      const response = await deleteAircraft(props.aircraftId, nameModel[0])
+      console.log("Réponse du serveur lors de la suppression : " + response)
     }
 };
 

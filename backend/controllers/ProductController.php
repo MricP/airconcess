@@ -105,6 +105,8 @@
         }
 
         public static function uploadImage($file, $destinationDir, $aircraftId) {
+
+
             $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
             $destinationDirBack  = __DIR__ . "/../../frontend/public/assets/product/" . $destinationDir. "/". $aircraftId. "/";
             // Vérifie si le fichier existe

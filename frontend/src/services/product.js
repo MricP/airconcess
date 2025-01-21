@@ -97,7 +97,7 @@ export const insertAircraft = async (idModel, serialNumber, manufactureYear, fli
             estimatedPrice,
             isAvailable
         });
-        console.log('Réponse du serveur:', response);
+        console.log('Réponse du serveur pour insertion aircraft :', response);
     } catch(error) {
         console.error("Erreur lors de l'insertion", error);
         throw error;
@@ -141,7 +141,7 @@ export const insertModel = async (modelName, rangeType, manufacturer, passengerC
             height,
             maxTakeoffWeight
         });
-        console.log('Réponse du serveur:', response);
+        console.log('Réponse du serveur insertion model :', response);
     } catch(error) {
         console.error("Erreur lors de l'insertion", error);
         throw error;
@@ -153,7 +153,7 @@ export const uploadImage = async (file, directionDir, aircraftId) => {
         const formData = new FormData();
         formData.append('file', file); // Ajouter le fichier
         formData.append('destinationDir', directionDir); // Ajouter le dossier de destination
-        formData.append('aircraftId', aircraftId)
+        formData.append('aircraftId', aircraftId);
 
         const response = await axiosInstance.post('/admin/post-uploadImage', formData, {
             headers: {
@@ -161,7 +161,15 @@ export const uploadImage = async (file, directionDir, aircraftId) => {
             },
         });
 
-        return response.data;
+        // Accéder aux données de la réponse
+        const data = response.data;
+        if (data.success) {
+            console.log("Image uploadée avec succès :", data.filePath);
+        } else {
+            console.error("Erreur de téléchargement :", data.message);
+        }
+
+        return data; // Retourner les données pour une utilisation ultérieure
     } catch (error) {
         console.error("Erreur lors de l'insertion d'une image", error);
         throw error;
@@ -175,7 +183,7 @@ export const insertImage = async (role, aircraftId, url) => {
             aircraftId,
             url
         });
-        console.log('Réponse du serveur:', response);
+        console.log('Réponse du serveur lors de insertion image :', response);
     } catch(error) {
         console.error("Erreur lors de l'insertion", error);
         throw error;
@@ -195,7 +203,7 @@ export const getAircraftBySerialNumber = async (serialNumber) => {
 export const deleteAircraft = async (id, nameModel) => {
     try {
         const response = await axiosInstance.post('/admin/delete-Aircraft', { id, nameModel });
-        console.log(response)
+        return response
     } catch (error) {
         console.error("Erreur lors de la suppression", error);
         throw error;

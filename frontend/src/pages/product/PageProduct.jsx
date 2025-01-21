@@ -208,7 +208,6 @@ function PageProduct({mode, onSubmitProduct, model}) {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(file)
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onload = (e) => setIconImage(e.target.result);

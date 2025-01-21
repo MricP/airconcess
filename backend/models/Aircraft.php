@@ -1,5 +1,10 @@
 <?php
 require_once __DIR__ . '/../utils/Database.php';
+ini_set('log_errors', 1); // Activer la journalisation des erreurs
+ini_set('error_log', __DIR__ . '/error_log.txt'); // Définir le fichier de log
+error_reporting(E_ALL); // Activer tous les niveaux d'erreurs
+ini_set('display_errors', 1);
+
 
 class Aircraft
 {
@@ -197,16 +202,36 @@ class Aircraft
     public static function deleteAircraft($id, $nameModel) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("DELETE FROM aircraft WHERE aircraft_id = ?");
-        $filePath = __DIR__ . "/../../frontend/public/assets/product/" . $nameModel . "/" . $id;
+        $folderPath = __DIR__ . "/../../frontend/public/assets/product/" . $nameModel . "/" . $id;
     
-        // Vérification et suppression du fichier
-        if (file_exists($filePath)) {
-            unlink($filePath);
-            $stmt->execute([$id]);
-        } else {
-            error_log("Fichier introuvable : " . $filePath);
+        // Fonction pour supprimer récursivement un dossier non vide
+        function deleteFolder($folderPath) {
+            if (!is_dir($folderPath)) {
+                return false;
+            }
+    
+            $files = array_diff(scandir($folderPath), ['.', '..']);
+            foreach ($files as $file) {
+                $filePath = $folderPath . DIRECTORY_SEPARATOR . $file;
+                if (is_dir($filePath)) {
+                    deleteFolder($filePath);
+                } else {
+                    unlink($filePath); // Supprime le fichier
+                }
+            }
+    
+            return rmdir($folderPath); // Supprime le dossier vide
         }
     
-        
+        // Vérifie et supprime le dossier
+        if (file_exists($folderPath)) {
+            if (deleteFolder($folderPath)) {
+                $stmt->execute([$id]); // Supprime l'entrée de la base de données
+            } else {
+                error_log("Échec de la suppression du dossier : " . $folderPath);
+            }
+        } else {
+            error_log("Dossier introuvable : " . $folderPath);
+        }
     }
 }
