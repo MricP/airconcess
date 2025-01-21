@@ -135,12 +135,16 @@ export default function ProfileSideBar(){
             const validExtensions = ['.png', '.jpg', '.jpeg', '.webp'];
             const extension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
             if (validExtensions.includes(extension)) {
-                changeProfilePicture(token, file);
-                setProfilePicture("/assets/profile/"+file.name);
-                if(profilePictureRef.current){
-                  profilePictureRef.current.src = profilePicture;
-                }
-                
+                changeProfilePicture(token, file)
+                .then(() => {
+                    // Une fois l'image bien sauvegardée, mettre à jour l'état local
+                    const newProfilePath = `/assets/profile/${file.name}`;
+                    setProfilePicture(newProfilePath);
+                })
+                .catch((error) => {
+                    console.error('Erreur lors de la mise à jour de l\'image de profil :', error);
+                    alert('Une erreur est survenue lors de la mise à jour de l\'image de profil.');
+                });
             } else {
                 console.log('Extension non valide. Veuillez sélectionner une image au format PNG, JPG, JPEG ou WEBP.');
                 alert('Veuillez sélectionner une image valide (PNG, JPG, JPEG, WEBP).');
