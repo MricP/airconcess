@@ -22,8 +22,8 @@ function FormSubTraining() {
         phone: "+33644038323",
         email: "matheoflores26@gmail.com",
         address: "141 rue Barthélémy de laffemas",
-        country: "France",
-        city: "Lyon",
+        country: null, //{value:"FR",label:"France"},
+        city: null,
         postalCode: 69100,
         idCard: null,
         //Step2
@@ -42,7 +42,7 @@ function FormSubTraining() {
 
   const formData = watch();
 
-  const [step,updateStep] = useState(2);
+  const [step,updateStep] = useState(0);
 
   function handlePrevStep() {
     if(step>0) {
@@ -118,7 +118,6 @@ function FormSubTraining() {
         
         <DarkButton disabled={step === 5} type='submit' className="next-step">{ step === 3 ? "Valider et payer" : "Continuer"}</DarkButton>
       </form>
-      
     </div>
   )
 }
