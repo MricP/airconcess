@@ -148,11 +148,12 @@ export const insertModel = async (modelName, rangeType, manufacturer, passengerC
     }
 }
 
-export const uploadImage = async (file, directionDir) => {
+export const uploadImage = async (file, directionDir, aircraftId) => {
     try {
         const formData = new FormData();
         formData.append('file', file); // Ajouter le fichier
         formData.append('destinationDir', directionDir); // Ajouter le dossier de destination
+        formData.append('aircraftId', aircraftId)
 
         const response = await axiosInstance.post('/admin/post-uploadImage', formData, {
             headers: {
@@ -187,6 +188,16 @@ export const getAircraftBySerialNumber = async (serialNumber) => {
         return response.data; 
     } catch (error) {
         console.error("Erreur lors de l'insertion", error);
+        throw error;
+    }
+}
+
+export const deleteAircraft = async (id, nameModel) => {
+    try {
+        const response = await axiosInstance.post('/admin/delete-Aircraft', { id, nameModel });
+        console.log(response)
+    } catch (error) {
+        console.error("Erreur lors de la suppression", error);
         throw error;
     }
 }

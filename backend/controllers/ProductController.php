@@ -104,9 +104,9 @@
             echo json_encode($model);
         }
 
-        public static function uploadImage($file, $destinationDir) {
+        public static function uploadImage($file, $destinationDir, $aircraftId) {
             $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-            $destinationDirBack  = __DIR__ . "/../../frontend/public/assets/product/" . $destinationDir. "/";
+            $destinationDirBack  = __DIR__ . "/../../frontend/public/assets/product/" . $destinationDir. "/". $aircraftId. "/";
             // Vérifie si le fichier existe
             if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
                 return ['success' => false, 'message' => 'Aucun fichier valide reçu.'];
@@ -130,7 +130,7 @@
         
             // Déplace le fichier téléchargé
             if (move_uploaded_file($file['tmp_name'], $filePath)) {
-                return ['success' => true, 'filePath' => "/assets/product/".$destinationDir."/".$fileName];
+                return ['success' => true, 'filePath' => "/assets/product/".$destinationDir."/". $aircraftId. "/". $fileName];
             } else {
                 return ['success' => false, 'message' => 'Erreur lors du déplacement du fichier.'];
             }

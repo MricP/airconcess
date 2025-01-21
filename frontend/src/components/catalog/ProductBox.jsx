@@ -5,6 +5,7 @@ import "../../styles/catalog/ProductBox.css";
 import { useNavigate } from 'react-router-dom';
 import { IoTrashBin } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
+import { deleteAircraft, getModelName } from '../../services/product';
 
 
 export const ProductBox = (props) => {
@@ -17,9 +18,14 @@ export const ProductBox = (props) => {
     use = <CiEdit size={30} />
   }
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async() => {
     if (props.use === "edit"){
         navigate(`/admin/edit/${props.idAircraft}`)
+    } else {
+      console.log(props.aircraftId)
+      const nameModel = await getModelName(props.aircraftId)
+      console.log(nameModel[0])
+      await deleteAircraft(props.aircraftId, nameModel[0])
     }
 };
 

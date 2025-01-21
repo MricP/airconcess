@@ -139,7 +139,7 @@ export default function PageAdmin(){
           console.log("Fichier sélectionné :", file);
           console.log("Nom du produit :", model.model_name);
 
-          const response = await uploadImage(file, model.model_name); // Passe le fichier ici
+          const response = await uploadImage(file, model.model_name, aircraft.aircraft_id); // Passe le fichier ici
           console.log("Réponse du serveur :", response);
           await insertImage("main", aircraft.aircraft_id, response.filePath)
           
@@ -152,7 +152,7 @@ export default function PageAdmin(){
             console.log("Fichier sélectionné :", icon);
             console.log("Nom du produit :", model.model_name);
   
-            const response = await uploadImage(icon, model.model_name); // Passe le fichier ici
+            const response = await uploadImage(icon, model.model_name, aircraft.aircraft_id); // Passe le fichier ici
             console.log("Réponse du serveur :", response);
             await insertImage("icon", aircraft.aircraft_id, response.filePath)
             
@@ -166,7 +166,7 @@ export default function PageAdmin(){
                 console.log("Fichier sélectionné :", file);
                 console.log("Nom du produit :", model.model_name);
                 
-                const response = await uploadImage(file, model.model_name); // Passe le fichier ici
+                const response = await uploadImage(file, model.model_name, aircraft.aircraft_id); // Passe le fichier ici
                 console.log("Réponse du serveur :", response);
                 await insertImage("slider", aircraft.aircraft_id, response.filePath);
                 

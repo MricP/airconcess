@@ -194,5 +194,19 @@ class Aircraft
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public static function deleteAircraft($id, $nameModel) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("DELETE FROM aircraft WHERE aircraft_id = ?");
+        $filePath = __DIR__ . "/../../frontend/public/assets/product/" . $nameModel . "/" . $id;
     
+        // Vérification et suppression du fichier
+        if (file_exists($filePath)) {
+            unlink($filePath);
+            $stmt->execute([$id]);
+        } else {
+            error_log("Fichier introuvable : " . $filePath);
+        }
+    
+        
+    }
 }
