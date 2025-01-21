@@ -137,7 +137,6 @@ export default function ProfileSideBar(){
             if (validExtensions.includes(extension)) {
                 changeProfilePicture(token, file)
                 .then(() => {
-                    // Une fois l'image bien sauvegardée, mettre à jour l'état local
                     const newProfilePath = `/assets/profile/${file.name}`;
                     setProfilePicture(newProfilePath);
                 })

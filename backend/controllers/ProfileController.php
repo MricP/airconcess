@@ -32,7 +32,7 @@ class ProfileController
         $newLastName = $data['lastName'] ?? null;
         $newLocation = $data['location'] ?? null;
 
-        if (!$newFirstName || !$newLastName || !$newLocation) {
+        if (!$newFirstName || !$newLastName) {
             http_response_code(400); 
             echo json_encode(["error" => "Données invalides"]);
             return;
