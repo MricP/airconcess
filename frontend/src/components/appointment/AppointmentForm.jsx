@@ -24,20 +24,20 @@ function AppointmentForm() {
     
     const {register,handleSubmit,watch,setValue,formState: { errors }} = useForm (
         { defaultValues: {
-            reason: "",
-            model: "",
-            serialNumber: "",
-            agency: "",
+            reason: null,
+            model: null,
+            serialNumber: null,
+            agency: null,
             date: null,
             time: null,
-            firstName: "",
-            lastName: "",
-            phone: "",
-            email: "",
-            address: "",
-            country: "",
-            city: "",
-            postalCode: "",
+            firstName: null,
+            lastName: null,
+            phone: null,
+            email: null,
+            address: null,
+            country: null,
+            city: null,
+            postalCode: null,
             idCard: null,
             incomeProof: null,
         }}
@@ -200,7 +200,7 @@ function AppointmentForm() {
                                     id="model-input"
                                     data={modelOptions} 
                                     value={formData.model != null ? formData.model : ''}
-                                    setValue={ async (value) => {
+                                    setValue={(value) => {
                                         setValue("model", value, errors.model ? {shouldValidate: true} : {shouldValidate: false});
                                         setValue("serialNumber", null, errors.serialNumber ? {shouldValidate: true} : {shouldValidate: false});
                                         loadAircraftsWith(value?.value)

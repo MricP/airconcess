@@ -6,19 +6,20 @@
 
         public static function createAppointment($data) {
             $apptData = [
+                "aircraftConcerned_id" => $data["formData"]["serialNumber"]["value"],
                 "firstName" => $data["formData"]["firstName"],
                 "lastName" => $data["formData"]["lastName"],
                 "phone" => $data["formData"]["phone"],
                 "email" => $data["formData"]["email"],
-                "country" => $data["formData"]["country"],
-                "city" => $data["formData"]["city"],
+                "country" => $data["formData"]["country"]["value"],
+                "city" => $data["formData"]["city"]["value"],
                 "address" => $data["formData"]["address"],
                 "postalCode" => $data["formData"]["postalCode"],
                 "idCard" => $data["formData"]["idCard"],
-                "incomeProof" => $data["formData"]["incomeProof"],
-                "reason" => $data["formData"]["reason"],
+                "incomeProof" => $data["formData"]["incomeProof"][0]["name"],
+                "reason" => $data["formData"]["reason"]["value"],
                 "timestamp" => $data["formData"]["date"]." ".$data["formData"]["time"],
-                "agency" => $data["formData"]["agency"],
+                "agency" => $data["formData"]["agency"]["value"],
             ];
             $isGood = Appointment::create($apptData);
         }
