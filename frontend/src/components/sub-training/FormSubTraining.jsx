@@ -111,7 +111,7 @@ function FormSubTraining() {
         <Steps.Item description="PRÉFÉRENCES ET DISPONIBILITÉ" />
         <Steps.Item description="DONNÉES DE PAIEMENT" />
         <Steps.Item description="VALIDATION" />
-        <Steps.Item icon={<IoCheckmarkDoneOutline style={{ fontSize: 20 ,color:"#5b5b5b"}}/>}/>
+        <Steps.Item icon={<IoCheckmarkDoneOutline style={{fontSize:20,color:"#5b5b5b"}}/>}/>
       </Steps>
       <form method="POST" onSubmit={handleSubmit(onSubmit)} className='current-step'>
         {handleStepDisplayed()}

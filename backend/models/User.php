@@ -5,8 +5,7 @@ class User
 {
     private static function getDB()
     {
-        $database = new Database();
-        return $database->getConnection();
+        return Database::getConnection();
     }
 
     public static function findByEmail($email)

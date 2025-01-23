@@ -3,22 +3,8 @@ require_once __DIR__ . '/../utils/Database.php';
 
 class Aircraft
 {
-    private static function getDB()
-    {
-        $database = new Database();
-        return $database->getConnection();
-    }
-
-
-    public static function createAircraft($model,$isAvailable,$planeImg,$serialNumber, $price, $year,$hours,  $capacity,$autonomy,$description,  $aircraftType)
-    {
-        $pdo = self::getDB();
-        $stmt = $pdo->prepare('INSERT INTO aircraft (model, serialNumber, price, year, hours, autonomy, aircraftType, description, isAvailable) 
-                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        if ($stmt->execute([$model, $serialNumber, $price, $year, $hours, $autonomy, $aircraftType, $description, $isAvailable])) {
-            return $pdo->lastInsertId();
-        }
-        return false;
+    private static function getDB() {
+        return Database::getConnection();
     }
 
     public static function getAllAircrafts() {
@@ -26,6 +12,13 @@ class Aircraft
         $stmt = $pdo->prepare("SELECT * FROM aircraft A JOIN model M ON A.model_id = M.model_id JOIN image I ON A.aircraft_id = I.aircraft_id WHERE I.role = 'icon'");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAllAircrafts2() {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT *,M.model_name FROM aircraft A INNER JOIN model M on M.model_id = A.model_id");
+        $stmt = execute();
+        return $stmt->fetchll(PDO::FETCH_ASSOC);
     }
 
     public static function getAllModel(){
@@ -50,16 +43,12 @@ class Aircraft
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Catalog Page
-
     public static function getIcon($id) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT img_id,img_URL FROM image WHERE aircraft_id = ? AND role = ?");
         $stmt->execute([$id,"icon"]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
-    // Product Page
 
     public static function getModelName($idAircraft) {
         $pdo = self::getDB();
@@ -98,40 +87,17 @@ class Aircraft
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable){
-        try {
-            $pdo = self::getDB();
-            $stmt = $pdo->prepare(
-            "
-                Insert into aircraft
-                    (model_id, serial_number, manufacture_year, flight_hours, configuration, recent_maintenance, typical_routes, owner, cost_per_km, monthly_maintenance_cost, estimated_price, isAvailable, description)
-                values (?,?,?,?,?,?,?,?,?,?,?,?,'test')
-            ");
-            
-    
-            $stmt->bindValue(1, $idModel);
-            $stmt->bindValue(2, $serialNumber);
-            $stmt->bindValue(3, $manufactureYear);
-            $stmt->bindValue(4, $flightHours);
-            $stmt->bindValue(5, $configuration);
-            $stmt->bindValue(6, $recentMaintenance);
-            $stmt->bindValue(7, $typicalRoutes);
-            $stmt->bindValue(8, $owner);
-            $stmt->bindValue(9, $costPerKm);
-            $stmt->bindValue(10, $monthlyMaintenanceCost);
-            $stmt->bindValue(11, $estimatedPrice);
-            $stmt->bindValue(12, $isAvailable);
-            
-            $stmt->execute();
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage(); // Display error message
-        }
-    }
-
     public static function getModelByName($nameModel){
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT * FROM model where model_name = ?");
         $stmt->execute([$nameModel]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAircraftBySerialNumber($serialNumber) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE serial_number = ?");
+        $stmt->execute([$serialNumber]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -187,12 +153,33 @@ class Aircraft
         }
     }
 
-    public static function getAircraftBySerialNumber($serialNumber) {
-        $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE serial_number = ?");
-        $stmt->execute([$serialNumber]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
+    public static function insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable){
+        try {
+            $pdo = self::getDB();
+            $stmt = $pdo->prepare(
+            "
+                Insert into aircraft
+                    (model_id, serial_number, manufacture_year, flight_hours, configuration, recent_maintenance, typical_routes, owner, cost_per_km, monthly_maintenance_cost, estimated_price, isAvailable, description)
+                values (?,?,?,?,?,?,?,?,?,?,?,?,'test')
+            ");
+            
     
+            $stmt->bindValue(1, $idModel);
+            $stmt->bindValue(2, $serialNumber);
+            $stmt->bindValue(3, $manufactureYear);
+            $stmt->bindValue(4, $flightHours);
+            $stmt->bindValue(5, $configuration);
+            $stmt->bindValue(6, $recentMaintenance);
+            $stmt->bindValue(7, $typicalRoutes);
+            $stmt->bindValue(8, $owner);
+            $stmt->bindValue(9, $costPerKm);
+            $stmt->bindValue(10, $monthlyMaintenanceCost);
+            $stmt->bindValue(11, $estimatedPrice);
+            $stmt->bindValue(12, $isAvailable);
+            
+            $stmt->execute();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage(); // Display error message
+        }
+    }
 }
