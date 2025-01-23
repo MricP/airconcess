@@ -96,6 +96,7 @@ const CustomTimePicker = forwardRef(({value=null,className,disabledSlots,disable
         temp.setMinutes(value.split(":")[1])
         return temp;
       }
+      return null
     }
 
     return (
@@ -105,7 +106,10 @@ const CustomTimePicker = forwardRef(({value=null,className,disabledSlots,disable
               onSelect={handleTimeSelect}
 
               onOk={(val) => val==null ? setTime(null) : setTime(format(val,"HH:mm:ss"))}
-              onClean={() => setTime(null)}
+              onClean={() => {
+                setTime(null)
+                console.log("clean")
+              }}
 
               value={handleValue()}
 

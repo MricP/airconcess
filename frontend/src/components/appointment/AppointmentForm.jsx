@@ -242,7 +242,10 @@ function AppointmentForm() {
                                         className={errors.date ? "input-error" : ""}
                                         disabledSlots={disabledTimestamps || []}
                                         selectedTime={handleSelectedSlot()}
-                                        setDate={(value) => setValue("date", value, errors.date ? {shouldValidate: true} : {shouldValidate: false})} //shouldValidate actualise les erreurs (true) ou non (false) si la valeur est modifiée
+                                        value={formData.date}
+                                        setDate={(value) => {
+                                            setValue("date", value, errors.date ? {shouldValidate: true} : {shouldValidate: false}) //shouldValidate actualise les erreurs (true) ou non (false) si la valeur est modifiée
+                                        }}
                                         {...register("date", { required: "La date est obligatoire." })}
                                     />
                                 </div>
@@ -252,6 +255,7 @@ function AppointmentForm() {
                                         className={errors.time ? "input-error" : ""}
                                         disabledSlots={disabledTimestamps || []}
                                         selectedDate={handleSelectedSlot()}
+                                        value={formData.time}
                                         setTime={(value) => setValue("time", value,errors.time ? {shouldValidate: true} : {shouldValidate: false})}
                                         {...register("time", { required: "L'heure est obligatoire." })} 
                                     />
