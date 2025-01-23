@@ -72,9 +72,9 @@ export default function Header({ color }) {
                 </div> :
                 <div className='header-mobile-menu'>
                     <div className="header-menu-bar">
-                        <img src={logo} alt="Logo" />
+                        <img src={logo} alt="Logo" onClick={() => navigate("/")}/>
                         <div className="header-icon">
-                            <button><CgProfile size={30} /></button>
+                            <button onClick={handleProfileButton}><CgProfile size={30} /></button>
                             {isClicked ? (
                                 <RxCross2 onClick={handleMenuClick} size={30} />
                             ) : (
