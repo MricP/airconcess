@@ -50,16 +50,20 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             className={errors.phone ? "input-error" : ""} 
                             value={formData.phone != null ? formData.phone : ''}
                             setValue={(value) => setValue("phone", value, errors.phone ? {shouldValidate: true} : {shouldValidate: false})}
-                            {...register("phone", { required: true })}/>
-                        </div>
+                            {...register("phone", { required: true })}
+                        />
+                    </div>
                     <div>
                         <p>Pays*</p>
                         <CustomSelectPicker 
-                            searchable={true}
+                            isSearchable={true}
                             className={errors.country ? "input-error" : ""}
                             data={countryList().getData()} 
-                            value={formData.country != null ? getCountryCodeFromName(formData.country) : ''}
-                            setValue={(value) => setValue("country", getCountryNameFromCode(value), errors.country ? {shouldValidate: true} : {shouldValidate: false})}
+                            value={formData.country != null ? formData.country : ''}
+                            setValue={(value) => {
+                                setValue("country", value, errors.country ? {shouldValidate: true} : {shouldValidate: false});
+                                setValue("city", null, errors.city ? {shouldValidate: true} : {shouldValidate: false});
+                            }}
                             {...register("country", { required: true })}
                         />
                     </div>
@@ -99,9 +103,9 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                         <label htmlFor="city" >
                             <p>Ville*</p>
                             <CustomSelectPicker 
-                                searchable={true}
+                                isSearchable={true}
                                 className={errors.city ? "input-error" : ""}
-                                data={formData.country ? City.getCitiesOfCountry(getCountryCodeFromName(formData.country)).map(
+                                data={formData.country ? City.getCitiesOfCountry(formData.country.value).map(
                                     (city) => ({
                                         value: city.name,
                                         label: city.name,

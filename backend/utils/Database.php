@@ -1,25 +1,32 @@
 <?php
 class Database
 {
-    private $host = 'localhost';
-    private $dbname = 'air_concess';
-    private $username = 'root';
-    private $password = '';
-    private $conn;
+    private static $host = 'localhost';
+    private static $dbname = 'air_concess';
+    private static $username = 'root';
+    private static $password = '';
+    private static $conn = null;
 
-    public function getConnection()
-    {
-        $this->conn = null;
+    private function __construct() {
+        //Constructeur en privé, pattern Singleton
+    }
 
-        try {
-            $pdo = new PDO("mysql:host={$this->host};dbname={$this->dbname};charset=utf8", $this->username, $this->password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $pdo;
-        } catch (PDOException $e) {
-            echo 'Connection failed: ' . $e->getMessage();
-            exit();
+    public static function getConnection() {
+        if(self::$conn == null) {
+            try {
+                self::$conn = new PDO(
+                    "mysql:host=" . self::$host . ";dbname=" . self::$dbname . ";charset=utf8",
+                    self::$username,
+                    self::$password
+                );
+                self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                echo 'Connection failed: ' . $e->getMessage();
+                exit();
+            }
         }
-        return $this->conn;
+
+        return self::$conn;
     }
 }
 
