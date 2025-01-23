@@ -7,18 +7,18 @@ class Aircraft
         return Database::getConnection();
     }
 
+    public static function getAircraftsOfModel($model_id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE model_id = ?");
+        $stmt->execute([$model_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getAllAircrafts() {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT * FROM aircraft A JOIN model M ON A.model_id = M.model_id JOIN image I ON A.aircraft_id = I.aircraft_id WHERE I.role = 'icon'");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public static function getAllAircrafts2() {
-        $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT *,M.model_name FROM aircraft A INNER JOIN model M on M.model_id = A.model_id");
-        $stmt = execute();
-        return $stmt->fetchll(PDO::FETCH_ASSOC);
     }
 
     public static function getAllModel(){

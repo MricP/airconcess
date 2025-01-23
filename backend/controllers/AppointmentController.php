@@ -1,5 +1,6 @@
 <?php
     require_once __DIR__ . '/../models/Appointment.php';
+    require_once __DIR__ . '/../models/Aircraft.php';
 
     class AppointmentController {
 
@@ -27,6 +28,38 @@
             if ($timestamps) {
                 echo json_encode($timestamps);
             }
+        }
+
+        public static function getAircraftsOfModel($model_id) {
+            $aircrafts = Aircraft::getAircraftsOfModel($model_id);
+            $finalList = null;
+
+            if($aircrafts) {
+                foreach ($aircrafts as $aircraft) {
+                    $finalList[] = [
+                        "value" => $aircraft['aircraft_id'],
+                        "label" => $aircraft['serial_number']
+                    ];
+                }
+            }
+
+            echo json_encode($finalList);
+        }
+
+        public static function getModels() {
+            $models = Aircraft::getAllModel();
+            $finalList = null;
+
+            if($models) {
+                foreach ($models as $model) {
+                    $finalList[] = [
+                        "value" => $model['model_id'],
+                        "label" => $model['model_name']
+                    ];
+                }
+            }
+
+            echo json_encode($finalList);
         }
     }
 

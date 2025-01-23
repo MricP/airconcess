@@ -209,7 +209,6 @@ function PageProduct({mode, onSubmitProduct, model}) {
     }));
   };
 
-
   // Si l'id est invalide ou qu'il n'y a pas d'aircraft à afficher
   if (!isIdValid && mode !== "add") {
     return (

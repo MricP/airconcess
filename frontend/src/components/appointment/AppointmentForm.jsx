@@ -9,16 +9,55 @@ import CustomTimePicker from '../general/CustomTimePicker'
 import CustomDatePicker from '../general/CustomDatePicker'
 import CustomSelectPicker from '../general/CustomSelectPicker';
 
-// services functions
-import { submitAppointment, loadTimestamps,loadAircrafts } from '../../services/appointment';
-
 import "../../styles/appointment/AppointmentForm.css"
 
-function AppointmentForm() {
-    /* ####### LOAD DATA ####### */
+// services functions
+import { loadTimestamps,loadModels,loadAircraftsOfModel,submitAppointment } from '../../services/appointment';
 
-    /* Format disabledTimestamps = [{ date:YYYY-MM-DD , hour:hh , minutes:[m,m,m,m] }] */
-    const [disabledTimestamps, updateDisabledTimestamps] = useState([]);
+function AppointmentForm() {
+    /*############ INITIALISATION DES STATES ############*/
+    
+    const [modelOptions,setModelOptions] = useState([]); // Stock les differents models de la BD (label:model_name,value:model_id)
+    const [aircraftOptions,setAircraftOptions] = useState([]); // Stock une liste d'appareils correspondant au model selectionné (label:serialNumber,value:aircraft_id)
+    const [disabledTimestamps, updateDisabledTimestamps] = useState([]); // Format disabledTimestamps = [{ date:YYYY-MM-DD , hour:hh , minutes:[m,m,m,m] }]
+    const [isCopied, setIsCopied] = useState(false); // Utilisé pour la copie de l'adresse de l'agence
+    
+    const {register,handleSubmit,watch,setValue,formState: { errors }} = useForm (
+        { defaultValues: {
+            reason: "",
+            model: "",
+            serialNumber: "",
+            agency: "",
+            date: null,
+            time: null,
+            firstName: "",
+            lastName: "",
+            phone: "",
+            email: "",
+            address: "",
+            country: "",
+            city: "",
+            postalCode: "",
+            idCard: null,
+            incomeProof: null,
+        }}
+    );
+
+    /*################### CONSTANTES ####################*/
+
+    const formData = watch(); //formData est l'accès direct 
+
+    const reasonOptions = [
+        { label: "J'envisage d'acheter un appareil", value: "purchase" },
+        { label: "J'envisage de louer un appareil", value: "rent" }
+    ];    
+
+    const agencyOptions = [
+        { label: "Agence 1", value: "A1" },
+        { label: "Agence 2", value: "A2" }
+    ];
+
+    /*#################### FONCTIONS ####################*/
 
     const loadDisabledTimestamps = async () => {
         try {
@@ -59,63 +98,25 @@ function AppointmentForm() {
         }
     };
 
-    const loadAvailableAircrafts = async () => {
+    const loadAvailableModels = async () => {
         try {
-            // const response = await loadAircrafts();
-            // console.log(response.data.message)
+            const response = await loadModels();
+            setModelOptions(response.data)
+        } catch (error) {
+            console.log('Error response:', error.response?.data?.message || 'Unknown error');
+        }
+    };
+    
+    const loadAircraftsWith = async (model_id) => {
+        try {
+            const response = await loadAircraftsOfModel(model_id);
+            setAircraftOptions(response.data ? response.data : [])
         } catch (error) {
             console.log('Error response:', error.response?.data?.message || 'Unknown error');
         }
     };
 
-    // Le chargement de toutes les data nécessaires (au 1er chargement de la page)
-    useEffect(() => {
-        console.log("ok")
-        // Les crénaux à désactiver (déjà reservés)
-        loadDisabledTimestamps()
-
-        // La liste des Avions dans la BD (pour la recherche du modèle et du serialNumber)
-        loadAvailableAircrafts()
-    },[])
-
-    // Ce sont les 2 seuls options à couvrir (les seuls présentes en BD)
-    const reasonOptions = [
-        { label: "J'envisage d'acheter un appareil", value: "purchase" },
-        { label: "J'envisage de louer un appareil", value: "rent" }
-    ];    
-
-    const agencyOptions = [
-        { label: "Agence 1", value: "A1" },
-        { label: "Agence 2", value: "A2" }
-    ];
-
-    /* TODO : INITIALISER TOUT à null à L'AVENIR*/
-    const {register,handleSubmit,watch,setValue, formState: { errors }} = useForm (
-        { defaultValues: {
-            reason: "",
-            model: "",
-            serialNumber: "",
-            agency: "",
-            date: null,
-            time: null,
-            firstName: "",
-            lastName: "",
-            phone: "",
-            email: "",
-            address: "",
-            country: "",
-            city: "",
-            postalCode: "",
-            idCard: null,
-            incomeProof: null,
-        }}
-    );
-
-    const formData = watch();
-
-    const [isCopied, setIsCopied] = useState(false);
-
-    function handleSelectedSlot() {
+    const handleSelectedSlot = () => {
         if(formData.date!=null) {
             return new Date(formData.date);
         }
@@ -129,15 +130,6 @@ function AppointmentForm() {
         }
         return null;
     }
-
-    useEffect(() => {
-        if(isCopied) {
-            // Permet de réafficher l'icone pour copier après 1s
-            setTimeout(() => {
-                setIsCopied(false)
-            },1000)
-        }
-    },[isCopied])
 
     const onSubmit = async (formData) => {
         try {
@@ -161,6 +153,23 @@ function AppointmentForm() {
             }
         }
     }
+
+    /*###################### AUTRE ######################*/
+
+    useEffect(() => {
+        // Recupération de toutes les data nécessaires, au premier chargement de la page    
+        loadDisabledTimestamps() // Les crénaux à désactiver (déjà reservés)
+        loadAvailableModels() // La liste des models dans la BD (pour la recherche du modèle et du serialNumber)
+    },[])
+
+    useEffect(() => {
+        if(isCopied) {
+            // Permet de réafficher l'icone pour copier après 1s
+            setTimeout(() => {
+                setIsCopied(false)
+            },1000)
+        }
+    },[isCopied])
     
     return (
         <div className="appointmentForm-container">
@@ -178,7 +187,7 @@ function AppointmentForm() {
                             <p>Motif du rendez-vous*</p>
                             <CustomSelectPicker 
                                 className={errors.reason ? "input-error" : ""}
-                                data={reasonOptions} 
+                                data={reasonOptions}
                                 setValue={(value) => setValue("reason", value, errors.reason ? {shouldValidate: true} : {shouldValidate: false})} 
                                 {...register("reason", { required: "Veuillez choisir votre motif de rendez-vous" })}
                             />
@@ -186,21 +195,30 @@ function AppointmentForm() {
                         <div>
                             <label htmlFor="model-input">
                                 Modèle de l'appareil*
-                                <input
+                                <CustomSelectPicker
                                     className={errors.model ? "input-error" : ""}
-                                    type="text"
                                     id="model-input"
-                                    name="model"
+                                    data={modelOptions} 
+                                    value={formData.model != null ? formData.model : ''}
+                                    setValue={ async (value) => {
+                                        setValue("model", value, errors.model ? {shouldValidate: true} : {shouldValidate: false});
+                                        setValue("serialNumber", null, errors.serialNumber ? {shouldValidate: true} : {shouldValidate: false});
+                                        loadAircraftsWith(value?.value)
+                                    }}
+                                    
                                     {...register("model", { required: "Selectionnez le model concerné" })}
                                 />
                             </label>
                             <label htmlFor="serialNumber-input">
                                 Numéro de série*
-                                <input
+                                <CustomSelectPicker
                                     className={errors.serialNumber ? "input-error" : ""}
-                                    type="text"
                                     id="serialNumber-input"
-                                    name="serialNumber"
+                                    data={aircraftOptions}
+                                    value={formData.serialNumber != null ? formData.serialNumber : ''}
+                                    setValue={(value) => {
+                                        setValue("serialNumber", value, errors.serialNumber ? {shouldValidate: true} : {shouldValidate: false});
+                                    }}
                                     {...register("serialNumber", { required: "Choisir le numéro de serie de l'appareil" })}
                                 />
                             </label>
