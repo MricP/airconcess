@@ -151,10 +151,10 @@ export default function PageAdmin(){
             alert("Une erreur s'est produite lors de l'envoi du fichier.");
         }
 
-        files.map(async (file) => {
+        files.map(async (element) => {
             try {
                 
-                const response = await uploadImage(file, model.model_name, aircraft.aircraft_id); // Passe le fichier ici
+                const response = await uploadImage(element, model.model_name, aircraft.aircraft_id); // Passe le fichier ici
                 await insertImage("slider", aircraft.aircraft_id, response.filePath);
                 
             } catch (error) {
