@@ -63,7 +63,8 @@ export default function EditArticle(props) {
             paginatedAircrafts
               .map((plane) => (
                 <ProductBox
-                  key={plane.aircraft_id}
+                  key = {plane.aircraft_id}
+                  aircraftId={plane.aircraft_id}
                   isAvailable={plane.isAvailable}
                   planeImg={plane.img_URL}
                   modelName={plane.model_name.toUpperCase()}

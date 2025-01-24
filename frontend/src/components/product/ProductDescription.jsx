@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
 import { GrStatusGood } from "react-icons/gr";
-import { getAllModel, getModelByName } from '../../services/product';
 
 
 const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescription,technicalSheetPath, mode, onInputChange, modelSelected}) => {
@@ -82,7 +81,7 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
     useEffect(() => {
             
 
-            if (modelSelected != "Nouveau" && mode === "add") {
+            if (modelSelected !== "Nouveau" && mode === "add") {
                 setModelDescriptionTab([
                     modelSelected.range_type,
                     modelSelected.manufacturer,
@@ -103,27 +102,66 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
 
     const handleProductFieldChange = (field, event, index) => {
         if (onInputChange) {
-          onInputChange(field, event.target.textContent)
+          if (field === "manufactureYear") {
+            if (/^(19|20)\d{2}$/.test(event.target.textContent)){
+                onInputChange(field, event.target.textContent)
+                const criteria = document.getElementById("aircraftDescription"+index)
+                const divCriteria = event.target.parentElement
+                const newP = document.createElement("p")
+                newP.textContent = criteria.textContent + event.target.textContent
+                divCriteria.innerHTML = ""
+                divCriteria.appendChild(newP)
+            } else {
+                event.target.style.color = "red"
+            }
+          } else if (field === "flightHours" || field === "estimatedPrice"){
+            if (/\d/.test(event.target.textContent)){
+                onInputChange(field, event.target.textContent)
+                const criteria = document.getElementById("aircraftDescription"+index)
+                const divCriteria = event.target.parentElement
+                const newP = document.createElement("p")
+                newP.textContent = criteria.textContent + event.target.textContent
+                divCriteria.innerHTML = ""
+                divCriteria.appendChild(newP)
+            } else {
+                event.target.style.color = "red"
+            }
+          } else {
+            onInputChange(field, event.target.textContent)
+            const criteria = document.getElementById("aircraftDescription"+index)
+            const divCriteria = event.target.parentElement
+            const newP = document.createElement("p")
+            newP.textContent = criteria.textContent + event.target.textContent
+            divCriteria.innerHTML = ""
+            divCriteria.appendChild(newP)
+          }
         }
-        const criteria = document.getElementById("aircraftDescription"+index)
-        const divCriteria = event.target.parentElement
-        const newP = document.createElement("p")
-        newP.textContent = criteria.textContent + event.target.textContent
-        divCriteria.innerHTML = ""
-        divCriteria.appendChild(newP)
     };
 
     const handleModelFieldChange = (field, event, index) => {
         if (onInputChange) {
-            console.log(field + " : " + event.target.textContent)
-          onInputChange(field, event.target.textContent)
+            if (field === "passengerCapacity" || field === "maxRange"){
+              if (/\d/.test(event.target.textContent)){
+                  onInputChange(field, event.target.textContent)
+                  const criteria = document.getElementById("modelDescription"+index)
+                  const divCriteria = event.target.parentElement
+                  const newP = document.createElement("p")
+                  newP.textContent = criteria.textContent + event.target.textContent
+                  divCriteria.innerHTML = ""
+                  divCriteria.appendChild(newP)
+              } else {
+                  event.target.style.color = "red"
+              }
+            } else {
+              onInputChange(field, event.target.textContent)
+              const criteria = document.getElementById("modelDescription"+index)
+              const divCriteria = event.target.parentElement
+              const newP = document.createElement("p")
+              newP.textContent = criteria.textContent + event.target.textContent
+              divCriteria.innerHTML = ""
+              divCriteria.appendChild(newP)
+            }
         }
-        const criteria = document.getElementById("modelDescription"+index)
-        const divCriteria = event.target.parentElement
-        const newP = document.createElement("p")
-        newP.textContent = criteria.textContent + event.target.textContent
-        divCriteria.innerHTML = ""
-        divCriteria.appendChild(newP)
     };
 
     if (mode === "add"){

@@ -73,3 +73,22 @@
     background-image: url("../../../public/assets/about/sacha.jpg");
     background-size: cover;
 }
+
+
+@media(max-width: 1250px){
+    .about-intro{
+        flex-direction: column;
+    }
+    .about-ourStory > .about-intro > img{
+        width: 80%;
+    }
+    .about-pictures-container{
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 750px){
+    .about-ourStory > .about-intro > img{
+        width: 100%;
+    }
+}

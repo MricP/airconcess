@@ -354,7 +354,6 @@ function CatalogPage() {
     reapplyFilters();
   };
 
-  // Pagination
   const paginatedAircrafts = (filteredAircrafts || []).slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
