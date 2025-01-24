@@ -55,24 +55,40 @@
 }
 
 .Emric{
-    /* background-image: url(); */
+    background-image: url("../../../public/assets/about/emric.jpg");
     background-size: cover;
 }
 
-
-/* Ajouter les urls de vos photos svp*/
-
 .Matheo{
-    /* background-image: url();  */
+     background-image: url("../../../public/assets/about/matheo.jpeg");  
     background-size: cover;
 }
 
 .Florian{
-    /* background-image: url(); */
+    background-image: url("../../../public/assets/about/florian.jpg");
     background-size: cover;
 }
 
 .Sacha{
-    /* background-image: url(); */
+    background-image: url("../../../public/assets/about/sacha.jpg");
     background-size: cover;
+}
+
+
+@media(max-width: 1250px){
+    .about-intro{
+        flex-direction: column;
+    }
+    .about-ourStory > .about-intro > img{
+        width: 80%;
+    }
+    .about-pictures-container{
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 750px){
+    .about-ourStory > .about-intro > img{
+        width: 100%;
+    }
 }

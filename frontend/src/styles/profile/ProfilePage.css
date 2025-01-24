@@ -4,4 +4,8 @@
 }
 
 
-
+@media (max-width: 750px){
+    .profilePage-backgroundPrincipal{
+        flex-direction: column;
+    }
+}

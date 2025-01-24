@@ -58,3 +58,8 @@
     transition: all ease 0.2s;
 }
 
+@media(max-width: 750px){
+    .profile-content-container{
+        width: 100%;
+    }
+}

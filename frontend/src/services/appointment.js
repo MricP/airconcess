@@ -17,7 +17,7 @@ export const submitAppointment = async (formData) => {
     }
 };
 
-export const loadTimestamps = async (formData) => {
+export const loadTimestamps = async () => {
     try {
         const response = await axiosInstance.post('/appointment-loadTimestamps');    
         return response;
@@ -27,9 +27,19 @@ export const loadTimestamps = async (formData) => {
     }
 };
 
-export const loadAircrafts = async (formData) => {
+export const loadModels = async () => {
     try {
-        const response = await axiosInstance.post('/appointment-loadAircrafts');    
+        const response = await axiosInstance.post('/appointment-loadModels');    
+        return response;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+};
+
+export const loadAircraftsOfModel = async (model_id) => {
+    try {
+        const response = await axiosInstance.post('/appointment-loadAircrafts',model_id);
         return response;
     } catch (error) {
         console.error('Error fetching data:', error);

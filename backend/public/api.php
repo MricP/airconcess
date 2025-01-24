@@ -104,15 +104,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadTimestamps') !== false) {
-    // echo json_encode(["message" => "Load timestamps"]);
     AppointmentController::getTimestamps();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAircrafts') !== false) {
-    echo json_encode(["message" => "Load aircrafts"]);
-    // AppointmentController::getAircrafts();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadModels') !== false) {
+    AppointmentController::getModels();
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAircrafts') !== false) {
+    $model_id = json_decode(file_get_contents("php://input"), true);
+    AppointmentController::getAircraftsOfModel($model_id);
+}
 
 // Partie page catalog 
 

@@ -5,6 +5,9 @@ import "../../styles/profile/ProfileSideBar.css"
 import { BiPencil } from "react-icons/bi";
 import { IoExitOutline } from "react-icons/io5";
 import { IoTrashOutline } from "react-icons/io5";
+import GrayInput from "../general/GrayInput.jsx";
+import DarkButton2 from '../general/DarkButton2.jsx';
+import DarkButton from '../general/DarkButton.jsx';
 
 export default function ProfileSideBar(){
     
@@ -135,12 +138,15 @@ export default function ProfileSideBar(){
             const validExtensions = ['.png', '.jpg', '.jpeg', '.webp'];
             const extension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
             if (validExtensions.includes(extension)) {
-                changeProfilePicture(token, file);
-                setProfilePicture("/assets/profile/"+file.name);
-                if(profilePictureRef.current){
-                  profilePictureRef.current.src = profilePicture;
-                }
-                
+                changeProfilePicture(token, file)
+                .then(() => {
+                    const newProfilePath = `/assets/profile/${file.name}`;
+                    setProfilePicture(newProfilePath);
+                })
+                .catch((error) => {
+                    console.error('Erreur lors de la mise à jour de l\'image de profil :', error);
+                    alert('Une erreur est survenue lors de la mise à jour de l\'image de profil.');
+                });
             } else {
                 console.log('Extension non valide. Veuillez sélectionner une image au format PNG, JPG, JPEG ou WEBP.');
                 alert('Veuillez sélectionner une image valide (PNG, JPG, JPEG, WEBP).');
@@ -172,40 +178,38 @@ export default function ProfileSideBar(){
                     <p>{userData.firstName} {userData.lastName}</p>
                     <p>{userData.email}</p>
                     <p>{userData.location ? userData.location : 'Location not define'}</p>
-                    {userData.isAdmin === 1 && <button onClick={() => navigate("/admin")} className='profile-AdminButton'>Partie Administrateur</button>}
+                    {userData.isAdmin === 1 && <DarkButton destination={"/admin"}>Partie Administrateur</DarkButton>}
                     {userData.isTrainer === 1 && <p><strong>Rôle :</strong> Formateur</p>}
                 </div>
                 {isModalOpen && (
                     <div className="modal">
                     <div className="profile-modalSideBarContent">
-                        <form className='profile-modifyForm' onSubmit={handleSubmit}>
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder='prenom'
-                                value={formData.firstName}
-                                onChange={handleChange}
+                        <form className='profile-modifyForm' /*onSubmit={handleSubmit}*/>
+                            <GrayInput
+                              name={"firstName"}
+                              type={"text"}
+                              placeholder={'prenom'}
+                              value={formData.firstName}
+                              onChange={(e) => handleChange(e)} 
                             />
-                            <input
-                                type="text"
-                                name="lastName"
-                                placeholder='nom'
-                                value={formData.lastName}
-                                onChange={handleChange}
+                            <GrayInput
+                              name={"lastName"}
+                              placeholder={'nom'}
+                              value={formData.lastName}
+                              onChange={handleChange}
                             />
-                            <input
-                                type="text"
-                                name="location"
-                                placeholder='localisation'
-                                value={formData.location}
-                                onChange={handleChange}
+                            <GrayInput
+                              name={"location"}
+                              placeholder={"location"}
+                              value={formData.location}
+                              onChange={handleChange}
                             />
                             <input
                                     type="hidden"
                                     name="email"
                                     value={formData.email}
                             />
-                            <button type="submit" className='profile-AdminButton'>Enregistrer</button>
+                            <DarkButton2 className={""} use={handleSubmit} text={"Enregistrer"}/>
                         </form>
                     </div>
                     </div>

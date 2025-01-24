@@ -8,22 +8,15 @@ require_once __DIR__ . '/../utils/Database.php';
 
 class Aircraft
 {
-    private static function getDB()
-    {
-        $database = new Database();
-        return $database->getConnection();
+    private static function getDB() {
+        return Database::getConnection();
     }
 
-
-    public static function createAircraft($model,$isAvailable,$planeImg,$serialNumber, $price, $year,$hours,  $capacity,$autonomy,$description,  $aircraftType)
-    {
+    public static function getAircraftsOfModel($model_id) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('INSERT INTO aircraft (model, serialNumber, price, year, hours, autonomy, aircraftType, description, isAvailable) 
-                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        if ($stmt->execute([$model, $serialNumber, $price, $year, $hours, $autonomy, $aircraftType, $description, $isAvailable])) {
-            return $pdo->lastInsertId();
-        }
-        return false;
+        $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE model_id = ?");
+        $stmt->execute([$model_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getAllAircrafts() {
@@ -55,16 +48,12 @@ class Aircraft
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Catalog Page
-
     public static function getIcon($id) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT img_id,img_URL FROM image WHERE aircraft_id = ? AND role = ?");
         $stmt->execute([$id,"icon"]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
-    // Product Page
 
     public static function getModelName($idAircraft) {
         $pdo = self::getDB();
@@ -138,6 +127,13 @@ class Aircraft
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT * FROM model where model_name = ?");
         $stmt->execute([$nameModel]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAircraftBySerialNumber($serialNumber) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE serial_number = ?");
+        $stmt->execute([$serialNumber]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
