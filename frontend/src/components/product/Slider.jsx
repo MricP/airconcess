@@ -20,10 +20,10 @@ function Slider({ images, mode, onInputChange }) {
         const files = Array.from(event.target.files);
         files.forEach(file => {
             if (file && file.type.startsWith("image/")) {
-                if (file.size > 2 * 1024 * 1024) {
-                    alert("Le fichier est trop volumineux.");
-                    return;
-                }
+                // if (file.size > 2 * 1024 * 1024) {
+                //     alert("Le fichier est trop volumineux.");
+                //     return;
+                // }
         
                 const reader = new FileReader();
                 reader.onload = (e) => {

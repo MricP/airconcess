@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Aircraft') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
-    Aircraft::insertAircraft(
+    $result = ProductController::insertAircraft(
         $args["idModel"],
         $args["serialNumber"],
         $args["manufactureYear"],
@@ -175,8 +175,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
         $args["costPerKm"],
         $args["monthlyMaintenanceCost"],
         $args["estimatedPrice"],
-        $args["isAvailable"]
+        $args["isAvailable"],
+        $args["description"]
     );
+    echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-Model') !== false) {
@@ -190,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Model') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
-    Aircraft::insertModel(
+    $result =ProductController::insertModel(
         $args["modelName"],
         $args["rangeType"],
         $args["manufacturer"],
@@ -205,6 +207,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
         $args["height"],
         $args["maxTakeoffWeight"]
     );
+
+    echo json_encode($result);
 }
 // Partie Profile
 
@@ -265,6 +269,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/pr
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/post-uploadImage') !== false) {
+    $aircraftId = $_POST['aircraftId'] ?? null;
     $destinationDir = $_POST['destinationDir'] ?? null; // Récupérer le dossier
     $file = $_FILES['file'] ?? null; // Récupérer le fichier
 
@@ -273,20 +278,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
         exit;
     }
 
-    $result = ProductController::uploadImage($file, $destinationDir);
+    $result = ProductController::uploadImage($file, $destinationDir, $aircraftId);
     echo json_encode($result);
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Image') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
-    Aircraft::insertImage(
+    $result = ProductController::insertImage(
         $args["role"],
         $args["aircraftId"],
         $args["url"]);
+    echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-AircraftBySerialNumber') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     ProductController::getAircraftBySerialNumber($args["serialNumber"]);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Aircraft') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    $result = Aircraft::deleteAircraft($args['id'], $args['nameModel']);
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Model') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    $result = Aircraft::deleteModel($args['id'], $args['nameModel']);
+    echo json_encode($result);
 }

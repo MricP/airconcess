@@ -104,9 +104,11 @@
             echo json_encode($model);
         }
 
-        public static function uploadImage($file, $destinationDir) {
+        public static function uploadImage($file, $destinationDir, $aircraftId) {
+
+
             $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-            $destinationDirBack  = __DIR__ . "/../../frontend/public/assets/product/" . $destinationDir. "/";
+            $destinationDirBack  = __DIR__ . "/../../frontend/public/assets/product/" . $destinationDir. "/". $aircraftId. "/";
             // Vérifie si le fichier existe
             if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
                 return ['success' => false, 'message' => 'Aucun fichier valide reçu.'];
@@ -130,7 +132,7 @@
         
             // Déplace le fichier téléchargé
             if (move_uploaded_file($file['tmp_name'], $filePath)) {
-                return ['success' => true, 'filePath' => "/assets/product/".$destinationDir."/".$fileName];
+                return ['success' => true, 'filePath' => "/assets/product/".$destinationDir."/". $aircraftId. "/". $fileName];
             } else {
                 return ['success' => false, 'message' => 'Erreur lors du déplacement du fichier.'];
             }
@@ -139,6 +141,30 @@
         public static function getAircraftBySerialNumber($serialNumber){
             $aircraft= Aircraft::getAircraftBySerialNumber($serialNumber);
             echo json_encode($aircraft);
+        }
+
+        public static function insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable, $description) {
+            if ($idModel != "" && $serialNumber != "" && $manufactureYear != "" && $flightHours != "" && $configuration != "" && $recentMaintenance != "" && $typicalRoutes != "" && $owner != "" && $costPerKm != "" && $monthlyMaintenanceCost != "" && $estimatedPrice != "" && $description != ""){
+                Aircraft::insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable, $description);
+                return ['success' => true];
+            }
+            return ['success' => false];
+        }
+
+        public static function insertImage($role, $aircraftId, $url) {
+            if ($url != null){
+                Aircraft::insertImage($role, $aircraftId, $url);
+                return ['success' => true];
+            }
+            return ['success' => false];
+        }
+
+        public static function insertModel($modelName, $rangeType, $manufacturer, $passengerCapacity, $engines, $speedAvg, $maxRange, $maxAltitude, $crewSize, $length, $wingspan, $height, $maxTakeoffWeight) {
+            if ($modelName != "" && $rangeType != "" && $manufacturer != "" && $passengerCapacity != "" && $engines != "" && $speedAvg != "" && $maxRange != "" && $maxAltitude != "" && $crewSize != "" && $length != "" && $wingspan != "" && $height != "" && $maxTakeoffWeight != ""){
+                Aircraft::insertModel($modelName, $rangeType, $manufacturer, $passengerCapacity, $engines, $speedAvg, $maxRange, $maxAltitude, $crewSize, $length, $wingspan, $height, $maxTakeoffWeight);
+                return ['success' => true];
+            }
+            return ['success' => false];
         }
     }
 ?>
