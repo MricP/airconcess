@@ -142,5 +142,29 @@
             $aircraft= Aircraft::getAircraftBySerialNumber($serialNumber);
             echo json_encode($aircraft);
         }
+
+        public static function insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable) {
+            if ($idModel != "" && $serialNumber != "" && $manufactureYear != "" && $flightHours != "" && $configuration != "" && $recentMaintenance != "" && $typicalRoutes != "" && $owner != "" && $costPerKm != "" && $monthlyMaintenanceCost != "" && $estimatedPrice != ""){
+                Aircraft::insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable);
+                return ['success' => true];
+            }
+            return ['success' => false];
+        }
+
+        public static function insertImage($role, $aircraftId, $url) {
+            if ($url != null){
+                Aircraft::insertImage($role, $aircraftId, $url);
+                return ['success' => true];
+            }
+            return ['success' => false];
+        }
+
+        public static function insertModel($modelName, $rangeType, $manufacturer, $passengerCapacity, $engines, $speedAvg, $maxRange, $maxAltitude, $crewSize, $length, $wingspan, $height, $maxTakeoffWeight) {
+            if ($modelName != "" && $rangeType != "" && $manufacturer != "" && $passengerCapacity != "" && $engines != "" && $speedAvg != "" && $maxRange != "" && $maxAltitude != "" && $crewSize != "" && $length != "" && $wingspan != "" && $height != "" && $maxTakeoffWeight != ""){
+                Aircraft::insertModel($modelName, $rangeType, $manufacturer, $passengerCapacity, $engines, $speedAvg, $maxRange, $maxAltitude, $crewSize, $length, $wingspan, $height, $maxTakeoffWeight);
+                return ['success' => true];
+            }
+            return ['success' => false];
+        }
     }
 ?>

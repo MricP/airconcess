@@ -97,7 +97,7 @@ export const insertAircraft = async (idModel, serialNumber, manufactureYear, fli
             estimatedPrice,
             isAvailable
         });
-        console.log('Réponse du serveur pour insertion aircraft :', response);
+        return response.data
     } catch(error) {
         console.error("Erreur lors de l'insertion", error);
         throw error;
@@ -141,7 +141,7 @@ export const insertModel = async (modelName, rangeType, manufacturer, passengerC
             height,
             maxTakeoffWeight
         });
-        console.log('Réponse du serveur insertion model :', response);
+        return response.data
     } catch(error) {
         console.error("Erreur lors de l'insertion", error);
         throw error;
@@ -163,11 +163,6 @@ export const uploadImage = async (file, directionDir, aircraftId) => {
 
         // Accéder aux données de la réponse
         const data = response.data;
-        if (data.success) {
-            console.log("Image uploadée avec succès :", data.filePath);
-        } else {
-            console.error("Erreur de téléchargement :", data.message);
-        }
 
         return data; // Retourner les données pour une utilisation ultérieure
     } catch (error) {
@@ -183,7 +178,7 @@ export const insertImage = async (role, aircraftId, url) => {
             aircraftId,
             url
         });
-        console.log('Réponse du serveur lors de insertion image :', response);
+        return response.data
     } catch(error) {
         console.error("Erreur lors de l'insertion", error);
         throw error;
@@ -203,6 +198,16 @@ export const getAircraftBySerialNumber = async (serialNumber) => {
 export const deleteAircraft = async (id, nameModel) => {
     try {
         const response = await axiosInstance.post('/admin/delete-Aircraft', { id, nameModel });
+        return response
+    } catch (error) {
+        console.error("Erreur lors de la suppression", error);
+        throw error;
+    }
+}
+
+export const deleteModel = async (id, nameModel) => {
+    try {
+        const response = await axiosInstance.post('/admin/delete-Model', { id, nameModel });
         return response
     } catch (error) {
         console.error("Erreur lors de la suppression", error);

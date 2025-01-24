@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import PageProduct from "../product/PageProduct";
-import { insertAircraft, insertModel, getModelByName, getAllModel, uploadImage, insertImage, getAircraftBySerialNumber } from "../../services/product";
+import { insertAircraft, insertModel, getModelByName, getAllModel, uploadImage, insertImage, getAircraftBySerialNumber, deleteAircraft, deleteModel } from "../../services/product";
 
 export default function PageAdmin(){
 
@@ -54,41 +54,22 @@ export default function PageAdmin(){
     }
 
     const handleAddButtonClick = async (productData, modelData, imageData) => {
-
         const {
             addMode,
             modelName,
             rangeType,
             manufacturer,
             passengerCapacity,
-            engines, 
-            speedAvg, 
-            maxRange, 
-            maxAltitude, 
-            crewSize, 
-            length, 
-            wingspan, 
-            height, 
+            engines,
+            speedAvg,
+            maxRange,
+            maxAltitude,
+            crewSize,
+            length,
+            wingspan,
+            height,
             maxTakeoffWeight,
         } = modelData;
-
-        if (addMode === "Nouveau"){
-            await insertModel(
-                modelName,
-                rangeType,
-                manufacturer,
-                +passengerCapacity,
-                engines, 
-                speedAvg, 
-                +maxRange, 
-                maxAltitude, 
-                crewSize, 
-                length, 
-                wingspan, 
-                height, 
-                maxTakeoffWeight
-            );
-        }
 
         const {
             serialNumber,
@@ -102,68 +83,107 @@ export default function PageAdmin(){
             monthlyMaintenanceCost,
             estimatedPrice,
             isAvailable,
-          } = productData;
-          
-          const model = await getModelByName(modelName);
-      
-          await insertAircraft(
-            model.model_id,
-            serialNumber,
-            +manufactureYear,
-            flightHours,
-            configuration,
-            recentMaintenance,
-            typicalRoutes,
-            owner,
-            costPerKm,
-            monthlyMaintenanceCost,
-            +estimatedPrice,
-            isAvailable
-          );
-
-        const {
-            file,
-            files,
-            icon
-        } = imageData;
-        
-        const aircraft = await getAircraftBySerialNumber(serialNumber)
-
+        } = productData;
+    
+        let insertedAircraftId = null;
+    
         try {
-          console.log(model.model_name+" et "+ aircraft.aircraft_id)
-          const response = await uploadImage(file, model.model_name, aircraft.aircraft_id); // Passe le fichier ici
-          console.log("Réponse du serveur lors de l'insertion de l'image :", response.success);
-          await insertImage("main", aircraft.aircraft_id, response.filePath)
-          
-        } catch (error) {
-          console.error("Erreur:", error);
-          alert("Une erreur s'est produite lors de l'envoi du fichier.");
-        }
-
-        try {
-  
-            const response = await uploadImage(icon, model.model_name, aircraft.aircraft_id); // Passe le fichier ici
-            console.log("Réponse du serveur :", response);
-            await insertImage("icon", aircraft.aircraft_id, response.filePath)
-            
-          } catch (error) {
-            console.error("Erreur:", error);
-            alert("Une erreur s'est produite lors de l'envoi du fichier.");
-        }
-
-        files.map(async (element) => {
-            try {
-                
-                const response = await uploadImage(element, model.model_name, aircraft.aircraft_id); // Passe le fichier ici
-                await insertImage("slider", aircraft.aircraft_id, response.filePath);
-                
-            } catch (error) {
-                console.error("Erreur:", error);
-                alert("Une erreur s'est produite lors de l'envoi du fichier.");
+            // Étape 1 : Insérer le modèle (si nécessaire)
+            if (addMode === "Nouveau") {
+                const resultInsertModel = await insertModel(
+                    modelName,
+                    rangeType,
+                    manufacturer,
+                    +passengerCapacity,
+                    engines,
+                    speedAvg,
+                    +maxRange,
+                    maxAltitude,
+                    crewSize,
+                    length,
+                    wingspan,
+                    height,
+                    maxTakeoffWeight
+                );
+    
+                if (!resultInsertModel.success) {
+                    throw new Error("Échec de l'insertion du modèle.");
+                }
+    
             }
-        });
-
-      };
+    
+            // Étape 2 : Insérer l'aircraft
+            const model = await getModelByName(modelName);
+            const resultInsertAircraft = await insertAircraft(
+                model.model_id,
+                serialNumber,
+                +manufactureYear,
+                flightHours,
+                configuration,
+                recentMaintenance,
+                typicalRoutes,
+                owner,
+                costPerKm,
+                monthlyMaintenanceCost,
+                +estimatedPrice,
+                isAvailable
+            );
+    
+            if (!resultInsertAircraft.success) {
+                throw new Error("Échec de l'insertion de l'aircraft.");
+            }
+    
+            insertedAircraftId = await getAircraftBySerialNumber(serialNumber); // Stocker l'ID de l'aircraft inséré
+            insertedAircraftId = insertedAircraftId.aircraft_id
+            // Étape 3 : Gestion des images
+            const { file, files, icon } = imageData;
+    
+            // Image principale
+            if (file) {
+                const responseMainImage = await uploadImage(file, model.model_name, insertedAircraftId);
+                if (!responseMainImage.success) throw new Error("Échec de l'upload de l'image principale.");
+    
+                const resultMainImage = await insertImage("main", insertedAircraftId, responseMainImage.filePath);
+                if (!resultMainImage.success) throw new Error("Échec de l'insertion de l'image principale.");
+            } else throw new Error("Échec de l'upload de l'image principale.");
+    
+            // Icône
+            if (icon) {
+                const responseIcon = await uploadImage(icon, model.model_name, insertedAircraftId);
+                if (!responseIcon.success) throw new Error("Échec de l'upload de l'icône.");
+    
+                const resultIcon = await insertImage("icon", insertedAircraftId, responseIcon.filePath);
+                if (!resultIcon.success) throw new Error("Échec de l'insertion de l'icône.");
+            } else throw new Error("Échec de l'upload de l'image principale.");
+    
+            // Images du slider
+            if (files && files.length > 0) {
+                for (const sliderImage of files) {
+                    const responseSlider = await uploadImage(sliderImage, model.model_name, insertedAircraftId);
+                    if (!responseSlider.success) throw new Error("Échec de l'upload d'une image du slider.");
+    
+                    const resultSliderImage = await insertImage("slider", insertedAircraftId, responseSlider.filePath);
+                    if (!resultSliderImage.success) throw new Error("Échec de l'insertion d'une image du slider.");
+                }
+            } else throw new Error("Échec de l'upload de l'image principale.");
+    
+            console.log("Toutes les opérations ont été effectuées avec succès !");
+        } catch (error) {
+            alert("Il y a eu un problème lors de l'insertion du nouveau produit. Veillez à ce que toutes les images et icones soient remplis et que tous les champs ne contiennent pas le texte 'Inconnu' !")
+    
+            // Rollback
+            if (insertedAircraftId) {
+                console.log("Annulation : suppression de l'aircraft...");
+                await deleteAircraft(insertedAircraftId, modelName);
+            }
+    
+            if (model && addMode === "Nouveau") {
+                console.log("Annulation : suppression du modèle...");
+                await deleteModel(model.model_id, modelName);
+            }
+        }
+    };
+    
     
     const handleModelChange = async (event) => {
         const selectedModelName = event.target.value;
