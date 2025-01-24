@@ -189,13 +189,6 @@ class Aircraft
         }
     }
 
-    public static function getAircraftBySerialNumber($serialNumber) {
-        $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT * FROM aircraft WHERE serial_number = ?");
-        $stmt->execute([$serialNumber]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
     public static function deleteAircraft($id, $nameModel) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("DELETE FROM aircraft WHERE aircraft_id = ?");
