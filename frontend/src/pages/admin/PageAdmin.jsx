@@ -184,6 +184,7 @@ export default function PageAdmin(){
                 console.log("Annulation : suppression du modèle...");
                 await deleteModel(model.model_id, modelName);
             }
+            window.location.reload()
         }
     };
     
