@@ -173,7 +173,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
         $args["costPerKm"],
         $args["monthlyMaintenanceCost"],
         $args["estimatedPrice"],
-        $args["isAvailable"]
+        $args["isAvailable"],
+        $args["description"]
     );
     echo json_encode($result);
 }

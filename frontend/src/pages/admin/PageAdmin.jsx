@@ -83,6 +83,7 @@ export default function PageAdmin(){
             monthlyMaintenanceCost,
             estimatedPrice,
             isAvailable,
+            description
         } = productData;
     
         let insertedAircraftId = null;
@@ -126,7 +127,8 @@ export default function PageAdmin(){
                 costPerKm,
                 monthlyMaintenanceCost,
                 +estimatedPrice,
-                isAvailable
+                isAvailable,
+                description
             );
     
             if (!resultInsertAircraft.success) {
@@ -168,6 +170,7 @@ export default function PageAdmin(){
             } else throw new Error("Échec de l'upload de l'image principale.");
     
             console.log("Toutes les opérations ont été effectuées avec succès !");
+            window.location.reload()
         } catch (error) {
             alert("Il y a eu un problème lors de l'insertion du nouveau produit. Veillez à ce que toutes les images et icones soient remplis et que tous les champs ne contiennent pas le texte 'Inconnu' !")
     

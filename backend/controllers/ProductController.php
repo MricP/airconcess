@@ -143,9 +143,9 @@
             echo json_encode($aircraft);
         }
 
-        public static function insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable) {
-            if ($idModel != "" && $serialNumber != "" && $manufactureYear != "" && $flightHours != "" && $configuration != "" && $recentMaintenance != "" && $typicalRoutes != "" && $owner != "" && $costPerKm != "" && $monthlyMaintenanceCost != "" && $estimatedPrice != ""){
-                Aircraft::insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable);
+        public static function insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable, $description) {
+            if ($idModel != "" && $serialNumber != "" && $manufactureYear != "" && $flightHours != "" && $configuration != "" && $recentMaintenance != "" && $typicalRoutes != "" && $owner != "" && $costPerKm != "" && $monthlyMaintenanceCost != "" && $estimatedPrice != "" && $description != ""){
+                Aircraft::insertAircraft($idModel, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable, $description);
                 return ['success' => true];
             }
             return ['success' => false];

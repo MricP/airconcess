@@ -139,6 +139,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
     monthlyMaintenanceCost: "",
     estimatedPrice: "",
     isAvailable: 1,
+    description: ""
   });
 
   const [imageData, setImageData] = useState({
@@ -165,7 +166,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
   });
 
   useEffect(() => {
-    if(model != "Nouveau" && mode == "add"){
+    if(model !== "Nouveau" && mode === "add"){
       setModelData({
         addMode: "",
         modelName: model.model_name,
@@ -263,7 +264,9 @@ function PageProduct({mode, onSubmitProduct, model}) {
           <div className='label-content'>
               <GrStatusGood color='green'/> Icone insérée
           </div>
-          }
+        }
+        <p>Description du produit</p>
+        <textarea name="" id="" onChange={(e) => {handleInputChange("description", e.target.value)}}></textarea>
         
         <DarkButton className={"add-button"} onClick={handleSubmit}>Ajouter le nouveau produit</DarkButton>
       </div>}

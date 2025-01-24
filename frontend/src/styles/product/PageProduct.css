@@ -46,3 +46,9 @@
 .page-product .bottom-product-page input {
   display: none;
 }
+
+.page-product .bottom-product-page textarea {
+  resize: none;
+  width: 30vw;
+  height: 6vw;
+}

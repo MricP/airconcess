@@ -81,7 +81,7 @@ export const getAircraftDescription = async (idAircraft) => {
     }
 }
 
-export const insertAircraft = async (idModel, serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, isAvailable) => {
+export const insertAircraft = async (idModel, serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, isAvailable, description) => {
     try {
         const response = await axiosInstance.post('/admin/insert-Aircraft', {
             idModel,
@@ -95,7 +95,8 @@ export const insertAircraft = async (idModel, serialNumber, manufactureYear, fli
             costPerKm,
             monthlyMaintenanceCost,
             estimatedPrice,
-            isAvailable
+            isAvailable,
+            description
         });
         return response.data
     } catch(error) {
