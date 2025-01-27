@@ -12,11 +12,13 @@ import CustomSelectPicker from '../general/CustomSelectPicker';
 import "../../styles/appointment/AppointmentForm.css"
 
 // services functions
-import { loadTimestamps,loadModels,loadAircraftsOfModel,submitAppointment } from '../../services/appointment';
+import { loadTimestamps,loadModels,loadAircraftsOfModel,submitAppointment,loadAgencies,loadAgencyLocation } from '../../services/appointment';
 
 function AppointmentForm() {
     /*############ INITIALISATION DES STATES ############*/
     
+    const [agencyOptions,setAgencyOptions] = useState([]);
+    const [selectedAgencyLocation,setSelectedAgencyLocation] = useState(null);
     const [modelOptions,setModelOptions] = useState([]); // Stock les differents models de la BD (label:model_name,value:model_id)
     const [aircraftOptions,setAircraftOptions] = useState([]); // Stock une liste d'appareils correspondant au model selectionné (label:serialNumber,value:aircraft_id)
     const [disabledTimestamps, updateDisabledTimestamps] = useState([]); // Format disabledTimestamps = [{ date:YYYY-MM-DD , hour:hh , minutes:[m,m,m,m] }]
@@ -52,21 +54,16 @@ function AppointmentForm() {
         { label: "J'envisage de louer un appareil", value: "rent" }
     ];    
 
-    const agencyOptions = [
-        { label: "Agence 1", value: "A1" },
-        { label: "Agence 2", value: "A2" }
-    ];
-
     /*#################### FONCTIONS ####################*/
 
     const loadDisabledTimestamps = async () => {
         try {
-            const response = await loadTimestamps();
+            const response = await loadTimestamps(formData.agency.value);
             
             const newDisabledTimestamps = [];
 
             // Convertir le tableau de timestamps retourné, en une liste de dico au formt souhaité
-            response.data.forEach((timestamp) => {
+            response.data?.forEach((timestamp) => {
                 const [date, time] = timestamp.split(" ");
                 const [hour, minutes] = time.split(':');
 
@@ -90,13 +87,31 @@ function AppointmentForm() {
                     });
                 }
             });
-
             // Mettre à jour l'état avec les nouveaux crénaux à désactiver
             updateDisabledTimestamps(newDisabledTimestamps);
+            
         } catch (error) {
             console.error('Error response:', error.response?.data || error.message || 'Unknown error');
         }
     };
+
+    const loadAvailableAgencies = async () => {
+        try {
+            const response = await loadAgencies();
+            setAgencyOptions(response.data)
+        } catch (error) {
+            console.log('Error response:', error.response?.data?.message || 'Unknown error');
+        }
+    }
+
+    const loadSelectedAgencyLocation = async () => {
+        try {
+            const response = await loadAgencyLocation(formData.agency.value);
+            setSelectedAgencyLocation(response.data)
+        } catch (error) {
+            console.log('Error response:', error.response?.data?.message || 'Unknown error');
+        }
+    }
 
     const loadAvailableModels = async () => {
         try {
@@ -134,7 +149,8 @@ function AppointmentForm() {
     const onSubmit = async (formData) => {
         try {
             const response = await submitAppointment({formData});
-            console.log(response.data.message)
+            /* TODO : Si l'insertion ne s'est pas faite, c'est que le crénaux a été reservé pendant le formulaire
+               Dans ce cas, réactualiser le loadDisabledTimestamps()*/
         } catch (error) {
             console.log('Error response:', error.response?.data?.message || 'Unknown error');
         }
@@ -158,9 +174,22 @@ function AppointmentForm() {
 
     useEffect(() => {
         // Recupération de toutes les data nécessaires, au premier chargement de la page    
-        loadDisabledTimestamps() // Les crénaux à désactiver (déjà reservés)
         loadAvailableModels() // La liste des models dans la BD (pour la recherche du modèle et du serialNumber)
+        loadAvailableAgencies()
     },[])
+
+    // Recup les crénaux indisponibles pour l'agence selectionnée, s'actualise à un changement d'agence
+    useEffect(() => {
+        setValue("date",null,{shouldValidate: true})
+        setValue("time",null,{shouldValidate: true})
+        if(formData.agency) {
+            loadDisabledTimestamps() // Les crénaux à désactiver (déjà reservés)
+            loadSelectedAgencyLocation()
+        } else {
+            updateDisabledTimestamps([])
+            setSelectedAgencyLocation(null)
+        }
+    },[formData.agency])
 
     useEffect(() => {
         if(isCopied) {
@@ -234,7 +263,19 @@ function AppointmentForm() {
                             {errors.time && <p>○ {errors.time.message}</p>}
                             {errors.agency && <p>○ {errors.agency.message}</p>}
                         </div>
-                        <div id="div-slot-pickers">
+                        <label htmlFor="place-input">
+                            Lieu*
+                            <CustomSelectPicker 
+                                className={errors.agency ? "input-error" : ""}
+                                data={agencyOptions} 
+                                placeholder={"Choisir parmi l'une de nos agences"}
+                                setValue={(value) => {
+                                    setValue("agency", value, errors.agency ? {shouldValidate: true} : {shouldValidate: false});
+                                }}
+                                {...register("agency", { required: true })}
+                            />
+                        </label>
+                        <div className={formData.agency ? "" : "invisible"} id="div-slot-pickers">
                             <CustomProvider locale={frFR}>
                                 <div>
                                     <p>Date*</p>
@@ -262,31 +303,16 @@ function AppointmentForm() {
                                 </div>
                             </CustomProvider>
                         </div>
-                        <label htmlFor="place-input">
-                            Lieu*
-                            <CustomSelectPicker 
-                                className={errors.agency ? "input-error" : ""}
-                                data={agencyOptions} 
-                                placeholder={"Choisir parmi l'une de nos agences"}
-                                setValue={(value) => setValue("agency", value, errors.agency ? {shouldValidate: true} : {shouldValidate: false})} 
-                                {...register("agency", { required: true })}
-                            />
-                        </label>
                         <div className={formData.agency ? "" : "invisible"} id="addr-label">
                             <p>Adresse de l'agence</p>
                             <section>
-                                <p>à afficher que si l'agence a été selectionnée</p>
-                                <CopyToClipboard text={formData.agency /*TODO : Remplacer par l'adresse de l'agence*/} onCopy={() => setIsCopied(true)}>
-                                    {isCopied ? (
-                                        <p id="copy-addr-message">Copié !</p>
-                                    ) : (
-                                        <MdContentCopy id="copy-addr-button" />
-                                    )}
+                                <p>{selectedAgencyLocation}</p>
+                                <CopyToClipboard text={selectedAgencyLocation} onCopy={() => setIsCopied(true)}>
+                                    {isCopied ? <p id="copy-addr-message">Copié !</p> : <MdContentCopy id="copy-addr-button" />}
                                 </CopyToClipboard>
                             </section>
                         </div>
                     </fieldset>
-
                     <button className="submit" type="submit">
                         Valider mon rendez-vous
                     </button>

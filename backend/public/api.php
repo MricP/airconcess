@@ -98,13 +98,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-submit') !== false) {
     $data = json_decode(file_get_contents("php://input"), true);
-    echo json_encode(["message" => $data['formData']['phone']]);
     var_dump($data); // Vérifie que les données sont correctement reçues
     AppointmentController::createAppointment($data);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadTimestamps') !== false) {
-    AppointmentController::getTimestamps();
+    $agency_id = json_decode(file_get_contents("php://input"), true);
+    AppointmentController::getTimestamps($agency_id);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAgencies') !== false) {
+    AppointmentController::getAgencies();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAgencyLocation') !== false) {
+    $agency_id = json_decode(file_get_contents("php://input"), true);
+    AppointmentController::getAgencyLocation($agency_id);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadModels') !== false) {

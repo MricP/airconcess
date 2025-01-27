@@ -158,24 +158,31 @@
     display: none;
 }
 
-.appointmentForm-container .rdv-fieldset #addr-label:not(.invisible)>p {
+.appointmentForm-container .rdv-fieldset #addr-label>p {
     color: #5B5B5B;
     font-size: 14px;
 }
 
-.appointmentForm-container .rdv-fieldset #addr-label:not(.invisible) section {
+.appointmentForm-container .rdv-fieldset #addr-label>p {
+    color: #5B5B5B;
+    font-size: 14px;
+}
+
+.appointmentForm-container .rdv-fieldset #addr-label section {
     display: flex;
+    align-items: center;
     /* background-color: orange; */
     padding: 5px 10px;
     border-radius: 2px;
     border: dashed 1px #B5B5B5;
 }
 
-.appointmentForm-container .rdv-fieldset #addr-label:not(.invisible) > section > p {
+.appointmentForm-container .rdv-fieldset #addr-label > section > p {
     width: 100%;
+    font-size: var(--text-size);
 }
 
-.appointmentForm-container .rdv-fieldset #addr-label:not(.invisible) > section #copy-addr-button {
+.appointmentForm-container .rdv-fieldset #addr-label > section #copy-addr-button {
     height: auto;
     width: 1.5em;
     cursor: pointer;

@@ -1,12 +1,14 @@
 <?php
     require_once __DIR__ . '/../models/Appointment.php';
     require_once __DIR__ . '/../models/Aircraft.php';
+    require_once __DIR__ . '/../models/Agency.php';
 
     class AppointmentController {
 
         public static function createAppointment($data) {
             $apptData = [
-                "aircraftConcerned_id" => $data["formData"]["serialNumber"]["value"],
+                "user_id" => 35,
+                "aircraft_id" => $data["formData"]["serialNumber"]["value"],
                 "firstName" => $data["formData"]["firstName"],
                 "lastName" => $data["formData"]["lastName"],
                 "phone" => $data["formData"]["phone"],
@@ -19,21 +21,23 @@
                 "incomeProof" => $data["formData"]["incomeProof"][0]["name"],
                 "reason" => $data["formData"]["reason"]["value"],
                 "timestamp" => $data["formData"]["date"]." ".$data["formData"]["time"],
-                "agency" => $data["formData"]["agency"]["value"],
+                "agency_id" => $data["formData"]["agency"]["value"],
             ];
             $isGood = Appointment::create($apptData);
         }
 
-        public static function getTimestamps() {
-            $timestamps = Appointment::getTimestampsFromDB();
+        public static function getTimestamps($agency_id) {
+            $timestamps = Appointment::getTimestampsFromDB($agency_id);
             if ($timestamps) {
                 echo json_encode($timestamps);
-            }
+            } else {
+                echo json_encode(null);
+            }      
         }
 
         public static function getAircraftsOfModel($model_id) {
             $aircrafts = Aircraft::getAircraftsOfModel($model_id);
-            $finalList = null;
+            $finalList = [];
 
             if($aircrafts) {
                 foreach ($aircrafts as $aircraft) {
@@ -49,7 +53,7 @@
 
         public static function getModels() {
             $models = Aircraft::getAllModel();
-            $finalList = null;
+            $finalList = [];
 
             if($models) {
                 foreach ($models as $model) {
@@ -61,6 +65,32 @@
             }
 
             echo json_encode($finalList);
+        }
+
+        public static function getAgencies() {
+            $agencies = Agency::getAllAgencies();
+            $finalList = [];
+
+            if($agencies) {
+                foreach ($agencies as $agency) {
+                    $finalList[] = [
+                        "value" => $agency['agency_id'],
+                        "label" => $agency['agency_name'].", ".$agency['agency_country']
+                    ];
+                }
+            }
+            echo json_encode($finalList);
+        }
+
+        public static function getAgencyLocation($agency_id) {
+            $agency = Agency::getAgency($agency_id);
+            $location = null;
+
+            if($agency) {
+                $location = $agency['agency_address'].", ".$agency['agency_city'].", ".$agency['agency_country'];
+            }
+
+            echo json_encode($location);
         }
     }
 

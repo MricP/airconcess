@@ -9,25 +9,25 @@
         public static function create($data) {
             $pdo = self::getDB();
             // TODO : gerer l'id du currentUser et l'id de l'appareil concerné
-            $stmt = $pdo->prepare('INSERT INTO appointment (aircraftConcerned_id,customer_firstName, customer_lastName,customer_phone,
+            $stmt = $pdo->prepare('INSERT INTO appointment (userConcerned_id,aircraftConcerned_id,customer_firstName, customer_lastName,customer_phone,
                                                             customer_email,customer_country,customer_city,
                                                             customer_address,customer_postalCode,customer_idCard_url,
-                                                            customer_incomeProof_url,appt_reason,appt_timestamp,appt_agency)
-                                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+                                                            customer_incomeProof_url,appt_reason,appt_timestamp,appt_agency_id)
+                                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
             
-            if ($stmt->execute([$data['aircraftConcerned_id'],$data['firstName'],$data['lastName'],$data['phone'],
-                                $data['email'],$data['country'],$data['city'],
+            if ($stmt->execute([$data['user_id'],$data['aircraft_id'],$data['firstName'],$data['lastName'],
+                                $data['phone'],$data['email'],$data['country'],$data['city'],
                                 $data['address'],$data['postalCode'],$data['idCard'],
-                                $data['incomeProof'],$data['reason'],$data['timestamp'],$data['agency']])) {
+                                $data['incomeProof'],$data['reason'],$data['timestamp'],$data['agency_id']])) {
                 return true;
             }
             return false;
         }
 
-        public static function getTimestampsFromDB() {
+        public static function getTimestampsFromDB($agency_id) {
             $pdo = self::getDB();
-            $stmt = $pdo->prepare('SELECT appt_timestamp FROM appointment');
-            $stmt->execute();
+            $stmt = $pdo->prepare('SELECT appt_timestamp FROM appointment WHERE appt_agency_id = ?');
+            $stmt->execute([$agency_id]);
             return $stmt->fetchAll(PDO::FETCH_COLUMN);
         }
 

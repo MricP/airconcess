@@ -21,7 +21,7 @@ import '../../styles/general/Rsuite-custom.css';
  *        Reçoit un argument :
  *        - `value` (string|null) : L'heure sélectionnée au format `HH:mm:ss`, ou `null` si aucune heure n'est sélectionnée.
  */
-const CustomTimePicker = forwardRef(({value=null,className,disabledSlots,disableAfter=null,disableBefore=null,selectedDate=null,setTime},ref) => {
+const CustomTimePicker = forwardRef(({editable=false,value=null,className,disabledSlots,disableAfter=null,disableBefore=null,selectedDate=null,setTime},ref) => {
     // forwardRef permet à ce composant d'accepter une ref provenant de son parent
 
     const [selectedTime, setSelectedTime] = useState(null); // Stocke l'heure sélectionnée
@@ -101,6 +101,7 @@ const CustomTimePicker = forwardRef(({value=null,className,disabledSlots,disable
 
     return (
             <TimePicker
+              editable={editable}
               ref={ref}
               className={className}
               onSelect={handleTimeSelect}
@@ -108,7 +109,6 @@ const CustomTimePicker = forwardRef(({value=null,className,disabledSlots,disable
               onOk={(val) => val==null ? setTime(null) : setTime(format(val,"HH:mm:ss"))}
               onClean={() => {
                 setTime(null)
-                console.log("clean")
               }}
 
               value={handleValue()}
