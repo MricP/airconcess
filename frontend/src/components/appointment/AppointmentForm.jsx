@@ -180,8 +180,8 @@ function AppointmentForm() {
 
     // Recup les crénaux indisponibles pour l'agence selectionnée, s'actualise à un changement d'agence
     useEffect(() => {
-        setValue("date",null,{shouldValidate: true})
-        setValue("time",null,{shouldValidate: true})
+        setValue("date",null)
+        setValue("time",null)
         if(formData.agency) {
             loadDisabledTimestamps() // Les crénaux à désactiver (déjà reservés)
             loadSelectedAgencyLocation()
