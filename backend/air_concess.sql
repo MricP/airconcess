@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 23 jan. 2025 à 17:34
--- Version du serveur : 8.3.0
--- Version de PHP : 8.2.18
+-- Généré le : lun. 27 jan. 2025 à 17:18
+-- Version du serveur : 9.1.0
+-- Version de PHP : 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `air_concess`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `agency`
+--
+
+DROP TABLE IF EXISTS `agency`;
+CREATE TABLE IF NOT EXISTS `agency` (
+  `agency_id` int NOT NULL AUTO_INCREMENT,
+  `agency_name` varchar(30) NOT NULL,
+  `agency_country` varchar(15) NOT NULL,
+  `agency_city` varchar(20) NOT NULL,
+  `agency_address` varchar(30) NOT NULL,
+  PRIMARY KEY (`agency_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `agency`
+--
+
+INSERT INTO `agency` (`agency_id`, `agency_name`, `agency_country`, `agency_city`, `agency_address`) VALUES
+(1, 'AirC Paris', 'France', 'Paris', '12 Avenue des Pilotes'),
+(3, 'AirC LA', 'United States', 'Los Angeles', '500 Jetstream Blvd'),
+(4, 'AirC Toronto', 'Canada', 'Toronto', '75 Airfield Road'),
+(5, 'AirC London', 'United Kingdom', 'London', '22 Pilot Street'),
+(6, 'AirC Berlin', 'Germany', 'Berlin', '10 Flughafenstraße');
 
 -- --------------------------------------------------------
 
@@ -46,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `aircraft` (
   PRIMARY KEY (`aircraft_id`),
   UNIQUE KEY `serial_number` (`serial_number`),
   KEY `fk_aircraft_model_id` (`model_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `aircraft`
@@ -92,21 +119,36 @@ CREATE TABLE IF NOT EXISTS `appointment` (
   `customer_incomeProof_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `appt_reason` enum('purchase','rent') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `appt_timestamp` datetime DEFAULT NULL,
-  `appt_agency` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `appt_agency_id` int NOT NULL,
   PRIMARY KEY (`appt_id`),
-  UNIQUE KEY `appointmentTimestamp` (`appt_timestamp`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `appointmentTimestamp` (`appt_timestamp`),
+  KEY `fk_appt_agency_id` (`appt_agency_id`),
+  KEY `fk_appt_aircraft_id` (`aircraftConcerned_id`),
+  KEY `fk_appt_user_id` (`userConcerned_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `appointment`
 --
 
-INSERT INTO `appointment` (`appt_id`, `aircraftConcerned_id`, `userConcerned_id`, `customer_firstName`, `customer_lastName`, `customer_phone`, `customer_email`, `customer_country`, `customer_city`, `customer_address`, `customer_postalCode`, `customer_idCard_url`, `customer_incomeProof_url`, `appt_reason`, `appt_timestamp`, `appt_agency`) VALUES
-(54, 0, 0, 'Mathéo', 'Flores', '+33644038323', 'matheoflores26@gmail.com', 'FR', 'Beausemblant', '141 rue Barthélémy de laffemas', '26240', 'Array', 'Array', 'purchase', '2024-12-11 09:45:00', 'A2'),
-(58, 0, 0, 'aaaaa', 'z', '+6', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '4', 'Array', 'Array', 'purchase', '2024-12-18 11:00:00', 'A1'),
-(59, 0, 0, 'aaaaa', 'z', '+6', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '4', 'Array', 'Array', 'purchase', '2024-12-18 11:30:00', 'A1'),
-(60, 7, 32, 'Emric', 'Pirrera', '0123456789', 'mail@mail.com', 'France', 'St-Chamond', '1 rue des blabla', '42400', '0', '0', 'purchase', '2025-01-18 11:30:00', 'Agence Alpha'),
-(61, 0, 32, 'Emric', 'Pirrera', '0123456789', 'qsfdqs', 'qdfq', 'qfds', 'qdsf', 'qsd', 'qsdf', 'qsd', 'rent', '2025-01-22 15:30:00', 'Gold Agency');
+INSERT INTO `appointment` (`appt_id`, `aircraftConcerned_id`, `userConcerned_id`, `customer_firstName`, `customer_lastName`, `customer_phone`, `customer_email`, `customer_country`, `customer_city`, `customer_address`, `customer_postalCode`, `customer_idCard_url`, `customer_incomeProof_url`, `appt_reason`, `appt_timestamp`, `appt_agency_id`) VALUES
+(70, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-05 10:45:00', 3),
+(71, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-05 10:15:00', 3),
+(72, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-05 10:30:00', 3),
+(73, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-05 11:30:00', 3),
+(74, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 11:30:00', 3),
+(75, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 07:00:00', 3),
+(76, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 07:15:00', 3),
+(77, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 07:30:00', 3),
+(78, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 07:45:00', 3),
+(79, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 08:00:00', 3),
+(80, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 08:15:00', 3),
+(81, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 08:30:00', 3),
+(82, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 08:45:00', 3),
+(83, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 09:45:00', 3),
+(84, 17, 35, 'Ma', 'Floz', '+3333', 'matheoflores32@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '69100', 'Array', NULL, 'purchase', '2025-02-05 16:00:00', 4),
+(85, 17, 35, 'Ma', 'Floz', '+3333', 'matheoflores32@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '69100', 'Array', NULL, 'purchase', '2025-02-05 17:15:00', 4),
+(86, 17, 35, 'Ma', 'Floz', '+3333', 'matheoflores32@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '69100', 'Array', NULL, 'purchase', '2025-02-07 12:45:00', 6);
 
 -- --------------------------------------------------------
 
@@ -138,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `img_URL` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   PRIMARY KEY (`img_id`),
   KEY `id_Aircraft` (`aircraft_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `image`
@@ -322,7 +364,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `inscriptionDate` date DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `user`
@@ -330,8 +372,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `location`, `profilePictureURL`, `isVerified`, `isTrainer`, `isAdmin`, `inscriptionDate`) VALUES
 (24, '$2y$10$NfmvVPDHlL02bgv80ogSLe2xYnabfZ2hpLJqfsiDWpcR6tWjoahH.', 'florian', 'FILLOUX', 'fillouxflorian56@gmail.com', 'Saint-Etienne, France', '/assets/profile/Jack-Sparrow.png', 1, 0, 0, '2024-10-21'),
-(25, '$2y$10$zucMXl1CCH.kK3Grmljma.m9Sb3y3LBrt7i1VnO86WO8yInEesqJu', 'Mathéo', 'Flores', 'matheoflores26@gmail.com', 'Saint-Etienne, France', '/assets/profile/Jack-Sparrow.png', 1, 0, 0, '2024-12-01'),
-(32, '$2y$10$M7RME7KjVB9djW3R2wLiaeVMYLBlic9LNytXuvyuiqyP8vccNuxe6', 'Emric', 'Pirrera', 'pemricn2@gmail.com', 'Saint-Chamond, France', '/assets/profile/Jack-Sparrow.png', 1, 0, 1, '2025-01-03');
+(32, '$2y$10$M7RME7KjVB9djW3R2wLiaeVMYLBlic9LNytXuvyuiqyP8vccNuxe6', 'Emric', 'Pirrera', 'pemricn2@gmail.com', 'Saint-Chamond, France', '/assets/profile/bgFigma.png', 1, 0, 1, '2025-01-03'),
+(35, '$2y$10$dE1rvUQ9IOiVMBSC1P/mBeWk.XLYG7LdJbMm0/CDtJo7WQRd8E0Vu', 'matheo', 'Flores', 'matheoflores26@gmail.com', NULL, NULL, 1, 0, 0, '2025-01-24');
 
 --
 -- Contraintes pour les tables déchargées
@@ -342,6 +384,14 @@ INSERT INTO `user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `loc
 --
 ALTER TABLE `aircraft`
   ADD CONSTRAINT `fk_aircraft_model_id` FOREIGN KEY (`model_id`) REFERENCES `model` (`model_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `appointment`
+--
+ALTER TABLE `appointment`
+  ADD CONSTRAINT `fk_appt_agency_id` FOREIGN KEY (`appt_agency_id`) REFERENCES `agency` (`agency_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_appt_aircraft_id` FOREIGN KEY (`aircraftConcerned_id`) REFERENCES `aircraft` (`aircraft_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_appt_user_id` FOREIGN KEY (`userConcerned_id`) REFERENCES `user` (`idUser`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Contraintes pour la table `estimate`
