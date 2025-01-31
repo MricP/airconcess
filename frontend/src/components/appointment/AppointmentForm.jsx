@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from "react-router-dom";
 import { MdContentCopy } from "react-icons/md";
 import { CustomProvider } from 'rsuite';
 import { frFR } from 'rsuite/locales'; // Locale française
@@ -12,10 +13,12 @@ import CustomSelectPicker from '../general/CustomSelectPicker';
 import "../../styles/appointment/AppointmentForm.css"
 
 // services functions
-import { loadTimestamps,loadModels,loadAircraftsOfModel,submitAppointment,loadAgencies,loadAgencyLocation } from '../../services/appointment';
+import { loadAircraft,loadTimestamps,loadModels,loadAircraftsOfModel,submitAppointment,loadAgencies,loadAgencyLocation } from '../../services/appointment';
 
 function AppointmentForm() {
     /*############ INITIALISATION DES STATES ############*/
+
+    const [currentAircraft,setCurrentAircraft] = useState(null)
     
     const [agencyOptions,setAgencyOptions] = useState([]);
     const [selectedAgencyLocation,setSelectedAgencyLocation] = useState(null);
@@ -46,6 +49,9 @@ function AppointmentForm() {
     );
 
     /*################### CONSTANTES ####################*/
+
+    const location = useLocation().pathname.split("/");
+    const idAircraft = parseInt(location[location.length - 1]); // Récupération de l'ID de l'appareil
 
     const formData = watch(); //formData est l'accès direct 
 
@@ -131,6 +137,29 @@ function AppointmentForm() {
         }
     };
 
+    const findAircraft = async (aircraft_id) => {
+        try {
+            const response = await loadAircraft(aircraft_id);
+            return response.data 
+        } catch (error) {
+            console.log('Error response:', error.response?.data?.message || 'Unknown error');
+        }
+    };
+
+    // Fonction permettant de gerer la preselection d'un aircraft via l'id présente dans l'URL
+    const handleIdLocation = async () => {
+        if (!isNaN(idAircraft)) {
+            let airc = await findAircraft(idAircraft)
+            if(airc) {
+                setCurrentAircraft(airc)
+            } else {
+                console.log("L'id dans l'url est invalide")
+                //Ici on ne fait rien 
+            }
+        }
+        
+    };
+
     const handleSelectedSlot = () => {
         if(formData.date!=null) {
             return new Date(formData.date);
@@ -170,14 +199,46 @@ function AppointmentForm() {
         }
     }
 
+    const handleModelSelection = async (value) => {
+        setValue("model", value, errors.model ? {shouldValidate: true} : {shouldValidate: false});
+        setValue("serialNumber", null, errors.serialNumber ? {shouldValidate: true} : {shouldValidate: false});
+        loadAircraftsWith(value?.value)
+    }
+
     /*###################### AUTRE ######################*/
 
     useEffect(() => {
         // Recupération de toutes les data nécessaires, au premier chargement de la page    
         loadAvailableModels() // La liste des models dans la BD (pour la recherche du modèle et du serialNumber)
         loadAvailableAgencies()
+
+        handleIdLocation() // Gere l'id present dans l'URL
     },[])
 
+    // Gestion du model (en fonction de l'id dans l'URL)
+    useEffect(() => {
+        if (modelOptions.length !== 0 && currentAircraft) {
+            let model = modelOptions.find(option => option.value == currentAircraft.model_id);
+            handleModelSelection(model);
+        }
+    }, [currentAircraft]);
+
+    // Gestion de l'appareil (en fonction de l'id dans l'URL)
+    useEffect(() => {
+        if (formData.model && currentAircraft) {
+            console.log(aircraftOptions)
+            if (aircraftOptions.length !== 0) {
+                console.log("2")
+                let aircraft = aircraftOptions.find(option => option.value == idAircraft);
+                if (aircraft) {
+                    setValue("serialNumber", aircraft, errors.serialNumber ? { shouldValidate: true } : { shouldValidate: false });
+                }
+            }
+        } else {
+            setCurrentAircraft(null)
+        }
+    }, [formData.model,aircraftOptions]); 
+    
     // Recup les crénaux indisponibles pour l'agence selectionnée, s'actualise à un changement d'agence
     useEffect(() => {
         setValue("date",null)
@@ -229,11 +290,7 @@ function AppointmentForm() {
                                     id="model-input"
                                     data={modelOptions} 
                                     value={formData.model != null ? formData.model : ''}
-                                    setValue={(value) => {
-                                        setValue("model", value, errors.model ? {shouldValidate: true} : {shouldValidate: false});
-                                        setValue("serialNumber", null, errors.serialNumber ? {shouldValidate: true} : {shouldValidate: false});
-                                        loadAircraftsWith(value?.value)
-                                    }}
+                                    setValue={handleModelSelection}
                                     
                                     {...register("model", { required: "Selectionnez le model concerné" })}
                                 />

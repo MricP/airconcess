@@ -107,6 +107,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     AppointmentController::getTimestamps($agency_id);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAircraftWithId') !== false) {
+    $airc_id = json_decode(file_get_contents("php://input"), true);
+    AppointmentController::getAircraft($airc_id);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAgencies') !== false) {
     AppointmentController::getAgencies();
 }

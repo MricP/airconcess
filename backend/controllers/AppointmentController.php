@@ -67,6 +67,17 @@
             echo json_encode($finalList);
         }
 
+        public static function getAircraft($airc_id) {
+            $airc = Aircraft::findById($airc_id);
+            $res = null;
+
+            if($airc) {
+                $res = $airc;
+            }
+
+            echo json_encode($res);
+        }
+
         public static function getAgencies() {
             $agencies = Agency::getAllAgencies();
             $finalList = [];
