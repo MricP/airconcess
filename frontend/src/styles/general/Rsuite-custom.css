@@ -16195,7 +16195,8 @@ textarea.rs-inline-edit-sm .rs-plaintext {
 .rs-toast-container-top-center,
 .rs-toast-container-top-start,
 .rs-toast-container-top-end {
-  top: 24px;
+  z-index: 10001;
+  top: 5vw;
 }
 .rs-toast-container-bottom-center,
 .rs-toast-container-bottom-start,

@@ -17,13 +17,16 @@
                 "city" => $data["formData"]["city"]["value"],
                 "address" => $data["formData"]["address"],
                 "postalCode" => $data["formData"]["postalCode"],
-                "idCard" => $data["formData"]["idCard"],
-                "incomeProof" => $data["formData"]["incomeProof"][0]["name"],
+                "idCard" => null,//$data["formData"]["idCard"],
+                "incomeProof" => null,//$data["formData"]["incomeProof"],
                 "reason" => $data["formData"]["reason"]["value"],
                 "timestamp" => $data["formData"]["date"]." ".$data["formData"]["time"],
                 "agency_id" => $data["formData"]["agency"]["value"],
             ];
-            $isGood = Appointment::create($apptData);
+            $res = Appointment::create($apptData);
+
+            echo json_encode($res);
+            exit();
         }
 
         public static function getTimestamps($agency_id) {

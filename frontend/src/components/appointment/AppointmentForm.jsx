@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router-dom";
 import { MdContentCopy } from "react-icons/md";
-import { CustomProvider } from 'rsuite';
+import { CustomProvider,Message,useToaster } from 'rsuite';
 import { frFR } from 'rsuite/locales'; // Locale française
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useForm } from "react-hook-form";
@@ -17,6 +17,7 @@ import { loadAircraft,loadTimestamps,loadModels,loadAircraftsOfModel,submitAppoi
 
 function AppointmentForm() {
     /*############ INITIALISATION DES STATES ############*/
+    const toaster = useToaster();
 
     const [currentAircraft,setCurrentAircraft] = useState(null)
     
@@ -178,8 +179,15 @@ function AppointmentForm() {
     const onSubmit = async (formData) => {
         try {
             const response = await submitAppointment({formData});
-            /* TODO : Si l'insertion ne s'est pas faite, c'est que le crénaux a été reservé pendant le formulaire
-               Dans ce cas, réactualiser le loadDisabledTimestamps()*/
+            
+            if(response.data.success) {
+
+            } else {
+                toaster.push(<Message type="error" showIcon><strong>Erreur! </strong>{response.data.message}</Message>,{ duration: 2000 })
+                setValue("time",null)
+                loadDisabledTimestamps() // On réactualise les disabledTimestamps
+            }
+            
         } catch (error) {
             console.log('Error response:', error.response?.data?.message || 'Unknown error');
         }
@@ -226,16 +234,13 @@ function AppointmentForm() {
     // Gestion de l'appareil (en fonction de l'id dans l'URL)
     useEffect(() => {
         if (formData.model && currentAircraft) {
-            console.log(aircraftOptions)
             if (aircraftOptions.length !== 0) {
-                console.log("2")
                 let aircraft = aircraftOptions.find(option => option.value == idAircraft);
                 if (aircraft) {
                     setValue("serialNumber", aircraft, errors.serialNumber ? { shouldValidate: true } : { shouldValidate: false });
                 }
+                setCurrentAircraft(null) // Une fois selectionné, on vide le state pour autoriser l'utilisateur à changer son choix
             }
-        } else {
-            setCurrentAircraft(null)
         }
     }, [formData.model,aircraftOptions]); 
     
@@ -263,6 +268,7 @@ function AppointmentForm() {
     
     return (
         <div className="appointmentForm-container">
+            
             <div className="form-container">
                 <h3>FORMULAIRE DE PRISE DE RENDEZ-VOUS</h3>
                 <form method='POST' onKeyDown={handleKeyDown} onSubmit={handleSubmit(onSubmit)}>
