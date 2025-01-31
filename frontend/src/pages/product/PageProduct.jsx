@@ -4,15 +4,17 @@ import ProductShowcase from "../../components/product/ProductShowcase";
 import ProductDescription from "../../components/product/ProductDescription";
 import Slider from "../../components/product/Slider";
 import ProductMap from "../../components/product/ProductMap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import DarkButton from "../../components/general/DarkButton";
 import { BiDownload } from "react-icons/bi";
 import { GrStatusGood } from "react-icons/gr";
 
 import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription, getModelName, getAircraft} from "../../services/product";
+import useRedirect from "../../components/Custom-hooks";
+import ResultPage from "../ResultPage";
 
 function PageProduct({mode, onSubmitProduct, model}) {
-  const navigate = useNavigate();
+  const redirect = useRedirect();
   const location = useLocation().pathname.split("/");
   const id = parseInt(location[location.length - 1]); // Récupération de l'ID
   
@@ -59,7 +61,6 @@ function PageProduct({mode, onSubmitProduct, model}) {
     return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
   
-
   // Charge toutes les data à afficher en fonction de l'id de l'appareil (idAircraft)
   const loadDataFromDB = async () => {
     try {
@@ -223,12 +224,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
 
   // Si l'id est invalide ou qu'il n'y a pas d'aircraft à afficher
   if (!isIdValid && mode !== "add") {
-    return (
-      <main>
-        <h2>Aucun aéronef correspondant.</h2>
-        <button onClick={() => navigate("/")}>Retourner vers l'accueil</button>
-      </main>
-    );
+    return(<ResultPage message='Aucun aéronef correspondant.'/>)
   }
   return (
     <main className="page-product">

@@ -15,7 +15,7 @@ import "../../styles/appointment/AppointmentForm.css"
 // services functions
 import { loadAircraft,loadTimestamps,loadModels,loadAircraftsOfModel,submitAppointment,loadAgencies,loadAgencyLocation } from '../../services/appointment';
 
-function AppointmentForm() {
+function AppointmentForm({setIsSubmitted}) {
     /*############ INITIALISATION DES STATES ############*/
     const toaster = useToaster();
 
@@ -181,7 +181,7 @@ function AppointmentForm() {
             const response = await submitAppointment({formData});
             
             if(response.data.success) {
-
+                setIsSubmitted(true)
             } else {
                 toaster.push(<Message type="error" showIcon><strong>Erreur! </strong>{response.data.message}</Message>,{ duration: 2000 })
                 setValue("time",null)

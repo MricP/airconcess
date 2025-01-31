@@ -81,8 +81,6 @@ function CatalogPage() {
     fetchAircrafts();
   }, [page]);
 
-
-
   useEffect(() => {
     const filtered = aircrafts.filter((plane) => {
       if (searchPlane.trim() === '') {
@@ -93,8 +91,6 @@ function CatalogPage() {
 
     setFilteredAircrafts(filtered);
   }, [searchPlane, aircrafts])
-
-
 
   // Gestion des pages
   const handleNextPage = () => {
