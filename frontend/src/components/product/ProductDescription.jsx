@@ -1,12 +1,12 @@
 import React, { useEffect, useState} from 'react'
-import { useNavigate } from 'react-router-dom';
 import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
 import { GrStatusGood } from "react-icons/gr";
+import useRedirect from '../Custom-hooks';
 
 
 const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescription,technicalSheetPath, mode, onInputChange, modelSelected}) => {
-    const navigate = useNavigate()
+    const redirect = useRedirect()
     const [selectedTechnicalSheet, setSelectedTechnicalSheet] = useState(null)
     const [modelDescriptionTab, setModelDescriptionTab] = 
     useState([
@@ -51,10 +51,7 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
     }
 
     function handleRedirection() {
-        navigate("/appointment/"+aircraftId)
-        window.scrollTo({
-            top: 0,
-        });
+        redirect("/appointment/"+aircraftId)
 
         setTimeout(() => {
             window.scrollTo({
