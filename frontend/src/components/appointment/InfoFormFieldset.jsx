@@ -7,24 +7,35 @@ import CustomPhoneInput from '../general/CustomPhoneInput';
 
 import "../../styles/appointment/InfoFormFieldset.css"
 
+import { Uploader, Button , Message , useToaster} from 'rsuite';
+import CustomFilePicker from '../general/CustomFilePicker';
+
 
 function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeProof=false,setValue}) {
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i    
     const postalCodeRegex = /^[0-9]{5}/
+    const toaster = useToaster();
 
     function handleDisplayErrorDiv() {
         return errors.email && errors.email?.message!=="required"
     }
 
-    const getCountryNameFromCode = (code) => {
-        const country = countryList().getData().find((country) => country.value === code);
-        return country ? country.label : code; // Retourne le nom complet ou le code si non trouvé
-    };
-
-    const getCountryCodeFromName = (name) => {
-        const country = countryList().getData().find((country) => country.label === name);
-        return country ? country.value : name; // Retourne le code ou le nom si non trouvé
-    };
+    const handleFileChange = (fileList,variableName) => {
+        let size = fileList.length-1
+        
+        const lastAdd = fileList[size];
+        if(lastAdd) {
+            if(lastAdd?.blobFile?.size < 1048576) { //1Mo
+                variableName === "idCard" ? setValue("idCard",lastAdd) : setValue("incomeProof",lastAdd)
+            } else {
+                toaster.push(<Message type="error" showIcon><strong>Erreur! </strong>{"La taille maximale est de 1Mo"}</Message>,{ duration: 3000 })
+                variableName === "idCard" ? setValue("idCard",formData.idCard) : setValue("incomeProof",formData.incomeProof)
+            }
+        } else {
+            variableName === "idCard" ? setValue("idCard",null) : setValue("incomeProof",null)
+        }
+        
+    }
 
     return (    
         <fieldset className='info-fieldset' ><legend>Vos informations</legend>
@@ -149,16 +160,36 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     {...register("address", { required: true })}    
                 />
             </label>
-            <div>
-                <input 
+            <div className='files-selection-div'>
+                <CustomFilePicker
+                    multiple={false} 
+                    autoUpload={false} 
+                    text={"Selectionner une carte d'identité*"}
+                    toaster={toaster}
+                    className={errors.idCard ? "file-error" : ""}
+                    value={formData.idCard}
+                    setValue={(val) => setValue("idCard", val, errors.idCard ? {shouldValidate: true} : {shouldValidate: false})}
+                    {...register("idCard", { required: true })}
+                />
+                <CustomFilePicker
+                    multiple={false} 
+                    autoUpload={false} 
+                    text={"Selectionner un justificatif de revenu*"}
+                    toaster={toaster}
+                    className={errors.incomeProof ? "file-error" : ""}
+                    value={formData.incomeProof}
+                    setValue={(val) => setValue("incomeProof", val, errors.incomeProof ? {shouldValidate: true} : {shouldValidate: false})}
+                    {...register("incomeProof", { required: true })}
+                />
+                {/* <input 
                     type="file" 
                     className="invisible" 
                     id="id-card" 
                     name="idCard" 
                     accept=".pdf,.jpg,.jpeg,.png" 
                     //Ici on ne peut pas mettre de value à un input file donc on retire simplement la contrainte s'il y a déjà un fichier  
-                    {...withIdCard===true && formData.idCard === null ? {...register("idCard", { required: true })} : null}  
-                    
+                    {...(withIdCard && formData.idCard === null ? register("idCard", { required: true }) : {})}
+                    onChange={handleFileChange}
                 />
                 <label className={`${withIdCard ? "" : "invisible"} ${errors.idCard ? "input-error" : ""}`}>
                     <p>Carte d’identité*</p>
@@ -168,14 +199,14 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             <MdOutlineFileUpload/>
                         </label>
                     </div>
-                </label>
-                <input 
+                </label> */}
+                {/* <input 
                     type="file" 
                     className="invisible" 
                     id="income-proof" 
                     name="incomeProof" 
                     accept=".pdf,.jpg,.jpeg,.png" 
-                    {...withIncomeProof===true && formData.incomeProof === null? {...register("incomeProof", { required: true })} : null}
+                    {...(withIncomeProof && formData.incomeProof === null ? register("incomeProof", { required: true }) : {})}
                 />
                 <label className={`${withIncomeProof ? "" : "invisible"} ${errors.incomeProof ? "input-error" : ""}`}>
                     <p>Justificatif de revenu*</p>
@@ -185,7 +216,7 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             <MdOutlineFileUpload/>
                         </label>
                     </div>
-                </label>
+                </label> */}
             </div>
         </fieldset>
     )

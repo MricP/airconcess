@@ -7,7 +7,7 @@ import ResultPage from '../ResultPage';
 function PageAppointment() {
     const [isSubmitted,setIsSubmitted] = useState(false);
 
-    if(!isSubmitted) {
+    if(isSubmitted) {
         return(<ResultPage message='Votre rendez-vous a été pris en compte'/>)
     } else {
         return (

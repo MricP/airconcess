@@ -17,13 +17,18 @@
                 "city" => $data["formData"]["city"]["value"],
                 "address" => $data["formData"]["address"],
                 "postalCode" => $data["formData"]["postalCode"],
-                "idCard" => null,//$data["formData"]["idCard"],
-                "incomeProof" => null,//$data["formData"]["incomeProof"],
+                "idCard" => $data["formData"]["idCard"]["name"],
+                "incomeProof" => $data["formData"]["incomeProof"]["name"],
                 "reason" => $data["formData"]["reason"]["value"],
                 "timestamp" => $data["formData"]["date"]." ".$data["formData"]["time"],
                 "agency_id" => $data["formData"]["agency"]["value"],
             ];
+
+            //TODO : Gerer l'insertion des fichiers (idCard et incomeProof)
+
             $res = Appointment::create($apptData);
+
+            
 
             echo json_encode($res);
             exit();

@@ -7,7 +7,8 @@
     font-size: 14px;
 }
 
-.info-fieldset>div>div, .info-fieldset>div:not(:nth-of-type(2), :first-of-type) {
+.info-fieldset>div>div
+/*.info-fieldset>div:not(:nth-of-type(2), :first-of-type)*/ {
     display: flex;
     flex-direction: column;
     gap: var(--form-input-gap);
@@ -22,15 +23,27 @@
     width: 48%;
 }
 
-.info-fieldset>div:last-of-type .div-upload {
+.info-fieldset .files-selection-div {
+    margin-top: var(--form-input-gap);
+    /* background-color: red; */
     display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 4%;
 }
 
-.info-fieldset>div:last-of-type .div-upload .file-name {
-    width: 95%;
-    /* white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; */
+.info-fieldset .files-selection-div>*{
+    width: 48%;
+    /* background-color: orange; */
+}
+
+.files-selection-div>.file-error>*>button {
+    outline: solid 1px #f77575 !important;
+    border:solid 1px #FF0000 !important;
+}
+
+.info-fieldset .files-selection-div>*>*>button{
+    width: 100%;
 }
 
 .info-fieldset .invisible {
@@ -42,10 +55,6 @@
     height: auto;
 }
 
-.info-fieldset>div:last-of-type .div-upload svg {
-    height: 100%;
-    cursor: pointer;
-}
 
 .info-fieldset>div:nth-of-type(2)>div:nth-child(2) {
     margin-left: 4%;
@@ -58,6 +67,7 @@
 
 .info-fieldset>div:nth-of-type(2)>div:nth-child(2)>div label {
     margin: 0;
+    /* background-color: red; */
 }
 
 .info-fieldset>div:nth-of-type(2)>div:nth-child(2)>div>label:first-of-type {

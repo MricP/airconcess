@@ -10,6 +10,7 @@ import CustomTimePicker from '../general/CustomTimePicker'
 import CustomDatePicker from '../general/CustomDatePicker'
 import CustomSelectPicker from '../general/CustomSelectPicker';
 
+
 import "../../styles/appointment/AppointmentForm.css"
 
 // services functions
@@ -327,11 +328,11 @@ function AppointmentForm({setIsSubmitted}) {
                             {errors.agency && <p>○ {errors.agency.message}</p>}
                         </div>
                         <label htmlFor="place-input">
-                            Lieu*
+                            Agence*
                             <CustomSelectPicker 
                                 className={errors.agency ? "input-error" : ""}
-                                data={agencyOptions} 
-                                placeholder={"Choisir parmi l'une de nos agences"}
+                                data={agencyOptions}    
+                                
                                 setValue={(value) => {
                                     setValue("agency", value, errors.agency ? {shouldValidate: true} : {shouldValidate: false});
                                 }}
