@@ -11,10 +11,16 @@ import { GrStatusGood } from "react-icons/gr";
 
 import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription, getModelName, getAircraft} from "../../services/product";
 
-function PageProduct({mode, onSubmitProduct, model}) {
+function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
   const navigate = useNavigate();
   const location = useLocation().pathname.split("/");
-  const id = parseInt(location[location.length - 1]); // Récupération de l'ID
+  let id = null
+  if (aircraftId){
+    id = aircraftId
+  } else {
+    id = parseInt(location[location.length - 1]); // Récupération de l'ID
+  }
+
   
   const [isIdValid, updateIdValidity] = useState(!isNaN(id));
 

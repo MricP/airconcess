@@ -228,6 +228,39 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                 </div>
             </div>
         )
+    } else if (mode === "edit") {
+        return (
+            <div className='productDescription-container'>
+                <h2>SPÉCIFICATIONS</h2>
+                <hr></hr>
+                <div className='informations-div'>
+                    <div>
+                        <h3>À propos du modèle</h3>
+                        <div className='informationsList'>
+                            {modelDescription.map((line) => (
+                                <p key={line.varName} >{"• "+line.txt+" : "+line.value}</p>
+                            ))}
+                        </div>
+                    </div>
+                    <hr></hr>
+                    <div>
+                        <h3>À propos de l'appareil</h3>
+                        <div className='informationsList'>
+                            {aircraftDescription.map((line, index) => (
+                                <div className="input-description criteria" key={line.varName}>
+                                    <p id={"aircraftDescription"+index}>{"• "+line.txt+" : "}</p>
+                                    <p contentEditable = "true" suppressContentEditableWarning = "true" onBlur={(e) => {handleProductFieldChange(aircraftDescriptionTab[index], e, index)}}>{line.value}</p> {/*Permet l'édition de l'élément} */}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                <div className='button-div'>
+                    <button onClick={handleDownload}><BiDownload/>{"Télécharger la fiche technique"}</button>
+                    <button onClick={handleRedirection}>Prendre rendez-vous</button>
+                </div>
+            </div>
+        )
     }
 
     return (
