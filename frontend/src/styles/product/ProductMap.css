@@ -7,11 +7,38 @@
     width: 100%;
 }
 
-.productMap-container .map {
+.productMap-container .map,
+.productMap-container .no-position-div {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 60%;
     height: 100%;
-    background-color: orange;
+    /* background-color: orange; */
+}
+
+.productMap-container .map {
+    z-index: 1 ;
+}
+
+.productMap-container .no-position-div {
+    z-index: 2;
+    position: absolute;
+    height: 70vh;
+    background-color: rgba(0, 0, 0, 0.37);
+}
+
+.productMap-container .no-position-div h3 {
+    color: #F5F5F5;
+}
+
+.productMap-container .map .map-popup p{
+    font-size: 14px;
+    margin: 0;
+}
+
+.productMap-container .map .map-popup section {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
