@@ -1,5 +1,5 @@
 import "../../styles/product/PageProduct.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ProductShowcase from "../../components/product/ProductShowcase";
 import ProductDescription from "../../components/product/ProductDescription";
 import Slider from "../../components/product/Slider";
@@ -20,6 +20,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
   
   const [isIdValid, updateIdValidity] = useState(!isNaN(id));
 
+  const [aircraft,setAircraft] = useState(null)
   const [modelName, updateModelName] = useState("Inconnu")
   const [mainImg, updateMainImg] = useState({ url: "/assets/not-available.png", id: 0 });
   const [sliderImgs, updateSliderImgs] = useState([]);
@@ -62,71 +63,83 @@ function PageProduct({mode, onSubmitProduct, model}) {
   }
   
   // Charge toutes les data à afficher en fonction de l'id de l'appareil (idAircraft)
-  const loadDataFromDB = async () => {
-    try {
-      // S'il n'y a pas d'id ou que cet aircraft n'existe pas
-      if (isNaN(id) || !(await getAircraft(id))) {
-        updateIdValidity(false);
-        return;
-      }
+  
 
-      // Appels des services
-      const dbModelName = await getModelName(id)
-      const dbMainImg = await getMainImage(id)
-      const dbSliderImgs = await getSliderImages(id)
-      const dbModelDescription = await getModelDescription(id)
-      const dbAircraftDescription = await getAircraftDescription(id)
-
-      if(dbModelName) updateModelName(dbModelName)
-      if(dbMainImg) updateMainImg(dbMainImg);
-      if(dbSliderImgs) updateSliderImgs(dbSliderImgs);
-
-      if(dbModelDescription) {
-        console.log(dbModelDescription)
-        const newDescription = []
-        dbModelDescription.forEach((element) => {
-          if(element.value) {
-            const criteria = modelDescription.find((elt) => elt.varName === element.varName)
-            if(criteria) {
-              let updatedCriteria = { ...criteria, value: element.value };
-              if(criteria.varName === "passenger_capacity") updatedCriteria = { ...criteria, value:"Jusqu'à "+element.value+" passagers"};
-              else if(criteria.varName === "max_range") updatedCriteria = { ...criteria, value: element.value+" km"};
-              newDescription.push(updatedCriteria);
-            }
-          }
-        });
-        updateModelDescription(newDescription)
-      }
-
-      if(dbAircraftDescription) {
-        const newDescription = []
-        dbAircraftDescription.forEach(element => {
-          if(element.value) {
-            const criteria = aircraftDescription.find((elt) => elt.varName === element.varName)
-            if(criteria) {
-              let updatedCriteria = { ...criteria, value: element.value };
-              if(criteria.varName === "flight_hours") updatedCriteria = { ...criteria, value:element.value+" heures"};
-              else if(criteria.varName === "estimated_price") updatedCriteria = { ...criteria, value: formatNumber(element.value)+" €"};
-              newDescription.push(updatedCriteria)
-            }
-          }
-        });
-        
-        updateAircraftDesciption(newDescription)
-      }
-      
-    } catch (error) {
-      console.error(
-        "Error response : ",
-        error.response?.data?.message || "Unknown error"
-      );
-    }
-  };
+  const modelDescriptionRef = useRef(modelDescription);
+  const aircraftDescriptionRef = useRef(aircraftDescription);
 
   // Charger les données lorsque le composant est monté ou lorsque `id` change
   useEffect(() => {
+    const loadDataFromDB = async () => {
+      try {
+        if (isNaN(id)) {// S'il n'y a pas d'id
+          updateIdValidity(false);
+          return;
+        } else {
+          const airc = await getAircraft(id);
+          if(airc) { 
+            setAircraft(airc);
+          } else { // Si l'id ne correspond à aucun aircraft
+            updateIdValidity(false);
+            return;
+          }
+        } 
+  
+        // Appels des services
+        const dbModelName = await getModelName(id)
+        const dbMainImg = await getMainImage(id)
+        const dbSliderImgs = await getSliderImages(id)
+        const dbModelDescription = await getModelDescription(id)
+        const dbAircraftDescription = await getAircraftDescription(id)
+  
+        if(dbModelName) updateModelName(dbModelName)
+        if(dbMainImg) updateMainImg(dbMainImg);
+        if(dbSliderImgs) updateSliderImgs(dbSliderImgs);
+  
+        if(dbModelDescription) {
+          const newDescription = []
+          dbModelDescription.forEach((element) => {
+            if(element.value) {
+              const criteria = modelDescriptionRef.current.find((elt) => elt.varName === element.varName)
+              if(criteria) {
+                let updatedCriteria = { ...criteria, value: element.value };
+                if(criteria.varName === "passenger_capacity") updatedCriteria = { ...criteria, value:"Jusqu'à "+element.value+" passagers"};
+                else if(criteria.varName === "max_range") updatedCriteria = { ...criteria, value: element.value+" km"};
+                newDescription.push(updatedCriteria);
+              }
+            }
+          });
+          updateModelDescription(newDescription)
+        }
+  
+        if(dbAircraftDescription) {
+          const newDescription = []
+          dbAircraftDescription.forEach(element => {
+            if(element.value) {
+              const criteria = aircraftDescriptionRef.current.find((elt) => elt.varName === element.varName)
+              if(criteria) {
+                let updatedCriteria = { ...criteria, value: element.value };
+                if(criteria.varName === "flight_hours") updatedCriteria = { ...criteria, value:element.value+" heures"};
+                else if(criteria.varName === "estimated_price") updatedCriteria = { ...criteria, value: formatNumber(element.value)+" €"};
+                newDescription.push(updatedCriteria)
+              }
+            }
+          });
+          
+          updateAircraftDesciption(newDescription)
+        }
+        
+      } catch (error) {
+        console.error(
+          "Error response : ",
+          error.response?.data?.message || "Unknown error"
+        );
+      }
+    };
+    
     loadDataFromDB();
-  }, [id]);
+  }
+  , [id]);
 
   const [productData, setProductData] = useState({
     serialNumber: "",
@@ -244,7 +257,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
         onInputChange={handleInputChange}
         modelSelected={model}
       />
-      <ProductMap/>
+      <ProductMap aircraft={aircraft} modelName={modelName}/>
       <Slider images={sliderImgs} mode={mode} onInputChange={handleInputChange}/>
       {mode === "add" && 
       <div className="bottom-product-page">

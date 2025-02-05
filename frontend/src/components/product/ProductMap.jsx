@@ -1,43 +1,51 @@
-import React from 'react'
-import '../../styles/product/ProductMap.css'
+import React, { useEffect, useState } from 'react';
+import '../../styles/product/ProductMap.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
-import 'leaflet/dist/leaflet.css'; // Importation du CSS de Leaflet
-import L from 'leaflet'; // Importation de Leaflet pour utiliser l'icône
+const ProductMap = ({ aircraft,modelName }) => {
+    const defaultCenter = [51, -0.09];
+    const [center, setCenter] = useState(defaultCenter);
 
+    useEffect(() => {
+        if (aircraft?.last_location_latitude && aircraft?.last_location_longitude) {
+            setCenter([aircraft.last_location_latitude, aircraft.last_location_longitude]);
+        }
+    }, [aircraft]);
 
-const ProductMap = (aircraft) => {
-    
     const customIcon = new L.Icon({
-        iconUrl: '/assets/plane-icon.svg', // Remplacez par l'URL de votre icône
+        iconUrl: '/assets/plane-icon.svg',
         className: 'plane-icon',
         iconSize: [32, 32],
-        iconAnchor: [16, 16], // position de l'icon par rapport au point (ici au centre)
-        popupAnchor: [0, -16], // Position du popup par rapport à l'icône
+        iconAnchor: [16, 16],
+        popupAnchor: [0, -16],
     });
 
     return (
         <div className='productMap-container'>
-            <MapContainer className='map' center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} >
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {aircraft?.position ?
-                <Marker className="marker" position={aircraft?.position} icon={customIcon}>
-                    <Popup className='map-popup'>
-                        <section>
-                            <p><strong>{aircraft?.modelName}</strong></p>
-                            <p>• Serie : {aircraft?.serialNumber}</p>
-                            <p>• Dernière localisation : {aircraft?.lastUpdate}</p>
-                            <p>{`• Dernière position : LAT ${aircraft?.position[0]}, LON ${aircraft?.position[1]}`}</p>
-                        </section>
-                    </Popup>
-                </Marker>
-                : null}
+            <MapContainer key={center.join(',')} className='map' center={center} zoom={13} scrollWheelZoom={false}>
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                {aircraft?.last_location_latitude && (
+                    <Marker position={center} icon={customIcon}>
+                        <Popup className='map-popup'>
+                            <section>
+                                <p><strong>{modelName}</strong></p>
+                                <p>• Série : {aircraft?.serial_number}</p>
+                                <p>• Dernière localisation : {(new Date(aircraft?.last_location_update)).toLocaleDateString()}</p>
+                                <p>{`• LAT ${aircraft?.last_location_latitude}, LON ${aircraft?.last_location_longitude}`}</p>
+                            </section>
+                        </Popup>
+                    </Marker>
+                )}
             </MapContainer>
-            {aircraft?.position ? null:<div className='no-position-div'><h3>La position de cet appareil n'est pas enregistrée.</h3></div>}
+            {!aircraft?.last_location_latitude && (
+                <div className='no-position-div'>
+                    <h3>La position de cet appareil n'est pas enregistrée.</h3>
+                </div>
+            )}
         </div>
-    )
+    );
 };
 
-export default ProductMap
+export default ProductMap;
