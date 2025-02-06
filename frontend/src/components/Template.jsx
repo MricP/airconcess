@@ -3,6 +3,7 @@ import Header from './graphic-charter/Header'
 import Footer from './graphic-charter/Footer'
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import ChatbotComponent from './chatbot/ChatbotComponent';
 
 function Template({children}) {
 
@@ -55,6 +56,7 @@ function Template({children}) {
     <div>
         <Header color={color}/>
         {children}
+        <ChatbotComponent/>
         { <Footer/>}
     </div>
     
