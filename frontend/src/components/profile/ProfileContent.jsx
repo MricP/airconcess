@@ -24,7 +24,6 @@ export default function ProfileContent() {
       }
       try {
         const appointments = await getAppointmentByUser(token);
-        console.log(appointments.data[0].appt_reason);
         setEvents(appointments.data) 
       } catch (error) {
         console.error("Erreur lors de la récupération des rendez-vous :", error);
@@ -63,7 +62,7 @@ export default function ProfileContent() {
         <div className="calendar-cell">
           <Badge className="calendar-todo-item-badge" />
           <div className="calendar-event">{eventForDate.appt_reason} à {eventForDate.appt_timestamp.split(" ")[1]}</div>
-          <div className="calendar-event">{eventForDate.appt_agency}</div>
+          <div className="calendar-event">{eventForDate.agency_name}</div>
         </div>
       );
     }
