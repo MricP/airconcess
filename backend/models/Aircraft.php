@@ -260,4 +260,67 @@ class Aircraft
         }
         $stmt->execute([$id]);
     }
+
+    public static function updateAircraft($id, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable, $description) {
+        try {
+            $pdo = self::getDB();
+
+            $stmt = $pdo->prepare("Update Aircraft set serial_number = ?, manufacture_year = ?, flight_hours = ?, configuration = ?, recent_maintenance = ?, typical_routes = ?, owner = ?, cost_per_km = ?, monthly_maintenance_cost = ?, estimated_price = ?, description = ?");
+            $stmt->bindValue(1, $serialNumber);
+            $stmt->bindValue(2, $manufactureYear);
+            $stmt->bindValue(3, $flightHours);
+            $stmt->bindValue(4, $configuration);
+            $stmt->bindValue(5, $recentMaintenance);
+            $stmt->bindValue(6, $typicalRoutes);
+            $stmt->bindValue(7, $owner);
+            $stmt->bindValue(8, $costPerKm);
+            $stmt->bindValue(9, $monthlyMaintenanceCost);
+            $stmt->bindValue(10, $estimatedPrice);
+            $stmt->bindValue(11, $description);
+
+            $stmt->execute();
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public static function updateMainImage($id, $url, $tmpPath) {
+        $image = Aircraft::getMainImg($id);
+        $oldURL = $image['img_URL'];
+        $oldFilePath = "../../frontend/public/assets/product/{$oldURL}";
+    
+        if (file_exists($oldFilePath)) {
+            unlink($oldFilePath);
+        }
+    
+        $newFilePath = "../../frontend/public/assets/product/{$url}";
+    
+        if (move_uploaded_file($tmpPath, $newFilePath)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function updateSliderImages($id, $url, $files) {
+        $images = Aircraft::getSliderImgs($id);
+        foreach ($image as $images) {
+            $oldURL = $image['img_URL'];
+            $oldFilePath = "../../frontend/public/assets/product/{$oldURL}";
+        
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
+            }
+        }
+
+        $newFilePath = "../../frontend/public/assets/product/{$url}";
+    
+        if (move_uploaded_file($tmpPath, $newFilePath)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

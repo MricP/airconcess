@@ -143,26 +143,42 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
             if (field === "passengerCapacity" || field === "maxRange"){
               if (/\d/.test(event.target.textContent)){
                   onInputChange(field, event.target.textContent)
-                  const criteria = document.getElementById("modelDescription"+index)
-                  const divCriteria = event.target.parentElement
-                  const newP = document.createElement("p")
-                  newP.textContent = criteria.textContent + event.target.textContent
-                  divCriteria.innerHTML = ""
-                  divCriteria.appendChild(newP)
+                    const criteria = document.getElementById("modelDescription"+index)
+                    const divCriteria = event.target.parentElement
+                    const newP = document.createElement("p")
+                    newP.textContent = criteria.textContent + event.target.textContent
+                    divCriteria.innerHTML = ""
+                    divCriteria.appendChild(newP)
               } else {
                   event.target.style.color = "red"
               }
             } else {
               onInputChange(field, event.target.textContent)
-              const criteria = document.getElementById("modelDescription"+index)
-              const divCriteria = event.target.parentElement
-              const newP = document.createElement("p")
-              newP.textContent = criteria.textContent + event.target.textContent
-              divCriteria.innerHTML = ""
-              divCriteria.appendChild(newP)
+                const criteria = document.getElementById("modelDescription"+index)
+                const divCriteria = event.target.parentElement
+                const newP = document.createElement("p")
+                newP.textContent = criteria.textContent + event.target.textContent
+                divCriteria.innerHTML = ""
+                divCriteria.appendChild(newP)
             }
         }
     };
+
+    const loadData = () => {
+        modelDescription.map((line, index) => (
+            onInputChange(modelDescriptionTab[index], line.value)
+        ))
+
+        aircraftDescription.map((line, index) => (
+            onInputChange(aircraftDescriptionTab[index], line.value)
+        ))
+    }
+
+    useEffect(() => {
+        if (mode === "edit"){
+            loadData();
+        }
+    }, [mode])
 
     if (mode === "add"){
         return (
@@ -256,8 +272,8 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
                     </div>
                 </div>
                 <div className='button-div'>
-                    <button onClick={handleDownload}><BiDownload/>{"Télécharger la fiche technique"}</button>
-                    <button onClick={handleRedirection}>Prendre rendez-vous</button>
+                    <button onClick={handleDownload}><BiDownload/>{"Changer la fiche technique"}</button>
+                    {/* <button onClick={handleRedirection} disabled>Prendre rendez-vous</button> */}
                 </div>
             </div>
         )

@@ -68,7 +68,12 @@ const ProductShowcase = ({ imagePath, modelName, mode, model, onInputChange }) =
   } else if (mode === "edit") {
       return (
         <div className="productShowcase-container" id={hasId ? "productShowcase-container-edit" : null}>
-            <img className="showcase-image" src={imagePath} alt={modelName + "-MainImage"} />
+            {selectedImage ? (
+                <img className="showcase-image" src={selectedImage} alt="Prévisualisation" />
+              ) : (
+                <img className="showcase-image" src={imagePath} alt={modelName + "-MainImage"} />
+              )
+            }
             <div>
               <form action="">
                 <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />

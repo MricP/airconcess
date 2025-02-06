@@ -215,3 +215,13 @@ export const deleteModel = async (id, nameModel) => {
         throw error;
     }
 }
+
+export const updateAircraft = async (serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, description) => {
+    try {
+        const response = await axiosInstance.post('/admin/update-Aircraft', { serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, description });
+        return response
+    } catch (error) {
+        console.error("Erreur lors de la mise à jour de l'aircraft", error);
+        throw error;
+    }
+}
