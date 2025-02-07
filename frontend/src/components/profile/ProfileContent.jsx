@@ -4,6 +4,7 @@ import {createTestimonial} from "../../services/auth.js"
 import {getAppointmentByUser} from "../../services/appointment.js"
 import { useNavigate } from 'react-router-dom'
 import {Calendar,Badge} from 'rsuite'
+import { getUserData } from '../../services/auth.js'
 
 import "../../styles/general/Rsuite-custom.css"
 
@@ -12,8 +13,20 @@ export default function ProfileContent() {
   const navigate = useNavigate()
   const testimonialRef = useRef(null)
   const [events, setEvents] = useState([]);
-
+  const [userData, setUserData] = useState(null);
   
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUserData(token);
+        setUserData(data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+    fetchData();
+  },[])
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -37,7 +50,6 @@ export default function ProfileContent() {
     navigate("sign-in")
     return
   }
-
 
   const handleSubmitTestimonial = (e) => {
     e.preventDefault();
@@ -71,19 +83,22 @@ export default function ProfileContent() {
 
 
   return (
-    <main className='profile-content-container'>
-      <div className='profile-actionStatus'>
-          <Calendar renderCell={renderCell} isoWeek />
-      </div>
-      <div className='profile-commentaire-container'>
-        <form method='POST' onSubmit={handleSubmitTestimonial}>
-          <p><strong>Ajouter un commentaire</strong></p>
-          <textarea ref={testimonialRef} name='testimonial' placeholder='Donnez nous votre avis...'></textarea>
-          <button type='submit'>Publier</button>
-        </form> 
-      </div>
-          
-    </main>
+    <>
+      {userData?.isTrainer !== 1 && userData?.isTrainer !== null && (
+        <main className='profile-content-container'>
+          <div className='profile-actionStatus'>
+              <Calendar renderCell={renderCell} isoWeek />
+          </div>
+          <div className='profile-commentaire-container'>
+            <form method='POST' onSubmit={handleSubmitTestimonial}>
+              <p><strong>Ajouter un commentaire</strong></p>
+              <textarea ref={testimonialRef} name='testimonial' placeholder='Donnez nous votre avis...'></textarea>
+              <button type='submit'>Publier</button>
+            </form> 
+          </div> 
+        </main>
+       )} 
+    </>
   )
   
 }
