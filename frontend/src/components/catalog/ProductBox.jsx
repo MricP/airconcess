@@ -7,6 +7,7 @@ import { IoTrashBin } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { deleteAircraft, getModelName } from '../../services/product';
 import PageProduct from '../../pages/product/PageProduct';
+import { updateAircraft, updateMainImage, updateSliderImages } from '../../services/product';
 
 export const ProductBox = (props) => {
   const navigate = useNavigate();
@@ -27,8 +28,71 @@ export const ProductBox = (props) => {
     }
   };
 
+  const handleAddButtonClick = async (productData, imageData) => {
+  
+          const {
+              id,
+              serialNumber,
+              manufactureYear,
+              flightHours,
+              configuration,
+              recentMaintenance,
+              typicalRoutes,
+              owner,
+              costPerKm,
+              monthlyMaintenanceCost,
+              estimatedPrice,
+              description
+          } = productData;
+      
+      
+          try {
+              
+              const resultUpdateAircraft = await updateAircraft(
+                  id,
+                  serialNumber,
+                  +manufactureYear,
+                  flightHours,
+                  configuration,
+                  recentMaintenance,
+                  typicalRoutes,
+                  owner,
+                  costPerKm,
+                  monthlyMaintenanceCost,
+                  +estimatedPrice,
+                  description
+              );
+      
+              if (!resultUpdateAircraft) {
+                  throw new Error("Échec de la mise à jour de l'aircraft.");
+              }
+      
+              const { file, files, icon } = imageData;
+      
+              // Image principale
+              if (file) {
+                  updateMainImage(id, file)
+              } else throw new Error("Échec de la mise à jour de l'image principale.");
+      
+              // Icône
+              if (icon) {
+                  
+              } else throw new Error("Échec de l'upload de l'image icône.");
+      
+              // Images du slider
+              if (files && files.length > 0) {
+                updateMainImage(id, files)
+              } else throw new Error("Échec de l'upload des images du slider.");
+      
+              console.log("Toutes les opérations ont été effectuées avec succès !");
+              window.location.reload()
+          } catch (error) {
+              alert(error)
+              window.location.reload()
+          }
+        }
   if (showProductPage) {
-    return <PageProduct aircraftId={props.idAircraft} mode={"edit"}/>;
+    return <PageProduct aircraftId={props.idAircraft} onSubmitProduct={handleAddButtonClick}  mode={"edit"}/>;
   }
 
   return (

@@ -91,105 +91,103 @@ export default function PageAdmin(){
     
         let insertedAircraftId = null;
     
-        if (mode === "add"){
-            try {
-                // Étape 1 : Insérer le modèle (si nécessaire)
-                if (addMode === "Nouveau") {
-                    const resultInsertModel = await insertModel(
-                        modelName,
-                        rangeType,
-                        manufacturer,
-                        +passengerCapacity,
-                        engines,
-                        speedAvg,
-                        +maxRange,
-                        maxAltitude,
-                        crewSize,
-                        length,
-                        wingspan,
-                        height,
-                        maxTakeoffWeight
-                    );
-        
-                    if (!resultInsertModel.success) {
-                        throw new Error("Échec de l'insertion du modèle.");
-                    }
-        
-                }
-        
-                // Étape 2 : Insérer l'aircraft
-                const model = await getModelByName(modelName);
-                const resultInsertAircraft = await insertAircraft(
-                    model.model_id,
-                    serialNumber,
-                    +manufactureYear,
-                    flightHours,
-                    configuration,
-                    recentMaintenance,
-                    typicalRoutes,
-                    owner,
-                    costPerKm,
-                    monthlyMaintenanceCost,
-                    +estimatedPrice,
-                    isAvailable,
-                    description
+        try {
+            // Étape 1 : Insérer le modèle (si nécessaire)
+            if (addMode === "Nouveau") {
+                const resultInsertModel = await insertModel(
+                    modelName,
+                    rangeType,
+                    manufacturer,
+                    +passengerCapacity,
+                    engines,
+                    speedAvg,
+                    +maxRange,
+                    maxAltitude,
+                    crewSize,
+                    length,
+                    wingspan,
+                    height,
+                    maxTakeoffWeight
                 );
-        
-                if (!resultInsertAircraft.success) {
-                    throw new Error("Échec de l'insertion de l'aircraft.");
+    
+                if (!resultInsertModel.success) {
+                    throw new Error("Échec de l'insertion du modèle.");
                 }
-        
-                insertedAircraftId = await getAircraftBySerialNumber(serialNumber); // Stocker l'ID de l'aircraft inséré
-                insertedAircraftId = insertedAircraftId.aircraft_id
-                // Étape 3 : Gestion des images
-                const { file, files, icon } = imageData;
-        
-                // Image principale
-                if (file) {
-                    const responseMainImage = await uploadImage(file, model.model_name, insertedAircraftId);
-                    if (!responseMainImage.success) throw new Error("Échec de l'upload de l'image principale.");
-        
-                    const resultMainImage = await insertImage("main", insertedAircraftId, responseMainImage.filePath);
-                    if (!resultMainImage.success) throw new Error("Échec de l'insertion de l'image principale.");
-                } else throw new Error("Échec de l'upload de l'image principale.");
-        
-                // Icône
-                if (icon) {
-                    const responseIcon = await uploadImage(icon, model.model_name, insertedAircraftId);
-                    if (!responseIcon.success) throw new Error("Échec de l'upload de l'icône.");
-        
-                    const resultIcon = await insertImage("icon", insertedAircraftId, responseIcon.filePath);
-                    if (!resultIcon.success) throw new Error("Échec de l'insertion de l'icône.");
-                } else throw new Error("Échec de l'upload de l'image icône.");
-        
-                // Images du slider
-                if (files && files.length > 0) {
-                    for (const sliderImage of files) {
-                        const responseSlider = await uploadImage(sliderImage, model.model_name, insertedAircraftId);
-                        if (!responseSlider.success) throw new Error("Échec de l'upload d'une image du slider.");
-        
-                        const resultSliderImage = await insertImage("slider", insertedAircraftId, responseSlider.filePath);
-                        if (!resultSliderImage.success) throw new Error("Échec de l'insertion d'une image du slider.");
-                    }
-                } else throw new Error("Échec de l'upload des images du slider.");
-        
-                console.log("Toutes les opérations ont été effectuées avec succès !");
-                window.location.reload()
-            } catch (error) {
-                alert("Il y a eu un problème lors de l'insertion du nouveau produit. Veillez à ce que toutes les images et icones soient remplis et que tous les champs ne contiennent pas le texte 'Inconnu' !")
-        
-                // Rollback
-                if (insertedAircraftId) {
-                    console.log("Annulation : suppression de l'aircraft...");
-                    await deleteAircraft(insertedAircraftId, modelName);
-                }
-        
-                if (model && addMode === "Nouveau") {
-                    console.log("Annulation : suppression du modèle...");
-                    await deleteModel(model.model_id, modelName);
-                }
-                window.location.reload()
+    
             }
+    
+            // Étape 2 : Insérer l'aircraft
+            const model = await getModelByName(modelName);
+            const resultInsertAircraft = await insertAircraft(
+                model.model_id,
+                serialNumber,
+                +manufactureYear,
+                flightHours,
+                configuration,
+                recentMaintenance,
+                typicalRoutes,
+                owner,
+                costPerKm,
+                monthlyMaintenanceCost,
+                +estimatedPrice,
+                isAvailable,
+                description
+            );
+    
+            if (!resultInsertAircraft.success) {
+                throw new Error("Échec de l'insertion de l'aircraft.");
+            }
+    
+            insertedAircraftId = await getAircraftBySerialNumber(serialNumber); // Stocker l'ID de l'aircraft inséré
+            insertedAircraftId = insertedAircraftId.aircraft_id
+            // Étape 3 : Gestion des images
+            const { file, files, icon } = imageData;
+    
+            // Image principale
+            if (file) {
+                const responseMainImage = await uploadImage(file, model.model_name, insertedAircraftId);
+                if (!responseMainImage.success) throw new Error("Échec de l'upload de l'image principale.");
+    
+                const resultMainImage = await insertImage("main", insertedAircraftId, responseMainImage.filePath);
+                if (!resultMainImage.success) throw new Error("Échec de l'insertion de l'image principale.");
+            } else throw new Error("Échec de l'upload de l'image principale.");
+    
+            // Icône
+            if (icon) {
+                const responseIcon = await uploadImage(icon, model.model_name, insertedAircraftId);
+                if (!responseIcon.success) throw new Error("Échec de l'upload de l'icône.");
+    
+                const resultIcon = await insertImage("icon", insertedAircraftId, responseIcon.filePath);
+                if (!resultIcon.success) throw new Error("Échec de l'insertion de l'icône.");
+            } else throw new Error("Échec de l'upload de l'image icône.");
+    
+            // Images du slider
+            if (files && files.length > 0) {
+                for (const sliderImage of files) {
+                    const responseSlider = await uploadImage(sliderImage, model.model_name, insertedAircraftId);
+                    if (!responseSlider.success) throw new Error("Échec de l'upload d'une image du slider.");
+    
+                    const resultSliderImage = await insertImage("slider", insertedAircraftId, responseSlider.filePath);
+                    if (!resultSliderImage.success) throw new Error("Échec de l'insertion d'une image du slider.");
+                }
+            } else throw new Error("Échec de l'upload des images du slider.");
+    
+            console.log("Toutes les opérations ont été effectuées avec succès !");
+            window.location.reload()
+        } catch (error) {
+            alert("Il y a eu un problème lors de l'insertion du nouveau produit. Veillez à ce que toutes les images et icones soient remplis et que tous les champs ne contiennent pas le texte 'Inconnu' !")
+    
+            // Rollback
+            if (insertedAircraftId) {
+                console.log("Annulation : suppression de l'aircraft...");
+                await deleteAircraft(insertedAircraftId, modelName);
+            }
+    
+            if (model && addMode === "Nouveau") {
+                console.log("Annulation : suppression du modèle...");
+                await deleteModel(model.model_id, modelName);
+            }
+            window.location.reload()
         }
     };
     

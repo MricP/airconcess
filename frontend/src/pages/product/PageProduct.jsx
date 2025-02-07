@@ -262,13 +262,13 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
           <div className='label-container'>
               <label htmlFor="input-icon">
                   <div className='label-content'>
-                      <BiDownload /> Insérer une icone 
+                      <BiDownload /> Insérer une icône 
                   </div> 
                   <input id="input-icon" type="file" accept="image/*" onChange={handleFileChange}/>
               </label>
           </div> :
           <div className='label-content'>
-              <GrStatusGood color='green'/> Icone insérée
+              <GrStatusGood color='green'/> Icône insérée
           </div>
         }
         <p>Description du produit</p>
@@ -276,6 +276,28 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
         
         <DarkButton className={"add-button"} onClick={handleSubmit}>Ajouter le nouveau produit</DarkButton>
       </div>}
+
+      {mode === "edit" && 
+      <div className="bottom-product-page">
+        {iconImg == null ? 
+          <div className='label-container'>
+              <label htmlFor="input-icon">
+                  <div className='label-content'>
+                      <BiDownload /> Changer l'icône 
+                  </div> 
+                  <input id="input-icon" type="file" accept="image/*" onChange={handleFileChange}/>
+              </label>
+          </div> :
+          <div className='label-content'>
+              <GrStatusGood color='green'/> Icône changée
+          </div>
+        }
+        <p>Description du produit</p>
+        <textarea name="" id="" onChange={(e) => {handleInputChange("description", e.target.value)}}></textarea>
+        
+        <DarkButton className={"add-button"} onClick={handleSubmit}>Valider les modifications</DarkButton>
+      </div>}
+
     </main>
   );
 }

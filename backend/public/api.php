@@ -336,3 +336,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     echo json_encode($result);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-MainImage') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    $result = Aircraft::updateMainImage($args['id'], $args['file']);
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-SliderImages') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    $result = Aircraft::updateMainImage($args['id'], $args['files']);
+    echo json_encode($result);
+}
+

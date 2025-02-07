@@ -286,41 +286,49 @@ class Aircraft
         }
     }
 
-    public static function updateMainImage($id, $url, $tmpPath) {
-        $image = Aircraft::getMainImg($id);
+    public static function updateMainImage($id, $file) {
+        $images = Aircraft::getSliderImgs($id);
+        $modelName = Aircraft::getModelName($id);
         $oldURL = $image['img_URL'];
-        $oldFilePath = "../../frontend/public/assets/product/{$oldURL}";
+        $oldFilePath = "../../frontend/public/assets/product/{$modelName}/{$id}/{$oldURL}";
     
         if (file_exists($oldFilePath)) {
             unlink($oldFilePath);
         }
+        
+        $url = basename($file['name']);
+        $newFilePath = "../../frontend/public/assets/product/{$modelName}/{$id}/{$url}";
     
-        $newFilePath = "../../frontend/public/assets/product/{$url}";
-    
-        if (move_uploaded_file($tmpPath, $newFilePath)) {
+        if (move_uploaded_file($file['tmp_name'], $newFilePath)) {
+            Aircraft::insertImage("main", $id, $url);
             return true;
         } else {
             return false;
         }
     }
 
-    public static function updateSliderImages($id, $url, $files) {
+    public static function updateSliderImages($id, $files) {
         $images = Aircraft::getSliderImgs($id);
+        $modelName = Aircraft::getModelName($id);
         foreach ($image as $images) {
             $oldURL = $image['img_URL'];
-            $oldFilePath = "../../frontend/public/assets/product/{$oldURL}";
+            $oldFilePath = "../../frontend/public/assets/product/{$modelName}/{$id}/{$oldURL}";
         
             if (file_exists($oldFilePath)) {
                 unlink($oldFilePath);
             }
         }
-
-        $newFilePath = "../../frontend/public/assets/product/{$url}";
+        foreach ($file as $files) {
+            $url = basename($file['name']);
+            $newFilePath = "../../frontend/public/assets/product/{$modelName}/{$id}/{$url}";
     
-        if (move_uploaded_file($tmpPath, $newFilePath)) {
-            return true;
-        } else {
-            return false;
+            if (move_uploaded_file($file['tmp_name'], $newFilePath)) {
+                Aircraft::insertImage("slider", $id, $url);
+            } else {
+                return false;
+            }
         }
+
+        return true;
     }
 }

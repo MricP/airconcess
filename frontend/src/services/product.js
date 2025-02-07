@@ -225,3 +225,23 @@ export const updateAircraft = async (serialNumber, manufactureYear, flightHours,
         throw error;
     }
 }
+
+export const updateMainImage = async (id, file) => {
+    try {
+        const response = await axiosInstance.post('/admin/update-MainImage', { id, file });
+        return response
+    } catch (error) {
+        console.error("Erreur lors de la suppression", error);
+        throw error;
+    }
+}
+
+export const updateSliderImages = async (id, files) => {
+    try {
+        const response = await axiosInstance.post('/admin/update-SliderImages', { id, files });
+        return response
+    } catch (error) {
+        console.error("Erreur lors de la suppression", error);
+        throw error;
+    }
+}
