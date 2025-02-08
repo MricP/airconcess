@@ -7,31 +7,31 @@
 
 .appointmentForm-container p {
     color: #5B5B5B;
-    font-size: 14px;
+    font-size: var(--lower-text-size);
+}
+
+.appointmentForm-container h3 {
+    margin: 2rem 0;
+    text-align: center;
 }
 
 .appointmentForm-container .form-container {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 13rem 0;
+    margin: 6rem 0;
     background-color: #ffffff;
-    /* background-color: red; */
     width: 65%;
-}
-
-
-.appointmentForm-container h3 {
-    margin: 2rem 0;
+    transition: all ease .2s;
 }
 
 .appointmentForm-container .form-container form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: aqua; */
     gap: var(--form-fieldset-gap);
     width: 70%;
+    transition: all ease .2s;
 }
 
 .appointmentForm-container .form-container fieldset {
@@ -41,50 +41,52 @@
     margin-top: 1rem;
     border:solid 1px #B5B5B5;
     padding: 1rem 5% 1.5rem;
-    /* gap: 1rem; */
 }
 
 .appointmentForm-container .form-container legend {
+    font-size: var(--text-size);
+    font-weight: 500; /* Medium */
     margin-left: 2%;
     padding: 0 2%;
-    font-weight: 500; /* Medium */
-    /* background-color: red; */
 }
 
 .appointmentForm-container .form-container label:not(.invisible-label) {
     color: #5B5B5B;
-    font-size: 14px;
+    font-size: var(--lower-text-size);
 } 
 
-.appointmentForm-container .form-container label:not(.invisible-label)>svg {
-    font-size: 20px !important;
-}
+/* ############## GESTION DES INPUTS ############## */
 
-/* Le style des input et pour les input type/file ils ont la class invisible
-    et leur comportement est gere par la div-upload */
 .appointmentForm-container .form-container input:not(.invisible), 
-.form-container .div-upload,
 .form-container .css-13cymwt-control,
 .form-container .css-t3ipsp-control {
     border: solid #B5B5B5 1px;
     border-radius: 2px;
-    padding: 5px 10px 4.5px;
+    padding: 5px 10px;
     font-size: var(--text-size);
-    /* background-color: rgb(109, 245, 245); */
     width: 100%;
+    height: 40px;
     -webkit-transition: border-color ease-in-out 0.15s;
     transition: all ease-in-out 0.15s;
+}
+
+.appointmentForm-container .rs-picker-input-group input {
+    height: unset !important;
+}
+
+.appointmentForm-container .rs-uploader-trigger.rs-uploader-trigger-customize {
+    position: relative;
 }
 
 .form-container .css-13cymwt-control,
 .form-container .css-t3ipsp-control {
     padding: unset;
-    height: 40px !important;
 }
 
 .form-container .css-13cymwt-control input ,
 .form-container .css-t3ipsp-control input{
     padding: unset !important;
+    height: unset !important;
 }
 
 .appointmentForm-container .form-container input:not(.invisible):focus-within,
@@ -117,15 +119,16 @@
 .appointmentForm-container .reason-fieldset>div:last-of-type{
     gap: 2%;
     display: flex;
-    flex-direction: row;
 }
 
 .appointmentForm-container .reason-fieldset div label:first-of-type {
     width: 68%;
+    transition: all ease .2s;
 }
 
 .appointmentForm-container .reason-fieldset div label:nth-child(2) {
     width: 30%;
+    transition: all ease .2s;
 }
 
 /* ############## rdv-fieldset ############## */
@@ -137,6 +140,7 @@
 .appointmentForm-container .rdv-fieldset>div:nth-of-type(2) {
     display: flex;
     gap: 2%;
+    /* background-color: red; */
 }
 
 .appointmentForm-container .rdv-fieldset>div:nth-of-type(2) input:not(.input-error) {
@@ -146,58 +150,86 @@
 
 .appointmentForm-container .rdv-fieldset>div:nth-of-type(2)>div {
     width: 49%;
+    transition: all ease .2s;
 }
 
 .appointmentForm-container .rdv-fieldset>div:nth-of-type(2)>div>p,
 .appointmentForm-container .reason-fieldset>div:nth-of-type(2)>p {
     color: #5B5B5B;
-    font-size: 14px;
+    font-size: var(--lower-text-size);
 }
 
-.appointmentForm-container .invisible {
-    display: none;
-}
-
-.appointmentForm-container .rdv-fieldset #addr-label>p {
-    color: #5B5B5B;
-    font-size: 14px;
+.appointmentForm-container .rdv-fieldset #addr-label {
+    position: relative;
+    width: 100%;
 }
 
 .appointmentForm-container .rdv-fieldset #addr-label>p {
+    width: fit-content;
     color: #5B5B5B;
-    font-size: 14px;
+    font-size: var(--lower-text-size);
 }
 
 .appointmentForm-container .rdv-fieldset #addr-label section {
     display: flex;
+    min-height: 40px;
     align-items: center;
-    /* background-color: orange; */
-    padding: 5px 10px;
+    padding: 5px 0 5px 10px;
     border-radius: 2px;
     border: dashed 1px #B5B5B5;
 }
 
-.appointmentForm-container .rdv-fieldset #addr-label > section > p {
+.appointmentForm-container .rdv-fieldset #addr-label>section>p {
     width: 100%;
+    max-width: 100%;
     font-size: var(--text-size);
+    margin-right: 2px;
+    color: #333333;
 }
 
 .appointmentForm-container .rdv-fieldset #addr-label > section #copy-addr-button {
     height: auto;
-    width: 1.5em;
+    width: 40px;
+    height: 20px;
     cursor: pointer;
-
+    color: #B5B5B5;
+    border-left: solid 1px #B5B5B5;
+    transition: all ease .1s;
 }
 
-.appointmentForm-container .rdv-fieldset #addr-label:not(.invisible) > section #copy-addr-message {
-    /* background-color: red; */
-    width: 5rem;
-    /* height: fit-content; */
-    font-size: 20px;
-    text-align: right;
-    align-content: center;
+.appointmentForm-container .rdv-fieldset #addr-label > section #copy-addr-button:hover {
+    color: #797979;
 }
 
+.appointmentForm-container .rdv-fieldset #addr-label > section #copy-addr-message {
+    position: absolute;
+    width: fit-content;
+    top: -15px;
+    font-size: var(--text-size);
+    text-align: center;
+    user-select: none;
+    right: 0;
+    transform: translateX(25%);
+    background-color: #333333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    transition: all ease .3s;
+}
+
+.appointmentForm-container .rdv-fieldset #addr-label > section #copy-addr-message::before {
+    content: '';
+    background-color: #333333;
+    position: absolute;
+    bottom: -7px;
+    transform: rotate(45deg) translateX(-50%);
+    left: 50%;
+    width: 10px;
+    height: 10px;
+}
+
+/* ############## Autre ############## */
 
 .appointmentForm-container .submit {
     display: flex;
@@ -224,4 +256,93 @@ input.input-error, .input-error>div:not(.PhoneInputCountry){
 
 .input-error div input {
     outline: unset !important;
+}
+
+@media (width < 500px) { /* Mobile */
+    /* .appointmentForm-container { 
+        background-color: orange !important; 
+    } */
+
+    /* ############## reason-fieldset ############## */
+
+    .appointmentForm-container .reason-fieldset>div:last-of-type{
+        flex-direction: column;
+        gap: var(--form-input-gap);
+        gap: 10px;
+    }
+    
+    .appointmentForm-container .reason-fieldset div label:first-of-type,
+    .appointmentForm-container .reason-fieldset div label:nth-child(2)  {
+        width: 100% !important;
+    }
+
+    /* ############## rdv-fieldset ############## */
+
+    .appointmentForm-container .rdv-fieldset>div:nth-of-type(2) {
+        flex-direction: column;
+        gap: var(--form-input-gap);
+        gap: 10px;
+    }
+
+    .appointmentForm-container .rdv-fieldset>div:nth-of-type(2)>div {
+        width: 100%;
+    }
+
+    .appointmentForm-container .submit {
+        width: 80%;
+    }
+}
+  
+@media (width < 640px) { /* Tablette/Mobile */
+    /* .appointmentForm-container { 
+        background-color: lightblue; 
+    } */
+
+    .appointmentForm-container .form-container {
+        width: 90%;
+    }
+
+    .appointmentForm-container .form-container form {
+        width: 85%;
+    }
+
+    /* ############## reason-fieldset ############## */
+
+    .appointmentForm-container .reason-fieldset div label:first-of-type {
+        width: 54%;
+    }
+
+    .appointmentForm-container .reason-fieldset div label:nth-child(2) {
+        width: 44%;
+    }
+}
+  
+@media (641px < width < 768px) { /* Tablette portrait */
+    /* .appointmentForm-container { 
+        background-color: lightgreen;
+    } */
+
+    .appointmentForm-container .form-container {
+        width: 90%;
+    }
+}
+    
+@media (769px < width < 1024px) { /* Tablette paysage */
+    /* .appointmentForm-container { 
+        background-color: lightcoral;   
+    } */
+
+    .appointmentForm-container .form-container {
+        width: 85%;
+    }
+}
+    
+@media (1025px < width <1280px) { /* PC standard */
+    /* .appointmentForm-container { 
+        background-color: lightgoldenrodyellow; 
+    } */
+
+    .appointmentForm-container .form-container {
+        width: 75%;
+    }
 }

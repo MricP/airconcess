@@ -10,6 +10,7 @@ require_once __DIR__ . '../../models/Aircraft.php';
 require_once __DIR__ . '../../controllers/AppointmentController.php';
 require_once __DIR__ . '../../controllers/CatalogController.php';
 require_once __DIR__ . '../../controllers/ProfileController.php';
+require_once __DIR__ . '../../controllers/TrainingController.php';
 
 // Middleware CORS globalement
 CorsMiddleware::handle();
@@ -237,6 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my
 
     ProfileController::updateProfileData($payload);
 }
+
 if($_SERVER['REQUEST_METHOD'] === 'DELETE' && strpos($_SERVER['REQUEST_URI'], '/my-profile/delete') !== false){
     $headers = getallheaders();
     if (!isset($headers['Authorization'])) {
@@ -320,4 +322,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::deleteModel($args['id'], $args['nameModel']);
     echo json_encode($result);
+}
+
+// Partie page sub-training
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/subTraining-submit') !== false) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    TrainingController::createTraining($data);
 }

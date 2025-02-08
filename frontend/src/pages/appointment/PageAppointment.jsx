@@ -11,7 +11,7 @@ function PageAppointment() {
         return(<ResultPage message='Votre rendez-vous a été pris en compte'/>)
     } else {
         return (
-            <main>
+            <main className='appt-container'>
                 <div className='appointmentShowcase'>
                     {/* TODO mettre br */}
                     <div className='text-div'>

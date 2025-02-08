@@ -3,10 +3,12 @@
 }
 
 .page-subTraining {
+    display: flex;
+    justify-content: center;
     position: relative;
     background-color: #F5F5F5;
     padding-top: 90px;
-    height: 150vh;
+    min-height: 100vh;
 }
 
 .page-subTraining .cardSubTraining-container {
@@ -17,4 +19,24 @@
 .page-subTraining .formSubTraining-container {
     position: absolute;
     left: var(--padding-page);
+}
+
+.page-subTraining .paymentstep-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    height:550px ;
+    width: clamp(300px,40%,500px);
+    background-color: #fff;
+}
+
+.page-subTraining .paymentstep-div>p:first-child {
+    color: green !important;
+    margin-bottom: 20px;
+}
+
+.page-subTraining .paymentstep-div .dark-button {
+    margin-top: 20px;
 }

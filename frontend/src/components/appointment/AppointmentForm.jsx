@@ -371,8 +371,9 @@ function AppointmentForm({setIsSubmitted}) {
                             <p>Adresse de l'agence</p>
                             <section>
                                 <p>{selectedAgencyLocation}</p>
+                                <p className={isCopied ? "" : "transparent"} id="copy-addr-message">Copié !</p>
                                 <CopyToClipboard text={selectedAgencyLocation} onCopy={() => setIsCopied(true)}>
-                                    {isCopied ? <p id="copy-addr-message">Copié !</p> : <MdContentCopy id="copy-addr-button" />}
+                                    <MdContentCopy id="copy-addr-button" />
                                 </CopyToClipboard>
                             </section>
                         </div>

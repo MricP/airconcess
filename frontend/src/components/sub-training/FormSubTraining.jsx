@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import DarkButton from '../general/DarkButton'
 import { Steps } from 'rsuite';
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
@@ -12,8 +12,11 @@ import PaymentDetailsStep from './PaymentDetailsStep';
 
 import "../../styles/sub-training/FormSubTraining.css"
 
+import { submitTraining } from "../../services/training";
 
-function FormSubTraining() {
+
+
+function FormSubTraining({step,updateStep}) {
   const {register,handleSubmit,watch,setValue, formState: { errors }} = useForm (
     { defaultValues: {
         //Step1
@@ -42,17 +45,17 @@ function FormSubTraining() {
 
   const formData = watch();
 
-  const [step,updateStep] = useState(0);
-
   function handlePrevStep() {
     if(step>0) {
-      step == 5 ? updateStep(3) : updateStep(step-1)
+      step === 5 ? updateStep(3) : updateStep(step-1)
     }
   }
 
   function handleNextStep() {
-    if(step<5) {
-      step == 3 ? updateStep(5) : updateStep(step+1)
+    if(step<3) {
+      updateStep(step+1)
+    } else if(step===3) { // Avant de passer à l'étape suivante, on fait l'isertion
+      handleInsertion()
     }
   }
 
@@ -72,9 +75,18 @@ function FormSubTraining() {
       if(count === 0) setValue('prefSlots',null)
     }
     handleNextStep()
-
     //console.table(formData.prefSlots)
   };
+
+  const handleInsertion = async () => {
+    try {
+      const response = await submitTraining(formData);    
+      console.log("insertion Ok")
+    } catch (error) {
+      console.log("insertion Not Ok")
+      // console.log('Error response:', error.response?.data?.message || 'Unknown error');
+    }
+  }
 
   function handleStepDisplayed() {
     switch(step) {
@@ -94,15 +106,11 @@ function FormSubTraining() {
         return (
           <ValidationStep formData={formData} setStep={updateStep}/>
         )
-      case 5:
-        return (
-          <div>
-            <p>Phase de paiement</p>
-          </div>
-        )
+      default:
+        break;
     }
   }
-  
+
   return (
     <div className='formSubTraining-container'>
       <GrFormPrevious className={step === 0 ? "disabled prev-step" :"prev-step"} onClick={handlePrevStep}/>

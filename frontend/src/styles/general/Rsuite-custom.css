@@ -8110,6 +8110,7 @@ textarea.rs-input-sm {
   border-right: 0;
 }
 .rs-input-group.rs-input-group-inside {
+  height: 40px;
   width: 100%;
   background-color: #fff;
   background-color: var(--rs-input-bg);

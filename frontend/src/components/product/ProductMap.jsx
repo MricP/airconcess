@@ -24,7 +24,7 @@ const ProductMap = ({ aircraft,modelName }) => {
 
     return (
         <div className='productMap-container'>
-            <MapContainer key={center.join(',')} className='map' center={center} zoom={13} scrollWheelZoom={false}>
+            <MapContainer key={center.join(',')} className='map' center={center} minZoom={4} maxZoom={13} zoom={8} scrollWheelZoom={false}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 {aircraft?.last_location_latitude && (
                     <Marker position={center} icon={customIcon}>

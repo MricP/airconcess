@@ -30,8 +30,11 @@
 
 :root {
     --font-primary: 'Jost', sans-serif;
-    --text-size : 1.25rem; /*20 sur figma*/
-    --title-size: 3.125rem; /*50 sur figma*/
+    --text-size : clamp(16px, 2vw, 20px); /*20px -> 16px*/
+    --lower-text-size : clamp(12px, 2vw, 16px); /*16px -> 12px*/
+    --h1-size : clamp(30px, 6vw, 90px); /*90px -> 30px*/
+    --h2-size: 3.125rem; /*50 sur figma*/
+    --h3-size : clamp(20px, 4vw, 30px); /*30px -> 20px*/
     --bg-primary: #FFFFFF;
     --bg-secondary: #F5F5F5;
     --color-primary: #333333;
@@ -44,7 +47,6 @@
     --line-color: #dedede;
     --box-color: #f5f5f5;
     --model-color: #00529D;
-
 }
 
 @media (prefers-color-scheme: dark) {
@@ -62,22 +64,21 @@ code { /*A VOIR*/
     monospace; */
 }
 
-h1 {
-    font-size: 90px;
-}
-
 body {
     background-color: var(--bg-primary);
     color: var(--color-primary);
 }
 
+h1 {
+    font-size: var(--h1-size);
+}
+
 h2 {
-    font-size: var(--title-size); 
-    /*clamp(30px,5vw,var(--title-size)); pour le responsive*/
+    font-size: var(--h2-size); 
 }
 
 h3 {
-    font-size: 2rem;
+    font-size: var(--h3-size);
 }
 
 p {
@@ -99,6 +100,11 @@ p {
 
 .invisible {
     display: none !important;
+}
+
+.transparent {
+    visibility: hidden;
+    opacity: 0;
 }
 
 button{

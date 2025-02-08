@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { TbEdit } from "react-icons/tb";
 
@@ -62,7 +62,7 @@ function ValidationStep({formData,setStep}) {
                     </section>
                     <section className="info-section">
                         <p>Piece d'identité</p>
-                        <p className="value-container">{formData.idCard != null ? formData.idCard[0].name : "Non renseigné"}</p>
+                        <p className="value-container">{formData.idCard ? formData.idCard.blobFile.name : "Non renseigné"}</p>
                     </section>
                 </div>
             </div>
