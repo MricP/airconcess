@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../utils/Database.php';
-// ini_set('log_errors', 1); // Activer la journalisation des erreurs
-// ini_set('error_log', __DIR__ . '/error_log.txt'); // Définir le fichier de log
-// error_reporting(E_ALL); // Activer tous les niveaux d'erreurs
-// ini_set('display_errors', 1);
+ini_set('log_errors', 1); // Activer la journalisation des erreurs
+ini_set('error_log', __DIR__ . '/error_log.txt'); // Définir le fichier de log
+error_reporting(E_ALL); // Activer tous les niveaux d'erreurs
+ini_set('display_errors', 1);
 
 
 class Aircraft
@@ -87,7 +87,7 @@ class Aircraft
     public static function getAircraftDescription($idAircraft) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT serial_number,manufacture_year,flight_hours,configuration,recent_maintenance,typical_routes,
-                owner,cost_per_km,monthly_maintenance_cost,estimated_price FROM aircraft WHERE aircraft_id = ?");
+                owner,cost_per_km,monthly_maintenance_cost,estimated_price, description FROM aircraft WHERE aircraft_id = ?");
         $stmt->execute([$idAircraft]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -261,11 +261,10 @@ class Aircraft
         $stmt->execute([$id]);
     }
 
-    public static function updateAircraft($id, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $isAvailable, $description) {
-        try {
+    public static function updateAircraft($id, $serialNumber, $manufactureYear, $flightHours, $configuration, $recentMaintenance, $typicalRoutes, $owner, $costPerKm, $monthlyMaintenanceCost, $estimatedPrice, $description) {
             $pdo = self::getDB();
 
-            $stmt = $pdo->prepare("Update Aircraft set serial_number = ?, manufacture_year = ?, flight_hours = ?, configuration = ?, recent_maintenance = ?, typical_routes = ?, owner = ?, cost_per_km = ?, monthly_maintenance_cost = ?, estimated_price = ?, description = ?");
+            $stmt = $pdo->prepare("Update Aircraft set serial_number = ?, manufacture_year = ?, flight_hours = ?, configuration = ?, recent_maintenance = ?, typical_routes = ?, owner = ?, cost_per_km = ?, monthly_maintenance_cost = ?, estimated_price = ?, description = ? where aircraft_id = ?");
             $stmt->bindValue(1, $serialNumber);
             $stmt->bindValue(2, $manufactureYear);
             $stmt->bindValue(3, $flightHours);
@@ -277,58 +276,74 @@ class Aircraft
             $stmt->bindValue(9, $monthlyMaintenanceCost);
             $stmt->bindValue(10, $estimatedPrice);
             $stmt->bindValue(11, $description);
+            $stmt->bindValue(12, $id);
 
-            $stmt->execute();
+            $result = $stmt->execute();
 
-            return true;
-        } catch (Exception $e) {
-            return false;
-        }
+            return $result;
     }
 
-    public static function updateMainImage($id, $file) {
-        $images = Aircraft::getSliderImgs($id);
-        $modelName = Aircraft::getModelName($id);
-        $oldURL = $image['img_URL'];
-        $oldFilePath = "../../frontend/public/assets/product/{$modelName}/{$id}/{$oldURL}";
+    public static function deleteImageWithAircraftId($id, $role){
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("DELETE FROM Image WHERE aircraft_id = ? AND role = ?");
+        return $stmt->execute([$id, $role]);
+    }
     
+    public static function updateMainImage($id, $file) {
+        $image = Aircraft::getMainImg($id); 
+        $modelName = Aircraft::getModelName($id);
+        $modelName = $modelName[0];
+        
+        $oldURL = $image['img_URL'];
+        $oldFilePath = "../../frontend/public{$oldURL}";
         if (file_exists($oldFilePath)) {
             unlink($oldFilePath);
         }
-        
+    
         $url = basename($file['name']);
         $newFilePath = "../../frontend/public/assets/product/{$modelName}/{$id}/{$url}";
     
         if (move_uploaded_file($file['tmp_name'], $newFilePath)) {
-            Aircraft::insertImage("main", $id, $url);
-            return true;
-        } else {
-            return false;
+            Aircraft::deleteImageWithAircraftId($id, "main");
+            Aircraft::insertImage("main", $id, "/assets/product/{$modelName}/{$id}/{$url}");
+            return $oldFilePath;
         }
+        
+        return $newFilePath;
     }
-
+    
     public static function updateSliderImages($id, $files) {
         $images = Aircraft::getSliderImgs($id);
         $modelName = Aircraft::getModelName($id);
-        foreach ($image as $images) {
-            $oldURL = $image['img_URL'];
-            $oldFilePath = "../../frontend/public/assets/product/{$modelName}/{$id}/{$oldURL}";
         
+        // Suppression des anciennes images
+        foreach ($images as $image) {
+            $oldURL = $image['img_URL'];
+            $oldFilePath = "../../frontend/public{$oldURL}";
+    
             if (file_exists($oldFilePath)) {
                 unlink($oldFilePath);
             }
+            
+            
         }
-        foreach ($file as $files) {
+
+        // Suppression de l'entrée dans la base de données
+        Aircraft::deleteImageWithAircraftId($id, "slider");
+    
+        // Ajout des nouvelles images
+        foreach ($files as $file) {
             $url = basename($file['name']);
             $newFilePath = "../../frontend/public/assets/product/{$modelName}/{$id}/{$url}";
     
             if (move_uploaded_file($file['tmp_name'], $newFilePath)) {
-                Aircraft::insertImage("slider", $id, $url);
+                Aircraft::insertImage("slider", $id, "/assets/product/{$modelName}/{$id}/{$url}");
             } else {
                 return false;
             }
         }
-
+    
         return true;
     }
+    
 }

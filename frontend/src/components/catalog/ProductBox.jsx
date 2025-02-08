@@ -31,7 +31,6 @@ export const ProductBox = (props) => {
   const handleAddButtonClick = async (productData, imageData) => {
   
           const {
-              id,
               serialNumber,
               manufactureYear,
               flightHours,
@@ -42,50 +41,48 @@ export const ProductBox = (props) => {
               costPerKm,
               monthlyMaintenanceCost,
               estimatedPrice,
-              description
+              description,
           } = productData;
       
       
           try {
-              
               const resultUpdateAircraft = await updateAircraft(
-                  id,
+                  props.aircraftId,
                   serialNumber,
                   +manufactureYear,
-                  flightHours,
+                  flightHours.split(" ")[0],
                   configuration,
                   recentMaintenance,
                   typicalRoutes,
                   owner,
                   costPerKm,
                   monthlyMaintenanceCost,
-                  +estimatedPrice,
+                  +estimatedPrice.split(" ")[0],
                   description
               );
-      
-              if (!resultUpdateAircraft) {
-                  throw new Error("Échec de la mise à jour de l'aircraft.");
-              }
-      
+              console.log(resultUpdateAircraft)
               const { file, files, icon } = imageData;
       
               // Image principale
               if (file) {
-                  updateMainImage(id, file)
-              } else throw new Error("Échec de la mise à jour de l'image principale.");
+                  console.log(props.aircraftId)
+                  console.log(file)
+                  const resultUpdateMainImage = updateMainImage(props.aircraftId, file)
+                  console.log(resultUpdateMainImage)
+              } 
       
               // Icône
               if (icon) {
                   
-              } else throw new Error("Échec de l'upload de l'image icône.");
+              } 
       
               // Images du slider
               if (files && files.length > 0) {
-                updateMainImage(id, files)
-              } else throw new Error("Échec de l'upload des images du slider.");
+                updateSliderImages(props.aircraftId, files)
+              } 
       
               console.log("Toutes les opérations ont été effectuées avec succès !");
-              window.location.reload()
+              
           } catch (error) {
               alert(error)
               window.location.reload()

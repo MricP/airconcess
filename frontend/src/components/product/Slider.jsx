@@ -116,7 +116,7 @@ function Slider({ images, mode, onInputChange }) {
                             <div className='label-container'>
                                 <label htmlFor="input-picture">
                                     <div className='label-content'>
-                                        <BiDownload /> Insérer des photos 
+                                        <BiDownload /> Remplacer les photos
                                     </div> 
                                     <input type="file" id="input-picture" onChange={handleFileChange} accept="image/*" multiple/>
                                 </label>

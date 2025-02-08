@@ -36,7 +36,9 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
         "owner",
         "costPerKm",
         "monthlyMaintenanceCost",
-        "estimatedPrice"
+        "estimatedPrice",
+        "description",
+        "id"
     ]
 
     function handleDownload() {
@@ -172,13 +174,14 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
         aircraftDescription.map((line, index) => (
             onInputChange(aircraftDescriptionTab[index], line.value)
         ))
+        onInputChange(aircraftDescriptionTab[10], aircraftId)
     }
 
     useEffect(() => {
         if (mode === "edit"){
             loadData();
         }
-    }, [mode])
+    }, [aircraftDescription])
 
     if (mode === "add"){
         return (

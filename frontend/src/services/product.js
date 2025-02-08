@@ -216,9 +216,9 @@ export const deleteModel = async (id, nameModel) => {
     }
 }
 
-export const updateAircraft = async (serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, description) => {
+export const updateAircraft = async (id, serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, description) => {
     try {
-        const response = await axiosInstance.post('/admin/update-Aircraft', { serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, description });
+        const response = await axiosInstance.post('/admin/update-Aircraft', {id, serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, description });
         return response
     } catch (error) {
         console.error("Erreur lors de la mise à jour de l'aircraft", error);
@@ -228,8 +228,15 @@ export const updateAircraft = async (serialNumber, manufactureYear, flightHours,
 
 export const updateMainImage = async (id, file) => {
     try {
-        const response = await axiosInstance.post('/admin/update-MainImage', { id, file });
-        return response
+        const formData = new FormData();
+        formData.append('file', file); // Ajouter le fichier
+        formData.append('id', id); 
+        const response = await axiosInstance.post('/admin/update-MainImage', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Nécessaire pour transmettre les fichiers
+            },
+        });
+        return response.data
     } catch (error) {
         console.error("Erreur lors de la suppression", error);
         throw error;

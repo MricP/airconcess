@@ -321,6 +321,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-Aircraft') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::updateAircraft(
+        $args["id"],
         $args["serialNumber"],
         $args["manufactureYear"],
         $args["flightHours"],
@@ -337,8 +338,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-MainImage') !== false) {
-    $args = json_decode(file_get_contents("php://input"), true);
-    $result = Aircraft::updateMainImage($args['id'], $args['file']);
+    $id = $_POST['id'];
+    $file = $_FILES['file'];
+    $result = Aircraft::updateMainImage($id, $file);
     echo json_encode($result);
 }
 
