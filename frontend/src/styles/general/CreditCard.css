@@ -75,13 +75,13 @@
 }
 
 .card-container .front .number-section *{
-    font-size: 20px;
+    font-size: var(--text-size);
 }
 
 .card-container .front .holder-section p:last-child, 
 .card-container .front .date-section p:last-child {
     font-weight: 500;
-    font-size: 16px;
+    font-size: var(--lower-text-size);
 }
 
 .card-container .front>div:last-of-type {

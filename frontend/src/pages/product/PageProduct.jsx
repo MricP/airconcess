@@ -1,5 +1,5 @@
 import "../../styles/product/PageProduct.css";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import ProductShowcase from "../../components/product/ProductShowcase";
 import ProductDescription from "../../components/product/ProductDescription";
 import Slider from "../../components/product/Slider";
@@ -10,48 +10,60 @@ import { BiDownload } from "react-icons/bi";
 import { GrStatusGood } from "react-icons/gr";
 
 import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription, getModelName, getAircraft} from "../../services/product";
-import useRedirect from "../../components/Custom-hooks";
 import ResultPage from "../ResultPage";
 
 function PageProduct({mode, onSubmitProduct, model}) {
-  const redirect = useRedirect();
+  /*################### CONSTANTES ####################*/
+
   const location = useLocation().pathname.split("/");
   const id = parseInt(location[location.length - 1]); // Récupération de l'ID
-  
+
+  /*############ INITIALISATION DES STATES ############*/
+
   const [isIdValid, updateIdValidity] = useState(!isNaN(id));
 
-  const [aircraft,setAircraft] = useState(null)
-  const [modelName, updateModelName] = useState("Inconnu")
+  const [aircraft,setAircraft] = useState(null) //Stock l'aircraft correspondant à l'id
+  const [modelName, updateModelName] = useState("Inconnu") //Stock le nom du model de l'aircaft
   const [mainImg, updateMainImg] = useState({ url: "/assets/not-available.png", id: 0 });
   const [sliderImgs, updateSliderImgs] = useState([]);
-  const [modelDescription, updateModelDescription] = useState([
-      {varName:"range_type", txt:"Rayon d'action", value:"Inconnu"},
-      {varName:"manufacturer", txt:"Constructeur", value:"Inconnu"},
-      {varName:"passenger_capacity", txt:"Capacité ", value:"Inconnu"},
-      {varName:"crew_size", txt:"Équipage", value:"Inconnu"},
-      {varName:"length", txt:"Longueur" , value:"Inconnu"},
-      {varName:"wingspan", txt:"Envergure" , value:"Inconnu"},
-      {varName:"height", txt:"Hauteur" , value:"Inconnu"},
-      {varName:"max_takeoff_weight", txt:"Poids maximum au décollage" , value:"Inconnu"},
-      {varName:"engines", txt:"Moteurs" , value:"Inconnu"},
-      {varName:"speed_avg", txt:"Vitesse moyenne" , value:"Inconnu"},
-      {varName:"max_range", txt:"Portée maximale" , value: "Inconnu"},
-      {varName:"max_altitude", txt:"Altitude maximale" , value:"Inconnu"}
-  ])
-  const [aircraftDescription, updateAircraftDesciption] = useState([
-      {varName:"serial_number", txt:"Numéro de série", value:"Inconnu"},
-      {varName:"manufacture_year", txt:"Année de fabrication", value:"Inconnu"},
-      {varName:"flight_hours", txt:"Heures de vol", value:"Inconnu"},
-      {varName:"configuration", txt:"Configuration", value:"Inconnu"},
-      {varName:"recent_maintenance", txt:"Maintenance récente", value:"Inconnu"},
-      {varName:"typical_routes", txt:"Trajets typiques", value:"Inconnu"},
-      {varName:"owner", txt:"Propriétaire", value:"Inconnu"},
-      {varName:"cost_per_km", txt:"Coût par kilomètre", value:"Inconnu"},
-      {varName:"monthly_maintenance_cost", txt:"Coût mensuel d’entretien", value:"Inconnu"},
-      {varName:"estimated_price", txt:"Prix estimé ", value:"Inconnu"},
-  ])
   const [iconImg, setIconImage] = useState(null)
-  
+
+  const [modelDescription, updateModelDescription] = useState([
+    {varName:"range_type", txt:"Rayon d'action", value:"Inconnu"},
+    {varName:"manufacturer", txt:"Constructeur", value:"Inconnu"},
+    {varName:"passenger_capacity", txt:"Capacité ", value:"Inconnu"},
+    {varName:"crew_size", txt:"Équipage", value:"Inconnu"},
+    {varName:"length", txt:"Longueur" , value:"Inconnu"},
+    {varName:"wingspan", txt:"Envergure" , value:"Inconnu"},
+    {varName:"height", txt:"Hauteur" , value:"Inconnu"},
+    {varName:"max_takeoff_weight", txt:"Poids maximum au décollage" , value:"Inconnu"},
+    {varName:"engines", txt:"Moteurs" , value:"Inconnu"},
+    {varName:"speed_avg", txt:"Vitesse moyenne" , value:"Inconnu"},
+    {varName:"max_range", txt:"Portée maximale" , value: "Inconnu"},
+    {varName:"max_altitude", txt:"Altitude maximale" , value:"Inconnu"}
+  ])
+
+  const [aircraftDescription, updateAircraftDesciption] = useState([
+    {varName:"serial_number", txt:"Numéro de série", value:"Inconnu"},
+    {varName:"manufacture_year", txt:"Année de fabrication", value:"Inconnu"},
+    {varName:"flight_hours", txt:"Heures de vol", value:"Inconnu"},
+    {varName:"configuration", txt:"Configuration", value:"Inconnu"},
+    {varName:"recent_maintenance", txt:"Maintenance récente", value:"Inconnu"},
+    {varName:"typical_routes", txt:"Trajets typiques", value:"Inconnu"},
+    {varName:"owner", txt:"Propriétaire", value:"Inconnu"},
+    {varName:"cost_per_km", txt:"Coût par kilomètre", value:"Inconnu"},
+    {varName:"monthly_maintenance_cost", txt:"Coût mensuel d’entretien", value:"Inconnu"},
+    {varName:"estimated_price", txt:"Prix estimé ", value:"Inconnu"},
+  ])
+
+  /*################### REFERENCES ####################*/
+  // Pour utiliser les states dans les useEffect sans détecter un changement de cette variable
+
+  // const modelDescriptionRef = useRef(modelDescription);
+  // const aircraftDescriptionRef = useRef(aircraftDescription);
+
+  /*#################### FONCTIONS ####################*/
+
   /**
    * Formate un nombre pour ajouter des points comme séparateurs de milliers.
    * @param {number|string} num - Le nombre à formater.
@@ -62,13 +74,9 @@ function PageProduct({mode, onSubmitProduct, model}) {
     return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
   
-  // Charge toutes les data à afficher en fonction de l'id de l'appareil (idAircraft)
-  
+  /*###################### AUTRE ######################*/
 
-  const modelDescriptionRef = useRef(modelDescription);
-  const aircraftDescriptionRef = useRef(aircraftDescription);
-
-  // Charger les données lorsque le composant est monté ou lorsque `id` change
+  // Charger les données lorsque le composant est monté ou lorsque "id" change
   useEffect(() => {
     const loadDataFromDB = async () => {
       try {
@@ -100,7 +108,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
           const newDescription = []
           dbModelDescription.forEach((element) => {
             if(element.value) {
-              const criteria = modelDescriptionRef.current.find((elt) => elt.varName === element.varName)
+              const criteria = modelDescription.current.find((elt) => elt.varName === element.varName)
               if(criteria) {
                 let updatedCriteria = { ...criteria, value: element.value };
                 if(criteria.varName === "passenger_capacity") updatedCriteria = { ...criteria, value:"Jusqu'à "+element.value+" passagers"};
@@ -116,7 +124,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
           const newDescription = []
           dbAircraftDescription.forEach(element => {
             if(element.value) {
-              const criteria = aircraftDescriptionRef.current.find((elt) => elt.varName === element.varName)
+              const criteria = aircraftDescription.current.find((elt) => elt.varName === element.varName)
               if(criteria) {
                 let updatedCriteria = { ...criteria, value: element.value };
                 if(criteria.varName === "flight_hours") updatedCriteria = { ...criteria, value:element.value+" heures"};
@@ -140,6 +148,10 @@ function PageProduct({mode, onSubmitProduct, model}) {
     loadDataFromDB();
   }
   , [id]);
+
+  /*:::::::::::::::::::::::::::::::::::::: PARTIE ADMIN ::::::::::::::::::::::::::::::::::::::*/
+
+  /*:::::::::::: INITIALISATION DES STATES ::::::::::::*/
 
   const [productData, setProductData] = useState({
     serialNumber: "",
@@ -179,26 +191,7 @@ function PageProduct({mode, onSubmitProduct, model}) {
     maxTakeoffWeight: "",
   });
 
-  useEffect(() => {
-    if(model !== "Nouveau" && mode === "add"){
-      setModelData({
-        addMode: "",
-        modelName: model.model_name,
-        rangeType: "",
-        manufacturer: "",
-        passengerCapacity: "",
-        engines: "", 
-        speedAvg: "", 
-        maxRange: "", 
-        maxAltitude: "", 
-        crewSize: "", 
-        length: "", 
-        wingspan: "", 
-        height: "", 
-        maxTakeoffWeight: "",
-      })
-    }
-  }, [model]);
+  /*:::::::::::::::::::: FONCTIONS ::::::::::::::::::::*/
 
   const handleSubmit = () => {
     if (onSubmitProduct) {
@@ -234,7 +227,30 @@ function PageProduct({mode, onSubmitProduct, model}) {
     }
   };
 
+  /*:::::::::::::::::::::: AUTRE ::::::::::::::::::::::*/
 
+  useEffect(() => {
+    if(model !== "Nouveau" && mode === "add"){
+      setModelData({
+        addMode: "",
+        modelName: model.model_name,
+        rangeType: "",
+        manufacturer: "",
+        passengerCapacity: "",
+        engines: "", 
+        speedAvg: "", 
+        maxRange: "", 
+        maxAltitude: "", 
+        crewSize: "", 
+        length: "", 
+        wingspan: "", 
+        height: "", 
+        maxTakeoffWeight: "",
+      })
+    }
+  }, [model,mode]);
+
+  
   // Si l'id est invalide ou qu'il n'y a pas d'aircraft à afficher
   if (!isIdValid && mode !== "add") {
     return(<ResultPage message='Aucun aéronef correspondant.'/>)

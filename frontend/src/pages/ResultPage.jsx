@@ -14,7 +14,7 @@ function ResultPage({ message="", redirectionMessage="Retourner à l'accueil",re
         }, delay);
 
         return () => clearTimeout(timer);
-    }, [redirect, delay]);
+    }, [redirect,delay,redirectTo]);
 
     return (
         <div className="result-page">

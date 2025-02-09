@@ -1,8 +1,9 @@
 import React,{useState} from 'react'
-import "../../styles/sub-training/PageSubTraining.css"
 import FormSubTraining from '../../components/sub-training/FormSubTraining'
 import CardSubTraining from '../../components/sub-training/CardSubTraining'
 import PaymentStep from '../../components/sub-training/PaymentStep';
+
+import "../../styles/sub-training/PageSubTraining.css"
 
 function PageSubTraining() {
   const [step,updateStep] = useState(3);
@@ -16,8 +17,10 @@ function PageSubTraining() {
   } else {
     return (
       <main className="page-subTraining">
+        <div>
           <FormSubTraining step={step} updateStep={updateStep}/>
           <CardSubTraining/>
+        </div>
       </main>
     )
   }

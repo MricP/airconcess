@@ -5,7 +5,7 @@
     text-align: center;
     border-radius: 5px;
     border: none;
-    font-size: 1.25rem;
+    font-size: var(--text-size);
     transition: all ease 0.2s;
 }
 

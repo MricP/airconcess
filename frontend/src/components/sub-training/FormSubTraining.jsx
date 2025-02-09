@@ -1,19 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import DarkButton from '../general/DarkButton'
 import { Steps } from 'rsuite';
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
-import { GrFormPrevious } from "react-icons/gr";
+import { IoArrowBackOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 
 import InfoFormFieldset from "../appointment/InfoFormFieldset"
 import TrainingPrefFormFieldset from "./TrainingPrefFormFieldset"
 import ValidationStep from './ValidationStep';
 import PaymentDetailsStep from './PaymentDetailsStep';
-
-import "../../styles/sub-training/FormSubTraining.css"
-
 import { submitTraining } from "../../services/training";
 
+import "../../styles/sub-training/FormSubTraining.css"
 
 
 function FormSubTraining({step,updateStep}) {
@@ -113,14 +111,23 @@ function FormSubTraining({step,updateStep}) {
 
   return (
     <div className='formSubTraining-container'>
-      <GrFormPrevious className={step === 0 ? "disabled prev-step" :"prev-step"} onClick={handlePrevStep}/>
+      <IoArrowBackOutline  className={step === 0 ? "disabled prev-step" :"prev-step"} onClick={handlePrevStep}/>
       <Steps current={step} className='step-indicator'>
-        <Steps.Item description="INFORMATIONS CLIENT" />
+        <Steps.Item description={"INFORMATIONS CLIENT"} />
         <Steps.Item description="PRÉFÉRENCES ET DISPONIBILITÉ" />
         <Steps.Item description="DONNÉES DE PAIEMENT" />
         <Steps.Item description="VALIDATION" />
         <Steps.Item icon={<IoCheckmarkDoneOutline style={{fontSize:20,color:"#5b5b5b"}}/>}/>
       </Steps>
+      
+      <Steps current={step} className='step-indicator mobile'> 
+        <Steps.Item />
+        <Steps.Item />
+        <Steps.Item />
+        <Steps.Item />
+        <Steps.Item icon={<IoCheckmarkDoneOutline style={{fontSize:20,color:"#5b5b5b"}}/>}/>
+      </Steps>
+
       <form method="POST" onSubmit={handleSubmit(onSubmit)} className='current-step'>
         {handleStepDisplayed()}
         

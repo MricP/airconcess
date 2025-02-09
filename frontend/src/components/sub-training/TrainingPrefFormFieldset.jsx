@@ -13,8 +13,16 @@ import { IoIosAddCircle } from "react-icons/io";
 import "../../styles/sub-training/TrainingPrefFormFieldset.css";
 
 function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
+    /*############ INITIALISATION DES STATES ############*/
+
     const [timeSlots, setTimeSlots] = useState([]); // Stocke des objets avec un identifiant unique
     const [isHovered, setIsHovered] = useState(false);
+
+    /*################### REFERENCES ####################*/
+    // Pour utiliser les states dans les useEffect sans détecter un changement de cette variable
+    
+
+    /*#################### FONCTIONS ####################*/
 
     function addTimeSlot() {
         const newSlot = {id: "id"+Math.round(Math.random()*10000) }; // Crée un objet unique avec un id
@@ -30,11 +38,15 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
         }
     };
 
+    /*###################### AUTRE ######################*/
+
+    // Sert à recharger les timeSlots de préference si on passe l'etape et que l'on revient en arriere
     useEffect(() => {
+        console.log("ici")
         let temp = timeSlots;
         for(let key in formData.prefSlots) {
             temp = [...temp,{id:key}]
-            console.log(key)
+            console.log("la")
             setTimeSlots(temp)
         }
     },[]);
@@ -135,8 +147,7 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                             onClick={timeSlots.length < 5 ? addTimeSlot : null}
                         />
                     </div>
-                </div>
-                
+                </div>       
             </div>
 
             <label>

@@ -214,6 +214,21 @@ function AppointmentForm({setIsSubmitted}) {
         loadAircraftsWith(value?.value)
     }
 
+    /*################### REFERENCES ####################*/ 
+    // Pour utiliser les states et fonctions dans les useEffect sans détecter un changement de cette variable
+
+    // const modelOptionsRef = useRef(modelOptions);
+    // const loadAvailableModelsRef = useRef(loadAvailableModels);
+    // const loadAvailableAgenciesRef = useRef(loadAvailableAgencies);
+    // const handleIdLocationRef = useRef(handleIdLocation);
+    // const handleModelSelectionRef = useRef(handleModelSelection);
+    // const currentAircraftRef = useRef(currentAircraft);
+    // const idAircraftRef = useRef(idAircraft);
+    // const setValueRef = useRef(setValue);
+    // const errorsRef = useRef(errors);
+    // const loadDisabledTimestampsRef = useRef(loadDisabledTimestamps)
+    // const loadSelectedAgencyLocationRef = useRef(loadSelectedAgencyLocation)
+
     /*###################### AUTRE ######################*/
 
     useEffect(() => {
@@ -227,7 +242,7 @@ function AppointmentForm({setIsSubmitted}) {
     // Gestion du model (en fonction de l'id dans l'URL)
     useEffect(() => {
         if (modelOptions.length !== 0 && currentAircraft) {
-            let model = modelOptions.find(option => option.value == currentAircraft.model_id);
+            let model = modelOptions.find(option => option.value === currentAircraft.model_id);
             handleModelSelection(model);
         }
     }, [currentAircraft]);
@@ -236,7 +251,7 @@ function AppointmentForm({setIsSubmitted}) {
     useEffect(() => {
         if (formData.model && currentAircraft) {
             if (aircraftOptions.length !== 0) {
-                let aircraft = aircraftOptions.find(option => option.value == idAircraft);
+                let aircraft = aircraftOptions.find(option => option.value === idAircraft);
                 if (aircraft) {
                     setValue("serialNumber", aircraft, errors.serialNumber ? { shouldValidate: true } : { shouldValidate: false });
                 }
@@ -269,7 +284,6 @@ function AppointmentForm({setIsSubmitted}) {
     
     return (
         <div className="appointmentForm-container">
-            
             <div className="form-container">
                 <h3>FORMULAIRE DE PRISE DE RENDEZ-VOUS</h3>
                 <form method='POST' onKeyDown={handleKeyDown} onSubmit={handleSubmit(onSubmit)}>

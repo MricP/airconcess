@@ -1,25 +1,23 @@
-:root {
-    --padding-page : 50px
-}
-
 .page-subTraining {
     display: flex;
-    justify-content: center;
-    position: relative;
+    padding: 90px 0;
     background-color: #F5F5F5;
-    padding-top: 90px;
-    min-height: 100vh;
 }
 
-.page-subTraining .cardSubTraining-container {
-    position: absolute;
-    right: var(--padding-page);
+.page-subTraining>div {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 2%;
+    padding: 0 1%;
 }
 
-.page-subTraining .formSubTraining-container {
-    position: absolute;
-    left: var(--padding-page);
+.page-subTraining div .cardSubTraining-container {
+    position: sticky;
+    top: 90px;
 }
+
+/* ############## paymentstep ############## */
 
 .page-subTraining .paymentstep-div {
     display: flex;
@@ -39,4 +37,101 @@
 
 .page-subTraining .paymentstep-div .dark-button {
     margin-top: 20px;
+}
+
+@media (width <= 500px) { /* Mobile */
+    .page-subTraining {
+        background-color: orange !important; 
+    }
+
+    .page-subTraining {
+        padding-top: 50px;
+    }
+
+    .page-subTraining>div {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        gap: 10px;
+    }
+
+    .page-subTraining>div .formSubTraining-container {
+        width: 90%;
+        order: 2;
+    }
+
+    .page-subTraining>div .cardSubTraining-container {
+        position: inherit;
+        order: 1;
+        width: 90%;
+    }
+}
+
+@media (500px <= width <= 640px) { /* Tablette/Mobile */
+    .page-subTraining { 
+        background-color: lightblue !important; 
+    }
+
+    .page-subTraining {
+        padding-top: 50px;
+    }
+
+    .page-subTraining>div {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        gap: 10px;
+    }
+
+    .page-subTraining>div .formSubTraining-container {
+        width: 90%;
+        order: 2;
+    }
+
+    .page-subTraining>div .cardSubTraining-container {
+        position: inherit;
+        order: 1;
+        width: 90%;
+    }
+}
+
+@media (640px <= width <= 768px) { /* Tablette portrait */
+    .page-subTraining { 
+        background-color: lightgreen;
+    }
+
+    .page-subTraining {
+        padding-top: 50px;
+    }
+
+    .page-subTraining>div {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        gap: 10px;
+    }
+
+    .page-subTraining>div .formSubTraining-container {
+        width: 90%;
+        order: 2;
+    }
+
+    .page-subTraining>div .cardSubTraining-container {
+        position: inherit;
+        order: 1;
+        width: 90%;
+    }
+}
+  
+@media (769px <= width <= 1024px) { /* Tablette paysage */
+    .page-subTraining {
+        background-color: lightcoral; 
+    }
+
+}
+  
+@media (1025px <= width) { /* PC standard */
+    .page-subTraining { 
+        background-color: lightgoldenrodyellow; 
+    }
 }

@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
+import CreditCard from '../general/CreditCard'
+import CardNumberInput from '../general/CardNumberInput'
 
 import "../../styles/sub-training/PaymentDetailsStep.css"
-import CreditCard from '../general/CreditCard'
-
-import CardNumberInput from '../general/CardNumberInput'
 
 function PaymentDetailsStep({ formData, register, errors, setValue }) {
 

@@ -24,7 +24,6 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
         "maxAltitude" 
     ]);
 
-
     const aircraftDescriptionTab = 
     [ 
         "serialNumber",
@@ -55,7 +54,7 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
 
         setTimeout(() => {
             window.scrollTo({
-                top: window.innerHeight + 0.20 * (window.innerHeight),
+                top: window.innerHeight,
                 behavior: 'smooth',
             });
         },100)
@@ -76,26 +75,23 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
       };
 
     useEffect(() => {
-            
-
-            if (modelSelected !== "Nouveau" && mode === "add") {
-                setModelDescriptionTab([
-                    modelSelected.range_type,
-                    modelSelected.manufacturer,
-                    "Jusqu'à " + modelSelected.passenger_capacity + " passager(s)",
-                    modelSelected.crew_size,
-                    modelSelected.length,
-                    modelSelected.wingspan,
-                    modelSelected.height,
-                    modelSelected.max_takeoff_weight,
-                    modelSelected.engines,
-                    modelSelected.speed_avg,
-                    modelSelected.max_range + " km",
-                    modelSelected.max_altitude
-                ]);
-            }
-    
-        }, [modelSelected]);
+        if (modelSelected !== "Nouveau" && mode === "add") {
+            setModelDescriptionTab([
+                modelSelected.range_type,
+                modelSelected.manufacturer,
+                "Jusqu'à " + modelSelected.passenger_capacity + " passager(s)",
+                modelSelected.crew_size,
+                modelSelected.length,
+                modelSelected.wingspan,
+                modelSelected.height,
+                modelSelected.max_takeoff_weight,
+                modelSelected.engines,
+                modelSelected.speed_avg,
+                modelSelected.max_range + " km",
+                modelSelected.max_altitude
+            ]);
+        }
+    }, [modelSelected,mode]);
 
     const handleProductFieldChange = (field, event, index) => {
         if (onInputChange) {
