@@ -29,32 +29,40 @@ export default function PageAdmin(){
     const handleElementClick = (event) => {
         const allElements = document.querySelectorAll(".element");
         allElements.forEach((el) => el.classList.remove("underline"));
-        event.target.classList.add("underline")
-        console.log(event.target.textContent)
-        if (event.target.textContent === "• Modifier un produit"){
-            setMode("edit")
-            setSelectedComponent(<EditArticle use= "edit"/>)
+        event.target.classList.add("underline");
+    
+        console.log(event.target.textContent);
+    
+        if (event.target.textContent === "• Modifier un produit") {
+            setMode("edit");
+            setSelectedComponent(<EditArticle use="edit" />);
         } else if (event.target.textContent === "• Supprimer un produit") {
-            setSelectedComponent(<EditArticle use= "delete"/>)
-        } else if (event.target.textContent === "• Ajouter un produit"){
-            setMode("add")
-            setModel("Nouveau")
+            setSelectedComponent(<EditArticle use="delete" />);
+        } else if (event.target.textContent === "• Ajouter un produit") {
+            setMode("add");
+            setModel("Nouveau");  // Mettre à jour l'état
+        }
+    };
+    
+    // Ajout d'un useEffect pour surveiller les changements de `model` et `mode`
+    useEffect(() => {
+        if (mode === "add") {
             setSelectedComponent(
                 <div className="add-mode">
                     <div className="selector">
-                        <label htmlFor="comboBox">Choisissez un model :</label>
+                        <label htmlFor="comboBox">Choisissez un modèle :</label>
                         <select id="comboBox" name="options" onChange={handleModelChange}>
                             <option value="Nouveau">Nouveau</option>
-                            {models.map((element) =>(
+                            {models?.map((element) => (
                                 <option key={element.model_id} value={element.model_name}>{element.model_name}</option>
                             ))}
                         </select>
-                    </div> 
-                    <PageProduct mode={mode} onSubmitProduct={handleAddButtonClick} model={"Nouveau"}/>
+                    </div>
+                    <PageProduct mode={mode} onSubmitProduct={handleAddButtonClick} model={"Nouveau"} />
                 </div>
-            )
+            );
         }
-    }
+    }, [mode, model]);
 
     const handleAddButtonClick = async (productData, modelData, imageData) => {
         const {

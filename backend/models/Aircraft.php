@@ -315,7 +315,7 @@ class Aircraft
     public static function updateSliderImages($id, $files) {
         $images = Aircraft::getSliderImgs($id);
         $modelName = Aircraft::getModelName($id);
-        
+        $modelName = $modelName[0];
         // Suppression des anciennes images
         foreach ($images as $image) {
             $oldURL = $image['img_URL'];

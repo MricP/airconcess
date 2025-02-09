@@ -1,0 +1,18 @@
+[09-Feb-2025 16:08:07 UTC] PHP Warning:  Undefined array key "name" in C:\wamp64\www\air-concess\backend\models\Aircraft.php on line 303
+[09-Feb-2025 16:08:07 UTC] PHP Stack trace:
+[09-Feb-2025 16:08:07 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[09-Feb-2025 16:08:07 UTC] PHP   2. Aircraft::updateMainImage($id = 45, $file = [0 => [], 1 => []]) C:\wamp64\www\air-concess\backend\public\api.php:349
+[09-Feb-2025 16:08:07 UTC] PHP Deprecated:  basename(): Passing null to parameter #1 ($path) of type string is deprecated in C:\wamp64\www\air-concess\backend\models\Aircraft.php on line 303
+[09-Feb-2025 16:08:07 UTC] PHP Stack trace:
+[09-Feb-2025 16:08:07 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[09-Feb-2025 16:08:07 UTC] PHP   2. Aircraft::updateMainImage($id = 45, $file = [0 => [], 1 => []]) C:\wamp64\www\air-concess\backend\public\api.php:349
+[09-Feb-2025 16:08:07 UTC] PHP   3. basename($path = NULL) C:\wamp64\www\air-concess\backend\models\Aircraft.php:303
+[09-Feb-2025 16:08:07 UTC] PHP Warning:  Undefined array key "tmp_name" in C:\wamp64\www\air-concess\backend\models\Aircraft.php on line 306
+[09-Feb-2025 16:08:07 UTC] PHP Stack trace:
+[09-Feb-2025 16:08:07 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[09-Feb-2025 16:08:07 UTC] PHP   2. Aircraft::updateMainImage($id = 45, $file = [0 => [], 1 => []]) C:\wamp64\www\air-concess\backend\public\api.php:349
+[09-Feb-2025 16:08:07 UTC] PHP Deprecated:  move_uploaded_file(): Passing null to parameter #1 ($from) of type string is deprecated in C:\wamp64\www\air-concess\backend\models\Aircraft.php on line 306
+[09-Feb-2025 16:08:07 UTC] PHP Stack trace:
+[09-Feb-2025 16:08:07 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[09-Feb-2025 16:08:07 UTC] PHP   2. Aircraft::updateMainImage($id = 45, $file = [0 => [], 1 => []]) C:\wamp64\www\air-concess\backend\public\api.php:349
+[09-Feb-2025 16:08:07 UTC] PHP   3. move_uploaded_file($from = NULL, $to = '../../frontend/public/assets/product/Gulfstream G650ER/45/') C:\wamp64\www\air-concess\backend\models\Aircraft.php:306

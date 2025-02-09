@@ -37,7 +37,6 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
         "costPerKm",
         "monthlyMaintenanceCost",
         "estimatedPrice",
-        "description",
         "id"
     ]
 

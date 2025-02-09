@@ -52,7 +52,6 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
       {varName:"cost_per_km", txt:"Coût par kilomètre", value:"Inconnu"},
       {varName:"monthly_maintenance_cost", txt:"Coût mensuel d’entretien", value:"Inconnu"},
       {varName:"estimated_price", txt:"Prix estimé ", value:"Inconnu"},
-      {varName:"description", txt:"", value:"Inconnu"},
   ])
   const [iconImg, setIconImage] = useState(null)
   const [description, setDescription] = useState(null)
@@ -233,10 +232,12 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
   };
 
   useEffect(() => {
-    if (mode === "edit"){
-      document.querySelector("textarea").textContent = description
+    const textarea = document.querySelector("textarea");
+    if (textarea && mode === "edit") {
+        textarea.textContent = description;
+        handleInputChange("description", description)
     }
-  }, [description]);
+}, [description, mode]);
 
   // Si l'id est invalide ou qu'il n'y a pas d'aircraft à afficher
   if (!isIdValid && mode !== "add") {
