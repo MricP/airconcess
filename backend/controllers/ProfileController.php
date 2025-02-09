@@ -111,8 +111,8 @@ class ProfileController
             echo json_encode(["message" => "Vous n'avez pas l'autorisation d'accéder à cette ressource."]);
             exit();
         }
-    
-        $appointments = Appointment::getAppointmentByUser($user['idUser']);
+        $appointments = Appointment::getAppointmentByUserWithAgency($user['idUser']);
+        // $appointments = Appointment::getAppointmentByUser($user['idUser']);
         echo json_encode($appointments);
     }
 
