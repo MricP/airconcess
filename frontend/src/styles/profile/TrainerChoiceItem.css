@@ -1,0 +1,35 @@
+.trainerChoiceItem-container{
+    width: 60%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 2px 2px var(--line-color);
+    padding: 10px;
+
+}
+
+.trainerChoiceItem-userMainInfos-profilePic{
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+}
+
+.trainerChoiceItem-userMainInfos-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.trainerChoiceItem-userMainInfos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.click{
+    transform: rotate(90deg);
+}
+
+.grow{
+    height: 100px;
+}

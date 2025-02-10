@@ -5,7 +5,7 @@ import {getAppointmentByUser} from "../../services/appointment.js"
 import { useNavigate } from 'react-router-dom'
 import {Calendar,Badge} from 'rsuite'
 import { getUserData } from '../../services/auth.js'
-
+import TrainerChoiceItem from './TrainerChoiceItem.jsx'
 import "../../styles/general/Rsuite-custom.css"
 
 export default function ProfileContent() {
@@ -96,6 +96,11 @@ export default function ProfileContent() {
               <button type='submit'>Publier</button>
             </form> 
           </div> 
+        </main>
+       )} 
+       {userData?.isTrainer === 1 && userData?.isTrainer !== null && (
+        <main className='profile-content-container'>
+          <TrainerChoiceItem />
         </main>
        )} 
     </>
