@@ -26,10 +26,7 @@
     gap: 10px;
 }
 
-.click{
+.click {
     transform: rotate(90deg);
-}
-
-.grow{
-    height: 100px;
+    transition: transform 0.2s ease;
 }

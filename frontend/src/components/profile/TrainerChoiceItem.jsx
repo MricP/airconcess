@@ -1,6 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import '../../styles/profile/TrainerChoiceItem.css'
 import { IoIosArrowForward } from "react-icons/io";
+import TrainingProposal from './TrainingProposal';
 
 export default function TrainerChoiceItem() {
 
@@ -8,24 +9,28 @@ export default function TrainerChoiceItem() {
 
     const arrowItem = useRef(null)
     const Item = useRef(null)
+    const [isOpen,setIsOpen] = useState(false)
 
     const handleItemClick = () => {
+        setIsOpen(!isOpen);
         if(arrowItem.current && Item.current){
             arrowItem.current.classList.toggle("click");
-            Item.current.classList.toggle("grow");
         }
     }
 
     return (
-        <div className='trainerChoiceItem-container' ref={Item}>
-                <div className='trainerChoiceItem-userMainInfos-container' onClick={handleItemClick}>
-                    <div className='trainerChoiceItem-userMainInfos'>
-                        <img className='trainerChoiceItem-userMainInfos-profilePic' src={profile} alt="photo" />
-                        <p>Pirrera</p>
-                        <p>Emric</p> 
-                    </div>
-                    <IoIosArrowForward ref={arrowItem} color='var(--section-color)' size={30} />
+        <div className={`trainerChoiceItem-container`} ref={Item}>
+            <div className='trainerChoiceItem-userMainInfos-container' onClick={handleItemClick}>
+                <div className='trainerChoiceItem-userMainInfos'>
+                    <img className='trainerChoiceItem-userMainInfos-profilePic' src={profile} alt="photo" />
+                    <p>Pirrera</p>
+                    <p>Emric</p> 
                 </div>
+                <IoIosArrowForward className={`trainerChoiceItem-arrow ${isOpen ? "click" : ""}`} ref={arrowItem} color='var(--section-color)' size={30} />
+            </div>
+            {isOpen === true && (
+                <TrainingProposal />
+            )}
         </div>
     )
 }
