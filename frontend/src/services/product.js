@@ -280,3 +280,12 @@ export const updateIconImage = async (id, file) => {
         throw error;
     }
 }
+
+export const createUserWithCRUD = async (email, password, firstname, lastname, isAdmin, isTrainer) => {
+    try {
+        await axiosInstance.post('/admin/create-User', { email, password, firstname, lastname, isAdmin, isTrainer }); 
+    } catch (error) {
+        console.error("Erreur lors de la création de l'utilisateur", error);
+        throw error;
+    }
+}

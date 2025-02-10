@@ -10,6 +10,7 @@ require_once __DIR__ . '../../models/Aircraft.php';
 require_once __DIR__ . '../../controllers/AppointmentController.php';
 require_once __DIR__ . '../../controllers/CatalogController.php';
 require_once __DIR__ . '../../controllers/ProfileController.php';
+require_once __DIR__ . '../../controllers/UserController.php';
 
 // Middleware CORS globalement
 CorsMiddleware::handle();
@@ -369,4 +370,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     $file = $_FILES['file'];
     $result = Aircraft::updateIconImage($id, $file);
     echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/create-User') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    UserController::createWithCRUD($args['email'],$args['password'],$args['firstname'],$args['lastname'],$args['isAdmin'],$args['isTrainer']);
 }

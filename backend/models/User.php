@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../utils/Database.php';
-
+ini_set('log_errors', 1); // Activer la journalisation des erreurs
+ini_set('error_log', __DIR__ . '/error_log.txt'); // Définir le fichier de log
+error_reporting(E_ALL); // Activer tous les niveaux d'erreurs
+ini_set('display_errors', 1);
 class User
 {
     private static function getDB()
@@ -70,5 +73,17 @@ class User
         $pdo = self::getDB();
         $stmt = $pdo->prepare("UPDATE User SET profilePictureURL = ? WHERE idUser = ?");
         return $stmt->execute([$url,$id]);
+    }
+
+    public static function createWithCRUD($email, $hashedPassword, $firstName, $lastName, $isAdmin, $isTrainer)
+    {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare('INSERT INTO User (email, password, firstName, lastName, isVerified, isTrainer, isAdmin, inscriptionDate) 
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+
+        if ($stmt->execute([$email, $hashedPassword, $firstName, $lastName, 1, $isTrainer, $isAdmin, date('Y-m-d H:i:s')])) {
+            return $pdo->lastInsertId();
+        }
+        return false;
     }
 }
