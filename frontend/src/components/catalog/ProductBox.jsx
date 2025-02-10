@@ -7,13 +7,13 @@ import { IoTrashBin } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { deleteAircraft, getModelName } from '../../services/product';
 import PageProduct from '../../pages/product/PageProduct';
-import { updateAircraft, updateMainImage, updateSliderImages } from '../../services/product';
+import { updateAircraft, updateMainImage, updateSliderImages, updateIconImage } from '../../services/product';
 
 export const ProductBox = (props) => {
   const navigate = useNavigate();
   const [showProductPage, setShowProductPage] = useState(false);
 
-  const icon = props.use === "delete" ? <IoTrashBin size={30} color='red'/> : <CiEdit size={30} />;
+  const icon = props.use === "delete" ? <IoTrashBin size={30} color='red'/> : props.use === "edit" && <CiEdit size={30} />;
 
   const handleButtonClick = async () => {
     if (props.use === "edit") {
@@ -46,7 +46,7 @@ export const ProductBox = (props) => {
       
       
           try {
-              const resultUpdateAircraft = await updateAircraft(
+              await updateAircraft(
                   props.aircraftId,
                   serialNumber,
                   +manufactureYear,
@@ -60,36 +60,33 @@ export const ProductBox = (props) => {
                   +estimatedPrice.split(" ")[0],
                   description
               );
-              console.log(resultUpdateAircraft)
               const { file, files, icon } = imageData;
       
               // Image principale
               if (file) {
-                  console.log(props.aircraftId)
-                  console.log(file)
-                  const resultUpdateMainImage = updateMainImage(props.aircraftId, file)
-                  console.log(resultUpdateMainImage)
+                  updateMainImage(props.aircraftId, file)
               } 
       
               // Icône
               if (icon) {
-                  
+                updateIconImage(props.aircraftId, icon)
               } 
       
               // Images du slider
               if (files && files.length > 0) {
+                console.log("ok2")
                 updateSliderImages(props.aircraftId, files)
               } 
       
               console.log("Toutes les opérations ont été effectuées avec succès !");
-              
+              window.location.reload()
           } catch (error) {
               alert(error)
               window.location.reload()
           }
         }
   if (showProductPage) {
-    return <PageProduct aircraftId={props.idAircraft} onSubmitProduct={handleAddButtonClick}  mode={"edit"}/>;
+    props.pageProduct(<PageProduct aircraftId={props.idAircraft} onSubmitProduct={handleAddButtonClick}  mode={"edit"}/>);
   }
 
   return (

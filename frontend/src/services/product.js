@@ -245,8 +245,36 @@ export const updateMainImage = async (id, file) => {
 
 export const updateSliderImages = async (id, files) => {
     try {
-        const response = await axiosInstance.post('/admin/update-SliderImages', { id, files });
-        return response
+        const formData = new FormData();
+        
+        files.forEach((file, index) => {
+            formData.append(`files[]`, file); // Ajouter chaque fichier séparément
+        });
+
+        formData.append('id', id);
+
+        const response = await axiosInstance.post('/admin/update-SliderImages', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        });
+
+        return response;
+    } catch (error) {
+        console.error("Erreur lors de la mise à jour des images du slider", error);
+        throw error;
+    }
+};
+
+export const updateIconImage = async (id, file) => {
+    try {
+        const formData = new FormData();
+        formData.append('file', file); // Ajouter le fichier
+        formData.append('id', id); 
+        const response = await axiosInstance.post('/admin/update-IconImage', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Nécessaire pour transmettre les fichiers
+            },
+        });
+        return response.data
     } catch (error) {
         console.error("Erreur lors de la suppression", error);
         throw error;

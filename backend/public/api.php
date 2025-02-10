@@ -345,8 +345,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-SliderImages') !== false) {
-    $args = json_decode(file_get_contents("php://input"), true);
-    $result = Aircraft::updateMainImage($args['id'], $args['files']);
+    $id = $_POST['id'];
+    $files = $_FILES['files'];
+    $structuredFiles = [];
+
+    foreach ($files['name'] as $key => $name) {
+        if ($files['error'][$key] === UPLOAD_ERR_OK) { // Vérifie s'il n'y a pas d'erreur
+            $structuredFiles[] = [
+                'name' => $name,
+                'type' => $files['type'][$key],
+                'tmp_name' => $files['tmp_name'][$key],
+                'error' => $files['error'][$key],
+                'size' => $files['size'][$key]
+            ];
+        }
+    }
+    $result = Aircraft::updateSliderImages($id, $structuredFiles);
     echo json_encode($result);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-IconImage') !== false) {
+    $id = $_POST['id'];
+    $file = $_FILES['file'];
+    $result = Aircraft::updateIconImage($id, $file);
+    echo json_encode($result);
+}

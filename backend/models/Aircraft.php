@@ -345,5 +345,28 @@ class Aircraft
     
         return true;
     }
+
+    public static function updateIconImage($id, $file) {
+        $image = Aircraft::getIcon($id); 
+        $modelName = Aircraft::getModelName($id);
+        $modelName = $modelName[0];
+        
+        $oldURL = $image['img_URL'];
+        $oldFilePath = "../../frontend/public{$oldURL}";
+        if (file_exists($oldFilePath)) {
+            unlink($oldFilePath);
+        }
+    
+        $url = basename($file['name']);
+        $newFilePath = "../../frontend/public/assets/product/{$modelName}/{$id}/{$url}";
+    
+        if (move_uploaded_file($file['tmp_name'], $newFilePath)) {
+            Aircraft::deleteImageWithAircraftId($id, "main");
+            Aircraft::insertImage("icon", $id, "/assets/product/{$modelName}/{$id}/{$url}");
+            return $oldFilePath;
+        }
+        
+        return $newFilePath;
+    }
     
 }
