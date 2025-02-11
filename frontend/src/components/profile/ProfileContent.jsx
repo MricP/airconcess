@@ -98,7 +98,7 @@ export default function ProfileContent() {
           </div> 
         </main>
        )} 
-       {userData?.isTrainer === 1 && userData?.isTrainer !== null && (
+       {userData?.isTrainer === 1 && (
         <main className='profile-content-container'>
           <TrainerChoiceItem />
         </main>

@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import '../../styles/profile/TrainerChoiceItem.css'
 import { IoIosArrowForward } from "react-icons/io";
 import TrainingProposal from './TrainingProposal';
+import { FiPlusCircle } from "react-icons/fi";
 
 export default function TrainerChoiceItem() {
 
@@ -10,6 +11,8 @@ export default function TrainerChoiceItem() {
     const arrowItem = useRef(null)
     const Item = useRef(null)
     const [isOpen,setIsOpen] = useState(false)
+    const [trainingProposals, setTrainingProposals] = useState([{}]);
+
 
     const handleItemClick = () => {
         setIsOpen(!isOpen);
@@ -17,6 +20,10 @@ export default function TrainerChoiceItem() {
             arrowItem.current.classList.toggle("click");
         }
     }
+
+    const addTrainingProposal = () => {
+        setTrainingProposals([...trainingProposals, {}]); // Ajouter un nouvel élément
+    };
 
     return (
         <div className={`trainerChoiceItem-container`} ref={Item}>
@@ -29,7 +36,12 @@ export default function TrainerChoiceItem() {
                 <IoIosArrowForward className={`trainerChoiceItem-arrow ${isOpen ? "click" : ""}`} ref={arrowItem} color='var(--section-color)' size={30} />
             </div>
             {isOpen === true && (
-                <TrainingProposal />
+                <>
+                    {trainingProposals.map((proposal) => (
+                        <TrainingProposal key={proposal.id} />
+                    ))}
+                    <FiPlusCircle onClick={addTrainingProposal} className='TrainerChoiceItem-plusButton' size={25} color='var(--button-color)' />
+                </>
             )}
         </div>
     )

@@ -21,7 +21,7 @@
     justify-content: left;
     gap: 10px;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 }
 
 .TrainingProposal-date{
@@ -36,10 +36,4 @@
 
 .TrainingProposal-border th, .TrainingProposal-border td {
     width: 50px;
-}
-
-.TrainingProposal-plusButton{
-    position: absolute;
-    top: 99%;
-    left: 48%;
 }
