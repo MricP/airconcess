@@ -89,8 +89,15 @@ class User
 
     public static function getAllUsers() {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('Select lastname, firstname, email, location, profilePictureURL, isVerified, isTrainer, isAdmin, inscriptionDate, idUser from User order by isVerified');
+        $stmt = $pdo->prepare('Select lastName, firstName, email, profilePictureURL, isVerified, isTrainer, isAdmin, inscriptionDate, idUser from User order by isVerified');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function updateRole($id, $role, $boolean) {
+        $pdo = self::getDB();
+        if ($role == "isAdmin") $stmt = $pdo->prepare('Update User set isAdmin = ? where idUser = ?');
+        elseif ($role == "isTrainer") $stmt = $pdo->prepare('Update User set isTrainer = ? where idUser = ?');
+        $stmt->execute([$boolean, $id]);
     }
 }

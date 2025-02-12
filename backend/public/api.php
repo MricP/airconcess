@@ -381,3 +381,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     $result = User::getAllUsers();
     echo json_encode($result);
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-RoleUser') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    User::updateRole($args['id'], $args['role'], $args['boolean']);
+}

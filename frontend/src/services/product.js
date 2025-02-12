@@ -299,3 +299,12 @@ export const getAllUsers = async () => {
         throw error;
     }
 }
+
+export const updateRoleUser = async (id, role, boolean) => {
+    try {
+        await axiosInstance.post('/admin/update-RoleUser', {id, role, boolean});
+    } catch (error) {
+        console.error("Erreur lors de la récupératio de tout les utilisateurs", error);
+        throw error;
+    }
+}
