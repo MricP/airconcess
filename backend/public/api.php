@@ -326,7 +326,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 
 // Partie page sub-training
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/subTraining-submit') !== false) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/subTraining/submit') !== false) {
     $data = json_decode(file_get_contents("php://input"), true);
     TrainingController::createTraining($data);
 }

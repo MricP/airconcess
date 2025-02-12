@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 06 fév. 2025 à 13:10
+-- Généré le : mer. 12 fév. 2025 à 18:44
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -147,6 +147,28 @@ INSERT INTO `appointment` (`appt_id`, `aircraftConcerned_id`, `userConcerned_id`
 (201, 18, 35, 'Mathéo', 'Flores', '+633', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '', 'Capture d’écran (49).png', NULL, 'purchase', '2025-02-22 08:15:00', 1),
 (202, 18, 35, 'Mathéo', 'Flores', '+33', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '', 'Capture d’écran (52).png', 'Capture d\'écran 2024-09-18 190014.png', 'purchase', '2025-02-12 09:45:00', 6),
 (203, 7, 35, 'Mathéo', 'Flores', '+33565', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '26240', 'CV_01-2025.pdf', 'CV.pdf', 'purchase', '2025-02-21 10:45:00', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `credit_card`
+--
+
+DROP TABLE IF EXISTS `credit_card`;
+CREATE TABLE IF NOT EXISTS `credit_card` (
+  `card_holder` varchar(30) NOT NULL,
+  `card_number` varchar(20) NOT NULL,
+  `card_id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`card_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `credit_card`
+--
+
+INSERT INTO `credit_card` (`card_holder`, `card_number`, `card_id`) VALUES
+('Flores Mathéo', '4965 4965 4547 1254', 4),
+('Flores Mathéo', '4965 4965 4547 1254', 5);
 
 -- --------------------------------------------------------
 
@@ -349,11 +371,59 @@ CREATE TABLE IF NOT EXISTS `trainer` (
 
 DROP TABLE IF EXISTS `training`;
 CREATE TABLE IF NOT EXISTS `training` (
-  `id_training` int NOT NULL AUTO_INCREMENT,
-  `id_final_proposal` int DEFAULT NULL,
-  PRIMARY KEY (`id_training`),
-  KEY `fk_training_id_final_proposal` (`id_final_proposal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `training_id` int NOT NULL AUTO_INCREMENT,
+  `final_proposal_id` int DEFAULT NULL,
+  `customer_firstName` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_lastName` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_country` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_city` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_postalCode` int DEFAULT NULL,
+  `customer_addr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_idCard_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `start_date_pref` date NOT NULL,
+  `end_date_pref` date NOT NULL,
+  `frequency_pref` int NOT NULL,
+  `cardUsed_id` int NOT NULL,
+  `userConcerned_id` int NOT NULL,
+  PRIMARY KEY (`training_id`) USING BTREE,
+  KEY `fk_training_userConcerned_id` (`userConcerned_id`),
+  KEY `fk_training_cardUsed_id` (`cardUsed_id`) USING BTREE,
+  KEY `fk_training_final_proposal_id` (`final_proposal_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `training`
+--
+
+INSERT INTO `training` (`training_id`, `final_proposal_id`, `customer_firstName`, `customer_lastName`, `customer_country`, `customer_city`, `customer_postalCode`, `customer_addr`, `customer_phone`, `customer_email`, `customer_idCard_url`, `start_date_pref`, `end_date_pref`, `frequency_pref`, `cardUsed_id`, `userConcerned_id`) VALUES
+(3, NULL, 'Mathéo', 'Flores', 'AF', 'Andkhoy', 69100, '141 rue Barthélémy de laffemas', '+33644038323', 'matheoflores26@gmail.com', 'imagetest.jpg', '2025-02-20', '2025-02-28', 3, 4, 35),
+(4, NULL, 'Mathéo', 'Flores', 'AF', 'Andkhoy', 69100, '141 rue Barthélémy de laffemas', '+33644038323', 'matheoflores26@gmail.com', 'imagetest.jpg', '2025-02-20', '2025-02-28', 3, 5, 35);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `training_preferedslot`
+--
+
+DROP TABLE IF EXISTS `training_preferedslot`;
+CREATE TABLE IF NOT EXISTS `training_preferedslot` (
+  `trainingConcerned_id` int NOT NULL,
+  `preferedSlot_id` int NOT NULL AUTO_INCREMENT,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  PRIMARY KEY (`preferedSlot_id`) USING BTREE,
+  KEY `training_pref_trainingConcerned_id` (`trainingConcerned_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `training_preferedslot`
+--
+
+INSERT INTO `training_preferedslot` (`trainingConcerned_id`, `preferedSlot_id`, `start_time`, `end_time`) VALUES
+(4, 1, '09:30:00', '09:45:00'),
+(4, 2, '10:45:00', '11:45:00');
 
 -- --------------------------------------------------------
 
@@ -363,10 +433,10 @@ CREATE TABLE IF NOT EXISTS `training` (
 
 DROP TABLE IF EXISTS `training_proposal`;
 CREATE TABLE IF NOT EXISTS `training_proposal` (
-  `id_proposal` int NOT NULL,
-  `id_concerned_training` int NOT NULL,
-  PRIMARY KEY (`id_proposal`),
-  KEY `fk_training_proposal_id_concerned_training` (`id_concerned_training`)
+  `proposal_id` int NOT NULL,
+  `trainingConcerned_id` int NOT NULL,
+  PRIMARY KEY (`proposal_id`) USING BTREE,
+  KEY `fk_training_proposal_trainingConcerned_id` (`trainingConcerned_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -441,13 +511,21 @@ ALTER TABLE `trainer`
 -- Contraintes pour la table `training`
 --
 ALTER TABLE `training`
-  ADD CONSTRAINT `fk_training_id_final_proposal` FOREIGN KEY (`id_final_proposal`) REFERENCES `training_proposal` (`id_proposal`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_training_id_creditCard_used` FOREIGN KEY (`cardUsed_id`) REFERENCES `credit_card` (`card_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_training_id_final_proposal` FOREIGN KEY (`final_proposal_id`) REFERENCES `training_proposal` (`proposal_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_training_userConcerned_id` FOREIGN KEY (`userConcerned_id`) REFERENCES `user` (`idUser`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `training_preferedslot`
+--
+ALTER TABLE `training_preferedslot`
+  ADD CONSTRAINT `training_pref_id_training_concerned` FOREIGN KEY (`trainingConcerned_id`) REFERENCES `training` (`training_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Contraintes pour la table `training_proposal`
 --
 ALTER TABLE `training_proposal`
-  ADD CONSTRAINT `fk_training_proposal_id_concerned_training` FOREIGN KEY (`id_concerned_training`) REFERENCES `training` (`id_training`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_training_proposal_id_concerned_training` FOREIGN KEY (`trainingConcerned_id`) REFERENCES `training` (`training_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

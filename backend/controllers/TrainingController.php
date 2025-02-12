@@ -4,31 +4,44 @@
     class TrainingController {
 
         public static function createTraining($data) {
-            // $apptData = [
-            //     "user_id" => 35,
-            //     "aircraft_id" => $data["formData"]["serialNumber"]["value"],
-            //     "firstName" => $data["formData"]["firstName"],
-            //     "lastName" => $data["formData"]["lastName"],
-            //     "phone" => $data["formData"]["phone"],
-            //     "email" => $data["formData"]["email"],
-            //     "country" => $data["formData"]["country"]["value"],
-            //     "city" => $data["formData"]["city"]["value"],
-            //     "address" => $data["formData"]["address"],
-            //     "postalCode" => $data["formData"]["postalCode"],
-            //     "idCard" => $data["formData"]["idCard"]["name"],
-            //     "incomeProof" => $data["formData"]["incomeProof"]["name"],
-            //     "reason" => $data["formData"]["reason"]["value"],
-            //     "timestamp" => $data["formData"]["date"]." ".$data["formData"]["time"],
-            //     "agency_id" => $data["formData"]["agency"]["value"],
-            // ];
+            $creditCard = [
+                "holder" => $data["cardHolder"],
+                "number" => $data["cardNumber"]
+            ];
 
-            //TODO : Gerer l'insertion des fichiers (idCard et incomeProof)
+            // Retourne l'id de la credit_card inserée
+            $insertedCreditCardId = Training::insertCreditCard($creditCard);
 
-            // $res = Appointment::create($apptData);
+            $training = [
+                "user_id" => 35,
+                "customer_firstName" => $data["firstName"],
+                "customer_lastName" => $data["lastName"],
+                "customer_country" => $data["country"]["value"],
+                "customer_city" => $data["city"]["value"],
+                "customer_postalCode" => $data["postalCode"],
+                "customer_addr" => $data["address"],
+                "customer_phone" => $data["phone"],
+                "customer_email" => $data["email"],
+                "customer_idCard_url" => $data["idCard"]["name"],
+                "start_date_pref" => $data["dateStart"],
+                "end_date_pref" => $data["dateEnd"],
+                "frequency_pref" => $data["prefFrequency"],
+                "cardUsed_id" => $insertedCreditCardId
+            ];
+
+            $insertedTrainingId = Training::createTraining($training);
+
+            foreach($data["prefSlots"] as $pref) {
+                $slot = [
+                    "trainingConcerned_id" => $insertedTrainingId,
+                    "start_time" => $pref["hourStart"],
+                    "end_time" => $pref["hourEnd"]
+                ];
+                Training::insertTrainingPreferedSlot($slot);
+            }
+
+            $insertTrainingPreferences = "";
         }
     }
-
-
-
 ?>
 

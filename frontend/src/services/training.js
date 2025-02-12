@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
 
 export const submitTraining = async (formData) => {
     try {
-        const response = await axiosInstance.post('/subTraining-submit',formData);    
+        const response = await axiosInstance.post('/subTraining/submit',formData);    
         return response;
     } catch (error) {
         throw error;
