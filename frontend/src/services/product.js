@@ -289,3 +289,13 @@ export const createUserWithCRUD = async (email, password, firstname, lastname, i
         throw error;
     }
 }
+
+export const getAllUsers = async () => {
+    try {
+        const response = await axiosInstance.post('/admin/get-Users', {});
+        return response.data
+    } catch (error) {
+        console.error("Erreur lors de la récupératio de tout les utilisateurs", error);
+        throw error;
+    }
+}

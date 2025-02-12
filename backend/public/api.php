@@ -376,3 +376,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     $args = json_decode(file_get_contents("php://input"), true);
     UserController::createWithCRUD($args['email'],$args['password'],$args['firstname'],$args['lastname'],$args['isAdmin'],$args['isTrainer']);
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-Users') !== false) {
+    $result = User::getAllUsers();
+    echo json_encode($result);
+}

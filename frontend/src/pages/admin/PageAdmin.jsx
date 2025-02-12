@@ -5,6 +5,8 @@ import { FaChevronDown } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import PageProduct from "../product/PageProduct";
 import CreateUser from "../../components/admin/CreateUser";
+import UpdateUser from "../../components/admin/UpdateUser";
+
 import { insertAircraft, insertModel, getModelByName, getAllModel, uploadImage, insertImage, getAircraftBySerialNumber, deleteAircraft, deleteModel } from "../../services/product";
 
 export default function PageAdmin(){
@@ -44,6 +46,8 @@ export default function PageAdmin(){
             setModel("Nouveau");  // Mettre à jour l'état
         } else if (event.target.textContent === "• Ajouter un utilisateur") {
             setSelectedComponent(<CreateUser />)
+        } else if (event.target.textContent === "• Modifier un utilisateur") {
+            setSelectedComponent(<UpdateUser />)
         }
     };
     

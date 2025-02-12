@@ -86,4 +86,11 @@ class User
         }
         return false;
     }
+
+    public static function getAllUsers() {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare('Select lastname, firstname, email, location, profilePictureURL, isVerified, isTrainer, isAdmin, inscriptionDate, idUser from User order by isVerified');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

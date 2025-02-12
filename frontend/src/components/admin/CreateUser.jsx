@@ -22,7 +22,8 @@ export default function CreateUser(){
         if (isAdmin === true) admin = 1;
         if (isTrainer === true) trainer = 1;
         try {
-          await createUserWithCRUD(email, password, firstName, lastName, admin, trainer)
+          await createUserWithCRUD(email, password, firstName, lastName, admin, trainer);
+          window.location.reload();
         } catch (error) {
           console.log('Error response:', error.response?.data?.message || 'Unknown error');
         }
