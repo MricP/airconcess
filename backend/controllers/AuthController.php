@@ -8,6 +8,25 @@ use PHPMailer\PHPMailer\Exception;
 
 class AuthController
 {
+    private static $smtp_host;
+    private static $smtp_username;
+    private static $smtp_password;
+    private static $smtp_port;
+    private static $smtp_secure;
+
+    public static function init()
+    {
+        if (empty(self::$smtp_host) || empty(self::$smtp_username)) {
+            $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../'); 
+            $dotenv->load();
+
+            self::$smtp_host = $_ENV['SMTP_HOST'];
+            self::$smtp_username = $_ENV['SMTP_USERNAME'];
+            self::$smtp_password = $_ENV['SMTP_PASSWORD'];
+            self::$smtp_port = $_ENV['SMTP_PORT'];
+            self::$smtp_secure = $_ENV['SMTP_SECURE'];
+        }
+    }
     /**
      * Fonction pour le login
      * @param array $data Les données de connexion (email et mot de passe)
@@ -76,6 +95,8 @@ class AuthController
      */
     private static function sendVerificationEmail($email, $token)
     {
+        self::init();
+
         $verificationLink = "http://localhost:3000/verify-email?token=" . urlencode($token);
 
         $subject = "Vérifiez votre adresse email";
@@ -86,14 +107,14 @@ class AuthController
 
         try {
             $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
+            $mail->Host = self::$smtp_host;
             $mail->SMTPAuth = true;
-            $mail->Username = 'airconcess.contact@gmail.com';
-            $mail->Password = 'qtbriwetjarfsgry';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
+            $mail->Username = self::$smtp_username;
+            $mail->Password = self::$smtp_password;
+            $mail->SMTPSecure = self::$smtp_secure;
+            $mail->Port = self::$smtp_port;
 
-            $mail->setFrom('airconcess.contact@gmail.com', 'AirConcess');
+            $mail->setFrom(self::$smtp_username, 'AirConcess');
             $mail->addAddress($email, 'Utilisateur');
 
             $mail->isHTML(true);
@@ -120,7 +141,7 @@ class AuthController
         $token = $data['token'];
         $payload = Token::verify($token);
 
-        if ($payload && isset($payload['idUser'])) {  
+        if ($payload && isset($payload['idUser'])) {
             $userId = $payload['idUser'];
             if (User::verifyEmail($userId)) {
                 echo json_encode(["message" => "Email vérifié avec succès."]);

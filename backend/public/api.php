@@ -2,6 +2,7 @@
 require_once __DIR__ . '../../middlewares/CorsMiddleware.php';
 // require_once __DIR__ . '../../middlewares/AuthMiddleware.php';
 require_once __DIR__ . '../../middlewares/ValidationMiddleware.php';
+require_once __DIR__ . '../../middlewares/ChatbotMiddleware.php';
 require_once __DIR__ . '../../controllers/AuthController.php';
 require_once __DIR__ . '../../controllers/ContactController.php';
 require_once __DIR__ . '../../controllers/ProductController.php';
@@ -10,6 +11,7 @@ require_once __DIR__ . '../../models/Aircraft.php';
 require_once __DIR__ . '../../controllers/AppointmentController.php';
 require_once __DIR__ . '../../controllers/CatalogController.php';
 require_once __DIR__ . '../../controllers/ProfileController.php';
+require_once __DIR__ . '../../controllers/ChatbotController.php';
 
 // Middleware CORS globalement
 CorsMiddleware::handle();
@@ -17,6 +19,11 @@ CorsMiddleware::handle();
 // Route pour le message de test (GET)
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && preg_match('/\/api\/?$/', $_SERVER['REQUEST_URI'])) {
     echo json_encode(["message" => "Message de test Bonjour"]);
+    $data = ['question' => ['Bonjour']];
+    ChatbotController::init();
+    $response = ChatbotController::responseForTheQuestion($data);
+
+    echo json_encode(['answer' => $response]);
 }
 
 // Route pour l'inscription (POST)
@@ -201,7 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Model') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
-    $result =ProductController::insertModel(
+    $result = ProductController::insertModel(
         $args["modelName"],
         $args["rangeType"],
         $args["manufacturer"],
@@ -233,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my
 
     ProfileController::updateProfileData($payload);
 }
-if($_SERVER['REQUEST_METHOD'] === 'DELETE' && strpos($_SERVER['REQUEST_URI'], '/my-profile/delete') !== false){
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && strpos($_SERVER['REQUEST_URI'], '/my-profile/delete') !== false) {
     $headers = getallheaders();
     if (!isset($headers['Authorization'])) {
         http_response_code(401);
@@ -256,12 +263,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/m
     $token = str_replace('Bearer ', '', $headers['Authorization']);
     $payload = Token::verify($token);
 
-    if (isset($_FILES['image'])) { 
+    if (isset($_FILES['image'])) {
         $file = $_FILES['image'];
-        ProfileController::changeProfilePicture($file,$payload);
+        ProfileController::changeProfilePicture($file, $payload);
     } else {
         echo json_encode(['error' => 'Aucun fichier reçu']);
-        http_response_code(400); 
+        http_response_code(400);
     }
 }
 
@@ -297,7 +304,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     $result = ProductController::insertImage(
         $args["role"],
         $args["aircraftId"],
-        $args["url"]);
+        $args["url"]
+    );
     echo json_encode($result);
 }
 
@@ -309,11 +317,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Aircraft') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::deleteAircraft($args['id'], $args['nameModel']);
-    echo json_encode($result);
+    // echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Model') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::deleteModel($args['id'], $args['nameModel']);
-    echo json_encode($result);
+    // echo json_encode($result);
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/chatbot/send') !== false) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    ChatbotController::init();
+    ChatbotMiddleware::validateChatbotQuestion($data);
+    $response = ChatbotController::responseForTheQuestion($data);
+    echo json_encode(['answer' => $response]);
+    exit();
 }

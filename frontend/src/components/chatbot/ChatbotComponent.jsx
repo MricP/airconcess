@@ -4,6 +4,7 @@ import { IoIosClose } from "react-icons/io";
 import { VscRobot } from "react-icons/vsc";
 import "../../styles/chatbot/ChatbotComponent.css";
 import GrayTextarea from '../general/GrayTextarea';
+import { sendAQuestion } from '../../services/chatbot';
 
 export default function ChatbotComponent() {
   const [isOpen, setIsOpen] = useState(true);
@@ -17,15 +18,29 @@ export default function ChatbotComponent() {
   };
 
   const handleInputChange = (event) => {
-    if (event.target.value.length <= 200) {
-      setGrayTextareaInput(event.target.value);
+    const text = event.target.value.slice(0, 200);
+    setGrayTextareaInput(text);
+  };
+
+  const handleSendMessage = async () => {
+    if (grayTextareaInput.trim() !== "") {
+      setMessages([...messages, { sender: "user", text: grayTextareaInput }]);
+      try {
+        const response = await sendAQuestion({ question: grayTextareaInput });
+        console.log(response);
+        setMessages(prevMessages => [...prevMessages, { sender: "bot", text: response.answer }]);
+      } catch (error) {
+        console.error("erreur lors de l'envoi de la réponse.", error);
+        setMessages(prevMessages => [...prevMessages, { sender: "bot", text: "Une erreur s'est produite. Veuillez réessayer plus tard." }]);
+      }
+      setGrayTextareaInput("");
     }
   };
 
-  const handleSendMessage = () => {
-    if (grayTextareaInput.trim() !== "") {
-      setMessages([...messages, { sender: "user", text: grayTextareaInput }]);
-      setGrayTextareaInput("");
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && !event.shiftKey) { 
+      event.preventDefault(); 
+      handleSendMessage(); 
     }
   };
 
@@ -38,24 +53,22 @@ export default function ChatbotComponent() {
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`message-container ${
-                  message.sender === "bot" ? "bot-message bot-row" : "user-message user-row"
-                }`}
+                className={`message-container ${message.sender === "bot" ? "bot-message bot-row" : "user-message user-row"
+                  }`}
               >
                 {message.sender === "user" ? (
                   <FaUser className="user-icon" />
                 ) : (
                   <VscRobot className="bot-icon" />
                 )}
-                <p className={`message-text ${
-                  message.sender === "bot" ? "bot-color-message" : "user-color-message"}`}>{message.text}</p>
+                <p className={`message-text ${message.sender === "bot" ? "bot-color-message" : "user-color-message"}`}>{message.text}</p>
               </div>
             ))}
           </section>
           <form
             className="chatbot-send-infos"
             onSubmit={(e) => {
-              e.preventDefault();
+              e.preventDefault(); 
               handleSendMessage();
             }}
           >
@@ -64,12 +77,13 @@ export default function ChatbotComponent() {
               placeholder={"Entrez votre message..."}
               value={grayTextareaInput}
               onChange={handleInputChange}
+              onKeyDown={handleKeyDown} 
             />
             <button
-              className="chatbot-submit-button"
-              disabled={grayTextareaInput.length === 0}
+                className="chatbot-submit-button"
+                disabled={grayTextareaInput.trim().length === 0}
             >
-              Envoyer
+                Envoyer
             </button>
           </form>
         </div>

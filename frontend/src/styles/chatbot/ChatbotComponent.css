@@ -29,7 +29,21 @@
     position: absolute;
     top: 10px;
     right: 10px;
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+    animation-delay: 2s;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 
 .chatbot-robot-icon {
     border-radius: 100%;
@@ -128,6 +142,8 @@
     align-items: center;
     justify-content: center;
     margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     width: 99%;
     margin-left: .5%;
 }
