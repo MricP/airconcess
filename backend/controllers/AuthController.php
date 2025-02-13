@@ -100,10 +100,31 @@ class AuthController
 
         $verificationLink = "http://localhost:3000/verify-email?token=" . urlencode($token);
 
-        $subject = "Vérifiez votre adresse email";
+        $subject = "Verifiez votre adresse email";
         $body = "Cliquez sur le lien suivant pour vérifier votre adresse email : ";
-        $body .= "<a href='" . $verificationLink . "'>Vérifier mon email</a>";
-
+        $body = "
+        <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f7f7f7; border-radius: 10px;\">
+            <h2 style=\"color: #333333; text-align: center;\">Vérifier mon adresse email</h2>
+            <p style=\"font-size: 16px; color: black;\">
+                Bonjour,
+            </p>
+            <p style=\"font-size: 16px; color: black;\">
+                Merci de vous être inscrit sur notre site ! Pour finaliser votre inscription et commencer à utiliser tous nos services, veuillez confirmer votre adresse email en cliquant sur le bouton ci-dessous :
+            </p>
+            <div style=\"text-align: center; margin: 20px 0;\">
+                <a href='" . $verificationLink . "'>Vérifier mon email</a>
+            </div>
+            <p style=\"font-size: 14px; color: black; text-align: center;\">
+                Si vous n'avez pas créé de compte chez nous, vous pouvez ignorer cet email en toute sécurité.
+            </p>
+            <p style=\"font-size: 14px; color: black; text-align: center;\">
+                Merci,<br />L'équipe de support
+            </p>
+            <div style=\"text-align: center; padding: 10px; font-size: 12px; color: black;\">
+                <p>&copy; 2024 AirConcess. Tous droits réservés.</p>
+            </div>
+        </div>    
+        ";
         $mail = new PHPMailer(true);
 
         try {
@@ -219,15 +240,15 @@ class AuthController
         $resetToken = Token::generate($payload);
         $resetLink = "http://localhost:3000/reset-password?token=" . urlencode($resetToken);
 
-        $subject = "Réinitialisez votre mot de passe";
+        $subject = "Reinitialisez votre mot de passe";
         $body = "
             <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f7f7f7; border-radius: 10px;\">
                 <h2 style=\"color: #333333; text-align: center;\">Réinitialiser mon mot de passe</h2>
                 <p style=\"font-size: 16px; color: black;\">
-                    Bonjour à toi,
+                    Bonjour,
                 </p>
                 <p style=\"font-size: 16px; color: black;\">
-                    Merci de vous être inscrit sur notre site ! Pour finaliser votre inscription et commencer à utiliser tous nos services, veuillez confirmer votre adresse email en cliquant sur le bouton ci-dessous :
+                    Vous avez fait une demande de réinitialisation de mot de passe, vous pouvez vous rendre sur le lien ci dessous.
                 </p>
                 <div style=\"text-align: center; margin: 20px 0;\">
                     <a href=\"" . $resetLink . "\" style=\"padding: 10px 20px; background-color: #333333; color: white; text-decoration: none; border-radius: 5px;\">Réinitialiser mon mot de passe</a>
@@ -239,7 +260,7 @@ class AuthController
                     Merci,<br />L'équipe de support
                 </p>
                 <div style=\"text-align: center; padding: 10px; font-size: 12px; color: black;\">
-                    <p>&copy; 2024 lajuristeindependante. Tous droits réservés.</p>
+                    <p>&copy; 2024 AirConcess. Tous droits réservés.</p>
                 </div>
             </div>
         ";
