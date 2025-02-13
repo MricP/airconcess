@@ -1,4 +1,4 @@
-.trainingPrefFormFieldset>div:nth-of-type(2)>div:first-child {
+.trainingPrefFormFieldset>div.pref-slots-div>div:first-child {
     display: flex;
     align-items: center;
     gap: 2px;
@@ -18,7 +18,7 @@
 }
 
 
-.trainingPrefFormFieldset>div:nth-of-type(2){
+.trainingPrefFormFieldset>div.pref-slots-div{
     display: flex;
     flex-direction: column;
     gap: var(--form-input-gap);

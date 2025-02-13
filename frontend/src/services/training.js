@@ -16,3 +16,14 @@ export const submitTraining = async (formData) => {
         throw error;
     }
 };
+
+export const getTrainers = async () => {
+  try {
+      const response = await axiosInstance.get('/subTraining/get-trainers');    
+      return response;
+  } catch (error) {
+      throw error;
+  }
+};
+
+

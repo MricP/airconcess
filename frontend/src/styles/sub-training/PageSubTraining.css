@@ -41,7 +41,7 @@
 
 @media (width <= 500px) { /* Mobile */
     .page-subTraining {
-        background-color: orange !important; 
+        /* background-color: orange !important;  */
     }
 
     .page-subTraining {
@@ -69,7 +69,7 @@
 
 @media (500px <= width <= 640px) { /* Tablette/Mobile */
     .page-subTraining { 
-        background-color: lightblue !important; 
+        /* background-color: lightblue !important;  */
     }
 
     .page-subTraining {
@@ -97,7 +97,7 @@
 
 @media (640px <= width <= 768px) { /* Tablette portrait */
     .page-subTraining { 
-        background-color: lightgreen;
+        /* background-color: lightgreen; */
     }
 
     .page-subTraining {
@@ -120,18 +120,5 @@
         position: inherit;
         order: 1;
         width: 90%;
-    }
-}
-  
-@media (769px <= width <= 1024px) { /* Tablette paysage */
-    .page-subTraining {
-        background-color: lightcoral; 
-    }
-
-}
-  
-@media (1025px <= width) { /* PC standard */
-    .page-subTraining { 
-        background-color: lightgoldenrodyellow; 
     }
 }

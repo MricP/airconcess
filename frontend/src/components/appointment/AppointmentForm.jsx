@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router-dom";
 import { MdContentCopy } from "react-icons/md";
-import { CustomProvider,Message,useToaster } from 'rsuite';
+import { CustomProvider,Message ,useToaster } from 'rsuite';
 import { frFR } from 'rsuite/locales'; // Locale française
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useForm } from "react-hook-form";
@@ -184,6 +184,7 @@ function AppointmentForm({setIsSubmitted}) {
             if(response.data.success) {
                 setIsSubmitted(true)
             } else {
+                console.log("impossible")
                 toaster.push(<Message type="error" showIcon><strong>Erreur! </strong>{response.data.message}</Message>,{ duration: 2000 })
                 setValue("time",null)
                 loadDisabledTimestamps() // On réactualise les disabledTimestamps
@@ -332,7 +333,7 @@ function AppointmentForm({setIsSubmitted}) {
                         </div>
                     </fieldset>
 
-                    <InfoFormFieldset formData={formData} register={register} errors={errors} setValue={setValue} withIdCard={true} withIncomeProof={true}/>
+                    <InfoFormFieldset toaster={toaster} formData={formData} register={register} errors={errors} setValue={setValue} withIdCard={true} withIncomeProof={true}/>
 
                     <fieldset className="rdv-fieldset">
                         <legend>Programmer mon rendez-vous</legend>

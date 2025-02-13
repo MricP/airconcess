@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DarkButton from '../general/DarkButton'
 import { Steps } from 'rsuite';
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
@@ -9,7 +9,7 @@ import InfoFormFieldset from "../appointment/InfoFormFieldset"
 import TrainingPrefFormFieldset from "./TrainingPrefFormFieldset"
 import ValidationStep from './ValidationStep';
 import PaymentDetailsStep from './PaymentDetailsStep';
-import { submitTraining } from "../../services/training";
+import { submitTraining,getTrainers } from "../../services/training";
 
 import "../../styles/sub-training/FormSubTraining.css"
 
@@ -32,6 +32,7 @@ function FormSubTraining({step,updateStep}) {
         dateEnd: null,
         prefSlots: null, //Format : { IDSLOT: {hourStart:VALUE,hourEnd:VALUE}, IDSLOT:{hourStart:VALUE,hourEnd:VALUE} }
         prefFrequency: 3,
+        trainer: null,
         //Step3
         cardHolder: "Flores Mathéo",
         cardNumber: "4965 4965 4547 1254",
@@ -40,6 +41,8 @@ function FormSubTraining({step,updateStep}) {
         cardIssuer: "visa"
     }}
   );
+
+  const [trainers,setTrainers] = useState([]);
 
   const formData = watch();
 
@@ -78,11 +81,10 @@ function FormSubTraining({step,updateStep}) {
 
   const handleInsertion = async () => {
     try {
-      const response = await submitTraining(formData);    
-      console.log("insertion Ok")
+      const response = await submitTraining(formData);   
+      updateStep(5) 
     } catch (error) {
-      console.log("insertion Not Ok")
-      // console.log('Error response:', error.response?.data?.message || 'Unknown error');
+      console.log('Erreur insertion:', error.response?.data?.message || 'Unknown error');
     }
   }
 
@@ -94,7 +96,7 @@ function FormSubTraining({step,updateStep}) {
         )
       case 1:
         return(
-          <TrainingPrefFormFieldset formData={formData} register={register} errors={errors} setValue={setValue}/>
+          <TrainingPrefFormFieldset formData={formData} register={register} errors={errors} setValue={setValue} trainers={trainers}/>
         )
       case 2:
         return(
@@ -102,12 +104,25 @@ function FormSubTraining({step,updateStep}) {
         )
       case 3:
         return (
-          <ValidationStep formData={formData} setStep={updateStep}/>
+          <ValidationStep trainers={trainers} formData={formData} setStep={updateStep}/>
         )
       default:
         break;
     }
   }
+
+  const loadTrainers = async () => {
+    try {
+      const response = await getTrainers();
+      setTrainers(response.data)
+    } catch (error) {
+      console.log('Error getTrainers:', error.response?.data?.message || 'Unknown error');
+    }
+  }
+
+  useEffect(() => {
+    loadTrainers()
+  },[])
 
   return (
     <div className='formSubTraining-container'>

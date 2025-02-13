@@ -2,17 +2,15 @@ import React from 'react'
 import { City } from "country-state-city";
 import countryList from 'react-select-country-list';
 import CustomSelectPicker from '../general/CustomSelectPicker';
-import CustomPhoneInput from '../general/CustomPhoneInput'
-import { useToaster} from 'rsuite';
+import CustomPhoneInput from '../general/CustomPhoneInput';
 import CustomFilePicker from '../general/CustomFilePicker';
 
 import "../../styles/appointment/InfoFormFieldset.css"
 
 
-function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeProof=false,setValue}) {
+function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeProof=false,setValue,toaster}) {
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i    
     const postalCodeRegex = /^[0-9]{5}/
-    const toaster = useToaster();
 
     function handleDisplayErrorDiv() {
         return errors.email && errors.email?.message!=="required"

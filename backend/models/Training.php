@@ -10,11 +10,11 @@ class Training
         $stmt = $pdo->prepare("INSERT INTO training (customer_firstName, customer_lastName, customer_country, customer_city,
                                                         customer_postalCode, customer_addr, customer_phone, customer_email,
                                                         customer_idCard_url, start_date_pref, end_date_pref, frequency_pref,
-                                                        cardUsed_id, userConcerned_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                                                        cardUsed_id, userConcerned_id, trainerConcerned_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         $stmt->execute([$training["customer_firstName"],$training["customer_lastName"],$training["customer_country"],$training["customer_city"],
                         $training["customer_postalCode"],$training["customer_addr"],$training["customer_phone"],$training["customer_email"],
                         $training["customer_idCard_url"],$training["start_date_pref"],$training["end_date_pref"],$training["frequency_pref"],
-                        $training["cardUsed_id"],$training["user_id"]]);
+                        $training["cardUsed_id"],$training["user_id"],$training["trainerConcerned_id"]]);
         return $pdo->lastInsertId();
     }
 

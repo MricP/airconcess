@@ -4,8 +4,10 @@ import AppointmentForm from '../../components/appointment/AppointmentForm';
 import ResultPage from '../ResultPage';
 
 import "../../styles/appointment/PageAppointment.css"
+import { useToaster,Message } from 'rsuite';
 
 function PageAppointment() {
+    const toaster = useToaster()
     const [isSubmitted,setIsSubmitted] = useState(false);
 
     if(isSubmitted) {
@@ -24,8 +26,16 @@ function PageAppointment() {
                         <img src="/assets/rdv-mainImg-left.png" alt="rdv-mainImg-left" />
                         <img src="/assets/rdv-mainImg-right.jpg" alt="rdv-mainImg-right " />
                     </div>
+
                     <div className="gradient-overlay"></div>
                 </div>
+                <button onClick={() => {
+                    console.log("ok")
+                    toaster.push(<Message showIcon type={"info"} closable>
+                        <strong>{"info"}!</strong> The message appears on the .
+                      </Message>)
+                }}>cLIQUE</button>
+
                 <AppointmentForm setIsSubmitted={setIsSubmitted}/>
             </main>
         )

@@ -330,3 +330,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/s
     $data = json_decode(file_get_contents("php://input"), true);
     TrainingController::createTraining($data);
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/subTraining/get-trainers') !== false) {
+    TrainingController::getAllTrainers();
+}

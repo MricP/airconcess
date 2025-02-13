@@ -7,7 +7,7 @@ import InfoPill from '../general/InfoPill';
 
 import "../../styles/sub-training/ValidationStep.css"
 
-function ValidationStep({formData,setStep}) {
+function ValidationStep({trainers,formData,setStep}) {
     function handleDisplayPrefSlots() {
         //Map impossible car prefSlots est un object (à cause du système d'ID)
         let slots = [];
@@ -27,6 +27,16 @@ function ValidationStep({formData,setStep}) {
             else displayNumber = displayNumber+"*"
         }
         return displayNumber;
+    }
+
+    function handleDisplayTrainer(){
+        let returnedVal = null;
+        if(formData.trainer) {
+            const trainer = trainers.filter(trainer => trainer.id === formData.trainer.value)[0];
+            console.log(trainer)
+            returnedVal = `${trainer.firstName} ${trainer.lastName}`
+        }
+        return returnedVal
     }
     
     return (
@@ -75,6 +85,10 @@ function ValidationStep({formData,setStep}) {
                     </div>
                 </div>
                 <div className='info-container'>
+                    <section className="info-section">
+                        <p>Formateur</p>
+                        <p className="value-container">{handleDisplayTrainer()}</p>
+                    </section>
                     <section className="info-section">
                         <p>Disponibilité</p>
                         <p className="value-container">{formData.dateStart && formData.dateEnd ? "Du "+new Date(formData.dateStart).toLocaleDateString()+" au "+new Date(formData.dateEnd).toLocaleDateString() : "Non renseigné"}</p>

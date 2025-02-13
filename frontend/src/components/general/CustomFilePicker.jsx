@@ -2,7 +2,7 @@ import React,{forwardRef} from 'react'
 
 import { Uploader, Button , Message } from 'rsuite';
 
-const CustomFilePicker = forwardRef(({action='',multiple,autoUpload,text="Selectionne un fichier",className,value,setValue,toaster,maxFileSize=1048576,errorSizeMessage="La taille maximale est de 1Mo",rest},ref) => {
+const CustomFilePicker = forwardRef(({action='',multiple,autoUpload,text="Selectionne un fichier",className,value,setValue,maxFileSize=1048576,toaster,errorSizeMessage="La taille maximale est de 1Mo",rest},ref) => {
 
     const handleFileChange = (fileList) => {
         let size = fileList.length-1
@@ -12,7 +12,7 @@ const CustomFilePicker = forwardRef(({action='',multiple,autoUpload,text="Select
             if(lastAdd?.blobFile?.size < maxFileSize) { //1Mo
                 setValue(lastAdd)
             } else {
-                toaster?.push(<Message type="error" showIcon><strong>Erreur! </strong>{errorSizeMessage}</Message>,{ duration: 3000 })
+                toaster.push(<Message type="error" showIcon><strong>Erreur! </strong>{errorSizeMessage}</Message>,{ placement:'topCenter',duration: 3000 })
                 setValue(value)
             }
         } else {

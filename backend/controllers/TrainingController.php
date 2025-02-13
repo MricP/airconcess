@@ -1,5 +1,6 @@
 <?php
     require_once __DIR__ . '/../models/Training.php';
+    require_once __DIR__ . '/../models/User.php';
 
     class TrainingController {
 
@@ -26,7 +27,8 @@
                 "start_date_pref" => $data["dateStart"],
                 "end_date_pref" => $data["dateEnd"],
                 "frequency_pref" => $data["prefFrequency"],
-                "cardUsed_id" => $insertedCreditCardId
+                "cardUsed_id" => $insertedCreditCardId,
+                "trainerConcerned_id" =>$data["trainer"]["value"],
             ];
 
             $insertedTrainingId = Training::createTraining($training);
@@ -41,6 +43,26 @@
             }
 
             $insertTrainingPreferences = "";
+        }
+
+        public static function getAllTrainers() {
+            $trainers = User::selectAllTrainers();
+            $returnedData = [];
+
+            if($trainers) {
+                foreach($trainers as $trainer) {
+                    $returnedData[] = [
+                        "id" => $trainer['trainer_id'],
+                        "country" => $trainer['country_assignment'],
+                        "city" => $trainer['city_assignment'],
+                        "address" => $trainer['address_assignment'],
+                        "firstName" => $trainer['firstName'], 
+                        "lastName" => $trainer['lastName']
+                    ];
+                }
+            }
+
+            echo json_encode($returnedData);
         }
     }
 ?>
