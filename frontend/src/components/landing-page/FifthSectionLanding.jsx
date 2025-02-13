@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/landing-page/FifthSectionLanding.css';
 import { getTestimonialsByUser, getAllTestimonials } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import useRedirect from '../Custom-hooks';
 
 function FifthSectionLanding() {
     const [testimonials, setTestimonials] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const token = localStorage.getItem('token');
-    const navigate = useNavigate();
+    const redirect = useRedirect();
 
     useEffect(() => {
         const fetchTestimonials = async () => {
@@ -34,7 +35,7 @@ function FifthSectionLanding() {
     }, [testimonials]);
 
     const handleAddTestimonial = () => {
-        navigate('/my-profile');
+        redirect('/my-profile');
     };
 
     return (
