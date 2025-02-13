@@ -13,11 +13,12 @@ class AuthController
     private static $smtp_password;
     private static $smtp_port;
     private static $smtp_secure;
+    private static $name;
 
     public static function init()
     {
         if (empty(self::$smtp_host) || empty(self::$smtp_username)) {
-            $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../'); 
+            $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
             $dotenv->load();
 
             self::$smtp_host = $_ENV['SMTP_HOST'];
@@ -219,10 +220,32 @@ class AuthController
         $resetLink = "http://localhost:3000/reset-password?token=" . urlencode($resetToken);
 
         $subject = "Réinitialisez votre mot de passe";
-        $body = "Cliquez sur le lien suivant pour réinitialiser votre mot de passe : ";
-        $body .= "<a href='" . $resetLink . "'>Réinitialiser mon mot de passe</a>";
+        $body = "
+            <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f7f7f7; border-radius: 10px;\">
+                <h2 style=\"color: #333333; text-align: center;\">Réinitialiser mon mot de passe</h2>
+                <p style=\"font-size: 16px; color: black;\">
+                    Bonjour à toi,
+                </p>
+                <p style=\"font-size: 16px; color: black;\">
+                    Merci de vous être inscrit sur notre site ! Pour finaliser votre inscription et commencer à utiliser tous nos services, veuillez confirmer votre adresse email en cliquant sur le bouton ci-dessous :
+                </p>
+                <div style=\"text-align: center; margin: 20px 0;\">
+                    <a href=\"" . $resetLink . "\" style=\"padding: 10px 20px; background-color: #333333; color: white; text-decoration: none; border-radius: 5px;\">Réinitialiser mon mot de passe</a>
+                </div>
+                <p style=\"font-size: 14px; color: black; text-align: center;\">
+                    Si vous n'avez pas créé de compte chez nous, vous pouvez ignorer cet email en toute sécurité.
+                </p>
+                <p style=\"font-size: 14px; color: black; text-align: center;\">
+                    Merci,<br />L'équipe de support
+                </p>
+                <div style=\"text-align: center; padding: 10px; font-size: 12px; color: black;\">
+                    <p>&copy; 2024 lajuristeindependante. Tous droits réservés.</p>
+                </div>
+            </div>
+        ";
 
         $mail = new PHPMailer(true);
+
 
         try {
             $mail->isSMTP();
