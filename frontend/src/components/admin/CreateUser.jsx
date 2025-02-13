@@ -4,7 +4,7 @@ import { useState } from "react";
 import GrayInput from '../../components/general/GrayInput';
 import DarkButton2 from "../general/DarkButton2";
 
-import { createUserWithCRUD } from "../../services/product";
+import { createUserWithCRUD, createTrainer, findUserByEmail } from "../../services/product";
 
 export default function CreateUser(){
     
@@ -17,12 +17,12 @@ export default function CreateUser(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let admin = 0;
-        let trainer = 0;
-        if (isAdmin === true) admin = 1;
-        if (isTrainer === true) trainer = 1;
         try {
-          await createUserWithCRUD(email, password, firstName, lastName, admin, trainer);
+          await createUserWithCRUD(email, password, firstName, lastName, Number(isAdmin), Number(isTrainer));
+          if (isTrainer) {
+            const result = await findUserByEmail(email);
+            await createTrainer(result.idUser)
+          }
           window.location.reload();
         } catch (error) {
           console.log('Error response:', error.response?.data?.message || 'Unknown error');

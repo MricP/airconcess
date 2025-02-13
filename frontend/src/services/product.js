@@ -295,7 +295,7 @@ export const getAllUsers = async () => {
         const response = await axiosInstance.post('/admin/get-Users', {});
         return response.data
     } catch (error) {
-        console.error("Erreur lors de la récupératio de tout les utilisateurs", error);
+        console.error("Erreur lors de la récupération de tout les utilisateurs", error);
         throw error;
     }
 }
@@ -304,7 +304,54 @@ export const updateRoleUser = async (id, role, boolean) => {
     try {
         await axiosInstance.post('/admin/update-RoleUser', {id, role, boolean});
     } catch (error) {
-        console.error("Erreur lors de la récupératio de tout les utilisateurs", error);
+        console.error("Erreur lors de la mise à jour de l'utilisateur", error);
+        throw error;
+    }
+}
+
+export const findUserByEmail = async (email) => {
+    try {
+        const response = await axiosInstance.post('/admin/find-UserEmail', {email});
+        return response.data
+    } catch (error) {
+        console.error("Erreur lors de la récupération de l'utilisateur", error);
+        throw error;
+    }
+}
+
+export const deleteUser = async (id) => {
+    try {
+        await axiosInstance.post('/admin/delete-User', {id});
+    } catch (error) {
+        console.error("Erreur lors de la suppression de tout les utilisateurs", error);
+        throw error;
+    }
+}
+
+export const createTrainer = async (id) => {
+    try {
+        await axiosInstance.post('/admin/create-Trainer', {id});
+    } catch (error) {
+        console.error("Erreur lors de la création du formatuer", error);
+        throw error;
+    }
+}
+
+export const findTrainerById = async (id) => {
+    try {
+        const response = await axiosInstance.post('/admin/find-TrainerId', {id});
+        return response.data
+    } catch (error) {
+        console.error("Erreur lors de la récupération de l'utilisateur", error);
+        throw error;
+    }
+}
+
+export const deleteTrainer = async (id) => {
+    try {
+        await axiosInstance.post('/admin/delete-Trainer', {id});
+    } catch (error) {
+        console.error("Erreur lors de la suppression de tout les utilisateurs", error);
         throw error;
     }
 }

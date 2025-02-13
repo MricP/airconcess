@@ -28,8 +28,21 @@
 .update-user .user-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 15px;
     margin-bottom: 15px;
+}
+
+.update-user .user-container .info-user {
+    display: flex;
+    gap: 40px;
+    width: 35vw;
+}
+
+.update-user .user-container .role-user {
+    display: flex;
+    justify-content: space-between;
+    width: 19vw;
 }
 
 .update-user .user-container img {
@@ -39,8 +52,23 @@
     object-fit: cover;
 }
 
-.update-user .user-container input {
-    margin-right: 5px;
+.update-user .user-container label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.update-user .user-container tbody {
+    display: flex;
+    align-items: center;
+}
+
+.update-user .user-container td {
+    width: 6vw;
+}
+
+.update-user #bin:hover {
+    cursor: pointer;
 }
 
 .update-user .chooseCatalogPage{

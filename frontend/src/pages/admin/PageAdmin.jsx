@@ -278,7 +278,6 @@ export default function PageAdmin(){
                     <div className="title-menu-child">
                         <p className ="element" onClick={handleElementClick}>• Ajouter un utilisateur</p>
                         <p className ="element" onClick={handleElementClick}>• Modifier un utilisateur</p>
-                        <p className ="element" onClick={handleElementClick}>• Supprimer un utilisateur</p>
                     </div>
                 }
                 

@@ -374,7 +374,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/create-User') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
-    UserController::createWithCRUD($args['email'],$args['password'],$args['firstname'],$args['lastname'],$args['isAdmin'],$args['isTrainer']);
+    UserController::createWithCRUD($args['email'],$args['password'],$args['firstname'],$args['lastname'],$args['isAdmin'],$args["isTrainer"]);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-Users') !== false) {
@@ -385,4 +385,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-RoleUser') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     User::updateRole($args['id'], $args['role'], $args['boolean']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/find-UserEmail') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    $result = User::findByEmail($args['email']);
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-User') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    User::deleteUser($args['id']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/create-Trainer') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    User::createTrainer($args['id']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/find-TrainerId') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    $result = User::findTrainerById($args['id']);
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Trainer') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    User::deleteTrainer($args['id']);
 }

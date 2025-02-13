@@ -78,10 +78,10 @@ class User
     public static function createWithCRUD($email, $hashedPassword, $firstName, $lastName, $isAdmin, $isTrainer)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('INSERT INTO User (email, password, firstName, lastName, isVerified, isTrainer, isAdmin, inscriptionDate) 
+        $stmt = $pdo->prepare('INSERT INTO User (email, password, firstName, lastName, isVerified, isAdmin, inscriptionDate, isTrainer) 
                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 
-        if ($stmt->execute([$email, $hashedPassword, $firstName, $lastName, 1, $isTrainer, $isAdmin, date('Y-m-d H:i:s')])) {
+        if ($stmt->execute([$email, $hashedPassword, $firstName, $lastName, 1, $isAdmin, date('Y-m-d H:i:s'), $isTrainer])) {
             return $pdo->lastInsertId();
         }
         return false;
@@ -89,7 +89,7 @@ class User
 
     public static function getAllUsers() {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('Select lastName, firstName, email, profilePictureURL, isVerified, isTrainer, isAdmin, inscriptionDate, idUser from User order by isVerified');
+        $stmt = $pdo->prepare('Select lastName, firstName, email, profilePictureURL, isVerified, isAdmin, inscriptionDate, idUser, isTrainer from User order by isVerified desc');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -100,4 +100,24 @@ class User
         elseif ($role == "isTrainer") $stmt = $pdo->prepare('Update User set isTrainer = ? where idUser = ?');
         $stmt->execute([$boolean, $id]);
     }
+
+    public static function createTrainer($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare('INSERT INTO trainer (trainer_id) VALUES (?)');
+        $stmt->execute([$id]);
+    }
+
+    public static function findTrainerById($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM Trainer WHERE trainer_id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function deleteTrainer($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("DELETE FROM Trainer WHERE trainer_id = ?");
+        $stmt->execute([$id]);
+    }
+
 }
