@@ -65,7 +65,7 @@ class ChatbotController
         $payload = [
             "model" => "gpt-4o",
             "messages" => [
-                ["role" => "system", "content" => "Tu es l'assistant Air-concess (pas chatgpt si on te demande, tu dois répondre uniquement en fonction des questions fournies, fait des belles phrases en 20 mots max, repond 'toi même' si on t'insulte)."],
+                ["role" => "system", "content" => "Tu es l'assistant Air-concess (pas chatgpt si on te demande, tu dois répondre uniquement en fonction des questions fournies, si on te pose une question sur un autre sujet que les avions d'AirConcess ne repond rien, fait des belles phrases en 20 mots max, repond 'toi même' si on t'insulte)."],
                 ["role" => "system", "content" => "Voici la base de connaissances :\n" . $context],
                 ["role" => "user", "content" => $user_question]
             ],

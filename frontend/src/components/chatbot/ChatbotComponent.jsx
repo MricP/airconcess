@@ -7,7 +7,7 @@ import GrayTextarea from '../general/GrayTextarea';
 import { sendAQuestion } from '../../services/chatbot';
 
 export default function ChatbotComponent() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [grayTextareaInput, setGrayTextareaInput] = useState("");
   const [messages, setMessages] = useState([
     { sender: "bot", text: "Bonjour ! Comment puis-je vous aider aujourd'hui ?" }
@@ -57,9 +57,9 @@ export default function ChatbotComponent() {
                   }`}
               >
                 {message.sender === "user" ? (
-                  <FaUser className="user-icon" />
+                  <FaUser width={24} height={24} className="user-icon" />
                 ) : (
-                  <VscRobot className="bot-icon" />
+                  <VscRobot width={24} height={24} className="bot-icon" />
                 )}
                 <p className={`message-text ${message.sender === "bot" ? "bot-color-message" : "user-color-message"}`}>{message.text}</p>
               </div>

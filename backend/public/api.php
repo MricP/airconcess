@@ -317,13 +317,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Aircraft') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::deleteAircraft($args['id'], $args['nameModel']);
-    // echo json_encode($result);
+    echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Model') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::deleteModel($args['id'], $args['nameModel']);
-    // echo json_encode($result);
+    echo json_encode($result);
 }
 
 

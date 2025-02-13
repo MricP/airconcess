@@ -63,7 +63,7 @@ export default function Header({ color }) {
                         </ul>
                         <form action="">
                             {user.session ? (
-                                <button className="profile-button" onClick={handleProfileButton}>Profile</button>
+                                <button className="profile-button" onClick={handleProfileButton}>Profil</button>
                             ) : (
                                 <button onClick={handleConnexionButton}>Connexion</button>
                             )}

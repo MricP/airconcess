@@ -1,6 +1,7 @@
 @keyframes bigger-height {
     0% {
         height: 200px;
+        overflow-y: hidden;
     }
 
     100% {
@@ -75,15 +76,15 @@
 .chatbot-talking-section {
     max-height: 215px;
     width: 100%;
-}
-
-.chatbot-talking-section {
     height: 300px;
     overflow-y: auto;
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+    animation-delay: 2s;
 }
 
 .message-container {

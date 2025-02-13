@@ -64,7 +64,7 @@ function FirstSectionLanding() {
                     </div>
                     <div className='footer-links'>
                         <Link to='/catalog'>Nos avions</Link>
-                        <Link to='/FAQ'>FAQ</Link>
+                        <Link to='/training'>PPL</Link>
                     </div>
                 </div>
             </div>
