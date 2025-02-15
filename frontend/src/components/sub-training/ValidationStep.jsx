@@ -33,7 +33,6 @@ function ValidationStep({trainers,formData,setStep}) {
         let returnedVal = null;
         if(formData.trainer) {
             const trainer = trainers.filter(trainer => trainer.id === formData.trainer.value)[0];
-            console.log(trainer)
             returnedVal = `${trainer.firstName} ${trainer.lastName}`
         }
         return returnedVal

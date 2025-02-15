@@ -1,0 +1,59 @@
+.copyable-section {
+    position: relative;
+    display: flex;
+    min-height: 40px;
+    align-items: center;
+    padding: 5px 0 5px 10px;
+    border-radius: 2px;
+    border: dashed 1px #B5B5B5;
+}
+
+.copyable-section p:not(#copy-addr-message) {
+    width: 100%;
+    max-width: 100%;
+    font-size: var(--text-size) !important;
+    margin-right: 2px;
+    color: #333333 !important;
+}
+
+.copyable-section #copy-addr-button {
+    height: auto;
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+    color: #B5B5B5;
+    border-left: solid 1px #B5B5B5;
+    transition: all ease .1s;
+}
+
+.copyable-section #copy-addr-button:hover {
+    color: #797979;
+}
+
+.copyable-section #copy-addr-message {
+    position: absolute;
+    width: fit-content;
+    top: -38px;
+    font-size: var(--text-size);
+    text-align: center;
+    user-select: none;
+    right: 0;
+    transform: translateX(28%);
+    background-color: #333333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    transition: all ease .3s;
+}
+
+.copyable-section #copy-addr-message::before {
+    content: '';
+    background-color: #333333;
+    position: absolute;
+    bottom: -7px;
+    transform: rotate(45deg) translateX(-50%);
+    left: 50%;
+    width: 10px;
+    height: 10px;
+}

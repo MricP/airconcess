@@ -1,14 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import ScrollDownButton from '../../components/general/ScrollDownButton';
 import AppointmentForm from '../../components/appointment/AppointmentForm';
 import ResultPage from '../ResultPage';
-
 import "../../styles/appointment/PageAppointment.css"
-import { useToaster,Message } from 'rsuite';
 
 function PageAppointment() {
-    const toaster = useToaster()
     const [isSubmitted,setIsSubmitted] = useState(false);
+
+    useEffect(() => {
+        const handleBeforeUnload = (event) => {
+          const confirmationMessage = "Êtes vous sûr de vouloir annuler le processus ?";
+          event.returnValue = confirmationMessage; // Affiche la fenêtre de confirmation
+          return confirmationMessage; // Certaines versions de navigateurs exigent cette ligne
+        };
+    
+        // Ajoute l'événement avant de quitter la page
+        window.addEventListener("beforeunload", handleBeforeUnload);
+    
+        return () => {
+          window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, []);
 
     if(isSubmitted) {
         return(<ResultPage message='Votre rendez-vous a été pris en compte'/>)
@@ -29,13 +41,6 @@ function PageAppointment() {
 
                     <div className="gradient-overlay"></div>
                 </div>
-                <button onClick={() => {
-                    console.log("ok")
-                    toaster.push(<Message showIcon type={"info"} closable>
-                        <strong>{"info"}!</strong> The message appears on the .
-                      </Message>)
-                }}>cLIQUE</button>
-
                 <AppointmentForm setIsSubmitted={setIsSubmitted}/>
             </main>
         )

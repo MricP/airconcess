@@ -54,7 +54,7 @@ function Template({children}) {
   return (
     <div>
         <Header color={color}/>
-        {children}
+          {children}
         { <Footer/>}
     </div>
     

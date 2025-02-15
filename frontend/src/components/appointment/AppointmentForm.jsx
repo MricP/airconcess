@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router-dom";
-import { MdContentCopy } from "react-icons/md";
-import { CustomProvider,Message ,useToaster } from 'rsuite';
+import { CustomProvider } from 'rsuite';
 import { frFR } from 'rsuite/locales'; // Locale française
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useForm } from "react-hook-form";
 import InfoFormFieldset from './InfoFormFieldset'
 import CustomTimePicker from '../general/CustomTimePicker'
 import CustomDatePicker from '../general/CustomDatePicker'
 import CustomSelectPicker from '../general/CustomSelectPicker';
-
+import CopyableSection from '../general/CopyableSection';
+import { toast } from 'react-toastify';
 
 import "../../styles/appointment/AppointmentForm.css"
 
@@ -18,8 +17,6 @@ import { loadAircraft,loadTimestamps,loadModels,loadAircraftsOfModel,submitAppoi
 
 function AppointmentForm({setIsSubmitted}) {
     /*############ INITIALISATION DES STATES ############*/
-    const toaster = useToaster();
-
     const [currentAircraft,setCurrentAircraft] = useState(null)
     
     const [agencyOptions,setAgencyOptions] = useState([]);
@@ -27,7 +24,6 @@ function AppointmentForm({setIsSubmitted}) {
     const [modelOptions,setModelOptions] = useState([]); // Stock les differents models de la BD (label:model_name,value:model_id)
     const [aircraftOptions,setAircraftOptions] = useState([]); // Stock une liste d'appareils correspondant au model selectionné (label:serialNumber,value:aircraft_id)
     const [disabledTimestamps, updateDisabledTimestamps] = useState([]); // Format disabledTimestamps = [{ date:YYYY-MM-DD , hour:hh , minutes:[m,m,m,m] }]
-    const [isCopied, setIsCopied] = useState(false); // Utilisé pour la copie de l'adresse de l'agence
     
     const {register,handleSubmit,watch,setValue,formState: { errors }} = useForm (
         { defaultValues: {
@@ -185,7 +181,7 @@ function AppointmentForm({setIsSubmitted}) {
                 setIsSubmitted(true)
             } else {
                 console.log("impossible")
-                toaster.push(<Message type="error" showIcon><strong>Erreur! </strong>{response.data.message}</Message>,{ duration: 2000 })
+                toast.error(`${response.data.message}`)
                 setValue("time",null)
                 loadDisabledTimestamps() // On réactualise les disabledTimestamps
             }
@@ -273,15 +269,6 @@ function AppointmentForm({setIsSubmitted}) {
             setSelectedAgencyLocation(null)
         }
     },[formData.agency])
-
-    useEffect(() => {
-        if(isCopied) {
-            // Permet de réafficher l'icone pour copier après 1s
-            setTimeout(() => {
-                setIsCopied(false)
-            },1000)
-        }
-    },[isCopied])
     
     return (
         <div className="appointmentForm-container">
@@ -333,7 +320,7 @@ function AppointmentForm({setIsSubmitted}) {
                         </div>
                     </fieldset>
 
-                    <InfoFormFieldset toaster={toaster} formData={formData} register={register} errors={errors} setValue={setValue} withIdCard={true} withIncomeProof={true}/>
+                    <InfoFormFieldset formData={formData} register={register} errors={errors} setValue={setValue} withIdCard={true} withIncomeProof={true}/>
 
                     <fieldset className="rdv-fieldset">
                         <legend>Programmer mon rendez-vous</legend>
@@ -384,13 +371,9 @@ function AppointmentForm({setIsSubmitted}) {
                         </div>
                         <div className={formData.agency ? "" : "invisible"} id="addr-label">
                             <p>Adresse de l'agence</p>
-                            <section>
-                                <p>{selectedAgencyLocation}</p>
-                                <p className={isCopied ? "" : "transparent"} id="copy-addr-message">Copié !</p>
-                                <CopyToClipboard text={selectedAgencyLocation} onCopy={() => setIsCopied(true)}>
-                                    <MdContentCopy id="copy-addr-button" />
-                                </CopyToClipboard>
-                            </section>
+                            <CopyableSection
+                                content={selectedAgencyLocation}
+                            />
                         </div>
                     </fieldset>
                     <button className="submit" type="submit">

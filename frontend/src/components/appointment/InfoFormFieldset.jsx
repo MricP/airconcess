@@ -8,7 +8,7 @@ import CustomFilePicker from '../general/CustomFilePicker';
 import "../../styles/appointment/InfoFormFieldset.css"
 
 
-function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeProof=false,setValue,toaster}) {
+function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeProof=false,setValue}) {
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i    
     const postalCodeRegex = /^[0-9]{5}/
 
@@ -147,7 +147,6 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     multiple={false} 
                     autoUpload={false} 
                     text={"Selectionner une carte d'identité*"}
-                    toaster={toaster}
                     className={(errors.idCard ? "file-error" : "")+(withIncomeProof ? "" : " solo")}
                     value={formData.idCard}
                     setValue={(val) => setValue("idCard", val, errors.idCard ? {shouldValidate: true} : {shouldValidate: false})}
@@ -158,7 +157,6 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     multiple={false} 
                     autoUpload={false} 
                     text={"Selectionner un justificatif de revenu*"}
-                    toaster={toaster}
                     className={errors.incomeProof ? "file-error" : ""}
                     value={formData.incomeProof}
                     setValue={(val) => setValue("incomeProof", val, errors.incomeProof ? {shouldValidate: true} : {shouldValidate: false})}

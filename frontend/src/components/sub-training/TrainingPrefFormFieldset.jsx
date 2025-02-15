@@ -14,6 +14,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosAddCircle } from "react-icons/io";
 
 import "../../styles/sub-training/TrainingPrefFormFieldset.css";
+import CopyableSection from '../general/CopyableSection';
 
 function TrainingPrefFormFieldset({ trainers, formData, register, errors, setValue }) {
     /*############ INITIALISATION DES STATES ############*/
@@ -53,6 +54,11 @@ function TrainingPrefFormFieldset({ trainers, formData, register, errors, setVal
         }
     },[]);
 
+    function handleContent() {
+        const tr = trainers.filter(trainer => trainer?.id === formData.trainer?.value)[0]
+        return `${tr?.address}, ${tr?.country}, ${tr?.city}`
+    }
+
     useEffect(() => {
         const trainersOptionsTemp = [];
         trainers.forEach(trainer => {
@@ -79,6 +85,10 @@ function TrainingPrefFormFieldset({ trainers, formData, register, errors, setVal
                     }}
                     {...register("trainer", { required: true })}
                 />
+            </div>
+            <div className={formData.trainer ? "" : "invisible"}>
+                <p>Adresse du centre de formation</p>
+                <CopyableSection content={handleContent()}/>
             </div>
             <div className='select-dates-div'>
                 <CustomProvider locale={frFR}>

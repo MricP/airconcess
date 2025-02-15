@@ -6,29 +6,22 @@ import PaymentStep from '../../components/sub-training/PaymentStep';
 import "../../styles/sub-training/PageSubTraining.css";
 
 function PageSubTraining() {
-  const [step, updateStep] = useState(0);
-
-  // const stepRef = useRef(step)
-
-  // useEffect(() => {
-  //   const handlePopState = () => {
-  //     if (stepRef === 0) {
-  //       window.history.pushState(null, "", window.location.href);
-  //       console.log("step : "+stepRef.current);
-  //     } else {
-  //       window.history.pushState(null, "", window.location.href);
-  //       console.log("step : "+stepRef.current);
-  //       updateStep(prevStep => prevStep - 1);
-  //     }
-  //   };
-
-  //   window.history.pushState(null, "", window.location.href);
-  //   window.addEventListener("popstate", handlePopState);
+  const [step, setStep] = useState(0);
   
-  //   return () => {
-  //     window.removeEventListener("popstate", handlePopState);
-  //   };
-  // }, []);
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      const confirmationMessage = "Êtes vous sûr de vouloir annuler le processus ?";
+      event.returnValue = confirmationMessage; // Affiche la fenêtre de confirmation
+      return confirmationMessage; // Certaines versions de navigateurs exigent cette ligne
+    };
+
+    // Ajoute l'événement avant de quitter la page
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   if (step === 5) {
     return (
@@ -42,7 +35,7 @@ function PageSubTraining() {
     return (
       <main className="page-subTraining">
         <div>
-          <FormSubTraining step={step} updateStep={updateStep} />
+          <FormSubTraining step={step} updateStep={setStep} />
           <CardSubTraining />
         </div>
       </main>
