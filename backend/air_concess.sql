@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 27 jan. 2025 à 17:18
+-- Généré le : mer. 12 fév. 2025 à 17:44
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -70,6 +70,9 @@ CREATE TABLE IF NOT EXISTS `aircraft` (
   `estimated_price` int DEFAULT NULL,
   `isAvailable` tinyint NOT NULL DEFAULT '1',
   `description` varchar(500) NOT NULL,
+  `last_location_update` datetime DEFAULT NULL,
+  `last_location_longitude` float DEFAULT NULL,
+  `last_location_latitude` float DEFAULT NULL,
   PRIMARY KEY (`aircraft_id`),
   UNIQUE KEY `serial_number` (`serial_number`),
   KEY `fk_aircraft_model_id` (`model_id`)
@@ -79,22 +82,22 @@ CREATE TABLE IF NOT EXISTS `aircraft` (
 -- Déchargement des données de la table `aircraft`
 --
 
-INSERT INTO `aircraft` (`aircraft_id`, `model_id`, `serial_number`, `manufacture_year`, `flight_hours`, `configuration`, `recent_maintenance`, `typical_routes`, `owner`, `cost_per_km`, `monthly_maintenance_cost`, `estimated_price`, `isAvailable`, `description`) VALUES
-(7, 2, 'SN 6205', '2020', 3500, '14 sièges / 3 zones distinctes (salon, salle de conférence, chambre privée)', 'Révision complète effectuée à 3 000 heures de vol', 'New York - Dubaï / Londres - Tokyo', 'Grande entreprise multinationale (fictif)', 'X €', 'X €', 66000000, 1, 'Le Gulfstream G650ER est un jet d’affaires ultramoderne offrant une autonomie exceptionnelle de 13 890 km, idéal pour les vols intercontinentaux. Avec une vitesse maximale de Mach 0.925, il allie rapidité et confort. Sa cabine spacieuse et luxueuse accueille jusqu’à 19 passagers, proposant un environnement lumineux et connecté. C’est le choix parfait pour les voyageurs exigeants en quête de performance, de style et d’efficacité.'),
-(15, 4, 'PH795', '2002', 1200, 'Monoplace avec cabine ergonomique et tableau de bord minimaliste, équipé d\'un train d’atterrissage rétractable, ailes en fibre de carbone, et commandes de vol précises pour maximiser la performance en vol.', '15 janvier 2025', 'Vols de distance dans des environnements montagneux (Alpes, Andes).\r\n', NULL, '0,20 € / km', '150 € / mois', 50000, 1, 'Le SparrowHawk est un planeur léger, performant et moderne, conçu pour maximiser la glisse et les performances en compétition. Sa structure en fibre de carbone lui confère une légèreté exceptionnelle, facilitant le transport et l’assemblage. Il est idéal pour les pilotes cherchant un planeur rapide, agile et capable de voler de longues distances avec une grande efficacité. Avec son cockpit confortable et ses commandes précises, le SparrowHawk est un choix privilégié pour les amateurs de vol'),
-(16, 5, 'F-HATZ', '1977', 5000, 'Monomoteur à hélice avec cabine fermée, tableau de bord équipé de Garmin G1000 ou autres instruments numériques modernes. Réservoirs de carburant situés dans les ailes.', '15 décembre 2024', 'Saint-Etienne - Brest', 'AirConcess', '0,20 €/km', '500 € ', 400000, 0, 'Le Cessna 172 Skyhawk est un avion polyvalent, robuste et idéal pour les pilotes privés ou les écoles de pilotage. Connu pour sa stabilité, sa maniabilité et son coût d\'exploitation abordable, il convient parfaitement aux courtes distances, aux vols d\'entraînement et aux loisirs aériens.'),
-(17, 6, 'I-POVO', '2015', 15000, 'Cabine pressurisée avec une configuration de sièges flexible, incluant des fauteuils pivotants, des tables pliantes et un espace de rangement optimisé. Le poste de pilotage est équipé d’avionique avancée (Garmin G1000 ou similaire).', '5 janvier 2025', 'Rome - Madrid', 'AirConcess', '2.15€/km', '7500 €', 8000000, 1, 'Le Piaggio Avanti EVO est connu pour son design aérodynamique unique, avec une configuration à ailes canard et des hélices arrière. Cette conception offre une vitesse proche de celle des jets légers, tout en conservant une efficacité énergétique exceptionnelle. Il est également célèbre pour son faible niveau sonore dans la cabine et son confort, faisant de lui un choix prisé pour les trajets régionaux et continentaux.'),
-(18, 7, 'SNW123', '2020', 750, 'Cabine spacieuse configurée pour le confort, avec des sièges en cuir inclinables, des tables escamotables et un espace optimisé pour le travail ou la détente.\r\n\r\n', '12 Janvier 2025', 'Paris - Moscow', 'AirConcess', '4€/km', '20 000 €/mois', 9900000, 1, 'Le Learjet 75 Liberty est conçu pour les professionnels cherchant un équilibre parfait entre luxe, performance et efficacité. Avec son autonomie suffisante pour des vols régionaux et transcontinentaux courts, il offre une cabine silencieuse et un espace de travail confortable. C\'est l\'un des jets légers les plus rapides de sa catégorie, parfait pour les déplacements d\'affaires ou privés.'),
-(19, 8, 'HB-VSA', '2015', 1500, 'Cabine configurable avec des options pour sièges VIP, transport médical ou cargo.\r\nPoste de pilotage doté d’un système avionique avancé, le Pilatus ACE™, pour une gestion intuitive et simplifiée.\r\nGrande porte cargo (unique dans sa catégorie) permettant un chargement aisé d\'équipements volumineux.', '26 décembre 2024', 'Istanbul-Londres', 'AirConcess', '3 €/km', '20 000 €/mois', 10000000, 0, 'Le Pilatus PC-24, surnommé le \"Super Versatile Jet\", est un avion conçu pour combiner les performances d’un jet privé avec la capacité d’atterrir sur des pistes courtes ou non préparées (graviers, herbe, etc.). Il est idéal pour des missions variées, telles que les vols d\'affaires, les transports médicaux, ou les opérations sur des sites éloignés. Connu pour sa robustesse suisse et son confort, il est un choix privilégié pour les clients recherchant à la fois luxe et polyvalence.'),
-(20, 9, 'T-OMUSS', '1965', 10000, 'Cabine avec 4 sièges en cuir ou tissu.\r\nCockpit simple et ergonomique, souvent équipé d’une avionique de base (certains modèles modernisés disposent du Garmin G1000).', '7 septembre 2024', 'Lilles - Bordeaux', 'AirConcess', '0,50 €/km', '750 €/mois', 400000, 1, 'Le Piper PA-28 Cherokee est l’un des avions légers les plus fiables et accessibles du marché. Conçu pour les vols d’apprentissage, de loisir ou de transport privé, il est apprécié pour sa simplicité, sa maniabilité, et ses faibles coûts d’exploitation. Son design classique et robuste en fait un choix populaire parmi les pilotes et aéroclubs.'),
-(21, 10, 'DA40-NG', '1997', 4560, 'Cabine spacieuse avec des sièges en cuir et une visibilité exceptionnelle grâce à son cockpit vitré.\r\nCockpit équipé d’un système avionique avancé Garmin G1000 NXi, facilitant la navigation et la gestion des vols.', '1 décembre 2024', 'Strasbourg - Grenoble', 'AirConcess', '0,45 €/km', '1 500 €/mois', 500000, 1, 'Le Diamond DA40 est un avion léger moderne, alliant performances, sécurité et économie. Construit avec des matériaux composites, il offre une aérodynamique optimisée et une grande fiabilité. Le DA40 est particulièrement populaire auprès des écoles de pilotage et des pilotes privés pour sa maniabilité, ses faibles coûts d’exploitation et son excellent confort de vol.'),
-(22, 11, 'I-PTFD', '2012', 562, 'Cabine spacieuse et lumineuse avec des sièges en cuir, offrant un confort supérieur pour un avion léger.\r\nCompartiment à bagages généreux, idéal pour les déplacements en famille ou pour des escapades prolongées.', '11 novembre 2024', 'Paris - Marseille', 'AirConcess', '0,55 €/km', '1 200 €/mois', 450000, 1, 'Le Tecnam P2010 est un avion léger moderne qui combine l’élégance italienne avec des performances fiables. Doté d’une conception en matériaux composites et d’une aile haute, il offre une excellente visibilité et une stabilité remarquable. Il est particulièrement adapté aux pilotes privés recherchant un avion confortable, moderne et efficace pour des vols locaux ou nationaux.'),
-(23, 12, 'ZS-GCH', '2012', 450, 'Cockpit ergonomique et confortable, conçu pour des vols de longue durée.\r\nInstruments modernes pour le vol à voile, souvent équipés de systèmes de navigation avancés tels que LXNAV ou Cambridge Aero Instruments.\r\nAiles en composite avec des winglets pour maximiser l’efficacité aérodynamique.', '2 janvier 2025', 'Lyon - Grenoble', 'AirConcess', '0,10 €/km', '500 €/mois', 200000, 1, 'Le Jonker JS1 Revelation est un planeur haut de gamme conçu pour offrir des performances exceptionnelles en vol de distance et en compétition. Grâce à son design aérodynamique avancé et ses matériaux composites, il est capable de voler sur de longues distances en utilisant efficacement les courants ascendants thermiques. Le JS1 peut être configuré avec des ailes de 18 ou 21 mètres, selon les préférences du pilote et les conditions de vol. '),
-(24, 13, 'US-4240', '2019', 50, 'Cabine ouverte, offrant une visibilité exceptionnelle pour les vols panoramiques.\r\nSièges en tandem (pilote à l’avant, passager à l’arrière) pour une expérience immersive en vol.\r\nOption flotteurs pour l’amphibie, permettant des décollages et atterrissages sur l’eau.', '21 janvier 2025', 'Exploration de paysages naturels', 'Airconcess', '0,35 €/km', '1 000 €', 160000, 1, 'L’AirCam est un avion biplan unique, conçu pour les vols d’exploration, les missions de photographie aérienne, et les aventures en plein air. Sa conception à double moteur offre une sécurité accrue et la capacité de continuer à voler même en cas de panne moteur. Avec son cockpit ouvert et sa maniabilité exceptionnelle, il est idéal pour explorer des zones reculées, des rivières, des lacs, ou des côtes.'),
-(25, 14, 'GD-5658', '1994', 9999, 'Cockpit compact avec des sièges en tandem (pilote à l’avant, passager à l’arrière).\r\nOption pour flotteurs (hydravion) ou skis (atterrissages sur neige).\r\nConçu pour des opérations sur des pistes courtes ou non aménagées.', '31 décembre 2020', 'Balades aquatique', 'AirConcess', '0,40 €/km', '1 000 €', 250000, 0, 'Le Piper Super Cub PA-18 est un avion léger tout-terrain extrêmement polyvalent et robuste. Avec sa capacité à décoller et atterrir sur des pistes courtes, sur l’eau ou sur la neige, il est un favori des pilotes qui aiment explorer des endroits reculés. Facile à piloter et à entretenir, il est aussi très populaire dans les régions montagneuses ou isolées. Sa conception légère et ses ailes hautes lui permettent de voler à basse vitesse.'),
-(26, 4, 'PC123', '2002', 1568, 'Monoplace avec cabine ergonomique et tableau de bord minimaliste, équipé d\'un train d’atterrissage rétractable, ailes en fibre de carbone, et commandes de vol précises pour maximiser la performance en vol.', '13 janvier 2025', 'Vols de distance dans des environnements montagneux (Alpes, Andes).\r\n', 'AirConcess', '0,20 € / km', '150 € / mois', 50000, 1, 'Le SparrowHawk est un planeur léger, performant et moderne, conçu pour maximiser la glisse et les performances en compétition. Sa structure en fibre de carbone lui confère une légèreté exceptionnelle, facilitant le transport et l’assemblage. Il est idéal pour les pilotes cherchant un planeur rapide, agile et capable de voler de longues distances avec une grande efficacité. Avec son cockpit confortable et ses commandes précises, le SparrowHawk est un choix privilégié pour les amateurs de vol'),
-(27, 4, 'ZT-239', '2002', 1568, 'Monoplace avec cabine ergonomique et tableau de bord minimaliste, équipé d\'un train d’atterrissage rétractable, ailes en fibre de carbone, et commandes de vol précises pour maximiser la performance en vol.', '13 janvier 2025', 'Vols de distance dans des environnements montagneux (Alpes, Andes).\r\n', 'AirConcess', '0,20 € / km', '150 € / mois', 50000, 1, 'Le SparrowHawk est un planeur léger, performant et moderne, conçu pour maximiser la glisse et les performances en compétition. Sa structure en fibre de carbone lui confère une légèreté exceptionnelle, facilitant le transport et l’assemblage. Il est idéal pour les pilotes cherchant un planeur rapide, agile et capable de voler de longues distances avec une grande efficacité. Avec son cockpit confortable et ses commandes précises, le SparrowHawk est un choix privilégié pour les amateurs de vol'),
-(28, 13, 'WA-865', '2019', 155, 'Cabine ouverte, offrant une visibilité exceptionnelle pour les vols panoramiques.\r\nSièges en tandem (pilote à l’avant, passager à l’arrière) pour une expérience immersive en vol.\r\nOption flotteurs pour l’amphibie, permettant des décollages et atterrissages sur l’eau.', '14 janvier 2025', 'Exploration de paysages naturels', 'Airconcess', '0,35 €/km', '1 000 €', 160000, 1, 'L’AirCam est un avion biplan unique, conçu pour les vols d’exploration, les missions de photographie aérienne, et les aventures en plein air. Sa conception à double moteur offre une sécurité accrue et la capacité de continuer à voler même en cas de panne moteur. Avec son cockpit ouvert et sa maniabilité exceptionnelle, il est idéal pour explorer des zones reculées, des rivières, des lacs, ou des côtes.');
+INSERT INTO `aircraft` (`aircraft_id`, `model_id`, `serial_number`, `manufacture_year`, `flight_hours`, `configuration`, `recent_maintenance`, `typical_routes`, `owner`, `cost_per_km`, `monthly_maintenance_cost`, `estimated_price`, `isAvailable`, `description`, `last_location_update`, `last_location_longitude`, `last_location_latitude`) VALUES
+(7, 2, 'SN 6205', '2020', 3500, '14 sièges / 3 zones distinctes (salon, salle de conférence, chambre privée)', 'Révision complète effectuée à 3 000 heures de vol', 'New York - Dubaï / Londres - Tokyo', 'Grande entreprise multinationale (fictif)', 'X €', 'X €', 66000000, 1, 'Le Gulfstream G650ER est un jet d’affaires ultramoderne offrant une autonomie exceptionnelle de 13 890 km, idéal pour les vols intercontinentaux. Avec une vitesse maximale de Mach 0.925, il allie rapidité et confort. Sa cabine spacieuse et luxueuse accueille jusqu’à 19 passagers, proposant un environnement lumineux et connecté. C’est le choix parfait pour les voyageurs exigeants en quête de performance, de style et d’efficacité.', '2025-02-20 14:20:14', 2.5479, 49.0097),
+(15, 4, 'PH795', '2002', 1200, 'Monoplace avec cabine ergonomique et tableau de bord minimaliste, équipé d\'un train d’atterrissage rétractable, ailes en fibre de carbone, et commandes de vol précises pour maximiser la performance en vol.', '15 janvier 2025', 'Vols de distance dans des environnements montagneux (Alpes, Andes).\r\n', NULL, '0,20 € / km', '150 € / mois', 50000, 1, 'Le SparrowHawk est un planeur léger, performant et moderne, conçu pour maximiser la glisse et les performances en compétition. Sa structure en fibre de carbone lui confère une légèreté exceptionnelle, facilitant le transport et l’assemblage. Il est idéal pour les pilotes cherchant un planeur rapide, agile et capable de voler de longues distances avec une grande efficacité. Avec son cockpit confortable et ses commandes précises, le SparrowHawk est un choix privilégié pour les amateurs de vol', '2024-12-10 06:11:18', 5.0811, 45.7256),
+(16, 5, 'F-HATZ', '1977', 5000, 'Monomoteur à hélice avec cabine fermée, tableau de bord équipé de Garmin G1000 ou autres instruments numériques modernes. Réservoirs de carburant situés dans les ailes.', '15 décembre 2024', 'Saint-Etienne - Brest', 'AirConcess', '0,20 €/km', '500 € ', 400000, 0, 'Le Cessna 172 Skyhawk est un avion polyvalent, robuste et idéal pour les pilotes privés ou les écoles de pilotage. Connu pour sa stabilité, sa maniabilité et son coût d\'exploitation abordable, il convient parfaitement aux courtes distances, aux vols d\'entraînement et aux loisirs aériens.', '2024-11-04 18:21:08', -73.741, 45.467),
+(17, 6, 'I-POVO', '2015', 15000, 'Cabine pressurisée avec une configuration de sièges flexible, incluant des fauteuils pivotants, des tables pliantes et un espace de rangement optimisé. Le poste de pilotage est équipé d’avionique avancée (Garmin G1000 ou similaire).', '5 janvier 2025', 'Rome - Madrid', 'AirConcess', '2.15€/km', '7500 €', 8000000, 1, 'Le Piaggio Avanti EVO est connu pour son design aérodynamique unique, avec une configuration à ailes canard et des hélices arrière. Cette conception offre une vitesse proche de celle des jets légers, tout en conservant une efficacité énergétique exceptionnelle. Il est également célèbre pour son faible niveau sonore dans la cabine et son confort, faisant de lui un choix prisé pour les trajets régionaux et continentaux.', '2025-02-03 14:21:26', -73.7781, 40.6413),
+(18, 7, 'SNW123', '2020', 750, 'Cabine spacieuse configurée pour le confort, avec des sièges en cuir inclinables, des tables escamotables et un espace optimisé pour le travail ou la détente.\r\n\r\n', '12 Janvier 2025', 'Paris - Moscow', 'AirConcess', '4€/km', '20 000 €/mois', 9900000, 1, 'Le Learjet 75 Liberty est conçu pour les professionnels cherchant un équilibre parfait entre luxe, performance et efficacité. Avec son autonomie suffisante pour des vols régionaux et transcontinentaux courts, il offre une cabine silencieuse et un espace de travail confortable. C\'est l\'un des jets légers les plus rapides de sa catégorie, parfait pour les déplacements d\'affaires ou privés.', '2025-02-13 09:15:48', -118.409, 33.9416),
+(19, 8, 'HB-VSA', '2015', 1500, 'Cabine configurable avec des options pour sièges VIP, transport médical ou cargo.\r\nPoste de pilotage doté d’un système avionique avancé, le Pilatus ACE™, pour une gestion intuitive et simplifiée.\r\nGrande porte cargo (unique dans sa catégorie) permettant un chargement aisé d\'équipements volumineux.', '26 décembre 2024', 'Istanbul-Londres', 'AirConcess', '3 €/km', '20 000 €/mois', 10000000, 0, 'Le Pilatus PC-24, surnommé le \"Super Versatile Jet\", est un avion conçu pour combiner les performances d’un jet privé avec la capacité d’atterrir sur des pistes courtes ou non préparées (graviers, herbe, etc.). Il est idéal pour des missions variées, telles que les vols d\'affaires, les transports médicaux, ou les opérations sur des sites éloignés. Connu pour sa robustesse suisse et son confort, il est un choix privilégié pour les clients recherchant à la fois luxe et polyvalence.', '2025-02-05 17:22:10', -0.4543, 51.47),
+(20, 9, 'T-OMUSS', '1965', 10000, 'Cabine avec 4 sièges en cuir ou tissu.\r\nCockpit simple et ergonomique, souvent équipé d’une avionique de base (certains modèles modernisés disposent du Garmin G1000).', '7 septembre 2024', 'Lilles - Bordeaux', 'AirConcess', '0,50 €/km', '750 €/mois', 400000, 1, 'Le Piper PA-28 Cherokee est l’un des avions légers les plus fiables et accessibles du marché. Conçu pour les vols d’apprentissage, de loisir ou de transport privé, il est apprécié pour sa simplicité, sa maniabilité, et ses faibles coûts d’exploitation. Son design classique et robuste en fait un choix populaire parmi les pilotes et aéroclubs.', '2025-02-27 06:38:23', 55.3657, 25.2532),
+(21, 10, 'DA40-NG', '1997', 4560, 'Cabine spacieuse avec des sièges en cuir et une visibilité exceptionnelle grâce à son cockpit vitré.\r\nCockpit équipé d’un système avionique avancé Garmin G1000 NXi, facilitant la navigation et la gestion des vols.', '1 décembre 2024', 'Strasbourg - Grenoble', 'AirConcess', '0,45 €/km', '1 500 €/mois', 500000, 1, 'Le Diamond DA40 est un avion léger moderne, alliant performances, sécurité et économie. Construit avec des matériaux composites, il offre une aérodynamique optimisée et une grande fiabilité. Le DA40 est particulièrement populaire auprès des écoles de pilotage et des pilotes privés pour sa maniabilité, ses faibles coûts d’exploitation et son excellent confort de vol.', '2024-12-18 18:22:42', 139.78, 35.5494),
+(22, 11, 'I-PTFD', '2012', 562, 'Cabine spacieuse et lumineuse avec des sièges en cuir, offrant un confort supérieur pour un avion léger.\r\nCompartiment à bagages généreux, idéal pour les déplacements en famille ou pour des escapades prolongées.', '11 novembre 2024', 'Paris - Marseille', 'AirConcess', '0,55 €/km', '1 200 €/mois', 450000, 1, 'Le Tecnam P2010 est un avion léger moderne qui combine l’élégance italienne avec des performances fiables. Doté d’une conception en matériaux composites et d’une aile haute, il offre une excellente visibilité et une stabilité remarquable. Il est particulièrement adapté aux pilotes privés recherchant un avion confortable, moderne et efficace pour des vols locaux ou nationaux.', '2024-12-17 13:22:58', 151.175, -33.9399),
+(23, 12, 'ZS-GCH', '2012', 450, 'Cockpit ergonomique et confortable, conçu pour des vols de longue durée.\r\nInstruments modernes pour le vol à voile, souvent équipés de systèmes de navigation avancés tels que LXNAV ou Cambridge Aero Instruments.\r\nAiles en composite avec des winglets pour maximiser l’efficacité aérodynamique.', '2 janvier 2025', 'Lyon - Grenoble', 'AirConcess', '0,10 €/km', '500 €/mois', 200000, 1, 'Le Jonker JS1 Revelation est un planeur haut de gamme conçu pour offrir des performances exceptionnelles en vol de distance et en compétition. Grâce à son design aérodynamique avancé et ses matériaux composites, il est capable de voler sur de longues distances en utilisant efficacement les courants ascendants thermiques. Le JS1 peut être configuré avec des ailes de 18 ou 21 mètres, selon les préférences du pilote et les conditions de vol. ', '2024-04-25 10:23:17', 116.585, 40.0801),
+(24, 13, 'US-4240', '2019', 50, 'Cabine ouverte, offrant une visibilité exceptionnelle pour les vols panoramiques.\r\nSièges en tandem (pilote à l’avant, passager à l’arrière) pour une expérience immersive en vol.\r\nOption flotteurs pour l’amphibie, permettant des décollages et atterrissages sur l’eau.', '21 janvier 2025', 'Exploration de paysages naturels', 'Airconcess', '0,35 €/km', '1 000 €', 160000, 1, 'L’AirCam est un avion biplan unique, conçu pour les vols d’exploration, les missions de photographie aérienne, et les aventures en plein air. Sa conception à double moteur offre une sécurité accrue et la capacité de continuer à voler même en cas de panne moteur. Avec son cockpit ouvert et sa maniabilité exceptionnelle, il est idéal pour explorer des zones reculées, des rivières, des lacs, ou des côtes.', '2025-02-26 14:23:35', NULL, NULL),
+(25, 14, 'GD-5658', '1994', 9999, 'Cockpit compact avec des sièges en tandem (pilote à l’avant, passager à l’arrière).\r\nOption pour flotteurs (hydravion) ou skis (atterrissages sur neige).\r\nConçu pour des opérations sur des pistes courtes ou non aménagées.', '31 décembre 2020', 'Balades aquatique', 'AirConcess', '0,40 €/km', '1 000 €', 250000, 0, 'Le Piper Super Cub PA-18 est un avion léger tout-terrain extrêmement polyvalent et robuste. Avec sa capacité à décoller et atterrir sur des pistes courtes, sur l’eau ou sur la neige, il est un favori des pilotes qui aiment explorer des endroits reculés. Facile à piloter et à entretenir, il est aussi très populaire dans les régions montagneuses ou isolées. Sa conception légère et ses ailes hautes lui permettent de voler à basse vitesse.', '2024-11-05 14:23:46', NULL, NULL),
+(26, 4, 'PC123', '2002', 1568, 'Monoplace avec cabine ergonomique et tableau de bord minimaliste, équipé d\'un train d’atterrissage rétractable, ailes en fibre de carbone, et commandes de vol précises pour maximiser la performance en vol.', '13 janvier 2025', 'Vols de distance dans des environnements montagneux (Alpes, Andes).\r\n', 'AirConcess', '0,20 € / km', '150 € / mois', 50000, 1, 'Le SparrowHawk est un planeur léger, performant et moderne, conçu pour maximiser la glisse et les performances en compétition. Sa structure en fibre de carbone lui confère une légèreté exceptionnelle, facilitant le transport et l’assemblage. Il est idéal pour les pilotes cherchant un planeur rapide, agile et capable de voler de longues distances avec une grande efficacité. Avec son cockpit confortable et ses commandes précises, le SparrowHawk est un choix privilégié pour les amateurs de vol', NULL, NULL, NULL),
+(27, 4, 'ZT-239', '2002', 1568, 'Monoplace avec cabine ergonomique et tableau de bord minimaliste, équipé d\'un train d’atterrissage rétractable, ailes en fibre de carbone, et commandes de vol précises pour maximiser la performance en vol.', '13 janvier 2025', 'Vols de distance dans des environnements montagneux (Alpes, Andes).\r\n', 'AirConcess', '0,20 € / km', '150 € / mois', 50000, 1, 'Le SparrowHawk est un planeur léger, performant et moderne, conçu pour maximiser la glisse et les performances en compétition. Sa structure en fibre de carbone lui confère une légèreté exceptionnelle, facilitant le transport et l’assemblage. Il est idéal pour les pilotes cherchant un planeur rapide, agile et capable de voler de longues distances avec une grande efficacité. Avec son cockpit confortable et ses commandes précises, le SparrowHawk est un choix privilégié pour les amateurs de vol', '2025-02-25 14:23:54', NULL, NULL),
+(28, 13, 'WA-865', '2019', 155, 'Cabine ouverte, offrant une visibilité exceptionnelle pour les vols panoramiques.\r\nSièges en tandem (pilote à l’avant, passager à l’arrière) pour une expérience immersive en vol.\r\nOption flotteurs pour l’amphibie, permettant des décollages et atterrissages sur l’eau.', '14 janvier 2025', 'Exploration de paysages naturels', 'Airconcess', '0,35 €/km', '1 000 €', 160000, 1, 'L’AirCam est un avion biplan unique, conçu pour les vols d’exploration, les missions de photographie aérienne, et les aventures en plein air. Sa conception à double moteur offre une sécurité accrue et la capacité de continuer à voler même en cas de panne moteur. Avec son cockpit ouvert et sa maniabilité exceptionnelle, il est idéal pour explorer des zones reculées, des rivières, des lacs, ou des côtes.', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -121,34 +124,51 @@ CREATE TABLE IF NOT EXISTS `appointment` (
   `appt_timestamp` datetime DEFAULT NULL,
   `appt_agency_id` int NOT NULL,
   PRIMARY KEY (`appt_id`),
-  UNIQUE KEY `appointmentTimestamp` (`appt_timestamp`),
+  UNIQUE KEY `appt_timestamp` (`appt_timestamp`,`appt_agency_id`),
   KEY `fk_appt_agency_id` (`appt_agency_id`),
   KEY `fk_appt_aircraft_id` (`aircraftConcerned_id`),
   KEY `fk_appt_user_id` (`userConcerned_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `appointment`
 --
 
 INSERT INTO `appointment` (`appt_id`, `aircraftConcerned_id`, `userConcerned_id`, `customer_firstName`, `customer_lastName`, `customer_phone`, `customer_email`, `customer_country`, `customer_city`, `customer_address`, `customer_postalCode`, `customer_idCard_url`, `customer_incomeProof_url`, `appt_reason`, `appt_timestamp`, `appt_agency_id`) VALUES
-(70, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-05 10:45:00', 3),
-(71, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-05 10:15:00', 3),
-(72, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-05 10:30:00', 3),
-(73, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-05 11:30:00', 3),
-(74, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 11:30:00', 3),
-(75, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 07:00:00', 3),
-(76, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 07:15:00', 3),
-(77, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 07:30:00', 3),
-(78, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 07:45:00', 3),
-(79, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 08:00:00', 3),
-(80, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 08:15:00', 3),
-(81, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 08:30:00', 3),
-(82, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 08:45:00', 3),
-(83, 16, 35, 'Mathéo', 'Flores', '+666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, 'Array', NULL, 'purchase', '2025-02-04 09:45:00', 3),
-(84, 17, 35, 'Ma', 'Floz', '+3333', 'matheoflores32@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '69100', 'Array', NULL, 'purchase', '2025-02-05 16:00:00', 4),
-(85, 17, 35, 'Ma', 'Floz', '+3333', 'matheoflores32@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '69100', 'Array', NULL, 'purchase', '2025-02-05 17:15:00', 4),
-(86, 17, 35, 'Ma', 'Floz', '+3333', 'matheoflores32@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '69100', 'Array', NULL, 'purchase', '2025-02-07 12:45:00', 6);
+(192, 18, 35, 'Mathéo', 'Flores', '+3666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, NULL, NULL, 'purchase', '2025-02-08 10:45:00', 1),
+(193, 18, 35, 'a', 'Flores', '+656', 'matheoflores26@gmail.com', 'DZ', 'Adrar', '141 rue Barthélémy de laffemas', '', NULL, NULL, 'purchase', '2025-02-08 10:30:00', 3),
+(194, 18, 35, 'Mathéo', 'Flores', '+3666', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', NULL, NULL, NULL, 'purchase', '2025-02-08 10:30:00', 1),
+(195, 18, 35, 'Mathéo', 'Flores', '+66', 'matheoflores26@gmail.com', 'AL', 'Bajram Curri', '141 rue Barthélémy de laffemas', NULL, NULL, NULL, 'purchase', '2025-02-08 10:15:00', 1),
+(196, 18, 35, 'Mathéo', 'Flores', '+66', 'matheoflores26@gmail.com', 'AL', 'Bajram Curri', '141 rue Barthélémy de laffemas', NULL, NULL, NULL, 'purchase', '2025-02-08 14:15:00', 1),
+(197, 18, 35, 'Mathéo', 'Flores', '+66', 'matheoflores26@gmail.com', 'AL', 'Bajram Curri', '141 rue Barthélémy de laffemas', NULL, NULL, NULL, 'purchase', '2025-02-08 08:30:00', 1),
+(198, 18, 35, 'Mathéo', 'Flores', '+66', 'matheoflores26@gmail.com', 'AL', 'Bajram Curri', '141 rue Barthélémy de laffemas', NULL, NULL, NULL, 'purchase', '2025-02-08 09:45:00', 1),
+(199, 18, 35, 'Mathéo', 'Flores', '+33', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '', NULL, NULL, 'purchase', '2025-02-08 14:45:00', 1),
+(200, 18, 35, 'Mathéo', 'Flores', '+633', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '', NULL, NULL, 'purchase', '2025-02-22 12:45:00', 1),
+(201, 18, 35, 'Mathéo', 'Flores', '+633', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '', 'Capture d’écran (49).png', NULL, 'purchase', '2025-02-22 08:15:00', 1),
+(202, 18, 35, 'Mathéo', 'Flores', '+33', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '', 'Capture d’écran (52).png', 'Capture d\'écran 2024-09-18 190014.png', 'purchase', '2025-02-12 09:45:00', 6),
+(203, 7, 35, 'Mathéo', 'Flores', '+33565', 'matheoflores26@gmail.com', 'AF', 'Andkhoy', '141 rue Barthélémy de laffemas', '26240', 'CV_01-2025.pdf', 'CV.pdf', 'purchase', '2025-02-21 10:45:00', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `credit_card`
+--
+
+DROP TABLE IF EXISTS `credit_card`;
+CREATE TABLE IF NOT EXISTS `credit_card` (
+  `card_holder` varchar(30) NOT NULL,
+  `card_number` varchar(20) NOT NULL,
+  `card_id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`card_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `credit_card`
+--
+
+INSERT INTO `credit_card` (`card_holder`, `card_number`, `card_id`) VALUES
+('Flores Mathéo', '4965 4965 4547 1254', 4),
+('Flores Mathéo', '4965 4965 4547 1254', 5);
 
 -- --------------------------------------------------------
 
@@ -331,16 +351,92 @@ INSERT INTO `testimonial` (`id_test`, `id_user`, `content`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `trainer`
+--
+
+DROP TABLE IF EXISTS `trainer`;
+CREATE TABLE IF NOT EXISTS `trainer` (
+  `id_trainer` int NOT NULL,
+  `country_assignment` text NOT NULL,
+  `city_assignment` text NOT NULL,
+  `address_assignment` text NOT NULL,
+  PRIMARY KEY (`id_trainer`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `training`
 --
 
 DROP TABLE IF EXISTS `training`;
 CREATE TABLE IF NOT EXISTS `training` (
-  `idTraining` int NOT NULL AUTO_INCREMENT,
-  `price` decimal(10,2) DEFAULT NULL,
-  `trainingType` text,
-  `cardIdentity` text,
-  PRIMARY KEY (`idTraining`)
+  `training_id` int NOT NULL AUTO_INCREMENT,
+  `final_proposal_id` int DEFAULT NULL,
+  `customer_firstName` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_lastName` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_country` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_city` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_postalCode` int DEFAULT NULL,
+  `customer_addr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `customer_idCard_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `start_date_pref` date NOT NULL,
+  `end_date_pref` date NOT NULL,
+  `frequency_pref` int NOT NULL,
+  `cardUsed_id` int NOT NULL,
+  `userConcerned_id` int NOT NULL,
+  PRIMARY KEY (`training_id`) USING BTREE,
+  KEY `fk_training_userConcerned_id` (`userConcerned_id`),
+  KEY `fk_training_cardUsed_id` (`cardUsed_id`) USING BTREE,
+  KEY `fk_training_final_proposal_id` (`final_proposal_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `training`
+--
+
+INSERT INTO `training` (`training_id`, `final_proposal_id`, `customer_firstName`, `customer_lastName`, `customer_country`, `customer_city`, `customer_postalCode`, `customer_addr`, `customer_phone`, `customer_email`, `customer_idCard_url`, `start_date_pref`, `end_date_pref`, `frequency_pref`, `cardUsed_id`, `userConcerned_id`) VALUES
+(3, NULL, 'Mathéo', 'Flores', 'AF', 'Andkhoy', 69100, '141 rue Barthélémy de laffemas', '+33644038323', 'matheoflores26@gmail.com', 'imagetest.jpg', '2025-02-20', '2025-02-28', 3, 4, 35),
+(4, NULL, 'Mathéo', 'Flores', 'AF', 'Andkhoy', 69100, '141 rue Barthélémy de laffemas', '+33644038323', 'matheoflores26@gmail.com', 'imagetest.jpg', '2025-02-20', '2025-02-28', 3, 5, 35);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `training_preferedslot`
+--
+
+DROP TABLE IF EXISTS `training_preferedslot`;
+CREATE TABLE IF NOT EXISTS `training_preferedslot` (
+  `trainingConcerned_id` int NOT NULL,
+  `preferedSlot_id` int NOT NULL AUTO_INCREMENT,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  PRIMARY KEY (`preferedSlot_id`) USING BTREE,
+  KEY `training_pref_trainingConcerned_id` (`trainingConcerned_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `training_preferedslot`
+--
+
+INSERT INTO `training_preferedslot` (`trainingConcerned_id`, `preferedSlot_id`, `start_time`, `end_time`) VALUES
+(4, 1, '09:30:00', '09:45:00'),
+(4, 2, '10:45:00', '11:45:00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `training_proposal`
+--
+
+DROP TABLE IF EXISTS `training_proposal`;
+CREATE TABLE IF NOT EXISTS `training_proposal` (
+  `proposal_id` int NOT NULL,
+  `trainingConcerned_id` int NOT NULL,
+  PRIMARY KEY (`proposal_id`) USING BTREE,
+  KEY `fk_training_proposal_trainingConcerned_id` (`trainingConcerned_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -404,6 +500,32 @@ ALTER TABLE `estimate`
 --
 ALTER TABLE `image`
   ADD CONSTRAINT `fk_aircraft_id_img` FOREIGN KEY (`aircraft_id`) REFERENCES `aircraft` (`aircraft_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `trainer`
+--
+ALTER TABLE `trainer`
+  ADD CONSTRAINT `fk_trainer_id` FOREIGN KEY (`id_trainer`) REFERENCES `user` (`idUser`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `training`
+--
+ALTER TABLE `training`
+  ADD CONSTRAINT `fk_training_id_creditCard_used` FOREIGN KEY (`cardUsed_id`) REFERENCES `credit_card` (`card_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_training_id_final_proposal` FOREIGN KEY (`final_proposal_id`) REFERENCES `training_proposal` (`proposal_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_training_userConcerned_id` FOREIGN KEY (`userConcerned_id`) REFERENCES `user` (`idUser`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `training_preferedslot`
+--
+ALTER TABLE `training_preferedslot`
+  ADD CONSTRAINT `training_pref_id_training_concerned` FOREIGN KEY (`trainingConcerned_id`) REFERENCES `training` (`training_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `training_proposal`
+--
+ALTER TABLE `training_proposal`
+  ADD CONSTRAINT `fk_training_proposal_id_concerned_training` FOREIGN KEY (`trainingConcerned_id`) REFERENCES `training` (`training_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
