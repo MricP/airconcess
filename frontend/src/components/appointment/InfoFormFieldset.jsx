@@ -7,7 +7,6 @@ import CustomFilePicker from '../general/CustomFilePicker';
 
 import "../../styles/appointment/InfoFormFieldset.css"
 
-
 function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeProof=false,setValue}) {
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i    
     const postalCodeRegex = /^[0-9]{5}/
@@ -95,6 +94,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                         <label htmlFor="city" >
                             <p>Ville*</p>
                             <CustomSelectPicker 
+                                noOptionsMessage={"Aucun pays selectionné"}
+
                                 isSearchable={true}
                                 className={errors.city ? "input-error" : ""}
                                 data={formData.country ? City.getCitiesOfCountry(formData.country.value).map(

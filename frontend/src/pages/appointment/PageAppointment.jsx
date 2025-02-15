@@ -4,6 +4,8 @@ import AppointmentForm from '../../components/appointment/AppointmentForm';
 import ResultPage from '../ResultPage';
 import "../../styles/appointment/PageAppointment.css"
 
+
+
 function PageAppointment() {
     const [isSubmitted,setIsSubmitted] = useState(false);
 

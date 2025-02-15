@@ -7,21 +7,21 @@
 
         public static function createAppointment($data) {
             $apptData = [
-                "user_id" => 35,
-                "aircraft_id" => $data["formData"]["serialNumber"]["value"],
-                "firstName" => $data["formData"]["firstName"],
-                "lastName" => $data["formData"]["lastName"],
-                "phone" => $data["formData"]["phone"],
-                "email" => $data["formData"]["email"],
-                "country" => $data["formData"]["country"]["value"],
-                "city" => $data["formData"]["city"]["value"],
-                "address" => $data["formData"]["address"],
-                "postalCode" => $data["formData"]["postalCode"],
-                "idCard" => $data["formData"]["idCard"]["name"],
-                "incomeProof" => $data["formData"]["incomeProof"]["name"],
-                "reason" => $data["formData"]["reason"]["value"],
-                "timestamp" => $data["formData"]["date"]." ".$data["formData"]["time"],
-                "agency_id" => $data["formData"]["agency"]["value"],
+                "user_id" => $data["userId"],
+                "aircraft_id" => $data["serialNumber"]["value"],
+                "firstName" => $data["firstName"],
+                "lastName" => $data["lastName"],
+                "phone" => $data["phone"],
+                "email" => $data["email"],
+                "country" => $data["country"]["value"],
+                "city" => $data["city"]["value"],
+                "address" => $data["address"],
+                "postalCode" => $data["postalCode"],
+                "idCard" => $data["idCard"]["name"],
+                "incomeProof" => $data["incomeProof"]["name"],
+                "reason" => $data["reason"]["value"],
+                "timestamp" => $data["date"]." ".$data["time"],
+                "agency_id" => $data["agency"]["value"],
             ];
 
             //TODO : Gerer l'insertion des fichiers (idCard et incomeProof)
@@ -112,8 +112,5 @@
             echo json_encode($location);
         }
     }
-
-
-
 ?>
 

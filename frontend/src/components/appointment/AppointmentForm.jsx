@@ -1,32 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router-dom";
 import { CustomProvider } from 'rsuite';
-import { frFR } from 'rsuite/locales'; // Locale française
+import { frFR } from 'rsuite/locales'; 
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
+
 import InfoFormFieldset from './InfoFormFieldset'
 import CustomTimePicker from '../general/CustomTimePicker'
 import CustomDatePicker from '../general/CustomDatePicker'
 import CustomSelectPicker from '../general/CustomSelectPicker';
 import CopyableSection from '../general/CopyableSection';
-import { toast } from 'react-toastify';
+import useRedirect from '../../components/Custom-hooks';
 
 import "../../styles/appointment/AppointmentForm.css"
 
 // services functions
+import { getUserData } from '../../services/auth';
 import { loadAircraft,loadTimestamps,loadModels,loadAircraftsOfModel,submitAppointment,loadAgencies,loadAgencyLocation } from '../../services/appointment';
 
 function AppointmentForm({setIsSubmitted}) {
     /*############ INITIALISATION DES STATES ############*/
-    const [currentAircraft,setCurrentAircraft] = useState(null)
     
+    const [currentAircraft,setCurrentAircraft] = useState(null)
     const [agencyOptions,setAgencyOptions] = useState([]);
     const [selectedAgencyLocation,setSelectedAgencyLocation] = useState(null);
     const [modelOptions,setModelOptions] = useState([]); // Stock les differents models de la BD (label:model_name,value:model_id)
     const [aircraftOptions,setAircraftOptions] = useState([]); // Stock une liste d'appareils correspondant au model selectionné (label:serialNumber,value:aircraft_id)
     const [disabledTimestamps, updateDisabledTimestamps] = useState([]); // Format disabledTimestamps = [{ date:YYYY-MM-DD , hour:hh , minutes:[m,m,m,m] }]
-    
+    const redirect = useRedirect()
+
     const {register,handleSubmit,watch,setValue,formState: { errors }} = useForm (
         { defaultValues: {
+            userId: null,
             reason: null,
             model: null,
             serialNumber: null,
@@ -59,6 +64,20 @@ function AppointmentForm({setIsSubmitted}) {
     ];    
 
     /*#################### FONCTIONS ####################*/
+
+    const getUserIdFromToken = async (token) => {
+        try {
+            const userData = await getUserData(token);
+            setValue("userId",userData.idUser)
+            setValue("email",userData.email)
+            setValue("firstName",userData.firstName)
+            setValue("lastName",userData.lastName)
+            setValue("userId",userData.idUser)
+            console.log(userData.idUser)
+        } catch (error) {
+            console.error('Erreur get:', error);
+        }
+    }
 
     const loadDisabledTimestamps = async () => {
         try {
@@ -175,7 +194,7 @@ function AppointmentForm({setIsSubmitted}) {
 
     const onSubmit = async (formData) => {
         try {
-            const response = await submitAppointment({formData});
+            const response = await submitAppointment(formData);
             
             if(response.data.success) {
                 setIsSubmitted(true)
@@ -211,29 +230,23 @@ function AppointmentForm({setIsSubmitted}) {
         loadAircraftsWith(value?.value)
     }
 
-    /*################### REFERENCES ####################*/ 
-    // Pour utiliser les states et fonctions dans les useEffect sans détecter un changement de cette variable
-
-    // const modelOptionsRef = useRef(modelOptions);
-    // const loadAvailableModelsRef = useRef(loadAvailableModels);
-    // const loadAvailableAgenciesRef = useRef(loadAvailableAgencies);
-    // const handleIdLocationRef = useRef(handleIdLocation);
-    // const handleModelSelectionRef = useRef(handleModelSelection);
-    // const currentAircraftRef = useRef(currentAircraft);
-    // const idAircraftRef = useRef(idAircraft);
-    // const setValueRef = useRef(setValue);
-    // const errorsRef = useRef(errors);
-    // const loadDisabledTimestampsRef = useRef(loadDisabledTimestamps)
-    // const loadSelectedAgencyLocationRef = useRef(loadSelectedAgencyLocation)
-
     /*###################### AUTRE ######################*/
 
     useEffect(() => {
-        // Recupération de toutes les data nécessaires, au premier chargement de la page    
+        const token = localStorage.getItem('token');
+        if (!token) {
+            redirect('/sign-in');
+            return;
+        }
+
+        // Recupération de toutes les data nécessaires, au premier chargement de la page  
+        getUserIdFromToken(token);  
         loadAvailableModels() // La liste des models dans la BD (pour la recherche du modèle et du serialNumber)
         loadAvailableAgencies()
 
         handleIdLocation() // Gere l'id present dans l'URL
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     // Gestion du model (en fonction de l'id dans l'URL)
@@ -242,6 +255,8 @@ function AppointmentForm({setIsSubmitted}) {
             let model = modelOptions.find(option => option.value === currentAircraft.model_id);
             handleModelSelection(model);
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentAircraft]);
 
     // Gestion de l'appareil (en fonction de l'id dans l'URL)
@@ -255,6 +270,8 @@ function AppointmentForm({setIsSubmitted}) {
                 setCurrentAircraft(null) // Une fois selectionné, on vide le state pour autoriser l'utilisateur à changer son choix
             }
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formData.model,aircraftOptions]); 
     
     // Recup les crénaux indisponibles pour l'agence selectionnée, s'actualise à un changement d'agence
@@ -268,6 +285,8 @@ function AppointmentForm({setIsSubmitted}) {
             updateDisabledTimestamps([])
             setSelectedAgencyLocation(null)
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[formData.agency])
     
     return (

@@ -119,7 +119,7 @@ function TrainingPrefFormFieldset({ trainers, formData, register, errors, setVal
             <div className="pref-slots-div">
                 <div>
                     <p>Vos plages horaires</p>
-                    <InfoPill />
+                    <InfoPill text={"Indiquez vos plages horaires afin que le formateur puisse les prendre en compte pour établir votre planning de formation."}/>
                 </div>
                 <div className='time-slots' id={timeSlots.length === 0 ? "nothing" : ""}>
                     {

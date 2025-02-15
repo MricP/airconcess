@@ -14,7 +14,7 @@
             $insertedCreditCardId = Training::insertCreditCard($creditCard);
 
             $training = [
-                "user_id" => 35,
+                "user_id" =>  $data["userId"],
                 "customer_firstName" => $data["firstName"],
                 "customer_lastName" => $data["lastName"],
                 "customer_country" => $data["country"]["value"],

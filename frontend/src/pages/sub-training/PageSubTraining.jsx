@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormSubTraining from '../../components/sub-training/FormSubTraining';
 import CardSubTraining from '../../components/sub-training/CardSubTraining';
 import PaymentStep from '../../components/sub-training/PaymentStep';
