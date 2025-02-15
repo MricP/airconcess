@@ -30,8 +30,11 @@
 
 :root {
     --font-primary: 'Jost', sans-serif;
-    --text-size : 1.25rem; /*20 sur figma*/
-    --title-size: 3.125rem; /*50 sur figma*/
+    --text-size : clamp(16px, 2.5vw, 20px); /*20px -> 16px*/
+    --lower-text-size : clamp(12px, 1.7vw, 16px); /*16px -> 12px*/
+    --h1-size : clamp(30px, 6vw, 90px); /*90px -> 30px*/
+    --h2-size: 3.125rem; /*50 sur figma*/
+    --h3-size : clamp(20px, 4vw, 30px); /*30px -> 20px*/
     --bg-primary: #FFFFFF;
     --bg-secondary: #F5F5F5;
     --color-primary: #333333;
@@ -44,26 +47,9 @@
     --line-color: #dedede;
     --box-color: #f5f5f5;
     --model-color: #00529D;
-
 }
 
 @media (prefers-color-scheme: dark) {
-}
-
-body { /*A VOIR*/
-    /* margin: 0;
-    font-family: "Jost", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; */
-}
-  
-code { /*A VOIR*/
-    /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace; */
-}
-
-h1 {
-    font-size: 90px;
 }
 
 body {
@@ -71,40 +57,47 @@ body {
     color: var(--color-primary);
 }
 
+p {
+    font-size: var(--text-size);
+}
+
+h1 {
+    font-size: var(--h1-size);
+}
+
 h2 {
-    font-size: var(--title-size); 
-    /*clamp(30px,5vw,var(--title-size)); pour le responsive*/
+    font-size: var(--h2-size); 
 }
 
 h3 {
-    font-size: 2rem;
-}
-
-p {
-    font-size: var(--text-size);
+    font-size: var(--h3-size);
 }
 
 .error-message-div {
     display: flex;
     flex-direction: column;
     padding: 10px 10px;
-    color: #FF0000;
     border: dashed #FFB2B2 1px ;
     background-color: rgba(255, 178, 178, 0.28);
 }
 
 .error-message-div>* {
     font-size: 16px;
+    color: #FF0000 !important;
 }
 
 .invisible {
     display: none !important;
 }
 
+.transparent {
+    visibility: hidden;
+    opacity: 0;
+}
+
 button{
     cursor: pointer;
 }
-  
 
 /** Pour les ordinateurs **/
 

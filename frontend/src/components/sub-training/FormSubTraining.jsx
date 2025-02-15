@@ -1,58 +1,119 @@
-import React, {useState} from 'react'
-import DarkButton from '../general/DarkButton'
+import React, { useEffect, useState } from 'react'
 import { Steps } from 'rsuite';
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
-import { GrFormPrevious } from "react-icons/gr";
+import { IoArrowBackOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 
+import DarkButton from '../general/DarkButton'
 import InfoFormFieldset from "../appointment/InfoFormFieldset"
 import TrainingPrefFormFieldset from "./TrainingPrefFormFieldset"
 import ValidationStep from './ValidationStep';
 import PaymentDetailsStep from './PaymentDetailsStep';
+import useRedirect from '../../components/Custom-hooks';
 
 import "../../styles/sub-training/FormSubTraining.css"
 
+// services functions
+import { getUserData } from '../../services/auth';
+import { submitTraining,getTrainers } from "../../services/training";
 
-function FormSubTraining() {
+function FormSubTraining({step,updateStep}) {
+  /*############ INITIALISATION DES STATES ############*/
+
+  const [trainers,setTrainers] = useState([]);
+  const redirect = useRedirect()
+
   const {register,handleSubmit,watch,setValue, formState: { errors }} = useForm (
     { defaultValues: {
+        userId: null,
         //Step1
-        firstName: "Mathéo",
-        lastName: "Flores",
-        phone: "+33644038323",
-        email: "matheoflores26@gmail.com",
-        address: "141 rue Barthélémy de laffemas",
+        firstName: null,
+        lastName: null,
+        phone: null,
+        email: null,
+        address: null,
         country: null, //{value:"FR",label:"France"},
         city: null,
-        postalCode: 69100,
+        postalCode: null,
         idCard: null,
         //Step2
         dateStart: null,
         dateEnd: null,
         prefSlots: null, //Format : { IDSLOT: {hourStart:VALUE,hourEnd:VALUE}, IDSLOT:{hourStart:VALUE,hourEnd:VALUE} }
-        prefFrequency: 3,
+        prefFrequency: null,
+        trainer: null,
         //Step3
-        cardHolder: "Flores Mathéo",
-        cardNumber: "4965 4965 4547 1254",
-        cardExpirationDate: "12/15",
-        cvv: 115,
-        cardIssuer: "visa"
+        cardHolder: null,
+        cardNumber: null,
+        cardExpirationDate: null,
+        cvv: null,
+        cardIssuer: null
     }}
   );
 
+  /*################### CONSTANTES ####################*/
+
   const formData = watch();
 
-  const [step,updateStep] = useState(0);
+  /*#################### FONCTIONS ####################*/
 
   function handlePrevStep() {
     if(step>0) {
-      step == 5 ? updateStep(3) : updateStep(step-1)
+      step === 5 ? updateStep(3) : updateStep(step-1)
     }
   }
 
   function handleNextStep() {
-    if(step<5) {
-      step == 3 ? updateStep(5) : updateStep(step+1)
+    if(step<3) {
+      updateStep(step+1)
+    } else if(step===3) { // Avant de passer à l'étape suivante, on fait l'isertion
+      handleInsertion()
+    }
+  }
+
+  function handleStepDisplayed() {
+    switch(step) {
+      case 0:
+        return(
+          <InfoFormFieldset formData={formData} register={register} errors={errors} setValue={setValue} withIdCard={true}/>
+        )
+      case 1:
+        return(
+          <TrainingPrefFormFieldset formData={formData} register={register} errors={errors} setValue={setValue} trainers={trainers}/>
+        )
+      case 2:
+        return(
+          <PaymentDetailsStep formData={formData} register={register} errors={errors} setValue={setValue}/>
+        )
+      case 3:
+        return (
+          <ValidationStep trainers={trainers} formData={formData} setStep={updateStep}/>
+        )
+      default:
+        break;
+    }
+  }
+
+  const getUserIdFromToken = async (token) => {
+    try {
+      const userData = await getUserData(token);
+      setValue("userId",userData.idUser)
+      setValue("email",userData.email)
+      setValue("firstName",userData.firstName)
+      setValue("lastName",userData.lastName)
+      setValue("userId",userData.idUser)
+      console.log(userData.idUser)
+    } catch (error) {
+        console.error('Erreur get:', error);
+    }
+  }
+
+  const loadTrainers = async () => {
+    try {
+      const response = await getTrainers();
+      setTrainers(response.data)
+    } catch (error) {
+      console.log('Error getTrainers:', error.response?.data?.message || 'Unknown error');
     }
   }
 
@@ -72,47 +133,52 @@ function FormSubTraining() {
       if(count === 0) setValue('prefSlots',null)
     }
     handleNextStep()
-
     //console.table(formData.prefSlots)
   };
 
-  function handleStepDisplayed() {
-    switch(step) {
-      case 0:
-        return(
-          <InfoFormFieldset formData={formData} register={register} errors={errors} setValue={setValue} withIdCard={true}/>
-        )
-      case 1:
-        return(
-          <TrainingPrefFormFieldset formData={formData} register={register} errors={errors} setValue={setValue}/>
-        )
-      case 2:
-        return(
-          <PaymentDetailsStep formData={formData} register={register} errors={errors} setValue={setValue}/>
-        )
-      case 3:
-        return (
-          <ValidationStep formData={formData} setStep={updateStep}/>
-        )
-      case 5:
-        return (
-          <div>
-            <p>Phase de paiement</p>
-          </div>
-        )
+  const handleInsertion = async () => {
+    try {
+      const response = await submitTraining(formData);   
+      updateStep(5) 
+    } catch (error) {
+      console.log('Erreur insertion:', error.response?.data?.message || 'Unknown error');
     }
   }
-  
+
+  /*###################### AUTRE ######################*/
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      redirect('/sign-in');
+      return;
+    }
+
+    getUserIdFromToken(token); 
+    loadTrainers()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
   return (
     <div className='formSubTraining-container'>
-      <GrFormPrevious className={step === 0 ? "disabled prev-step" :"prev-step"} onClick={handlePrevStep}/>
+      <IoArrowBackOutline  className={step === 0 ? "disabled prev-step" :"prev-step"} onClick={handlePrevStep}/>
       <Steps current={step} className='step-indicator'>
-        <Steps.Item description="INFORMATIONS CLIENT" />
+        <Steps.Item description={"INFORMATIONS CLIENT"} />
         <Steps.Item description="PRÉFÉRENCES ET DISPONIBILITÉ" />
         <Steps.Item description="DONNÉES DE PAIEMENT" />
         <Steps.Item description="VALIDATION" />
         <Steps.Item icon={<IoCheckmarkDoneOutline style={{fontSize:20,color:"#5b5b5b"}}/>}/>
       </Steps>
+      
+      <Steps current={step} className='step-indicator mobile'> 
+        <Steps.Item />
+        <Steps.Item />
+        <Steps.Item />
+        <Steps.Item />
+        <Steps.Item icon={<IoCheckmarkDoneOutline style={{fontSize:20,color:"#5b5b5b"}}/>}/>
+      </Steps>
+
       <form method="POST" onSubmit={handleSubmit(onSubmit)} className='current-step'>
         {handleStepDisplayed()}
         

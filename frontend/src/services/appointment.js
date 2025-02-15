@@ -67,6 +67,16 @@ export const loadAircraftsOfModel = async (model_id) => {
     }
 };
 
+export const loadAircraft = async (aircraft_id) => {
+    try {
+        const response = await axiosInstance.post('/appointment-loadAircraftWithId',aircraft_id);
+        return response;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+};
+
 export const getAppointmentByUser = async (token) => {
     try {
         const token = localStorage.getItem("token");

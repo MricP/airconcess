@@ -10,6 +10,7 @@
     height: 100%;
     width: 30%;
     padding-top: 5px;
+    transition: all ease 0.2s;
 }
 .productBox-container {
     height: auto; /* Utilise la hauteur du contenu */
@@ -70,6 +71,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: all ease 0.2s;
 }
 
 .catalog-productDescription-container .bin {
@@ -91,7 +93,8 @@
 
 .productBox-container:hover .catalog-productDescription-container, 
 .productBox-container:hover .catalog-productImage-container{
-    box-shadow: 2px 3px 3px var(--section-color);
+    box-shadow: 2px 2px 3px var(--section-color);
+    transform: scale(1.009);
 }
 
 .planeInfos{

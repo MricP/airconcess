@@ -71,4 +71,11 @@ class User
         $stmt = $pdo->prepare("UPDATE User SET profilePictureURL = ? WHERE idUser = ?");
         return $stmt->execute([$url,$id]);
     }
+
+    public static function selectAllTrainers() {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT t.trainer_id,t.city_assignment,t.country_assignment,t.address_assignment,u.firstName,u.lastName FROM trainer T INNER JOIN user U ON T.trainer_id = U.idUser");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

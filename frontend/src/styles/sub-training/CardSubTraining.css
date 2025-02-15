@@ -1,7 +1,12 @@
 .cardSubTraining-container {
     padding: 25px;
     width: 325px;
+    height: fit-content;
     background-color: #fff;
+}
+
+.cardSubTraining-container p:not(#training-name) {
+    font-size: var(--lower-text-size);
 }
 
 .cardSubTraining-container img {
@@ -10,32 +15,61 @@
 }
 
 .cardSubTraining-container hr {
+    border: 1px solid rgb(235, 235, 235);
     margin: 10px 0 10px 0;
 }
 
-.cardSubTraining-container p#training-name {
+.cardSubTraining-container p#training-name,
+.cardSubTraining-container .price-div section>p:first-child {
     font-weight: bold;
 }
 
-.cardSubTraining-container p:not(#training-name) {
-    font-size: 14px;
+.cardSubTraining-container .price-div section {
+    display: flex;
+    justify-content: space-between;
 }
 
-.cardSubTraining-container #conditions-section>p {
-    font-weight: 500;
+.cardSubTraining-container .info-div {
+    display: flex;
+    align-items: end;
 }
 
 .cardSubTraining-container #conditions-section section {
     margin-left: 10px;
 }
 
-.cardSubTraining-container>section:not(#conditions-section) {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+@media (500px <= width <= 600px) { /* Tablette portrait */
+    /* .cardSubTraining-container .info-div p {
+        font-size: 13px !important;
+    } */
+
 }
 
-.cardSubTraining-container>section:not(#conditions-section)>p:first-child {
-    font-weight: 500;
+@media (500px <= width <= 768px) { /* Tablette portrait */
+    .cardSubTraining-container { 
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 5px;
+    }
+
+    .cardSubTraining-container>div:first-child {
+        display: flex;
+        flex-direction: column;
+        justify-content : center;
+    }
+
+    .cardSubTraining-container img {
+        width: 200px;
+        order: 2;
+    }
+    
+
+    .cardSubTraining-container #training-name {
+        order: 1;
+    }
+
+    .cardSubTraining-container .price-div {
+        grid-column: span 3;
+    }
 }
 
