@@ -3,6 +3,7 @@ import '../../styles/profile/TrainerChoiceItem.css'
 import { IoIosArrowForward } from "react-icons/io";
 import TrainingProposal from './TrainingProposal';
 import { FiPlusCircle } from "react-icons/fi";
+import DarkButton2 from "../general/DarkButton2"
 
 export default function TrainerChoiceItem() {
 
@@ -39,7 +40,9 @@ export default function TrainerChoiceItem() {
                 <>
                     {trainingProposals.map((proposal) => (
                         <TrainingProposal key={proposal.id} />
+                        
                     ))}
+                    <DarkButton2 className={"darkButton"} text={"Valider"}/>
                     <FiPlusCircle onClick={addTrainingProposal} className='TrainerChoiceItem-plusButton' size={25} color='var(--button-color)' />
                 </>
             )}
