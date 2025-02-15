@@ -9,7 +9,7 @@ import InfoFormFieldset from './InfoFormFieldset'
 import CustomTimePicker from '../general/CustomTimePicker'
 import CustomDatePicker from '../general/CustomDatePicker'
 import CustomSelectPicker from '../general/CustomSelectPicker';
-import CopyableSection from '../general/CopyableSection';
+import CopyableSection from "../general/CopyableSection"
 import useRedirect from '../../components/Custom-hooks';
 
 import "../../styles/appointment/AppointmentForm.css"

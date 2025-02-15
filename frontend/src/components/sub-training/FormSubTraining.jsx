@@ -138,7 +138,7 @@ function FormSubTraining({step,updateStep}) {
 
   const handleInsertion = async () => {
     try {
-      const response = await submitTraining(formData);   
+      await submitTraining(formData);   
       updateStep(5) 
     } catch (error) {
       console.log('Erreur insertion:', error.response?.data?.message || 'Unknown error');
