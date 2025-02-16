@@ -7,6 +7,7 @@ require_once __DIR__ . '../../controllers/ContactController.php';
 require_once __DIR__ . '../../controllers/ProductController.php';
 require_once __DIR__ . '../../controllers/TestimonialController.php';
 require_once __DIR__ . '../../models/Aircraft.php';
+require_once __DIR__ . '../../models/Logs.php';
 require_once __DIR__ . '../../controllers/AppointmentController.php';
 require_once __DIR__ . '../../controllers/CatalogController.php';
 require_once __DIR__ . '../../controllers/ProfileController.php';
@@ -412,4 +413,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Trainer') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     User::deleteTrainer($args['id']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-Logs') !== false) {
+    $result = Logs::getLastLogs();
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Log') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    Logs::insertLog($args['content']);
 }

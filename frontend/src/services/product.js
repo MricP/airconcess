@@ -355,3 +355,22 @@ export const deleteTrainer = async (id) => {
         throw error;
     }
 }
+
+export const getLastLogs = async () => {
+    try {
+        const response = await axiosInstance.post('/admin/get-Logs', {});
+        return response.data
+    } catch (error) {
+        console.error("Erreur lors de la récupération des logs", error);
+        throw error;
+    }
+}
+
+export const insertLog = async (content) => {
+    try {
+        await axiosInstance.post('/admin/insert-Log', {content});
+    } catch (error) {
+        console.error("Erreur lors de l'insertion d'un log'", error);
+        throw error;
+    }
+}

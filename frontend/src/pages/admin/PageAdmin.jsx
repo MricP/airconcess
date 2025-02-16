@@ -7,7 +7,7 @@ import PageProduct from "../product/PageProduct";
 import CreateUser from "../../components/admin/CreateUser";
 import UpdateUser from "../../components/admin/UpdateUser";
 
-import { insertAircraft, insertModel, getModelByName, getAllModel, uploadImage, insertImage, getAircraftBySerialNumber, deleteAircraft, deleteModel } from "../../services/product";
+import { insertAircraft, insertModel, getModelByName, getAllModel, uploadImage, insertImage, getAircraftBySerialNumber, deleteAircraft, deleteModel, getLastLogs, insertLog } from "../../services/product";
 
 export default function PageAdmin(){
 
@@ -186,6 +186,9 @@ export default function PageAdmin(){
                     if (!resultSliderImage.success) throw new Error("Échec de l'insertion d'une image du slider.");
                 }
             } else throw new Error("Échec de l'upload des images du slider.");
+
+            const content = `Nouveau produit inséré : ${model} ${serialNumber}`
+            await insertLog(content)
     
             console.log("Toutes les opérations ont été effectuées avec succès !");
             window.location.reload()
@@ -202,7 +205,6 @@ export default function PageAdmin(){
                 console.log("Annulation : suppression du modèle...");
                 await deleteModel(model.model_id, modelName);
             }
-            window.location.reload()
         }
     };
     
@@ -252,6 +254,19 @@ export default function PageAdmin(){
             );
         }
     }, [model, models]);
+
+    useEffect(() => {
+        const fetchLogs = async () => {
+            const response = await getLastLogs();
+            console.log(response)
+            setSelectedComponent(
+                <p>{response}</p>
+            )
+        };
+        if (selectedComponent == null) fetchLogs()
+        
+
+    }, [selectedComponent])
 
     return (
         <div className="page-admin">
