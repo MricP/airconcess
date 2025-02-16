@@ -14,7 +14,7 @@ class Logs {
 
     public static function getLastLogs() {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('Select log_content, date_logs from Logs order by date_log desc limit 10');
+        $stmt = $pdo->prepare('Select * from Logs order by date_log desc limit 10');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

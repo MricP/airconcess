@@ -7,7 +7,7 @@ import { IoTrashBin } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { deleteAircraft, getModelName } from '../../services/product';
 import PageProduct from '../../pages/product/PageProduct';
-import { updateAircraft, updateMainImage, updateSliderImages, updateIconImage } from '../../services/product';
+import { updateAircraft, updateMainImage, updateSliderImages, updateIconImage, insertLog, getAircraft } from '../../services/product';
 
 export const ProductBox = (props) => {
   const navigate = useNavigate();
@@ -19,11 +19,17 @@ export const ProductBox = (props) => {
     if (props.use === "edit") {
       setShowProductPage(true); // Afficher la page produit directement
     } else {
-      console.log(props.aircraftId);
+
       const nameModel = await getModelName(props.aircraftId);
-      console.log(nameModel[0]);
-      const response = await deleteAircraft(props.aircraftId, nameModel[0]);
-      console.log("Réponse du serveur lors de la suppression : " + response);
+
+      const aircraft = await getAircraft(props.aircraftId)
+      console.log(aircraft)
+
+      await deleteAircraft(props.aircraftId, nameModel[0]);
+
+      const content = `Suppression du produit : ${nameModel[0]} ${aircraft.serial_number} `
+      await insertLog(content)
+
       window.location.reload();
     }
   };
@@ -76,7 +82,13 @@ export const ProductBox = (props) => {
               if (files && files.length > 0) {
                 console.log("ok2")
                 updateSliderImages(props.aircraftId, files)
-              } 
+              }
+
+              const nameModel = await getModelName(props.aircraftId);
+              const aircraft = await getAircraft(props.aircraftId)
+
+              const content = `Modification du produit : ${nameModel[0]} ${aircraft.serial_number}`
+              await insertLog(content)
       
               console.log("Toutes les opérations ont été effectuées avec succès !");
               window.location.reload()

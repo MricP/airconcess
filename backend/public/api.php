@@ -144,7 +144,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-aircraftWithId') !== false) {
     $input = json_decode(file_get_contents("php://input"), true);
-    ProductController::getAircraftWith($input['idAircraft']);
+    $result = ProductController::getAircraftWith($input['idAircraft']);
+    echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-modelName') !== false) {

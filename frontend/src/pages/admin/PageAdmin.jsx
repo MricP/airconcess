@@ -187,8 +187,13 @@ export default function PageAdmin(){
                 }
             } else throw new Error("Échec de l'upload des images du slider.");
 
-            const content = `Nouveau produit inséré : ${model} ${serialNumber}`
-            await insertLog(content)
+            
+            if (addMode === "Nouveau") {
+                const contentModel = `Nouveau model inséré : ${model}`
+                await insertLog(contentModel) 
+            }
+            const contentAircraft = `Nouveau produit inséré : ${model} ${serialNumber}` 
+            await insertLog(contentAircraft)
     
             console.log("Toutes les opérations ont été effectuées avec succès !");
             window.location.reload()
@@ -258,9 +263,18 @@ export default function PageAdmin(){
     useEffect(() => {
         const fetchLogs = async () => {
             const response = await getLastLogs();
-            console.log(response)
             setSelectedComponent(
-                <p>{response}</p>
+                <div className="last-modifications">
+                    <h2>Dernières modifications</h2>
+                    <div className="logs">
+                        {response.map((element) => (
+                            <div className="log" key={element.id}>
+                                <p>{element.log_content}</p>
+                                <p>{element.date_log}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             )
         };
         if (selectedComponent == null) fetchLogs()
