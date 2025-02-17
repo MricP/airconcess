@@ -7,7 +7,6 @@
             if ($aircraft) {
                 return $aircraft;
             }
-            echo json_encode(null);
         }
 
         public static function getIconOf($idAircraft){

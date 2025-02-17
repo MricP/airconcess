@@ -1,12 +1,12 @@
 import React, { useEffect, useState} from 'react'
-import { useNavigate } from 'react-router-dom';
 import "../../styles/product/ProductDescription.css"
 import { BiDownload } from "react-icons/bi";
 import { GrStatusGood } from "react-icons/gr";
+import useRedirect from '../Custom-hooks';
 
 
 const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescription,technicalSheetPath, mode, onInputChange, modelSelected}) => {
-    const navigate = useNavigate()
+    const redirect = useRedirect()
     const [selectedTechnicalSheet, setSelectedTechnicalSheet] = useState(null)
     const [modelDescriptionTab, setModelDescriptionTab] = 
     useState([
@@ -23,7 +23,6 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
         "maxRange", 
         "maxAltitude" 
     ]);
-
 
     const aircraftDescriptionTab = 
     [ 
@@ -52,14 +51,11 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
     }
 
     function handleRedirection() {
-        navigate("/appointment/"+aircraftId)
-        window.scrollTo({
-            top: 0,
-        });
+        redirect("/appointment/"+aircraftId)
 
         setTimeout(() => {
             window.scrollTo({
-                top: window.innerHeight + 0.20 * (window.innerHeight),
+                top: window.innerHeight,
                 behavior: 'smooth',
             });
         },100)
@@ -80,26 +76,23 @@ const ProductDescription = ({aircraftId,modelName,modelDescription,aircraftDescr
       };
 
     useEffect(() => {
-            
-
-            if (modelSelected !== "Nouveau" && mode === "add") {
-                setModelDescriptionTab([
-                    modelSelected.range_type,
-                    modelSelected.manufacturer,
-                    "Jusqu'à " + modelSelected.passenger_capacity + " passager(s)",
-                    modelSelected.crew_size,
-                    modelSelected.length,
-                    modelSelected.wingspan,
-                    modelSelected.height,
-                    modelSelected.max_takeoff_weight,
-                    modelSelected.engines,
-                    modelSelected.speed_avg,
-                    modelSelected.max_range + " km",
-                    modelSelected.max_altitude
-                ]);
-            }
-    
-        }, [modelSelected]);
+        if (modelSelected !== "Nouveau" && mode === "add") {
+            setModelDescriptionTab([
+                modelSelected.range_type,
+                modelSelected.manufacturer,
+                "Jusqu'à " + modelSelected.passenger_capacity + " passager(s)",
+                modelSelected.crew_size,
+                modelSelected.length,
+                modelSelected.wingspan,
+                modelSelected.height,
+                modelSelected.max_takeoff_weight,
+                modelSelected.engines,
+                modelSelected.speed_avg,
+                modelSelected.max_range + " km",
+                modelSelected.max_altitude
+            ]);
+        }
+    }, [modelSelected,mode]);
 
     const handleProductFieldChange = (field, event, index) => {
         if (onInputChange) {

@@ -12,6 +12,8 @@ require_once __DIR__ . '../../controllers/AppointmentController.php';
 require_once __DIR__ . '../../controllers/CatalogController.php';
 require_once __DIR__ . '../../controllers/ProfileController.php';
 require_once __DIR__ . '../../controllers/UserController.php';
+require_once __DIR__ . '../../controllers/TrainingController.php';
+
 
 // Middleware CORS globalement
 CorsMiddleware::handle();
@@ -100,13 +102,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-submit') !== false) {
     $data = json_decode(file_get_contents("php://input"), true);
-    var_dump($data); // Vérifie que les données sont correctement reçues
     AppointmentController::createAppointment($data);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadTimestamps') !== false) {
     $agency_id = json_decode(file_get_contents("php://input"), true);
     AppointmentController::getTimestamps($agency_id);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAircraftWithId') !== false) {
+    $airc_id = json_decode(file_get_contents("php://input"), true);
+    AppointmentController::getAircraft($airc_id);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAgencies') !== false) {
@@ -147,7 +153,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
     $result = ProductController::getAircraftWith($input['idAircraft']);
     echo json_encode($result);
 }
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-modelName') !== false) {
     $input = json_decode(file_get_contents("php://input"), true);
     ProductController::getModelNameOf($input['idAircraft']);
@@ -236,6 +241,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my
 
     ProfileController::updateProfileData($payload);
 }
+
 if($_SERVER['REQUEST_METHOD'] === 'DELETE' && strpos($_SERVER['REQUEST_URI'], '/my-profile/delete') !== false){
     $headers = getallheaders();
     if (!isset($headers['Authorization'])) {
@@ -424,4 +430,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Log') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     Logs::insertLog($args['content']);
+}
+
+// Partie page sub-training
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/subTraining/submit') !== false) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    TrainingController::createTraining($data);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/subTraining/get-trainers') !== false) {
+    TrainingController::getAllTrainers();
 }

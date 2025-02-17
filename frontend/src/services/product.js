@@ -23,7 +23,7 @@ export const getIcon = async (id) => {
 
 export const getAircraft = async (idAircraft) => {
     try {
-        const response = await axiosInstance.post('/product/get-aircraftWithId',{idAircraft});
+        const response = await axiosInstance.post('/product/get-aircraftWithId',idAircraft);
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);

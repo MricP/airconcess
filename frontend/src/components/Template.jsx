@@ -30,11 +30,11 @@ function Template({children}) {
     }, [scrolled]);
 
     const productRegex = /^\/product\/\d+$/;
-    const apptRegex = /^\/appointment\/\d+$/;
+    // const apptRegex = /^\/appointment\/\d+$/;
     const catalogRegex = /^\/catalog\/\d+$/;
 
     if (location.pathname === "/services" || productRegex.test(location.pathname) 
-      || location.pathname === "/appointment" || apptRegex.test(location.pathname) 
+      // || location.pathname === "/appointment" || apptRegex.test(location.pathname) 
       || location.pathname === "/catalog" || catalogRegex.test(location.pathname)){
       if (scrolled){
         color = "white-black"
@@ -54,7 +54,7 @@ function Template({children}) {
   return (
     <div>
         <Header color={color}/>
-        {children}
+          {children}
         { <Footer/>}
     </div>
     

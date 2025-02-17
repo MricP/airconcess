@@ -4,7 +4,7 @@ import '../../styles/general/Rsuite-custom.css';
 
 import AsyncSelect from 'react-select/async';
 
-const CustomSelectPicker = forwardRef(({className,setValue,data,value,isSearchable=false,placeholder=" ",rest},ref) => {  
+const CustomSelectPicker = forwardRef(({className,setValue,data,value,isSearchable=false,placeholder=" ",rest,noOptionsMessage="Aucune donnée"},ref) => {  
   const loadOptions = (inputValue) => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -29,6 +29,8 @@ const CustomSelectPicker = forwardRef(({className,setValue,data,value,isSearchab
       onChange={(val) => {
         setValue(val);    
       }}
+      noOptionsMessage={() => noOptionsMessage}
+      loadingMessage={() => "Chargement..."}
       {...rest}
       />
     )
