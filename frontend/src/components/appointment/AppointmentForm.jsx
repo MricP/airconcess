@@ -1,31 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { MdContentCopy } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 import { CustomProvider } from 'rsuite';
-import { frFR } from 'rsuite/locales'; // Locale française
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import { frFR } from 'rsuite/locales'; 
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
+
 import InfoFormFieldset from './InfoFormFieldset'
 import CustomTimePicker from '../general/CustomTimePicker'
 import CustomDatePicker from '../general/CustomDatePicker'
 import CustomSelectPicker from '../general/CustomSelectPicker';
+import CopyableSection from "../general/CopyableSection"
+import useRedirect from '../../components/Custom-hooks';
 
 import "../../styles/appointment/AppointmentForm.css"
 
 // services functions
-import { loadTimestamps,loadModels,loadAircraftsOfModel,submitAppointment,loadAgencies,loadAgencyLocation } from '../../services/appointment';
+import { getUserData } from '../../services/auth';
+import { loadAircraft,loadTimestamps,loadModels,loadAircraftsOfModel,submitAppointment,loadAgencies,loadAgencyLocation } from '../../services/appointment';
 
-function AppointmentForm() {
+function AppointmentForm({setIsSubmitted}) {
     /*############ INITIALISATION DES STATES ############*/
     
+    const [currentAircraft,setCurrentAircraft] = useState(null)
     const [agencyOptions,setAgencyOptions] = useState([]);
     const [selectedAgencyLocation,setSelectedAgencyLocation] = useState(null);
     const [modelOptions,setModelOptions] = useState([]); // Stock les differents models de la BD (label:model_name,value:model_id)
     const [aircraftOptions,setAircraftOptions] = useState([]); // Stock une liste d'appareils correspondant au model selectionné (label:serialNumber,value:aircraft_id)
     const [disabledTimestamps, updateDisabledTimestamps] = useState([]); // Format disabledTimestamps = [{ date:YYYY-MM-DD , hour:hh , minutes:[m,m,m,m] }]
-    const [isCopied, setIsCopied] = useState(false); // Utilisé pour la copie de l'adresse de l'agence
-    
+    const redirect = useRedirect()
+
     const {register,handleSubmit,watch,setValue,formState: { errors }} = useForm (
         { defaultValues: {
+            userId: null,
             reason: null,
             model: null,
             serialNumber: null,
@@ -47,6 +53,9 @@ function AppointmentForm() {
 
     /*################### CONSTANTES ####################*/
 
+    const location = useLocation().pathname.split("/");
+    const idAircraft = parseInt(location[location.length - 1]); // Récupération de l'ID de l'appareil
+
     const formData = watch(); //formData est l'accès direct 
 
     const reasonOptions = [
@@ -55,6 +64,20 @@ function AppointmentForm() {
     ];    
 
     /*#################### FONCTIONS ####################*/
+
+    const getUserIdFromToken = async (token) => {
+        try {
+            const userData = await getUserData(token);
+            setValue("userId",userData.idUser)
+            setValue("email",userData.email)
+            setValue("firstName",userData.firstName)
+            setValue("lastName",userData.lastName)
+            setValue("userId",userData.idUser)
+            console.log(userData.idUser)
+        } catch (error) {
+            console.error('Erreur get:', error);
+        }
+    }
 
     const loadDisabledTimestamps = async () => {
         try {
@@ -131,6 +154,29 @@ function AppointmentForm() {
         }
     };
 
+    const findAircraft = async (aircraft_id) => {
+        try {
+            const response = await loadAircraft(aircraft_id);
+            return response.data 
+        } catch (error) {
+            console.log('Error response:', error.response?.data?.message || 'Unknown error');
+        }
+    };
+
+    // Fonction permettant de gerer la preselection d'un aircraft via l'id présente dans l'URL
+    const handleIdLocation = async () => {
+        if (!isNaN(idAircraft)) {
+            let airc = await findAircraft(idAircraft)
+            if(airc) {
+                setCurrentAircraft(airc)
+            } else {
+                console.log("L'id dans l'url est invalide")
+                //Ici on ne fait rien 
+            }
+        }
+        
+    };
+
     const handleSelectedSlot = () => {
         if(formData.date!=null) {
             return new Date(formData.date);
@@ -148,9 +194,17 @@ function AppointmentForm() {
 
     const onSubmit = async (formData) => {
         try {
-            const response = await submitAppointment({formData});
-            /* TODO : Si l'insertion ne s'est pas faite, c'est que le crénaux a été reservé pendant le formulaire
-               Dans ce cas, réactualiser le loadDisabledTimestamps()*/
+            const response = await submitAppointment(formData);
+            
+            if(response.data.success) {
+                setIsSubmitted(true)
+            } else {
+                console.log("impossible")
+                toast.error(`${response.data.message}`)
+                setValue("time",null)
+                loadDisabledTimestamps() // On réactualise les disabledTimestamps
+            }
+            
         } catch (error) {
             console.log('Error response:', error.response?.data?.message || 'Unknown error');
         }
@@ -170,14 +224,56 @@ function AppointmentForm() {
         }
     }
 
+    const handleModelSelection = async (value) => {
+        setValue("model", value, errors.model ? {shouldValidate: true} : {shouldValidate: false});
+        setValue("serialNumber", null, errors.serialNumber ? {shouldValidate: true} : {shouldValidate: false});
+        loadAircraftsWith(value?.value)
+    }
+
     /*###################### AUTRE ######################*/
 
     useEffect(() => {
-        // Recupération de toutes les data nécessaires, au premier chargement de la page    
+        const token = localStorage.getItem('token');
+        if (!token) {
+            redirect('/sign-in');
+            return;
+        }
+
+        // Recupération de toutes les data nécessaires, au premier chargement de la page  
+        getUserIdFromToken(token);  
         loadAvailableModels() // La liste des models dans la BD (pour la recherche du modèle et du serialNumber)
         loadAvailableAgencies()
+
+        handleIdLocation() // Gere l'id present dans l'URL
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
+    // Gestion du model (en fonction de l'id dans l'URL)
+    useEffect(() => {
+        if (modelOptions.length !== 0 && currentAircraft) {
+            let model = modelOptions.find(option => option.value === currentAircraft.model_id);
+            handleModelSelection(model);
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentAircraft]);
+
+    // Gestion de l'appareil (en fonction de l'id dans l'URL)
+    useEffect(() => {
+        if (formData.model && currentAircraft) {
+            if (aircraftOptions.length !== 0) {
+                let aircraft = aircraftOptions.find(option => option.value === idAircraft);
+                if (aircraft) {
+                    setValue("serialNumber", aircraft, errors.serialNumber ? { shouldValidate: true } : { shouldValidate: false });
+                }
+                setCurrentAircraft(null) // Une fois selectionné, on vide le state pour autoriser l'utilisateur à changer son choix
+            }
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [formData.model,aircraftOptions]); 
+    
     // Recup les crénaux indisponibles pour l'agence selectionnée, s'actualise à un changement d'agence
     useEffect(() => {
         setValue("date",null)
@@ -189,16 +285,9 @@ function AppointmentForm() {
             updateDisabledTimestamps([])
             setSelectedAgencyLocation(null)
         }
-    },[formData.agency])
 
-    useEffect(() => {
-        if(isCopied) {
-            // Permet de réafficher l'icone pour copier après 1s
-            setTimeout(() => {
-                setIsCopied(false)
-            },1000)
-        }
-    },[isCopied])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[formData.agency])
     
     return (
         <div className="appointmentForm-container">
@@ -229,11 +318,7 @@ function AppointmentForm() {
                                     id="model-input"
                                     data={modelOptions} 
                                     value={formData.model != null ? formData.model : ''}
-                                    setValue={(value) => {
-                                        setValue("model", value, errors.model ? {shouldValidate: true} : {shouldValidate: false});
-                                        setValue("serialNumber", null, errors.serialNumber ? {shouldValidate: true} : {shouldValidate: false});
-                                        loadAircraftsWith(value?.value)
-                                    }}
+                                    setValue={handleModelSelection}
                                     
                                     {...register("model", { required: "Selectionnez le model concerné" })}
                                 />
@@ -264,11 +349,11 @@ function AppointmentForm() {
                             {errors.agency && <p>○ {errors.agency.message}</p>}
                         </div>
                         <label htmlFor="place-input">
-                            Lieu*
+                            Agence*
                             <CustomSelectPicker 
                                 className={errors.agency ? "input-error" : ""}
-                                data={agencyOptions} 
-                                placeholder={"Choisir parmi l'une de nos agences"}
+                                data={agencyOptions}    
+                                
                                 setValue={(value) => {
                                     setValue("agency", value, errors.agency ? {shouldValidate: true} : {shouldValidate: false});
                                 }}
@@ -305,12 +390,9 @@ function AppointmentForm() {
                         </div>
                         <div className={formData.agency ? "" : "invisible"} id="addr-label">
                             <p>Adresse de l'agence</p>
-                            <section>
-                                <p>{selectedAgencyLocation}</p>
-                                <CopyToClipboard text={selectedAgencyLocation} onCopy={() => setIsCopied(true)}>
-                                    {isCopied ? <p id="copy-addr-message">Copié !</p> : <MdContentCopy id="copy-addr-button" />}
-                                </CopyToClipboard>
-                            </section>
+                            <CopyableSection
+                                content={selectedAgencyLocation}
+                            />
                         </div>
                     </fieldset>
                     <button className="submit" type="submit">

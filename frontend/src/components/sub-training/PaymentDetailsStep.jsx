@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
+import CreditCard from '../general/CreditCard'
+import CardNumberInput from '../general/CardNumberInput'
 
 import "../../styles/sub-training/PaymentDetailsStep.css"
-import CreditCard from '../general/CreditCard'
-
-import CardNumberInput from '../general/CardNumberInput'
 
 function PaymentDetailsStep({ formData, register, errors, setValue }) {
 
@@ -32,9 +31,8 @@ function PaymentDetailsStep({ formData, register, errors, setValue }) {
   return (
     <div className='paymentDetailsStep-container'>
       <fieldset>
-        <div className={errors.cardIssuer || errors.cardNumber || errors.cardHolder || errors.cardExpirationDate || errors.cvv ? 'error-message-div' : "invisible"}>
-          {errors.cardIssuer?.message || errors.cardNumber?.message || errors.cardHolder?.message ||
-          errors.cardExpirationDate?.message || errors.cvv?.message}
+        <div className={errors.cardIssuer ? 'error-message-div' : "invisible"}>
+          <p>○ {errors.cardIssuer?.message}</p>
         </div>
         <CreditCard className={"credit-card"} rotate={isCardRotated} current={current} infos={formData}/>
         <label htmlFor="">

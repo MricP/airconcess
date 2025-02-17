@@ -1,4 +1,18 @@
-/*/////////////////////////*/
+.formSubTraining-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    width: 70%;
+    min-height: 500px;
+    padding: 30px clamp(30px,10%,70px); 
+}
+
+.formSubTraining-container p {
+    color: #5B5B5B;
+    font-size: var(--lower-text-size);
+}
 
 .formSubTraining-container fieldset {
     width: 100%;
@@ -10,91 +24,86 @@
 }
 
 .formSubTraining-container legend {
+    font-size: var(--text-size);
+    font-weight: 500; /* Medium */
     margin-left: 2%;
     padding: 0 2%;
-    font-weight: 500; /* Medium */
 }
 
 .formSubTraining-container label:not(.invisible-label) {
     color: #5B5B5B;
+    font-size: var(--lower-text-size);
 } 
 
 .formSubTraining-container label:not(.invisible-label)>svg {
     font-size: 20px !important;
+    background-color: red;
 }
 
-/* 
-    Le style des input. 
-    Pour les input type file, ils ont la class invisible
-    et leur comportement est géré par la div-upload 
-*/
-.formSubTraining-container input:not(.invisible), 
-.info-fieldset .div-upload,
-.formSubTraining-container .css-13cymwt-control,
-.formSubTraining-container .css-t3ipsp-control {
+
+/* ############## GESTION DES INPUTS ############## */
+
+.formSubTraining-container .current-step input:not(.invisible), 
+.formSubTraining-container .current-step .css-13cymwt-control,
+.formSubTraining-container .current-step .css-t3ipsp-control {
     border: solid #B5B5B5 1px;
     border-radius: 2px;
     padding: 5px 10px;
     font-size: var(--text-size);
-    /* background-color: rgb(109, 245, 245); */
     width: 100%;
+    height: 40px;
     -webkit-transition: border-color ease-in-out 0.15s;
     transition: all ease-in-out 0.15s;
 }
 
-.formSubTraining-container .css-13cymwt-control,
-.formSubTraining-container .css-t3ipsp-control {
-    padding: unset !important;
-    height: 40px !important;
+.formSubTraining-container .current-step .css-13cymwt-control,
+.formSubTraining-container .current-step .css-t3ipsp-control {
+    padding: unset;
 }
 
-.formSubTraining-container .css-13cymwt-control input ,
-.formSubTraining-container .css-t3ipsp-control input{
+.formSubTraining-container .current-step .css-13cymwt-control input ,
+.formSubTraining-container .current-step .css-t3ipsp-control input{
     padding: unset !important;
+    height: unset !important;
 }
 
-.formSubTraining-container input:not(.invisible):focus-within,
-.formSubTraining-container .css-t3ipsp-control {
+/* Inputs à modifier pour le file selector de Rsuite */
+.formSubTraining-container .current-step .rs-picker-input-group input {
+    height: unset !important;
+    border: unset !important;
+}
+
+.formSubTraining-container .current-step .rs-uploader-trigger.rs-uploader-trigger-customize {
+    position: relative;
+}
+
+.formSubTraining-container .current-step input:not(.invisible):focus-within,
+.formSubTraining-container .current-step .css-t3ipsp-control {
     outline: solid 2px #acd7ff !important;
     border:solid 1px #61b3ff !important;
 }
 
-.css-hlgwow:hover {
+.formSubTraining-container .current-step .css-hlgwow:hover {
     cursor: text;
 }
 
-.css-19bb58m,.css-1cfo1cf {
+.formSubTraining-container .current-step .css-19bb58m,.css-1cfo1cf {
     padding: unset !important;
     margin: unset !important;
 }
 
-.css-1wy0on6:hover {
+.formSubTraining-container .current-step .css-1wy0on6:hover {
     cursor: pointer;
 }
 
-.formSubTraining-container .css-t3ipsp-control input:focus-within,
-.formSubTraining-container .css-13cymwt-control input:focus-within {
+.formSubTraining-container .current-step .css-t3ipsp-control input:focus-within,
+.formSubTraining-container .current-step .css-13cymwt-control input:focus-within {
     outline: unset !important;
     border: unset !important;
 }
 
 /*////////////////////////////////////////////*/
 
-.formSubTraining-container p {
-    color: #5B5B5B;
-    font-size: 14px;
-}
-
-.formSubTraining-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: #fff;
-    width: 70%;
-    min-height: 500px;
-    padding: 30px 70px;
-}
 
 .formSubTraining-container .current-step {
     /* background-color: red; */
@@ -108,16 +117,17 @@
 
 .formSubTraining-container .prev-step {
     position: absolute;
-    top: 29px;
+    top: 30px;
     left: 20px;
     border-radius: 30px;
-    border: solid 1px transparent;
+    color: #333333;
+    border: solid 1.5px transparent;
     font-size: 1.8rem;
     transition: all ease 0.2s;
 }
 
 .formSubTraining-container .prev-step:not(.disabled):hover {
-    border: solid 1px #b5b5b5;
+    border: solid 1.5px #333333;
 }
 
 .formSubTraining-container .prev-step.disabled {
@@ -133,7 +143,11 @@
     width:100%;
 }
 
-/* ######## Partie à modifier pour rsuite ######## */
+.step-indicator.mobile {
+    display: none;
+}
+
+/* ######## PARTIE À MODIFIER POUR RSUITE ######## */
 
 .formSubTraining-container .step-indicator .rs-steps-item-description {
     text-align: center;
@@ -141,6 +155,7 @@
 
 .formSubTraining-container .step-indicator .rs-steps-item-status-finish *,
 .formSubTraining-container .step-indicator .rs-steps-item-status-finish .rs-steps-item-title::after{
+    font-size: var(--lower-text-size);
     color: green !important;
     border-color: green !important;
 }
@@ -152,3 +167,23 @@
 .formSubTraining-container .step-indicator .rs-steps-item-active .rs-steps-item-title::after {
     border-color: #3498ff !important;
 }
+
+@media (width <= 500px) { /* Mobile */
+    .formSubTraining-container .next-step {
+        width: 90%;
+    }
+
+    .formSubTraining-container .prev-step {
+        left: 10px;
+    }
+}
+
+@media (width <= 1000px) { /* Mobile */
+    .step-indicator:not(.mobile) {
+        display: none;
+    }
+    .step-indicator.mobile {
+        display: flex;
+    }
+}
+

@@ -8110,6 +8110,7 @@ textarea.rs-input-sm {
   border-right: 0;
 }
 .rs-input-group.rs-input-group-inside {
+  height: 40px;
   width: 100%;
   background-color: #fff;
   background-color: var(--rs-input-bg);
@@ -16195,7 +16196,8 @@ textarea.rs-inline-edit-sm .rs-plaintext {
 .rs-toast-container-top-center,
 .rs-toast-container-top-start,
 .rs-toast-container-top-end {
-  top: 24px;
+  z-index: 10001;
+  top: 5vw;
 }
 .rs-toast-container-bottom-center,
 .rs-toast-container-bottom-start,

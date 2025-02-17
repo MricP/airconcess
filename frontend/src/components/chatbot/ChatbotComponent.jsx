@@ -27,7 +27,7 @@ export default function ChatbotComponent() {
       setMessages([...messages, { sender: "user", text: grayTextareaInput }]);
       try {
         const response = await sendAQuestion({ question: grayTextareaInput });
-        console.log(response);
+        // console.log(response);
         setMessages(prevMessages => [...prevMessages, { sender: "bot", text: response.answer }]);
       } catch (error) {
         console.error("erreur lors de l'envoi de la réponse.", error);

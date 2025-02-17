@@ -1,12 +1,11 @@
 import React from 'react'
-import { MdOutlineFileUpload } from "react-icons/md";
 import { City } from "country-state-city";
 import countryList from 'react-select-country-list';
 import CustomSelectPicker from '../general/CustomSelectPicker';
 import CustomPhoneInput from '../general/CustomPhoneInput';
+import CustomFilePicker from '../general/CustomFilePicker';
 
 import "../../styles/appointment/InfoFormFieldset.css"
-
 
 function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeProof=false,setValue}) {
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i    
@@ -16,23 +15,13 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
         return errors.email && errors.email?.message!=="required"
     }
 
-    const getCountryNameFromCode = (code) => {
-        const country = countryList().getData().find((country) => country.value === code);
-        return country ? country.label : code; // Retourne le nom complet ou le code si non trouvé
-    };
-
-    const getCountryCodeFromName = (name) => {
-        const country = countryList().getData().find((country) => country.label === name);
-        return country ? country.value : name; // Retourne le code ou le nom si non trouvé
-    };
-
     return (    
         <fieldset className='info-fieldset' ><legend>Vos informations</legend>
             <div className={handleDisplayErrorDiv() ? "error-message-div" : "invisible"}>
                 {errors.email && errors.email.message!=="required" && <p>{errors.email.message}</p>}
             </div>
-            <div>
-                <div>
+
+            <div className='firstName-lastName-div'> {/* Nom et prenom */}
                     <label htmlFor="last-name">
                         <p>Nom*</p>
                         <input 
@@ -44,31 +33,6 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             {...register("lastName", { required: true })}
                         />
                     </label>
-                    <div>
-                        <p>Numéro de téléphone*</p>
-                        <CustomPhoneInput
-                            className={errors.phone ? "input-error" : ""} 
-                            value={formData.phone != null ? formData.phone : ''}
-                            setValue={(value) => setValue("phone", value, errors.phone ? {shouldValidate: true} : {shouldValidate: false})}
-                            {...register("phone", { required: true })}
-                        />
-                    </div>
-                    <div>
-                        <p>Pays*</p>
-                        <CustomSelectPicker 
-                            isSearchable={true}
-                            className={errors.country ? "input-error" : ""}
-                            data={countryList().getData()} 
-                            value={formData.country != null ? formData.country : ''}
-                            setValue={(value) => {
-                                setValue("country", value, errors.country ? {shouldValidate: true} : {shouldValidate: false});
-                                setValue("city", null, errors.city ? {shouldValidate: true} : {shouldValidate: false});
-                            }}
-                            {...register("country", { required: true })}
-                        />
-                    </div>
-                </div>
-                <div>
                     <label htmlFor="first-name">
                         <p>Prénom*</p>
                         <input 
@@ -80,6 +44,17 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             {...register("firstName", { required: true })}
                         />
                     </label>
+            </div>
+            <div className='phone-mail-div'> {/* Phone et mail */}
+                    <div>
+                        <p>Numéro de téléphone*</p>
+                        <CustomPhoneInput
+                            className={errors.phone ? "input-error" : ""} 
+                            value={formData.phone != null ? formData.phone : ''}
+                            setValue={(value) => setValue("phone", value, errors.phone ? {shouldValidate: true} : {shouldValidate: false})}
+                            {...register("phone", { required: true })}
+                        />
+                    </div>
                     <label htmlFor="email">
                         <p>Adresse mail*</p>
                         <input 
@@ -99,10 +74,28 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             })}
                         />
                     </label>
+            </div>
+            <div className='country-city-postalCode-div'>  {/* Country et City et PostalCode */}
                     <div>
+                        <p>Pays*</p>
+                        <CustomSelectPicker 
+                            isSearchable={true}
+                            className={errors.country ? "input-error" : ""}
+                            data={countryList().getData()} 
+                            value={formData.country != null ? formData.country : ''}
+                            setValue={(value) => {
+                                setValue("country", value, errors.country ? {shouldValidate: true} : {shouldValidate: false});
+                                setValue("city", null, errors.city ? {shouldValidate: true} : {shouldValidate: false});
+                            }}
+                            {...register("country", { required: true })}
+                        />
+                    </div>
+                    <div className='city-postalCode-div'>
                         <label htmlFor="city" >
                             <p>Ville*</p>
                             <CustomSelectPicker 
+                                noOptionsMessage={"Aucun pays selectionné"}
+
                                 isSearchable={true}
                                 className={errors.city ? "input-error" : ""}
                                 data={formData.country ? City.getCitiesOfCountry(formData.country.value).map(
@@ -137,8 +130,8 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             />
                         </label>
                     </div>
-                </div>
             </div>
+
             <label htmlFor="address">
                 <p>Adresse*</p>
                 <input 
@@ -149,43 +142,27 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                     {...register("address", { required: true })}    
                 />
             </label>
-            <div>
-                <input 
-                    type="file" 
-                    className="invisible" 
-                    id="id-card" 
-                    name="idCard" 
-                    accept=".pdf,.jpg,.jpeg,.png" 
-                    //Ici on ne peut pas mettre de value à un input file donc on retire simplement la contrainte s'il y a déjà un fichier  
-                    {...withIdCard===true && formData.idCard === null ? {...register("idCard", { required: true })} : null}  
-                    
+
+            <div className='files-selection-div'>
+                <CustomFilePicker
+                    multiple={false} 
+                    autoUpload={false} 
+                    text={"Selectionner une carte d'identité*"}
+                    className={(errors.idCard ? "file-error" : "")+(withIncomeProof ? "" : " solo")}
+                    value={formData.idCard}
+                    setValue={(val) => setValue("idCard", val, errors.idCard ? {shouldValidate: true} : {shouldValidate: false})}
+                    {...register("idCard", { required: true })}
                 />
-                <label className={`${withIdCard ? "" : "invisible"} ${errors.idCard ? "input-error" : ""}`}>
-                    <p>Carte d’identité*</p>
-                    <div className="div-upload">
-                        <span id="id-card-file-name" className="file-name">{formData.idCard != null ? formData.idCard[0].name :"Aucun fichier sélectionné"}</span>
-                        <label className="inactive-label" htmlFor="id-card">
-                            <MdOutlineFileUpload/>
-                        </label>
-                    </div>
-                </label>
-                <input 
-                    type="file" 
-                    className="invisible" 
-                    id="income-proof" 
-                    name="incomeProof" 
-                    accept=".pdf,.jpg,.jpeg,.png" 
-                    {...withIncomeProof===true && formData.incomeProof === null? {...register("incomeProof", { required: true })} : null}
-                />
-                <label className={`${withIncomeProof ? "" : "invisible"} ${errors.incomeProof ? "input-error" : ""}`}>
-                    <p>Justificatif de revenu*</p>
-                    <div className="div-upload">
-                        <span id="income-proof-file-name" className="file-name">{formData.incomeProof != null ? formData.incomeProof[0].name :'Aucun fichier sélectionné'}</span>
-                        <label className="inactive-label" htmlFor="income-proof">
-                            <MdOutlineFileUpload/>
-                        </label>
-                    </div>
-                </label>
+                {withIncomeProof ?
+                <CustomFilePicker
+                    multiple={false} 
+                    autoUpload={false} 
+                    text={"Selectionner un justificatif de revenu*"}
+                    className={errors.incomeProof ? "file-error" : ""}
+                    value={formData.incomeProof}
+                    setValue={(val) => setValue("incomeProof", val, errors.incomeProof ? {shouldValidate: true} : {shouldValidate: false})}
+                    {...register("incomeProof", { required: true })}
+                />:null}
             </div>
         </fieldset>
     )

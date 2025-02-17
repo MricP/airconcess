@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '../../middlewares/CorsMiddleware.php';
-// require_once __DIR__ . '../../middlewares/AuthMiddleware.php';
 require_once __DIR__ . '../../middlewares/ValidationMiddleware.php';
 require_once __DIR__ . '../../middlewares/ChatbotMiddleware.php';
 require_once __DIR__ . '../../controllers/AuthController.php';
@@ -11,7 +10,8 @@ require_once __DIR__ . '../../models/Aircraft.php';
 require_once __DIR__ . '../../controllers/AppointmentController.php';
 require_once __DIR__ . '../../controllers/CatalogController.php';
 require_once __DIR__ . '../../controllers/ProfileController.php';
-require_once __DIR__ . '../../controllers/ChatbotController.php';
+require_once __DIR__ . '../../controllers/TrainingController.php';
+require_once __DIR__ . '../../controllers/ChatBotController.php';
 
 // Middleware CORS globalement
 CorsMiddleware::handle();
@@ -105,13 +105,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-submit') !== false) {
     $data = json_decode(file_get_contents("php://input"), true);
-    var_dump($data); // Vérifie que les données sont correctement reçues
     AppointmentController::createAppointment($data);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadTimestamps') !== false) {
     $agency_id = json_decode(file_get_contents("php://input"), true);
     AppointmentController::getTimestamps($agency_id);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAircraftWithId') !== false) {
+    $airc_id = json_decode(file_get_contents("php://input"), true);
+    AppointmentController::getAircraft($airc_id);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadAgencies') !== false) {
@@ -148,8 +152,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
 // Partie page product
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-aircraftWithId') !== false) {
-    $input = json_decode(file_get_contents("php://input"), true);
-    ProductController::getAircraftWith($input['idAircraft']);
+    $id = json_decode(file_get_contents("php://input"), true);
+    ProductController::getAircraftWith($id);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-modelName') !== false) {
@@ -240,6 +244,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my
 
     ProfileController::updateProfileData($payload);
 }
+
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && strpos($_SERVER['REQUEST_URI'], '/my-profile/delete') !== false) {
     $headers = getallheaders();
     if (!isset($headers['Authorization'])) {
@@ -317,15 +322,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Aircraft') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::deleteAircraft($args['id'], $args['nameModel']);
-    echo json_encode($result);
+    // echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Model') !== false) {
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::deleteModel($args['id'], $args['nameModel']);
-    echo json_encode($result);
+    // echo json_encode($result);
 }
 
+// Partie page sub-training
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/subTraining/submit') !== false) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    TrainingController::createTraining($data);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/subTraining/get-trainers') !== false) {
+    TrainingController::getAllTrainers();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/chatbot/send') !== false) {
     $data = json_decode(file_get_contents("php://input"), true);
@@ -335,3 +350,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
     echo json_encode(['answer' => $response]);
     exit();
 }
+

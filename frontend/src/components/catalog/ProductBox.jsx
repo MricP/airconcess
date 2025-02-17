@@ -2,14 +2,14 @@ import React from 'react'
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
 import "../../styles/catalog/ProductBox.css";
-import { useNavigate } from 'react-router-dom';
 import { IoTrashBin } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { deleteAircraft, getModelName } from '../../services/product';
+import useRedirect from '../Custom-hooks';
 
 
 export const ProductBox = (props) => {
-  const navigate = useNavigate();
+  const redirect = useRedirect();
   let use = null;
 //   const history = useHistory();
   if (props.use === "delete"){
@@ -20,7 +20,7 @@ export const ProductBox = (props) => {
 
   const handleButtonClick = async() => {
     if (props.use === "edit"){
-        navigate(`/admin/edit/${props.idAircraft}`)
+        redirect(`/admin/edit/${props.idAircraft}`)
     } else {
       console.log(props.aircraftId)
       const nameModel = await getModelName(props.aircraftId)
@@ -70,7 +70,7 @@ export const ProductBox = (props) => {
                 </div>
             </div>
             <p>{props.description}</p>
-            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button onClick={() => navigate(`/product/${props.idAircraft}` )}><FaArrowRightLong size={20}/></button></div>
+            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button onClick={() => redirect(`/product/${props.idAircraft}` )}><FaArrowRightLong size={20}/></button></div>
         </div>
       </div>
   )
