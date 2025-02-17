@@ -7,10 +7,13 @@ require_once __DIR__ . '../../controllers/ContactController.php';
 require_once __DIR__ . '../../controllers/ProductController.php';
 require_once __DIR__ . '../../controllers/TestimonialController.php';
 require_once __DIR__ . '../../models/Aircraft.php';
+require_once __DIR__ . '../../models/Logs.php';
 require_once __DIR__ . '../../controllers/AppointmentController.php';
 require_once __DIR__ . '../../controllers/CatalogController.php';
 require_once __DIR__ . '../../controllers/ProfileController.php';
+require_once __DIR__ . '../../controllers/UserController.php';
 require_once __DIR__ . '../../controllers/TrainingController.php';
+
 
 // Middleware CORS globalement
 CorsMiddleware::handle();
@@ -146,10 +149,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
 // Partie page product
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-aircraftWithId') !== false) {
-    $id = json_decode(file_get_contents("php://input"), true);
-    ProductController::getAircraftWith($id);
+    $input = json_decode(file_get_contents("php://input"), true);
+    $result = ProductController::getAircraftWith($input['idAircraft']);
+    echo json_encode($result);
 }
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-modelName') !== false) {
     $input = json_decode(file_get_contents("php://input"), true);
     ProductController::getModelNameOf($input['idAircraft']);
@@ -322,6 +325,111 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::deleteModel($args['id'], $args['nameModel']);
     echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-Aircraft') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    $result = Aircraft::updateAircraft(
+        $args["id"],
+        $args["serialNumber"],
+        $args["manufactureYear"],
+        $args["flightHours"],
+        $args["configuration"],
+        $args["recentMaintenance"],
+        $args["typicalRoutes"],
+        $args["owner"],
+        $args["costPerKm"],
+        $args["monthlyMaintenanceCost"],
+        $args["estimatedPrice"],
+        $args["description"]
+    );
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-MainImage') !== false) {
+    $id = $_POST['id'];
+    $file = $_FILES['file'];
+    $result = Aircraft::updateMainImage($id, $file);
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-SliderImages') !== false) {
+    $id = $_POST['id'];
+    $files = $_FILES['files'];
+    $structuredFiles = [];
+
+    foreach ($files['name'] as $key => $name) {
+        if ($files['error'][$key] === UPLOAD_ERR_OK) { // Vérifie s'il n'y a pas d'erreur
+            $structuredFiles[] = [
+                'name' => $name,
+                'type' => $files['type'][$key],
+                'tmp_name' => $files['tmp_name'][$key],
+                'error' => $files['error'][$key],
+                'size' => $files['size'][$key]
+            ];
+        }
+    }
+    $result = Aircraft::updateSliderImages($id, $structuredFiles);
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-IconImage') !== false) {
+    $id = $_POST['id'];
+    $file = $_FILES['file'];
+    $result = Aircraft::updateIconImage($id, $file);
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/create-User') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    UserController::createWithCRUD($args['email'],$args['password'],$args['firstname'],$args['lastname'],$args['isAdmin'],$args["isTrainer"]);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-Users') !== false) {
+    $result = User::getAllUsers();
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-RoleUser') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    User::updateRole($args['id'], $args['role'], $args['boolean']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/find-UserEmail') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    $result = User::findByEmail($args['email']);
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-User') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    User::deleteUser($args['id']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/create-Trainer') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    User::createTrainer($args['id']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/find-TrainerId') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    $result = User::findTrainerById($args['id']);
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Trainer') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    User::deleteTrainer($args['id']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-Logs') !== false) {
+    $result = Logs::getLastLogs();
+    echo json_encode($result);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Log') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    Logs::insertLog($args['content']);
 }
 
 // Partie page sub-training

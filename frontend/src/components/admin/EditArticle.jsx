@@ -7,7 +7,6 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
 export default function EditArticle(props) {
-  const gulfstreamG650ER = "../assets/catalog/gulfstreamG650.svg"; 
   const [aircrafts, setAircrafts] = useState([]);
   const [page, setPage] = useState(1);
   const catalogRef = useRef(null);
@@ -16,6 +15,12 @@ export default function EditArticle(props) {
   const itemsPerPage = 5;
 
   let [filteredAircrafts, setFilteredAircrafts] = useState([]);
+
+  const [pageProduct, setPageProduct] = useState(null);
+
+  const setCurrentPageProduct = (element) => {
+    setPageProduct(element)
+  }
 
   useEffect(() => {
     const fetchAircrafts = async () => {
@@ -58,43 +63,50 @@ export default function EditArticle(props) {
   };
 
   return (
-    <div className="edit-article">
-      {Array.isArray(aircrafts) && aircrafts.length > 0 ? (
-            paginatedAircrafts
-              .map((plane) => (
-                <ProductBox
-                  key = {plane.aircraft_id}
-                  aircraftId={plane.aircraft_id}
-                  isAvailable={plane.isAvailable}
-                  planeImg={plane.img_URL}
-                  modelName={plane.model_name.toUpperCase()}
-                  serialNumber={plane.serial_number}
-                  price={`USD $ ${plane.estimated_price}`}
-                  year={plane.manufacture_year}
-                  hour={plane.flight_hours}
-                  capacity={plane.passenger_capacity}
-                  autonomy={plane.max_range}
-                  description={plane.description}
-                  aircraftType={plane.range_type}
-                  idAircraft={plane.aircraft_id}
-                  use = {props.use}
-                />
-              ))
+    <>
+      {pageProduct ? (
+        <div>{pageProduct}</div>
+      ) : (
+        <div className="edit-article">
+          {paginatedAircrafts.length > 0 ? (
+            paginatedAircrafts.map((plane) => (
+              <ProductBox
+                key={plane.aircraft_id}
+                aircraftId={plane.aircraft_id}
+                isAvailable={plane.isAvailable}
+                planeImg={plane.img_URL}
+                modelName={plane.model_name.toUpperCase()}
+                serialNumber={plane.serial_number}
+                price={`USD $ ${plane.estimated_price}`}
+                year={plane.manufacture_year}
+                hour={plane.flight_hours}
+                capacity={plane.passenger_capacity}
+                autonomy={plane.max_range}
+                description={plane.description}
+                aircraftType={plane.range_type}
+                idAircraft={plane.aircraft_id}
+                use={props.use}
+                pageProduct = {setCurrentPageProduct}
+              />
+            ))
           ) : (
             <p>Aucun avion trouvé.</p>
           )}
-
-      <div className='chooseCatalogPage'>
-        <button onClick={handlePreviousPage} disabled={page === 1}>
-          <IoIosArrowBack color='#B5B5B5' size={35} />
-        </button>
-        <p>
-          {page} / {totalPages === 0 ? 1 : totalPages}
-        </p>
-        <button onClick={handleNextPage} disabled={page === totalPages}>
-          <IoIosArrowForward color='#B5B5B5' size={35} />
-        </button>
-      </div>
-    </div>
-  )
+  
+          <div className="chooseCatalogPage">
+            <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+              <IoIosArrowBack color="#B5B5B5" size={35} />
+            </button>
+            <p>
+              {currentPage} / {totalPages || 1}
+            </p>
+            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+              <IoIosArrowForward color="#B5B5B5" size={35} />
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+  
 }

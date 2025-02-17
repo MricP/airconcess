@@ -24,9 +24,10 @@
     font-weight: 600; /*Semi-bold*/
 }
 
+
 .productShowcase-container .input {
     text-align: center;
-    font-size: var(--title-size);
+    font-size: var(--h2-size);
     width: 30vw;
     height: 10vh;
     color: white;
