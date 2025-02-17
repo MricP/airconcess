@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoTrashBin } from "react-icons/io5";
 import { getAllUsers, updateRoleUser, deleteUser, deleteTrainer, createTrainer } from "../../services/product";
+import { useMediaQuery } from 'react-responsive'
 
 export default function UpdateUser() {
     const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
+    const isMobile = useMediaQuery({ maxWidth: 992 });
     
     useEffect(() => {
         const loadUsers = async () => {
@@ -99,18 +101,34 @@ export default function UpdateUser() {
                 {paginatedUsers.length > 0 ? (
                     paginatedUsers.map((user) => (
                         <div className="user-container" key={user.idUser}>
-                            <table className="info-user">
-                                <tbody>
-                                    <tr>
+                            {isMobile ? 
+                                <table className="info-user">
+                                    <tbody>
+                                        <tr>
+                                            <td rowSpan={3}>
+                                                <img src={user.profilePictureURL || "/assets/admin/default-avatar.png"} alt="Utilisateur" />
+                                            </td>
+                                        </tr>
                                         <td>
-                                            <img src={user.profilePictureURL || "/assets/admin/default-avatar.png"} alt="Utilisateur" />
+                                            <tr>{user.firstName} {user.lastName}</tr>
+                                            <tr>{user.email}</tr>
                                         </td>
-                                    </tr>
-                                    <tr><td>{user.firstName}</td></tr>
-                                    <tr><td>{user.lastName}</td></tr>
-                                    <tr><td>{user.email}</td></tr>
-                                </tbody>
-                            </table>
+                                        
+                                    </tbody>
+                                </table> :
+                                <table className="info-user">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <img src={user.profilePictureURL || "/assets/admin/default-avatar.png"} alt="Utilisateur" />
+                                            </td>
+                                        </tr>
+                                        <tr><td>{user.firstName}</td></tr>
+                                        <tr><td>{user.lastName}</td></tr>
+                                        <tr><td>{user.email}</td></tr>
+                                    </tbody>
+                                </table> 
+                            }
 
                             <div className="role-user">
                                 <label>

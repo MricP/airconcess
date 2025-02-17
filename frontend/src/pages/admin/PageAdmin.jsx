@@ -7,6 +7,7 @@ import PageProduct from "../product/PageProduct";
 import CreateUser from "../../components/admin/CreateUser";
 import UpdateUser from "../../components/admin/UpdateUser";
 
+
 import { insertAircraft, insertModel, getModelByName, getAllModel, uploadImage, insertImage, getAircraftBySerialNumber, deleteAircraft, deleteModel, getLastLogs, insertLog } from "../../services/product";
 
 export default function PageAdmin(){
@@ -16,7 +17,7 @@ export default function PageAdmin(){
     const [models, setModels] = useState(null);
     const [model, setModel] = useState(null)
     const [mode, setMode] = useState(null);
-    
+    const [selectedElement, setSelectedElement] = useState(null);
     
 
     const handleMenuClick1 = () => {
@@ -30,11 +31,7 @@ export default function PageAdmin(){
     };
 
     const handleElementClick = (event) => {
-        const allElements = document.querySelectorAll(".element");
-        allElements.forEach((el) => el.classList.remove("underline"));
-        event.target.classList.add("underline");
-    
-        console.log(event.target.textContent);
+        setSelectedElement(event.target.textContent);
     
         if (event.target.textContent === "• Modifier un produit") {
             setMode("edit");
@@ -287,14 +284,14 @@ export default function PageAdmin(){
             <div className="first-admin-component">
                 <div className="title-menu">
                     {isClicked1 ? <FaChevronDown onClick={handleMenuClick1} className="chevron"/> : <FaChevronRight onClick={handleMenuClick1} className="chevron" />}
-                    <p>Articles</p>
+                    <p>Produits</p>
                 </div>
 
                 {isClicked1 && 
                     <div className="title-menu-child">
-                        <p className ="element" onClick={handleElementClick}>• Ajouter un produit</p>
-                        <p className ="element" onClick={handleElementClick}>• Modifier un produit</p>
-                        <p className ="element" onClick={handleElementClick}>• Supprimer un produit</p>
+                        <p className={`element ${selectedElement === "• Ajouter un produit" ? "underline" : ""}`} onClick={handleElementClick}>• Ajouter un produit</p>
+                        <p className={`element ${selectedElement === "• Modifier un produit" ? "underline" : ""}`} onClick={handleElementClick}>• Modifier un produit</p>
+                        <p className={`element ${selectedElement === "• Supprimer un produit" ? "underline" : ""}`} onClick={handleElementClick}>• Supprimer un produit</p>
                     </div>
                 }
 
@@ -305,8 +302,8 @@ export default function PageAdmin(){
 
                 {isClicked2 && 
                     <div className="title-menu-child">
-                        <p className ="element" onClick={handleElementClick}>• Ajouter un utilisateur</p>
-                        <p className ="element" onClick={handleElementClick}>• Modifier un utilisateur</p>
+                        <p className={`element ${selectedElement === "• Ajouter un utilisateur" ? "underline" : ""}`} onClick={handleElementClick}>• Ajouter un utilisateur</p>
+                        <p className={`element ${selectedElement === "• Modifier un utilisateur" ? "underline" : ""}`} onClick={handleElementClick}>• Modifier un utilisateur</p>
                     </div>
                 }
                 

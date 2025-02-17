@@ -98,3 +98,30 @@
     border-radius: 5px;
     background-color: var(--box-color);
 }
+
+@media (max-width: 992px) {
+    .update-user .filter-bar > input {
+        width: 60vw;
+    }
+
+    .update-user .user-container {
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .update-user .user-container .info-user {
+        width: 70vw;
+    }
+
+    .update-user .user-container img {
+        width: 15vw;
+    }
+
+    .update-user .user-container td {
+        width: auto;
+    }
+
+    .update-user .user-container .role-user {
+        width: 70vw;
+    }
+}

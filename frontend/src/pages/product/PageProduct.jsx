@@ -13,7 +13,9 @@ import { getMainImage, getSliderImages, getModelDescription, getAircraftDescript
 import ResultPage from "../ResultPage";
 
 function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
-  // const navigate = useNavigate();
+
+  /*################### CONSTANTES ####################*/
+
   const location = useLocation().pathname.split("/");
   let id = null
   if (aircraftId){
@@ -21,11 +23,6 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
   } else {
     id = parseInt(location[location.length - 1]); // Récupération de l'ID
   }
-function PageProduct({mode, onSubmitProduct, model}) {
-  /*################### CONSTANTES ####################*/
-
-  const location = useLocation().pathname.split("/");
-  const id = parseInt(location[location.length - 1]); // Récupération de l'ID
 
   /*############ INITIALISATION DES STATES ############*/
 
@@ -403,7 +400,6 @@ function PageProduct({mode, onSubmitProduct, model}) {
 
     </main>
   );
-}
 }
 
 export default PageProduct;

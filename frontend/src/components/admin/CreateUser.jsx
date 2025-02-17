@@ -14,16 +14,21 @@ export default function CreateUser(){
     const [password, setPassword] = useState('');
     const [isAdmin, setIsAdmin] = useState(false);
     const [isTrainer, setIsTrainer] = useState(false);
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          await createUserWithCRUD(email, password, firstName, lastName, Number(isAdmin), Number(isTrainer));
-          if (isTrainer) {
-            const result = await findUserByEmail(email);
-            await createTrainer(result.idUser)
+          if(emailRegex.test(email)) {
+            await createUserWithCRUD(email, password, firstName, lastName, Number(isAdmin), Number(isTrainer));
+            if (isTrainer) {
+              const result = await findUserByEmail(email);
+              await createTrainer(result.idUser)
+            }
+            window.location.reload();
+          } else {
+            alert("Email invalide !")
           }
-          window.location.reload();
         } catch (error) {
           console.log('Error response:', error.response?.data?.message || 'Unknown error');
         }
