@@ -74,4 +74,39 @@ class User
         $stmt = $pdo->prepare("UPDATE User SET profilePictureURL = ? WHERE idUser = ?");
         return $stmt->execute([$url,$id]);
     }
+
+    public static function getAllUsers() {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare('Select lastName, firstName, email, profilePictureURL, isVerified, isAdmin, inscriptionDate, idUser, isTrainer from User order by isVerified desc');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function updateRole($id, $role, $boolean) {
+        $pdo = self::getDB();
+        if ($role == "isAdmin") $stmt = $pdo->prepare('Update User set isAdmin = ? where idUser = ?');
+        elseif ($role == "isTrainer") $stmt = $pdo->prepare('Update User set isTrainer = ? where idUser = ?');
+        $stmt->execute([$boolean, $id]);
+    }
+
+    public static function createTrainer($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare('INSERT INTO trainer (trainer_id) VALUES (?)');
+        $stmt->execute([$id]);
+    }
+
+    public static function findTrainerById($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM Trainer WHERE trainer_id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function deleteTrainer($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("DELETE FROM Trainer WHERE trainer_id = ?");
+        $stmt->execute([$id]);
+    }
+
+
 }

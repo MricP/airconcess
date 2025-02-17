@@ -4,7 +4,7 @@ import { useState } from "react";
 import GrayInput from '../../components/general/GrayInput';
 import DarkButton2 from "../general/DarkButton2";
 
-import { createUserWithCRUD, createTrainer, findUserByEmail } from "../../services/product";
+import { createUserWithCRUD, createTrainer, findUserByEmail} from "../../services/product";
 
 export default function CreateUser(){
     
@@ -43,7 +43,7 @@ export default function CreateUser(){
                </div>
                <div className="form-group">
                  <label htmlFor="email" className="form-label">Email*</label>
-                 <GrayInput placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />
+                 <GrayInput placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required={true}/>
                </div>
                <div className="form-group">
                  <label htmlFor="password" className="form-label">Mot de passe*</label>
@@ -53,7 +53,7 @@ export default function CreateUser(){
                 <label htmlFor="isAdmin"><input type="checkbox" onChange={(e) => setIsAdmin(e.target.checked)}/>Admin</label>
                 <label htmlFor="isTrainer"><input type="checkbox" onChange={(e) => setIsTrainer(e.target.checked)}/>Formateur</label>
                </div>
-               <DarkButton2 text="Ajouter l'utilisateur" use={handleSubmit} />
+               <DarkButton2 text="Ajouter l'utilisateur" use={handleSubmit}/>
             </form>
         </div>
     )

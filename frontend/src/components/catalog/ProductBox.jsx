@@ -7,9 +7,10 @@ import { CiEdit } from "react-icons/ci";
 import { deleteAircraft, getModelName } from '../../services/product';
 import PageProduct from '../../pages/product/PageProduct';
 import { updateAircraft, updateMainImage, updateSliderImages, updateIconImage, insertLog, getAircraft } from '../../services/product';
+import useRedirect from '../Custom-hooks';
 
 export const ProductBox = (props) => {
-  const navigate = useNavigate();
+  const redirect = useRedirect();
   const [showProductPage, setShowProductPage] = useState(false);
 
   const icon = props.use === "delete" ? <IoTrashBin size={30} color='red'/> : props.use === "edit" && <CiEdit size={30} />;
@@ -144,10 +145,11 @@ export const ProductBox = (props) => {
             <p>{props.description}</p>
             <div className='LearnMorebButton'>
               <p>EN SAVOIR PLUS</p>
-              <button onClick={() => navigate(`/product/${props.idAircraft}` )}>
+              <button onClick={() => redirect(`/product/${props.idAircraft}` )}>
                 <FaArrowRightLong size={20}/>
               </button>
             </div>
+            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button onClick={() => redirect(`/product/${props.idAircraft}` )}><FaArrowRightLong size={20}/></button></div>
         </div>
       </div>
   );

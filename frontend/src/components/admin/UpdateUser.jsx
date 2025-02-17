@@ -44,10 +44,10 @@ export default function UpdateUser() {
     const handleCheckboxTrainerClick = async (id, role, boolean) => {
         if (boolean) {
             await createTrainer(id);
+
         } else {
             await deleteTrainer(id); 
         }
-        console.log(boolean)
         await updateRoleUser(id, role, Number(boolean));
         setUsers((prevUsers) =>
             prevUsers.map((user) =>
