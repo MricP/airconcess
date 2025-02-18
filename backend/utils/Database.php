@@ -3,8 +3,8 @@ class Database
 {
     private static $host = 'localhost';
     private static $dbname = 'air_concess';
-    private static $username = 'root';
-    private static $password = '';
+    private static $username = 'airconcess_user';
+    private static $password = 'AirConcess2024!SAE';
     private static $conn = null;
 
     private function __construct() {

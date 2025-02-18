@@ -22,7 +22,7 @@ class User
     public static function create($email, $hashedPassword, $firstName, $lastName)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('INSERT INTO User (email, password, firstName, lastName, isVerified, isTrainer, isAdmin, inscriptionDate) 
+        $stmt = $pdo->prepare('INSERT INTO user (email, password, firstName, lastName, isVerified, isTrainer, isAdmin, inscriptionDate) 
                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 
         if ($stmt->execute([$email, $hashedPassword, $firstName, $lastName, 0, 0, 0, date('Y-m-d H:i:s')])) {
@@ -34,7 +34,7 @@ class User
     public static function verifyEmail($userId)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('UPDATE User SET isVerified = 1 WHERE idUser = ?');
+        $stmt = $pdo->prepare('UPDATE user SET isVerified = 1 WHERE idUser = ?');
         return $stmt->execute([$userId]);
     }
     
@@ -43,14 +43,14 @@ class User
     public static function updatePassword($userId, $newPassword)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('UPDATE User SET password = ? WHERE idUser = ?');
+        $stmt = $pdo->prepare('UPDATE user SET password = ? WHERE idUser = ?');
         return $stmt->execute([$newPassword, $userId]);
     }
 
     public static function updateUser($userId, $firstName,$lastName,$location)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('UPDATE User SET firstName = ?, lastName = ?, location = ? WHERE idUser = ?');
+        $stmt = $pdo->prepare('UPDATE user SET firstName = ?, lastName = ?, location = ? WHERE idUser = ?');
         return $stmt->execute([$firstName,$lastName,$location, $userId]);
     }
 
@@ -71,7 +71,7 @@ class User
 
     public static function updateURLPicture($url,$id){
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("UPDATE User SET profilePictureURL = ? WHERE idUser = ?");
+        $stmt = $pdo->prepare("UPDATE user SET profilePictureURL = ? WHERE idUser = ?");
         return $stmt->execute([$url,$id]);
     }
 
@@ -84,8 +84,8 @@ class User
 
     public static function updateRole($id, $role, $boolean) {
         $pdo = self::getDB();
-        if ($role == "isAdmin") $stmt = $pdo->prepare('Update User set isAdmin = ? where idUser = ?');
-        elseif ($role == "isTrainer") $stmt = $pdo->prepare('Update User set isTrainer = ? where idUser = ?');
+        if ($role == "isAdmin") $stmt = $pdo->prepare('Update user set isAdmin = ? where idUser = ?');
+        elseif ($role == "isTrainer") $stmt = $pdo->prepare('Update user set isTrainer = ? where idUser = ?');
         $stmt->execute([$boolean, $id]);
     }
 
@@ -97,14 +97,14 @@ class User
 
     public static function findTrainerById($id) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT * FROM Trainer WHERE trainer_id = ?");
+        $stmt = $pdo->prepare("SELECT * FROM trainer WHERE trainer_id = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public static function deleteTrainer($id) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("DELETE FROM Trainer WHERE trainer_id = ?");
+        $stmt = $pdo->prepare("DELETE FROM trainer WHERE trainer_id = ?");
         $stmt->execute([$id]);
     }
 
