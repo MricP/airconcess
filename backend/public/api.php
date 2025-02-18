@@ -12,9 +12,10 @@ require_once __DIR__ . '../../models/Logs.php';
 require_once __DIR__ . '../../controllers/AppointmentController.php';
 require_once __DIR__ . '../../controllers/CatalogController.php';
 require_once __DIR__ . '../../controllers/ProfileController.php';
-require_once __DIR__ . '../../controllers/TrainingController.php';
 require_once __DIR__ . '../../controllers/ChatBotController.php';
 require_once __DIR__ . '../../controllers/UserController.php';
+require_once __DIR__ . '../../controllers/TrainingController.php';
+
 
 // Middleware CORS globalement
 CorsMiddleware::handle();
@@ -259,7 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my
     ProfileController::updateProfileData($payload);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && strpos($_SERVER['REQUEST_URI'], '/my-profile/delete') !== false) {
+if($_SERVER['REQUEST_METHOD'] === 'DELETE' && strpos($_SERVER['REQUEST_URI'], '/my-profile/delete') !== false){
     $headers = getallheaders();
     if (!isset($headers['Authorization'])) {
         http_response_code(401);

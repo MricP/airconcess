@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const chatbotInstance = axios.create({
-    baseURL: 'http://localhost/air-concess/backend/public/api/chatbot',
+    baseURL: 'http://46.101.169.59/public/api.php',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -9,7 +9,7 @@ const chatbotInstance = axios.create({
 
 export const sendAQuestion = async (question) => {
     try {
-        const response = await chatbotInstance.post("/send", { question });
+        const response = await chatbotInstance.post("/chatbot/send", { question });
         return response.data.answer;
     } catch (error) {
         console.error("erreur lors de l'envoi de la réponse.", error);

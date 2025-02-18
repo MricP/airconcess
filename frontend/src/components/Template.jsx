@@ -55,10 +55,10 @@ function Template({ children }) {
 
   return (
     <div>
-      <Header color={color} />
-      {children}
-      <ChatbotComponent />
-      {<Footer />}
+        <Header color={color}/>
+        {children}
+        <ChatbotComponent/>
+        { <Footer/>}
     </div>
 
   )
