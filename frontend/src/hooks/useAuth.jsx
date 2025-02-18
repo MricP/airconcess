@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import useRedirect from '../components/Custom-hooks';
 
 const useAuth = () => {
-  const navigate = useNavigate();
+  const redirect =  useRedirect
   const isFirstVisit = useRef(true); // Garde en mémoire la première visite
 
   const checkTokenValidity = () => {
@@ -24,7 +24,7 @@ const useAuth = () => {
 
       // Empêche la redirection si c'est la première visite
       if (!isFirstVisit.current) {
-        navigate('/sign-in');
+        redirect('/sign-in');
       }
       isFirstVisit.current = false;
     }
