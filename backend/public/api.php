@@ -26,12 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && preg_match('/\/api\/?$/', $_SERVER['
     $data = ['question' => ['Bonjour']];
     ChatbotController::init();
     $response = ChatbotController::responseForTheQuestion($data);
-
     echo json_encode(['answer' => $response]);
-    $headers = getallheaders();
-    $payload = Token::verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5OTEyMjYxLCJleHAiOjE3Mzk5MTU4NjF9.Dyy1pDBvZr793VLM9vf4N_EguQte2u24IDm6DyuL50k");
-    echo json_encode(['payload' => $payload]);
-    echo json_encode(['payload' => AuthController::getUser($payload)]);
 }
 
 // Route pour l'inscription (POST)

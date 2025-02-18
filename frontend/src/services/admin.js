@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 const adminInstance = axios.create({
-    baseURL: 'https://airconcess.org/public/api',
+    baseURL: 'https://airconcess.org/public/api.php',
     headers: {
         'Content-Type': 'application/json',
     },

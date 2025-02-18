@@ -104,7 +104,6 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
       if(dbSliderImgs) updateSliderImgs(dbSliderImgs);
 
       if(dbModelDescription) {
-        console.log(dbModelDescription)
         const newDescription = []
         dbModelDescription.forEach((element) => {
           if(element.value) {
@@ -178,7 +177,6 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
           dbModelDescription.forEach((element) => {
             if(element.value) {
               const criteria = modelDescription.find((elt) => elt.varName === element.varName)
-              console.log(criteria)
               if(criteria) {
                 let updatedCriteria = { ...criteria, value: element.value };
                 if(criteria.varName === "passenger_capacity") updatedCriteria = { ...criteria, value:"Jusqu'à "+element.value+" passagers"};
