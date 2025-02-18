@@ -64,6 +64,14 @@
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
             return $result;
         }
+
+        public static function getAppointmentByUserWithAgency($id){
+            $pdo = self::getDB();
+            $stmt = $pdo->prepare("SELECT appt_reason, appt_timestamp, agency_name FROM appointment A JOIN agency Ag ON A.appt_agency_id = AG.agency_id  WHERE userConcerned_id = ?");            
+            $stmt->execute([$id]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+            return $result;
+        }
     }
 
 ?>

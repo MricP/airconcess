@@ -2,6 +2,7 @@
 require_once __DIR__ . '../../middlewares/CorsMiddleware.php';
 require_once __DIR__ . '../../middlewares/ValidationMiddleware.php';
 require_once __DIR__ . '../../middlewares/ChatbotMiddleware.php';
+require_once __DIR__ . '../../middlewares/AuthMiddleware.php';
 require_once __DIR__ . '../../controllers/AuthController.php';
 require_once __DIR__ . '../../controllers/ContactController.php';
 require_once __DIR__ . '../../controllers/ProductController.php';
@@ -27,6 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && preg_match('/\/api\/?$/', $_SERVER['
     $response = ChatbotController::responseForTheQuestion($data);
 
     echo json_encode(['answer' => $response]);
+    // $headers = getallheaders();
+    // $payload = AuthMiddleware::verifyAdminAccess($headers);
+    // echo json_encode(['payload' => $payload]);
 }
 
 // Route pour l'inscription (POST)
@@ -185,6 +189,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Aircraft') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     $result = ProductController::insertAircraft(
         $args["idModel"],
@@ -205,15 +211,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-Model') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     ProductController::getAllModel();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-ByNameModel') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     ProductController::getModelByName($args["nameModel"]);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Model') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     $result = ProductController::insertModel(
         $args["modelName"],
@@ -293,6 +305,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/pr
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/post-uploadImage') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $aircraftId = $_POST['aircraftId'] ?? null;
     $destinationDir = $_POST['destinationDir'] ?? null; // Récupérer le dossier
     $file = $_FILES['file'] ?? null; // Récupérer le fichier
@@ -308,6 +322,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Image') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     $result = ProductController::insertImage(
         $args["role"],
@@ -318,23 +334,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-AircraftBySerialNumber') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     ProductController::getAircraftBySerialNumber($args["serialNumber"]);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Aircraft') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::deleteAircraft($args['id'], $args['nameModel']);
     // echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Model') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::deleteModel($args['id'], $args['nameModel']);
     // echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-Aircraft') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     $result = Aircraft::updateAircraft(
         $args["id"],
@@ -354,6 +378,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-MainImage') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $id = $_POST['id'];
     $file = $_FILES['file'];
     $result = Aircraft::updateMainImage($id, $file);
@@ -361,6 +387,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-SliderImages') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $id = $_POST['id'];
     $files = $_FILES['files'];
     $structuredFiles = [];
@@ -381,6 +409,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-IconImage') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $id = $_POST['id'];
     $file = $_FILES['file'];
     $result = Aircraft::updateIconImage($id, $file);
@@ -388,53 +418,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/create-User') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
-    UserController::createWithCRUD($args['email'],$args['password'],$args['firstname'],$args['lastname'],$args['isAdmin'],$args["isTrainer"]);
+    UserController::createWithCRUD($args['email'], $args['password'], $args['firstname'], $args['lastname'], $args['isAdmin'], $args["isTrainer"]);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-Users') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $result = User::getAllUsers();
     echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/update-RoleUser') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     User::updateRole($args['id'], $args['role'], $args['boolean']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/find-UserEmail') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     $result = User::findByEmail($args['email']);
     echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-User') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     User::deleteUser($args['id']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/create-Trainer') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     User::createTrainer($args['id']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/find-TrainerId') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     $result = User::findTrainerById($args['id']);
     echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/delete-Trainer') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     User::deleteTrainer($args['id']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/get-Logs') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $result = Logs::getLastLogs();
     echo json_encode($result);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/admin/insert-Log') !== false) {
+    $headers = getallheaders();
+    $payload = AuthMiddleware::verifyAdminAccess($headers);
     $args = json_decode(file_get_contents("php://input"), true);
     Logs::insertLog($args['content']);
 }
@@ -458,4 +508,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
     echo json_encode(['answer' => $response]);
     exit();
 }
-

@@ -1,5 +1,9 @@
 <?php
 require_once __DIR__ . '/../utils/Token.php';
+ini_set('log_errors', 1); // Activer la journalisation des erreurs
+ini_set('error_log', __DIR__ . '/error_log.txt'); // Définir le fichier de log
+error_reporting(E_ALL); // Activer tous les niveaux d'erreurs
+ini_set('display_errors', 1);
 
 class AuthMiddleware
 {
@@ -29,5 +33,36 @@ class AuthMiddleware
 
         // Call the next middleware/controller
         return $next($request);
+    }
+
+    public static function verifyAdminAccess($headers)
+    {
+        error_log("Headers: " . print_r($headers['Authorization'], true));
+
+        if (!isset($headers['Authorization'])) {
+            http_response_code(401);
+            echo json_encode(["message" => "Authorization header missing"]);
+            exit();
+        }
+
+        $token = str_replace('Bearer ', '', $headers['Authorization']);
+        error_log("TOKEN:" . print_r($token, true));
+        $payload = Token::verifyAdmin($token);
+        error_log("payload:" . print_r($payload, true));
+
+        if (!$payload || !isset($payload['isAdmin'])) {
+            http_response_code(403);
+            echo json_encode(["message" => "Access forbidden. Admin role required."]);
+            exit();
+        }
+
+
+        if ($payload['isAdmin'] !== 1) {
+            http_response_code(403);
+            echo json_encode(["message" => "Access forbidden. Admin role required."]);
+            exit();
+        }
+
+        return $payload;
     }
 }

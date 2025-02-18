@@ -1,0 +1,39 @@
+.TrainingProposal-container{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+}
+
+.TrainingProposal-chooseDate-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.TrainingProposal-chooseDate{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.TrainingProposal-date{
+    width: 100%;
+}
+
+.TrainingProposal-border, .TrainingProposal-border th, .TrainingProposal-border td { 
+    border: 1px solid black; 
+    border-collapse: collapse; 
+    text-align: center;
+}
+
+.TrainingProposal-border th, .TrainingProposal-border td {
+    width: 50px;
+}

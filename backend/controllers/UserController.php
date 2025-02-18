@@ -10,7 +10,7 @@ class UserController {
     public static function createWithCRUD($email, $password, $firstName, $lastName, $isAdmin, $isTrainer){
         if ($email !== "" && $password !== "" && $firstName !== "" && $lastName !== ""){
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            User::createWithCRUD($email, $hashedPassword, $firstName, $lastName, $isAdmin, $isTrainer);
+            // User::createWithCRUD($email, $hashedPassword, $firstName, $lastName, $isAdmin, $isTrainer);
         }
     }
 }

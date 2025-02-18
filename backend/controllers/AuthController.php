@@ -51,6 +51,7 @@ class AuthController
         $payload = [
             'idUser' => $user['idUser'],
             'email' => $user['email'],
+            'isAdmin' => $user['isAdmin'],  
             'iat' => time(),
             'exp' => time() + 3600
         ];
@@ -58,6 +59,7 @@ class AuthController
         $token = Token::generate($payload);
         echo json_encode(["token" => $token]);
     }
+
 
     /**
      * Fonction pour l'inscription
@@ -74,6 +76,7 @@ class AuthController
             $payload = [
                 'idUser' => $userId,
                 'email' => $data['email'],
+                'isAdmin' => 0,
                 'iat' => time(),
                 'exp' => time() + 3600
             ];

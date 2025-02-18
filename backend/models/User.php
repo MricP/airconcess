@@ -14,7 +14,7 @@ class User
     public static function findByEmail($email)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('SELECT * FROM User WHERE email = ?');
+        $stmt = $pdo->prepare('SELECT * FROM user WHERE email = ?');
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -57,14 +57,14 @@ class User
     
     public static function findById($id) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT * FROM User WHERE idUser = ?");
+        $stmt = $pdo->prepare("SELECT * FROM user WHERE idUser = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public static function deleteUser($id){
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("DELETE FROM User WHERE idUser = ?");
+        $stmt = $pdo->prepare("DELETE FROM user WHERE idUser = ?");
         return $stmt->execute([$id]);
     }
     
@@ -77,7 +77,7 @@ class User
 
     public static function getAllUsers() {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('Select lastName, firstName, email, profilePictureURL, isVerified, isAdmin, inscriptionDate, idUser, isTrainer from User order by isVerified desc');
+        $stmt = $pdo->prepare('Select lastName, firstName, email, profilePictureURL, isVerified, isAdmin, inscriptionDate, idUser, isTrainer FROM user order by isVerified desc');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

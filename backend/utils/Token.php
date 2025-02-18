@@ -7,6 +7,8 @@ class Token
     {
         $config = include(__DIR__ . '/../config/config.php');
         $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+
+        $payload['exp'] = time() + 3600; // 3600 secondes = 1 heure
         $payload = json_encode($payload);
 
         $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
@@ -24,7 +26,7 @@ class Token
         $parts = explode('.', $token);
 
         if (count($parts) !== 3) {
-            return false;   
+            return false; 
         }
 
         $signatureProvided = $parts[2];
@@ -37,7 +39,32 @@ class Token
         }
 
         $payload = json_decode(base64_decode($parts[1]), true);
-        return $payload;   
+
+        if (isset($payload['exp']) && $payload['exp'] < time()) {
+            return false;  
+        }
+
+        return $payload;  
+    }
+
+    public static function verifyAdmin($token)
+    {
+        $config = include(__DIR__ . '/../config/config.php');
+        $parts = explode('.', $token);
+
+
+        $headerAndPayload = $parts[0] . '.' . $parts[1];
+
+        $payload = json_decode(base64_decode($parts[1]), true);
+
+        if (isset($payload['exp']) && $payload['exp'] < time()) {
+            return false;  
+        }
+
+        if (!isset($payload['isAdmin'])) {
+            return false;  
+        }
+
+        return $payload;  
     }
 }
-

@@ -58,12 +58,6 @@ export default function ResetPasswordRequest() {
                         <DarkButton2 text="Recevoir le mail" type="submit" className="reset-password-button" />
                     </form>
                     {message && <p className="response-message">{message}</p>}
-                    {errorHtml && (
-                        <div
-                            dangerouslySetInnerHTML={{ __html: errorHtml }}
-                            className="error-html"
-                        />
-                    )}
                 </div>
             }
         />
