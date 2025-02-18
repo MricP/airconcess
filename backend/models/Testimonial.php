@@ -10,7 +10,7 @@ class Testimonial
     public static function getAllTestimonials()
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('SELECT * FROM Testimonial');
+        $stmt = $pdo->prepare('SELECT * FROM testimonial');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -18,7 +18,7 @@ class Testimonial
     public static function getNumberTestimonials()
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('SELECT COUNT(*) FROM Testimonial');
+        $stmt = $pdo->prepare('SELECT COUNT(*) FROM testimonial');
         $stmt->execute();
         return $stmt->fetchColumn();
     }

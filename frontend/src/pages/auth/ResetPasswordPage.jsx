@@ -9,7 +9,7 @@ export default function ResetPasswordPage() {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
-    const [errorHtml, setErrorHtml] = useState(null);
+    const [errorHtml, setErrorHtml] = useState(null);   
 
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
@@ -80,12 +80,6 @@ export default function ResetPasswordPage() {
                         <DarkButton2 text="Réinitialiser le mot de passe" type="submit" className="reset-password-button" />
                     </form>
                     {message && <p className="response-message">{message}</p>}
-                    {errorHtml && (
-                        <div
-                            dangerouslySetInnerHTML={{ __html: errorHtml }}
-                            className="error-html"
-                        />
-                    )}
                 </div>
             }
         />

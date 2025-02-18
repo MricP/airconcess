@@ -9,7 +9,6 @@ const authInstance = axios.create({
 
 export const signIn = async ({ email, password }) => {
     try {
-        console.log({ email, password });
         const response = await authInstance.post('/auth/sign-in', {
             email,
             password
