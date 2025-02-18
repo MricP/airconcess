@@ -27,7 +27,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
    return (
-    <BrowserRouter>
+    <BrowserRouter> 
       <Template>
         <ToastContainer position="top-center" autoClose={3000} newestOnTop closeOnClick rtl={false} draggable pauseOnHover style={{ top: '70px' }} />
           <Routes>

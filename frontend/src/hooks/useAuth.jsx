@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import useRedirect from '../components/Custom-hooks';
 
 const useAuth = () => {
-  const redirect =  useRedirect
+  const redirect = useRedirect
   const isFirstVisit = useRef(true); // Garde en mémoire la première visite
 
   const checkTokenValidity = () => {
