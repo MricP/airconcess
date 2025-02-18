@@ -88,7 +88,7 @@ footer h2 {
 }
 
 .footer-bottom-footer li {
-    font-size: 1.25rem;
+    font-size: var(--text-size);
     list-style-type: none;
 }
 
@@ -109,32 +109,27 @@ footer h2 {
 @media (max-width: 992px) {
 
     .footer-high-footer {
-        gap: 15vw;
+        justify-content: space-between;
         margin-bottom: 0vh;
     }
 
     .footer-reseau {
         flex-direction: row;
-        
+        gap: 2vw;
     }
 
     .footer-reseau-picture {
-        padding: 1vw;
+        margin-top: 10px;
+        width: 50px;
     }
-
-    
 
     .footer-bottom-footer {
         flex-direction: column;
         align-items: center;
     }
 
-    .footer-bottom-footer h2 {
-        font-size: 1.5em;
-    }
-
-    .footer-bottom-footer li {
-        font-size: 1.2em;
+    .footer-bottom-footer ul {
+        width: 80vw;
     }
 
     .footer-bottom-footer-child {

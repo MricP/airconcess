@@ -1,12 +1,14 @@
 header {
     position: fixed;
-    padding: 0.8vw 4vw;
+    padding: 0vw 4vw;
     width: 100%;
     /* S'assure que le header prend toute la largeur */
     z-index: 10000;
+    height: 10vh;
 }
 
 .header-default-menu {
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -30,9 +32,8 @@ nav {
     display: flex;
     align-items: center;
     gap: 4vw;
-    font-size: 20px;
+    font-size: var(--text-size);
     font-weight: 500;
-
 }
 
 nav ul {
@@ -83,14 +84,26 @@ nav button {
 }
 
 @media (max-width: 992px) {
+    header {
+        height: 7vh;
+        padding: 0;
+    }
+
     .header-menu-bar {
+        height: 7vh;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 0 4vw;
     }
 
     .header-mobile-menu img {
         width: 125px;
+    }
+
+    .header-mobile-menu nav{
+        width: 100vw;
+        padding: 2vh 4vw;
     }
 
     .header-icon {

@@ -84,7 +84,7 @@ export default function Header({ color }) {
                     </div>
 
                     {isClicked &&
-                        <nav>
+                        <nav className={`${color} nav-mobile`}>
                             <ul>
                                 <li><Link to="/catalog">Nos aéronefs</Link></li>
                                 <li><Link to="/services">Nos services</Link></li>
