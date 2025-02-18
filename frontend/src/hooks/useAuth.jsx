@@ -9,17 +9,17 @@ const useAuth = () => {
     if (!token) return false;
 
     const payload = JSON.parse(atob(token.split('.')[1]));
-    const expiration = payload.exp * 1000;  
+    const expiration = payload.exp * 1000;
     const now = Date.now();
 
-    return expiration > now;  
+    return expiration > now;
   };
 
   const handleTokenValidation = () => {
     if (!checkTokenValidity()) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      navigate('/sign-in'); 
+      navigate('/sign-in');
     }
   };
 
