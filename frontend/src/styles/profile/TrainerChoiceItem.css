@@ -1,13 +1,15 @@
-.trainerChoiceItem-container{
-    width: 60%;
+.trainerChoiceItem-container {
+    width: 80%;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-top: 75px;
     margin-bottom: 25px;
     box-shadow: 1px 2px 2px var(--line-color);
-    padding: 10px;
+    padding: 20px;
     position: relative;
+    /* background-color: red; */
 }
+
 
 .trainerChoiceItem-userMainInfos-profilePic{
     width: 40px;
@@ -21,22 +23,72 @@
     align-items: center;
 }
 
-.trainerChoiceItem-userMainInfos{
+.trainerChoiceItem-userMainInfos {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
 
+.trainerChoiceItem-container .pref-container {
+    margin: 20px 0;
+    
+    /* background-color: red; */
+}
+
+.trainerChoiceItem-container .pref-container p:not(.title) {
+    font-size: var(--lower-text-size) !important;
+}
+
+.trainerChoiceItem-container .title {
+    font-weight: bold;
+}
+
+.trainerChoiceItem-container .proposals {   
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.trainerChoiceItem-container .proposals .proposal hr{
+    margin-bottom: 10px;
+    border: 1px solid #00000098;
+
+}
+
+.trainerChoiceItem-container .proposals .icon-container {
+    position: relative;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 1.3rem;
+    height: 1.4rem;    
+}
+
+.trainerChoiceItem-container .proposals .icon-container .add-time-slot {
+    font-size: 1.5rem;    
+    position: absolute;
+    transition: all ease 0.4s;
+    cursor: pointer;
+}
+
+.trainerChoiceItem-container .proposals .icon-container .add-time-slot.hidden {
+    opacity: 0;
+    /* transform: scale(0.9); */
+    position: absolute;
+    transition: opacity ease 0.1s;
+    pointer-events: none; /* Désactive les clics sur l'élément caché */
+}
+
+.trainerChoiceItem-container .proposals .icon-container .add-time-slot.visible {
+    opacity: 1;
+    /* transform: scale(1); */
+}
+
 .click {
     transform: rotate(90deg);
     transition: transform 0.2s ease;
-}
-
-.TrainerChoiceItem-plusButton {
-    position: absolute; 
-    transform: translateX(-47%); 
-    left: 50%;
 }
 
 .darkButton{

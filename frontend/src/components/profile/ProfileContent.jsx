@@ -1,6 +1,7 @@
 import React, {useRef,useState,useEffect} from 'react'
 import "../../styles/profile/ProfileContent.css"
 import {createTestimonial} from "../../services/auth.js"
+import {getAllTrainings} from "../../services/training.js"
 import {getAppointmentByUser} from "../../services/appointment.js"
 import { useNavigate } from 'react-router-dom'
 import {Calendar,Badge} from 'rsuite'
@@ -14,6 +15,8 @@ export default function ProfileContent() {
   const testimonialRef = useRef(null)
   const [events, setEvents] = useState([]);
   const [userData, setUserData] = useState(null);
+
+  const [allTrainingsData,setAllTrainingsData] = useState();
   
 
   useEffect(() => {
@@ -21,12 +24,25 @@ export default function ProfileContent() {
       try {
         const data = await getUserData(token);
         setUserData(data);
+        if(data?.isTrainer) {
+          await loadTrainingsDataOfTrainer(data.id)
+        }
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
     };
     fetchData();
   },[])
+
+  const loadTrainingsDataOfTrainer = async (id) => {
+    try {
+      const trainingsD = await getAllTrainings(id)
+      console.log("ICCCCCCIIIIIIII : "+trainingsD.data)
+      setAllTrainingsData(trainingsD.data)
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  }
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -65,7 +81,6 @@ export default function ProfileContent() {
     } 
   }
 
-  
   const renderCell = (date) => {
     const formattedDate = date.toLocaleDateString('en-CA');
     const eventForDate = events.find((event) => event.appt_timestamp.split(' ')[0] === formattedDate);

@@ -317,3 +317,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     $result = Aircraft::deleteModel($args['id'], $args['nameModel']);
     echo json_encode($result);
 }
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/getTrainings') !== false) {
+    $idTrainer = json_decode(file_get_contents("php://input"), true);
+    ProfileController::getAllTrainings($idTrainer);
+}
