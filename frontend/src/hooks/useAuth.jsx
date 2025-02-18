@@ -1,31 +1,38 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const useAuth = () => {
   const navigate = useNavigate();
+  const isFirstVisit = useRef(true); // Garde en mémoire la première visite
 
   const checkTokenValidity = () => {
     const token = localStorage.getItem('token');
     if (!token) return false;
 
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    const expiration = payload.exp * 1000;
-    const now = Date.now();
-
-    return expiration > now;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiration = payload.exp * 1000;
+      return expiration > Date.now();
+    } catch (error) {
+      return false;
+    }
   };
 
   const handleTokenValidation = () => {
     if (!checkTokenValidity()) {
       localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      navigate('/sign-in');
+
+      // Empêche la redirection si c'est la première visite
+      if (!isFirstVisit.current) {
+        navigate('/sign-in');
+      }
+      isFirstVisit.current = false;
     }
   };
 
   useEffect(() => {
     handleTokenValidation();
-  }, []); 
+  }, []);
 };
 
 export default useAuth;

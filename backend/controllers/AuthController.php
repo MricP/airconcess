@@ -28,6 +28,7 @@ class AuthController
             self::$smtp_secure = $_ENV['SMTP_SECURE'];
         }
     }
+    
     /**
      * Fonction pour le login
      * @param array $data Les données de connexion (email et mot de passe)
@@ -51,7 +52,7 @@ class AuthController
         $payload = [
             'idUser' => $user['idUser'],
             'email' => $user['email'],
-            'isAdmin' => $user['isAdmin'],  
+            'isAdmin' => $user['isAdmin'],
             'iat' => time(),
             'exp' => time() + 3600
         ];
@@ -272,15 +273,15 @@ class AuthController
 
 
         try {
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
+            $mail->Host = self::$smtp_host;
             $mail->SMTPAuth = true;
-            $mail->Username = 'airconcess.contact@gmail.com';
-            $mail->Password = 'qtbriwetjarfsgry';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
+            $mail->Username = self::$smtp_username;
+            $mail->Password = self::$smtp_password;
+            $mail->SMTPSecure = self::$smtp_secure;
+            $mail->Port = self::$smtp_port;
+            $mail->isSMTP();
 
-            $mail->setFrom('airconcess.contact@gmail.com', 'AirConcess');
+            $mail->setFrom(self::$smtp_username, 'AirConcess');
             $mail->addAddress($email, 'Utilisateur');
 
             $mail->isHTML(true);

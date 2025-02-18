@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const authInstance = axios.create({
-    baseURL: 'http://46.101.169.59/public/api.php',
+    baseURL: 'https://airconcess.org/public/api',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -13,7 +13,6 @@ export const signIn = async ({ email, password }) => {
             email,
             password
         });
-        console.log('Data fetched:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -23,7 +22,6 @@ export const signIn = async ({ email, password }) => {
 
 export const signUp = async ({ email, password, passwordConfirmation, firstName, lastName }) => {
     try {
-        console.log({ email, password, passwordConfirmation, firstName, lastName });
         const response = await authInstance.post('/auth/sign-up', {
             email: email,
             password: password,
@@ -44,7 +42,6 @@ export const verifyEmail = async ({ token }) => {
         const response = await authInstance.post('/auth/verify-email', {
             token,
         });
-        console.log('Data fetched:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -58,7 +55,6 @@ export const resetPassword = async ({ token, new_password }) => {
             new_password,
             token,
         });
-        console.log('Data fetched:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -71,7 +67,6 @@ export const resetPasswordRequest = async (email) => {
         const response = await authInstance.post('/auth/reset-password-request', {
             email,
         });
-        console.log('Data fetched:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -82,18 +77,23 @@ export const resetPasswordRequest = async (email) => {
 
 export const getUserData = async (token) => {
     try {
+        if (!token) {
+            throw new Error("Token manquant !");
+        }
+
         const response = await authInstance.get('/auth/user', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         });
-        console.log('Data fetched:', response.data);
+
         return response.data;
     } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Erreur lors de la récupération des données utilisateur:', error.response?.data || error.message);
         throw error;
     }
-}
+};
+
 
 export const updateUserData = async (data, token) => {
     try {
@@ -102,7 +102,6 @@ export const updateUserData = async (data, token) => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        console.log('Data fetched:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -117,7 +116,6 @@ export const updateProfileData = async (data, token) => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        console.log('Data fetched for profile update:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -132,7 +130,6 @@ export const deleteProfilData = async (token) => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        console.log('Data fetched for profile update:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -151,7 +148,6 @@ export const changeProfilePicture = async (token, data) => {
                 'Content-Type': 'multipart/form-data',
             }
         });
-        console.log('Fichier post:', response.data);
         return response.data;
     } catch (error) {
         console.error('Erreur lors de l’envoi des données:', error);

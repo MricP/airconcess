@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://46.101.169.59/public/api.php',
+    baseURL: 'https://airconcess.org/public/api',
     headers: {
         'Content-Type': 'application/json',
     },

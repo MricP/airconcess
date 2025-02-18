@@ -177,7 +177,8 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
           const newDescription = []
           dbModelDescription.forEach((element) => {
             if(element.value) {
-              const criteria = modelDescription.current.find((elt) => elt.varName === element.varName)
+              const criteria = modelDescription.find((elt) => elt.varName === element.varName)
+              console.log(criteria)
               if(criteria) {
                 let updatedCriteria = { ...criteria, value: element.value };
                 if(criteria.varName === "passenger_capacity") updatedCriteria = { ...criteria, value:"Jusqu'à "+element.value+" passagers"};
@@ -193,7 +194,7 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
           const newDescription = []
           dbAircraftDescription.forEach(element => {
             if(element.value) {
-              const criteria = aircraftDescription.current.find((elt) => elt.varName === element.varName)
+              const criteria = aircraftDescription.find((elt) => elt.varName === element.varName)
               if(criteria) {
                 let updatedCriteria = { ...criteria, value: element.value };
                 if(criteria.varName === "flight_hours") updatedCriteria = { ...criteria, value:element.value+" heures"};

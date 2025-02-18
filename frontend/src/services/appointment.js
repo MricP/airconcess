@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://46.101.169.59/public/api.php',
+  baseURL: 'https://airconcess.org/public/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -80,14 +80,11 @@ export const loadAircraft = async (aircraft_id) => {
 export const getAppointmentByUser = async (token) => {
     try {
         const token = localStorage.getItem("token");
-        console.log("Token trouvé :", token);
-
         const response = await axiosInstance.get('/profile/get-appointment-user', {
             headers: {
                 'Authorization': `Bearer ${token}`, // Vérifiez que le préfixe "Bearer " est présent
             }
         });
-        console.log('Data fetched for time:', response.data);
         return response;
     } catch (error) {
         console.error('Error fetching data:', error);
