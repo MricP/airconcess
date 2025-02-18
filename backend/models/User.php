@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../utils/Database.php';
-
+ini_set('log_errors', 1); // Activer la journalisation des erreurs
+ini_set('error_log', __DIR__ . '/error_log.txt'); // Définir le fichier de log
+error_reporting(E_ALL); // Activer tous les niveaux d'erreurs
+ini_set('display_errors', 1);
 class User
 {
     private static function getDB()
@@ -72,10 +75,38 @@ class User
         return $stmt->execute([$url,$id]);
     }
 
-    public static function selectAllTrainers() {
+    public static function getAllUsers() {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT t.trainer_id,t.city_assignment,t.country_assignment,t.address_assignment,u.firstName,u.lastName FROM trainer T INNER JOIN user U ON T.trainer_id = U.idUser");
+        $stmt = $pdo->prepare('Select lastName, firstName, email, profilePictureURL, isVerified, isAdmin, inscriptionDate, idUser, isTrainer from User order by isVerified desc');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function updateRole($id, $role, $boolean) {
+        $pdo = self::getDB();
+        if ($role == "isAdmin") $stmt = $pdo->prepare('Update User set isAdmin = ? where idUser = ?');
+        elseif ($role == "isTrainer") $stmt = $pdo->prepare('Update User set isTrainer = ? where idUser = ?');
+        $stmt->execute([$boolean, $id]);
+    }
+
+    public static function createTrainer($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare('INSERT INTO trainer (trainer_id) VALUES (?)');
+        $stmt->execute([$id]);
+    }
+
+    public static function findTrainerById($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM Trainer WHERE trainer_id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function deleteTrainer($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("DELETE FROM Trainer WHERE trainer_id = ?");
+        $stmt->execute([$id]);
+    }
+
+
 }

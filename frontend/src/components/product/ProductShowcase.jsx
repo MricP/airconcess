@@ -65,6 +65,29 @@ const ProductShowcase = ({ imagePath, modelName, mode, model, onInputChange }) =
               />
           </div>
     );
+  } else if (mode === "edit") {
+      return (
+        <div className="productShowcase-container" id={hasId ? "productShowcase-container-edit" : null}>
+            {selectedImage ? (
+                <img className="showcase-image" src={selectedImage} alt="Prévisualisation" />
+              ) : (
+                <img className="showcase-image" src={imagePath} alt={modelName + "-MainImage"} />
+              )
+            }
+            <div>
+              <form action="">
+                <input type="file" id="file-input" accept="image/*" onChange={handleFileChange} />
+                <label htmlFor="file-input">Charger une image</label>  
+              </form>
+              <h2 className='product-name'>{modelName}</h2>  
+            </div>     
+            <div className="gradient-overlay"></div>
+            <ScrollDownButton
+              scrollLength={window.innerHeight + 0.25 * window.innerHeight}
+              colorIcon="white"
+            />
+        </div>
+      );
   }
 
 

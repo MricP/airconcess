@@ -58,7 +58,7 @@ export default function ChatbotComponent() {
 
   return (
     <div className={`chatbot-container`}>
-      <div className={`chatbot-frame ${isOpen ? "block-chatbot opening" : "closing "}`}>
+      <div className={`chatbot-frame ${isOpen ? "block-chatbot opening" : "hidden-chatbot"}`}>
         <IoIosClose className='close-chat' onClick={handleOpenChatbot} />
         <div className="chatbot-content">
           <section className="chatbot-talking-section">
