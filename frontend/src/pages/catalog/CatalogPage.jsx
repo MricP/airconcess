@@ -451,6 +451,7 @@ function CatalogPage() {
                 <button ref={buttonRef} className='editFilterButton' onClick={handleTypeFilter}><FaEdit size={20} /></button><button className='editFilterButton' onClick={handleDeleteTypeFilter}><AiOutlineCloseSquare size={20} /></button></div>
             </div>
           </ul>
+          <p>Nombre d'aéronef : {filteredAircrafts.length} sur {aircrafts.length}</p>
         </div>{/*}*/}
 
 

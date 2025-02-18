@@ -149,7 +149,6 @@ export const ProductBox = (props) => {
                 <FaArrowRightLong size={20}/>
               </button>
             </div>
-            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button onClick={() => redirect(`/product/${props.idAircraft}` )}><FaArrowRightLong size={20}/></button></div>
         </div>
       </div>
   );
