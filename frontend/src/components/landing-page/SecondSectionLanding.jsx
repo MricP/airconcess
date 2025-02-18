@@ -1,12 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../../styles/landing-page/SecondSectionLanding.css';
+import useRedirect from '../Custom-hooks';
 
 function SecondSectionLanding() {
     const choix1 = '/assets/landing/bg-offer1.jpg';
     const choix2 = '/assets/landing/bg-offer2.jpg';
     const choix3 = '/assets/landing/bg-offer3.jpg';
-    const navigate = useNavigate();
+    const redirect = useRedirect();
+
 
     const offers = [
         { src: choix1, alt: "choix international et national", text: "Découvrez nos offres internationales et nationales", path: '/catalog/international' },
@@ -23,7 +24,7 @@ function SecondSectionLanding() {
                     </h2>
                     <div className="flex-choices-container">
                         {offers.map((offer, index) => (
-                            <div key={index} className={`card-container${index + 1}`} onClick={() => navigate(offer.path)}>
+                            <div key={index} className={`card-container${index + 1}`} onClick={() => redirect(offer.path)}>
                                 <div className={`card-choice${index + 1}`}>
                                     <img src={offer.src} alt={offer.alt} />
                                     <p className="text">

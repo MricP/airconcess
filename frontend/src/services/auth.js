@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const authInstance = axios.create({
-    baseURL: 'http://localhost/air-concess/backend/public/api',
+    baseURL: 'http://46.101.169.59/public/api.php',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -9,7 +9,6 @@ const authInstance = axios.create({
 
 export const signIn = async ({ email, password }) => {
     try {
-        console.log({ email, password });
         const response = await authInstance.post('/auth/sign-in', {
             email,
             password

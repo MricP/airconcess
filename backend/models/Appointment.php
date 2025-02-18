@@ -8,21 +8,47 @@
 
         public static function create($data) {
             $pdo = self::getDB();
-            // TODO : gerer l'id du currentUser et l'id de l'appareil concerné
-            $stmt = $pdo->prepare('INSERT INTO appointment (userConcerned_id,aircraftConcerned_id,customer_firstName, customer_lastName,customer_phone,
-                                                            customer_email,customer_country,customer_city,
-                                                            customer_address,customer_postalCode,customer_idCard_url,
-                                                            customer_incomeProof_url,appt_reason,appt_timestamp,appt_agency_id)
-                                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-            
-            if ($stmt->execute([$data['user_id'],$data['aircraft_id'],$data['firstName'],$data['lastName'],
-                                $data['phone'],$data['email'],$data['country'],$data['city'],
-                                $data['address'],$data['postalCode'],$data['idCard'],
-                                $data['incomeProof'],$data['reason'],$data['timestamp'],$data['agency_id']])) {
-                return true;
+
+            // Vérifier si le créneau est déjà pris
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM appointment WHERE appt_timestamp = ? AND appt_agency_id = ?");
+            $stmt->execute([$data['timestamp'],$data['agency_id']]);
+            $exists = $stmt->fetchColumn();
+
+            if ($exists > 0) {
+                return [
+                    'success' => false,
+                    'message' => "Ce créneau est déjà réservé, merci d'en choisir un autre."
+                ];
             }
-            return false;
+        
+            $stmt = $pdo->prepare(
+                'INSERT INTO appointment 
+                (userConcerned_id, aircraftConcerned_id, customer_firstName, customer_lastName, customer_phone,
+                 customer_email, customer_country, customer_city, customer_address, customer_postalCode, 
+                 customer_idCard_url, customer_incomeProof_url, appt_reason, appt_timestamp, appt_agency_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            );
+
+            try {
+                $stmt->execute([
+                    $data['user_id'], $data['aircraft_id'], $data['firstName'], $data['lastName'],
+                    $data['phone'], $data['email'], $data['country'], $data['city'],
+                    $data['address'], $data['postalCode'], $data['idCard'],
+                    $data['incomeProof'], $data['reason'], $data['timestamp'], $data['agency_id']
+                ]);
+
+                return [
+                    'success' => true,
+                    'message' => "Rendez-vous enregistré avec succès."
+                ];
+            } catch (PDOException $e) {
+                return [
+                    'success' => false,
+                    'message' => "Erreur lors de l'enregistrement : " . $e->getMessage()
+                ];
+            }
         }
+        
 
         public static function getTimestampsFromDB($agency_id) {
             $pdo = self::getDB();

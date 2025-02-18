@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import '../../styles/auth/SignInPage.css';
-
-// services functions
 import { signIn } from '../../services/auth';
-
-// components
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
 import DarkButton2 from '../../components/general/DarkButton2';
 import GrayInput from '../../components/general/GrayInput';
+import useRedirect from '../../components/Custom-hooks';
 
 const SignInPage = () => {
   const signInImg = '/assets/auth/sign-in-img.jpg';
   const airconcessLogo = '/assets/logo-black.png';
   const airconcessLogoPlane = '/assets/airconcess-logo-plane.png';
-
+  const redirect = useRedirect();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorHtml, setErrorHtml] = useState(null);
@@ -74,11 +70,11 @@ const SignInPage = () => {
             <DarkButton2 text="Se connecter" use={handleSubmit} />
           </form>
           <div className="forgot-password">
-            <Link to="/reset-password-request" className="forgot-password-link">Mot de passe oublié ?</Link>
+            <div onClick={()=>redirect("/reset-password-request")} className="forgot-password-link">Mot de passe oublié ?</div>
           </div>
           <div className="sign-up-link-container">
             <p className="sign-up-link-text">Pas encore rejoins l’aventure ?</p>
-            <Link to="/sign-up" className="sign-up-link">Créer mon compte</Link>
+            <div onClick={()=>redirect("/sign-up")} className="sign-up-link">Créer mon compte</div>
           </div>
           {responseMessage && <p className="response-message">{responseMessage}</p>}
           {errorHtml && <div className="error-html" dangerouslySetInnerHTML={{ __html: errorHtml }} />}

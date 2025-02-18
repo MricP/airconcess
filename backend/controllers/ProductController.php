@@ -5,9 +5,8 @@
         public static function getAircraftWith($idAircraft) {
             $aircraft = Aircraft::findById($idAircraft);
             if ($aircraft) {
-                echo json_encode($aircraft);
+                return $aircraft;
             }
-            echo json_encode(null);
         }
 
         public static function getIconOf($idAircraft){

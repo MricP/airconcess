@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost/air-concess/backend/public/api',
+  baseURL: 'http://46.101.169.59/public/api.php',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -60,6 +60,16 @@ export const loadAgencyLocation = async (agency_id) => {
 export const loadAircraftsOfModel = async (model_id) => {
     try {
         const response = await axiosInstance.post('/appointment-loadAircrafts',model_id);
+        return response;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+};
+
+export const loadAircraft = async (aircraft_id) => {
+    try {
+        const response = await axiosInstance.post('/appointment-loadAircraftWithId',aircraft_id);
         return response;
     } catch (error) {
         console.error('Error fetching data:', error);

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+
+import CustomSelectPicker from "../general/CustomSelectPicker";
+
 import CustomDatePicker from "../general/CustomDatePicker";
 import CustomTimePicker from "../general/CustomTimePicker";
 import { CustomProvider } from 'rsuite';
@@ -11,10 +14,20 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosAddCircle } from "react-icons/io";
 
 import "../../styles/sub-training/TrainingPrefFormFieldset.css";
+import CopyableSection from '../general/CopyableSection';
 
-function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
+function TrainingPrefFormFieldset({ trainers, formData, register, errors, setValue }) {
+    /*############ INITIALISATION DES STATES ############*/
+
+    const [trainersOptions,setTrainersOptions] = useState([]);
     const [timeSlots, setTimeSlots] = useState([]); // Stocke des objets avec un identifiant unique
     const [isHovered, setIsHovered] = useState(false);
+
+    /*################### REFERENCES ####################*/
+    // Pour utiliser les states dans les useEffect sans détecter un changement de cette variable
+    
+
+    /*#################### FONCTIONS ####################*/
 
     function addTimeSlot() {
         const newSlot = {id: "id"+Math.round(Math.random()*10000) }; // Crée un objet unique avec un id
@@ -30,18 +43,53 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
         }
     };
 
+    /*###################### AUTRE ######################*/
+
+    // Sert à recharger les timeSlots de préference si on passe l'etape et que l'on revient en arriere
     useEffect(() => {
         let temp = timeSlots;
         for(let key in formData.prefSlots) {
             temp = [...temp,{id:key}]
-            console.log(key)
             setTimeSlots(temp)
         }
     },[]);
 
+    function handleContent() {
+        const tr = trainers.filter(trainer => trainer?.id === formData.trainer?.value)[0]
+        return `${tr?.address}, ${tr?.country}, ${tr?.city}`
+    }
+
+    useEffect(() => {
+        const trainersOptionsTemp = [];
+        trainers.forEach(trainer => {
+            trainersOptionsTemp.push({
+                value: trainer.id,
+                label:`${trainer.firstName} ${trainer.lastName}, ${trainer.country}, ${trainer.city}`
+            })
+        }); 
+        setTrainersOptions(trainersOptionsTemp)
+    },[trainers])
+
     return (
         <fieldset className='trainingPrefFormFieldset'>
             <legend>Préférences de formation</legend>
+            <div>
+                <p>Formateur affilié*</p>
+                <CustomSelectPicker 
+                    isSearchable={true}
+                    className={errors.trainer ? "input-error" : ""}
+                    data={trainersOptions}
+                    value={formData.trainer != null ? formData.trainer : ''}
+                    setValue={(value) => {
+                        setValue("trainer", value, errors.trainer ? {shouldValidate: true} : {shouldValidate: false});
+                    }}
+                    {...register("trainer", { required: true })}
+                />
+            </div>
+            <div className={formData.trainer ? "" : "invisible"}>
+                <p>Adresse du centre de formation</p>
+                <CopyableSection content={handleContent()}/>
+            </div>
             <div className='select-dates-div'>
                 <CustomProvider locale={frFR}>
                     <div>
@@ -68,10 +116,10 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                     </div>
                 </CustomProvider>
             </div>
-            <div>
+            <div className="pref-slots-div">
                 <div>
                     <p>Vos plages horaires</p>
-                    <InfoPill />
+                    <InfoPill text={"Indiquez vos plages horaires afin que le formateur puisse les prendre en compte pour établir votre planning de formation."}/>
                 </div>
                 <div className='time-slots' id={timeSlots.length === 0 ? "nothing" : ""}>
                     {
@@ -135,8 +183,7 @@ function TrainingPrefFormFieldset({ formData, register, errors, setValue }) {
                             onClick={timeSlots.length < 5 ? addTimeSlot : null}
                         />
                     </div>
-                </div>
-                
+                </div>       
             </div>
 
             <label>

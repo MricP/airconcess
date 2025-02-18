@@ -3,15 +3,29 @@
 import axios from 'axios';
 
 const adminInstance = axios.create({
-    baseURL: 'http://localhost/air-concess/backend/public/api',
+    baseURL: 'http://46.101.169.59/public/api.php',
     headers: {
         'Content-Type': 'application/json',
     },
 });
 
-export const createAircraft = async ({model,isAvailable,planeImg,serialNumber,price,year,hour,capacity,autonomy,description,aircraftType}) => {
+adminInstance.interceptors.request.use(
+    config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
+
+
+export const createAircraft = async ({ model, isAvailable, planeImg, serialNumber, price, year, hour, capacity, autonomy, description, aircraftType }) => {
     try {
-        console.log(model,serialNumber,planeImg,price,year,hour,capacity,autonomy,aircraftType,description,isAvailable);
+        console.log(model, serialNumber, planeImg, price, year, hour, capacity, autonomy, aircraftType, description, isAvailable);
         const response = await adminInstance.post('/admin/create-aircraft', {
             model,
             serialNumber,

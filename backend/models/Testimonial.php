@@ -10,7 +10,7 @@ class Testimonial
     public static function getAllTestimonials()
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('SELECT * FROM Testimonial');
+        $stmt = $pdo->prepare('SELECT * FROM testimonial');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -18,7 +18,7 @@ class Testimonial
     public static function getNumberTestimonials()
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('SELECT COUNT(*) FROM Testimonial');
+        $stmt = $pdo->prepare('SELECT COUNT(*) FROM testimonial');
         $stmt->execute();
         return $stmt->fetchColumn();
     }
@@ -27,7 +27,7 @@ class Testimonial
     public static function getUserInfos($id_user)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('SELECT profilePictureURL, firstName, lastName FROM User WHERE idUser = ?');
+        $stmt = $pdo->prepare('SELECT profilePictureURL, firstName, lastName FROM user WHERE idUser = ?');
         $stmt->execute([$id_user]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -35,7 +35,7 @@ class Testimonial
     public static function createTestimonial($id_user, $content)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('INSERT INTO Testimonial (id_user	, content) VALUES (?, ?)');
+        $stmt = $pdo->prepare('INSERT INTO testimonial (id_user	, content) VALUES (?, ?)');
         $stmt->execute([$id_user, $content]);
         return $pdo->lastInsertId();
     }

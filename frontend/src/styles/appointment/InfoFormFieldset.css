@@ -1,72 +1,65 @@
 .info-fieldset {
-    gap: var(--form-input-gap);
-}
-
-.info-fieldset div:not(.error-message-div)>p{
-    color: #5B5B5B;
-    font-size: 14px;
-}
-
-.info-fieldset>div>div, .info-fieldset>div:not(:nth-of-type(2), :first-of-type) {
     display: flex;
     flex-direction: column;
     gap: var(--form-input-gap);
 }
 
-.info-fieldset>div:nth-of-type(2) {
+.info-fieldset>div {
     display: flex;
-    flex-direction: row;
+    gap: 2%;
+    transition: all ease .2s;
 }
 
-.info-fieldset>div:nth-of-type(2)>div {
-    width: 48%;
+.info-fieldset>div>* {
+    width: 49%;
+    transition: all ease .2s;
 }
 
-.info-fieldset>div:last-of-type .div-upload {
+.info-fieldset .city-postalCode-div {
     display: flex;
+    gap: 2%;
 }
 
-.info-fieldset>div:last-of-type .div-upload .file-name {
-    width: 95%;
-    /* white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; */
+.info-fieldset .city-postalCode-div>:first-child {
+    width: 58%;
 }
 
-.info-fieldset .invisible {
-    display: none !important;
+.info-fieldset .city-postalCode-div>:last-child {
+    width: 40%;
 }
 
-.inactive-label {
-    width: 5%;
-    height: auto;
+/* ############## files-selection-div ############## */
+
+.info-fieldset .files-selection-div>*{
+    width: 49%;
+    margin-top: var(--form-input-gap);
 }
 
-.info-fieldset>div:last-of-type .div-upload svg {
-    height: 100%;
-    cursor: pointer;
+.info-fieldset .files-selection-div>.solo, /* Si il n'y a que l'idCard*/
+.info-fieldset .files-selection-div>*>*>button { 
+    width: 100%;
 }
 
-.info-fieldset>div:nth-of-type(2)>div:nth-child(2) {
-    margin-left: 4%;
+.files-selection-div>.file-error>*>button {
+    outline: solid 1px #f77575 !important;
+    border:solid 1px #FF0000 !important;
 }
+  
+@media (width < 768px) { /* Tablette portrait */
+    .info-fieldset>div {
+        flex-direction: column;
+        gap: var(--form-input-gap);
+    }
 
-.info-fieldset>div:nth-of-type(2)>div:nth-child(2)>div {
-    display: flex;
-    flex-direction: row;
-}
+    .info-fieldset>div>* {
+        width: 100%;
+    }
 
-.info-fieldset>div:nth-of-type(2)>div:nth-child(2)>div label {
-    margin: 0;
-}
+    .info-fieldset .city-postalCode-div>* {
+        width: 49% !important;
+    }
 
-.info-fieldset>div:nth-of-type(2)>div:nth-child(2)>div>label:first-of-type {
-    width: 60%;
-    /* background-color: orange; */
-}
-
-.info-fieldset>div:nth-of-type(2)>div:nth-child(2)>div label:last-of-type {
-    width: 38%;
-    margin-left: 2%;
-    /* background-color: red; */
+    .info-fieldset .files-selection-div>*{
+        width: 100%;
+    }
 }

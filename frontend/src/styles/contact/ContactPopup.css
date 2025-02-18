@@ -22,9 +22,15 @@
     align-items: center;
 }
 
-.popup-content p {
-    margin-bottom: 20px;
+.popup-content p,
+a {
+    margin-bottom: 10px;
     text-align: center;
+}
+
+.popup-content a {
+    text-decoration: underline;
+    z-index: 100;
 }
 
 .popup-button {

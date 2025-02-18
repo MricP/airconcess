@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../utils/Database.php';
-
+ini_set('log_errors', 1); // Activer la journalisation des erreurs
+ini_set('error_log', __DIR__ . '/error_log.txt'); // Définir le fichier de log
+error_reporting(E_ALL); // Activer tous les niveaux d'erreurs
+ini_set('display_errors', 1);
 class User
 {
     private static function getDB()
@@ -11,7 +14,7 @@ class User
     public static function findByEmail($email)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('SELECT * FROM User WHERE email = ?');
+        $stmt = $pdo->prepare('SELECT * FROM user WHERE email = ?');
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -19,7 +22,7 @@ class User
     public static function create($email, $hashedPassword, $firstName, $lastName)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('INSERT INTO User (email, password, firstName, lastName, isVerified, isTrainer, isAdmin, inscriptionDate) 
+        $stmt = $pdo->prepare('INSERT INTO user (email, password, firstName, lastName, isVerified, isTrainer, isAdmin, inscriptionDate) 
                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 
         if ($stmt->execute([$email, $hashedPassword, $firstName, $lastName, 0, 0, 0, date('Y-m-d H:i:s')])) {
@@ -31,7 +34,7 @@ class User
     public static function verifyEmail($userId)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('UPDATE User SET isVerified = 1 WHERE idUser = ?');
+        $stmt = $pdo->prepare('UPDATE user SET isVerified = 1 WHERE idUser = ?');
         return $stmt->execute([$userId]);
     }
     
@@ -40,35 +43,70 @@ class User
     public static function updatePassword($userId, $newPassword)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('UPDATE User SET password = ? WHERE idUser = ?');
+        $stmt = $pdo->prepare('UPDATE user SET password = ? WHERE idUser = ?');
         return $stmt->execute([$newPassword, $userId]);
     }
 
     public static function updateUser($userId, $firstName,$lastName,$location)
     {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare('UPDATE User SET firstName = ?, lastName = ?, location = ? WHERE idUser = ?');
+        $stmt = $pdo->prepare('UPDATE user SET firstName = ?, lastName = ?, location = ? WHERE idUser = ?');
         return $stmt->execute([$firstName,$lastName,$location, $userId]);
     }
 
     
     public static function findById($id) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT * FROM User WHERE idUser = ?");
+        $stmt = $pdo->prepare("SELECT * FROM user WHERE idUser = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public static function deleteUser($id){
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("DELETE FROM User WHERE idUser = ?");
+        $stmt = $pdo->prepare("DELETE FROM user WHERE idUser = ?");
         return $stmt->execute([$id]);
     }
     
 
     public static function updateURLPicture($url,$id){
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("UPDATE User SET profilePictureURL = ? WHERE idUser = ?");
+        $stmt = $pdo->prepare("UPDATE user SET profilePictureURL = ? WHERE idUser = ?");
         return $stmt->execute([$url,$id]);
     }
+
+    public static function getAllUsers() {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare('Select lastName, firstName, email, profilePictureURL, isVerified, isAdmin, inscriptionDate, idUser, isTrainer FROM user order by isVerified desc');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function updateRole($id, $role, $boolean) {
+        $pdo = self::getDB();
+        if ($role == "isAdmin") $stmt = $pdo->prepare('Update user set isAdmin = ? where idUser = ?');
+        elseif ($role == "isTrainer") $stmt = $pdo->prepare('Update user set isTrainer = ? where idUser = ?');
+        $stmt->execute([$boolean, $id]);
+    }
+
+    public static function createTrainer($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare('INSERT INTO trainer (trainer_id) VALUES (?)');
+        $stmt->execute([$id]);
+    }
+
+    public static function findTrainerById($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM trainer WHERE trainer_id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function deleteTrainer($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("DELETE FROM trainer WHERE trainer_id = ?");
+        $stmt->execute([$id]);
+    }
+
+
 }

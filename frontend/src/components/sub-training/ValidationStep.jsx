@@ -7,7 +7,7 @@ import InfoPill from '../general/InfoPill';
 
 import "../../styles/sub-training/ValidationStep.css"
 
-function ValidationStep({formData,setStep}) {
+function ValidationStep({trainers,formData,setStep}) {
     function handleDisplayPrefSlots() {
         //Map impossible car prefSlots est un object (à cause du système d'ID)
         let slots = [];
@@ -27,6 +27,15 @@ function ValidationStep({formData,setStep}) {
             else displayNumber = displayNumber+"*"
         }
         return displayNumber;
+    }
+
+    function handleDisplayTrainer(){
+        let returnedVal = null;
+        if(formData.trainer) {
+            const trainer = trainers.filter(trainer => trainer.id === formData.trainer.value)[0];
+            returnedVal = `${trainer.firstName} ${trainer.lastName}`
+        }
+        return returnedVal
     }
     
     return (
@@ -62,7 +71,7 @@ function ValidationStep({formData,setStep}) {
                     </section>
                     <section className="info-section">
                         <p>Piece d'identité</p>
-                        <p className="value-container">{formData.idCard != null ? formData.idCard[0].name : "Non renseigné"}</p>
+                        <p className="value-container">{formData.idCard ? formData.idCard.blobFile.name : "Non renseigné"}</p>
                     </section>
                 </div>
             </div>
@@ -75,6 +84,10 @@ function ValidationStep({formData,setStep}) {
                     </div>
                 </div>
                 <div className='info-container'>
+                    <section className="info-section">
+                        <p>Formateur</p>
+                        <p className="value-container">{handleDisplayTrainer()}</p>
+                    </section>
                     <section className="info-section">
                         <p>Disponibilité</p>
                         <p className="value-container">{formData.dateStart && formData.dateEnd ? "Du "+new Date(formData.dateStart).toLocaleDateString()+" au "+new Date(formData.dateEnd).toLocaleDateString() : "Non renseigné"}</p>
@@ -94,7 +107,10 @@ function ValidationStep({formData,setStep}) {
             </div>
             <div>
                 <div>
-                    <div><p>Vos informations de paiement</p><InfoPill text="Une fois le processus terminé, seul le numéro de carte et le nom du titulaire seront stockés pour votre sécurité. Aucune autre donnée sensible, comme le code PIN ou le code de sécurité, ne sera conservée. Aucun traitement supplémentaire ne sera effectué après ce processys, et aucune donnée personnelle ne sera transmise à des tiers, sauf dans le cadre d'une exigence légale ou réglementaire. En aucun cas, ces informations ne seront utilisées à d'autres fins que celles spécifiées lors de la transaction."/></div>
+                    <div>
+                        <p>Vos informations de paiement</p>
+                        <InfoPill text="Une fois le processus terminé, seuls le numéro de carte et le nom du titulaire seront stockés pour votre sécurité. Aucune donnée sensible, comme le code PIN ou le code de sécurité, ne sera conservée ni partagée. Ces informations ne seront utilisées qu'aux fins spécifiées lors de la transaction.m"/>
+                    </div>
                     <div className='edit-values' onClick={()=>setStep(2)}>
                         <p>Modifier</p>
                         <TbEdit />
