@@ -1534,3 +1534,279 @@
 [18-Feb-2025 07:07:59 UTC] PHP   2. ProfileController::getAppointment($payload = FALSE) C:\wamp64\www\air-concess\backend\public\api.php:303
 [18-Feb-2025 07:07:59 UTC] PHP   3. ProfileController::getUser($payload = FALSE) C:\wamp64\www\air-concess\backend\controllers\ProfileController.php:106
 [18-Feb-2025 07:07:59 UTC] Utilisateur non trouvé pour ce token.
+[18-Feb-2025 07:12:39 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5ODYwNjY4LCJleHAiOjE3Mzk4NjQyNjh9.q4QZUmNKGEU_RvydwIePW8w5AIwKgIDDJSLZ5mFfcWQ
+[18-Feb-2025 07:12:39 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5ODYwNjY4LCJleHAiOjE3Mzk4NjQyNjh9.q4QZUmNKGEU_RvydwIePW8w5AIwKgIDDJSLZ5mFfcWQ
+[18-Feb-2025 07:12:39 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5ODYwNjY4LCJleHAiOjE3Mzk4NjQyNjh9.q4QZUmNKGEU_RvydwIePW8w5AIwKgIDDJSLZ5mFfcWQ
+[18-Feb-2025 07:12:39 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5ODYwNjY4LCJleHAiOjE3Mzk4NjQyNjh9.q4QZUmNKGEU_RvydwIePW8w5AIwKgIDDJSLZ5mFfcWQ
+[18-Feb-2025 07:12:39 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5ODYwNjY4LCJleHAiOjE3Mzk4NjQyNjh9.q4QZUmNKGEU_RvydwIePW8w5AIwKgIDDJSLZ5mFfcWQ
+[18-Feb-2025 07:12:39 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5ODYwNjY4LCJleHAiOjE3Mzk4NjQyNjh9.q4QZUmNKGEU_RvydwIePW8w5AIwKgIDDJSLZ5mFfcWQ
+[18-Feb-2025 07:12:39 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5ODYwNjY4LCJleHAiOjE3Mzk4NjQyNjh9.q4QZUmNKGEU_RvydwIePW8w5AIwKgIDDJSLZ5mFfcWQ
+[18-Feb-2025 07:12:39 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 1
+    [iat] => 1739860668
+    [exp] => 1739864268
+)
+
+[18-Feb-2025 07:12:39 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 1
+    [iat] => 1739860668
+    [exp] => 1739864268
+)
+
+[18-Feb-2025 07:12:39 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 1
+    [iat] => 1739860668
+    [exp] => 1739864268
+)
+
+[18-Feb-2025 07:12:39 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5ODYwNjY4LCJleHAiOjE3Mzk4NjQyNjh9.q4QZUmNKGEU_RvydwIePW8w5AIwKgIDDJSLZ5mFfcWQ
+[18-Feb-2025 07:12:39 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 1
+    [iat] => 1739860668
+    [exp] => 1739864268
+)
+
+[18-Feb-2025 07:12:52 UTC] 
+[18-Feb-2025 07:12:52 UTC] PHP Warning:  Trying to access array offset on false in C:\wamp64\www\air-concess\backend\controllers\ProfileController.php on line 14
+[18-Feb-2025 07:12:52 UTC] PHP Stack trace:
+[18-Feb-2025 07:12:52 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[18-Feb-2025 07:12:52 UTC] PHP   2. ProfileController::getAppointment($payload = FALSE) C:\wamp64\www\air-concess\backend\public\api.php:303
+[18-Feb-2025 07:12:52 UTC] PHP   3. ProfileController::getUser($payload = FALSE) C:\wamp64\www\air-concess\backend\controllers\ProfileController.php:106
+[18-Feb-2025 07:12:52 UTC] Utilisateur non trouvé pour ce token.
+[18-Feb-2025 07:12:52 UTC] 
+[18-Feb-2025 07:12:52 UTC] PHP Warning:  Trying to access array offset on false in C:\wamp64\www\air-concess\backend\controllers\ProfileController.php on line 14
+[18-Feb-2025 07:12:52 UTC] PHP Stack trace:
+[18-Feb-2025 07:12:52 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[18-Feb-2025 07:12:52 UTC] PHP   2. ProfileController::getAppointment($payload = FALSE) C:\wamp64\www\air-concess\backend\public\api.php:303
+[18-Feb-2025 07:12:52 UTC] PHP   3. ProfileController::getUser($payload = FALSE) C:\wamp64\www\air-concess\backend\controllers\ProfileController.php:106
+[18-Feb-2025 07:12:52 UTC] Utilisateur non trouvé pour ce token.
+[18-Feb-2025 07:12:53 UTC] 
+[18-Feb-2025 07:12:53 UTC] PHP Warning:  Trying to access array offset on false in C:\wamp64\www\air-concess\backend\controllers\ProfileController.php on line 14
+[18-Feb-2025 07:12:53 UTC] PHP Stack trace:
+[18-Feb-2025 07:12:53 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[18-Feb-2025 07:12:53 UTC] PHP   2. ProfileController::getAppointment($payload = FALSE) C:\wamp64\www\air-concess\backend\public\api.php:303
+[18-Feb-2025 07:12:53 UTC] PHP   3. ProfileController::getUser($payload = FALSE) C:\wamp64\www\air-concess\backend\controllers\ProfileController.php:106
+[18-Feb-2025 07:12:53 UTC] Utilisateur non trouvé pour ce token.
+[18-Feb-2025 07:12:53 UTC] 
+[18-Feb-2025 07:12:53 UTC] PHP Warning:  Trying to access array offset on false in C:\wamp64\www\air-concess\backend\controllers\ProfileController.php on line 14
+[18-Feb-2025 07:12:53 UTC] PHP Stack trace:
+[18-Feb-2025 07:12:53 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[18-Feb-2025 07:12:53 UTC] PHP   2. ProfileController::getAppointment($payload = FALSE) C:\wamp64\www\air-concess\backend\public\api.php:303
+[18-Feb-2025 07:12:53 UTC] PHP   3. ProfileController::getUser($payload = FALSE) C:\wamp64\www\air-concess\backend\controllers\ProfileController.php:106
+[18-Feb-2025 07:12:53 UTC] Utilisateur non trouvé pour ce token.
+[18-Feb-2025 07:13:26 UTC] 
+[18-Feb-2025 07:13:26 UTC] PHP Warning:  Trying to access array offset on false in C:\wamp64\www\air-concess\backend\controllers\ProfileController.php on line 14
+[18-Feb-2025 07:13:26 UTC] PHP Stack trace:
+[18-Feb-2025 07:13:26 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[18-Feb-2025 07:13:26 UTC] PHP   2. ProfileController::getAppointment($payload = FALSE) C:\wamp64\www\air-concess\backend\public\api.php:303
+[18-Feb-2025 07:13:26 UTC] PHP   3. ProfileController::getUser($payload = FALSE) C:\wamp64\www\air-concess\backend\controllers\ProfileController.php:106
+[18-Feb-2025 07:13:26 UTC] Utilisateur non trouvé pour ce token.
+[18-Feb-2025 07:13:26 UTC] 
+[18-Feb-2025 07:13:26 UTC] PHP Warning:  Trying to access array offset on false in C:\wamp64\www\air-concess\backend\controllers\ProfileController.php on line 14
+[18-Feb-2025 07:13:26 UTC] PHP Stack trace:
+[18-Feb-2025 07:13:26 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[18-Feb-2025 07:13:26 UTC] PHP   2. ProfileController::getAppointment($payload = FALSE) C:\wamp64\www\air-concess\backend\public\api.php:303
+[18-Feb-2025 07:13:26 UTC] PHP   3. ProfileController::getUser($payload = FALSE) C:\wamp64\www\air-concess\backend\controllers\ProfileController.php:106
+[18-Feb-2025 07:13:26 UTC] Utilisateur non trouvé pour ce token.
+[18-Feb-2025 07:13:26 UTC] 
+[18-Feb-2025 07:13:26 UTC] PHP Warning:  Trying to access array offset on false in C:\wamp64\www\air-concess\backend\controllers\ProfileController.php on line 14
+[18-Feb-2025 07:13:26 UTC] PHP Stack trace:
+[18-Feb-2025 07:13:26 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[18-Feb-2025 07:13:26 UTC] PHP   2. ProfileController::getAppointment($payload = FALSE) C:\wamp64\www\air-concess\backend\public\api.php:303
+[18-Feb-2025 07:13:26 UTC] PHP   3. ProfileController::getUser($payload = FALSE) C:\wamp64\www\air-concess\backend\controllers\ProfileController.php:106
+[18-Feb-2025 07:13:26 UTC] Utilisateur non trouvé pour ce token.
+[18-Feb-2025 07:13:26 UTC] 
+[18-Feb-2025 07:13:26 UTC] PHP Warning:  Trying to access array offset on false in C:\wamp64\www\air-concess\backend\controllers\ProfileController.php on line 14
+[18-Feb-2025 07:13:26 UTC] PHP Stack trace:
+[18-Feb-2025 07:13:26 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[18-Feb-2025 07:13:26 UTC] PHP   2. ProfileController::getAppointment($payload = FALSE) C:\wamp64\www\air-concess\backend\public\api.php:303
+[18-Feb-2025 07:13:26 UTC] PHP   3. ProfileController::getUser($payload = FALSE) C:\wamp64\www\air-concess\backend\controllers\ProfileController.php:106
+[18-Feb-2025 07:13:26 UTC] Utilisateur non trouvé pour ce token.
+[18-Feb-2025 07:14:19 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:14:19 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:14:19 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:14:19 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:14:19 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:14:19 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:14:19 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:14:19 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:14:19 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:14:19 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:14:19 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:14:19 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:15:15 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:15 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:15 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:15 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:15 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:15 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:15 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:15 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:15 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:15:15 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:15:15 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:15:15 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:15:16 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:16 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:16 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:16 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:16 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:16 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:16 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:15:16 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:16 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:15:16 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:15:16 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:15:16 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:16:35 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:16:35 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:16:35 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:16:35 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:16:35 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:16:35 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:16:35 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:16:35 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:16:35 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:16:35 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzM5ODYyODUzLCJleHAiOjE3Mzk4NjY0NTN9.rwtbr9zyWNh8j5MbzavV9d2QTScAXyZUnFRojnjdpP4
+[18-Feb-2025 07:16:35 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
+[18-Feb-2025 07:16:35 UTC] payload:Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739862853
+    [exp] => 1739866453
+)
+
