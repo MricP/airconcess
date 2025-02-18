@@ -215,3 +215,162 @@ export const deleteModel = async (id, nameModel) => {
         throw error;
     }
 }
+
+export const updateAircraft = async (id, serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, description) => {
+    try {
+        const response = await axiosInstance.post('/admin/update-Aircraft', {id, serialNumber, manufactureYear, flightHours, configuration, recentMaintenance, typicalRoutes, owner, costPerKm, monthlyMaintenanceCost, estimatedPrice, description });
+        return response
+    } catch (error) {
+        console.error("Erreur lors de la mise à jour de l'aircraft", error);
+        throw error;
+    }
+}
+
+export const updateMainImage = async (id, file) => {
+    try {
+        const formData = new FormData();
+        formData.append('file', file); // Ajouter le fichier
+        formData.append('id', id); 
+        const response = await axiosInstance.post('/admin/update-MainImage', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Nécessaire pour transmettre les fichiers
+            },
+        });
+        return response.data
+    } catch (error) {
+        console.error("Erreur lors de la suppression", error);
+        throw error;
+    }
+}
+
+export const updateSliderImages = async (id, files) => {
+    try {
+        const formData = new FormData();
+        
+        files.forEach((file, index) => {
+            formData.append(`files[]`, file); // Ajouter chaque fichier séparément
+        });
+
+        formData.append('id', id);
+
+        const response = await axiosInstance.post('/admin/update-SliderImages', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        });
+
+        return response;
+    } catch (error) {
+        console.error("Erreur lors de la mise à jour des images du slider", error);
+        throw error;
+    }
+};
+
+export const updateIconImage = async (id, file) => {
+    try {
+        const formData = new FormData();
+        formData.append('file', file); // Ajouter le fichier
+        formData.append('id', id); 
+        const response = await axiosInstance.post('/admin/update-IconImage', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Nécessaire pour transmettre les fichiers
+            },
+        });
+        return response.data
+    } catch (error) {
+        console.error("Erreur lors de la suppression", error);
+        throw error;
+    }
+}
+
+export const createUserWithCRUD = async (email, password, firstname, lastname, isAdmin, isTrainer) => {
+    try {
+        await axiosInstance.post('/admin/create-User', { email, password, firstname, lastname, isAdmin, isTrainer }); 
+    } catch (error) {
+        console.error("Erreur lors de la création de l'utilisateur", error);
+        throw error;
+    }
+}
+
+export const getAllUsers = async () => {
+    try {
+        const response = await axiosInstance.post('/admin/get-Users', {});
+        return response.data
+    } catch (error) {
+        console.error("Erreur lors de la récupération de tout les utilisateurs", error);
+        throw error;
+    }
+}
+
+export const updateRoleUser = async (id, role, boolean) => {
+    try {
+        await axiosInstance.post('/admin/update-RoleUser', {id, role, boolean});
+    } catch (error) {
+        console.error("Erreur lors de la mise à jour de l'utilisateur", error);
+        throw error;
+    }
+}
+
+export const findUserByEmail = async (email) => {
+    try {
+        const response = await axiosInstance.post('/admin/find-UserEmail', {email});
+        return response.data
+    } catch (error) {
+        console.error("Erreur lors de la récupération de l'utilisateur", error);
+        throw error;
+    }
+}
+
+export const deleteUser = async (id) => {
+    try {
+        await axiosInstance.post('/admin/delete-User', {id});
+    } catch (error) {
+        console.error("Erreur lors de la suppression de tout les utilisateurs", error);
+        throw error;
+    }
+}
+
+export const createTrainer = async (id) => {
+    try {
+        await axiosInstance.post('/admin/create-Trainer', {id});
+    } catch (error) {
+        console.error("Erreur lors de la création du formatuer", error);
+        throw error;
+    }
+}
+
+export const findTrainerById = async (id) => {
+    try {
+        const response = await axiosInstance.post('/admin/find-TrainerId', {id});
+        return response.data
+    } catch (error) {
+        console.error("Erreur lors de la récupération de l'utilisateur", error);
+        throw error;
+    }
+}
+
+export const deleteTrainer = async (id) => {
+    try {
+        await axiosInstance.post('/admin/delete-Trainer', {id});
+    } catch (error) {
+        console.error("Erreur lors de la suppression de tout les utilisateurs", error);
+        throw error;
+    }
+}
+
+export const getLastLogs = async () => {
+    try {
+        const response = await axiosInstance.post('/admin/get-Logs', {});
+        return response.data
+    } catch (error) {
+        console.error("Erreur lors de la récupération des logs", error);
+        throw error;
+    }
+}
+
+export const insertLog = async (content) => {
+    try {
+        await axiosInstance.post('/admin/insert-Log', {content});
+    } catch (error) {
+        console.error("Erreur lors de l'insertion d'un log'", error);
+        throw error;
+    }
+}

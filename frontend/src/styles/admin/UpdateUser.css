@@ -1,0 +1,127 @@
+.update-user {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5vh;
+}
+
+.update-user .filter-bar{
+    border-radius: 15px;
+    z-index: 1;
+    height: 45px;
+    background-color: var(--box-color);
+}
+
+.update-user .filter-bar > input{
+    width: 20vw;
+    border: solid 2px var(--box-color);;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-left: 20px;
+    font-size: 1em;
+    height: 100%;
+    color: var(--button-color);
+    background-color: var(--bg-primary);
+}
+
+.update-user .user-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.update-user .user-container .info-user {
+    display: flex;
+    gap: 40px;
+    width: 35vw;
+}
+
+.update-user .user-container .role-user {
+    display: flex;
+    justify-content: space-between;
+    width: 19vw;
+}
+
+.update-user .user-container img {
+    aspect-ratio: 1/1;
+    width: 50px;
+    border-radius: 50px;
+    object-fit: cover;
+}
+
+.update-user .user-container label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.update-user .user-container tbody {
+    display: flex;
+    align-items: center;
+}
+
+.update-user .user-container td {
+    width: 6vw;
+}
+
+.update-user #bin:hover {
+    cursor: pointer;
+}
+
+.update-user .chooseCatalogPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+
+.update-user .chooseCatalogPage > p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    width: 10vw;
+    height: 40px;
+    text-align: center;
+    background-color: var(--box-color);
+    border-radius: 2px;
+    color: var(--section-color);
+}
+
+.update-user .chooseCatalogPage > button{
+    border: none;
+    border-radius: 5px;
+    background-color: var(--box-color);
+}
+
+@media (max-width: 992px) {
+    .update-user .filter-bar > input {
+        width: 60vw;
+    }
+
+    .update-user .user-container {
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .update-user .user-container .info-user {
+        width: 70vw;
+    }
+
+    .update-user .user-container img {
+        width: 15vw;
+    }
+
+    .update-user .user-container td {
+        width: auto;
+    }
+
+    .update-user .user-container .role-user {
+        width: 70vw;
+    }
+}

@@ -5,9 +5,7 @@
         public static function getAircraftWith($idAircraft) {
             $aircraft = Aircraft::findById($idAircraft);
             if ($aircraft) {
-                echo json_encode($aircraft);
-            } else {
-                echo json_encode(null);
+                return $aircraft;
             }
         }
 

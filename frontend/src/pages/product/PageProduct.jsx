@@ -11,12 +11,27 @@ import { GrStatusGood } from "react-icons/gr";
 
 import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription, getModelName, getAircraft} from "../../services/product";
 import ResultPage from "../ResultPage";
+<<<<<<< HEAD
 
 function PageProduct({mode, onSubmitProduct, model}) {
   /*################### CONSTANTES ####################*/
 
   const location = useLocation().pathname.split("/");
   const id = parseInt(location[location.length - 1]); // Récupération de l'ID
+=======
+
+function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
+
+  /*################### CONSTANTES ####################*/
+
+  const location = useLocation().pathname.split("/");
+  let id = null
+  if (aircraftId){
+    id = aircraftId
+  } else {
+    id = parseInt(location[location.length - 1]); // Récupération de l'ID
+  }
+>>>>>>> 09ee23a9ebb99dcd298f280883438c015704e9fe
 
   /*############ INITIALISATION DES STATES ############*/
 
@@ -27,7 +42,11 @@ function PageProduct({mode, onSubmitProduct, model}) {
   const [mainImg, updateMainImg] = useState({ url: "/assets/not-available.png", id: 0 });
   const [sliderImgs, updateSliderImgs] = useState([]);
   const [iconImg, setIconImage] = useState(null)
+<<<<<<< HEAD
 
+=======
+  const [description, setDescription] = useState(null)
+>>>>>>> 09ee23a9ebb99dcd298f280883438c015704e9fe
   const [modelDescription, updateModelDescription] = useState([
     {varName:"range_type", txt:"Rayon d'action", value:"Inconnu"},
     {varName:"manufacturer", txt:"Constructeur", value:"Inconnu"},
@@ -75,7 +94,74 @@ function PageProduct({mode, onSubmitProduct, model}) {
   }
   
   /*###################### AUTRE ######################*/
+<<<<<<< HEAD
 
+=======
+
+
+  // Charge toutes les data à afficher en fonction de l'id de l'appareil (idAircraft)
+  const loadDataFromDB = async () => {
+    try {
+      // S'il n'y a pas d'id ou que cet aircraft n'existe pas
+      if (isNaN(id) || !(await getAircraft(id))) {
+        updateIdValidity(false);
+        return;
+      }
+
+      // Appels des services
+      const dbModelName = await getModelName(id)
+      const dbMainImg = await getMainImage(id)
+      const dbSliderImgs = await getSliderImages(id)
+      const dbModelDescription = await getModelDescription(id)
+      const dbAircraftDescription = await getAircraftDescription(id)
+
+      if(dbModelName) updateModelName(dbModelName)
+      if(dbMainImg) updateMainImg(dbMainImg);
+      if(dbSliderImgs) updateSliderImgs(dbSliderImgs);
+
+      if(dbModelDescription) {
+        console.log(dbModelDescription)
+        const newDescription = []
+        dbModelDescription.forEach((element) => {
+          if(element.value) {
+            const criteria = modelDescription.find((elt) => elt.varName === element.varName)
+            if(criteria) {
+              let updatedCriteria = { ...criteria, value: element.value };
+              if(criteria.varName === "passenger_capacity") updatedCriteria = { ...criteria, value:"Jusqu'à "+element.value+" passagers"};
+              else if(criteria.varName === "max_range") updatedCriteria = { ...criteria, value: element.value+" km"};
+              newDescription.push(updatedCriteria);
+            }
+          }
+        });
+        updateModelDescription(newDescription)
+      }
+
+      if(dbAircraftDescription) {
+        const newDescription = []
+        dbAircraftDescription.forEach(element => {
+          if(element.value) {
+            const criteria = aircraftDescription.find((elt) => elt.varName === element.varName)
+            if(criteria) {
+              let updatedCriteria = { ...criteria, value: element.value };
+              if(criteria.varName === "flight_hours") updatedCriteria = { ...criteria, value:element.value+" heures"};
+              else if(criteria.varName === "estimated_price") updatedCriteria = { ...criteria, value: formatNumber(element.value)+" €"};
+              newDescription.push(updatedCriteria)
+            }
+          }
+        });
+        setDescription(dbAircraftDescription[10].value)
+        updateAircraftDesciption(newDescription)
+      }
+      
+    } catch (error) {
+      console.error(
+        "Error response : ",
+        error.response?.data?.message || "Unknown error"
+      );
+    }
+  };
+
+>>>>>>> 09ee23a9ebb99dcd298f280883438c015704e9fe
   // Charger les données lorsque le composant est monté ou lorsque "id" change
   useEffect(() => {
     const loadDataFromDB = async () => {
@@ -195,7 +281,11 @@ function PageProduct({mode, onSubmitProduct, model}) {
 
   const handleSubmit = () => {
     if (onSubmitProduct) {
-      onSubmitProduct(productData, modelData, imageData); // Appelle la fonction du parent
+      if (mode === "add"){
+        onSubmitProduct(productData, modelData, imageData); // Appelle la fonction du parent
+      } else {
+        onSubmitProduct(productData, imageData); // Appelle la fonction du parent
+      }
     }
   };
 
@@ -227,8 +317,21 @@ function PageProduct({mode, onSubmitProduct, model}) {
     }
   };
 
+<<<<<<< HEAD
   /*:::::::::::::::::::::: AUTRE ::::::::::::::::::::::*/
 
+=======
+  useEffect(() => {
+    const textarea = document.querySelector("textarea");
+    if (textarea && mode === "edit") {
+        textarea.textContent = description;
+        handleInputChange("description", description)
+    }
+}, [description, mode]);
+
+  /*:::::::::::::::::::::: AUTRE ::::::::::::::::::::::*/
+
+>>>>>>> 09ee23a9ebb99dcd298f280883438c015704e9fe
   useEffect(() => {
     if(model !== "Nouveau" && mode === "add"){
       setModelData({
@@ -281,13 +384,13 @@ function PageProduct({mode, onSubmitProduct, model}) {
           <div className='label-container'>
               <label htmlFor="input-icon">
                   <div className='label-content'>
-                      <BiDownload /> Insérer une icone 
+                      <BiDownload /> Insérer une icône 
                   </div> 
                   <input id="input-icon" type="file" accept="image/*" onChange={handleFileChange}/>
               </label>
           </div> :
           <div className='label-content'>
-              <GrStatusGood color='green'/> Icone insérée
+              <GrStatusGood color='green'/> Icône insérée
           </div>
         }
         <p>Description du produit</p>
@@ -295,6 +398,28 @@ function PageProduct({mode, onSubmitProduct, model}) {
         
         <DarkButton className={"add-button"} onClick={handleSubmit}>Ajouter le nouveau produit</DarkButton>
       </div>}
+
+      {mode === "edit" && 
+      <div className="bottom-product-page">
+        {iconImg == null ? 
+          <div className='label-container'>
+              <label htmlFor="input-icon">
+                  <div className='label-content'>
+                      <BiDownload /> Changer l'icône 
+                  </div> 
+                  <input id="input-icon" type="file" accept="image/*" onChange={handleFileChange}/>
+              </label>
+          </div> :
+          <div className='label-content'>
+              <GrStatusGood color='green'/> Icône changée
+          </div>
+        }
+        <p>Description du produit</p>
+        <textarea name="" id="" onChange={(e) => {handleInputChange("description", e.target.value)}}>{description}</textarea>
+        
+        <DarkButton className={"add-button"} onClick={handleSubmit}>Valider les modifications</DarkButton>
+      </div>}
+
     </main>
   );
 }

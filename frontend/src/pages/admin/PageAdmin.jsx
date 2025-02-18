@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import PageProduct from "../product/PageProduct";
-import { insertAircraft, insertModel, getModelByName, getAllModel, uploadImage, insertImage, getAircraftBySerialNumber, deleteAircraft, deleteModel } from "../../services/product";
+import CreateUser from "../../components/admin/CreateUser";
+import UpdateUser from "../../components/admin/UpdateUser";
+
+
+import { insertAircraft, insertModel, getModelByName, getAllModel, uploadImage, insertImage, getAircraftBySerialNumber, deleteAircraft, deleteModel, getLastLogs, insertLog } from "../../services/product";
 
 export default function PageAdmin(){
 
@@ -12,7 +16,8 @@ export default function PageAdmin(){
     const [selectedComponent, setSelectedComponent] = useState(null);
     const [models, setModels] = useState(null);
     const [model, setModel] = useState(null)
-    
+    const [mode, setMode] = useState(null);
+    const [selectedElement, setSelectedElement] = useState(null);
     
 
     const handleMenuClick1 = () => {
@@ -26,32 +31,42 @@ export default function PageAdmin(){
     };
 
     const handleElementClick = (event) => {
-        const allElements = document.querySelectorAll(".element");
-        allElements.forEach((el) => el.classList.remove("underline"));
-        event.target.classList.add("underline")
-        console.log(event.target.textContent)
-        if (event.target.textContent === "• Modifier un produit"){
-            setSelectedComponent(<EditArticle use= "edit"/>)
+        setSelectedElement(event.target.textContent);
+    
+        if (event.target.textContent === "• Modifier un produit") {
+            setMode("edit");
+            setSelectedComponent(<EditArticle use="edit" />);
         } else if (event.target.textContent === "• Supprimer un produit") {
-            setSelectedComponent(<EditArticle use= "delete"/>)
-        } else if (event.target.textContent === "• Ajouter un produit"){
-            setModel("Nouveau")
+            setSelectedComponent(<EditArticle use="delete" />);
+        } else if (event.target.textContent === "• Ajouter un produit") {
+            setMode("add");
+            setModel("Nouveau");  // Mettre à jour l'état
+        } else if (event.target.textContent === "• Ajouter un utilisateur") {
+            setSelectedComponent(<CreateUser />)
+        } else if (event.target.textContent === "• Modifier un utilisateur") {
+            setSelectedComponent(<UpdateUser />)
+        }
+    };
+    
+    // Ajout d'un useEffect pour surveiller les changements de `model` et `mode`
+    useEffect(() => {
+        if (mode === "add") {
             setSelectedComponent(
                 <div className="add-mode">
                     <div className="selector">
-                        <label htmlFor="comboBox">Choisissez un model :</label>
+                        <label htmlFor="comboBox">Choisissez un modèle :</label>
                         <select id="comboBox" name="options" onChange={handleModelChange}>
                             <option value="Nouveau">Nouveau</option>
-                            {models.map((element) =>(
+                            {models?.map((element) => (
                                 <option key={element.model_id} value={element.model_name}>{element.model_name}</option>
                             ))}
                         </select>
-                    </div> 
-                    <PageProduct mode="add" onSubmitProduct={handleAddButtonClick} model={"Nouveau"}/>
+                    </div>
+                    <PageProduct mode={mode} onSubmitProduct={handleAddButtonClick} model={"Nouveau"} />
                 </div>
-            )
+            );
         }
-    }
+    }, [mode, model]);
 
     const handleAddButtonClick = async (productData, modelData, imageData) => {
         const {
@@ -156,7 +171,7 @@ export default function PageAdmin(){
     
                 const resultIcon = await insertImage("icon", insertedAircraftId, responseIcon.filePath);
                 if (!resultIcon.success) throw new Error("Échec de l'insertion de l'icône.");
-            } else throw new Error("Échec de l'upload de l'image principale.");
+            } else throw new Error("Échec de l'upload de l'image icône.");
     
             // Images du slider
             if (files && files.length > 0) {
@@ -167,7 +182,15 @@ export default function PageAdmin(){
                     const resultSliderImage = await insertImage("slider", insertedAircraftId, responseSlider.filePath);
                     if (!resultSliderImage.success) throw new Error("Échec de l'insertion d'une image du slider.");
                 }
-            } else throw new Error("Échec de l'upload de l'image principale.");
+            } else throw new Error("Échec de l'upload des images du slider.");
+
+            
+            if (addMode === "Nouveau") {
+                const contentModel = `Nouveau model inséré : ${model}`
+                await insertLog(contentModel) 
+            }
+            const contentAircraft = `Nouveau produit inséré : ${model} ${serialNumber}` 
+            await insertLog(contentAircraft)
     
             console.log("Toutes les opérations ont été effectuées avec succès !");
             window.location.reload()
@@ -184,7 +207,6 @@ export default function PageAdmin(){
                 console.log("Annulation : suppression du modèle...");
                 await deleteModel(model.model_id, modelName);
             }
-            window.location.reload()
         }
     };
     
@@ -229,25 +251,47 @@ export default function PageAdmin(){
                             ))}
                         </select>
                     </div>
-                    <PageProduct mode="add" onSubmitProduct={handleAddButtonClick} model={model} />
+                    <PageProduct mode={mode} onSubmitProduct={handleAddButtonClick} model={model} />
                 </div>
             );
         }
     }, [model, models]);
+
+    useEffect(() => {
+        const fetchLogs = async () => {
+            const response = await getLastLogs();
+            setSelectedComponent(
+                <div className="last-modifications">
+                    <h2>Dernières modifications</h2>
+                    <div className="logs">
+                        {response.map((element) => (
+                            <div className="log" key={element.id}>
+                                <p>{element.log_content}</p>
+                                <p>{element.date_log}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )
+        };
+        if (selectedComponent == null) fetchLogs()
+        
+
+    }, [selectedComponent])
 
     return (
         <div className="page-admin">
             <div className="first-admin-component">
                 <div className="title-menu">
                     {isClicked1 ? <FaChevronDown onClick={handleMenuClick1} className="chevron"/> : <FaChevronRight onClick={handleMenuClick1} className="chevron" />}
-                    <p>Articles</p>
+                    <p>Produits</p>
                 </div>
 
                 {isClicked1 && 
                     <div className="title-menu-child">
-                        <p className ="element" onClick={handleElementClick}>• Ajouter un produit</p>
-                        <p className ="element" onClick={handleElementClick}>• Modifier un produit</p>
-                        <p className ="element" onClick={handleElementClick}>• Supprimer un produit</p>
+                        <p className={`element ${selectedElement === "• Ajouter un produit" ? "underline" : ""}`} onClick={handleElementClick}>• Ajouter un produit</p>
+                        <p className={`element ${selectedElement === "• Modifier un produit" ? "underline" : ""}`} onClick={handleElementClick}>• Modifier un produit</p>
+                        <p className={`element ${selectedElement === "• Supprimer un produit" ? "underline" : ""}`} onClick={handleElementClick}>• Supprimer un produit</p>
                     </div>
                 }
 
@@ -258,9 +302,8 @@ export default function PageAdmin(){
 
                 {isClicked2 && 
                     <div className="title-menu-child">
-                        <p className ="element" onClick={handleElementClick}>• Ajouter un utilisateur</p>
-                        <p className ="element" onClick={handleElementClick}>• Modifier un utilisateur</p>
-                        <p className ="element" onClick={handleElementClick}>• Supprimer un utilisateur</p>
+                        <p className={`element ${selectedElement === "• Ajouter un utilisateur" ? "underline" : ""}`} onClick={handleElementClick}>• Ajouter un utilisateur</p>
+                        <p className={`element ${selectedElement === "• Modifier un utilisateur" ? "underline" : ""}`} onClick={handleElementClick}>• Modifier un utilisateur</p>
                     </div>
                 }
                 
