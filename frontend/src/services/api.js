@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost/air-concess/backend/public/api',
+  baseURL: 'http://46.101.169.59/public/api.php',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -36,8 +36,8 @@ export const fetchTestMessage = async () => {
 export const getCatalogData = async () => {
   try {
     const response = await axiosInstance.get('/catalog');
-    console.log('Full response:', response);
-    console.log('Catalog data fetched:', response.data);
+    // console.log('Full response:', response);
+    // console.log('Catalog data fetched:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching catalog data:', error);
@@ -57,7 +57,7 @@ export const getAllTestimonials = async () => {
 
 export const getTestimonialsByUser = async (id_user) => {
   try {
-    console.log('/testimonials/id-user');
+//  console.log('/testimonials/id-user');
     const response = await axiosInstance.get(`testimonial/id-user?id_user=${id_user}`);
     return response.data;
   } catch (error) {

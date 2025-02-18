@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import '../../styles/landing-page/FirstSectionLanding.css';
+import useRedirect from "../Custom-hooks";
 
 function FirstSectionLanding() {
     const { scrollY } = useScroll();
@@ -9,6 +9,7 @@ function FirstSectionLanding() {
     const y2 = useTransform(scrollY, [0, 300], [100, -110]);
     const y3 = useTransform(scrollY, [0, 300], [400, -100]);
     const arrowDown = '/assets/landing/arrow1-icon.png';
+    const redirect = useRedirect(); 
 
     const [scrolled, setScrolled] = React.useState(false);
 
@@ -63,8 +64,16 @@ function FirstSectionLanding() {
                         </motion.p>
                     </div>
                     <div className='footer-links'>
-                        <Link to='/catalog'>Nos avions</Link>
-                        <Link to='/FAQ'>FAQ</Link>
+                        <div onClick={() => {
+                            redirect("/catalog");
+                        }}>
+                            Nos avions
+                        </div>
+                        <div onClick={() => {
+                            redirect("/training");
+                        }}>
+                            PPL
+                        </div>
                     </div>
                 </div>
             </div>

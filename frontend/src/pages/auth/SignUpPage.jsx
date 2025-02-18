@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import '../../styles/auth/SignUpPage.css';
-
-// services functions
 import { signUp } from '../../services/auth';
-
-// components
 import TwoColumnLayout from '../../components/auth/TwoColumnLayout';
 import DarkButton2 from '../../components/general/DarkButton2';
 import GrayInput from '../../components/general/GrayInput';
+import useRedirect from '../../components/Custom-hooks';
 
 const SignUpPage = () => {
   const signUpImg = '/assets/auth/sign-up-img.jpg';
   const airconcessLogo = '/assets/logo-black.png';
   const airconcessLogoPlane = '/assets/airconcess-logo-plane.png';
+  const redirect = useRedirect();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -39,7 +36,7 @@ const SignUpPage = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const img = new Image();
     img.src = signUpImg;
     img.onload = () => {
@@ -84,7 +81,7 @@ const SignUpPage = () => {
           </form>
           <div className="sign-in-link-container">
             <p className="sign-in-link-text">Déjà inscrit ?</p>
-            <Link to="/sign-in" className="sign-in-link">Se connecter</Link>
+            <div onClick={()=>redirect("/sign-in")} className="sign-in-link">Se connecter</div>
           </div>
           {responseMessage && <p className="response-message">{responseMessage}</p>}
           {errorHtml && <div className="error-html" dangerouslySetInnerHTML={{ __html: errorHtml }} />}

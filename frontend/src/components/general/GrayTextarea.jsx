@@ -1,6 +1,6 @@
 import "../../styles/general/GrayInput.css";
 
-export default function GrayTextarea({ placeholder, value, onChange, required, className, maxLength, rows }) {
+export default function GrayTextarea({ placeholder, value, onChange, required, className, maxLength, rows, onKeyDown }) {
     return (
         <textarea
             className={`gray-text-area ${className}`}
@@ -9,7 +9,8 @@ export default function GrayTextarea({ placeholder, value, onChange, required, c
             onChange={onChange}
             required={required}
             maxLength={maxLength}
-            rows={rows || 3}  
+            rows={rows || 3}
+            onKeyDown={onKeyDown}
         />
     );
 }
