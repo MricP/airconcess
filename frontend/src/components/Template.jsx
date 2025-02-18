@@ -4,9 +4,10 @@ import Footer from './graphic-charter/Footer'
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ChatbotComponent from './chatbot/ChatbotComponent';
+import useAuth from '../hooks/useAuth';
 
 function Template({children}) {
-
+  useAuth();
   let location = useLocation();
   
   const [scrolled, setScrolled] = useState(false);

@@ -7,6 +7,8 @@ class Token
     {
         $config = include(__DIR__ . '/../config/config.php');
         $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+
+        $payload['exp'] = time() + 3600; // 3600 secondes = 1 heure
         $payload = json_encode($payload);
 
         $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
@@ -22,22 +24,27 @@ class Token
     {
         $config = include(__DIR__ . '/../config/config.php');
         $parts = explode('.', $token);
-
+    
         if (count($parts) !== 3) {
-            return false;   
+            return false;
         }
-
+    
         $signatureProvided = $parts[2];
         $headerAndPayload = $parts[0] . '.' . $parts[1];
         $signature = hash_hmac('sha256', $headerAndPayload, $config['jwt_secret'], true);
         $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
-
+    
         if ($base64UrlSignature !== $signatureProvided) {
+            return false;
+        }
+    
+        $payload = json_decode(base64_decode($parts[1]), true);
+    
+        if (isset($payload['exp']) && $payload['exp'] < time()) {
             return false;  
         }
-
-        $payload = json_decode(base64_decode($parts[1]), true);
-        return $payload;   
+    
+        return $payload;
     }
+    
 }
-

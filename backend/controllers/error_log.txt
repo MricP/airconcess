@@ -1,0 +1,196 @@
+[18-Feb-2025 04:11:02 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:11:02 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:11:02 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 'appt_agency' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\Appointment.php:63
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\Appointment.php(63): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\ProfileController.php(115): Appointment::getAppointmentByUser(24)
+#2 C:\wamp64\www\air-concess\backend\public\api.php(291): ProfileController::getAppointment(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\Appointment.php on line 63
+[18-Feb-2025 04:11:02 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:11:02 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 'appt_agency' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\Appointment.php:63
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\Appointment.php(63): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\ProfileController.php(115): Appointment::getAppointmentByUser(24)
+#2 C:\wamp64\www\air-concess\backend\public\api.php(291): ProfileController::getAppointment(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\Appointment.php on line 63
+[18-Feb-2025 04:11:02 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:11:02 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:11:02 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:11:02 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:11:02 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 'appt_agency' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\Appointment.php:63
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\Appointment.php(63): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\ProfileController.php(115): Appointment::getAppointmentByUser(24)
+#2 C:\wamp64\www\air-concess\backend\public\api.php(291): ProfileController::getAppointment(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\Appointment.php on line 63
+[18-Feb-2025 04:11:02 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:11:02 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 'appt_agency' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\Appointment.php:63
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\Appointment.php(63): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\ProfileController.php(115): Appointment::getAppointmentByUser(24)
+#2 C:\wamp64\www\air-concess\backend\public\api.php(291): ProfileController::getAppointment(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\Appointment.php on line 63
+[18-Feb-2025 04:11:16 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 La table 'air_concess.logs' n'existe pas in C:\wamp64\www\air-concess\backend\models\Logs.php:18
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\Logs.php(18): PDOStatement->execute()
+#1 C:\wamp64\www\air-concess\backend\public\api.php(432): Logs::getLastLogs()
+#2 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\Logs.php on line 18
+[18-Feb-2025 04:11:16 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 La table 'air_concess.logs' n'existe pas in C:\wamp64\www\air-concess\backend\models\Logs.php:18
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\Logs.php(18): PDOStatement->execute()
+#1 C:\wamp64\www\air-concess\backend\public\api.php(432): Logs::getLastLogs()
+#2 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\Logs.php on line 18
+[18-Feb-2025 04:14:04 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:14:04 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:14:04 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 'appt_agency' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\Appointment.php:63
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\Appointment.php(63): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\ProfileController.php(115): Appointment::getAppointmentByUser(24)
+#2 C:\wamp64\www\air-concess\backend\public\api.php(291): ProfileController::getAppointment(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\Appointment.php on line 63
+[18-Feb-2025 04:14:04 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:14:04 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:14:04 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 'appt_agency' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\Appointment.php:63
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\Appointment.php(63): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\ProfileController.php(115): Appointment::getAppointmentByUser(24)
+#2 C:\wamp64\www\air-concess\backend\public\api.php(291): ProfileController::getAppointment(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\Appointment.php on line 63
+[18-Feb-2025 04:14:04 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:14:04 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:14:04 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:14:04 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 'appt_agency' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\Appointment.php:63
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\Appointment.php(63): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\ProfileController.php(115): Appointment::getAppointmentByUser(24)
+#2 C:\wamp64\www\air-concess\backend\public\api.php(291): ProfileController::getAppointment(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\Appointment.php on line 63
+[18-Feb-2025 04:14:04 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [iat] => 1739754703
+    [exp] => 1739758303
+)
+
+[18-Feb-2025 04:14:04 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 'appt_agency' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\Appointment.php:63
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\Appointment.php(63): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\ProfileController.php(115): Appointment::getAppointmentByUser(24)
+#2 C:\wamp64\www\air-concess\backend\public\api.php(291): ProfileController::getAppointment(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\Appointment.php on line 63

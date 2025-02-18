@@ -11,14 +11,6 @@ import { GrStatusGood } from "react-icons/gr";
 
 import { getMainImage, getSliderImages, getModelDescription, getAircraftDescription, getModelName, getAircraft} from "../../services/product";
 import ResultPage from "../ResultPage";
-<<<<<<< HEAD
-
-function PageProduct({mode, onSubmitProduct, model}) {
-  /*################### CONSTANTES ####################*/
-
-  const location = useLocation().pathname.split("/");
-  const id = parseInt(location[location.length - 1]); // Récupération de l'ID
-=======
 
 function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
 
@@ -31,7 +23,6 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
   } else {
     id = parseInt(location[location.length - 1]); // Récupération de l'ID
   }
->>>>>>> 09ee23a9ebb99dcd298f280883438c015704e9fe
 
   /*############ INITIALISATION DES STATES ############*/
 
@@ -42,11 +33,7 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
   const [mainImg, updateMainImg] = useState({ url: "/assets/not-available.png", id: 0 });
   const [sliderImgs, updateSliderImgs] = useState([]);
   const [iconImg, setIconImage] = useState(null)
-<<<<<<< HEAD
-
-=======
   const [description, setDescription] = useState(null)
->>>>>>> 09ee23a9ebb99dcd298f280883438c015704e9fe
   const [modelDescription, updateModelDescription] = useState([
     {varName:"range_type", txt:"Rayon d'action", value:"Inconnu"},
     {varName:"manufacturer", txt:"Constructeur", value:"Inconnu"},
@@ -94,9 +81,6 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
   }
   
   /*###################### AUTRE ######################*/
-<<<<<<< HEAD
-
-=======
 
 
   // Charge toutes les data à afficher en fonction de l'id de l'appareil (idAircraft)
@@ -161,7 +145,6 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
     }
   };
 
->>>>>>> 09ee23a9ebb99dcd298f280883438c015704e9fe
   // Charger les données lorsque le composant est monté ou lorsque "id" change
   useEffect(() => {
     const loadDataFromDB = async () => {
@@ -317,10 +300,6 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
     }
   };
 
-<<<<<<< HEAD
-  /*:::::::::::::::::::::: AUTRE ::::::::::::::::::::::*/
-
-=======
   useEffect(() => {
     const textarea = document.querySelector("textarea");
     if (textarea && mode === "edit") {
@@ -331,7 +310,6 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
 
   /*:::::::::::::::::::::: AUTRE ::::::::::::::::::::::*/
 
->>>>>>> 09ee23a9ebb99dcd298f280883438c015704e9fe
   useEffect(() => {
     if(model !== "Nouveau" && mode === "add"){
       setModelData({
