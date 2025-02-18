@@ -14,8 +14,20 @@ export default function ChatbotComponent() {
   ]);
 
   const handleOpenChatbot = () => {
-    setIsOpen(!isOpen);
+    const chatbotFrame = document.querySelector(".chatbot-frame");
+
+    if (isOpen) {
+      chatbotFrame.classList.remove("opening");
+      chatbotFrame.classList.add("closing");
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 2000);
+    } else {
+      setIsOpen(true);
+    }
   };
+
+
 
   const handleInputChange = (event) => {
     const text = event.target.value.slice(0, 200);
@@ -38,15 +50,15 @@ export default function ChatbotComponent() {
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter" && !event.shiftKey) { 
-      event.preventDefault(); 
-      handleSendMessage(); 
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      handleSendMessage();
     }
   };
 
   return (
     <div className={`chatbot-container`}>
-      <div className={`chatbot-frame ${isOpen ? "block-chatbot" : "hidden-chatbot"}`}>
+      <div className={`chatbot-frame ${isOpen ? "block-chatbot opening" : "closing "}`}>
         <IoIosClose className='close-chat' onClick={handleOpenChatbot} />
         <div className="chatbot-content">
           <section className="chatbot-talking-section">
@@ -68,7 +80,7 @@ export default function ChatbotComponent() {
           <form
             className="chatbot-send-infos"
             onSubmit={(e) => {
-              e.preventDefault(); 
+              e.preventDefault();
               handleSendMessage();
             }}
           >
@@ -77,13 +89,13 @@ export default function ChatbotComponent() {
               placeholder={"Entrez votre message..."}
               value={grayTextareaInput}
               onChange={handleInputChange}
-              onKeyDown={handleKeyDown} 
+              onKeyDown={handleKeyDown}
             />
             <button
-                className="chatbot-submit-button"
-                disabled={grayTextareaInput.trim().length === 0}
+              className="chatbot-submit-button"
+              disabled={grayTextareaInput.trim().length === 0}
             >
-                Envoyer
+              Envoyer
             </button>
           </form>
         </div>
