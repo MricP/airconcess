@@ -68,3 +68,33 @@
     margin-top: 30vh;
     margin-left: -5vw;
 }
+
+@media (max-width: 992px) {
+    .training-service {
+        height: auto;
+    }
+
+    .training-service-top {
+        flex-direction: column;
+    }
+
+    .training-service-left {
+        width: 80vw;
+        align-items: center;
+        text-align: justify;
+        padding-right: 0;
+    }
+
+    .training-service-right {
+        display: none;
+    }
+
+    .training-service-button{
+        width: 50vw;
+    }
+
+    .training-service-bottom {
+        margin-top: 7vh;
+        margin-bottom: 5vh;
+    }
+}
