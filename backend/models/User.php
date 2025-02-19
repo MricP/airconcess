@@ -108,5 +108,16 @@ class User
         $stmt->execute([$id]);
     }
 
+    public static function createWithCRUD($email, $hashedPassword, $firstName, $lastName, $isAdmin, $isTrainer)
+    {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare('INSERT INTO User (email, password, firstName, lastName, isVerified, isAdmin, inscriptionDate, isTrainer) 
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+
+        if ($stmt->execute([$email, $hashedPassword, $firstName, $lastName, 1, $isAdmin, date('Y-m-d H:i:s'), $isTrainer])) {
+            return $pdo->lastInsertId();
+        }
+        return false;
+    }
 
 }

@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
 import "../../styles/catalog/ProductBox.css";
+import { useNavigate } from 'react-router-dom';
 import { IoTrashBin } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { deleteAircraft, getModelName } from '../../services/product';
 import PageProduct from '../../pages/product/PageProduct';
 import { updateAircraft, updateMainImage, updateSliderImages, updateIconImage, insertLog, getAircraft } from '../../services/product';
-import useRedirect from '../Custom-hooks';
 
 export const ProductBox = (props) => {
-  const redirect = useRedirect();
+  const navigate = useNavigate();
   const [showProductPage, setShowProductPage] = useState(false);
 
   const icon = props.use === "delete" ? <IoTrashBin size={30} color='red'/> : props.use === "edit" && <CiEdit size={30} />;
@@ -94,12 +94,13 @@ export const ProductBox = (props) => {
               window.location.reload()
           } catch (error) {
               alert(error)
-              window.location.reload()
           }
         }
-  if (showProductPage) {
-    props.pageProduct(<PageProduct aircraftId={props.idAircraft} onSubmitProduct={handleAddButtonClick}  mode={"edit"}/>);
-  }
+        useEffect(() => {
+          if (showProductPage) {
+            props.pageProduct(<PageProduct aircraftId={props.idAircraft} onSubmitProduct={handleAddButtonClick} mode={"edit"}/>);
+          }
+        }, [showProductPage]);
 
   return (
       <div className='productBox-container'>
@@ -145,11 +146,10 @@ export const ProductBox = (props) => {
             <p>{props.description}</p>
             <div className='LearnMorebButton'>
               <p>EN SAVOIR PLUS</p>
-              <button onClick={() => redirect(`/product/${props.idAircraft}` )}>
+              <button onClick={() => navigate(`/product/${props.idAircraft}` )}>
                 <FaArrowRightLong size={20}/>
               </button>
             </div>
-            <div className='LearnMorebButton'><p>EN SAVOIR PLUS</p><button onClick={() => redirect(`/product/${props.idAircraft}` )}><FaArrowRightLong size={20}/></button></div>
         </div>
       </div>
   );
