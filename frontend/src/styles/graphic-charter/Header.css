@@ -7,6 +7,10 @@ header {
     height: 10vh;
 }
 
+header li {
+    cursor: pointer;
+}
+
 .header-default-menu {
     height: 100%;
     display: flex;
@@ -111,6 +115,7 @@ nav button {
         justify-content: center;
         align-items: center;
         gap: 2vw;
+        cursor: pointer;
     }
 
     .header-mobile-menu ul {

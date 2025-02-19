@@ -190,10 +190,10 @@ export default function PageAdmin() {
 
 
             if (addMode === "Nouveau") {
-                const contentModel = `Nouveau model inséré : ${model}`
+                const contentModel = `Nouveau model inséré : ${model.model_name}`
                 await insertLog(contentModel)
             }
-            const contentAircraft = `Nouveau produit inséré : ${model} ${serialNumber}`
+            const contentAircraft = `Nouveau produit inséré : ${model.model_name} ${serialNumber}`
             await insertLog(contentAircraft)
 
             console.log("Toutes les opérations ont été effectuées avec succès !");
