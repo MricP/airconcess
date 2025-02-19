@@ -13,7 +13,7 @@ export const ProductBox = (props) => {
   const navigate = useNavigate();
   const [showProductPage, setShowProductPage] = useState(false);
 
-  const icon = props.use === "delete" ? <IoTrashBin size={30} color='red'/> : props.use === "edit" && <CiEdit size={30} />;
+  const icon = props.use === "delete" ? <IoTrashBin size={30} color='red' /> : props.use === "edit" && <CiEdit size={30} />;
 
   const handleButtonClick = async () => {
     if (props.use === "edit") {
@@ -35,57 +35,57 @@ export const ProductBox = (props) => {
   };
 
   const handleAddButtonClick = async (productData, imageData) => {
-  
-          const {
-              serialNumber,
-              manufactureYear,
-              flightHours,
-              configuration,
-              recentMaintenance,
-              typicalRoutes,
-              owner,
-              costPerKm,
-              monthlyMaintenanceCost,
-              estimatedPrice,
-              description,
-          } = productData;
-      
-      
-          try {
-              await updateAircraft(
-                  props.aircraftId,
-                  serialNumber,
-                  +manufactureYear,
-                  flightHours.split(" ")[0],
-                  configuration,
-                  recentMaintenance,
-                  typicalRoutes,
-                  owner,
-                  costPerKm,
-                  monthlyMaintenanceCost,
-                  +estimatedPrice.split(" ")[0],
-                  description
-              );
-              const { file, files, icon } = imageData;
-      
-              // Image principale
-              if (file) {
-                  updateMainImage(props.aircraftId, file)
-              } 
-      
-              // Icône
-              if (icon) {
-                updateIconImage(props.aircraftId, icon)
-              } 
-      
-              // Images du slider
-              if (files && files.length > 0) {
-                console.log("ok2")
-                updateSliderImages(props.aircraftId, files)
-              }
 
-              const nameModel = await getModelName(props.aircraftId);
-              const aircraft = await getAircraft(props.aircraftId)
+    const {
+      serialNumber,
+      manufactureYear,
+      flightHours,
+      configuration,
+      recentMaintenance,
+      typicalRoutes,
+      owner,
+      costPerKm,
+      monthlyMaintenanceCost,
+      estimatedPrice,
+      description,
+    } = productData;
+
+
+    try {
+      await updateAircraft(
+        props.aircraftId,
+        serialNumber,
+        +manufactureYear,
+        flightHours.split(" ")[0],
+        configuration,
+        recentMaintenance,
+        typicalRoutes,
+        owner,
+        costPerKm,
+        monthlyMaintenanceCost,
+        +estimatedPrice.split(" ")[0],
+        description
+      );
+      const { file, files, icon } = imageData;
+
+      // Image principale
+      if (file) {
+        updateMainImage(props.aircraftId, file)
+      }
+
+      // Icône
+      if (icon) {
+        updateIconImage(props.aircraftId, icon)
+      }
+
+      // Images du slider
+      if (files && files.length > 0) {
+        console.log("ok2")
+        updateSliderImages(props.aircraftId, files)
+      }
+
+      const nameModel = await getModelName(props.aircraftId);
+      const aircraft = await getAircraft(props.aircraftId)
 
               const content = `Modification du produit : ${nameModel[0]} ${aircraft.serial_number}`
               await insertLog(content)
@@ -103,19 +103,19 @@ export const ProductBox = (props) => {
         }, [showProductPage]);
 
   return (
-      <div className='productBox-container'>
-        <div className='catalog-productImage-container'>
-          <div className='available-container'>
-            {props.isAvailable === 1 ? <FaRegCircleDot color='#43A73A'/> : <FaRegCircleDot color='#ea2424'/> }
-            <p className='catalogAvailable'>{props.isAvailable === 0 ? "INDISPONIBLE" : "DISPONIBLE"}</p>
-          </div>
-          <img className='catalog-planeImg' src={props.planeImg} alt="plane img"/>
-          <div className='imageInfo-container'>
-              <p>{props.modelName}</p>
-              <p>{props.serialNumber}</p>
-              <p className='catalogPrice'>{props.price}</p>
-          </div>
-        </div>  
+    <div className='productBox-container'>
+      <div className='catalog-productImage-container'>
+        <div className='available-container'>
+          {props.isAvailable === 1 ? <FaRegCircleDot color='#43A73A' /> : <FaRegCircleDot color='#ea2424' />}
+          <p className='catalogAvailable'>{props.isAvailable === 0 ? "INDISPONIBLE" : "DISPONIBLE"}</p>
+        </div>
+        <img className='catalog-planeImg' src={props.planeImg} alt="plane img" />
+        <div className='imageInfo-container'>
+          <p>{props.modelName}</p>
+          <p>{props.serialNumber}</p>
+          <p className='catalogPrice'>{props.price}</p>
+        </div>
+      </div>
 
         <div className='catalog-productDescription-container'>
             <div className="bin">

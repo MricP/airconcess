@@ -28,6 +28,7 @@ class AuthController
             self::$smtp_secure = $_ENV['SMTP_SECURE'];
         }
     }
+
     /**
      * Fonction pour le login
      * @param array $data Les données de connexion (email et mot de passe)
@@ -51,7 +52,7 @@ class AuthController
         $payload = [
             'idUser' => $user['idUser'],
             'email' => $user['email'],
-            'isAdmin' => $user['isAdmin'],  
+            'isAdmin' => $user['isAdmin'],
             'iat' => time(),
             'exp' => time() + 3600
         ];
@@ -101,7 +102,7 @@ class AuthController
     {
         self::init();
 
-        $verificationLink = "http://localhost:3000/verify-email?token=" . urlencode($token);
+        $verificationLink = "https://air-concess.vercel.app/verify-email?token=" . urlencode($token);
 
         $subject = "Verifiez votre adresse email";
         $body = "Cliquez sur le lien suivant pour vérifier votre adresse email : ";
@@ -241,7 +242,7 @@ class AuthController
         ];
 
         $resetToken = Token::generate($payload);
-        $resetLink = "http://localhost:3000/reset-password?token=" . urlencode($resetToken);
+        $resetLink = "https://air-concess.vercel.app/reset-password?token=" . urlencode($resetToken);
 
         $subject = "Reinitialisez votre mot de passe";
         $body = "
@@ -272,15 +273,15 @@ class AuthController
 
 
         try {
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
+            $mail->Host = self::$smtp_host;
             $mail->SMTPAuth = true;
-            $mail->Username = 'airconcess.contact@gmail.com';
-            $mail->Password = 'qtbriwetjarfsgry';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
+            $mail->Username = self::$smtp_username;
+            $mail->Password = self::$smtp_password;
+            $mail->SMTPSecure = self::$smtp_secure;
+            $mail->Port = self::$smtp_port;
+            $mail->isSMTP();
 
-            $mail->setFrom('airconcess.contact@gmail.com', 'AirConcess');
+            $mail->setFrom(self::$smtp_username, 'AirConcess');
             $mail->addAddress($email, 'Utilisateur');
 
             $mail->isHTML(true);

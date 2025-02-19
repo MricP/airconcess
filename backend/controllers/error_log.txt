@@ -1,9 +1,17 @@
-[19-Feb-2025 21:14:03 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
-[19-Feb-2025 21:14:03 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
-[19-Feb-2025 21:14:03 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
-[19-Feb-2025 21:14:03 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
-[19-Feb-2025 21:14:03 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
-[19-Feb-2025 21:14:03 UTC] payload:Array
+[19-Feb-2025 21:27:58 UTC] PHP Warning:  Trying to access array offset on value of type int in C:\wamp64\www\air-concess\backend\public\api.php on line 174
+[19-Feb-2025 21:27:58 UTC] PHP Stack trace:
+[19-Feb-2025 21:27:58 UTC] PHP Warning:  Trying to access array offset on value of type int in C:\wamp64\www\air-concess\backend\public\api.php on line 174
+[19-Feb-2025 21:27:58 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 21:27:58 UTC] PHP Stack trace:
+[19-Feb-2025 21:27:58 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 21:28:06 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
+[19-Feb-2025 21:28:06 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
+[19-Feb-2025 21:28:06 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
+[19-Feb-2025 21:28:06 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
+[19-Feb-2025 21:28:06 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
+[19-Feb-2025 21:28:06 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
+[19-Feb-2025 21:28:06 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
+[19-Feb-2025 21:28:06 UTC] payload:Array
 (
     [idUser] => 24
     [email] => fillouxflorian56@gmail.com
@@ -12,8 +20,7 @@
     [exp] => 1740000879
 )
 
-[19-Feb-2025 21:14:03 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
-[19-Feb-2025 21:14:03 UTC] payload:Array
+[19-Feb-2025 21:28:06 UTC] payload:Array
 (
     [idUser] => 24
     [email] => fillouxflorian56@gmail.com
@@ -22,7 +29,7 @@
     [exp] => 1740000879
 )
 
-[19-Feb-2025 21:14:03 UTC] payload:Array
+[19-Feb-2025 21:28:06 UTC] payload:Array
 (
     [idUser] => 24
     [email] => fillouxflorian56@gmail.com
@@ -31,9 +38,8 @@
     [exp] => 1740000879
 )
 
-[19-Feb-2025 21:14:03 UTC] Headers: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
-[19-Feb-2025 21:14:03 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
-[19-Feb-2025 21:14:03 UTC] payload:Array
+[19-Feb-2025 21:28:06 UTC] TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM5OTk3Mjc5LCJleHAiOjE3NDAwMDA4Nzl9.zsM_LgluFkddqFc-PewcAznbxN-VxpFQAkhHwHRFSdo
+[19-Feb-2025 21:28:06 UTC] payload:Array
 (
     [idUser] => 24
     [email] => fillouxflorian56@gmail.com
@@ -42,9 +48,9 @@
     [exp] => 1740000879
 )
 
-[19-Feb-2025 21:14:15 UTC] PHP Warning:  Trying to access array offset on value of type int in C:\wamp64\www\air-concess\backend\public\api.php on line 163
-[19-Feb-2025 21:14:15 UTC] PHP Stack trace:
-[19-Feb-2025 21:14:15 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
-[19-Feb-2025 21:14:15 UTC] PHP Warning:  Trying to access array offset on value of type int in C:\wamp64\www\air-concess\backend\public\api.php on line 163
-[19-Feb-2025 21:14:15 UTC] PHP Stack trace:
-[19-Feb-2025 21:14:15 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 21:28:11 UTC] PHP Warning:  Trying to access array offset on value of type int in C:\wamp64\www\air-concess\backend\public\api.php on line 174
+[19-Feb-2025 21:28:11 UTC] PHP Warning:  Trying to access array offset on value of type int in C:\wamp64\www\air-concess\backend\public\api.php on line 174
+[19-Feb-2025 21:28:11 UTC] PHP Stack trace:
+[19-Feb-2025 21:28:11 UTC] PHP Stack trace:
+[19-Feb-2025 21:28:11 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 21:28:11 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0

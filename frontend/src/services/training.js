@@ -26,4 +26,13 @@ export const getTrainers = async () => {
   }
 };
 
+export const getTrainings = async (idTrainer) => {
+  try {
+    const response = await axiosInstance.post('/training/getTrainings',idTrainer);   
+    return response;
+  } catch (error) {
+      throw error;
+  }
+}
+
 

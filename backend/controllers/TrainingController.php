@@ -64,6 +64,45 @@
 
             echo json_encode($returnedData);
         }
+
+        public static function getAllTrainings($idTrainer) {
+            $trainings = Training::selectAllTrainings($idTrainer);
+            $returnedData = [];
+    
+            if($trainings) {
+                foreach($trainings as $training) {
+                    $slots = Training::getTrainingPreferedSlots($training['training_id']);
+                    $returnedSlots = null;
+                    
+                    if($slots) {
+                        foreach($slots as $slot) {
+                            $returnedSlots[] = [
+                                "startTime" => $slot['start_time'],
+                                "endTime" => $slot['end_time'],
+                            ];
+                        }
+                    }
+    
+                    $responseFromTrainer = Training::getTrainingProposals($training['training_id']);
+    
+                    $returnedData[] = [
+                        "trainerId" => $idTrainer,
+                        "trainingId" => $training['training_id'],
+                        "finalProposalId" => $training['final_proposal_id'],
+                        "usrProfilePicture" => $training['profilePictureUrl'],
+                        "usrFirstName" => $training['firstName'],
+                        "usrLastName" => $training['lastName'],
+                        "startDate" => $training['start_date_pref'],
+                        "endDate" => $training['end_date_pref'],
+                        "frequency" => $training['frequency_pref'],
+                        "prefSlots" => $returnedSlots,
+                        "hasResponseFromTrainer" => $responseFromTrainer ? true : false,
+                    ];
+                }
+            }
+    
+            echo json_encode($returnedData);
+        }
     }
 ?>
 

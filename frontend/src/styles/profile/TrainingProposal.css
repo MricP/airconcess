@@ -1,39 +1,57 @@
-.TrainingProposal-container{
-    margin-top: 15px;
+.tp-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 10px;
     position: relative;
 }
+.tp-container input {
+    font-size: var(--text-size);
+    /* height: 40px; */
+}
 
-.TrainingProposal-chooseDate-container{
+.tp-container .css-13cymwt-control,
+.tp-container .css-t3ipsp-control {
+    height: 40px;
+}
+
+.tp-container p:not(.title) {
+    /* background-color: red; */
+    font-size: var(--lower-text-size);
+}
+
+.tp-container .tp-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
 }
 
-.TrainingProposal-chooseDate{
+.tp-container .tp-header .button-del {
+    color: #5b5b5b;
+    transition: all ease 0.2s;
+    cursor: pointer;
+}
+
+.tp-container .tp-header .button-del:hover {
+    color: red;
+    stroke-width: 0.5;
+}
+
+.trainerChoiceItem-container .tp-table {
+    width: 100%;
+    table-layout: fixed;
+    
+}
+
+.trainerChoiceItem-container .tp-table th{
+    border: 1px solid rgba(0, 0, 0, 0.336); 
+    width: 10%;
+} 
+
+.trainerChoiceItem-container .tp-dates-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: left;
-    gap: 10px;
-    width: 100%;
-    margin-bottom: 25px;
+    gap: 2%;
 }
-
-.TrainingProposal-date{
-    width: 100%;
-}
-
-.TrainingProposal-border, .TrainingProposal-border th, .TrainingProposal-border td { 
-    border: 1px solid black; 
-    border-collapse: collapse; 
-    text-align: center;
-}
-
-.TrainingProposal-border th, .TrainingProposal-border td {
-    width: 50px;
+.trainerChoiceItem-container .tp-dates-container>div {
+    width: 49%;
 }
