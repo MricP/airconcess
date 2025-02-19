@@ -41,3 +41,18 @@
 .third-training-component-third {
     background-image: url(../../../public/assets/training/avionModerne.jpg);
 }
+
+@media (max-width: 992px) {
+    .third-training-component-image {
+        flex-direction: column;
+        gap: 5vh;
+    }
+
+    .third-training-component-container {
+        width: 80vw;
+        height: 60vh;
+        text-align: justify;
+        padding: 4vw;
+        height: auto;
+    }
+}

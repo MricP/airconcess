@@ -58,6 +58,10 @@ footer h2 {
     box-shadow: 1px 1px 2px black;
 }
 
+.footer-reseau-picture a {
+    margin-top: 10px;
+}
+
 .footer-reseau-picture-child {
     display: flex;
     justify-content: center;
@@ -116,10 +120,10 @@ footer h2 {
     .footer-reseau {
         flex-direction: row;
         gap: 2vw;
+        align-items: center;
     }
 
     .footer-reseau-picture {
-        margin-top: 10px;
         width: 50px;
     }
 

@@ -27,3 +27,13 @@
 .second-training-component-button {
     width: 30vw;
 }
+
+@media (max-width: 992px) {
+    .second-training-component h2 {
+        width: 80vw;
+    }
+
+    .second-training-component-button {
+        width: 50vw;
+    }
+}

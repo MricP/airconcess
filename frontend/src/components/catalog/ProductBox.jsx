@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
 import "../../styles/catalog/ProductBox.css";
-import { useNavigate } from 'react-router-dom';
 import { IoTrashBin } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { deleteAircraft, getModelName } from '../../services/product';
 import PageProduct from '../../pages/product/PageProduct';
 import { updateAircraft, updateMainImage, updateSliderImages, updateIconImage, insertLog, getAircraft } from '../../services/product';
+import useRedirect from '../Custom-hooks';
 
 export const ProductBox = (props) => {
-  const navigate = useNavigate();
+  const redirect = useRedirect();
   const [showProductPage, setShowProductPage] = useState(false);
 
   const icon = props.use === "delete" ? <IoTrashBin size={30} color='red' /> : props.use === "edit" && <CiEdit size={30} />;
@@ -146,7 +146,7 @@ export const ProductBox = (props) => {
             <p>{props.description}</p>
             <div className='LearnMorebButton'>
               <p>EN SAVOIR PLUS</p>
-              <button onClick={() => navigate(`/product/${props.idAircraft}` )}>
+              <button onClick={() => redirect(`/product/${props.idAircraft}` )}>
                 <FaArrowRightLong size={20}/>
               </button>
             </div>

@@ -14,11 +14,18 @@ export default function Footer() {
             <div className="footer-high-footer">
                 {!isMobile && <h2>Proposer<br></br>les meilleurs<br></br>aéronefs du marché</h2>}
                 <img src='/assets/logo-white.png' alt="logo" />
-                <div className="footer-reseau">
-                    <div className="footer-reseau-picture"><Link to=""><FaLinkedin className="footer-reseau-picture-child" size={30} /></Link></div>
-                    <div className="footer-reseau-picture"><Link to=""><FaSquareXTwitter className="footer-reseau-picture-child" size={30} /></Link></div>
-                    <div className="footer-reseau-picture"><Link to=""><FaInstagram className="footer-reseau-picture-child" size={30} /></Link></div>
-                </div>
+                {isMobile ? 
+                    <div className="footer-reseau">
+                        <div className="footer-reseau-picture"><Link to=""><FaLinkedin className="footer-reseau-picture-child" size={30} /></Link></div>
+                        <div className="footer-reseau-picture"><Link to=""><FaSquareXTwitter className="footer-reseau-picture-child" size={30} /></Link></div>
+                        <div className="footer-reseau-picture"><Link to=""><FaInstagram className="footer-reseau-picture-child" size={30} /></Link></div>
+                    </div> : 
+                    <div className="footer-reseau">
+                        <div className="footer-reseau-picture"><Link to=""><FaLinkedin className="footer-reseau-picture-child" size={40} /></Link></div>
+                        <div className="footer-reseau-picture"><Link to=""><FaSquareXTwitter className="footer-reseau-picture-child" size={40} /></Link></div>
+                        <div className="footer-reseau-picture"><Link to=""><FaInstagram className="footer-reseau-picture-child" size={40} /></Link></div>
+                    </div>  
+                }
 
             </div>
             <div className="footer-bottom-footer">
