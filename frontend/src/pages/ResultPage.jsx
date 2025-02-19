@@ -5,7 +5,7 @@ import "../styles/ResultPage.css"
 import DarkButton from '../components/general/DarkButton';
 
 
-function ResultPage({ message="", redirectionMessage="Retourner à l'accueil",redirectTo="/", delay = 3000 }) {
+function ResultPage({ message = "", redirectionMessage = "Retourner à l'accueil", redirectTo = "/", delay = 3000 }) {
     const redirect = useRedirect();
 
     useEffect(() => {
@@ -14,12 +14,12 @@ function ResultPage({ message="", redirectionMessage="Retourner à l'accueil",re
         }, delay);
 
         return () => clearTimeout(timer);
-    }, [redirect,delay,redirectTo]);
+    }, [redirect, delay, redirectTo]);
 
     return (
         <div className="result-page">
             <h3>{message}</h3>
-            <DarkButton type="button" onClick={()=>redirect(redirectTo)}>{redirectionMessage}</DarkButton>
+            <DarkButton type="button" onClick={() => redirect(redirectTo)}>{redirectionMessage}</DarkButton>
         </div>
     );
 }

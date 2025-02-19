@@ -26,11 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && preg_match('/\/api\/?$/', $_SERVER['
     $data = ['question' => ['Bonjour']];
     ChatbotController::init();
     $response = ChatbotController::responseForTheQuestion($data);
-
     echo json_encode(['answer' => $response]);
-    // $headers = getallheaders();
-    // $payload = AuthMiddleware::verifyAdminAccess($headers);
-    // echo json_encode(['payload' => $payload]);
 }
 
 // Route pour l'inscription (POST)
@@ -71,20 +67,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 // Route pour récupérer ou modifier l'utilisateur (GET et PUT)
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/auth/user') !== false) {
     $headers = getallheaders();
+
     if (!isset($headers['Authorization'])) {
         http_response_code(401);
-        echo json_encode(["message" => "Bonjour, vous devez vous connecter pour accéder à cette ressource"]);
+        echo json_encode(["message" => "Vous devez être connecté pour accéder à cette ressource."]);
         exit();
     }
+
+    // Récupération du token dans l'en-tête Authorization
     $token = str_replace('Bearer ', '', $headers['Authorization']);
+
     $payload = Token::verify($token);
     if (!$payload) {
         http_response_code(401);
-        echo json_encode(["message" => "Bonjour, vous devez vous connecter pour accéder à cette ressource"]);
+        echo json_encode(["message" => "Token invalide ou expiré."]);
         exit();
     }
+
+    // Vérification que l'utilisateur existe encore en base de données
+    $user = User::findById($payload['idUser']);
+    if (!$user) {
+        http_response_code(404);
+        echo json_encode(["message" => "Utilisateur non trouvé."]);
+        exit();
+    }
+
+    // Envoi des données utilisateur
     AuthController::getUser($payload);
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], 'testimonial/id-user') !== false) {
     $id_user = $_GET['id_user'] ?? null;
@@ -260,7 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my
     ProfileController::updateProfileData($payload);
 }
 
-if($_SERVER['REQUEST_METHOD'] === 'DELETE' && strpos($_SERVER['REQUEST_URI'], '/my-profile/delete') !== false){
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && strpos($_SERVER['REQUEST_URI'], '/my-profile/delete') !== false) {
     $headers = getallheaders();
     if (!isset($headers['Authorization'])) {
         http_response_code(401);

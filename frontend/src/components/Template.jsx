@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ChatbotComponent from './chatbot/ChatbotComponent';
 import useAuth from '../hooks/useAuth';
+import ErrorBoundary from './ErrorBoundary';  
 
 function Template({ children }) {
   useAuth();
@@ -54,12 +55,12 @@ function Template({ children }) {
   }
 
   return (
-    <div>
+    <ErrorBoundary fallback={<p>Something went wrong</p>}>
         <Header color={color}/>
         {children}
         <ChatbotComponent/>
         { <Footer/>}
-    </div>
+    </ErrorBoundary>
 
   )
 }

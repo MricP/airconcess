@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/landing-page/FifthSectionLanding.css';
 import { getTestimonialsByUser, getAllTestimonials } from '../../services/api';
-import { useNavigate } from 'react-router-dom';
 import useRedirect from '../Custom-hooks';
 
 function FifthSectionLanding() {
