@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://airconcess.org/public/api.php',
+  baseURL: 'http://localhost/air-concess/backend/public/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -25,5 +25,14 @@ export const getTrainers = async () => {
       throw error;
   }
 };
+
+export const getTrainings = async (idTrainer) => {
+  try {
+    const response = await axiosInstance.post('/training/getTrainings',idTrainer);   
+    return response;
+  } catch (error) {
+      throw error;
+  }
+}
 
 

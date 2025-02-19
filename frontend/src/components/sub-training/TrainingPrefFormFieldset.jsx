@@ -55,13 +55,13 @@ function TrainingPrefFormFieldset({ trainers, formData, register, errors, setVal
     },[]);
 
     function handleContent() {
-        const tr = trainers.filter(trainer => trainer?.id === formData.trainer?.value)[0]
+        const tr = trainers?.filter(trainer => trainer?.id === formData.trainer?.value)[0]
         return `${tr?.address}, ${tr?.country}, ${tr?.city}`
     }
 
     useEffect(() => {
         const trainersOptionsTemp = [];
-        trainers.forEach(trainer => {
+        trainers?.forEach(trainer => {
             trainersOptionsTemp.push({
                 value: trainer.id,
                 label:`${trainer.firstName} ${trainer.lastName}, ${trainer.country}, ${trainer.city}`
@@ -125,7 +125,7 @@ function TrainingPrefFormFieldset({ trainers, formData, register, errors, setVal
                     {
                         timeSlots.length === 0 ? 
                             <div style={{display:"flex",justifyContent:"center", alignItems:"center"}}>Aucune plage selectionnée</div> : 
-                            
+                
                         timeSlots.map((slot) => (
                             <div className="time-slot" key={slot.id}>
                                 <p>De</p>
