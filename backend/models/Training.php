@@ -36,20 +36,20 @@ class Training
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT * FROM training_preferedslot WHERE trainingConcerned_id = ?");
         $stmt->execute([$idTraining]);
-        return $pdo->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getAllTrainings($idTrainer) {
+    public static function selectAllTrainings($idTrainer) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT t.training_id,t.final_proposal_id,u.firstName,u.lastName,u.profilePictureUrl,t.frequency_pref,t.start_date_pref,t.end_date_pref training t inner join user u WHERE trainerConcerned_id = ?");
+        $stmt = $pdo->prepare("SELECT t.training_id, t.final_proposal_id, u.firstName, u.lastName, u.profilePictureUrl, t.frequency_pref, t.start_date_pref, t.end_date_pref FROM training t INNER JOIN user u ON u.idUser = t.trainerConcerned_id WHERE trainerConcerned_id = ?");
         $stmt->execute([$idTrainer]);
-        return $pdo->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getTrainingProposals($idTraining) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("SELECT * FROM training_proposal WHERE trainingConcerned_id = ?");
         $stmt->execute([$idTraining]);
-        return $pdo->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

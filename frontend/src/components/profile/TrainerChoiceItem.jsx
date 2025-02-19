@@ -7,6 +7,7 @@ import DarkButton from "../general/DarkButton"
 import { useForm } from "react-hook-form";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosAddCircle } from "react-icons/io";
+import { toast } from 'react-toastify';
 
 
 export default function TrainerChoiceItem({trainingData}) {
@@ -18,7 +19,7 @@ export default function TrainerChoiceItem({trainingData}) {
 
     const {register,handleSubmit,watch,setValue, formState: { errors }} = useForm (
         { defaultValues: {
-            proposals: null, //Format : { IDPROPOSAL: {dateStart:VALUE,dateEnd:VALUE,times: [timeM,timeTu,timeTh,timeWe,timeF]} }
+            proposals: null, //Format : { IDPROPOSAL: {dateStart:VALUE,dateEnd:VALUE,hourMondayhourTuesdayhourWednesdayhourThursdayhourFriday} }
         }}
     );
 
@@ -27,7 +28,19 @@ export default function TrainerChoiceItem({trainingData}) {
     const [isHovered, setIsHovered] = useState(false);
 
     const onSubmit = () => {
-        console.log("ok")
+        
+        if(formData.proposals) {
+            let isValid = true;
+            for (let key in formData.proposals) {
+                if(!(formData.proposals?.[key]?.hourMonday || formData.proposals?.[key]?.hourTuesday || formData.proposals?.[key]?.hourWednesday ||
+                    formData.proposals?.[key]?.hourThursday || formData.proposals?.[key]?.hourFriday)) isValid=false
+            }
+            if(isValid) {
+                console.log("ok")
+            } else {
+                toast.error("Vous devez selectionner au moins une zone horaire par proposition")
+            }
+        }
     }
 
     const addProposal = () => {
@@ -42,6 +55,16 @@ export default function TrainerChoiceItem({trainingData}) {
             delete formData.proposals[id];
         }
     };
+
+    function handleDisplayPrefSlots() {
+        let slots = [];
+        for (let key in trainingData.prefSlots) {
+            let hStart = trainingData.prefSlots[key].startTime.split(":");
+            let hEnd = trainingData.prefSlots[key].endTime.split(":");
+            slots.push(<p key={key}>{"De " + hStart[0] + "h" + hStart[1] + " à " + hEnd[0] + "h" + hEnd[1]}</p>);
+        }
+        return slots;
+    }
     
     useEffect(() => {
         let temp = proposals;
@@ -58,24 +81,39 @@ export default function TrainerChoiceItem({trainingData}) {
         }
     }
 
+    const handleStatus = () => {
+        if(trainingData?.finalProposalId) {
+            return <p style={{color:"green"}}>Traité</p>
+        } else {
+            if(trainingData.hasResponseFromTrainer) {
+                return <p style={{color:"orange"}}>En attente du client</p>
+            } else {
+                return <p style={{color:"red"}}>Non traité</p>
+            }
+        }
+    }
+
     return (
         <div className={`trainerChoiceItem-container`} >
             <div className='trainerChoiceItem-userMainInfos-container' onClick={handleItemClick}>
                 <div className='trainerChoiceItem-userMainInfos'>
                     <img className='trainerChoiceItem-userMainInfos-profilePic' src={profile} alt='' />
-                    <p>Pirrera</p>
-                    <p>Emric</p> 
+                    <p>{trainingData.usrFirstName} {trainingData.usrLastName}</p>
                 </div>
-                <IoIosArrowForward className={`trainerChoiceItem-arrow ${isOpen ? "click" : ""}`} color='var(--section-color)' size={30} />
+                <div>
+                    {handleStatus()}
+                    <IoIosArrowForward className={`trainerChoiceItem-arrow ${isOpen ? "click" : ""}`} color='var(--section-color)' size={30} />
+                </div>
             </div>
             {isOpen === true && (
                 <>
                     <div className='pref-container'>
                         <p className='title'>Préférences client</p>
-                        <p>• Date de début : </p>
-                        <p>• Date de fin : </p>
-                        <p>• Fréquence des séances : </p>
-                        <p>• Préférences horaires : </p>
+                        <p>• Date de début : {trainingData?.startDate}</p>
+                        <p>• Date de fin : {trainingData?.endDate}</p>
+                        <p>• Fréquence des séances : {trainingData?.frequency} séance(s) par semaine</p>
+                        <p>• Préférences horaires : {trainingData?.prefSlots ? null : "Non renseigné"}</p>
+                        {trainingData.prefSlots ? <div className="value-container">{handleDisplayPrefSlots()}</div> : null}
                     </div>
                     
                     <form method="POST" onSubmit={handleSubmit(onSubmit)} className='proposals' id={proposals.length === 0 ? "nothing" : ""}>

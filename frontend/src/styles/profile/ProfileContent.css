@@ -4,8 +4,32 @@
     align-items: center;
     justify-content: center;
     width: 70%;
-
 }
+
+.trainer-zone {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.trainer-zone>p {
+    font-weight: bold;
+}
+
+.trainings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: scroll;
+    height: fit-content;
+    max-height: 700px;
+    padding: 5px;
+}
+
+
 
 /* calendar */
 

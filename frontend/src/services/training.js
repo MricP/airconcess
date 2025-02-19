@@ -26,10 +26,10 @@ export const getTrainers = async () => {
   }
 };
 
-export const getAllTrainings = async (idTrainer) => {
+export const getTrainings = async (idTrainer) => {
   try {
-      const response = await axiosInstance.get('/training/getTrainings',idTrainer);   
-      return response;
+    const response = await axiosInstance.post('/training/getTrainings',idTrainer);   
+    return response;
   } catch (error) {
       throw error;
   }

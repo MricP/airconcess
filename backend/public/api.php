@@ -260,7 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/getTrainings') !== false) {
     $idTrainer = json_decode(file_get_contents("php://input"), true);
-    ProfileController::getAllTrainings($idTrainer);
+    TrainingController::getAllTrainings($idTrainer);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my-profile') !== false) {

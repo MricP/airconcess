@@ -7,6 +7,11 @@
 }
 .tp-container input {
     font-size: var(--text-size);
+    /* height: 40px; */
+}
+
+.tp-container .css-13cymwt-control,
+.tp-container .css-t3ipsp-control {
     height: 40px;
 }
 

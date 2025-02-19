@@ -55,7 +55,7 @@ function TrainingProposal({noProposal,proposId,formData,errors,setValue,register
                 <CustomDatePicker
                     className={errors.proposals?.[proposId]?.dateStart ? "input-error" : ""}
                     disabledSlots={[]}
-                    // disableAfter={formData.proposals?.[key] ? formData.proposals?.[key]?.dateEnd : null}
+                    disableAfter={formData.proposals?.[proposId] ? formData.proposals?.[proposId]?.dateEnd : null}
                     setDate={(value) => setValue(`proposals.${proposId}.dateStart`,value, errors.proposals?.[proposId]?.dateStart ? { shouldValproposIdate: true } : { shouldValproposIdate: false })}
                     value={formData?.proposals?.[proposId]?.dateStart}
                     {...register(`proposals.${proposId}.dateStart`, { required: "La date de début est obligatoire." })}
@@ -66,7 +66,7 @@ function TrainingProposal({noProposal,proposId,formData,errors,setValue,register
                 <CustomDatePicker
                     className={errors.proposals?.[proposId]?.dateEnd ? "input-error" : ""}
                     disabledSlots={[]}
-                    // disableBefore={formData.proposals?.[key] ? formData.proposals?.[key]?.dateStart : null}
+                    disableBefore={formData.proposals?.[proposId] ? formData.proposals?.[proposId]?.dateStart : null}
                     setDate={(value) => setValue(`proposals.${proposId}.dateEnd`,value, errors.proposals?.[proposId]?.dateEnd ? { shouldValproposIdate: true } : { shouldValproposIdate: false })}
                     value={formData?.proposals?.[proposId]?.dateEnd}
                     {...register(`proposals.${proposId}.dateEnd`, { required: "La date de fin est obligatoire." })}

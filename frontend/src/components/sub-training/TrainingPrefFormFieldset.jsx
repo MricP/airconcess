@@ -125,7 +125,7 @@ function TrainingPrefFormFieldset({ trainers, formData, register, errors, setVal
                     {
                         timeSlots.length === 0 ? 
                             <div style={{display:"flex",justifyContent:"center", alignItems:"center"}}>Aucune plage selectionnée</div> : 
-                            
+                
                         timeSlots.map((slot) => (
                             <div className="time-slot" key={slot.id}>
                                 <p>De</p>

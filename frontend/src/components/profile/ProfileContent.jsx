@@ -1,11 +1,10 @@
 import React, {useRef,useState,useEffect} from 'react'
 import "../../styles/profile/ProfileContent.css"
-import {createTestimonial} from "../../services/auth.js"
-import {getAllTrainings} from "../../services/training.js"
-import {getAppointmentByUser} from "../../services/appointment.js"
+import { getAppointmentByUser } from "../../services/appointment.js"
 import { useNavigate } from 'react-router-dom'
-import {Calendar,Badge} from 'rsuite'
-import { getUserData } from '../../services/auth.js'
+import { Calendar,Badge } from 'rsuite'
+import { getUserData, createTestimonial } from '../../services/auth.js'
+import { getTrainings } from "../../services/training.js"
 import TrainerChoiceItem from './TrainerChoiceItem.jsx'
 import "../../styles/general/Rsuite-custom.css"
 
@@ -24,9 +23,8 @@ export default function ProfileContent() {
       try {
         const data = await getUserData(token);
         setUserData(data);
-        console.log(data)
         if(data?.isTrainer) {
-          await loadTrainingsDataOfTrainer(data.id)
+          await loadTrainingsDataOfTrainer(data.idUser)
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -37,7 +35,7 @@ export default function ProfileContent() {
 
   const loadTrainingsDataOfTrainer = async (id) => {
     try {
-      const trainingsD = await getAllTrainings(id)
+      const trainingsD = await getTrainings(id)
       console.log(trainingsD.data)
       setAllTrainingsData(trainingsD.data)
     } catch (error) {
@@ -100,25 +98,28 @@ export default function ProfileContent() {
 
   return (
     <>
-      {userData?.isTrainer !== 1 && userData?.isTrainer !== null && (
-        <main className='profile-content-container'>
-          <div className='profile-actionStatus'>
-              <Calendar renderCell={renderCell} isoWeek />
+      <main className='profile-content-container'>
+        <div className='profile-actionStatus'>
+            <Calendar renderCell={renderCell} isoWeek />
+        </div>
+        {userData?.isTrainer === 1 ?
+          <div className='trainer-zone'>
+            <p>Espace formateur</p>
+            <div className='trainings-container'>
+              {allTrainingsData?.map(tr => { return <TrainerChoiceItem trainingData={tr} key={tr.trainingId}/>})}
+            </div> 
           </div>
-          <div className='profile-commentaire-container'>
-            <form method='POST' onSubmit={handleSubmitTestimonial}>
-              <p><strong>Ajouter un commentaire</strong></p>
-              <textarea ref={testimonialRef} name='testimonial' placeholder='Donnez nous votre avis...'></textarea>
-              <button type='submit'>Publier</button>
-            </form> 
-          </div> 
-        </main>
-       )} 
-       {userData?.isTrainer === 1 && (
-        <main className='profile-content-container'>
-          <TrainerChoiceItem />
-        </main>
-       )} 
+          
+        : null}
+        <div className='profile-commentaire-container'>
+          <form method='POST' onSubmit={handleSubmitTestimonial}>
+            <p><strong>Ajouter un commentaire</strong></p>
+            <textarea ref={testimonialRef} name='testimonial' placeholder='Donnez nous votre avis...'></textarea>
+            <button type='submit'>Publier</button>
+          </form> 
+        </div> 
+        
+       </main>
     </>
   )
   

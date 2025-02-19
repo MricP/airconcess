@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../models/Appointment.php';
-require_once __DIR__ . '/../models/Training.php';
-
 
 class ProfileController
 {
@@ -116,43 +114,5 @@ class ProfileController
         // $appointments = Appointment::getAppointmentByUser($user['idUser']);
         echo json_encode($appointments);
     }
-
-    public static function getAllTrainings($idTrainer) {
-        $trainings = Training::getAllTrainings($idTrainer);
-        $returnedData = [];
-
-        if($trainers) {
-            foreach($trainings as $training) {
-                $slots = Training::getTrainingPreferedSlots($training['training_id']);
-                $returnedSlots = [];
-
-                foreach($slots as $slot) {
-                    $returnedSlots[] = [
-                        "startTime" => $slot['start_time'],
-                        "endTime" => $slot['end_time'],
-                    ];
-                }
-
-                $responseFromTrainer = Training::getTrainingProposals($training['training_id']);
-
-                $returnedData[] = [
-                    "trainerId" => $training['trainer_id'],
-                    "trainingId" => $training['training_id'],
-                    "finalProposalId" => $training['final_proposal_id'],
-                    "usrProfilePicture" => $training['profilePictureUrl'],
-                    "usrFirstName" => $training['firstName'],
-                    "usrLastName" => $training['lastName'],
-                    "startDate" => $training['start_date_pref'],
-                    "endDate" => $training['end_date_pref'],
-                    "frequency" => $training['frequency_pref'],
-                    "prefSlots" => $returnedSlots,
-                    "hasResponseFromTrainer" => $responseFromTrainer ? true : false,
-                ];
-            }
-        }
-
-        echo json_encode($returnedData);
-    }
-
     
 }
