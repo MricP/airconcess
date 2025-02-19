@@ -1,18 +1,14 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://46.101.169.59/public/api.php',
+  baseURL: 'https://airconcess.org/public/api.php',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 
-
-
 export const submitContact = (formData) => {
-  console.log(formData);
-
   if (formData.consent !== true) {
     throw new Error('Consentement requis');
   }
@@ -26,8 +22,6 @@ export const submitContact = (formData) => {
 export const fetchTestMessage = async () => {
   try {
     const response = await axiosInstance.get('/api');
-    console.log('Full response:', response); // Log the full response
-    console.log('Data fetched:', response.data.message); // Log the message
     return response.data.message;
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -38,8 +32,6 @@ export const fetchTestMessage = async () => {
 export const getCatalogData = async () => {
   try {
     const response = await axiosInstance.get('/catalog');
-    // console.log('Full response:', response);
-    // console.log('Catalog data fetched:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching catalog data:', error);
@@ -59,7 +51,6 @@ export const getAllTestimonials = async () => {
 
 export const getTestimonialsByUser = async (id_user) => {
   try {
-//  console.log('/testimonials/id-user');
     const response = await axiosInstance.get(`testimonial/id-user?id_user=${id_user}`);
     return response.data;
   } catch (error) {

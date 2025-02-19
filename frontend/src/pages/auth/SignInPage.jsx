@@ -24,7 +24,6 @@ const SignInPage = () => {
       setResponseMessage(response.message);
       if (response.token) {
         localStorage.setItem('token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
         window.location.href = '/';
       } else if (response.message) {
         setErrorHtml(null);
