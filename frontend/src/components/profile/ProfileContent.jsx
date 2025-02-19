@@ -24,7 +24,7 @@ export default function ProfileContent() {
       try {
         const data = await getUserData(token);
         setUserData(data);
-        console.log("LAAAAAAAAAAAAAA : "+data)
+        console.log(data)
         if(data?.isTrainer) {
           await loadTrainingsDataOfTrainer(data.id)
         }
@@ -38,7 +38,7 @@ export default function ProfileContent() {
   const loadTrainingsDataOfTrainer = async (id) => {
     try {
       const trainingsD = await getAllTrainings(id)
-      console.log("ICCCCCCIIIIIIII : "+trainingsD)
+      console.log(trainingsD.data)
       setAllTrainingsData(trainingsD.data)
     } catch (error) {
       console.error('Error fetching user data:', error);

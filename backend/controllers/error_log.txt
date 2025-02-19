@@ -1718,3 +1718,1572 @@
     [exp] => 1739919501
 )
 
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:30 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:35:30 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:30 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:35:30 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:30 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:30 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:30 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:35:30 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:30 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:35:30 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:30 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:35:30 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:35:30 UTC] nb parts: 3
+[19-Feb-2025 11:35:31 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:10 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:10 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:10 UTC] nb parts: 3
+[19-Feb-2025 11:37:10 UTC] nb parts: 3
+[19-Feb-2025 11:37:10 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:10 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:10 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:10 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:10 UTC] nb parts: 3
+[19-Feb-2025 11:37:10 UTC] nb parts: 3
+[19-Feb-2025 11:37:10 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:10 UTC] nb parts: 3
+[19-Feb-2025 11:37:10 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:10 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:10 UTC] nb parts: 3
+[19-Feb-2025 11:37:10 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:10 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:10 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:29 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:29 UTC] nb parts: 3
+[19-Feb-2025 11:37:29 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:29 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:29 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:29 UTC] nb parts: 3
+[19-Feb-2025 11:37:29 UTC] nb parts: 3
+[19-Feb-2025 11:37:29 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:29 UTC] nb parts: 3
+[19-Feb-2025 11:37:29 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:29 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:29 UTC] nb parts: 3
+[19-Feb-2025 11:37:29 UTC] nb parts: 3
+[19-Feb-2025 11:37:29 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:29 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:29 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:29 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:29 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:45 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:45 UTC] nb parts: 3
+[19-Feb-2025 11:37:45 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:45 UTC] nb parts: 3
+[19-Feb-2025 11:37:45 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:45 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:46 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:46 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:46 UTC] nb parts: 3
+[19-Feb-2025 11:37:46 UTC] nb parts: 3
+[19-Feb-2025 11:37:46 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:46 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:46 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:46 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:46 UTC] nb parts: 3
+[19-Feb-2025 11:37:46 UTC] nb parts: 3
+[19-Feb-2025 11:37:46 UTC] nb parts: 3
+[19-Feb-2025 11:37:46 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:46 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:46 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:37:46 UTC] nb parts: 3
+[19-Feb-2025 11:37:46 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:46 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:37:46 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:38:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:38:04 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:38:04 UTC] nb parts: 3
+[19-Feb-2025 11:38:04 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:38:04 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:38:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:38:04 UTC] nb parts: 3
+[19-Feb-2025 11:38:04 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:38:50 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:38:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:38:50 UTC] nb parts: 3
+[19-Feb-2025 11:38:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:38:50 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:38:50 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:38:50 UTC] nb parts: 3
+[19-Feb-2025 11:38:50 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:39:33 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:39:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:39:33 UTC] nb parts: 3
+[19-Feb-2025 11:39:33 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:39:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:39:33 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:39:33 UTC] nb parts: 3
+[19-Feb-2025 11:39:33 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:41:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:41:58 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:41:58 UTC] nb parts: 3
+[19-Feb-2025 11:41:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:41:58 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:41:58 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:41:58 UTC] nb parts: 3
+[19-Feb-2025 11:41:58 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:42:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:42:49 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:42:49 UTC] nb parts: 3
+[19-Feb-2025 11:42:49 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:42:49 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:42:49 UTC] nb parts: 3
+[19-Feb-2025 11:42:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:42:49 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:43:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:43:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:43:59 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:43:59 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:43:59 UTC] nb parts: 3
+[19-Feb-2025 11:43:59 UTC] nb parts: 3
+[19-Feb-2025 11:43:59 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:43:59 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:45:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:45:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:45:19 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:45:19 UTC] nb parts: 3
+[19-Feb-2025 11:45:19 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:45:19 UTC] nb parts: 3
+[19-Feb-2025 11:45:19 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:45:19 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:46:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:46:06 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:46:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:46:06 UTC] nb parts: 3
+[19-Feb-2025 11:46:06 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:46:06 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:46:06 UTC] nb parts: 3
+[19-Feb-2025 11:46:06 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:47:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:47:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:47:40 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:47:40 UTC] nb parts: 3
+[19-Feb-2025 11:47:40 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:47:40 UTC] nb parts: 3
+[19-Feb-2025 11:47:40 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:47:40 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:48:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:48:02 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:48:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:48:02 UTC] nb parts: 3
+[19-Feb-2025 11:48:02 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:48:02 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:48:02 UTC] nb parts: 3
+[19-Feb-2025 11:48:02 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:48:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:48:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:48:44 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:48:44 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:48:44 UTC] nb parts: 3
+[19-Feb-2025 11:48:44 UTC] nb parts: 3
+[19-Feb-2025 11:48:44 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:48:44 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:48:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:48:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::selectAllTrainers() in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php:49
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#1 {main}
+  thrown in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 49
+[19-Feb-2025 11:48:53 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:48:53 UTC] nb parts: 3
+[19-Feb-2025 11:48:53 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:48:53 UTC] nb parts: 3
+[19-Feb-2025 11:48:53 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:48:53 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:51:29 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:51:29 UTC] nb parts: 3
+[19-Feb-2025 11:51:29 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "firstName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 59
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "lastName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 60
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "firstName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 59
+[19-Feb-2025 11:51:29 UTC] nb parts: 3
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "lastName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 60
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "firstName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 59
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "lastName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 60
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "firstName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 59
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "lastName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 60
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "firstName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 59
+[19-Feb-2025 11:51:29 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "lastName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 60
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "firstName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 59
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "lastName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 60
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "firstName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 59
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "lastName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 60
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "firstName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 59
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:51:29 UTC] PHP Warning:  Undefined array key "lastName" in C:\wamp64\www\air-concess\backend\controllers\TrainingController.php on line 60
+[19-Feb-2025 11:51:29 UTC] PHP Stack trace:
+[19-Feb-2025 11:51:29 UTC] PHP   1. {main}() C:\wamp64\www\air-concess\backend\public\api.php:0
+[19-Feb-2025 11:51:29 UTC] PHP   2. TrainingController::getAllTrainers() C:\wamp64\www\air-concess\backend\public\api.php:516
+[19-Feb-2025 11:53:54 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:53:54 UTC] nb parts: 3
+[19-Feb-2025 11:53:54 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:53:54 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 't.address_assignmentt.trainer_id' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\User.php:114
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(114): PDOStatement->execute()
+#1 C:\wamp64\www\air-concess\backend\controllers\TrainingController.php(49): User::selectAllTrainers()
+#2 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 114
+[19-Feb-2025 11:53:54 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:53:54 UTC] nb parts: 3
+[19-Feb-2025 11:53:54 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 't.address_assignmentt.trainer_id' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\User.php:114
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(114): PDOStatement->execute()
+#1 C:\wamp64\www\air-concess\backend\controllers\TrainingController.php(49): User::selectAllTrainers()
+#2 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 114
+[19-Feb-2025 11:53:54 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:54:35 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 't.address_assignmentt.trainer_id' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\User.php:114
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(114): PDOStatement->execute()
+#1 C:\wamp64\www\air-concess\backend\controllers\TrainingController.php(49): User::selectAllTrainers()
+#2 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 114
+[19-Feb-2025 11:54:35 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:54:35 UTC] nb parts: 3
+[19-Feb-2025 11:54:35 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 't.address_assignmentt.trainer_id' inconnu dans field list in C:\wamp64\www\air-concess\backend\models\User.php:114
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(114): PDOStatement->execute()
+#1 C:\wamp64\www\air-concess\backend\controllers\TrainingController.php(49): User::selectAllTrainers()
+#2 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 114
+[19-Feb-2025 11:54:35 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:54:35 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:54:35 UTC] nb parts: 3
+[19-Feb-2025 11:54:35 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:55:28 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 'u.userId' inconnu dans on clause in C:\wamp64\www\air-concess\backend\models\User.php:114
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(114): PDOStatement->execute()
+#1 C:\wamp64\www\air-concess\backend\controllers\TrainingController.php(49): User::selectAllTrainers()
+#2 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 114
+[19-Feb-2025 11:55:28 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Champ 'u.userId' inconnu dans on clause in C:\wamp64\www\air-concess\backend\models\User.php:114
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(114): PDOStatement->execute()
+#1 C:\wamp64\www\air-concess\backend\controllers\TrainingController.php(49): User::selectAllTrainers()
+#2 C:\wamp64\www\air-concess\backend\public\api.php(516): TrainingController::getAllTrainers()
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 114
+[19-Feb-2025 11:55:28 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:55:28 UTC] nb parts: 3
+[19-Feb-2025 11:55:28 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:55:28 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:55:28 UTC] nb parts: 3
+[19-Feb-2025 11:55:28 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:56:12 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:56:12 UTC] nb parts: 3
+[19-Feb-2025 11:56:12 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:56:12 UTC] nb parts: 3
+[19-Feb-2025 11:56:12 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:56:12 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:56:48 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:56:48 UTC] nb parts: 3
+[19-Feb-2025 11:56:48 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:56:48 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:56:48 UTC] nb parts: 3
+[19-Feb-2025 11:56:48 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:57:55 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:57:55 UTC] nb parts: 3
+[19-Feb-2025 11:57:55 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:57:55 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:57:55 UTC] nb parts: 3
+[19-Feb-2025 11:57:55 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:57:55 UTC] nb parts: 3
+[19-Feb-2025 11:57:55 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:57:55 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:57:55 UTC] nb parts: 3
+[19-Feb-2025 11:57:55 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:57:55 UTC] nb parts: 3
+[19-Feb-2025 11:57:55 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:57:55 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:57:55 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:57:56 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:57:56 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:57:56 UTC] nb parts: 3
+[19-Feb-2025 11:57:56 UTC] nb parts: 3
+[19-Feb-2025 11:57:56 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:57:56 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:57:56 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:57:56 UTC] nb parts: 3
+[19-Feb-2025 11:57:56 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:57:56 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:57:56 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:57:56 UTC] nb parts: 3
+[19-Feb-2025 11:57:56 UTC] nb parts: 3
+[19-Feb-2025 11:57:56 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:57:56 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+
+[19-Feb-2025 11:57:56 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjQ3LCJlbWFpbCI6Im1hdGhlb2ZscnMzOEBnbWFpbC5jb20iLCJpc0FkbWluIjowLCJpYXQiOjE3Mzk5NjQ5MjgsImV4cCI6MTczOTk2ODUyOH0
+    [2] => 3OahZwQKxXm1vKzfNURsuzfv64M9-LADrI8hAmvVuvA
+)
+
+[19-Feb-2025 11:57:56 UTC] nb parts: 3
+[19-Feb-2025 11:57:56 UTC] Array
+(
+    [idUser] => 47
+    [email] => matheoflrs38@gmail.com
+    [isAdmin] => 0
+    [iat] => 1739964928
+    [exp] => 1739968528
+)
+

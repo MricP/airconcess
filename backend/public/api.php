@@ -524,3 +524,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
     echo json_encode(['answer' => $response]);
     exit();
 }
+

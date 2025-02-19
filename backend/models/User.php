@@ -108,5 +108,14 @@ class User
         $stmt->execute([$id]);
     }
 
+    public static function selectAllTrainers() {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT t.country_assignment,t.city_assignment,t.address_assignment,t.trainer_id,u.firstName,u.lastName FROM trainer t INNER JOIN user U on u.idUser = t.trainer_id");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    
+
 
 }

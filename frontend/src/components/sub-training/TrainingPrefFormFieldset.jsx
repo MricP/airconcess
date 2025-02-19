@@ -55,13 +55,13 @@ function TrainingPrefFormFieldset({ trainers, formData, register, errors, setVal
     },[]);
 
     function handleContent() {
-        const tr = trainers.filter(trainer => trainer?.id === formData.trainer?.value)[0]
+        const tr = trainers?.filter(trainer => trainer?.id === formData.trainer?.value)[0]
         return `${tr?.address}, ${tr?.country}, ${tr?.city}`
     }
 
     useEffect(() => {
         const trainersOptionsTemp = [];
-        trainers.forEach(trainer => {
+        trainers?.forEach(trainer => {
             trainersOptionsTemp.push({
                 value: trainer.id,
                 label:`${trainer.firstName} ${trainer.lastName}, ${trainer.country}, ${trainer.city}`
