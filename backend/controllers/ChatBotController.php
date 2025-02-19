@@ -49,7 +49,6 @@ class ChatbotController
         }
 
         $user_question = reset($data['question']);
-
         if (!is_string($user_question) || empty(trim($user_question))) {
             http_response_code(400);
             return ['error' => 'La question est vide ou invalide.'];
@@ -73,36 +72,27 @@ class ChatbotController
             "temperature" => 0.7
         ];
 
-        $ch = curl_init(self::$apiUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        $options = [
+            "http" => [
+                "header" => [
+                    "Content-Type: application/json",
+                    "Authorization: Bearer " . self::$openai_api_key
+                ],
+                "method" => "POST",
+                "content" => json_encode($payload),
+                "ignore_errors" => true
+            ]
+        ];
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-            'Authorization: Bearer ' . self::$openai_api_key,
-        ]);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        $context = stream_context_create($options);
+        $response = file_get_contents(self::$apiUrl, false, $context);
 
-        $response = curl_exec($ch);
-
-        if (curl_errno($ch)) {
+        if ($response === false) {
             http_response_code(500);
-            return ['error' => "Erreur cURL: " . curl_error($ch)];
-        }
-
-        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        if ($http_status !== 200) {
-            http_response_code(500);
-            return ['error' => "Erreur lors de l'appel à l'API OpenAI.", 'details' => $response];
+            return ['error' => "Erreur lors de l'appel à l'API OpenAI."];
         }
 
         $decoded_response = json_decode($response, true);
-
         if (!isset($decoded_response['choices'][0]['message']['content'])) {
             http_response_code(500);
             return ['error' => "Réponse inattendue de l'API OpenAI.", 'details' => $decoded_response];
