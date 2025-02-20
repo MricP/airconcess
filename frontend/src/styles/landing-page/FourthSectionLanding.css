@@ -1,18 +1,21 @@
 .fourth-section-landing {
-    min-height: 100vh;
+    min-height: 120vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 20px;
 }
 
 .video-container {
-    width: 100%;
-    max-width: 800px;
-    transition: transform 0.1s ease;
+    width: 75%;
+    max-width: none;
+    height: auto;
+    border-radius: 25px;
 }
 
 .video-container-mobile {
-    width: 100%;
+    width: 90%; 
+    max-width: 600px; 
 }
 
 .video {
