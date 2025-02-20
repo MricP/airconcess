@@ -63,13 +63,13 @@ function FirstSectionLanding() {
                             Bénéficiez de notre expertise et de notre attention aux détails !
                         </motion.p>
                     </div>
-                    <div className='footer-links'>
-                        <div onClick={() => {
+                    <div className='links-to-important-pages'>
+                        <div className='links-to-important-pages-catalog' onClick={() => {
                             redirect("/catalog");
                         }}>
                             Nos avions
                         </div>
-                        <div onClick={() => {
+                        <div className='links-to-important-pages-training' onClick={() => {
                             redirect("/training");
                         }}>
                             PPL
