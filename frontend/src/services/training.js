@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://airconcess.org/public/api.php',
+  baseURL: 'https://localhost/air-concess/public/api.php',
   headers: {
     'Content-Type': 'application/json',
   },
