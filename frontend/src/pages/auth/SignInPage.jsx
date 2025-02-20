@@ -13,11 +13,10 @@ const SignInPage = () => {
   const redirect = useRedirect();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorHtml, setErrorHtml] = useState(null);
   const [responseMessage, setResponseMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSubmit = async (event) => {
-    console.log("ok")
     event.preventDefault();
     try {
       const response = await signIn({ email, password });
@@ -26,13 +25,13 @@ const SignInPage = () => {
         localStorage.setItem('token', response.token);
         window.location.href = '/';
       } else if (response.message) {
-        setErrorHtml(null);
+        setErrorMessage(null); 
       } else {
-        setErrorHtml(response);
+        setErrorMessage(response); 
       }
     } catch (error) {
       console.log('Error response:', error.response?.data?.message || 'Unknown error');
-      setErrorHtml(error.response?.data?.message || 'An error occurred');
+      setErrorMessage(error.response?.data?.message || 'An error occurred'); // Mise à jour ici
     }
   };
 
@@ -76,7 +75,7 @@ const SignInPage = () => {
             <div onClick={()=>redirect("/sign-up")} className="sign-up-link">Créer mon compte</div>
           </div>
           {responseMessage && <p className="response-message">{responseMessage}</p>}
-          {errorHtml && <div className="error-html" dangerouslySetInnerHTML={{ __html: errorHtml }} />}
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </div>
       }
     />

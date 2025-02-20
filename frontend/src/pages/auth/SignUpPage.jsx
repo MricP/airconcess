@@ -38,15 +38,6 @@ const SignUpPage = () => {
     }
   };
 
-  useEffect(() => {
-    const img = new Image();
-    img.src = signUpImg;
-    img.onload = () => {
-      console.log('Width:', img.width);
-      console.log('Height:', img.height);
-    };
-  }, [signUpImg]);
-
   return (
     <TwoColumnLayout
       leftContainerChildren={
