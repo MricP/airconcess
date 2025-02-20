@@ -17,6 +17,10 @@
     font-weight: bold;
 }
 
+.link-politics-underline{
+    text-decoration: underline;
+}
+
 .flex-container-privacy {
     margin-top: 15vh;
     margin-bottom: 10vh;
