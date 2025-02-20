@@ -83,68 +83,6 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
   /*###################### AUTRE ######################*/
 
 
-  // Charge toutes les data à afficher en fonction de l'id de l'appareil (idAircraft)
-  const loadDataFromDB = async () => {
-    try {
-      // S'il n'y a pas d'id ou que cet aircraft n'existe pas
-      if (isNaN(id) || !(await getAircraft(id))) {
-        updateIdValidity(false);
-        return;
-      }
-
-      // Appels des services
-      const dbModelName = await getModelName(id)
-      const dbMainImg = await getMainImage(id)
-      const dbSliderImgs = await getSliderImages(id)
-      const dbModelDescription = await getModelDescription(id)
-      const dbAircraftDescription = await getAircraftDescription(id)
-
-      if(dbModelName) updateModelName(dbModelName)
-      if(dbMainImg) updateMainImg(dbMainImg);
-      if(dbSliderImgs) updateSliderImgs(dbSliderImgs);
-
-      if(dbModelDescription) {
-        const newDescription = []
-        dbModelDescription.forEach((element) => {
-          if(element.value) {
-            const criteria = modelDescription.find((elt) => elt.varName === element.varName)
-            if(criteria) {
-              let updatedCriteria = { ...criteria, value: element.value };
-              if(criteria.varName === "passenger_capacity") updatedCriteria = { ...criteria, value:"Jusqu'à "+element.value+" passagers"};
-              else if(criteria.varName === "max_range") updatedCriteria = { ...criteria, value: element.value+" km"};
-              newDescription.push(updatedCriteria);
-            }
-          }
-        });
-        updateModelDescription(newDescription)
-      }
-
-      if(dbAircraftDescription) {
-        console.log(dbAircraftDescription)
-        const newDescription = []
-        dbAircraftDescription.forEach(element => {
-          if(element.value) {
-            const criteria = aircraftDescription.find((elt) => elt.varName === element.varName)
-            if(criteria) {
-              let updatedCriteria = { ...criteria, value: element.value };
-              if(criteria.varName === "flight_hours") updatedCriteria = { ...criteria, value:element.value+" heures"};
-              else if(criteria.varName === "estimated_price") updatedCriteria = { ...criteria, value: formatNumber(element.value)+" €"};
-              newDescription.push(updatedCriteria)
-            }
-          }
-        });
-        
-        setDescription(dbAircraftDescription[10].value)
-        updateAircraftDesciption(newDescription)
-      }
-      
-    } catch (error) {
-      console.error(
-        "Error response : ",
-        error.response?.data?.message || "Unknown error"
-      );
-    }
-  };
 
   // Charger les données lorsque le composant est monté ou lorsque "id" change
   useEffect(() => {

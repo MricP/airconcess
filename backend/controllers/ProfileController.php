@@ -75,7 +75,7 @@ class ProfileController
     
         if (in_array($fileExtension, $allowedExtensions)) {
             if ($fileError === 0) {
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '46.101.169.59/AirConcess/frontend/public/assets/profile/';
+                $uploadDir =  'http://localhost/air-concess/frontend/public/assets/profile/';
                 $destination = $uploadDir . $fileName;
     
                 if (move_uploaded_file($fileTmpName, $destination)) {
