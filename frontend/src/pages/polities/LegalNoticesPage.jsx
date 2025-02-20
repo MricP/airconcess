@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../styles/polities/LegalNoticesPage.css';
+import { Link } from 'react-router-dom';
 
 function LegalNoticesPage() {
   return (
@@ -16,22 +17,22 @@ function LegalNoticesPage() {
           <p className='legal-info'>
             Le présent site est édité par :
             <span>Air'Concess</span>
-            <span>Adresse : 123 rue de l'exemple, 75000 Paris</span>
-            <span>Email : <a href="mailto:airconcess.contact@gmail.com" target="_blank" rel="noopener noreferrer">airconcess.contact@gmail.com</a></span>
             <span>SIRET : 123 456 789 00000</span>
+            <span>Téléphone : +33 1 23 45 67 89</span>
+            <span>Email : <Link target="_blank" className='link-politics-underline' to="mailto:airconcess.contact@gmail.com" rel="noopener noreferrer">airconcess.contact@gmail.com</Link></span>
+            <span>Adresse : 123 Rue des Ailes, 75008 Paris, France</span>
           </p>
 
           <h3>2. Hébergement</h3>
           <p className='legal-info'>
             Le site est hébergé par :
-            <span>IUT Lyon 1</span>
-            <span>Adresse : 123 rue de l'exemple, 69000 Villeurbanne</span>
-            <span>Site web : <a href="https://iut.univ-lyon1.fr/" target="_blank" rel="noopener noreferrer">https://iut.univ-lyon1.fr/</a></span>
+            <span>Vercel</span>
+            <span>Site web : <Link className='link-politics-underline' to="https://vercel.com/" target="_blank" rel="noopener noreferrer">https://vercel.com/</Link></span>
           </p>
 
           <h3>3. Propriété intellectuelle</h3>
           <p>
-            Tous les contenus présents sur ce site, incluant textes, images, graphismes, logos, vidéos, et autres éléments, sont protégés par des droits d'auteur et sont la propriété exclusive de l'éditeur du site, sauf mention contraire.
+            Tous les contenus présents sur ce site, incluant textes, images, graphismes, logos, vidéos, et autres éléments, sont des ressources open-source mais peuvent etre soumises à des droits d'auteurs sauf mention contraire.
           </p>
 
           <h3>4. Responsabilité</h3>
@@ -41,7 +42,7 @@ function LegalNoticesPage() {
 
           <h3>5. Protection des données personnelles</h3>
           <p>
-            Les données personnelles collectées par ce site sont traitées conformément à la <a href="/privacy">politique de confidentialité</a> disponible sur notre site.
+            Les données personnelles collectées par ce site sont traitées conformément à la <Link className='link-politics-underline' to="/privacy">politique de confidentialité</Link> disponible sur notre site.
           </p>
 
           <h3>6. Liens externes</h3>
@@ -58,7 +59,7 @@ function LegalNoticesPage() {
           <p>
             Pour toute question concernant ces mentions légales, vous pouvez nous contacter à :
           </p>
-          <span>airconcess.contact@gmail.com</span>
+          <Link target="_blank" className='link-politics-underline' to="mailto:airconcess.contact@gmail.com" rel="noopener noreferrer">airconcess.contact@gmail.com</Link>
         </section>
       </div>
     </main>
