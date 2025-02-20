@@ -8,7 +8,7 @@ function LegalNoticesPage() {
       <div className="flex-container-legal-notices">
         <h1 className='legal-notices-title'>MENTIONS LÉGALES</h1>
         <section>
-          <p><span className='legal-update-text'>Dernière mise à jour : 04/12/2024</span></p>
+          <p><span className='legal-update-text'>Dernière mise à jour : 20/02/2025</span></p>
           <p>
             Cette page présente les mentions légales du site. En accédant à ce site, vous acceptez les conditions ci-dessous.
           </p>
