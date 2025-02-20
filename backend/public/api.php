@@ -170,8 +170,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
 // Partie page product
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-aircraftWithId') !== false) {
-    $input = json_decode(file_get_contents("php://input"), true);
-    $result = ProductController::getAircraftWith($input['idAircraft']);
+    $id = json_decode(file_get_contents("php://input"), true);
+    $result = ProductController::getAircraftWith($id);
     echo json_encode($result);
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-modelName') !== false) {
