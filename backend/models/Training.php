@@ -39,10 +39,17 @@ class Training
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function selectAllTrainings($idTrainer) {
+    public static function selectTrainingsOfTrainer($idTrainer) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT t.training_id, t.final_proposal_id, u.firstName, u.lastName, u.profilePictureUrl, t.frequency_pref, t.start_date_pref, t.end_date_pref FROM training t INNER JOIN user u ON u.idUser = t.trainerConcerned_id WHERE trainerConcerned_id = ?");
+        $stmt = $pdo->prepare("SELECT t.training_id, t.final_proposal_id, u.firstName, u.lastName, u.profilePictureUrl, t.frequency_pref, t.start_date_pref, t.end_date_pref FROM training t INNER JOIN user u ON u.idUser = t.userConcerned_id WHERE t.trainerConcerned_id = ?");
         $stmt->execute([$idTrainer]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function selectTrainingsOfUser($idUser) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT t.training_id, t.final_proposal_id, u.firstName, u.lastName, u.profilePictureUrl, t.frequency_pref, t.start_date_pref, t.end_date_pref FROM training t INNER JOIN user u ON u.idUser = t.trainerConcerned_id WHERE t.userConcerned_id = ?");
+        $stmt->execute([$idUser]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -52,4 +59,27 @@ class Training
         $stmt->execute([$idTraining]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function getTrainingProposal($idProposal) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM training_proposal WHERE proposal_id = ?");
+        $stmt->execute([$idProposal]);
+        return $stmt->fetch();
+    }
+
+    public static function insertProposal($proposal) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("INSERT INTO training_proposal (trainingConcerned_id,trainerConcerned_id,start_date,end_date,time_monday,time_tuesday,time_wednesday,time_thursday,time_friday) VALUES (?,?,?,?,?,?,?,?,?)");
+        $stmt->execute([$proposal['trainingConcerned_id'],$proposal['trainerConcerned_id'],$proposal['start_date'],$proposal["end_date"],$proposal['time_monday'],$proposal['time_tuesday'],$proposal['time_wednesday'],$proposal['time_thursday'],$proposal['time_friday']]);
+        return $pdo->lastInsertId();
+    }
+
+    public static function acceptProposal($trainingId,$proposalId) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("UPDATE TABLE training SET final_proposal_id = ? WHERE training_id = ?");
+        $stmt->execute([$proposalId,$trainingId]);
+        return $pdo->lastUpdateId();
+    }
+
+    
 }

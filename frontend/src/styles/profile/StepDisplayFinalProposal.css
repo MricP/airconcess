@@ -1,0 +1,12 @@
+.stepDisplayFinalProposal-container {
+    margin-top: 20px;
+}
+
+.stepDisplayFinalProposal-container strong {
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.stepDisplayFinalProposal-container .section-days {
+    margin-left: 20px;
+}

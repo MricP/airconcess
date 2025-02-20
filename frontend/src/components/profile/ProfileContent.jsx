@@ -1,12 +1,14 @@
 import React, {useRef,useState,useEffect} from 'react'
-import "../../styles/profile/ProfileContent.css"
-import { getAppointmentByUser } from "../../services/appointment.js"
 import { useNavigate } from 'react-router-dom'
 import { Calendar,Badge } from 'rsuite'
+import TrainerTrainingDisplayer from './TrainerTrainingDisplayer.jsx'
+
+import { getAppointmentByUser } from "../../services/appointment.js"
 import { getUserData, createTestimonial } from '../../services/auth.js'
-import { getTrainings } from "../../services/training.js"
-import TrainerChoiceItem from './TrainerChoiceItem.jsx'
+import { getTrainingsOfTrainer,getTrainingsOfUser } from "../../services/training.js"
+
 import "../../styles/general/Rsuite-custom.css"
+import "../../styles/profile/ProfileContent.css"
 
 export default function ProfileContent() {
 
@@ -15,7 +17,8 @@ export default function ProfileContent() {
   const [events, setEvents] = useState([]);
   const [userData, setUserData] = useState(null);
 
-  const [allTrainingsData,setAllTrainingsData] = useState();
+  const [trainerTrainings,setTrainerTrainings] = useState();
+  const [userTrainings,setUserTrainings] = useState();
   
 
   useEffect(() => {
@@ -23,6 +26,7 @@ export default function ProfileContent() {
       try {
         const data = await getUserData(token);
         setUserData(data);
+        await loadTrainingsDataOfUser(data.idUser)
         if(data?.isTrainer) {
           await loadTrainingsDataOfTrainer(data.idUser)
         }
@@ -35,9 +39,18 @@ export default function ProfileContent() {
 
   const loadTrainingsDataOfTrainer = async (id) => {
     try {
-      const trainingsD = await getTrainings(id)
+      const trainingsD = await getTrainingsOfTrainer(id)
       console.log(trainingsD.data)
-      setAllTrainingsData(trainingsD.data)
+      setTrainerTrainings(trainingsD.data)
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  }
+
+  const loadTrainingsDataOfUser = async (id) => {
+    try {
+      const trainingsD = await getTrainingsOfUser(id)
+      setUserTrainings(trainingsD.data)
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -95,21 +108,32 @@ export default function ProfileContent() {
     return null;
   }
 
-
   return (
-    <>
       <main className='profile-content-container'>
         <div className='profile-actionStatus'>
             <Calendar renderCell={renderCell} isoWeek />
         </div>
+        <div className='training-zone'>  
+            {userTrainings ? 
+              <>
+                <p>Vos actions en cours</p> 
+                <div className='trainings-container'>
+                  {/* {userTrainings?.map(tr => { return <UserTrainingDisplayer trainingData={tr} key={tr.trainingId}/>})} */}
+                </div>
+              </>
+            :null}
+        </div>
         {userData?.isTrainer === 1 ?
           <div className='trainer-zone'>
-            <p>Espace formateur</p>
-            <div className='trainings-container'>
-              {allTrainingsData?.map(tr => { return <TrainerChoiceItem trainingData={tr} key={tr.trainingId}/>})}
-            </div> 
+            {trainerTrainings ?
+              <>
+                <p>Espace formateur</p>
+                <div className='trainings-container'>
+                  {trainerTrainings?.map(tr => { return <TrainerTrainingDisplayer trainingData={tr} key={tr.trainingId}/>})}
+                </div>
+              </>
+            :null}
           </div>
-          
         : null}
         <div className='profile-commentaire-container'>
           <form method='POST' onSubmit={handleSubmitTestimonial}>
@@ -118,9 +142,7 @@ export default function ProfileContent() {
             <button type='submit'>Publier</button>
           </form> 
         </div> 
-        
        </main>
-    </>
   )
   
 }

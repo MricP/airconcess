@@ -258,10 +258,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 // Partie Profile
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/getTrainings') !== false) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/getTrainingsOfTrainer') !== false) {
     $idTrainer = json_decode(file_get_contents("php://input"), true);
-    TrainingController::getAllTrainings($idTrainer);
+    TrainingController::getTrainingsOfTrainer($idTrainer);
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/getTrainingsOfUser') !== false) {
+    $idUser = json_decode(file_get_contents("php://input"), true);
+    TrainingController::getTrainingsOfUser($idUser);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/insertProposals') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    TrainingController::insertProposals($args['trainerId'],$args['trainingId'],$args['proposals']);
+}
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my-profile') !== false) {
     $headers = getallheaders();

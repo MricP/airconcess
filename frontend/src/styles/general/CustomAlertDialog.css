@@ -1,0 +1,29 @@
+.alertdialog {
+    top: 50%;
+    transform: translateY(-50%) !important;
+}
+
+.alertdialog .alert-title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.alertdialog .alert-body,
+.alertdialog .alert-body * {
+    text-align: justify;
+}
+
+.alertdialog .alert-icon {
+    color: red;
+    font-size: 1.5rem;
+}
+
+.alertdialog .ok-button {
+    background-color: red;
+    border-radius: 3px;
+}
+
+.alertdialog .cancel-button {
+    border-radius: 3px;
+}

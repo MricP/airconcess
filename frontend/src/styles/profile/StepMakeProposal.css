@@ -1,0 +1,59 @@
+.stepMakeProposal-container {
+    margin-top: 20px;
+    background-color: red;
+}
+
+.stepMakeProposal-container .pref-container {
+    /* margin: 20px 0; */
+    background-color: green;
+}
+
+.stepMakeProposal-container .pref-container p:not(.title) {
+    font-size: var(--lower-text-size) !important;
+}
+
+.stepMakeProposal-container .title {
+    font-weight: bold;
+}
+
+.stepMakeProposal-container .proposals {   
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stepMakeProposal-container .proposals .proposal hr{
+    margin-bottom: 10px;
+    border: 1px solid #00000098;
+
+}
+
+.stepMakeProposal-container .proposals .icon-container {
+    position: relative;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 1.3rem;
+    height: 1.4rem;    
+}
+
+.stepMakeProposal-container .proposals .icon-container .add-time-slot {
+    font-size: 1.5rem;    
+    position: absolute;
+    transition: all ease 0.4s;
+    cursor: pointer;
+}
+
+.stepMakeProposal-container .proposals .icon-container .add-time-slot.hidden {
+    opacity: 0;
+    /* transform: scale(0.9); */
+    position: absolute;
+    transition: opacity ease 0.1s;
+    pointer-events: none; /* Désactive les clics sur l'élément caché */
+}
+
+.stepMakeProposal-container .proposals .icon-container .add-time-slot.visible {
+    opacity: 1;
+    /* transform: scale(1); */
+}

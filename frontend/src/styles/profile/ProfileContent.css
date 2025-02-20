@@ -6,7 +6,7 @@
     width: 70%;
 }
 
-.trainer-zone {
+.trainer-zone,.training-zone {
     /* background-color: red; */
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@
     margin-bottom: 20px;
 }
 
-.trainer-zone>p {
+.trainer-zone>p:first-child,.training-zone>p:first-child {
     font-weight: bold;
 }
 

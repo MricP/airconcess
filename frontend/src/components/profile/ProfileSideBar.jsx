@@ -107,7 +107,6 @@ export default function ProfileSideBar(){
       }
 
       const handleIsModal = () => {
-        
         if (!isModalOpen && contentInfosRef.current){
             contentInfosRef.current.classList.toggle("invisible");
             setIsModalOpen(true);
@@ -163,9 +162,9 @@ export default function ProfileSideBar(){
           <div className='profile-sideBarContent'>
                 <form method="post" encType="multipart/form-data">
                   <div className='profile-picture-container' onClick={handleProfileClick}>
-                  {profilePicture ? (
+                  {/* {profilePicture ? (
                       <img ref={profilePictureRef} src={profilePicture} alt="Profile" onError={(e) => { e.target.onerror = null; e.target.src = "defaultProfilePictureURL"; }} />
-                  ) : ""}
+                  ) : ""} */}
                   </div>
                 </form>
                 

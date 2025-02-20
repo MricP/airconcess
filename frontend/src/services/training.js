@@ -26,13 +26,33 @@ export const getTrainers = async () => {
   }
 };
 
-export const getTrainings = async (idTrainer) => {
+export const getTrainingsOfTrainer = async (idTrainer) => {
   try {
-    const response = await axiosInstance.post('/training/getTrainings',idTrainer);   
+    const response = await axiosInstance.post('/training/getTrainingsOfTrainer',idTrainer);   
     return response;
   } catch (error) {
       throw error;
   }
 }
+
+export const getTrainingsOfUser = async (idUser) => {
+  try {
+    const response = await axiosInstance.post('/training/getTrainingsOfUser',idUser);   
+    return response;
+  } catch (error) {
+      throw error;
+  }
+}
+
+export const insertProposals = async (trainerId,trainingId,proposals) => {
+  try {
+    const response = await axiosInstance.post('/training/insertProposals',{trainerId,trainingId,proposals});   
+    return response;
+  } catch (error) {
+      throw error;
+  }
+}
+
+
 
 
