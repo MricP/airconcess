@@ -1313,3 +1313,190 @@
     [exp] => 1740044083
 )
 
+[20-Feb-2025 09:15:12 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDQwNDgzLCJleHAiOjE3NDAwNDQwODN9
+    [2] => qqzuF5ZQ88Q07d2K00Wsq4fJ0hC-4_Dcizfbw6-XQM0
+)
+
+[20-Feb-2025 09:15:12 UTC] nb parts: 3
+[20-Feb-2025 09:15:12 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDQwNDgzLCJleHAiOjE3NDAwNDQwODN9
+    [2] => qqzuF5ZQ88Q07d2K00Wsq4fJ0hC-4_Dcizfbw6-XQM0
+)
+
+[20-Feb-2025 09:15:12 UTC] nb parts: 3
+[20-Feb-2025 09:15:12 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740040483
+    [exp] => 1740044083
+)
+
+[20-Feb-2025 09:15:12 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740040483
+    [exp] => 1740044083
+)
+
+[20-Feb-2025 09:15:12 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDQwNDgzLCJleHAiOjE3NDAwNDQwODN9
+    [2] => qqzuF5ZQ88Q07d2K00Wsq4fJ0hC-4_Dcizfbw6-XQM0
+)
+
+[20-Feb-2025 09:15:12 UTC] nb parts: 3
+[20-Feb-2025 09:15:12 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDQwNDgzLCJleHAiOjE3NDAwNDQwODN9
+    [2] => qqzuF5ZQ88Q07d2K00Wsq4fJ0hC-4_Dcizfbw6-XQM0
+)
+
+[20-Feb-2025 09:15:12 UTC] nb parts: 3
+[20-Feb-2025 09:15:12 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740040483
+    [exp] => 1740044083
+)
+
+[20-Feb-2025 09:15:12 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740040483
+    [exp] => 1740044083
+)
+
+[20-Feb-2025 09:15:12 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDQwNDgzLCJleHAiOjE3NDAwNDQwODN9
+    [2] => qqzuF5ZQ88Q07d2K00Wsq4fJ0hC-4_Dcizfbw6-XQM0
+)
+
+[20-Feb-2025 09:15:12 UTC] nb parts: 3
+[20-Feb-2025 09:15:12 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740040483
+    [exp] => 1740044083
+)
+
+[20-Feb-2025 09:15:13 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDQwNDgzLCJleHAiOjE3NDAwNDQwODN9
+    [2] => qqzuF5ZQ88Q07d2K00Wsq4fJ0hC-4_Dcizfbw6-XQM0
+)
+
+[20-Feb-2025 09:15:13 UTC] nb parts: 3
+[20-Feb-2025 09:15:13 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDQwNDgzLCJleHAiOjE3NDAwNDQwODN9
+    [2] => qqzuF5ZQ88Q07d2K00Wsq4fJ0hC-4_Dcizfbw6-XQM0
+)
+
+[20-Feb-2025 09:15:13 UTC] nb parts: 3
+[20-Feb-2025 09:15:13 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740040483
+    [exp] => 1740044083
+)
+
+[20-Feb-2025 09:15:13 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740040483
+    [exp] => 1740044083
+)
+
+[20-Feb-2025 09:15:13 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDQwNDgzLCJleHAiOjE3NDAwNDQwODN9
+    [2] => qqzuF5ZQ88Q07d2K00Wsq4fJ0hC-4_Dcizfbw6-XQM0
+)
+
+[20-Feb-2025 09:15:13 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDQwNDgzLCJleHAiOjE3NDAwNDQwODN9
+    [2] => qqzuF5ZQ88Q07d2K00Wsq4fJ0hC-4_Dcizfbw6-XQM0
+)
+
+[20-Feb-2025 09:15:13 UTC] nb parts: 3
+[20-Feb-2025 09:15:13 UTC] nb parts: 3
+[20-Feb-2025 09:15:13 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740040483
+    [exp] => 1740044083
+)
+
+[20-Feb-2025 09:15:13 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740040483
+    [exp] => 1740044083
+)
+
+[20-Feb-2025 09:15:13 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDQwNDgzLCJleHAiOjE3NDAwNDQwODN9
+    [2] => qqzuF5ZQ88Q07d2K00Wsq4fJ0hC-4_Dcizfbw6-XQM0
+)
+
+[20-Feb-2025 09:15:13 UTC] nb parts: 3
+[20-Feb-2025 09:15:13 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740040483
+    [exp] => 1740044083
+)
+
+[20-Feb-2025 09:15:13 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDQwNDgzLCJleHAiOjE3NDAwNDQwODN9
+    [2] => qqzuF5ZQ88Q07d2K00Wsq4fJ0hC-4_Dcizfbw6-XQM0
+)
+
+[20-Feb-2025 09:15:13 UTC] nb parts: 3
+[20-Feb-2025 09:15:13 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740040483
+    [exp] => 1740044083
+)
+

@@ -13,6 +13,10 @@
     background-color: #F5F5F5;
 }
 
+.link-politics-underline{
+    text-decoration: underline;
+}
+
 .flex-container-cgu {
     margin-top: 15vh;
     margin-bottom: 10vh;
@@ -75,3 +79,4 @@
         font-size: 1.25rem;
     }
 }
+
