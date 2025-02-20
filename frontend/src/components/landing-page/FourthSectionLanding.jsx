@@ -1,63 +1,30 @@
-import { motion, useAnimation } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import { useMediaQuery } from 'react-responsive';
-import '../../styles/landing-page/FourthSectionLanding.css';
+import React from "react";
+import Plyr from "plyr-react";
+import "plyr-react/plyr.css";
+import { useMediaQuery } from "react-responsive";
+import "../../styles/landing-page/FourthSectionLanding.css";
 
 function FourthSectionLanding() {
-    const controls = useAnimation();
-    const isMobile = useMediaQuery({ query: '(max-width: 1220px)' });
-    const ref = useRef(null);
-    const videoRef = useRef(null);
-    const aeronef_video = '/assets/landing/aeronef-video.mp4';
+    const isMobile = useMediaQuery({ query: "(max-width: 1220px)" });
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (ref.current && videoRef.current) {
-                const rect = ref.current.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-
-                if (rect.top < windowHeight && rect.bottom > 0) {
-                    const scrollPercentage = Math.min((windowHeight - rect.top) / windowHeight, 1);
-                    const scale = 1 + scrollPercentage * 0.5;
-                    controls.start({ scale: scale, transition: { duration: 0.1 } })
-                } else {
-                    videoRef.current.pause();
-                }
+    const videoSrc = {
+        type: "video",
+        sources: [
+            {
+                src: "/assets/landing/aeronef-video.mp4",
+                type: 'video/mp4',
+                size: 1080,
             }
-        }
-
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [controls])
+        ]
+    };
 
     return (
         <section className="fourth-section-landing">
-            {!isMobile ? (
-                <motion.div
-                    ref={ref}
-                    animate={controls}
-                    initial={{ scale: 1 }}
-                    className="video-container"
-                >
-                    <video
-                        ref={videoRef}
-                        src={aeronef_video}
-                        controls
-                        className="video"
-                    />
-                </motion.div>
-            ) : (
-                <div className="video-container-mobile">
-                    <video
-                        ref={videoRef}
-                        src={aeronef_video}
-                        controls
-                        className="video"
-                    />
-                </div>
-            )}
+            <div className={isMobile ? "video-container-mobile" : "video-container"}>
+                <Plyr source={videoSrc} options={{ autoplay: true }} />
+            </div>
         </section>
-    )
+    );
 }
 
 export default FourthSectionLanding;
