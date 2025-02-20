@@ -21,7 +21,7 @@ function FourthSectionLanding() {
     return (
         <section className="fourth-section-landing">
             <div className={isMobile ? "video-container-mobile" : "video-container"}>
-                <Plyr source={videoSrc} />
+                <Plyr source={videoSrc} options={{ autoplay: true }} />
             </div>
         </section>
     );
