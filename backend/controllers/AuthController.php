@@ -102,7 +102,7 @@ class AuthController
     {
         self::init();
 
-        $verificationLink = "https://air-concess.vercel.app/verify-email?token=" . urlencode($token);
+        $verificationLink = "http://localhost:3000/verify-email?token=" . urlencode($token);
 
         $subject = "Verifiez votre adresse email";
         $body = "Cliquez sur le lien suivant pour vérifier votre adresse email : ";
@@ -242,7 +242,7 @@ class AuthController
         ];
 
         $resetToken = Token::generate($payload);
-        $resetLink = "https://air-concess.vercel.app/reset-password?token=" . urlencode($resetToken);
+        $resetLink = "http://localhost:3000/reset-password?token=" . urlencode($resetToken);
 
         $subject = "Reinitialisez votre mot de passe";
         $body = "
