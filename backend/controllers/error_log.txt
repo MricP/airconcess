@@ -1500,3 +1500,277 @@
     [exp] => 1740044083
 )
 
+[20-Feb-2025 11:11:33 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicata du champ 'fillouxflorian56@gmail.com' pour la clef 'user.email' in C:\wamp64\www\air-concess\backend\models\User.php:28
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(28): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\AuthController.php(74): User::create('fillouxflorian5...', '$2y$10$LCE5.mZp...', 'florian', 'FILLOUX')
+#2 C:\wamp64\www\air-concess\backend\public\api.php(36): AuthController::register(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 28
+[20-Feb-2025 11:12:36 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicata du champ 'fillouxflorian56@gmail.com' pour la clef 'user.email' in C:\wamp64\www\air-concess\backend\models\User.php:28
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(28): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\AuthController.php(74): User::create('fillouxflorian5...', '$2y$10$Uk1EmQTT...', 'florian', 'FILLOUX')
+#2 C:\wamp64\www\air-concess\backend\public\api.php(36): AuthController::register(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 28
+[20-Feb-2025 11:12:39 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicata du champ 'fillouxflorian56@gmail.com' pour la clef 'user.email' in C:\wamp64\www\air-concess\backend\models\User.php:28
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(28): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\AuthController.php(74): User::create('fillouxflorian5...', '$2y$10$i//cgAXe...', 'florian', 'FILLOUX')
+#2 C:\wamp64\www\air-concess\backend\public\api.php(36): AuthController::register(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 28
+[20-Feb-2025 11:12:39 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicata du champ 'fillouxflorian56@gmail.com' pour la clef 'user.email' in C:\wamp64\www\air-concess\backend\models\User.php:28
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(28): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\AuthController.php(74): User::create('fillouxflorian5...', '$2y$10$fjW8CrND...', 'florian', 'FILLOUX')
+#2 C:\wamp64\www\air-concess\backend\public\api.php(36): AuthController::register(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 28
+[20-Feb-2025 11:12:40 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicata du champ 'fillouxflorian56@gmail.com' pour la clef 'user.email' in C:\wamp64\www\air-concess\backend\models\User.php:28
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(28): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\AuthController.php(74): User::create('fillouxflorian5...', '$2y$10$sal4tXjQ...', 'florian', 'FILLOUX')
+#2 C:\wamp64\www\air-concess\backend\public\api.php(36): AuthController::register(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 28
+[20-Feb-2025 11:14:15 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicata du champ 'fillouxflorian56@gmail.com' pour la clef 'user.email' in C:\wamp64\www\air-concess\backend\models\User.php:28
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(28): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\AuthController.php(74): User::create('fillouxflorian5...', '$2y$10$6ucq8GDy...', 'florian', 'FILLOUX')
+#2 C:\wamp64\www\air-concess\backend\public\api.php(36): AuthController::register(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 28
+[20-Feb-2025 11:14:19 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicata du champ 'fillouxflorian56@gmail.com' pour la clef 'user.email' in C:\wamp64\www\air-concess\backend\models\User.php:28
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(28): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\AuthController.php(74): User::create('fillouxflorian5...', '$2y$10$309WGSlt...', 'florian', 'FILLOUX')
+#2 C:\wamp64\www\air-concess\backend\public\api.php(36): AuthController::register(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 28
+[20-Feb-2025 11:14:19 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicata du champ 'fillouxflorian56@gmail.com' pour la clef 'user.email' in C:\wamp64\www\air-concess\backend\models\User.php:28
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(28): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\AuthController.php(74): User::create('fillouxflorian5...', '$2y$10$WAce9wr4...', 'florian', 'FILLOUX')
+#2 C:\wamp64\www\air-concess\backend\public\api.php(36): AuthController::register(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 28
+[20-Feb-2025 11:14:19 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicata du champ 'fillouxflorian56@gmail.com' pour la clef 'user.email' in C:\wamp64\www\air-concess\backend\models\User.php:28
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(28): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\AuthController.php(74): User::create('fillouxflorian5...', '$2y$10$148BqxT0...', 'florian', 'FILLOUX')
+#2 C:\wamp64\www\air-concess\backend\public\api.php(36): AuthController::register(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 28
+[20-Feb-2025 11:19:51 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicata du champ 'fillouxflorian56@gmail.com' pour la clef 'user.email' in C:\wamp64\www\air-concess\backend\models\User.php:28
+Stack trace:
+#0 C:\wamp64\www\air-concess\backend\models\User.php(28): PDOStatement->execute(Array)
+#1 C:\wamp64\www\air-concess\backend\controllers\AuthController.php(74): User::create('fillouxflorian5...', '$2y$10$1mPOoj9R...', 'florian', 'FILLOUX')
+#2 C:\wamp64\www\air-concess\backend\public\api.php(36): AuthController::register(Array)
+#3 {main}
+  thrown in C:\wamp64\www\air-concess\backend\models\User.php on line 28
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+
+[20-Feb-2025 11:25:31 UTC] parts: Array
+(
+    [0] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    [1] => eyJpZFVzZXIiOjI0LCJlbWFpbCI6ImZpbGxvdXhmbG9yaWFuNTZAZ21haWwuY29tIiwiaXNBZG1pbiI6MCwiaWF0IjoxNzQwMDUwNzI5LCJleHAiOjE3NDAwNTQzMjl9
+    [2] => M7qenEltWRuzFDH7C0x2jMU4cBaELgj2Nvgxt5ulSm0
+)
+
+[20-Feb-2025 11:25:31 UTC] nb parts: 3
+[20-Feb-2025 11:25:31 UTC] Array
+(
+    [idUser] => 24
+    [email] => fillouxflorian56@gmail.com
+    [isAdmin] => 0
+    [iat] => 1740050729
+    [exp] => 1740054329
+)
+

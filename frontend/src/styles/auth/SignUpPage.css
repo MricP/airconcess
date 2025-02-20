@@ -60,9 +60,14 @@
     width: 100%;
 }
 
+.button-sign-up{
+    margin-top: 15px;
+}
+
 .form-label {
     font-size: 14px;
     margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .form-group {
