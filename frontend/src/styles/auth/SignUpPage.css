@@ -32,6 +32,7 @@
 }
 
 .right-container {
+    padding: 20px;
     width: 80%;
 }
 
@@ -59,16 +60,13 @@
     width: 100%;
 }
 
-.form-group {
-    margin-bottom: 15px;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-}
-
 .form-label {
     font-size: 14px;
     margin-bottom: 5px;
+}
+
+.form-group {
+    width: 100%;
 }
 
 .form-input {
@@ -77,8 +75,9 @@
     font-size: 14px;
     border: 1px solid var(--input-color1);
     border-radius: 4px;
-    box-sizing: border-box; /* Ajouté pour inclure le padding et la bordure dans la largeur totale */
+    box-sizing: border-box; /* Ajout important */
 }
+
 
 .response-message {
     margin-top: 10px;
