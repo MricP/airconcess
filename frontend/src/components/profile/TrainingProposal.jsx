@@ -2,10 +2,18 @@ import React from 'react'
 import CustomDatePicker from "../general/CustomDatePicker"
 import "../../styles/profile/TrainingProposal.css"
 import CustomTimePicker from '../general/CustomTimePicker'
+import { RxCross1 } from "react-icons/rx";
 
-function TrainingProposal({proposId,formData,errors,setValue,register}) {
+
+function TrainingProposal({noProposal,proposId,formData,errors,setValue,register,removeProposal}) {
   return (
     <div className='tp-container'>
+        <div className='tp-header'>
+            <p className='title'>Proposition {noProposal}</p>
+            <RxCross1  className='button-del' onClick={() => removeProposal(proposId)}>
+                Supprimer
+            </RxCross1 >
+        </div>
         <table className='tp-table'>
             <tbody>
                 <tr className='TrainingProposal-border'>
@@ -43,11 +51,11 @@ function TrainingProposal({proposId,formData,errors,setValue,register}) {
         </table>
         <div className='tp-dates-container'>
             <div>
-                <p>Date de début {proposId}</p>
+                <p>Date de début</p>
                 <CustomDatePicker
                     className={errors.proposals?.[proposId]?.dateStart ? "input-error" : ""}
                     disabledSlots={[]}
-                    // disableAfter={formData.proposals?.[key] ? formData.proposals?.[key]?.dateEnd : null}
+                    disableAfter={formData.proposals?.[proposId] ? formData.proposals?.[proposId]?.dateEnd : null}
                     setDate={(value) => setValue(`proposals.${proposId}.dateStart`,value, errors.proposals?.[proposId]?.dateStart ? { shouldValproposIdate: true } : { shouldValproposIdate: false })}
                     value={formData?.proposals?.[proposId]?.dateStart}
                     {...register(`proposals.${proposId}.dateStart`, { required: "La date de début est obligatoire." })}
@@ -58,7 +66,7 @@ function TrainingProposal({proposId,formData,errors,setValue,register}) {
                 <CustomDatePicker
                     className={errors.proposals?.[proposId]?.dateEnd ? "input-error" : ""}
                     disabledSlots={[]}
-                    // disableBefore={formData.proposals?.[key] ? formData.proposals?.[key]?.dateStart : null}
+                    disableBefore={formData.proposals?.[proposId] ? formData.proposals?.[proposId]?.dateStart : null}
                     setDate={(value) => setValue(`proposals.${proposId}.dateEnd`,value, errors.proposals?.[proposId]?.dateEnd ? { shouldValproposIdate: true } : { shouldValproposIdate: false })}
                     value={formData?.proposals?.[proposId]?.dateEnd}
                     {...register(`proposals.${proposId}.dateEnd`, { required: "La date de fin est obligatoire." })}

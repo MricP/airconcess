@@ -31,4 +31,25 @@ class Training
         $stmt->execute([$slot['trainingConcerned_id'],$slot['start_time'],$slot["end_time"]]);
         return $pdo->lastInsertId();
     }
+
+    public static function getTrainingPreferedSlots($idTraining) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM training_preferedslot WHERE trainingConcerned_id = ?");
+        $stmt->execute([$idTraining]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function selectAllTrainings($idTrainer) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT t.training_id, t.final_proposal_id, u.firstName, u.lastName, u.profilePictureUrl, t.frequency_pref, t.start_date_pref, t.end_date_pref FROM training t INNER JOIN user u ON u.idUser = t.trainerConcerned_id WHERE trainerConcerned_id = ?");
+        $stmt->execute([$idTrainer]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getTrainingProposals($idTraining) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT * FROM training_proposal WHERE trainingConcerned_id = ?");
+        $stmt->execute([$idTraining]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

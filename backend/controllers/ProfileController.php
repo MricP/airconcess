@@ -2,7 +2,6 @@
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../models/Appointment.php';
 
-
 class ProfileController
 {
 
@@ -115,6 +114,5 @@ class ProfileController
         // $appointments = Appointment::getAppointmentByUser($user['idUser']);
         echo json_encode($appointments);
     }
-
     
 }

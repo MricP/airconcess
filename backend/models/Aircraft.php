@@ -361,7 +361,7 @@ class Aircraft
         $newFilePath = "../../frontend/public/assets/product/{$modelName}/{$id}/{$url}";
     
         if (move_uploaded_file($file['tmp_name'], $newFilePath)) {
-            Aircraft::deleteImageWithAircraftId($id, "main");
+            Aircraft::deleteImageWithAircraftId($id, "icon");
             Aircraft::insertImage("icon", $id, "/assets/product/{$modelName}/{$id}/{$url}");
             return $oldFilePath;
         }

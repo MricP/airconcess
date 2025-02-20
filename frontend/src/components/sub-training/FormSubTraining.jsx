@@ -111,6 +111,7 @@ function FormSubTraining({step,updateStep}) {
   const loadTrainers = async () => {
     try {
       const response = await getTrainers();
+      console.log("ok ")
       setTrainers(response.data)
     } catch (error) {
       console.log('Error getTrainers:', error.response?.data?.message || 'Unknown error');

@@ -258,6 +258,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 // Partie Profile
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/getTrainings') !== false) {
+    $idTrainer = json_decode(file_get_contents("php://input"), true);
+    TrainingController::getAllTrainings($idTrainer);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my-profile') !== false) {
     $headers = getallheaders();
     if (!isset($headers['Authorization'])) {
@@ -519,3 +524,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/c
     echo json_encode(['answer' => $response]);
     exit();
 }
+

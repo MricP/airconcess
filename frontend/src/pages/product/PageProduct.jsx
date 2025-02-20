@@ -120,6 +120,7 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
       }
 
       if(dbAircraftDescription) {
+        console.log(dbAircraftDescription)
         const newDescription = []
         dbAircraftDescription.forEach(element => {
           if(element.value) {
@@ -132,6 +133,7 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
             }
           }
         });
+        
         setDescription(dbAircraftDescription[10].value)
         updateAircraftDesciption(newDescription)
       }
@@ -201,7 +203,7 @@ function PageProduct({mode, onSubmitProduct, model, aircraftId}) {
               }
             }
           });
-          
+          setDescription(dbAircraftDescription[10].value)
           updateAircraftDesciption(newDescription)
         }
         

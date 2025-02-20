@@ -24,10 +24,22 @@
 }
 
 .second-maintenance-component-container-child li {
-    font-size: 1.25rem;
+    font-size: var(--text-size);
     margin-left: 2vw;
 }
 
 .second-maintenance-component-container-child h3 {
     text-align: center;
+}
+
+@media (max-width: 992px) {
+    .second-maintenance-component-container {
+        flex-direction: column;
+        gap: 5vh;
+    }
+
+    .second-maintenance-component-container-child {
+        width: 80vw;
+        padding: 6vw;
+    }
 }
