@@ -42,8 +42,7 @@ function StepMakeProposal({reloadPage,trainingData}) {
 
     const insertProposalsIntoDB = async () => {
         try {
-            const resp = await insertProposals(trainingData.trainerId,trainingData.trainingId,formData.proposals);
-            console.log(resp.data)
+            await insertProposals(trainingData.trainerId,trainingData.trainingId,formData.proposals);
         } catch (error) {
             console.error('Error inserting proposals data:', error);
         }

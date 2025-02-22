@@ -1,7 +1,10 @@
 import React, {useRef,useState,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Calendar,Badge } from 'rsuite'
+import { Calendar,Badge, CustomProvider } from 'rsuite'
+import frFR from "rsuite/locales/fr_FR";
 import TrainerTrainingDisplayer from './TrainerTrainingDisplayer.jsx'
+import UserTrainingDisplayer from './UserTrainingDisplayer.jsx'
+import CalendarPopup from './CalendarPopup.jsx'
 
 import { getAppointmentByUser } from "../../services/appointment.js"
 import { getUserData, createTestimonial } from '../../services/auth.js'
@@ -9,8 +12,7 @@ import { getTrainingsOfTrainer,getTrainingsOfUser } from "../../services/trainin
 
 import "../../styles/general/Rsuite-custom.css"
 import "../../styles/profile/ProfileContent.css"
-import UserTrainingDisplayer from './UserTrainingDisplayer.jsx'
-import CalendarPopup from './CalendarPopup.jsx'
+
 
 export default function ProfileContent() {
   /*############ INITIALISATION DES STATES ############*/
@@ -48,10 +50,6 @@ export default function ProfileContent() {
     return hour[0] + "h" + hour[1]
   }
 
-  useEffect(() => {
-    console.log("apptPopupVisible changé : ", apptVisible);
-  }, [apptVisible]);
-
   const renderCell = (date) => {
     const formattedDate = date.toLocaleDateString('en-CA');
     const appt = appointments.find((event) => event.appt_timestamp.split(' ')[0] === formattedDate);
@@ -81,7 +79,6 @@ export default function ProfileContent() {
   const loadTrainingsDataOfUser = async (id) => {
     try {
       const trainingsD = await getTrainingsOfUser(id)
-      console.log(trainingsD.data)
       setUserTrainings(trainingsD.data)
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -155,7 +152,9 @@ export default function ProfileContent() {
   return (
     <main className='profile-content-container'>
       <div className='profile-calendar'>
-        <Calendar renderCell={renderCell} isoWeek />
+        <CustomProvider locale={frFR}>
+          <Calendar locale={frFR} renderCell={renderCell} isoWeek />
+        </CustomProvider>
       </div>
 
       <div className='training-zone'>  

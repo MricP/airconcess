@@ -1,29 +1,29 @@
-.profile-sideBar-container{
-    background-color: var(--bg-primary);
-    width: 30%;
-    height: 100vh;
-    box-shadow: 0px 0px 10px var(--line-color);
+.profileSideBar-container {
     display: flex;
     position: sticky;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 1px 0 var(--line-color);
+    background-color: var(--bg-primary);
+    /* background-color: blanchedalmond; */
+    height: 100vh;
+    width: 30%;
     top: 0;
-    justify-content: center;
+    padding: 80px 0 50px 0;
+    /* gap: 30px; */
 }
-.profile-sideBarContent{
+
+.profileSideBar-container .profileSideBar-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    gap: 30px;
-}
-
-.profile-modalSideBarContent{
-    display: flex;
-    gap: 100px;
     align-items: center;
-    justify-content: center;
+    gap: 20px;
 }
 
-.profile-picture-container{
+/* PHOTO */
+
+.profileSideBar-container .profileSideBar-content .profile-picture-container {
     background-color: var(--color-primary);
     width: 200px;
     height: 200px;
@@ -31,7 +31,7 @@
     position: relative;
 }
 
-.profile-picture-container > img{
+.profileSideBar-container .profileSideBar-content .profile-picture-container > img{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -40,62 +40,108 @@
     overflow: hidden;
 }
 
-.profile-control-button{
-    display: flex;
-    gap: 30px;
-}
+/* PARTIE MODAL */
 
-.profile-control-button > button{
-    width: 50px;
-    height: 50px;
-    border-radius: 15px;
-    background-color: var(--bg-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.profile-control-button > button:hover{
-    background-color: var(--line-color);
-}
-
-.profile-contentInfos{
+.profileSideBar-container .profileSideBar-content .editing-form {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-}
-
-.profile-AdminButton{
-    background-color: var(--failure-color);
-    color: var(--bg-primary);
-    height: 50px;
-    border: none;
-    border-radius: 10px;
-    transition: all ease 0.3s;
-}
-
-.profile-AdminButton:hover{
-    background-color: var(--button-color);
-}
-
-.profile-modifyForm{
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
     align-items: center;
     justify-content: center;
+    gap: 10px;
     width: 100%;
 }
 
-
-
-.profile-modifyForm > button{
+.profileSideBar-container .profileSideBar-content .editing-form .edit-values-buttons {
+    display: flex;
     width: 100%;
-    height: 75%;
+    gap: 4%;
+}
+
+.profileSideBar-container .profileSideBar-content .editing-form .edit-values-buttons button {
+    width: 48%;
+    justify-content: center;
+}
+
+.profileSideBar-container .profileSideBar-content .editing-form .edit-values-buttons .cancel-button {
+    color: rgb(35, 167, 255);
+}
+
+.profileSideBar-container .profileSideBar-content .editing-form .edit-values-buttons .cancel-button:hover {
+    border-color: rgb(35, 167, 255);
+}
+
+.profileSideBar-container .profileSideBar-content .editing-form .edit-values-buttons .ok-button {
+    background-color: rgb(35, 167, 255);
+    color: #fff;
+}
+
+/* PARTIE INFO */
+
+.profileSideBar-container .profileSideBar-content .profile-infos {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* PARTIE BOUTONS */
+
+.profileSideBar-container button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: unset;
+    padding: 3px 5px;
+    border: unset;
+    border-radius: 3px;
+    border: solid 1px transparent;
+    transition: all ease .1s;
+    width: 200px;
+}
+
+.profileSideBar-container button.edit-button:hover {
+    background-color: unset;
+    color: rgb(35, 167, 255);
+    border: solid 1px rgb(35, 167, 255);
+}
+
+.profileSideBar-container .edit-button .icon-container .edit-icon {
+    color: rgb(35, 167, 255);
+    margin-left: 3px;
+}
+
+.profileSideBar-container .account-buttons-container {
+    /* background-color: brown; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profileSideBar-container .account-buttons-container button.delete-account-button,
+.profileSideBar-container .account-buttons-container button.admin-button {
+    background-color: red;
+    color: #fff;
+}
+
+.profileSideBar-container .account-buttons-container button:hover {
+    background-color: unset;
+    color: red;
+    border: solid 1px red;
+}
+
+.profileSideBar-container .account-buttons-container .icon-container {
+    display: flex;
+    align-items: center;
+    /* background-color: orange; */
+}
+
+.profileSideBar-container .account-buttons-container .icon-container .logout-icon {
+    margin-left: 3px;
+    color: red;
 }
 
 @media(max-width: 750px){
-    .profile-sideBar-container{
+    .profileSideBar-container{
         position: relative;
         width: 100%;
     }

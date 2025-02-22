@@ -41,8 +41,7 @@ function StepProposalsSummary({reloadPage,trainingData,mode="trainer"}) {
 
   const handleAcceptProposal = async () => {
     try {
-      const resp = await acceptProposal(trainingData.trainingId,proposalToAccept);
-      console.log(resp.data)
+      await acceptProposal(trainingData.trainingId,proposalToAccept);
     } catch (error) {      
       console.error('Error accepting proposals :', error);
     }

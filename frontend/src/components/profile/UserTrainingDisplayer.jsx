@@ -64,7 +64,6 @@ function UserTrainingDisplayer({reloadPage,trainingData}) {
     
     /*###################### AUTRE ######################*/
     useEffect(() => {
-        console.log(trainingData?.finalProposal)
         if(trainingData?.finalProposal) {
             setStatus('ok')
         } else {

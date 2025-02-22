@@ -26,8 +26,7 @@ function StepCancelTraining({reloadPage,trainingData}) {
 
     const handleDeleteTraining = async () => {
         try {
-            const resp = await deleteTraining(trainingData?.trainingId);
-            console.log(resp.data)
+            await deleteTraining(trainingData?.trainingId);
         } catch (error) {      
           console.error('Error deleting proposals :', error);
         }
