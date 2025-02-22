@@ -10,13 +10,16 @@ import { getTrainingsOfTrainer,getTrainingsOfUser } from "../../services/trainin
 import "../../styles/general/Rsuite-custom.css"
 import "../../styles/profile/ProfileContent.css"
 import UserTrainingDisplayer from './UserTrainingDisplayer.jsx'
+import CalendarPopup from './CalendarPopup.jsx'
 
 export default function ProfileContent() {
   /*############ INITIALISATION DES STATES ############*/
   const navigate = useNavigate()
   const testimonialRef = useRef(null)
-  const [events, setEvents] = useState([]);
+  const [appointments, setAppointments] = useState([]);
   const [userData, setUserData] = useState(null);
+
+  const [apptVisible,setApptVisible] = useState(null)
 
   const [trainerTrainings,setTrainerTrainings] = useState();
   const [userTrainings,setUserTrainings] = useState();  
@@ -40,19 +43,30 @@ export default function ProfileContent() {
     } 
   }
 
+  const handleTime = (time) => {
+    let hour = time.split(":");
+    return hour[0] + "h" + hour[1]
+  }
+
+  useEffect(() => {
+    console.log("apptPopupVisible changé : ", apptVisible);
+  }, [apptVisible]);
+
   const renderCell = (date) => {
     const formattedDate = date.toLocaleDateString('en-CA');
-    const eventForDate = events.find((event) => event.appt_timestamp.split(' ')[0] === formattedDate);
-    if (eventForDate) {
+    const appt = appointments.find((event) => event.appt_timestamp.split(' ')[0] === formattedDate);
+    if (appt) {
       return (
-        <div className="calendar-cell">
+        <div className="calendar-cell" onClick={()=>setApptVisible(appt.appt_id)}>
           <Badge className="calendar-todo-item-badge" />
-          <div className="calendar-event">{eventForDate.appt_reason} à {eventForDate.appt_timestamp.split(" ")[1]}</div>
-          <div className="calendar-event">{eventForDate.agency_name}</div>
+          <p>Rendez-vous à</p>
+          <p>{handleTime(appt.appt_timestamp.split(" ")[1])}</p>
+          <CalendarPopup apptLinked={appt} isOpen={appt.appt_id===apptVisible} onOk={() => {
+            setAppointments([]); //Force un refresh des 'appointments' pour mettre 'apptVisible' à null
+          }}/>
         </div>
       );
     }
-    return null;
   }
 
   const loadTrainingsDataOfTrainer = async (id) => {
@@ -92,14 +106,30 @@ export default function ProfileContent() {
         return;
       }
       try {
-        const appointments = await getAppointmentByUser(token);
-        setEvents(appointments.data) 
+        const appts = await getAppointmentByUser(token);
+        setAppointments(appts.data) 
       } catch (error) {
         console.error("Erreur lors de la récupération des rendez-vous :", error);
       }
     };
     fetchAppointments();
   }, [navigate]);
+
+  // Permet de quitter la CalendarPopup car sinon le apptVisible ne se met pas à jour
+  useEffect(() => {
+    if(appointments.length === 0) {
+      const fetchAppointments = async () => {
+        try {
+          const appts = await getAppointmentByUser(token);
+          setAppointments(appts.data) 
+        } catch (error) {
+          console.error("Erreur lors de la récupération des rendez-vous :", error);
+        }
+      }
+      setApptVisible(null);
+      fetchAppointments()
+    }
+  },[appointments,token])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -124,9 +154,10 @@ export default function ProfileContent() {
 
   return (
     <main className='profile-content-container'>
-      <div className='profile-actionStatus'>
+      <div className='profile-calendar'>
         <Calendar renderCell={renderCell} isoWeek />
       </div>
+
       <div className='training-zone'>  
         {userTrainings ? 
           <>

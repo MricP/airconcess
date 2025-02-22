@@ -126,6 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     AppointmentController::createAppointment($data);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment/deleteAppointment') !== false) {
+    $apptId = json_decode(file_get_contents("php://input"), true);
+    AppointmentController::deleteAppointment($apptId);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadTimestamps') !== false) {
     $agency_id = json_decode(file_get_contents("php://input"), true);
     AppointmentController::getTimestamps($agency_id);

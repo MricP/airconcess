@@ -1,0 +1,51 @@
+.calendarPopup {
+    top: 50%;
+    transform: translateY(-50%) !important;
+}
+
+/* TITLE */
+
+.calendarPopup .title {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.calendarPopup .title>div {
+    gap: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.calendarPopup .title>div .icon {
+    color: rgb(35, 167, 255);
+    font-size: 1.5rem;
+}
+
+.calendarPopup .title .delete-button {
+    background: unset;
+    border: unset;
+    height: fit-content;
+    width: fit-content;
+    font-size: var(--lower-text-size);
+    transition: background-size .5s;
+    color: red;
+    background: linear-gradient(to top, red 0%, red 5%, transparent 5.01%) no-repeat right bottom / 0% 100%;
+}
+
+.calendarPopup .title .delete-button:hover {
+    background-size: 100% 100%;
+    background-position: bottom left;
+}
+
+/* BODY */
+
+.calendarPopup .popup-body p{
+    font-size: var(--lower-text-size);
+}
+
+.calendarPopup .ok-button {
+    background-color: rgb(35, 167, 255);
+    border-radius: 3px;
+}
