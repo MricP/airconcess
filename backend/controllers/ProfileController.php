@@ -5,8 +5,7 @@ require_once __DIR__ . '/../models/Appointment.php';
 class ProfileController
 {
 
-    public static function getUser($payload)
-    {
+    public static function getUser($payload){
         error_log(print_r($payload, true)); // Debugging
 
         // Recherche de l'utilisateur par ID
@@ -114,5 +113,22 @@ class ProfileController
         // $appointments = Appointment::getAppointmentByUser($user['idUser']);
         echo json_encode($appointments);
     }
-    
+
+    public static function getTrainer($trainer_id) {
+        $trainer = User::selectTrainer($trainer_id);
+        $returnedData = null;
+
+        if($trainer) {
+            $returnedData = [
+                "id" => $trainer['trainer_id'],
+                "country" => $trainer['country_assignment'],
+                "city" => $trainer['city_assignment'],
+                "address" => $trainer['address_assignment'],
+                "firstName" => $trainer['firstName'], 
+                "lastName" => $trainer['lastName']
+            ];
+        }
+
+        echo json_encode($returnedData);
+    }
 }

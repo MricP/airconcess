@@ -1,15 +1,17 @@
 .stepMakeProposal-container {
     margin-top: 20px;
-    background-color: red;
 }
 
 .stepMakeProposal-container .pref-container {
-    /* margin: 20px 0; */
-    background-color: green;
+    margin-bottom: 20px;
 }
 
 .stepMakeProposal-container .pref-container p:not(.title) {
     font-size: var(--lower-text-size) !important;
+}
+
+.stepMakeProposal-container .pref-container .prefSlots-container {
+    margin-left: 20px;
 }
 
 .stepMakeProposal-container .title {
@@ -23,10 +25,10 @@
     gap: 20px;
 }
 
-.stepMakeProposal-container .proposals .proposal hr{
-    margin-bottom: 10px;
-    border: 1px solid #00000098;
-
+.stepMakeProposal-container .proposals hr {
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid #efe8e8;
 }
 
 .stepMakeProposal-container .proposals .icon-container {

@@ -1,15 +1,14 @@
 import React, { useRef, useState,useEffect } from 'react'
 import { IoIosArrowForward } from "react-icons/io";
-
-import StepMakeProposal from './StepMakeProposal.jsx';
-
-import '../../styles/profile/TrainerTrainingDisplayer.css'
 import StepProposalsSummary from './StepProposalsSummary.jsx';
 import StepDisplayFinalProposal from './StepDisplayFinalProposal.jsx';
+import StepCancelTraining from './StepCancelTraining.jsx';
+
+import '../../styles/profile/UserTrainingDisplayer.css'
 
 import { getTrainer } from "../../services/api.js"
 
-export default function TrainerTrainingDisplayer({reloadPage,trainingData}) {
+function UserTrainingDisplayer({reloadPage,trainingData}) {
     /*############ INITIALISATION DES STATES ############*/
     const [trainer,setTrainer] = useState(null)
     const [isOpen,setIsOpen] = useState(false) //Savoir si le menu est open
@@ -33,9 +32,9 @@ export default function TrainerTrainingDisplayer({reloadPage,trainingData}) {
             case 'ok': 
                 return <p style={{color:"green"}}>Formation programmée</p>
             case 'await-user': 
-                return <p style={{color:"orange"}}>En attente du client</p>
+                return <p style={{color:"orange"}}>Selection d'un programme</p>
             case 'not-ok': 
-                return <p style={{color:"red"}}>Non traité</p>
+                return <p style={{color:"red"}}>En attente du formateur</p>
             default:
                 return;
         }
@@ -46,9 +45,9 @@ export default function TrainerTrainingDisplayer({reloadPage,trainingData}) {
             case 'ok': 
                 return <StepDisplayFinalProposal trainer={trainer} trainingData={trainingData}/>
             case 'await-user': 
-                return <StepProposalsSummary reloadPage={reloadPage} trainingData={trainingData}/>
+                return <StepProposalsSummary reloadPage={reloadPage} trainingData={trainingData} mode='user'/>
             case 'not-ok': 
-                return <StepMakeProposal reloadPage={reloadPage} trainingData={trainingData}/>
+                return <StepCancelTraining reloadPage={reloadPage} trainingData={trainingData}/>
             default:
                 return;
         }
@@ -65,6 +64,7 @@ export default function TrainerTrainingDisplayer({reloadPage,trainingData}) {
     
     /*###################### AUTRE ######################*/
     useEffect(() => {
+        console.log(trainingData?.finalProposal)
         if(trainingData?.finalProposal) {
             setStatus('ok')
         } else {
@@ -79,9 +79,9 @@ export default function TrainerTrainingDisplayer({reloadPage,trainingData}) {
     useEffect(() => {
         loadTrainerInfos()
     },[])
-    
+  
     return (
-        <div className={`trainerTrainingDisplayer-container`} >
+        <div className={`userTrainingDisplayer-container`} >
             <div className='user-infos-container' onClick={handleItemClick}>
                 <div>
                     <img className='profile-picture' src={profile} alt='' />
@@ -96,3 +96,5 @@ export default function TrainerTrainingDisplayer({reloadPage,trainingData}) {
         </div>
     )
 }
+
+export default UserTrainingDisplayer

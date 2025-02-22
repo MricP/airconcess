@@ -9,76 +9,23 @@ import { getTrainingsOfTrainer,getTrainingsOfUser } from "../../services/trainin
 
 import "../../styles/general/Rsuite-custom.css"
 import "../../styles/profile/ProfileContent.css"
+import UserTrainingDisplayer from './UserTrainingDisplayer.jsx'
 
 export default function ProfileContent() {
-
+  /*############ INITIALISATION DES STATES ############*/
   const navigate = useNavigate()
   const testimonialRef = useRef(null)
   const [events, setEvents] = useState([]);
   const [userData, setUserData] = useState(null);
 
   const [trainerTrainings,setTrainerTrainings] = useState();
-  const [userTrainings,setUserTrainings] = useState();
-  
+  const [userTrainings,setUserTrainings] = useState();  
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getUserData(token);
-        setUserData(data);
-        await loadTrainingsDataOfUser(data.idUser)
-        if(data?.isTrainer) {
-          await loadTrainingsDataOfTrainer(data.idUser)
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
-    fetchData();
-  },[])
-
-  const loadTrainingsDataOfTrainer = async (id) => {
-    try {
-      const trainingsD = await getTrainingsOfTrainer(id)
-      console.log(trainingsD.data)
-      setTrainerTrainings(trainingsD.data)
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  }
-
-  const loadTrainingsDataOfUser = async (id) => {
-    try {
-      const trainingsD = await getTrainingsOfUser(id)
-      setUserTrainings(trainingsD.data)
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  }
-
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        navigate("sign-in");
-        return;
-      }
-      try {
-        const appointments = await getAppointmentByUser(token);
-        setEvents(appointments.data) 
-      } catch (error) {
-        console.error("Erreur lors de la récupération des rendez-vous :", error);
-      }
-    };
-    fetchAppointments();
-  }, [navigate]);
+  /*################### CONSTANTES ####################*/
 
   const token = localStorage.getItem("token")
-  if(!token){
-    navigate("sign-in")
-    return
-  }
-
+  
+  /*#################### FONCTIONS ####################*/
   const handleSubmitTestimonial = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token")
@@ -108,41 +55,110 @@ export default function ProfileContent() {
     return null;
   }
 
+  const loadTrainingsDataOfTrainer = async (id) => {
+    try {
+      const trainingsD = await getTrainingsOfTrainer(id)
+      setTrainerTrainings(trainingsD.data)
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  }
+
+  const loadTrainingsDataOfUser = async (id) => {
+    try {
+      const trainingsD = await getTrainingsOfUser(id)
+      console.log(trainingsD.data)
+      setUserTrainings(trainingsD.data)
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  }
+
+  const reloadPage = async () => {
+    // await window.scrollTo({
+    //   top: 0,
+    //   behavior: 'smooth'
+    // });
+    loadTrainingsDataOfTrainer(userData.idUser)
+    loadTrainingsDataOfUser(userData.idUser)
+  }
+
+  /*###################### AUTRE ######################*/
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        navigate("sign-in");
+        return;
+      }
+      try {
+        const appointments = await getAppointmentByUser(token);
+        setEvents(appointments.data) 
+      } catch (error) {
+        console.error("Erreur lors de la récupération des rendez-vous :", error);
+      }
+    };
+    fetchAppointments();
+  }, [navigate]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUserData(token);
+        setUserData(data);
+        await loadTrainingsDataOfUser(data.idUser)
+        if(data?.isTrainer) {
+          await loadTrainingsDataOfTrainer(data.idUser)
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+    fetchData();
+  },[])
+
+  if(!token){
+    navigate("sign-in")
+    return
+  }
+
   return (
-      <main className='profile-content-container'>
-        <div className='profile-actionStatus'>
-            <Calendar renderCell={renderCell} isoWeek />
+    <main className='profile-content-container'>
+      <div className='profile-actionStatus'>
+        <Calendar renderCell={renderCell} isoWeek />
+      </div>
+      <div className='training-zone'>  
+        {userTrainings ? 
+          <>
+            <p>Vos actions en cours</p> 
+            <div className='trainings-container'>
+              {userTrainings?.map(tr => { return <UserTrainingDisplayer reloadPage={reloadPage} trainingData={tr} key={tr.trainingId}/>})}
+            </div>
+          </>
+        :null}
+      </div>
+
+      {userData?.isTrainer === 1 ?
+        <div className='trainer-zone'>
+          {trainerTrainings ?
+            <>
+              <p>Espace formateur</p>
+              <div className='trainings-container'>
+                {trainerTrainings?.map(tr => { return <TrainerTrainingDisplayer reloadPage={reloadPage} trainingData={tr} key={tr.trainingId}/>})}
+              </div>
+            </>
+          :null}
         </div>
-        <div className='training-zone'>  
-            {userTrainings ? 
-              <>
-                <p>Vos actions en cours</p> 
-                <div className='trainings-container'>
-                  {/* {userTrainings?.map(tr => { return <UserTrainingDisplayer trainingData={tr} key={tr.trainingId}/>})} */}
-                </div>
-              </>
-            :null}
-        </div>
-        {userData?.isTrainer === 1 ?
-          <div className='trainer-zone'>
-            {trainerTrainings ?
-              <>
-                <p>Espace formateur</p>
-                <div className='trainings-container'>
-                  {trainerTrainings?.map(tr => { return <TrainerTrainingDisplayer trainingData={tr} key={tr.trainingId}/>})}
-                </div>
-              </>
-            :null}
-          </div>
-        : null}
-        <div className='profile-commentaire-container'>
-          <form method='POST' onSubmit={handleSubmitTestimonial}>
-            <p><strong>Ajouter un commentaire</strong></p>
-            <textarea ref={testimonialRef} name='testimonial' placeholder='Donnez nous votre avis...'></textarea>
-            <button type='submit'>Publier</button>
-          </form> 
-        </div> 
-       </main>
+      : null}
+
+      <div className='profile-commentaire-container'>
+        <form method='POST' onSubmit={handleSubmitTestimonial}>
+          <p><strong>Ajouter un commentaire</strong></p>
+          <textarea ref={testimonialRef} name='testimonial' placeholder='Donnez nous votre avis...'></textarea>
+          <button type='submit'>Publier</button>
+        </form> 
+      </div> 
+    </main>
   )
   
 }

@@ -45,6 +45,10 @@
             $insertTrainingPreferences = "";
         }
 
+        public static function deleteTraining($trainingId) {
+            echo json_encode(Training::deleteTraining($trainingId));    
+        }
+
         public static function getAllTrainers() {
             $trainers = User::selectAllTrainers();
             $returnedData = [];
@@ -89,6 +93,7 @@
                     if($proposals) {
                         foreach($proposals as $proposal) {
                             $returnedProposals[] = [
+                                "proposalId" => $proposal['proposal_id'],
                                 "dateStart" => $proposal['start_date'],
                                 "dateEnd" => $proposal['end_date'],
                                 "hourMonday" => $proposal['time_monday'],
@@ -104,6 +109,7 @@
                     if($training['final_proposal_id']) {
                         $proposal = Training::getTrainingProposal($training['final_proposal_id']);
                         $finalProposal = [
+                            "proposalId" => $proposal['proposal_id'],
                             "dateStart" => $proposal['start_date'],
                             "dateEnd" => $proposal['end_date'],
                             "hourMonday" => $proposal['time_monday'],
@@ -151,20 +157,51 @@
                         }
                     }
     
-                    $responseFromTrainer = Training::getTrainingProposals($training['training_id']);
+                    $proposals = Training::getTrainingProposals($training['training_id']);
+                    $returnedProposals = null;
+
+                    if($proposals) {
+                        foreach($proposals as $proposal) {
+                            $returnedProposals[] = [
+                                "proposalId" => $proposal['proposal_id'],
+                                "dateStart" => $proposal['start_date'],
+                                "dateEnd" => $proposal['end_date'],
+                                "hourMonday" => $proposal['time_monday'],
+                                "hourTuesday" => $proposal['time_tuesday'],    
+                                "hourWednesday" =>$proposal['time_wednesday'], 
+                                "hourThursday" => $proposal['time_thursday'], 
+                                "hourFriday" => $proposal['time_friday'], 
+                            ];
+                        }
+                    }
+
+                    $finalProposal = null;
+                    if($training['final_proposal_id']) {
+                        $proposal = Training::getTrainingProposal($training['final_proposal_id']);
+                        $finalProposal = [
+                            "proposalId" => $proposal['proposal_id'],
+                            "dateStart" => $proposal['start_date'],
+                            "dateEnd" => $proposal['end_date'],
+                            "hourMonday" => $proposal['time_monday'],
+                            "hourTuesday" => $proposal['time_tuesday'],    
+                            "hourWednesday" =>$proposal['time_wednesday'], 
+                            "hourThursday" => $proposal['time_thursday'], 
+                            "hourFriday" => $proposal['time_friday'],
+                        ];
+                    }
     
                     $returnedData[] = [
-                        "trainerId" => $idTrainer,
+                        "trainerId" => $training['trainerConcerned_id'],
                         "trainingId" => $training['training_id'],
-                        "finalProposalId" => $training['final_proposal_id'],
+                        "finalProposal" => $finalProposal,
                         "usrProfilePicture" => $training['profilePictureUrl'],
-                        "trainerFirstName" => $training['firstName'],
-                        "trainerLastName" => $training['lastName'],
+                        "usrFirstName" => $training['firstName'],
+                        "usrLastName" => $training['lastName'],
                         "startDate" => $training['start_date_pref'],
                         "endDate" => $training['end_date_pref'],
                         "frequency" => $training['frequency_pref'],
                         "prefSlots" => $returnedSlots,
-                        "hasResponseFromTrainer" => $responseFromTrainer ? true : false,
+                        "proposals" => $returnedProposals,
                     ];
                 }
             }
@@ -191,6 +228,14 @@
 
         }
 
+        public static function deleteProposals($trainingId) {
+            echo json_encode(Training::deleteProposals($trainingId));    
+        }
+
+        public static function deleteProposal($proposalId) {
+            echo json_encode(Training::deleteProposal($proposalId));    
+        }
+
         public static function getProposals($trainingId) {
             $proposals = Training::getTrainingProposals($trainingId);
             $returnedData = null;
@@ -198,6 +243,7 @@
             if($proposals) {
                 foreach($proposals as $proposal) {
                     $returnedData[] = [
+                        "proposalId" => $proposal['proposal_id'],
                         "dateStart" => $proposal['start_date'],
                         "dateEnd" => $proposal['end_date'],
                         "hourMonday" => $proposal['time_monday'],
@@ -213,8 +259,7 @@
         }
 
         public static function acceptProposal($trainingId,$proposalId) {
-            $resp = Training::acceptProposal($trainingId,$proposalId);
-            echo json_encode($resp);
+            echo json_encode(Training::acceptProposal($trainingId,$proposalId));
         }
     }
 ?>

@@ -3,7 +3,6 @@
 
     //A
     class CatalogControlleur{
-
         public static function getAircrafts(){
             try {
                 $aircrafts = Aircraft::getAllAircrafts();

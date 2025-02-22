@@ -1,9 +1,37 @@
 .stepProposalsSummary-container {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: column;   
     margin-top: 20px;
+}
 
+.stepProposalsSummary-container .proposals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.stepProposalsSummary-container .proposals.two-rows {
+    grid-template-rows: 1fr 1fr;
+}
+
+.stepProposalsSummary-container .proposals .proposal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: center;
+    grid-area: 1fr 1fr;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #efe8e8;
+}
+
+.stepProposalsSummary-container .proposals .proposal>div {
+    width: 100%;
+}
+
+.stepProposalsSummary-container p:not(.title,.proposal-number) {
+    font-size: var(--lower-text-size);
 }
 
 .stepProposalsSummary-container .title {
@@ -16,29 +44,32 @@
     align-items: center;
 }
 
-.stepProposalsSummary-container .cancel-proposals-button {
+.stepProposalsSummary-container .proposal-button {
     background: unset;
     border: unset;
     height: fit-content;
     width: fit-content;
     font-size: var(--lower-text-size);
-    color: red;
-    background: linear-gradient(to top, red 0%, red 5%, transparent 5.01%) no-repeat right bottom / 0% 100%;
     transition: background-size .5s;
 }
 
-.stepProposalsSummary-container .cancel-proposals-button:hover {
+.stepProposalsSummary-container .proposal-button.cancel {
+    color: red;
+    background: linear-gradient(to top, red 0%, red 5%, transparent 5.01%) no-repeat right bottom / 0% 100%;
+}
+
+.stepProposalsSummary-container .proposal-button.accept {
+    color: green;
+    background: linear-gradient(to top, green 0%, green 5%, transparent 5.01%) no-repeat right bottom / 0% 100%;
+}
+
+.stepProposalsSummary-container .proposal-button:hover {
     background-size: 100% 100%;
     background-position: bottom left;
 }
 
-.stepProposalsSummary-container .proposal {
-    margin-left: 20px;
-}
-
-
 .stepProposalsSummary-container .proposal .proposal-number {
-    font-weight: bold;
+    font-weight: 300;
     text-decoration: underline;
 }
 

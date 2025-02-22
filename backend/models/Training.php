@@ -18,6 +18,12 @@ class Training
         return $pdo->lastInsertId();
     }
 
+    public static function deleteTraining($trainingId) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("DELETE FROM training WHERE training_id = ?");
+        return $stmt->execute([$trainingId]);
+    }
+
     public static function insertCreditCard($creditCard) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("INSERT INTO credit_card (card_holder,card_number) VALUES (?,?)");
@@ -48,7 +54,7 @@ class Training
 
     public static function selectTrainingsOfUser($idUser) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT t.training_id, t.final_proposal_id, u.firstName, u.lastName, u.profilePictureUrl, t.frequency_pref, t.start_date_pref, t.end_date_pref FROM training t INNER JOIN user u ON u.idUser = t.trainerConcerned_id WHERE t.userConcerned_id = ?");
+        $stmt = $pdo->prepare("SELECT t.trainerConcerned_id,t.training_id, t.final_proposal_id, u.firstName, u.lastName, u.profilePictureUrl, t.frequency_pref, t.start_date_pref, t.end_date_pref FROM training t INNER JOIN user u ON u.idUser = t.trainerConcerned_id WHERE t.userConcerned_id = ?");
         $stmt->execute([$idUser]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -67,6 +73,18 @@ class Training
         return $stmt->fetch();
     }
 
+    public static function deleteProposals($trainingId) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("DELETE FROM training_proposal WHERE trainingConcerned_id = ?");
+        return $stmt->execute([$trainingId]);
+    }
+
+    public static function deleteProposal($proposalId) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("DELETE FROM training_proposal WHERE proposal_id = ?");
+        return $stmt->execute([$proposalId]);
+    }
+    
     public static function insertProposal($proposal) {
         $pdo = self::getDB();
         $stmt = $pdo->prepare("INSERT INTO training_proposal (trainingConcerned_id,trainerConcerned_id,start_date,end_date,time_monday,time_tuesday,time_wednesday,time_thursday,time_friday) VALUES (?,?,?,?,?,?,?,?,?)");
@@ -76,10 +94,7 @@ class Training
 
     public static function acceptProposal($trainingId,$proposalId) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("UPDATE TABLE training SET final_proposal_id = ? WHERE training_id = ?");
-        $stmt->execute([$proposalId,$trainingId]);
-        return $pdo->lastUpdateId();
+        $stmt = $pdo->prepare("UPDATE training SET final_proposal_id = ? WHERE training_id = ?");
+        return $stmt->execute([$proposalId,$trainingId]);
     }
-
-    
 }

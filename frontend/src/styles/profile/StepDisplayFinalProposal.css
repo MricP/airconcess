@@ -1,5 +1,16 @@
 .stepDisplayFinalProposal-container {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
     margin-top: 20px;
+}
+
+.stepDisplayFinalProposal-container p:not(.title) {
+    font-size: var(--lower-text-size);
+}
+
+.stepDisplayFinalProposal-container .title {
+    font-weight: bold;
 }
 
 .stepDisplayFinalProposal-container strong {

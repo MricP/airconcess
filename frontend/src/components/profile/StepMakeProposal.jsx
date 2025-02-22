@@ -10,7 +10,7 @@ import { insertProposals } from '../../services/training';
 
 import "../../styles/profile/StepMakeProposal.css"
 
-function StepMakeProposal({trainingData}) {
+function StepMakeProposal({reloadPage,trainingData}) {
     /*############ INITIALISATION DES STATES ############*/
     const [proposals, setProposals] = useState([]); // Stocke des objets avec un identifiant unique
     const [isHovered, setIsHovered] = useState(false);
@@ -33,7 +33,7 @@ function StepMakeProposal({trainingData}) {
             }
             if(isValid) {
                 await insertProposalsIntoDB();
-                window.location.reload();
+                reloadPage();
             } else {
                 toast.error("Vous devez selectionner au moins une zone horaire par proposition")
             }
@@ -67,9 +67,13 @@ function StepMakeProposal({trainingData}) {
         for (let key in trainingData.prefSlots) {
             let hStart = trainingData.prefSlots[key].startTime.split(":");
             let hEnd = trainingData.prefSlots[key].endTime.split(":");
-            slots.push(<p key={key}>{"De " + hStart[0] + "h" + hStart[1] + " à " + hEnd[0] + "h" + hEnd[1]}</p>);
+            slots.push(<p key={key}>{"○ De " + hStart[0] + "h" + hStart[1] + " à " + hEnd[0] + "h" + hEnd[1]}</p>);
         }
         return slots;
+    }
+
+    const handleDisplayDate = (date) => {
+        return (new Date(date)).toLocaleDateString()
     }
 
     /*###################### AUTRE ######################*/
@@ -85,21 +89,27 @@ function StepMakeProposal({trainingData}) {
         <div className='stepMakeProposal-container'>
             <div className='pref-container'>
                 <p className='title'>Préférences client</p>
-                <p>• Date de début : {trainingData?.startDate}</p>
-                <p>• Date de fin : {trainingData?.endDate}</p>
-                <p>• Fréquence des séances : {trainingData?.frequency} séance(s) par semaine</p>
-                <p>• Préférences horaires : {trainingData?.prefSlots ? null : "Non renseigné"}</p>
-                {trainingData.prefSlots ? <div className="value-container">{handleDisplayPrefSlots()}</div> : null}
+                <p>○ Date de début : {handleDisplayDate(trainingData?.startDate)}</p>
+                <p>○ Date de fin : {handleDisplayDate(trainingData?.endDate)}</p>
+                <p>○ Fréquence des séances : {trainingData?.frequency} séance(s) par semaine</p>
+                <p>○ Préférences horaires : {trainingData?.prefSlots ? null : "Non renseigné"}</p>
+                {trainingData.prefSlots ? <div className="prefSlots-container">{handleDisplayPrefSlots()}</div> : null}
             </div>
                     
+            <p className='title'>Vos propositions</p>
             <form method="POST" onSubmit={handleSubmit(onSubmit)} className='proposals' id={proposals.length === 0 ? "nothing" : ""}>
+                
                 {proposals.length === 0 ? 
                     <div style={{display:"flex",justifyContent:"center", alignItems:"center"}}>Aucune proposition</div> :               
                 proposals?.map((proposal,index) => (
-                    <div className="proposal" key={proposal.id}>
+                    <>
+                        <div className="proposal" key={proposal.id}>
+                            
+                            <TrainingProposal noProposal={index+1} proposId={proposal.id} formData={formData} errors={errors} setValue={setValue} register={register} removeProposal={removeProposal}/>
+                            
+                        </div>
                         <hr />
-                        <TrainingProposal noProposal={index+1} proposId={proposal.id} formData={formData} errors={errors} setValue={setValue} register={register} removeProposal={removeProposal}/>
-                    </div>
+                    </>
                 ))}
 
                 <div className="icon-container" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>   
@@ -112,7 +122,7 @@ function StepMakeProposal({trainingData}) {
                         onClick={proposals.length < 5 ? addProposal : null}
                     />
                 </div>
-                <DarkButton>Valider les propositions</DarkButton>
+                <DarkButton disabled={proposals.length===0} >Valider {proposals.length>1 ? "les propositions" : "la proposition"}</DarkButton>
             </form>
         </div>
     )

@@ -1,0 +1,42 @@
+.stepCancelTraining-container {
+    margin-top: 20px;
+}
+
+.stepCancelTraining-container .pref-container {
+    margin-bottom: 20px;
+}
+
+.stepCancelTraining-container .title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stepCancelTraining-container .title-container .title {
+    font-weight: bold;
+}
+
+.stepCancelTraining-container .proposal-button {
+    background: unset;
+    border: unset;
+    height: fit-content;
+    width: fit-content;
+    font-size: var(--lower-text-size);
+    color: red;
+    background: linear-gradient(to top, red 0%, red 5%, transparent 5.01%) no-repeat right bottom / 0% 100%;
+    transition: background-size .5s;
+}
+
+.stepCancelTraining-container .proposal-button:hover {
+    background-size: 100% 100%;
+    background-position: bottom left;
+}
+
+.stepCancelTraining-container .pref-container p:not(.title) {
+    font-size: var(--lower-text-size) !important;
+}
+
+.stepCancelTraining-container .pref-container .prefSlots-container {
+    margin-left: 20px;
+}
+

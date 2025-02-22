@@ -17,6 +17,15 @@ export const submitTraining = async (formData) => {
     }
 };
 
+export const deleteTraining = async (trainingId) => {
+  try {
+    const response = await axiosInstance.post('/training/deleteTraining',trainingId);   
+    return response;
+  } catch (error) {
+      throw error;
+  }
+}
+
 export const getTrainers = async () => {
   try {
       const response = await axiosInstance.get('/subTraining/get-trainers');    
@@ -53,6 +62,30 @@ export const insertProposals = async (trainerId,trainingId,proposals) => {
   }
 }
 
+export const deleteProposals = async (trainingId) => {
+  try {
+    const response = await axiosInstance.post('/training/deleteProposals',trainingId);   
+    return response;
+  } catch (error) {
+      throw error;
+  }
+}
 
+export const deleteProposal = async (proposalId) => {
+  try {
+    const response = await axiosInstance.post('/training/deleteProposalWithId',proposalId);   
+    return response;
+  } catch (error) {
+      throw error;
+  }
+}
 
+export const acceptProposal = async (trainingId,proposalId) => {
+  try {
+    const response = await axiosInstance.post('/training/acceptProposal',{trainingId,proposalId});   
+    return response;
+  } catch (error) {
+      throw error;
+  }
+}
 
