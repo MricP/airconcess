@@ -1,5 +1,5 @@
 .scroll-down-button {
-    font-size: 50px;
+    font-size: clamp(35px, 4vw, 50px);;
     border: none;
     cursor: pointer;
     background-color: transparent;

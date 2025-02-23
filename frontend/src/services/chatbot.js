@@ -10,6 +10,7 @@ const chatbotInstance = axios.create({
 export const sendAQuestion = async (question) => {
     try {
         const response = await chatbotInstance.post("/chatbot/send", { question });
+        console.log(response.data)
         return response.data.answer;
     } catch (error) {
         console.error("erreur lors de l'envoi de la réponse.", error);

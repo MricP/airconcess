@@ -148,6 +148,7 @@ export default function PageAdmin() {
             );
 
             if (!resultInsertAircraft.success) {
+                console.log("erreur")
                 throw new Error("Échec de l'insertion de l'aircraft.");
             }
 
@@ -163,12 +164,12 @@ export default function PageAdmin() {
 
                 const resultMainImage = await insertImage("main", insertedAircraftId, responseMainImage.filePath);
                 if (!resultMainImage.success) throw new Error("Échec de l'insertion de l'image principale.");
-            } else throw new Error("Échec de l'upload de l'image principale.");
+            } else {console.log("erreur"); throw new Error("Échec de l'upload de l'image principale.");}
 
             // Icône
             if (icon) {
                 const responseIcon = await uploadImage(icon, model.model_name, insertedAircraftId);
-                if (!responseIcon.success) throw new Error("Échec de l'upload de l'icône.");
+                if (!responseIcon.success) {console.log("erreur");throw new Error("Échec de l'upload de l'icône.");}
 
                 const resultIcon = await insertImage("icon", insertedAircraftId, responseIcon.filePath);
                 if (!resultIcon.success) throw new Error("Échec de l'insertion de l'icône.");
@@ -176,21 +177,23 @@ export default function PageAdmin() {
 
             // Images du slider
             if (files && files.length > 0) {
+                console.log(files)
                 for (const sliderImage of files) {
+                    console.log(sliderImage)
                     const responseSlider = await uploadImage(sliderImage, model.model_name, insertedAircraftId);
-                    if (!responseSlider.success) throw new Error("Échec de l'upload d'une image du slider.");
+                    if (!responseSlider.success) {console.log("erreur");throw new Error("Échec de l'upload d'une image du slider.");}
 
                     const resultSliderImage = await insertImage("slider", insertedAircraftId, responseSlider.filePath);
-                    if (!resultSliderImage.success) throw new Error("Échec de l'insertion d'une image du slider.");
+                    if (!resultSliderImage.success) {console.log("erreur");throw new Error("Échec de l'insertion d'une image du slider.");}
                 }
             } else throw new Error("Échec de l'upload des images du slider.");
 
 
             if (addMode === "Nouveau") {
-                const contentModel = `Nouveau model inséré : ${model}`
+                const contentModel = `Nouveau model inséré : ${model.model_name}`
                 await insertLog(contentModel)
             }
-            const contentAircraft = `Nouveau produit inséré : ${model} ${serialNumber}`
+            const contentAircraft = `Nouveau produit inséré : ${model.model_name} ${serialNumber}`
             await insertLog(contentAircraft)
 
             console.log("Toutes les opérations ont été effectuées avec succès !");
@@ -199,6 +202,8 @@ export default function PageAdmin() {
             if (error.response && error.response.status === 403) {
                 navigate('/');
             }
+            console.log(modelData)
+            console.log(productData)
             alert("Il y a eu un problème lors de l'insertion du nouveau produit. Veillez à ce que toutes les images et icones soient remplis et que tous les champs ne contiennent pas le texte 'Inconnu' !")
 
             // Rollback

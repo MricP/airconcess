@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
 import "../../styles/catalog/ProductBox.css";
@@ -87,19 +87,20 @@ export const ProductBox = (props) => {
       const nameModel = await getModelName(props.aircraftId);
       const aircraft = await getAircraft(props.aircraftId)
 
-      const content = `Modification du produit : ${nameModel[0]} ${aircraft.serial_number}`
-      await insertLog(content)
-
-      console.log("Toutes les opérations ont été effectuées avec succès !");
-      window.location.reload()
-    } catch (error) {
-      alert(error)
-      window.location.reload()
-    }
-  }
-  if (showProductPage) {
-    props.pageProduct(<PageProduct aircraftId={props.idAircraft} onSubmitProduct={handleAddButtonClick} mode={"edit"} />);
-  }
+              const content = `Modification du produit : ${nameModel[0]} ${aircraft.serial_number}`
+              await insertLog(content)
+      
+              console.log("Toutes les opérations ont été effectuées avec succès !");
+              window.location.reload()
+          } catch (error) {
+              alert(error)
+          }
+        }
+        useEffect(() => {
+          if (showProductPage) {
+            props.pageProduct(<PageProduct aircraftId={props.idAircraft} onSubmitProduct={handleAddButtonClick} mode={"edit"}/>);
+          }
+        }, [showProductPage]);
 
   return (
     <div className='productBox-container'>
@@ -116,40 +117,40 @@ export const ProductBox = (props) => {
         </div>
       </div>
 
-      <div className='catalog-productDescription-container'>
-        <div className="bin">
-          <button onClick={handleButtonClick}>{icon}</button>
-        </div>
-        <div className='planeInfos-container'>
-          <div className='planeInfos'>
-            <p className='infoTitle'>Année</p>
-            <p>{props.year}</p>
-          </div>
-          <div className='planeInfos'>
-            <p className='infoTitle'>Heures</p>
-            <p>{props.hour}</p>
-          </div>
-          <div className='planeInfos'>
-            <p className='infoTitle'>Capacité</p>
-            <p>{props.capacity} pers</p>
-          </div>
-          <div className='planeInfos'>
-            <p className='infoTitle'>Autonomie</p>
-            <p>{props.autonomy} km</p>
-          </div>
-          <div className='planeInfos'>
-            <p className='infoTitle'>Type</p>
-            <p>{props.aircraftType}</p>
-          </div>
-        </div>
-        <p>{props.description}</p>
-        <div className='LearnMorebButton'>
-          <p>EN SAVOIR PLUS</p>
-          <button onClick={() => redirect(`/product/${props.idAircraft}`)}>
-            <FaArrowRightLong size={20} />
-          </button>
+        <div className='catalog-productDescription-container'>
+            <div className="bin">
+                <button onClick={handleButtonClick}>{icon}</button>
+            </div>
+            <div className='planeInfos-container'>
+                <div className='planeInfos'>
+                    <p className='infoTitle'>Année</p>
+                    <p>{props.year}</p>
+                </div>
+                <div className='planeInfos'>
+                    <p className='infoTitle'>Heures</p>
+                    <p>{props.hour}</p>
+                </div>
+                <div className='planeInfos'>
+                    <p className='infoTitle'>Capacité</p>
+                    <p>{props.capacity} pers</p>
+                </div>
+                <div className='planeInfos'>
+                    <p className='infoTitle'>Autonomie</p>
+                    <p>{props.autonomy} km</p>
+                </div>
+                <div className='planeInfos'>
+                    <p className='infoTitle'>Type</p>
+                    <p>{props.aircraftType}</p>
+                </div>
+            </div>
+            <p>{props.description}</p>
+            <div className='LearnMorebButton'>
+              <p>EN SAVOIR PLUS</p>
+              <button onClick={() => redirect(`/product/${props.idAircraft}` )}>
+                <FaArrowRightLong size={20}/>
+              </button>
+            </div>
         </div>
       </div>
-    </div>
   );
 }
