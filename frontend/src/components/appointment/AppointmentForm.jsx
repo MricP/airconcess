@@ -198,6 +198,10 @@ function AppointmentForm({setIsSubmitted}) {
             
             if(response.data.success) {
                 setIsSubmitted(true)
+                window.scrollTo({
+                    top:0,
+                    behavior: 'smooth'
+                })
             } else {
                 console.log("impossible")
                 toast.error(`${response.data.message}`)

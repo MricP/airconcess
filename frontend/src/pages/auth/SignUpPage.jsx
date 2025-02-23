@@ -57,6 +57,8 @@ const SignUpPage = () => {
             <img src={airconcessLogo} alt="AirConcess" className="airconcess-logo" />
           </div>
           <form onSubmit={handleSubmit} className="sign-up-form">
+            {responseMessage && (<div className="error-message-div">{responseMessage && <p>○ {responseMessage}</p>}</div>)}
+            {errorHtml && (<div className="error-message-div">{errorHtml && <p>○ {errorHtml}</p>}</div>)}
             <div className="form-group">
               <label htmlFor="firstName" className="form-label">Prénom*</label>
               <GrayInput placeholder="Prénom" value={firstName} onChange={(e) => setFirstName(e.target.value)} required={true} />
@@ -83,8 +85,6 @@ const SignUpPage = () => {
             <p className="sign-in-link-text">Déjà inscrit ?</p>
             <div onClick={()=>redirect("/sign-in")} className="sign-in-link">Se connecter</div>
           </div>
-          {responseMessage && <p className="response-message">{responseMessage}</p>}
-          {errorHtml && <div className="error-html" dangerouslySetInnerHTML={{ __html: errorHtml }} />}
         </div>
       }
     />

@@ -6,7 +6,7 @@ import "../../styles/general/DarkButton.css";
 export default function DarkButton({children, className, destination=null,...rest}){
     if(destination) {
         return (
-            <Link className={`dark-button ${className}`} {...rest} to={destination}>{children}</Link>
+            <Link className={`dark-button ${className}`} {...rest} onClick={() => window.scrollTo({top:0,behavior:'smooth'})} to={destination}>{children}</Link>
         )
     } else {
         return (

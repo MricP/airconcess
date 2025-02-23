@@ -6,6 +6,7 @@ function useRedirect() {
     function redirectTo(location) {
         window.scrollTo({
             top: 0,
+            behavior:'smooth'
         });
         navigate(location)
     }

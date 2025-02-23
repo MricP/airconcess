@@ -17,6 +17,11 @@
     top: 20vh;
     position: absolute;
     color: var(--bg-primary);
+    cursor: pointer;
+}
+
+.first-section-landing .footer-links>div {
+    cursor: pointer;
 }
 
 .first-section-landing-col {

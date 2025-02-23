@@ -18,18 +18,9 @@ header li {
     justify-content: space-between;
 }
 
-.header-default-menu>a {
-    display: flex;
+.header-default-menu>img {
     width: 11vw;
-}
-
-.header-default-menu img {
-    width: 100%;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
+    cursor: pointer;
 }
 
 nav {

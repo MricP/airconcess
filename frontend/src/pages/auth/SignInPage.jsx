@@ -58,6 +58,8 @@ const SignInPage = () => {
             <img src={airconcessLogo} alt="AirConcess" className="airconcess-logo" />
           </div>
           <form onSubmit={handleSubmit} className="sign-in-form">
+            {responseMessage && (<div className="error-message-div">{responseMessage && <p>○ {responseMessage}</p>}</div>)}
+            {errorHtml && (<div className="error-message-div">{errorHtml && <p>○ {errorHtml}</p>}</div>)}
             <div className="form-group">
               <label htmlFor="email" className="form-label">Adresse mail*</label>
               <GrayInput placeholder="toto12@exemple.net" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />
@@ -75,8 +77,6 @@ const SignInPage = () => {
             <p className="sign-up-link-text">Pas encore rejoins l’aventure ?</p>
             <div onClick={()=>redirect("/sign-up")} className="sign-up-link">Créer mon compte</div>
           </div>
-          {responseMessage && <p className="response-message">{responseMessage}</p>}
-          {errorHtml && <div className="error-html" dangerouslySetInnerHTML={{ __html: errorHtml }} />}
         </div>
       }
     />

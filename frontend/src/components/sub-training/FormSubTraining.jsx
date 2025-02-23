@@ -61,6 +61,10 @@ function FormSubTraining({step,updateStep}) {
     if(step>0) {
       step === 5 ? updateStep(3) : updateStep(step-1)
     }
+    window.scrollTo({
+      top:0,
+      behavior: 'smooth'
+    })
   }
 
   function handleNextStep() {
@@ -69,6 +73,10 @@ function FormSubTraining({step,updateStep}) {
     } else if(step===3) { // Avant de passer à l'étape suivante, on fait l'isertion
       handleInsertion()
     }
+    window.scrollTo({
+      top:0,
+      behavior: 'smooth'
+    })
   }
 
   function handleStepDisplayed() {
