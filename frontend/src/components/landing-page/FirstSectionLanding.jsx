@@ -30,7 +30,6 @@ function FirstSectionLanding() {
 
     const scrollToSecondSection = () => {
         const secondSection = document.querySelector('#second-section-landing');
-        console.log(secondSection);
         if (secondSection) {
             secondSection.scrollIntoView({ behavior: 'smooth' });
         }

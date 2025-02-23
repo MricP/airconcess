@@ -110,7 +110,7 @@ function FormSubTraining({step,updateStep}) {
       setValue("firstName",userData.firstName)
       setValue("lastName",userData.lastName)
       setValue("userId",userData.idUser)
-      console.log(userData.idUser)
+
     } catch (error) {
         console.error('Erreur get:', error);
     }
@@ -119,7 +119,6 @@ function FormSubTraining({step,updateStep}) {
   const loadTrainers = async () => {
     try {
       const response = await getTrainers();
-      console.log("ok ")
       setTrainers(response.data)
     } catch (error) {
       console.log('Error getTrainers:', error.response?.data?.message || 'Unknown error');

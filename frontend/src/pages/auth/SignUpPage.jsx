@@ -40,8 +40,8 @@ const SignUpPage = () => {
     const img = new Image();
     img.src = signUpImg;
     img.onload = () => {
-      console.log('Width:', img.width);
-      console.log('Height:', img.height);
+      // console.log('Width:', img.width);
+      // console.log('Height:', img.height);
     };
   }, [signUpImg]);
 

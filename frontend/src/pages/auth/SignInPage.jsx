@@ -17,7 +17,6 @@ const SignInPage = () => {
   const [responseMessage, setResponseMessage] = useState('');
 
   const handleSubmit = async (event) => {
-    console.log("ok")
     event.preventDefault();
     try {
       const response = await signIn({ email, password });

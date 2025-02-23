@@ -10,7 +10,6 @@ function PaymentDetailsStep({ formData, register, errors, setValue }) {
   const [current,setCurrent] = useState(null) //Designe le champ de saisie courant, pour la CreditCard
 
   const handleDateChange = (e) => {
-    console.log("movment")
 
     const value= e.target.value;
     let numericValue = value.replace(/\D/g, ''); // Supprimer tous les caractères non numériques

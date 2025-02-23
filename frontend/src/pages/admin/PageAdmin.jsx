@@ -177,7 +177,7 @@ export default function PageAdmin() {
 
             // Images du slider
             if (files && files.length > 0) {
-                console.log(files)
+                // console.log(files)
                 for (const sliderImage of files) {
                     console.log(sliderImage)
                     const responseSlider = await uploadImage(sliderImage, model.model_name, insertedAircraftId);
@@ -202,8 +202,8 @@ export default function PageAdmin() {
             if (error.response && error.response.status === 403) {
                 navigate('/');
             }
-            console.log(modelData)
-            console.log(productData)
+            // console.log(modelData)
+            // console.log(productData)
             alert("Il y a eu un problème lors de l'insertion du nouveau produit. Veillez à ce que toutes les images et icones soient remplis et que tous les champs ne contiennent pas le texte 'Inconnu' !")
 
             // Rollback
