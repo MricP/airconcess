@@ -30,7 +30,7 @@ export default function ProfileSideBar(){
   const [buttonDeleteClicked,setButtonDeleteClicked] = useState(false)
 
   const [profilePicture, setProfilePicture] = useState(null);
-  const {register,handleSubmit,watch,setValue, formState: { errors }} = useForm (
+  const {handleSubmit,watch,setValue, formState: { errors }} = useForm (
     { defaultValues: {
         firstName: null, 
         lastName: null,
@@ -39,6 +39,10 @@ export default function ProfileSideBar(){
         isAdmin: false,
         email: null,
         profilePictureURL: null,
+        //Si isTrainer
+        country_assignment: null,
+        city_assignment: null,
+        address_assignment: null
     }}
   );
 
@@ -149,6 +153,7 @@ export default function ProfileSideBar(){
     const fetchData = async () => {
       try {
         const data = await getUserData(token);
+        console.log(data)
         setUserData(data);
 
         setValue("firstName",data.firstName)
@@ -158,6 +163,9 @@ export default function ProfileSideBar(){
         setValue("profilePictureURL",data.profilePictureURL)
         setValue('isAdmin',data.isAdmin)
         setValue('isTrainer',data.isTrainer)
+        setValue('address_assignment',data.address_assignment)
+        setValue('city_assignment',data.city_assignment)
+        setValue('country_assignment',data.country_assignment)
 
         // setProfilePicture(data.profilePictureURL);
       } catch (error) {
@@ -196,6 +204,26 @@ export default function ProfileSideBar(){
                   
         {isModalOpen ? 
           <form method='POST' onSubmit={handleSubmit(onSubmit)} className='editing-form' >
+            <div className='editing-form-content'>
+              {formData.isTrainer?
+                <>
+                  <GrayInput
+                    placeholder={"Ville d'assignement"}
+                    value={formData.city_assignment ? formData.city_assignment : ""}
+                    onChange={(e) => setValue("city_assignment", e.target.value)}
+                  />
+                  <GrayInput
+                    placeholder={"Pays d'assignement"}
+                    value={formData.country_assignment ? formData.country_assignment : ""}
+                    onChange={(e) => setValue("country_assignment", e.target.value)}
+                  />
+                  <GrayInput
+                    placeholder={"Adresse d'assignement"}
+                    value={formData.address_assignment ? formData.address_assignment : ""}
+                    onChange={(e) => setValue("address_assignment", e.target.value)}
+                  />
+                </>
+              :null}
               <GrayInput
                 placeholder={'Prénom'}
                 value={formData.firstName ? formData.firstName : ""}
@@ -217,10 +245,11 @@ export default function ProfileSideBar(){
                 value={formData.email ? formData.email : ""}
                 onChange={(e) => setValue("email", e.target.value)}
               />
-              <div className='edit-values-buttons'>
-                <button className="cancel-button" type='button' onClick={handleCancel}>Annuler</button>
-                <button className="ok-button" type='submit'>Valider</button>
-              </div>
+            </div>
+            <div className='edit-values-buttons'>
+              <button className="cancel-button" type='button' onClick={handleCancel}>Annuler</button>
+              <button className="ok-button" type='submit'>Valider</button>
+            </div>
           </form>:
           <div className='profile-infos'>
             <p>{userData.firstName} {userData.lastName}</p>

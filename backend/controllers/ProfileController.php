@@ -25,7 +25,6 @@ class ProfileController
         $data = json_decode(file_get_contents("php://input"), true);
         $user = self::getUser($payload);
 
-
         $newFirstName = $data['firstName'] ?? null;
         $newLastName = $data['lastName'] ?? null;
         $newLocation = $data['location'] ?? null;
@@ -37,6 +36,10 @@ class ProfileController
         }
 
         $result = User::updateUser($user['idUser'], $newFirstName, $newLastName, $newLocation);
+
+        if($user['isTrainer']) {
+            $result = $result && User::updateTrainer($user['idUser'],$data);
+        }
 
         if ($result) {
             echo json_encode(["message" => "Profil modifié"]);
