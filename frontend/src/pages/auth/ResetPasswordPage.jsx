@@ -80,6 +80,7 @@ export default function ResetPasswordPage() {
                         <DarkButton2 text="Réinitialiser le mot de passe" type="submit" className="reset-password-button" />
                     </form>
                     {message && <p className="response-message">{message}</p>}
+                    {errorHtml && <p className="error-message">{errorHtml}</p>}
                 </div>
             }
         />

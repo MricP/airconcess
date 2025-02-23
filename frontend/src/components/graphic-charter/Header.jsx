@@ -5,6 +5,7 @@ import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import useRedirect from '../Custom-hooks';
 
 export default function Header({ color }) {
     const logoWhite = '/assets/logo-white.png';
@@ -13,6 +14,7 @@ export default function Header({ color }) {
     const isMobile = useMediaQuery({ maxWidth: 992 });
     const [isClicked, updateClicked] = useState(false);
     const [user, setUser] = useState({ session: false });
+    const redirect = useRedirect();
 
     if (color === "white-black" || color === "transparent-black") {
         logo = logoBlack;
@@ -20,6 +22,9 @@ export default function Header({ color }) {
 
     const handleMenuClick = () => {
         updateClicked(!isClicked);
+        if(isClicked){
+            
+        }
     };
 
     useEffect(() => {
@@ -56,10 +61,10 @@ export default function Header({ color }) {
                     <Link to="/"><img src={logo} alt="Logo" /></Link>
                     <nav>
                         <ul>
-                            <li><Link to="/catalog">Nos aéronefs</Link></li>
-                            <li><Link to="/services">Nos services</Link></li>
-                            <li><Link to="/contact-us">Contact</Link></li>
-                            <li><Link to="/about">A propos</Link></li>
+                            <li onClick={() => redirect("/catalog")}>Nos aéronefs</li>
+                            <li onClick={() => redirect("/services")}>Nos services</li>
+                            <li onClick={() => redirect("/contact-us")}>Contact</li>
+                            <li onClick={() => redirect("/about")}>A propos</li>
                         </ul>
                         <form action="">
                             {user.session ? (
@@ -74,7 +79,10 @@ export default function Header({ color }) {
                     <div className="header-menu-bar">
                         <img src={logo} alt="Logo" onClick={() => navigate("/")}/>
                         <div className="header-icon">
-                            <button onClick={handleProfileButton}><CgProfile size={30} /></button>
+                            {user.session ? 
+                                <button onClick={handleProfileButton}><CgProfile size={30} /></button> :
+                                <button onClick={handleConnexionButton}><CgProfile size={30} /></button>
+                            }
                             {isClicked ? (
                                 <RxCross2 onClick={handleMenuClick} size={30} />
                             ) : (
@@ -84,12 +92,12 @@ export default function Header({ color }) {
                     </div>
 
                     {isClicked &&
-                        <nav>
+                        <nav className={`${color} nav-mobile`}>
                             <ul>
-                                <li><Link to="/catalog">Nos aéronefs</Link></li>
-                                <li><Link to="/services">Nos services</Link></li>
-                                <li><Link to="/contact-us">Contact</Link></li>
-                                <li><Link to="/about">A propos</Link></li>
+                                <li onClick={() => redirect("/catalog")}>Nos aéronefs</li>
+                                <li onClick={() => redirect("/services")}>Nos services</li>
+                                <li onClick={() => redirect("/contact-us")}>Contact</li>
+                                <li onClick={() => redirect("/about")}>A propos</li>
                             </ul>
                         </nav>}
                 </div>

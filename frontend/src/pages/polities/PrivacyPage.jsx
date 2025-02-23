@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../styles/polities/PrivacyPage.css';
+import { Link } from 'react-router-dom';
 
 function PrivacyPage() {
   return (
@@ -14,17 +15,17 @@ function PrivacyPage() {
 
           <h3>1. Collecte des informations</h3>
           <p>
-            Comme ce site est utilisé en local, aucune donnée personnelle n'est collectée, stockée ou partagée à travers ce système.
+            Comme ce site est hébergé sur le web, vos données personnelles sont collectées, stockée dans notre base de données.
           </p>
 
           <h3>2. Utilisation des informations</h3>
           <p>
-            Toutes les données ou contenus que vous fournissez sont traités uniquement sur votre appareil local. Aucune information n'est envoyée à des serveurs externes ou à des tiers.
+            Toutes les données ou contenus que vous fournissez sont traités sur notre serveur.
           </p>
 
           <h3>3. Sécurité des données</h3>
           <p>
-            Nous prenons la confidentialité et la sécurité de vos données au sérieux. Les informations traitées restent sur votre appareil et ne sont accessibles qu'à travers ce site local.
+            Nous prenons la confidentialité et la sécurité de vos données au sérieux. Les informations traitées restent sur nos et sont accessibles qu'à travers ce site local.
           </p>
 
           <h3>4. Cookies et technologies similaires</h3>
@@ -51,7 +52,7 @@ function PrivacyPage() {
           <p>
             Si vous avez des questions concernant cette politique de confidentialité, vous pouvez nous contacter à :
           </p>
-          <span>airconcess.contact@gmail.com</span>
+          <Link target="_blank" className='link-politics-underline' to="mailto:airconcess.contact@gmail.com" rel="noopener noreferrer">airconcess.contact@gmail.com</Link>
         </section>
       </div>
     </main>

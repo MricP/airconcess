@@ -108,12 +108,11 @@ export default function UpdateUser() {
                                             <td rowSpan={3}>
                                                 <img src={user.profilePictureURL || "/assets/admin/default-avatar.png"} alt="Utilisateur" />
                                             </td>
+                                            <td>{user.firstName} {user.lastName}</td>
                                         </tr>
-                                        <td>
-                                            <tr>{user.firstName} {user.lastName}</tr>
-                                            <tr>{user.email}</tr>
-                                        </td>
-                                        
+                                        <tr>
+                                            <td>{user.email}</td>
+                                        </tr>
                                     </tbody>
                                 </table> :
                                 <table className="info-user">

@@ -36,3 +36,24 @@
     border-radius: 5px;
     box-shadow: 1px 1px 9px grey;
 }
+
+@media (max-width: 992px) {
+    .first-training-component {
+        justify-content: center;
+        height: 30vh;
+        margin-top: 10vh;
+        padding: 0;
+        position: static;
+    }
+
+    .first-training-component .image {
+        display: none;
+    }
+
+    .first-training-component section {
+        margin: 0;
+        width: 80vw;
+        height: auto;
+        text-align: justify;
+    }
+}

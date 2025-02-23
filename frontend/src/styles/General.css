@@ -33,7 +33,7 @@
     --text-size : clamp(16px, 2.5vw, 20px); /*20px -> 16px*/
     --lower-text-size : clamp(12px, 1.7vw, 16px); /*16px -> 12px*/
     --h1-size : clamp(30px, 6vw, 90px); /*90px -> 30px*/
-    --h2-size: 3.125rem; /*50 sur figma*/
+    --h2-size: clamp(25px, 5vw, 60px); /*50 sur figma*/
     --h3-size : clamp(20px, 4vw, 30px); /*30px -> 20px*/
     --bg-primary: #FFFFFF;
     --bg-secondary: #F5F5F5;
