@@ -53,16 +53,6 @@ export default function ProfileSideBar(){
   
   /*#################### FONCTIONS ####################*/
     
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     isAdmin: userData.isAdmin,
-  //     isTrainer: userData.isTrainer,
-  //     [name]: value
-  //   });
-  // };
-    
   const onSubmit = async (e) => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -153,7 +143,6 @@ export default function ProfileSideBar(){
     const fetchData = async () => {
       try {
         const data = await getUserData(token);
-        console.log(data)
         setUserData(data);
 
         setValue("firstName",data.firstName)
