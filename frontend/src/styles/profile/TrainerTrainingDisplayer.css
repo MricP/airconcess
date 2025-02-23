@@ -1,0 +1,36 @@
+.trainerTrainingDisplayer-container {
+    width: 99%;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 1px 2px 2px var(--line-color);
+    padding: 20px;
+    position: relative;
+}
+
+.trainerTrainingDisplayer-container .user-infos-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.trainerTrainingDisplayer-container .user-infos-container>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.trainerTrainingDisplayer-container .user-infos-container .profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+}
+
+.trainerTrainingDisplayer-container .user-infos-container .arrow {
+    transition: transform 0.2s ease;
+}
+
+.trainerTrainingDisplayer-container .user-infos-container .arrow.click {
+    transform: rotate(90deg);
+}

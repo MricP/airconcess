@@ -10,6 +10,7 @@
 }
 
 .dark-button:disabled {
-    background-color: #333333;
+    background-color: #33333365;
+    cursor: not-allowed;
     color: rgba(255, 255, 255, 0.895);
 }

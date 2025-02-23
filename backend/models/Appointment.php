@@ -48,8 +48,13 @@
                 ];
             }
         }
-        
 
+        public static function deleteAppointment($apptId) {
+            $pdo = self::getDB();
+            $stmt = $pdo->prepare("DELETE FROM appointment WHERE appt_id = ?");
+            return $stmt->execute([$apptId]);
+        }
+        
         public static function getTimestampsFromDB($agency_id) {
             $pdo = self::getDB();
             $stmt = $pdo->prepare('SELECT appt_timestamp FROM appointment WHERE appt_agency_id = ?');
@@ -67,7 +72,11 @@
 
         public static function getAppointmentByUserWithAgency($id){
             $pdo = self::getDB();
-            $stmt = $pdo->prepare("SELECT appt_reason, appt_timestamp, agency_name FROM appointment A JOIN agency Ag ON A.appt_agency_id = AG.agency_id  WHERE userConcerned_id = ?");            
+            $stmt = $pdo->prepare("SELECT M.model_name,Ac.serial_number,appt_id,appt_reason,appt_timestamp,agency_name,agency_address,agency_city,agency_country 
+                FROM appointment A INNER JOIN agency Ag ON A.appt_agency_id = Ag.agency_id  
+                INNER JOIN aircraft Ac ON A.aircraftConcerned_id = Ac.aircraft_id
+                INNER JOIN model M ON Ac.model_id = M.model_id
+                WHERE userConcerned_id = ?");            
             $stmt->execute([$id]);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
             return $result;

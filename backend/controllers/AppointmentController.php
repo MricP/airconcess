@@ -34,6 +34,10 @@
             exit();
         }
 
+        public static function deleteAppointment($apptId) {
+            echo json_encode(Appointment::deleteAppointment($apptId));    
+        }
+
         public static function getTimestamps($agency_id) {
             $timestamps = Appointment::getTimestampsFromDB($agency_id);
             if ($timestamps) {

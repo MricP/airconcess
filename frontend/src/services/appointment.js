@@ -91,3 +91,12 @@ export const getAppointmentByUser = async (token) => {
         throw error;
     }
 };
+
+export const deleteAppointment = async (apptId) => {
+  try {
+    const response = await axiosInstance.post('/appointment/deleteAppointment',apptId);   
+    return response;
+  } catch (error) {
+      throw error;
+  }
+}

@@ -54,10 +54,16 @@ class User
         return $stmt->execute([$firstName,$lastName,$location, $userId]);
     }
 
+    public static function updateTrainer($userId,$data)
+    {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare('UPDATE trainer SET country_assignment = ?, city_assignment = ?, address_assignment = ? WHERE trainer_id = ?');
+        return $stmt->execute([$data['country_assignment'],$data['city_assignment'],$data['address_assignment'],$userId]);
+    }
     
     public static function findById($id) {
         $pdo = self::getDB();
-        $stmt = $pdo->prepare("SELECT * FROM user WHERE idUser = ?");
+        $stmt = $pdo->prepare("SELECT * FROM user U LEFT JOIN trainer T ON U.idUser = T.trainer_id WHERE U.idUser = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -127,5 +133,10 @@ class User
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
+    public static function selectTrainer($id) {
+        $pdo = self::getDB();
+        $stmt = $pdo->prepare("SELECT t.country_assignment,t.city_assignment,t.address_assignment,t.trainer_id,u.firstName,u.lastName FROM trainer t INNER JOIN user U on u.idUser = t.trainer_id WHERE t.trainer_id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
