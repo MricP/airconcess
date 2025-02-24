@@ -53,6 +53,7 @@ export default function ResetPasswordRequest() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="email-input"
+                                autocomplete="email"
                             />
                         </div>
                         <DarkButton2 text="Recevoir le mail" type="submit" className="reset-password-button" />

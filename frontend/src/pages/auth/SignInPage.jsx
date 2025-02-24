@@ -25,9 +25,9 @@ const SignInPage = () => {
         localStorage.setItem('token', response.token);
         window.location.href = '/';
       } else if (response.message) {
-        setErrorMessage(null); 
+        setErrorMessage(null);
       } else {
-        setErrorMessage(response); 
+        setErrorMessage(response);
       }
     } catch (error) {
       console.log('Error response:', error.response?.data?.message || 'Unknown error');
@@ -60,20 +60,37 @@ const SignInPage = () => {
             {responseMessage && (<div className="error-message-div">{responseMessage && <p>○ {responseMessage}</p>}</div>)}
             <div className="form-group">
               <label htmlFor="email" className="form-label">Adresse mail*</label>
-              <GrayInput placeholder="toto12@exemple.net" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />
+              <GrayInput
+                id="email"
+                name="email"
+                placeholder="toto12@exemple.net"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required={true}
+                autocomplete="email"
+              />
             </div>
             <div className="form-group">
               <label htmlFor="password" className="form-label">Mot de passe*</label>
-              <GrayInput type={"password"} placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
+              <GrayInput
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Mot de passe"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required={true}
+                autocomplete="current-password"
+              />
             </div>
             <DarkButton2 text="Se connecter" use={handleSubmit} />
           </form>
           <div className="forgot-password">
-            <div onClick={()=>redirect("/reset-password-request")} className="forgot-password-link">Mot de passe oublié ?</div>
+            <div onClick={() => redirect("/reset-password-request")} className="forgot-password-link">Mot de passe oublié ?</div>
           </div>
           <div className="sign-up-link-container">
             <p className="sign-up-link-text">Pas encore rejoins l’aventure ?</p>
-            <p onClick={()=>redirect("/sign-up")} className="sign-up-link">Créer mon compte</p>
+            <p onClick={() => redirect("/sign-up")} className="sign-up-link">Créer mon compte</p>
           </div>
           {responseMessage && <p className="response-message">{responseMessage}</p>}
           {errorMessage && <p className="error-message">{errorMessage}</p>}

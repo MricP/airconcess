@@ -24,12 +24,12 @@ const SignUpPage = () => {
     e.preventDefault();
     setErrorMessage('');
     setResponseMessage('');
-    
+
     if (password !== passwordConfirmation) {
       setErrorMessage('Les mots de passe ne correspondent pas.');
       return;
     }
-    
+
     try {
       const response = await signUp({ email, password, passwordConfirmation, firstName, lastName });
       setResponseMessage(response.message);
@@ -50,20 +50,62 @@ const SignUpPage = () => {
             <img src={airconcessLogo} alt="AirConcess" className="airconcess-logo" />
           </div>
           <form onSubmit={handleSubmit} className="sign-up-form">
-              <label htmlFor="firstName" className="form-label">Prénom*</label>
-              <GrayInput placeholder="Prénom" value={firstName} onChange={(e) => setFirstName(e.target.value)} required={true} />
+            <label htmlFor="firstName" className="form-label">Prénom*</label>
+            <GrayInput
+              id="firstName"
+              name="firstName"
+              placeholder="Prénom"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required={true}
+              autocomplete="given-name"
+            />
 
-              <label htmlFor="lastName" className="form-label">Nom*</label>
-              <GrayInput placeholder="Nom" value={lastName} onChange={(e) => setLastName(e.target.value)} required={true} />
+            <label htmlFor="lastName" className="form-label">Nom*</label>
+            <GrayInput
+              id="lastName"
+              name="lastName"
+              placeholder="Nom"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required={true}
+              autocomplete="family-name"
+            />
 
-              <label htmlFor="email" className="form-label">Email*</label>
-              <GrayInput placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />
+            <label htmlFor="email" className="form-label">Email*</label>
+            <GrayInput
+              id="email"
+              name="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required={true}
+              autocomplete="email"
+            />
 
-              <label htmlFor="password" className="form-label">Mot de passe*</label>
-              <GrayInput type="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
+            <label htmlFor="password" className="form-label">Mot de passe*</label>
+            <GrayInput
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Mot de passe"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required={true}
+              autocomplete="new-password"
+            />
 
-              <label htmlFor="passwordConfirmation" className="form-label">Confirmer le mot de passe*</label>
-              <GrayInput type="password" placeholder="Confirmer le mot de passe" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} required={true} />
+            <label htmlFor="passwordConfirmation" className="form-label">Confirmer le mot de passe*</label>
+            <GrayInput
+              id="passwordConfirmation"
+              name="passwordConfirmation"
+              type="password"
+              placeholder="Confirmer le mot de passe"
+              value={passwordConfirmation}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
+              required={true}
+              autocomplete="new-password"
+            />
 
             <DarkButton2 text="S'inscrire" className={"button-sign-up"} use={handleSubmit} />
           </form>
