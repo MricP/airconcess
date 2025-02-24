@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import '../../styles/landing-page/FirstSectionLanding.css';
 import useRedirect from "../Custom-hooks";
+import { useMediaQuery } from 'react-responsive';
 
 function FirstSectionLanding() {
     const { scrollY } = useScroll();
@@ -9,7 +10,8 @@ function FirstSectionLanding() {
     const y2 = useTransform(scrollY, [0, 300], [100, -110]);
     const y3 = useTransform(scrollY, [0, 300], [400, -100]);
     const arrowDown = '/assets/landing/arrow1-icon.png';
-    const redirect = useRedirect(); 
+    const redirect = useRedirect();
+    const isMobile = useMediaQuery({ query: "(max-width : 768px" });
 
     const [scrolled, setScrolled] = React.useState(false);
 
@@ -62,18 +64,34 @@ function FirstSectionLanding() {
                             Bénéficiez de notre expertise et de notre attention aux détails !
                         </motion.p>
                     </div>
-                    <div className='links-to-important-pages'>
-                        <div className='links-to-important-pages-catalog' onClick={() => {
-                            redirect("/catalog");
-                        }}>
-                            Nos avions
+                    {!isMobile ? (
+                        <div className='links-to-important-pages'>
+                            <div className='links-to-important-pages-catalog' onClick={() => {
+                                redirect("/catalog");
+                            }}>
+                                Nos avions
+                            </div>
+                            <div className='links-to-important-pages-training' onClick={() => {
+                                redirect("/training");
+                            }}>
+                                PPL
+                            </div>
                         </div>
-                        <div className='links-to-important-pages-training' onClick={() => {
-                            redirect("/training");
-                        }}>
-                            PPL
-                        </div>
-                    </div>
+                    ) : (
+                        <motion.div style={{ y: y3 }} className='links-to-important-pages'>
+                            <div className='links-to-important-pages-catalog' onClick={() => {
+                                redirect("/catalog");
+                            }}>
+                                Nos avions
+                            </div>
+                            <div className='links-to-important-pages-training' onClick={() => {
+                                redirect("/training");
+                            }}>
+                                PPL
+                            </div>
+                        </motion.div>
+                    )}
+
                 </div>
             </div>
         </section>

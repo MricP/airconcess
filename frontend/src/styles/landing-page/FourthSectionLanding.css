@@ -40,14 +40,10 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     .fourth-section-landing {
-        min-height: 80vh;
+        min-height: 50vh;
+        margin-bottom: 10vh;
     }
 
-    .video-container-mobile {
-        max-width: 100%;
-        height: 160%;  
-        padding: 0 10px; 
-    }
 }
