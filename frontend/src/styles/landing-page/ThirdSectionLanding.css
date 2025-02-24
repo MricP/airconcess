@@ -72,3 +72,20 @@
         margin-top: 5px;
     }
 }
+
+@media (max-width: 320px) {
+    .plane-animation{
+        display: none;
+    }
+
+    .third-section-text-new{
+        text-align: center;
+        width: 100%;
+    }
+
+    .third-section-text-new h2{
+        text-align: center;
+        width: 100%;
+        font-size: var(--title-size);
+    }
+}

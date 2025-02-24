@@ -20,6 +20,7 @@
     justify-content: center;
     align-items: start;
     flex-direction: column;
+    width: 85%;
 }
 
 .choices-container h2 {
@@ -31,9 +32,8 @@
 
 .flex-choices-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 4rem;
     width: 100%;
 }
 

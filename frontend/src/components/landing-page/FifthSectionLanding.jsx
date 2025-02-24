@@ -87,9 +87,6 @@ const TestimonialCard = ({ testimonial }) => {
 
     return (
         <div className="testimonial-card">
-            <p className="testimonial-content">
-                {content}
-            </p>
             <div className="author-container">
                 <div className="author-name">
                     <span>{firstName}</span>
@@ -102,6 +99,9 @@ const TestimonialCard = ({ testimonial }) => {
                     />
                 </div>
             </div>
+            <p className="testimonial-content">
+                {content}
+            </p>
         </div>
     );
 }
