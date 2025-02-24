@@ -22,8 +22,7 @@
     align-items: center;
 }
 
-.popup-content p,
-a {
+.popup-content p{
     margin-bottom: 10px;
     text-align: center;
 }

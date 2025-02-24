@@ -32,18 +32,18 @@ export default function Footer() {
                 <div className="footer-bottom-footer-child">
                     <h3>Liens rapides</h3>
                     <ul>
-                        <li><Link to="/">Accueil</Link></li>
-                        <li><Link to="/catalog">Catalogue d'aéronefs</Link></li>
-                        <li><Link to="/appointment">Prendre rendez-vous</Link></li>
-                        <li><Link to="/services">Services et maintenance</Link></li>
+                        <li><Link onClick={() => window.scrollTo({top:0,behavior:'smooth'})} to="/">Accueil</Link></li>
+                        <li><Link onClick={() => window.scrollTo({top:0,behavior:'smooth'})} to="/catalog">Catalogue d'aéronefs</Link></li>
+                        <li><Link onClick={() => window.scrollTo({top:0,behavior:'smooth'})} to="/appointment">Prendre rendez-vous</Link></li>
+                        <li><Link onClick={() => window.scrollTo({top:0,behavior:'smooth'})} to="/services">Services et maintenance</Link></li>
                     </ul>
                 </div>
                 <div className="footer-bottom-footer-child separator">
                     <h3>Informations Légales</h3>
                     <ul>
-                        <li><Link to="legal-notices">Mentions légales</Link></li>
-                        <li><Link to="privacy">Politique de confidentialité</Link></li>
-                        <li><Link to="cgu">Conditions générales de vente (CGV)</Link></li>
+                        <li><Link onClick={() => window.scrollTo({top:0,behavior:'smooth'})} to="legal-notices">Mentions légales</Link></li>
+                        <li><Link onClick={() => window.scrollTo({top:0,behavior:'smooth'})} to="privacy">Politique de confidentialité</Link></li>
+                        <li><Link onClick={() => window.scrollTo({top:0,behavior:'smooth'})} to="cgu">Conditions générales de vente (CGV)</Link></li>
                     </ul>
                 </div>
                 <div className="footer-bottom-footer-child separator">

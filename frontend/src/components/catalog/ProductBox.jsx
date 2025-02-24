@@ -23,7 +23,6 @@ export const ProductBox = (props) => {
       const nameModel = await getModelName(props.aircraftId);
 
       const aircraft = await getAircraft(props.aircraftId)
-      console.log(aircraft)
 
       await deleteAircraft(props.aircraftId, nameModel[0]);
 
@@ -80,7 +79,6 @@ export const ProductBox = (props) => {
 
       // Images du slider
       if (files && files.length > 0) {
-        console.log("ok2")
         updateSliderImages(props.aircraftId, files)
       }
 

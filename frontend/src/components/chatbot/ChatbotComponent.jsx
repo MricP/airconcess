@@ -21,7 +21,7 @@ export default function ChatbotComponent() {
       chatbotFrame.classList.add("closing");
       setTimeout(() => {
         setIsOpen(false);
-      }, 2000);
+      }, 250);
     } else {
       setIsOpen(true);
     }

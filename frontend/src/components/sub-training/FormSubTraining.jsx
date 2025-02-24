@@ -61,6 +61,10 @@ function FormSubTraining({step,updateStep}) {
     if(step>0) {
       step === 5 ? updateStep(3) : updateStep(step-1)
     }
+    window.scrollTo({
+      top:0,
+      behavior: 'smooth'
+    })
   }
 
   function handleNextStep() {
@@ -69,6 +73,10 @@ function FormSubTraining({step,updateStep}) {
     } else if(step===3) { // Avant de passer à l'étape suivante, on fait l'isertion
       handleInsertion()
     }
+    window.scrollTo({
+      top:0,
+      behavior: 'smooth'
+    })
   }
 
   function handleStepDisplayed() {
@@ -102,7 +110,7 @@ function FormSubTraining({step,updateStep}) {
       setValue("firstName",userData.firstName)
       setValue("lastName",userData.lastName)
       setValue("userId",userData.idUser)
-      console.log(userData.idUser)
+
     } catch (error) {
         console.error('Erreur get:', error);
     }
@@ -111,7 +119,6 @@ function FormSubTraining({step,updateStep}) {
   const loadTrainers = async () => {
     try {
       const response = await getTrainers();
-      console.log("ok ")
       setTrainers(response.data)
     } catch (error) {
       console.log('Error getTrainers:', error.response?.data?.message || 'Unknown error');

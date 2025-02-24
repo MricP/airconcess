@@ -116,6 +116,7 @@
     color: #393939;
     text-align: right;
     margin-left: 5px;
+    cursor: pointer;
 }
 
 .sign-in-link:hover {

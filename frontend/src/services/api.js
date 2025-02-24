@@ -59,3 +59,12 @@ export const getTestimonialsByUser = async (id_user) => {
   }
 };
 
+export const getTrainer = async (id) => {
+  try {
+      const response = await axiosInstance.post('/trainer/getTrainerWithId',id);    
+      return response;
+  } catch (error) {
+      throw error;
+  }
+};
+

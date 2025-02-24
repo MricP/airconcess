@@ -42,6 +42,7 @@
 .card-choice3 {
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .card-choice1 img,

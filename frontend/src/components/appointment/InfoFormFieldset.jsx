@@ -22,18 +22,18 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
             </div>
 
             <div className='firstName-lastName-div'> {/* Nom et prenom */}
-                    <label htmlFor="last-name">
-                        <p>Nom*</p>
-                        <input 
-                            className={errors.lastName ? "input-error" : ""}
-                            type="text" 
-                            id="last-name" 
-                            name="lastName" 
-                            value={formData.lastName != null ? formData.lastName : ''}
-                            {...register("lastName", { required: true })}
-                        />
-                    </label>
-                    <label htmlFor="first-name">
+                <label htmlFor="last-name">
+                    <p>Nom*</p>
+                    <input 
+                        className={errors.lastName ? "input-error" : ""}
+                        type="text" 
+                        id="last-name" 
+                        name="lastName" 
+                        value={formData.lastName != null ? formData.lastName : ''}
+                        {...register("lastName", { required: true })}
+                    />
+                </label>
+                <label htmlFor="first-name">
                         <p>Prénom*</p>
                         <input 
                             className={errors.firstName ? "input-error" : ""}
@@ -43,7 +43,7 @@ function InfoFormFieldset({formData,register,errors,withIdCard=false,withIncomeP
                             value={formData.firstName != null ? formData.firstName : ''}
                             {...register("firstName", { required: true })}
                         />
-                    </label>
+                </label>
             </div>
             <div className='phone-mail-div'> {/* Phone et mail */}
                     <div>

@@ -58,7 +58,7 @@ export default function Header({ color }) {
 
             {!isMobile ?
                 <div className="header-default-menu">
-                    <Link to="/"><img src={logo} alt="Logo" /></Link>
+                    <img onClick={() => redirect('/')} src={logo} alt="Logo" />
                     <nav>
                         <ul>
                             <li onClick={() => redirect("/catalog")}>Nos aéronefs</li>

@@ -1,11 +1,16 @@
 @keyframes bigger-height {
     0% {
-        height: 200px;
+        height: 0;
         overflow-y: hidden;
+        width: 0;
     }
-
+    75% {
+        height: 300px;
+        width: 300px;
+    }
     100% {
         height: 400px;
+        width: 300px;
     }
 }
 
@@ -13,17 +18,31 @@
     0% {
         height: 400px;
         overflow: hidden;
+        width: 300px;
     }
-    100% {
-        height: 0px;
+    50% {
+        height: 100px;
+        width: 100px;
+    }
+    70% {
+        height: 50px;
+        width: 50px;
         overflow: hidden;
         opacity: 0;
+        
+    }
+    95%{
+        border-radius: 100px;
+    }
+    100% {
+        height: 0;
+        width: 0;
         display: none;
     }
 }
 
 .closing {
-    animation: smaller-height 2s ease-in forwards;
+    animation: smaller-height .3s ease-in forwards;
 }
 
 .chatbot-container {
@@ -34,12 +53,13 @@
 }
 
 .opening{
-    animation: bigger-height 2s ease-in forwards;
+    animation: bigger-height .4s ease-in forwards;
 }
 
 .chatbot-frame {
     border-radius: 10px;
-    width: 300px;
+    /* width: 300px; */
+    width: 0;
     background-color: white;
     border: 1px solid black;
 }
@@ -51,8 +71,8 @@
     top: 10px;
     right: 10px;
     opacity: 0;
-    animation: fadeIn 1s ease-in forwards;
-    animation-delay: 2s;
+    animation: fadeIn .1s ease-in forwards;
+    animation-delay: .4s;
 }
 
 @keyframes fadeIn {
@@ -78,6 +98,7 @@
 
 .block-chatbot {
     display: block;
+    cursor: pointer;
 }
 
 .hidden-chatbot {
@@ -105,8 +126,8 @@
     flex-direction: column;
     gap: 10px;
     opacity: 0;
-    animation: fadeIn 1s ease-in forwards;
-    animation-delay: 2s;
+    animation: fadeIn .1s ease-in forwards;
+    animation-delay: .4s;
 }
 
 .message-container {

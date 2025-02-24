@@ -27,7 +27,6 @@ function CreditCard({className,rotate,infos,current}) {
     }
 
     useEffect(()=>{
-        console.log(rotate)
         setCardRotated(rotate)
         setTimeout(()=>{setContentFront(!rotate)},100)
     },[rotate])

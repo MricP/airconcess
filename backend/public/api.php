@@ -126,6 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
     AppointmentController::createAppointment($data);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment/deleteAppointment') !== false) {
+    $apptId = json_decode(file_get_contents("php://input"), true);
+    AppointmentController::deleteAppointment($apptId);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/appointment-loadTimestamps') !== false) {
     $agency_id = json_decode(file_get_contents("php://input"), true);
     AppointmentController::getTimestamps($agency_id);
@@ -170,8 +175,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/p
 // Partie page product
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-aircraftWithId') !== false) {
-    $input = json_decode(file_get_contents("php://input"), true);
-    $result = ProductController::getAircraftWith($input['idAircraft']);
+    $id = json_decode(file_get_contents("php://input"), true);
+    $result = ProductController::getAircraftWith($id);
     echo json_encode($result);
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/product/get-modelName') !== false) {
@@ -258,10 +263,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/a
 }
 // Partie Profile
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/getTrainings') !== false) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/getTrainingsOfTrainer') !== false) {
     $idTrainer = json_decode(file_get_contents("php://input"), true);
-    TrainingController::getAllTrainings($idTrainer);
+    TrainingController::getTrainingsOfTrainer($idTrainer);
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/getTrainingsOfUser') !== false) {
+    $idUser = json_decode(file_get_contents("php://input"), true);
+    TrainingController::getTrainingsOfUser($idUser);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/deleteTraining') !== false) {
+    $trainingId = json_decode(file_get_contents("php://input"), true);
+    TrainingController::deleteTraining($trainingId);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/insertProposals') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    TrainingController::insertProposals($args['trainerId'],$args['trainingId'],$args['proposals']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/deleteProposals') !== false) {
+    $trainingId = json_decode(file_get_contents("php://input"), true);
+    TrainingController::deleteProposals($trainingId);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/deleteProposalWithId') !== false) {
+    $proposalId = json_decode(file_get_contents("php://input"), true);
+    TrainingController::deleteProposal($proposalId);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/training/acceptProposal') !== false) {
+    $args = json_decode(file_get_contents("php://input"), true);
+    TrainingController::acceptProposal($args['trainingId'],$args['proposalId']);
+}
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'PUT' && strpos($_SERVER['REQUEST_URI'], '/my-profile') !== false) {
     $headers = getallheaders();
@@ -514,6 +551,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/s
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/subTraining/get-trainers') !== false) {
     TrainingController::getAllTrainers();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/trainer/getTrainerWithId') !== false) {
+    $id = json_decode(file_get_contents("php://input"), true);
+    ProfileController::getTrainer($id);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], '/chatbot/send') !== false) {

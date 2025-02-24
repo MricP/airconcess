@@ -57,6 +57,8 @@ const SignInPage = () => {
             <img src={airconcessLogo} alt="AirConcess" className="airconcess-logo" />
           </div>
           <form onSubmit={handleSubmit} className="sign-in-form">
+            {responseMessage && (<div className="error-message-div">{responseMessage && <p>○ {responseMessage}</p>}</div>)}
+            {errorHtml && (<div className="error-message-div">{errorHtml && <p>○ {errorHtml}</p>}</div>)}
             <div className="form-group">
               <label htmlFor="email" className="form-label">Adresse mail*</label>
               <GrayInput placeholder="toto12@exemple.net" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />

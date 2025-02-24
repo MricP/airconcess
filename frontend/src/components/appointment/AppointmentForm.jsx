@@ -73,7 +73,7 @@ function AppointmentForm({setIsSubmitted}) {
             setValue("firstName",userData.firstName)
             setValue("lastName",userData.lastName)
             setValue("userId",userData.idUser)
-            console.log(userData.idUser)
+
         } catch (error) {
             console.error('Erreur get:', error);
         }
@@ -198,8 +198,11 @@ function AppointmentForm({setIsSubmitted}) {
             
             if(response.data.success) {
                 setIsSubmitted(true)
+                window.scrollTo({
+                    top:0,
+                    behavior: 'smooth'
+                })
             } else {
-                console.log("impossible")
                 toast.error(`${response.data.message}`)
                 setValue("time",null)
                 loadDisabledTimestamps() // On réactualise les disabledTimestamps

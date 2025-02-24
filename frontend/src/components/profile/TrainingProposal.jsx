@@ -1,15 +1,16 @@
 import React from 'react'
-import CustomDatePicker from "../general/CustomDatePicker"
-import "../../styles/profile/TrainingProposal.css"
-import CustomTimePicker from '../general/CustomTimePicker'
 import { RxCross1 } from "react-icons/rx";
+import CustomDatePicker from "../general/CustomDatePicker"
+import CustomTimePicker from '../general/CustomTimePicker'
+
+import "../../styles/profile/TrainingProposal.css"
 
 
 function TrainingProposal({noProposal,proposId,formData,errors,setValue,register,removeProposal}) {
   return (
     <div className='tp-container'>
         <div className='tp-header'>
-            <p className='title'>Proposition {noProposal}</p>
+            <p className='proposal-number'>Proposition {noProposal}</p>
             <RxCross1  className='button-del' onClick={() => removeProposal(proposId)}>
                 Supprimer
             </RxCross1 >
@@ -51,7 +52,7 @@ function TrainingProposal({noProposal,proposId,formData,errors,setValue,register
         </table>
         <div className='tp-dates-container'>
             <div>
-                <p>Date de début</p>
+                <p>Date de début*</p>
                 <CustomDatePicker
                     className={errors.proposals?.[proposId]?.dateStart ? "input-error" : ""}
                     disabledSlots={[]}
@@ -62,7 +63,7 @@ function TrainingProposal({noProposal,proposId,formData,errors,setValue,register
                 />
             </div>
             <div>
-                <p>Date de fin</p>
+                <p>Date de fin*</p>
                 <CustomDatePicker
                     className={errors.proposals?.[proposId]?.dateEnd ? "input-error" : ""}
                     disabledSlots={[]}

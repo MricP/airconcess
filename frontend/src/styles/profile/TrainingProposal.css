@@ -4,6 +4,7 @@
     justify-content: center;
     gap: 10px;
     position: relative;
+    /* background-color: rgb(148, 199, 246); */
 }
 .tp-container input {
     font-size: var(--text-size);
@@ -15,15 +16,23 @@
     height: 40px;
 }
 
-.tp-container p:not(.title) {
+.tp-container p:not(.proposal-number) {
     /* background-color: red; */
     font-size: var(--lower-text-size);
+    color: #5B5B5B;
 }
+
 
 .tp-container .tp-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.tp-container .tp-header p.proposal-number {
+    text-decoration: underline;
+    font-weight: 300;
+    height: fit-content;
 }
 
 .tp-container .tp-header .button-del {
@@ -37,21 +46,22 @@
     stroke-width: 0.5;
 }
 
-.trainerChoiceItem-container .tp-table {
+.tp-container .tp-table {
     width: 100%;
     table-layout: fixed;
     
 }
 
-.trainerChoiceItem-container .tp-table th{
+.tp-container .tp-table th{
     border: 1px solid rgba(0, 0, 0, 0.336); 
     width: 10%;
 } 
 
-.trainerChoiceItem-container .tp-dates-container {
+.tp-container .tp-dates-container {
     display: flex;
     gap: 2%;
+    /* background-color: rgb(148, 246, 168); */
 }
-.trainerChoiceItem-container .tp-dates-container>div {
+.tp-container .tp-dates-container>div {
     width: 49%;
 }
