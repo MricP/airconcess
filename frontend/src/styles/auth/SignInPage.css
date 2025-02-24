@@ -31,9 +31,10 @@
     margin: 0 auto;
 }
 
-.right-container {
+.right-container-sign-in {
     padding: 20px;
     width: 80%;
+    box-sizing: border-box;
 }
 
 .logos-img-container {
@@ -141,9 +142,10 @@
         display: none;
     }
 
-    .right-container {
-        width: 100%;
+    .right-container-sign-in {
+        width: 95%; 
         margin-bottom: 5vh;
+        padding: 15px; 
     }
 
     .plane-airconcess-logo {
@@ -152,6 +154,13 @@
 
     .airconcess-logo {
         display: none;
+    }
+
+    .sign-in-img {
+        max-width: 90%; 
+        width: 100%; 
+        height: auto;
+        aspect-ratio: 381 / 520;
     }
 
     .sign-up-link-container {

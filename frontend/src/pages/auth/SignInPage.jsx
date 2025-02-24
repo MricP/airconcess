@@ -51,7 +51,7 @@ const SignInPage = () => {
         </>
       }
       rightContainerChildren={
-        <div className="right-container">
+        <div className="right-container-sign-in">
           <div className="logos-img-container">
             <img src={airconcessLogoPlane} alt="AirConcess" className="plane-airconcess-logo" />
             <img src={airconcessLogo} alt="AirConcess" className="airconcess-logo" />
