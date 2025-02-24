@@ -59,7 +59,7 @@ function Template({ children }) {
         <Header color={color}/>
         {children}
         <ChatbotComponent/>
-        {/* { <Footer/>} */}
+        { <Footer/>}
     </ErrorBoundary>
 
   )
