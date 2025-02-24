@@ -69,7 +69,7 @@ const SignUpPage = () => {
           </form>
           <div className="sign-in-link-container">
             <p className="sign-in-link-text">Déjà inscrit ?</p>
-            <div onClick={() => redirect("/sign-in")} className="sign-in-link">Se connecter</div>
+            <p onClick={() => redirect("/sign-in")} className="sign-in-link">Se connecter</p>
           </div>
           {responseMessage && <p className="response-message">{responseMessage}</p>}
           {errorMessage && <p className="error-message">{errorMessage}</p>}

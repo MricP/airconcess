@@ -167,3 +167,9 @@
         padding-top: 20px;
     }
 }
+
+@media (max-width: 1210px) {
+    .sign-up-link-container {
+        flex-direction: column;
+    }
+}
