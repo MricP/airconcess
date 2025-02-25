@@ -124,10 +124,10 @@ function CatalogPage() {
     } else {
       nbAppuie++;
       if (nbAppuie % 2 === 1) {
-        filterContainerRef.current.classList.toggle("invisible");
+        filterContainerRef.current.classList.remove("invisible");
       }
       else {
-        filterContainerRef.current.classList.toggle("invisible");
+        filterContainerRef.current.classList.add("invisible");
       }
     }
   };
@@ -357,6 +357,9 @@ function CatalogPage() {
 
   if (loading) return <div className='loading-screen'><p>Chargement...</p></div>;
   if (error) return <div className='error-screen'><p>{error}</p></div>;
+  if(nbAppuie === 0 && isMobile && filterContainerRef.current){
+    filterContainerRef.current.classList.add("invisible")
+  }
 
 
   return (
@@ -408,9 +411,9 @@ function CatalogPage() {
               <div>
                 <select className='invisible' name="select" ref={yearRef} onChange={handleYearFilter}>
                   <option value="Aucun">Aucun</option>
-                  <option value="2000">2000</option>
-                  <option value="2010">2010</option>
-                  <option value="2020" >2020</option>
+                  <option value="2000">Avant 2000</option>
+                  <option value="2010">2000 - 2010</option>
+                  <option value="2020" >2010 - 2020</option>
                   <option value="NEW">NEW</option>
                 </select>
                 <button className='editFilterButton' onClick={handleYearFilter}><FaEdit size={20} /></button><button className='editFilterButton' onClick={handleDeleteYearFilter}><AiOutlineCloseSquare size={20} /></button></div>
@@ -420,9 +423,9 @@ function CatalogPage() {
               <div>
                 <select className='invisible' name="select" ref={capacityRef} onChange={handleCapacityFilter}>
                   <option value="Aucun">Aucun</option>
-                  <option value="0">0</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
+                  <option value="0">0 à 5</option>
+                  <option value="5">5 à 10</option>
+                  <option value="10">10 à 15</option>
                   <option value="15" >+ de 15</option>
                 </select>
                 <button className='editFilterButton' onClick={handleCapacityFilter}><FaEdit size={20} /></button><button className='editFilterButton' onClick={handleDeleteCapacityFilter}><AiOutlineCloseSquare size={20} /></button></div>
