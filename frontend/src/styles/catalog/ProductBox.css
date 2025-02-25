@@ -189,8 +189,10 @@
 
     .productBox-container{
             flex-direction: column;
-            gap: 3px;
+            /* gap: 3px; */
             width: 100%;
+            margin-bottom: 200px;
+
     }
 
    .catalog-productDescription-container{
