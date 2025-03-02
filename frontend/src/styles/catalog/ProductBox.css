@@ -189,8 +189,10 @@
 
     .productBox-container{
             flex-direction: column;
-            gap: 3px;
+            /* gap: 3px; */
             width: 100%;
+            margin-bottom: 200px;
+
     }
 
    .catalog-productDescription-container{
@@ -202,6 +204,7 @@
         height: 100%;
         width: 95%;
         margin-left: 0px;
+        margin-bottom: 10px;
         flex-direction: column;    
     }
     .catalog-productImage-container{
@@ -216,7 +219,6 @@
 
     .LearnMorebButton{
         font-size: 0.9em;
-        margin-top: 5px;
         position: relative;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 0px;
@@ -253,6 +255,7 @@
         margin-bottom: 25px;
         flex-direction: column;
         gap: 0px;
+        margin-bottom: 40px;
     }
 
     .catalog-productImage-container{
@@ -263,7 +266,18 @@
         width: 100%;
     }
 
+    .catalog-productDescription-container > p{
+        display: none;
+    }
     .planeInfos-container{
         display: none;
+    }
+
+    .LearnMorebButton{
+        height: 100%;
+    }
+
+    .catalog-planeImg{
+        width: 90%;
     }
 }

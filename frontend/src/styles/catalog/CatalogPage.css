@@ -220,7 +220,6 @@
     }
 
     .planeContainer{
-        gap: 200px;
         margin-top: 50px;
     }
 
@@ -259,11 +258,6 @@
         width: 70%;
     }
 
-    .planeContainer{
-        gap: 200px;
-        margin-top: 100px;
-    }
-
     .catalog-subtitle{
         font-size: 1em;
         width: initial;
@@ -276,7 +270,7 @@
         width: 60%;
         align-items: center;
         justify-content: center;
-        top: 90%;
+        top: 91%;
         left: 10%;
     }
 
@@ -294,5 +288,9 @@
         height: inherit;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+    }
+
+    .chooseCatalogPage{
+        font-size: 0.7em;
     }
 }
