@@ -24,6 +24,10 @@
     cursor: pointer;
 }
 
+.links-to-important-pages-training:hover, .links-to-important-pages-catalog:hover{
+    text-decoration: underline;
+}
+
 .first-section-landing-col {
     display: flex;
     flex-direction: column;
@@ -83,24 +87,34 @@
     font-weight: 300;
 }
 
-.footer-links {
+.links-to-important-pages {
     display: flex;
     justify-content: space-between;
     gap: 20px;
     margin-top: 15%;
     width: 80%;
-    margin-left: 7%;
 }
 
-.footer-links a {
+.links-to-important-pages a {
     font-size: 1rem;
     color: var(--bg-primary);
     transition: border-bottom 0.3s;
 }
 
-.footer-links a:hover {
+.links-to-important-pages a:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 823px) {
+    .title span {
+        font-size: 3rem;
+    }
+
+    .links-to-important-pages{
+        width: 80%;
+    }
+}
+
 
 @media (max-width: 768px) {
     .first-section-landing {
@@ -119,12 +133,17 @@
         font-size: 1rem;
     }
 
-    .footer-links {
+    .links-to-important-pages {
         margin-top: 10%;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 560px) {
+
+    .title span {
+        font-size: 3.5rem;
+    }
+
     .first-section-landing {
         height: 150vh;
         padding: 10px;
@@ -157,32 +176,29 @@
         font-size: 0.9rem;
     }
 
-    .title span {
-        font-size: 3rem;
-    }
 
     .description {
         font-size: 0.9rem;
     }
 
-    .footer-links {
+    .links-to-important-pages {
         gap: 10px;
         margin-top: 5%;
-        width: 100%;
         margin-left: 0;
     }
 
-    .footer-links a {
+    .links-to-important-pages a {
         font-size: 0.9rem;
     }
 
-    .footer-links a:nth-child(2) {
+    .links-to-important-pages a:nth-child(2) {
         font-size: 0.9rem;
         margin-right: 20px;
     }
 }
 
-@media (max-width: 350px) {
+
+@media (max-width: 455px) {
     .first-section-landing {
         height: 150vh;
     }
@@ -222,24 +238,24 @@
         font-size: 0.8rem;
     }
 
-    .footer-links {
+    .links-to-important-pages {
         gap: 10px;
         margin-top: 5%;
         width: 100%;
         margin-left: 0;
     }
 
-    .footer-links a {
+    .links-to-important-pages a {
         font-size: 0.8rem;
     }
 
-    .footer-links a:nth-child(2) {
+    .links-to-important-pages a:nth-child(2) {
         font-size: 0.8rem;
         margin-right: 20px;
     }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 330px) {
     .title span {
         font-size: 2rem;
     }

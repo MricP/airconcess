@@ -31,7 +31,7 @@
     margin: 0 auto;
 }
 
-.right-container {
+.right-container-sign-up {
     padding: 20px;
     width: 80%;
 }
@@ -60,9 +60,14 @@
     width: 100%;
 }
 
+.button-sign-up{
+    margin-top: 15px;
+}
+
 .form-label {
     font-size: 14px;
     margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .form-group {
@@ -123,7 +128,7 @@
         display: none;
     }
 
-    .right-container {
+    .right-container-sign-up {
         width: 100%;
         margin-bottom: 5vh;
     }
@@ -142,9 +147,8 @@
 }
 
 @media (max-height: 700px) {
-
-    .right-container {
-        margin-top: 100px;
+    .sign-up-img{
+        margin-top: 0px;
     }
 
     .plane-airconcess-logo {
@@ -154,9 +158,5 @@
     .logos-img-container {
         padding-bottom: 0;
         margin-bottom: 0;
-    }
-
-    .sign-up-img {
-        margin-top: 60px;
     }
 }

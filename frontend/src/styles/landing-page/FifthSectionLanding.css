@@ -44,7 +44,6 @@
 
 .testimonial-content {
     font-style: italic;
-    text-align: center;
     font-size: var(--text-size);
     color: var(--color-primary);
     height: 150px;
@@ -55,10 +54,9 @@
     align-items: center;
     justify-content: flex-end;
     gap: 15px;
-    margin-top: 1.5%;
+    margin-bottom: 1.5%;
     margin-right: 3%;
 }
-
 
 .profile-picture {
     display: flex;
@@ -88,44 +86,10 @@
     background-color: #333333;
     color: white;
     padding: 1vh;
-    text-align: center;
     border-radius: 5px;
     border: none;
     font-size: 1.25rem;
-}
-
-.form-testimonial-content button {
-    background-color: #333333;
-    color: white;
-    padding: 1vh;
-    text-align: center;
-    border-radius: 5px;
-    border: none;
-}
-
-.add-testimonial-button {
     margin-top: 20px;
-}
-
-.form-testimonial-content{
-    margin-top: 5vh;
-}
-
-.form-testimonial-content form {
-    display: flex;
-    flex-direction: column;
-    min-width: 150px;
-    width: auto;
-    max-width: 200px;
-    gap: 10px;
-}
-
-.form-testimonial-content form textarea {
-    height: 100px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #E2E2E2;
-    resize: none;
 }
 
 @media (max-width: 1200px) {
@@ -149,40 +113,17 @@
         margin: auto;
     }
 
-    .testimonial {
-        font-size: calc(var(--text-size) - 2px);
-        width: 70%;
-        margin: auto;
-    }
-
     .author-container {
-        display: flex;
-        align-items: center;
         justify-content: center;
-        gap: 15px;
-        margin-top: 1.5%;
-    }
-
-    .profile-picture img,
-    .profile-picture {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid var(--color-primary);
     }
 
     .author-name {
         font-size: calc(var(--text-size) - 2px);
-        font-weight: bold;
-        color: var(--color-primary);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: flex-start;
     }
 }
 
+/* Pour les petits écrans (téléphones) */
 @media (max-width: 768px) {
     .fifth-section-container {
         padding: 40px 20px;
@@ -203,5 +144,13 @@
 
     .author-container {
         justify-content: center;
+    }
+
+    .fifth-section-left p {
+        text-align: left;
+    }
+
+    .testimonial-content{
+        text-align: center;
     }
 }
