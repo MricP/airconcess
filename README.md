@@ -6,23 +6,55 @@
 
 ## 🗂️ Architecture du projet
 
-/frontend
-├── /components # Composants React réutilisables
-├── /hooks # Hooks personnalisés
-├── /pages # Pages principales de l'application
-├── /services # Appels API et services externes
-├── /style # Fichiers CSS/SCSS
+### 📦 frontend/ – Application React
 
-/backend
-├── /config # Fichiers de configuration (base de données, etc.)
-├── /controllers # Logique métier et gestion des requêtes
-├── /data # Données statiques ou fixtures
-├── /middlewares # Middlewares pour la gestion des requêtes
-├── /merge # Scripts de fusion ou de migration
-├── /models # Modèles de données (ORM)
-├── /public # Fichiers accessibles publiquement (index.php, assets)
-├── /utils # Fonctions utilitaires
-├── /vendor # Dépendances PHP (gérées par Composer)
+- **components/**  
+  Composants UI réutilisables (boutons, cartes, modales, etc.)
+
+- **hooks/**  
+  Hooks personnalisés pour la gestion de l'état et des effets secondaires
+
+- **pages/**  
+  Pages principales de l'application (Accueil, Catalogue, Panier, etc.)
+
+- **services/**  
+  Modules pour les appels API et la gestion des données
+
+- **style/**  
+  Fichiers de styles globaux et spécifiques aux composants
+
+---
+
+### 🛠️ backend/ – Application PHP (WampServer)
+
+- **config/**  
+  Fichiers de configuration (base de données, etc.)
+
+- **controllers/**  
+  Logique métier et gestion des requêtes entrantes
+
+- **data/**  
+  Données statiques ou fichiers de migration
+
+- **middlewares/**  
+  Middlewares pour la validation, l'authentification, etc.
+
+- **merge/**  
+  Scripts pour la fusion de données ou la migration
+
+- **models/**  
+  Modèles de données représentant les entités de la base
+
+- **public/**  
+  Point d'entrée de l'application backend (index.php) et fichiers accessibles publiquement
+
+- **utils/**  
+  Fonctions utilitaires partagées
+
+- **vendor/**  
+  Dépendances PHP installées via Composer
+
+---
 
 ---
 
